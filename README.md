@@ -1,4 +1,1 @@
-Tools
-=====
-
-CybOX Tools and Scripts
+Welcome to the CybOX (http://cybox.mitre.org) tools repository. 
