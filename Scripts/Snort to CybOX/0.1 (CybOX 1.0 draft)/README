@@ -1,0 +1,61 @@
+****************************************************
+
+      Snort -> CybOX XML Converter Script
+
+ Copyright (c) 2012 - The MITRE Corporation
+
+****************************************************
+
+BY USING THE SNORT TO CYBOX SCRIPT, YOU SIGNIFY YOUR ACCEPTANCE OF THE TERMS AND 
+CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE SCRIPT.
+
+For more information, please refer to the terms.txt file.
+
+#################################################################
+#Generates CybOX Output from a Snort Rules File                 #
+#Compatible with CybOX v1.0 and corresponding objects           #
+#                                                               #
+#v0.1 - BETA                                                    #
+#04/13/2012                                                     #
+#                                                               #
+#                                                               #
+#################################################################
+# CybOX - http://cybox.mitre.org                                #
+# Snort - http://www.snort.org                                  #
+#################################################################
+--------------------------------------------------------------------------------
+--Installation Notes------------------------------------------------------------
+This script requires the Pyparsing module. See http://pyparsing.wikispaces.com/
+--------------------------------------------------------------------------------
+--Snort Coverage----------------------------------------------------------------
+This translator currently only supports Snort rules with PCRE/Content strings and
+the following modifiers: 
+offset depth distance within nocase rawbytes
+Rules with any other modifiers (e.g. http_) or unsupported content will be skipped and will not be converted.
+--------------------------------------------------------------------------------
+--Included Files----------------------------------------------------------------
+
+README: this file.
+snort_to_cybox.py: the Snort to CybOX XML Python converter script.
+snort_parser.py: the Python snort rule parser used by this script.
+\cybox: the CybOX Python bindings which the script imports.
+terms.txt: the terms of use for this script.
+--------------------------------------------------------------------------------
+--Usage Notes-------------------------------------------------------------------
+
+There are two main command line parameters for this script:
+
+-i: the path to the input Snort Rule file (text, one rule per line)
+
+-o: the path to the output CybOX XML file
+
+There is one optional parameter that may be specified before the main parameters:
+
+-v: print verbose error output (tracebacks)
+
+To use the script, run the following command:
+
+python snort_to_cybox.py -i <snort file> -o <cybox xml>
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
