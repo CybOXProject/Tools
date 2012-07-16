@@ -1,0 +1,11 @@
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e651c4e4-6cce-4cfc-8bd4-ebc203907ef4" last-modified="2012-07-12T08:54:26" xmlns="http://schemas.mandiant.com/2010/ioc">
+    <description></description>
+    <definition>
+        <Indicator operator="OR" id="openioc:indicator-item-09e7d0b3-29a0-4f4b-81f0-4a86d5a7fcb3">
+            <IndicatorItem id="openioc:indicator-item-09e7d0b3-29a0-4f4b-81f0-4a86d5a7fcb3" condition="is">
+                <Context search="DnsEntryItem/Host" document="DnsEntryItem" type="mir"/>
+                <Content type="string">www.sample1.com/index.html</Content>
+            </IndicatorItem>
+        </Indicator>
+    </definition>
+</ioc>
