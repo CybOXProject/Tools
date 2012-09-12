@@ -1177,6 +1177,24 @@ ikirillov@mitre.org
                     <xsl:call-template name="processPipeObject"/>
                 </div>
             </xsl:when>
+            <xsl:when test="@xsi:type='PortObj:PortObjectType'">
+                <div id="portObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$div_var}','{$span_var}')">
+                    <span id="{$span_var}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span> Port Object Attributes
+                </div>
+                <div id="{$div_var}" style="overflow:hidden; display:none; padding:0px 7px;">
+                    <br/>
+                    <xsl:call-template name="processPortObject"/>
+                </div>
+            </xsl:when>
+            <xsl:when test="@xsi:type='AddressObj:AddressObjectType'">
+                <div id="addressObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$div_var}','{$span_var}')">
+                    <span id="{$span_var}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span> Address Object Attributes
+                </div>
+                <div id="{$div_var}" style="overflow:hidden; display:none; padding:0px 7px;">
+                    <br/>
+                    <xsl:call-template name="processAddressObject"/>
+                </div>
+            </xsl:when>
             <xsl:when test="@xsi:type='WinPipeObj:WindowsPipeObjectType'">
                 <div id="winPipeObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$div_var}','{$span_var}')">
                     <span id="{$span_var}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span> Windows Pipe Object Attributes
