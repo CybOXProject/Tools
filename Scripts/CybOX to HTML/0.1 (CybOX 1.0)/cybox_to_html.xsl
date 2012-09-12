@@ -3141,6 +3141,16 @@ ikirillov@mitre.org
                         </td>
                     </tr>
                 </xsl:if>
+                <xsl:if test="FileObj:Extracted_Features">
+                    <tr>
+                        <td>Extracted Features</td>
+                        <td>
+                            <xsl:for-each select="FileObj:Extracted_Features">
+                                <xsl:call-template name="processExtractedFeatures"/>
+                            </xsl:for-each> 
+                        </td>
+                    </tr>
+                </xsl:if>
                 <xsl:if test="FileObj:Byte_Runs">
                     <tr>
                         <td>Byte Runs</td>
@@ -3160,6 +3170,60 @@ ikirillov@mitre.org
                 </xsl:if>
             </tbody>
         </table>
+    </xsl:template>
+    
+    <xsl:template name="processExtractedFeatures">
+        <xsl:if test="Common:Strings">
+            <table id="one-column-emphasis">
+                <colgroup>
+                    <col class="oce-first-inner" />
+                </colgroup>
+                <tbody>
+                    <xsl:for-each select="Common:Strings/Common:String">
+                        <xsl:call-template name="processExtractedString"/>
+                    </xsl:for-each>
+                </tbody>
+            </table> 
+        </xsl:if>
+        <xsl:if test="Common:Imports">
+            <table id="one-column-emphasis">
+                <colgroup>
+                    <col class="oce-first-inner-inner" />
+                </colgroup>
+                <tbody>
+                    <xsl:for-each select="Common:Imports/Common:Import">
+                        <tr>
+                            <td>Extracted Import</td>
+                            <td><xsl:value-of select="."/></td>
+                        </tr>
+                        <!-- Spacer for repeated entries -->
+                        <tr bgcolor="#FFFFFF">
+                            <td></td>
+                        </tr>
+                    </xsl:for-each>
+                </tbody>
+            </table> 
+        </xsl:if>
+        <xsl:if test="Common:Functions">
+            <table id="one-column-emphasis">
+                <colgroup>
+                    <col class="oce-first-inner-inner" />
+                </colgroup>
+                <tbody>
+                    <xsl:for-each select="Common:Functions/Common:Function">
+                        <tr>
+                            <td>Extracted Function</td>
+                            <td><xsl:value-of select="."/></td>
+                        </tr>
+                        <!-- Spacer for repeated entries -->
+                        <tr bgcolor="#FFFFFF">
+                            <td></td>
+                        </tr>
+                    </xsl:for-each>
+                </tbody>
+            </table> 
+        </xsl:if>
+
     </xsl:template>
     
     <xsl:template name="processWinDriverObject">
