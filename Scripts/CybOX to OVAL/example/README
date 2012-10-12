@@ -1,0 +1,3 @@
+CybOX -> OVAL Translation Example
+
+This is a basic example of a CybOX file (cybox_example.xml) with two observables (one registry key and one file) that was translated into its OVAL equivalent (oval_output.xml) using the command 'python cybox_to_oval.py -i cybox_example.xml -o oval_output.xml'
