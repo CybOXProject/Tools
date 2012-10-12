@@ -1,5 +1,7 @@
 """ 2012 - Bryan Worrell -The MITRE Corporation """
 
+import hashlib
+import base64
 import uuid
 import quopri
 import sys
@@ -199,9 +201,22 @@ class email_translator:
         The factor of 1.37 is there to compensate for the inflation
         that occurs through base64 encoding """
 
-    def __calc_file_size(self, base64_enc_data):
+    def __get_file_size(self, base64_enc_data):
         num_bytes = int(len(base64_enc_data) / 1.37)
         return num_bytes
+
+
+    """ Returns the MD5 hash for the given attachment.
+        Because the attachments are base64 encoded,
+        we need to decode the data and then run the 
+        digest algorithm """
+    def __get_attachment_md5(self, base64_enc_data):
+        decoded = base64.b64decode(base64_enc_data)
+        m = hashlib.md5()
+        m.update(decoded)
+        digest = m.hexdigest()
+        return digest
+
 
 
 
@@ -269,7 +284,8 @@ class email_translator:
                     # if it's an attachment-type, pull out the filename
                     # and calculate the size in bytes
                     filename = part.get_filename()
-                    file_size = self.__calc_file_size(part.get_payload())
+                    file_size = self.__get_file_size(part.get_payload())
+                    md5_hash = self.__get_attachment_md5(part.get_payload())
                     size_in_bytes = common.UnsignedLongObjectAttributeType(
                                     valueOf_ = str(file_size))
                     modified_date = self.__get_attachment_modified_date(part)
@@ -279,11 +295,15 @@ class email_translator:
                     if(self.__verbose_output):
                         print "** creating file object for: " + filename + " size: " + str(file_size) + " bytes"
 
-                    cybox_id = self.__create_cybox_id()
+                    cybox_id = self.__create_cybox_id("object")
+                    
+                    hash_type_obj = self.__create_hash_object(md5_hash)
+                    
                     file_obj = file_object.FileObjectType(
                                File_Name = self.__create_string_object_attr_type(filename),
                                File_Extension = self.__create_string_object_attr_type(extension),
                                Size_In_Bytes = size_in_bytes,
+                               Hashes = self.__create_hash_list_object([hash_type_obj]),
                                Modified_Time = self.__create_string_object_attr_type(modified_date),
                                Created_Time = self.__create_date_time_object_attr_type(created_date))
                     
@@ -541,7 +561,25 @@ class email_translator:
 
         return addr_obj
         
-
+        
+    """ Returns a CybOX HashType object for the given md5 hash """
+    def __create_hash_object(self, md5_hash):
+        hash_name_type = common.HashNameType(valueOf_= "MD5")
+        hash_value_type = common.SimpleHashValueType(valueOf_ = md5_hash)
+        hash_type = common.HashType(Type=hash_name_type, Simple_Hash_Value=hash_value_type)
+        
+        return hash_type
+        
+        
+    """ Returns a CybOX HashListType object for the given list of HashType objects """
+    def __create_hash_list_object(self, list_hash_type_objects):
+        hash_list_object = common.HashListType()
+        
+        for hash_type_object in list_hash_type_objects:
+            hash_list_object.add_Hash(hash_type_object)
+            
+        return hash_list_object
+        
     
     """ Returns a CybOX AddressType Object for use with IPv4 addresses """
     def __create_ip_address_object(self, ip_addr):
@@ -734,7 +772,10 @@ class email_translator:
         if self.is_enabled_include_urls():
             child_object_map.update(url_obj_map)
         
-        root_observables = cybox.ObservablesType(cybox_major_version = "1", cybox_minor_version= "0")
+        
+        root_observable_comp = cybox.ObservableCompositionType(operator="AND")
+        root_observable = cybox.ObservableType(id = self.__create_cybox_id("observable"), Observable_Composition = root_observable_comp)
+        root_observables = cybox.ObservablesType(cybox_major_version = "1", cybox_minor_version= "0", Observable = [root_observable])
         
         # set up the email observable
         email_observable = cybox.ObservableType(id = self.__create_cybox_id("observable"))    
@@ -747,7 +788,7 @@ class email_translator:
         
         map_child_observables = {}
         for obj_id, obj in child_object_map.iteritems():
-            observable_id = self.__create_cybox_id()
+            observable_id = self.__create_cybox_id("observable")
             observable = cybox.ObservableType(id = observable_id)
             cybox_object = cybox.ObjectType(id = obj_id)
             cybox_object.set_Defined_Object(obj)
@@ -758,9 +799,9 @@ class email_translator:
             map_child_observables[obj_id] = observable
         
         for observable in map_child_observables.itervalues():
-            root_observables.add_Observable(observable)
+            root_observable_comp.add_Observable(observable)
         
-        root_observables.add_Observable(email_observable)
+        root_observable_comp.add_Observable(email_observable)
         
         return root_observables
   
@@ -812,7 +853,7 @@ class email_translator:
         else:
             map_urls = None
         
-        email_message_id = self.__create_cybox_id()
+        email_message_id = self.__create_cybox_id("object")
         cybox_email_message_obj =   self.__create_cybox_email_message_object( attachments = cybox_attachments,
                                                                               headers = cybox_headers,
                                                                               optional_headers = cybox_optional_headers,
