@@ -193,16 +193,10 @@ class email_translator:
         return "cybox:" + item_type + "-" + str(uuid.uuid1())
 
 
-    """ Attachments are encoded using Base64 encoding. To estimate
-        the size of the attachment, we use the following format:
-        
-        bytes = (string_length(encoded_payload)) / 1.37
-
-        The factor of 1.37 is there to compensate for the inflation
-        that occurs through base64 encoding """
+    """ Returns file size of base64 decompressed attachment """
 
     def __get_file_size(self, base64_enc_data):
-        num_bytes = int(len(base64_enc_data) / 1.37)
+        num_bytes = len(base64.b64decode(base64_enc_data))
         return num_bytes
 
 
