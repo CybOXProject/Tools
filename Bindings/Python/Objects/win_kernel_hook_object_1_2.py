@@ -371,7 +371,8 @@ class WindowsKernelHookObjectType(common.DefinedObjectType):
     Windows kernel function hooks."""
     subclass = None
     superclass = common.DefinedObjectType
-    def __init__(self, Digital_Signature_Hooking=None, Digital_Signature_Hooked=None, Hooking_Address=None, Hook_Description=None, Hooked_Function=None, Hooked_Module=None, Hooking_Module=None, Type=None, object_reference=None):
+    def __init__(self, Digital_Signature_Hooking=None, Digital_Signature_Hooked=None, Hooking_Address=None, Hook_Description=None, Hooked_Function=None, Hooked_Module=None, Hooking_Module=None, Type=None):
+        super(WindowsKernelHookObjectType, self).__init__(None)
         self.Digital_Signature_Hooking = Digital_Signature_Hooking
         self.Digital_Signature_Hooked = Digital_Signature_Hooked
         self.Hooking_Address = Hooking_Address
@@ -380,8 +381,6 @@ class WindowsKernelHookObjectType(common.DefinedObjectType):
         self.Hooked_Module = Hooked_Module
         self.Hooking_Module = Hooking_Module
         self.Type = Type
-        self.anyAttributes_= {}
-        self.object_reference = object_reference
     def factory(*args_, **kwargs_):
         if WindowsKernelHookObjectType.subclass:
             return WindowsKernelHookObjectType.subclass(*args_, **kwargs_)
@@ -496,33 +495,33 @@ class WindowsKernelHookObjectType(common.DefinedObjectType):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Digital_Signature_Hooking':
-            Digital_Signature_Hooking_ = common.DigitalSignatureInfoType.factory()
-            Digital_Signature_Hooking_.build(child_)
-            self.set_Digital_Signature_Hooking(Digital_Signature_Hooking_)
+            Digital_Signature_Hooking_ = child_.text
+            Digital_Signature_Hooking_ = self.gds_validate_string(Digital_Signature_Hooking_, node, 'Digital_Signature_Hooking')
+            self.Digital_Signature_Hooking = Digital_Signature_Hooking_
         elif nodeName_ == 'Digital_Signature_Hooked':
-            Digital_Signature_Hooked_ = common.DigitalSignatureInfoType.factory()
-            Digital_Signature_Hooked_.build(child_)
-            self.set_Digital_Signature_Hooked(Digital_Signature_Hooked_)
+            Digital_Signature_Hooked_ = child_.text
+            Digital_Signature_Hooked_ = self.gds_validate_string(Digital_Signature_Hooked_, node, 'Digital_Signature_Hooked')
+            self.Digital_Signature_Hooked = Digital_Signature_Hooked_
         elif nodeName_ == 'Hooking_Address':
-            Hooking_Address_ = common.UnsignedLongObjectAttributeType.factory()
-            Hooking_Address_.build(child_)
-            self.set_Hooking_Address(Hooking_Address_)
+            Hooking_Address_ = child_.text
+            Hooking_Address_ = self.gds_validate_string(Hooking_Address_, node, 'Hooking_Address')
+            self.Hooking_Address = Hooking_Address_
         elif nodeName_ == 'Hook_Description':
-            Hook_Description_ = common.StringObjectAttributeType.factory()
-            Hook_Description_.build(child_)
-            self.set_Hook_Description(Hook_Description_)
+            Hook_Description_ = child_.text
+            Hook_Description_ = self.gds_validate_string(Hook_Description_, node, 'Hook_Description')
+            self.Hook_Description = Hook_Description_
         elif nodeName_ == 'Hooked_Function':
-            Hooked_Function_ = common.StringObjectAttributeType.factory()
-            Hooked_Function_.build(child_)
-            self.set_Hooked_Function(Hooked_Function_)
+            Hooked_Function_ = child_.text
+            Hooked_Function_ = self.gds_validate_string(Hooked_Function_, node, 'Hooked_Function')
+            self.Hooked_Function = Hooked_Function_
         elif nodeName_ == 'Hooked_Module':
-            Hooked_Module_ = common.StringObjectAttributeType.factory()
-            Hooked_Module_.build(child_)
-            self.set_Hooked_Module(Hooked_Module_)
+            Hooked_Module_ = child_.text
+            Hooked_Module_ = self.gds_validate_string(Hooked_Module_, node, 'Hooked_Module')
+            self.Hooked_Module = Hooked_Module_
         elif nodeName_ == 'Hooking_Module':
-            Hooking_Module_ = common.StringObjectAttributeType.factory()
-            Hooking_Module_.build(child_)
-            self.set_Hooking_Module(Hooking_Module_)
+            Hooking_Module_ = child_.text
+            Hooking_Module_ = self.gds_validate_string(Hooking_Module_, node, 'Hooking_Module')
+            self.Hooking_Module = Hooking_Module_
         elif nodeName_ == 'Type':
             obj_ = None
             self.set_Type(obj_)

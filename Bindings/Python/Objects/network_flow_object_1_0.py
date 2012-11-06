@@ -600,7 +600,7 @@ class NetworkLayerInfoType(GeneratedsSuper):
 # end class NetworkLayerInfoType
 
 
-class NetworkFlowLabelType(common.NetworkLayerInfoType):
+class NetworkFlowLabelType(NetworkLayerInfoType):
     """The NetworkFlowLabelType contains elements that are common to all
     flow record formats. It builds off of network layer information
     (a 5-tuple that commonly defines a flow) and includes ingress
@@ -611,7 +611,7 @@ class NetworkFlowLabelType(common.NetworkLayerInfoType):
     defined here, they are excluded from the fields associated
     directly with each different flow record format type."""
     subclass = None
-    superclass = common.NetworkLayerInfoType
+    superclass = NetworkLayerInfoType
     def __init__(self, Src_IP=None, Dest_IP=None, Src_Port=None, Dest_Port=None, IP_Protocol=None, Ingress_Interface_Index=None, Egress_Interface_Index=None, IP_Type_Of_Service=None):
         super(NetworkFlowLabelType, self).__init__(Src_IP, Dest_IP, Src_Port, Dest_Port, IP_Protocol, )
         self.Ingress_Interface_Index = Ingress_Interface_Index

@@ -2,15 +2,16 @@
 # -*- coding: utf-8 -*- 
 
 #
-# Generated Mon Oct 15 12:49:59 2012 by generateDS.py version 2.7c.
+# Generated Tue Nov 06 14:02:26 2012 by generateDS.py version 2.7c.
 #
 
 import sys
 import getopt
 import re as re_
-import common_types_1_0 as common
-import uri_object_1_1 as uri_object
-import dns_record_object_1_0 as dns_record_object
+
+import cybox_common_types_v1_0
+import dns_record_object_1_1
+import uri_object_1_2
 
 etree_ = None
 Verbose_import_ = False
@@ -369,152 +370,6 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class DNSQueryObjectType(common.DefinedObjectType):
-    """The DNSQueryObjectType is intended to characterize a single DNS query and
-    its components.The successful attribute specifies whether or not
-    the DNS Query was successful."""
-    subclass = None
-    superclass = common.DefinedObjectType
-    def __init__(self, successful=None, Question=None, Answer_Resource_Records=None, Authority_Resource_Records=None, Additional_Records=None):
-        super(DNSQueryObjectType, self).__init__(None)
-        self.successful = _cast(bool, successful)
-        self.Question = Question
-        self.Answer_Resource_Records = Answer_Resource_Records
-        self.Authority_Resource_Records = Authority_Resource_Records
-        self.Additional_Records = Additional_Records
-    def factory(*args_, **kwargs_):
-        if DNSQueryObjectType.subclass:
-            return DNSQueryObjectType.subclass(*args_, **kwargs_)
-        else:
-            return DNSQueryObjectType(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def get_Question(self): return self.Question
-    def set_Question(self, Question): self.Question = Question
-    def get_Answer_Resource_Records(self): return self.Answer_Resource_Records
-    def set_Answer_Resource_Records(self, Answer_Resource_Records): self.Answer_Resource_Records = Answer_Resource_Records
-    def get_Authority_Resource_Records(self): return self.Authority_Resource_Records
-    def set_Authority_Resource_Records(self, Authority_Resource_Records): self.Authority_Resource_Records = Authority_Resource_Records
-    def get_Additional_Records(self): return self.Additional_Records
-    def set_Additional_Records(self, Additional_Records): self.Additional_Records = Additional_Records
-    def get_successful(self): return self.successful
-    def set_successful(self, successful): self.successful = successful
-    def export(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSQueryObjectType', namespacedef_='', pretty_print=True):
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='DNSQueryObjectType')
-        if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
-            showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
-        else:
-            outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='DNSQueryObj:', name_='DNSQueryObjectType'):
-        super(DNSQueryObjectType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='DNSQueryObjectType')
-        if self.successful is not None and 'successful' not in already_processed:
-            already_processed.append('successful')
-            outfile.write(' successful="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.successful)), input_name='successful'))
-    def exportChildren(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSQueryObjectType', fromsubclass_=False, pretty_print=True):
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.Question is not None:
-            self.Question.export(outfile, level, 'DNSQueryObj:', name_='Question', pretty_print=pretty_print)
-        if self.Answer_Resource_Records is not None:
-            self.Answer_Resource_Records.export(outfile, level, 'DNSQueryObj:', name_='Answer_Resource_Records', pretty_print=pretty_print)
-        if self.Authority_Resource_Records is not None:
-            self.Authority_Resource_Records.export(outfile, level, 'DNSQueryObj:', name_='Authority_Resource_Records', pretty_print=pretty_print)
-        if self.Additional_Records is not None:
-            self.Additional_Records.export(outfile, level, 'DNSQueryObj:', name_='Additional_Records', pretty_print=pretty_print)
-    def hasContent_(self):
-        if (
-            self.Question is not None or
-            self.Answer_Resource_Records is not None or
-            self.Authority_Resource_Records is not None or
-            self.Additional_Records is not None
-            ):
-            return True
-        else:
-            return False
-    def exportLiteral(self, outfile, level, name_='DNSQueryObjectType'):
-        level += 1
-        self.exportLiteralAttributes(outfile, level, [], name_)
-        if self.hasContent_():
-            self.exportLiteralChildren(outfile, level, name_)
-    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        super(DNSQueryObjectType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
-        if self.successful is not None and 'successful' not in already_processed:
-            already_processed.append('successful')
-            showIndent(outfile, level)
-            outfile.write('successful = %s,\n' % (self.successful,))
-    def exportLiteralChildren(self, outfile, level, name_):
-        if self.Question is not None:
-            showIndent(outfile, level)
-            outfile.write('Question=model_.DNSQuestionType(\n')
-            self.Question.exportLiteral(outfile, level, name_='Question')
-            showIndent(outfile, level)
-            outfile.write('),\n')
-        if self.Answer_Resource_Records is not None:
-            showIndent(outfile, level)
-            outfile.write('Answer_Resource_Records=model_.DNSResourceRecordsType(\n')
-            self.Answer_Resource_Records.exportLiteral(outfile, level, name_='Answer_Resource_Records')
-            showIndent(outfile, level)
-            outfile.write('),\n')
-        if self.Authority_Resource_Records is not None:
-            showIndent(outfile, level)
-            outfile.write('Authority_Resource_Records=model_.DNSResourceRecordsType(\n')
-            self.Authority_Resource_Records.exportLiteral(outfile, level, name_='Authority_Resource_Records')
-            showIndent(outfile, level)
-            outfile.write('),\n')
-        if self.Additional_Records is not None:
-            showIndent(outfile, level)
-            outfile.write('Additional_Records=model_.DNSResourceRecordsType(\n')
-            self.Additional_Records.exportLiteral(outfile, level, name_='Additional_Records')
-            showIndent(outfile, level)
-            outfile.write('),\n')
-    def build(self, node):
-        self.buildAttributes(node, node.attrib, [])
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-    def buildAttributes(self, node, attrs, already_processed):
-        super(DNSQueryObjectType, self).buildAttributes(node, attrs, already_processed)
-        value = find_attr_value_('successful', node)
-        if value is not None and 'successful' not in already_processed:
-            already_processed.append('successful')
-            if value in ('true', '1'):
-                self.successful = True
-            elif value in ('false', '0'):
-                self.successful = False
-            else:
-                raise_parse_error(node, 'Bad boolean attribute')
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'Question':
-            obj_ = DNSQuestionType.factory()
-            obj_.build(child_)
-            self.set_Question(obj_)
-        elif nodeName_ == 'Answer_Resource_Records':
-            obj_ = DNSResourceRecordsType.factory()
-            obj_.build(child_)
-            self.set_Answer_Resource_Records(obj_)
-        elif nodeName_ == 'Authority_Resource_Records':
-            obj_ = DNSResourceRecordsType.factory()
-            obj_.build(child_)
-            self.set_Authority_Resource_Records(obj_)
-        elif nodeName_ == 'Additional_Records':
-            obj_ = DNSResourceRecordsType.factory()
-            obj_.build(child_)
-            self.set_Additional_Records(obj_)
-        super(DNSQueryObjectType, self).buildChildren(child_, node, nodeName_, True)
-# end class DNSQueryObjectType
-
-
 class DNSQuestionType(GeneratedsSuper):
     """The DNSQuestionType specifies the components of a DNS Question,
     including the domain name queried, type, and class."""
@@ -539,6 +394,9 @@ class DNSQuestionType(GeneratedsSuper):
         pass
     def get_QClass(self): return self.QClass
     def set_QClass(self, QClass): self.QClass = QClass
+    def validate_StringObjectAttributeType(self, value):
+        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        pass
     def export(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSQuestionType', namespacedef_='', pretty_print=True):
         if pretty_print:
             eol_ = '\n'
@@ -563,11 +421,11 @@ class DNSQuestionType(GeneratedsSuper):
         else:
             eol_ = ''
         if self.QName is not None:
-            self.QName.export(outfile, level, namespace_, name_='QName')
+            self.QName.export(outfile, level, 'DNSQueryObj:', name_='QName', pretty_print=pretty_print)
         if self.QType is not None:
-            self.QType.export(outfile, level, namespace_, name_='QType', pretty_print=pretty_print)
+            self.QType.export(outfile, level, 'DNSQueryObj:', name_='QType', pretty_print=pretty_print)
         if self.QClass is not None:
-            self.QClass.export(outfile, level, namespace_, name_='QClass')
+            self.QClass.export(outfile, level, 'DNSQueryObj:', name_='QClass', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.QName is not None or
@@ -587,7 +445,10 @@ class DNSQuestionType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.QName is not None:
             showIndent(outfile, level)
-            outfile.write('QName=%s,\n' % quote_python(self.QName).encode(ExternalEncoding))
+            outfile.write('QName=model_.uri_object_1_2.URIObjectType(\n')
+            self.QName.exportLiteral(outfile, level, name_='QName')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.QType is not None:
             showIndent(outfile, level)
             outfile.write('QType=model_.DNSRecordType(\n')
@@ -596,7 +457,10 @@ class DNSQuestionType(GeneratedsSuper):
             outfile.write('),\n')
         if self.QClass is not None:
             showIndent(outfile, level)
-            outfile.write('QClass=%s,\n' % quote_python(self.QClass).encode(ExternalEncoding))
+            outfile.write('QClass=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            self.QClass.exportLiteral(outfile, level, name_='QClass')
+            showIndent(outfile, level)
+            outfile.write('),\n')
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
         for child in node:
@@ -606,19 +470,18 @@ class DNSQuestionType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'QName':
-            QName_ = uri_object.URIObjectType.factory()
-            QName_.build(child_)
-            self.QName = QName_
+            obj_ = uri_object_1_2.URIObjectType.factory()
+            obj_.build(child_)
+            self.set_QName(obj_)
         elif nodeName_ == 'QType':
-            QType_ = common.StringObjectAttributeType.factory()
-            QType_.build(child_)
-            self.QType = QType_
+            obj_ = DNSRecordType.factory()
+            obj_.build(child_)
+            self.set_QType(obj_)
         elif nodeName_ == 'QClass':
-            QClass_ = common.StringObjectAttributeType.factory()
-            QClass_.build(child_)
-            self.QClass = QClass_
+            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_QClass(obj_)
 # end class DNSQuestionType
-
 
 class DNSResourceRecordsType(GeneratedsSuper):
     """The DNSAnswersType encompasses one or more resource records returned
@@ -664,7 +527,7 @@ class DNSResourceRecordsType(GeneratedsSuper):
         else:
             eol_ = ''
         for Resource_Record_ in self.Resource_Record:
-            Resource_Record_.export(outfile, level, namespace_, name_='Resource_Record')
+            Resource_Record_.export(outfile, level, 'DNSQueryObj:', name_='Resource_Record', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Resource_Record
@@ -685,7 +548,10 @@ class DNSResourceRecordsType(GeneratedsSuper):
         level += 1
         for Resource_Record_ in self.Resource_Record:
             showIndent(outfile, level)
-            outfile.write('%s,\n' % quote_python(Resource_Record_).encode(ExternalEncoding))
+            outfile.write('model_.dns_record_object_1_1.DNSRecordObjectType(\n')
+            Resource_Record_.exportLiteral(outfile, level, name_='dns_record_object_1_1.DNSRecordObjectType')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         level -= 1
         showIndent(outfile, level)
         outfile.write('],\n')
@@ -698,22 +564,22 @@ class DNSResourceRecordsType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Resource_Record':
-            Resource_Record_ = dns_record_object.DNSRecordObjectType.factory()
-            Resource_Record_.build(child_)
-            self.Resource_Record.append(Resource_Record_)
+            obj_ = dns_record_object_1_1.DNSRecordObjectType.factory()
+            obj_.build(child_)
+            self.Resource_Record.append(obj_)
 # end class DNSResourceRecordsType
 
-
-class DNSRecordType(GeneratedsSuper):
+class DNSRecordType(cybox_common_types_v1_0.BaseObjectAttributeType):
     """DNSRecordType specifies DNS record types, via a union of the
     DNSRecordTypeEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = None
-    def __init__(self, datatype=None, valueOf_=None):
+    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(DNSRecordType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -743,14 +609,17 @@ class DNSRecordType(GeneratedsSuper):
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='DNSQueryObj:', name_='DNSRecordType'):
+        super(DNSRecordType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='DNSRecordType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
     def exportChildren(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSRecordType', fromsubclass_=False, pretty_print=True):
+        super(DNSRecordType, self).exportChildren(outfile, level, 'DNSQueryObj:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
-            self.valueOf_
+            self.valueOf_ or
+            super(DNSRecordType, self).hasContent_()
             ):
             return True
         else:
@@ -767,7 +636,9 @@ class DNSRecordType(GeneratedsSuper):
             already_processed.append('datatype')
             showIndent(outfile, level)
             outfile.write('datatype = %s,\n' % (self.datatype,))
+        super(DNSRecordType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
     def exportLiteralChildren(self, outfile, level, name_):
+        super(DNSRecordType, self).exportLiteralChildren(outfile, level, name_)
         pass
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
@@ -780,10 +651,158 @@ class DNSRecordType(GeneratedsSuper):
         if value is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             self.datatype = value
+        super(DNSRecordType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         pass
 # end class DNSRecordType
 
+class DNSQueryObjectType(cybox_common_types_v1_0.DefinedObjectType):
+    """The DNSQueryType is intended to characterize a single DNS query and
+    its components.The successful attribute specifies whether or not
+    the DNS Query was successful."""
+    subclass = None
+    superclass = cybox_common_types_v1_0.DefinedObjectType
+    def __init__(self, object_reference=None, successful=None, Question=None, Answer_Resource_Records=None, Authority_Resource_Records=None, Additional_Records=None):
+        super(DNSQueryObjectType, self).__init__(object_reference, )
+        self.successful = _cast(bool, successful)
+        self.Question = Question
+        self.Answer_Resource_Records = Answer_Resource_Records
+        self.Authority_Resource_Records = Authority_Resource_Records
+        self.Additional_Records = Additional_Records
+    def factory(*args_, **kwargs_):
+        if DNSQueryObjectType.subclass:
+            return DNSQueryObjectType.subclass(*args_, **kwargs_)
+        else:
+            return DNSQueryObjectType(*args_, **kwargs_)
+    factory = staticmethod(factory)
+    def get_Question(self): return self.Question
+    def set_Question(self, Question): self.Question = Question
+    def get_Answer_Resource_Records(self): return self.Answer_Resource_Records
+    def set_Answer_Resource_Records(self, Answer_Resource_Records): self.Answer_Resource_Records = Answer_Resource_Records
+    def get_Authority_Resource_Records(self): return self.Authority_Resource_Records
+    def set_Authority_Resource_Records(self, Authority_Resource_Records): self.Authority_Resource_Records = Authority_Resource_Records
+    def get_Additional_Records(self): return self.Additional_Records
+    def set_Additional_Records(self, Additional_Records): self.Additional_Records = Additional_Records
+    def get_successful(self): return self.successful
+    def set_successful(self, successful): self.successful = successful
+    def export(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSQueryObjectType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
+        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        already_processed = []
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='DNSQueryObjectType')
+        if self.hasContent_():
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+        else:
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='DNSQueryObj:', name_='DNSQueryObjectType'):
+        super(DNSQueryObjectType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='DNSQueryObjectType')
+        if self.successful is not None and 'successful' not in already_processed:
+            already_processed.append('successful')
+            outfile.write(' successful="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.successful)), input_name='successful'))
+    def exportChildren(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSQueryObjectType', fromsubclass_=False, pretty_print=True):
+        super(DNSQueryObjectType, self).exportChildren(outfile, level, 'DNSQueryObj:', name_, True, pretty_print=pretty_print)
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        if self.Question is not None:
+            self.Question.export(outfile, level, 'DNSQueryObj:', name_='Question', pretty_print=pretty_print)
+        if self.Answer_Resource_Records is not None:
+            self.Answer_Resource_Records.export(outfile, level, 'DNSQueryObj:', name_='Answer_Resource_Records', pretty_print=pretty_print)
+        if self.Authority_Resource_Records is not None:
+            self.Authority_Resource_Records.export(outfile, level, 'DNSQueryObj:', name_='Authority_Resource_Records', pretty_print=pretty_print)
+        if self.Additional_Records is not None:
+            self.Additional_Records.export(outfile, level, 'DNSQueryObj:', name_='Additional_Records', pretty_print=pretty_print)
+    def hasContent_(self):
+        if (
+            self.Question is not None or
+            self.Answer_Resource_Records is not None or
+            self.Authority_Resource_Records is not None or
+            self.Additional_Records is not None or
+            super(DNSQueryObjectType, self).hasContent_()
+            ):
+            return True
+        else:
+            return False
+    def exportLiteral(self, outfile, level, name_='DNSQueryObjectType'):
+        level += 1
+        self.exportLiteralAttributes(outfile, level, [], name_)
+        if self.hasContent_():
+            self.exportLiteralChildren(outfile, level, name_)
+    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
+        if self.successful is not None and 'successful' not in already_processed:
+            already_processed.append('successful')
+            showIndent(outfile, level)
+            outfile.write('successful = %s,\n' % (self.successful,))
+        super(DNSQueryObjectType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
+    def exportLiteralChildren(self, outfile, level, name_):
+        super(DNSQueryObjectType, self).exportLiteralChildren(outfile, level, name_)
+        if self.Question is not None:
+            showIndent(outfile, level)
+            outfile.write('Question=model_.DNSQuestionType(\n')
+            self.Question.exportLiteral(outfile, level, name_='Question')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Answer_Resource_Records is not None:
+            showIndent(outfile, level)
+            outfile.write('Answer_Resource_Records=model_.DNSResourceRecordsType(\n')
+            self.Answer_Resource_Records.exportLiteral(outfile, level, name_='Answer_Resource_Records')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Authority_Resource_Records is not None:
+            showIndent(outfile, level)
+            outfile.write('Authority_Resource_Records=model_.DNSResourceRecordsType(\n')
+            self.Authority_Resource_Records.exportLiteral(outfile, level, name_='Authority_Resource_Records')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Additional_Records is not None:
+            showIndent(outfile, level)
+            outfile.write('Additional_Records=model_.DNSResourceRecordsType(\n')
+            self.Additional_Records.exportLiteral(outfile, level, name_='Additional_Records')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+    def build(self, node):
+        self.buildAttributes(node, node.attrib, [])
+        for child in node:
+            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
+            self.buildChildren(child, node, nodeName_)
+    def buildAttributes(self, node, attrs, already_processed):
+        value = find_attr_value_('successful', node)
+        if value is not None and 'successful' not in already_processed:
+            already_processed.append('successful')
+            if value in ('true', '1'):
+                self.successful = True
+            elif value in ('false', '0'):
+                self.successful = False
+            else:
+                raise_parse_error(node, 'Bad boolean attribute')
+        super(DNSQueryObjectType, self).buildAttributes(node, attrs, already_processed)
+    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+        if nodeName_ == 'Question':
+            obj_ = DNSQuestionType.factory()
+            obj_.build(child_)
+            self.set_Question(obj_)
+        elif nodeName_ == 'Answer_Resource_Records':
+            obj_ = DNSResourceRecordsType.factory()
+            obj_.build(child_)
+            self.set_Answer_Resource_Records(obj_)
+        elif nodeName_ == 'Authority_Resource_Records':
+            obj_ = DNSResourceRecordsType.factory()
+            obj_.build(child_)
+            self.set_Authority_Resource_Records(obj_)
+        elif nodeName_ == 'Additional_Records':
+            obj_ = DNSResourceRecordsType.factory()
+            obj_.build(child_)
+            self.set_Additional_Records(obj_)
+        super(DNSQueryObjectType, self).buildChildren(child_, node, nodeName_, True)
+# end class DNSQueryObjectType
 
 USAGE_TEXT = """
 Usage: python <Parser>.py [ -s ] <in_xml_file>
@@ -793,12 +812,10 @@ def usage():
     print USAGE_TEXT
     sys.exit(1)
 
-
 def get_root_tag(node):
     tag = Tag_pattern_.match(node.tag).groups()[-1]
     rootClass = globals().get(tag)
     return tag, rootClass
-
 
 def parse(inFileName):
     doc = parsexml_(inFileName)
@@ -817,7 +834,6 @@ def parse(inFileName):
         pretty_print=True)
     return rootObj
 
-
 def parseString(inString):
     from StringIO import StringIO
     doc = parsexml_(StringIO(inString))
@@ -835,7 +851,6 @@ def parseString(inString):
         namespacedef_='')
     return rootObj
 
-
 def parseLiteral(inFileName):
     doc = parsexml_(inFileName)
     rootNode = doc.getroot()
@@ -847,13 +862,12 @@ def parseLiteral(inFileName):
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
-    sys.stdout.write('#from dns_query_object_1_0 import *\n\n')
-    sys.stdout.write('import dns_query_object_1_0 as model_\n\n')
+    sys.stdout.write('#from temp import *\n\n')
+    sys.stdout.write('import temp as model_\n\n')
     sys.stdout.write('rootObj = model_.rootTag(\n')
     rootObj.exportLiteral(sys.stdout, 0, name_=rootTag)
     sys.stdout.write(')\n')
     return rootObj
-
 
 def main():
     args = sys.argv[1:]
@@ -862,15 +876,13 @@ def main():
     else:
         usage()
 
-
 if __name__ == '__main__':
     #import pdb; pdb.set_trace()
     main()
 
-
 __all__ = [
     "DNSQueryObjectType",
     "DNSQuestionType",
-    "DNSRecordType",
-    "DNSResourceRecordsType"
+    "DNSResourceRecordsType",
+    "DNSRecordType"
     ]

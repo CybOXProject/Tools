@@ -416,21 +416,21 @@ class WindowsFileObjectType(file_object.FileObjectType):
     def exportAttributes(self, outfile, level, already_processed, namespace_='WinFileObj:', name_='WindowsFileObjectType'):
         super(WindowsFileObjectType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='WindowsFileObjectType')
     def exportChildren(self, outfile, level, namespace_='WinFileObj:', name_='WindowsFileObjectType', fromsubclass_=False):
-        if self.Filename_Accessed_Time is not None:
-            self.Filename_Accessed_Time.export(outfile, level, namespace_, name_='Filename_Accessed_Time')
-        if self.Filename_Created_Time is not None:
-            self.Filename_Created_Time.export(outfile, level, namespace_, name_='Filename_Created_Time')
-        if self.Filename_Modified_Time is not None:
-            self.Filename_Modified_Time.export(outfile, level, namespace_, name_='Filename_Modified_Time')
-        if self.Drive is not None:
-            self.Drive.export(outfile, level, namespace_, name_='Drive')
-        if self.Security_ID is not None:
-            self.Security_ID.export(outfile, level, namespace_, name_='Security_ID')
-        if self.Security_Type is not None:
-            self.Security_Type.export(outfile, level, namespace_, name_='Security_Type')
-        if self.Stream_List is not None:
-            self.Stream_List.export(outfile, level, namespace_, name_='Stream_List')
         super(WindowsFileObjectType, self).exportChildren(outfile, level, namespace_, name_, True)
+        if self.Filename_Accessed_Time is not None:
+            self.Filename_Accessed_Time.export(outfile, level, 'WinFileObj:', name_='Filename_Accessed_Time')
+        if self.Filename_Created_Time is not None:
+            self.Filename_Created_Time.export(outfile, level, 'WinFileObj:', name_='Filename_Created_Time')
+        if self.Filename_Modified_Time is not None:
+            self.Filename_Modified_Time.export(outfile, level, 'WinFileObj:', name_='Filename_Modified_Time')
+        if self.Drive is not None:
+            self.Drive.export(outfile, level, 'WinFileObj:', name_='Drive')
+        if self.Security_ID is not None:
+            self.Security_ID.export(outfile, level, 'WinFileObj:', name_='Security_ID')
+        if self.Security_Type is not None:
+            self.Security_Type.export(outfile, level, 'WinFileObj:', name_='Security_Type')
+        if self.Stream_List is not None:
+            self.Stream_List.export(outfile, level, 'WinFileObj:', name_='Stream_List')
     def hasContent_(self):
         if (
             self.Filename_Accessed_Time is not None or
@@ -439,7 +439,8 @@ class WindowsFileObjectType(file_object.FileObjectType):
             self.Drive is not None or
             self.Security_ID is not None or
             self.Security_Type is not None or
-            self.Stream_List is not None
+            self.Stream_List is not None or
+            super(WindowsFileObjectType, self).hasContent_()
             ):
             return True
         else:
@@ -485,29 +486,29 @@ class WindowsFileObjectType(file_object.FileObjectType):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Filename_Accessed_Time':
-            Filename_Accessed_Time_ = common.DateTimeObjectAttributeType.factory()
-            Filename_Accessed_Time_.build(child_)
-            self.set_Filename_Accessed_Time(Filename_Accessed_Time_)
+            Filename_Accessed_Time_ = child_.text
+            Filename_Accessed_Time_ = self.gds_validate_string(Filename_Accessed_Time_, node, 'Filename_Accessed_Time')
+            self.Filename_Accessed_Time = Filename_Accessed_Time_
         elif nodeName_ == 'Filename_Created_Time':
-            Filename_Created_Time_ = common.DateTimeObjectAttributeType.factory()
-            Filename_Created_Time_.build(child_)
-            self.set_Filename_Created_Time(Filename_Created_Time_)
+            Filename_Created_Time_ = child_.text
+            Filename_Created_Time_ = self.gds_validate_string(Filename_Created_Time_, node, 'Filename_Created_Time')
+            self.Filename_Created_Time = Filename_Created_Time_
         elif nodeName_ == 'Filename_Modified_Time':
-            Filename_Modified_Time_ = common.DateTimeObjectAttributeType.factory()
-            Filename_Modified_Time_.build(child_)
-            self.set_Filename_Modified_Time(Filename_Modified_Time_)
+            Filename_Modified_Time_ = child_.text
+            Filename_Modified_Time_ = self.gds_validate_string(Filename_Modified_Time_, node, 'Filename_Modified_Time')
+            self.Filename_Modified_Time = Filename_Modified_Time_
         elif nodeName_ == 'Drive':
-            Drive_ = common.StringObjectAttributeType.factory()
-            Drive_.build(child_)
-            self.set_Drive(Drive_)
+            Drive_ = child_.text
+            Drive_ = self.gds_validate_string(Drive_, node, 'Drive')
+            self.Drive = Drive_
         elif nodeName_ == 'Security_ID':
-            Security_ID_ = common.StringObjectAttributeType.factory()
-            Security_ID_.build(child_)
-            self.set_Security_ID(Security_ID_)
+            Security_ID_ = child_.text
+            Security_ID_ = self.gds_validate_string(Security_ID_, node, 'Security_ID')
+            self.Security_ID = Security_ID_
         elif nodeName_ == 'Security_Type':
-            Security_Type_ = common.StringObjectAttributeType.factory()
-            Security_Type_.build(child_)
-            self.set_Security_Type(Security_Type_)
+            Security_Type_ = child_.text
+            Security_Type_ = self.gds_validate_string(Security_Type_, node, 'Security_Type')
+            self.Security_Type = Security_Type_
         elif nodeName_ == 'Stream_List':
             obj_ = StreamListType.factory()
             obj_.build(child_)
@@ -584,13 +585,13 @@ class StreamObjectType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            Name_ = common.StringObjectAttributeType.factory()
-            Name_.build(child_)
-            self.set_Name(Name_)
+            Name_ = child_.text
+            Name_ = self.gds_validate_string(Name_, node, 'Name')
+            self.Name = Name_
         elif nodeName_ == 'Size_In_Bytes':
-            Size_In_Bytes_ = common.UnsignedLongObjectAttributeType.factory()
-            Size_In_Bytes_.build(child_)
-            self.set_Size_In_Bytes(Size_In_Bytes_)
+            Size_In_Bytes_ = child_.text
+            Size_In_Bytes_ = self.gds_validate_string(Size_In_Bytes_, node, 'Size_In_Bytes')
+            self.Size_In_Bytes = Size_In_Bytes_
         super(StreamObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class StreamObjectType
 

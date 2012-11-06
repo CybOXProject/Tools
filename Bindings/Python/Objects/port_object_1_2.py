@@ -448,12 +448,11 @@ class PortObjectType(common.DefinedObjectType):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Port_Value':
-            Port_Value_ = common.PositiveIntegerObjectAttributeType.factory()
-            Port_Value_.build(child_)
+            Port_Value_ = child_.text
+            Port_Value_ = self.gds_validate_string(Port_Value_, node, 'Port_Value')
             self.Port_Value = Port_Value_
         elif nodeName_ == 'Layer4_Protocol':
-            obj_ = Layer4ProtocolType.factory()
-            obj_.build(child_)
+            obj_ = None
             self.set_Layer4_Protocol(obj_)
             self.validate_Layer4ProtocolType(self.Layer4_Protocol)    # validate type Layer4ProtocolType
         super(PortObjectType, self).buildChildren(child_, node, nodeName_, True)

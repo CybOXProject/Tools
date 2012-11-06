@@ -9,8 +9,6 @@ import sys
 import getopt
 import re as re_
 import common_types_1_0 as common
-import address_object_1_1 as address_object
-import port_object_1_2 as port_object
 
 etree_ = None
 Verbose_import_ = False
@@ -458,41 +456,41 @@ class ProcessObjectType(common.DefinedObjectType):
             outfile.write(' is_hidden="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.is_hidden)), input_name='is_hidden'))
     def exportChildren(self, outfile, level, namespace_='ProcessObj:', name_='ProcessObjectType', fromsubclass_=False):
         if self.PID is not None:
-            self.PID.export(outfile, level, namespace_, name_='PID')
+            self.PID.export(outfile, level, 'ProcessObj:', name_='PID')
         if self.Name is not None:
-            self.Name.export(outfile, level, namespace_, name_='Name')
+            self.Name.export(outfile, level, 'ProcessObj:', name_='Name')
         if self.Path is not None:
-            self.Path.export(outfile, level, namespace_, name_='Path')
+            self.Path.export(outfile, level, 'ProcessObj:', name_='Path')
         if self.Current_Working_Directory is not None:
-            self.Current_Working_Directory.export(outfile, level, namespace_, name_='Current_Working_Directory')
+            self.Current_Working_Directory.export(outfile, level, 'ProcessObj:', name_='Current_Working_Directory')
         if self.Creation_Time is not None:
-            self.Creation_Time.export(outfile, level, namespace_, name_='Creation_Time')
+            self.Creation_Time.export(outfile, level, 'ProcessObj:', name_='Creation_Time')
         if self.Parent_PID is not None:
-            self.Parent_PID.export(outfile, level, namespace_, name_='Parent_PID')
+            self.Parent_PID.export(outfile, level, 'ProcessObj:', name_='Parent_PID')
         if self.Child_PID_List is not None:
-            self.Child_PID_List.export(outfile, level, namespace_, name_='Child_PID_List')
+            self.Child_PID_List.export(outfile, level, 'ProcessObj:', name_='Child_PID_List')
         if self.Argument_List is not None:
-            self.Argument_List.export(outfile, level, namespace_, name_='Argument_List')
+            self.Argument_List.export(outfile, level, 'ProcessObj:', name_='Argument_List')
         if self.Environment_Variable_List is not None:
-            self.Environment_Variable_List.export(outfile, level, namespace_, name_='Environment_Variable_List')
+            self.Environment_Variable_List.export(outfile, level, 'ProcessObj:', name_='Environment_Variable_List')
         if self.Image_Info is not None:
-            self.Image_Info.export(outfile, level, namespace_, name_='Image_Info')
+            self.Image_Info.export(outfile, level, 'ProcessObj:', name_='Image_Info')
         if self.Kernel_Time is not None:
-            self.Kernel_Time.export(outfile, level, namespace_, name_='Kernel_Time')
+            self.Kernel_Time.export(outfile, level, 'ProcessObj:', name_='Kernel_Time')
         if self.Port_List is not None:
-            self.Port_List.export(outfile, level, namespace_, name_='Port_List')
+            self.Port_List.export(outfile, level, 'ProcessObj:', name_='Port_List')
         if self.Network_Connection_List is not None:
-            self.Network_Connection_List.export(outfile, level, namespace_, name_='Network_Connection_List')
+            self.Network_Connection_List.export(outfile, level, 'ProcessObj:', name_='Network_Connection_List')
         if self.Start_Time is not None:
-            self.Start_Time.export(outfile, level, namespace_, name_='Start_Time')
+            self.Start_Time.export(outfile, level, 'ProcessObj:', name_='Start_Time')
         if self.Status is not None:
-            self.Status.export(outfile, level, namespace_, name_='Status')
+            self.Status.export(outfile, level, 'ProcessObj:', name_='Status')
         if self.String_List is not None:
-            self.String_List.export(outfile, level, namespace_, name_='String_List')
+            self.String_List.export(outfile, level, 'ProcessObj:', name_='String_List')
         if self.Username is not None:
-            self.Username.export(outfile, level, namespace_, name_='Username')
+            self.Username.export(outfile, level, 'ProcessObj:', name_='Username')
         if self.User_Time is not None:
-            self.User_Time.export(outfile, level, namespace_, name_='User_Time')
+            self.User_Time.export(outfile, level, 'ProcessObj:', name_='User_Time')
     def hasContent_(self):
         if (
             self.PID is not None or
@@ -617,28 +615,28 @@ class ProcessObjectType(common.DefinedObjectType):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'PID':
-            PID_ = common.UnsignedIntegerObjectAttributeType.factory()
-            PID_.build(child_)
+            PID_ = child_.text
+            PID_ = self.gds_validate_string(PID_, node, 'PID')
             self.PID = PID_
         elif nodeName_ == 'Name':
-            Name_ = common.StringObjectAttributeType.factory()
-            Name_.build(child_)
+            Name_ = child_.text
+            Name_ = self.gds_validate_string(Name_, node, 'Name')
             self.Name = Name_
         elif nodeName_ == 'Path':
-            Path_ = common.StringObjectAttributeType.factory()
-            Path_.build(child_)
+            Path_ = child_.text
+            Path_ = self.gds_validate_string(Path_, node, 'Path')
             self.Path = Path_
         elif nodeName_ == 'Current_Working_Directory':
-            Current_Working_Directory_ = common.StringObjectAttributeType.factory()
-            Current_Working_Directory_.build(child_)
+            Current_Working_Directory_ = child_.text
+            Current_Working_Directory_ = self.gds_validate_string(Current_Working_Directory_, node, 'Current_Working_Directory')
             self.Current_Working_Directory = Current_Working_Directory_
         elif nodeName_ == 'Creation_Time':
-            Creation_Time_ = common.DateTimeObjectAttributeType.factory()
-            Creation_Time_.build(child_)
+            Creation_Time_ = child_.text
+            Creation_Time_ = self.gds_validate_string(Creation_Time_, node, 'Creation_Time')
             self.Creation_Time = Creation_Time_
         elif nodeName_ == 'Parent_PID':
-            Parent_PID_ = common.UnsignedIntegerObjectAttributeType.factory()
-            Parent_PID_.build(child_)
+            Parent_PID_ = child_.text
+            Parent_PID_ = self.gds_validate_string(Parent_PID_, node, 'Parent_PID')
             self.Parent_PID = Parent_PID_
         elif nodeName_ == 'Child_PID_List':
             obj_ = ChildPIDListType.factory()
@@ -649,16 +647,16 @@ class ProcessObjectType(common.DefinedObjectType):
             obj_.build(child_)
             self.set_Argument_List(obj_)
         elif nodeName_ == 'Environment_Variable_List':
-            Environment_Variable_List_ = common.StringObjectAttributeType.factory()
-            Environment_Variable_List_.build(child_)
+            Environment_Variable_List_ = child_.text
+            Environment_Variable_List_ = self.gds_validate_string(Environment_Variable_List_, node, 'Environment_Variable_List')
             self.Environment_Variable_List = Environment_Variable_List_
         elif nodeName_ == 'Image_Info':
             obj_ = ImageInfoType.factory()
             obj_.build(child_)
             self.set_Image_Info(obj_)
         elif nodeName_ == 'Kernel_Time':
-            Kernel_Time_ = common.DurationObjectAttributeType.factory()
-            Kernel_Time_.build(child_)
+            Kernel_Time_ = child_.text
+            Kernel_Time_ = self.gds_validate_string(Kernel_Time_, node, 'Kernel_Time')
             self.Kernel_Time = Kernel_Time_
         elif nodeName_ == 'Port_List':
             obj_ = PortListType.factory()
@@ -669,8 +667,8 @@ class ProcessObjectType(common.DefinedObjectType):
             obj_.build(child_)
             self.set_Network_Connection_List(obj_)
         elif nodeName_ == 'Start_Time':
-            Start_Time_ = common.DateTimeObjectAttributeType.factory()
-            Start_Time_.build(child_)
+            Start_Time_ = child_.text
+            Start_Time_ = self.gds_validate_string(Start_Time_, node, 'Start_Time')
             self.Start_Time = Start_Time_
         elif nodeName_ == 'Status':
             type_name_ = child_.attrib.get('{http://www.w3.org/2001/XMLSchema-instance}type')
@@ -690,16 +688,16 @@ class ProcessObjectType(common.DefinedObjectType):
                     'Class not implemented for <Status> element')
             self.set_Status(obj_)
         elif nodeName_ == 'String_List':
-            String_List_ =  common.ExtractedStringsType.factory()
-            String_List_.build(child_)
+            String_List_ = child_.text
+            String_List_ = self.gds_validate_string(String_List_, node, 'String_List')
             self.String_List = String_List_
         elif nodeName_ == 'Username':
-            Username_ = common.StringObjectAttributeType.factory()
-            Username_.build(child_)
+            Username_ = child_.text
+            Username_ = self.gds_validate_string(Username_, node, 'Username')
             self.Username = Username_
         elif nodeName_ == 'User_Time':
-            User_Time_ = common.DurationObjectAttributeType.factory()
-            User_Time_.build(child_)
+            User_Time_ = child_.text
+            User_Time_ = self.gds_validate_string(User_Time_, node, 'User_Time')
             self.User_Time = User_Time_
         super(ProcessObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class ProcessObjectType
@@ -815,28 +813,27 @@ class NetworkConnectionType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Creation_Time':
-            Creation_Time_ = common.DateTimeObjectAttributeType.factory()
-            Creation_Time_.build(child_)
+            Creation_Time_ = child_.text
+            Creation_Time_ = self.gds_validate_string(Creation_Time_, node, 'Creation_Time')
             self.Creation_Time = Creation_Time_
         elif nodeName_ == 'Destination_IP_Address':
-            Destination_IP_Address_ = address_object.AddressObjectType.factory()
-            Destination_IP_Address_.build(child_)
+            Destination_IP_Address_ = child_.text
+            Destination_IP_Address_ = self.gds_validate_string(Destination_IP_Address_, node, 'Destination_IP_Address')
             self.Destination_IP_Address = Destination_IP_Address_
         elif nodeName_ == 'Destination_Port':
-            Destination_Port_ = port_object.PortObjectType.factory()
-            Destination_Port_.build(child_)
+            Destination_Port_ = child_.text
+            Destination_Port_ = self.gds_validate_string(Destination_Port_, node, 'Destination_Port')
             self.Destination_Port = Destination_Port_
         elif nodeName_ == 'Source_IP_Address':
-            Source_IP_Address_ = address_object.AddressObjectType.factory()
-            Source_IP_Address_.build(child_)
+            Source_IP_Address_ = child_.text
+            Source_IP_Address_ = self.gds_validate_string(Source_IP_Address_, node, 'Source_IP_Address')
             self.Source_IP_Address = Source_IP_Address_
         elif nodeName_ == 'Source_Port':
-            Source_Port_ = port_object.PortObjectType.factory()
-            Source_Port_.build(child_)
+            Source_Port_ = child_.text
+            Source_Port_ = self.gds_validate_string(Source_Port_, node, 'Source_Port')
             self.Source_Port = Source_Port_
         elif nodeName_ == 'TCP_State':
-            obj_ = common.StringObjectAttributeType.factory()
-            obj_.build(child_)
+            obj_ = None
             self.set_TCP_State(obj_)
             self.validate_ConnectionStateType(self.TCP_State)    # validate type ConnectionStateType
 # end class NetworkConnectionType
@@ -996,16 +993,16 @@ class ImageInfoType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Command_Line':
-            Command_Line_ = common.StringObjectAttributeType.factory()
-            Command_Line_.build(child_)
+            Command_Line_ = child_.text
+            Command_Line_ = self.gds_validate_string(Command_Line_, node, 'Command_Line')
             self.Command_Line = Command_Line_
         elif nodeName_ == 'Current_Directory':
-            Current_Directory_ = common.StringObjectAttributeType.factory()
-            Current_Directory_.build(child_)
+            Current_Directory_ = child_.text
+            Current_Directory_ = self.gds_validate_string(Current_Directory_, node, 'Current_Directory')
             self.Current_Directory = Current_Directory_
         elif nodeName_ == 'Path':
-            Path_ = common.StringObjectAttributeType.factory()
-            Path_.build(child_)
+            Path_ = child_.text
+            Path_ = self.gds_validate_string(Path_, node, 'Path')
             self.Path = Path_
 # end class ImageInfoType
 
@@ -1138,8 +1135,8 @@ class ChildPIDListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Child_PID':
-            Child_PID_ = common.UnsignedIntegerObjectAttributeType.factory()
-            Child_PID_.build(child_)
+            Child_PID_ = child_.text
+            Child_PID_ = self.gds_validate_string(Child_PID_, node, 'Child_PID')
             self.Child_PID.append(Child_PID_)
 # end class ChildPIDListType
 
@@ -1280,8 +1277,8 @@ class ArgumentListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Argument':
-            Argument_ = common.StringObjectAttributeType.factory()
-            Argument_.build(child_)
+            Argument_ = child_.text
+            Argument_ = self.gds_validate_string(Argument_, node, 'Argument')
             self.Argument = Argument_
 # end class ArgumentListType
 
@@ -1355,8 +1352,8 @@ class PortListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Port':
-            Port_ = port_object.PortObjectType.factory()
-            Port_.build(child_)
+            Port_ = child_.text
+            Port_ = self.gds_validate_string(Port_, node, 'Port')
             self.Port.append(Port_)
 # end class PortListType
 

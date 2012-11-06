@@ -477,30 +477,29 @@ class WindowsHandleObjectType(common.DefinedObjectType):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'ID':
-            ID_ = common.UnsignedIntegerObjectAttributeType.factory()
-            ID_.build(child_)
-            self.set_ID(ID_)
+            ID_ = child_.text
+            ID_ = self.gds_validate_string(ID_, node, 'ID')
+            self.ID = ID_
         elif nodeName_ == 'Name':
-            Name_ = common.StringObjectAttributeType.factory()
-            Name_.build(child_)
-            self.set_Name(Name_)
+            Name_ = child_.text
+            Name_ = self.gds_validate_string(Name_, node, 'Name')
+            self.Name = Name_
         elif nodeName_ == 'Type':
-            obj_ = common.StringObjectAttributeType.factory()
-            obj_.build(child_)
+            obj_ = None
             self.set_Type(obj_)
             self.validate_HandleType(self.Type)    # validate type HandleType
         elif nodeName_ == 'Object_Address':
-            Object_Address_ = common.UnsignedLongObjectAttributeType.factory()
-            Object_Address_.build(child_)
-            self.set_Object_Address(Object_Address_)
+            Object_Address_ = child_.text
+            Object_Address_ = self.gds_validate_string(Object_Address_, node, 'Object_Address')
+            self.Object_Address = Object_Address_
         elif nodeName_ == 'Access_Mask':
-            Access_Mask_ = common.UnsignedLongObjectAttributeType.factory()
-            Access_Mask_.build(child_)
-            self.set_Access_Mask(Access_Mask_)
+            Access_Mask_ = child_.text
+            Access_Mask_ = self.gds_validate_string(Access_Mask_, node, 'Access_Mask')
+            self.Access_Mask = Access_Mask_
         elif nodeName_ == 'Pointer_Count':
-            Pointer_Count_ = common.UnsignedLongObjectAttributeType.factory()
-            Pointer_Count_.build(child_)
-            self.set_Pointer_Count(Pointer_Count_)
+            Pointer_Count_ = child_.text
+            Pointer_Count_ = self.gds_validate_string(Pointer_Count_, node, 'Pointer_Count')
+            self.Pointer_Count = Pointer_Count_
         super(WindowsHandleObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class WindowsHandleObjectType
 

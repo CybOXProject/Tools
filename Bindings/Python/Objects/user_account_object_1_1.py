@@ -524,40 +524,40 @@ class UserAccountObjectType(account_object.AccountObjectType):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'User_ID':
-            User_ID_ = common.StringObjectAttributeType.factory()
-            User_ID_.build(child_)
+            User_ID_ = child_.text
+            User_ID_ = self.gds_validate_string(User_ID_, node, 'User_ID')
             self.User_ID = User_ID_
         elif nodeName_ == 'Full_Name':
-            Full_Name_ = common.StringObjectAttributeType.factory()
-            Full_Name_.build(child_)
+            Full_Name_ = child_.text
+            Full_Name_ = self.gds_validate_string(Full_Name_, node, 'Full_Name')
             self.Full_Name = Full_Name_
         elif nodeName_ == 'Group_List':
             obj_ = GroupListType.factory()
             obj_.build(child_)
             self.set_Group_List(obj_)
         elif nodeName_ == 'Home_Directory':
-            Home_Directory_ = common.StringObjectAttributeType.factory()
-            Home_Directory_.build(child_)
+            Home_Directory_ = child_.text
+            Home_Directory_ = self.gds_validate_string(Home_Directory_, node, 'Home_Directory')
             self.Home_Directory = Home_Directory_
         elif nodeName_ == 'Last_Login':
-            Last_Login_ = common.DateTimeObjectAttributeType.factory()
-            Last_Login_.build(child_)
+            Last_Login_ = child_.text
+            Last_Login_ = self.gds_validate_string(Last_Login_, node, 'Last_Login')
             self.Last_Login = Last_Login_
         elif nodeName_ == 'Privilege_List':
             obj_ = PrivilegeListType.factory()
             obj_.build(child_)
             self.set_Privilege_List(obj_)
         elif nodeName_ == 'Script_Path':
-            Script_Path_ = common.StringObjectAttributeType.factory()
-            Script_Path_.build(child_)
+            Script_Path_ = child_.text
+            Script_Path_ = self.gds_validate_string(Script_Path_, node, 'Script_Path')
             self.Script_Path = Script_Path_
         elif nodeName_ == 'Username':
-            Username_ = common.StringObjectAttributeType.factory()
-            Username_.build(child_)
+            Username_ = child_.text
+            Username_ = self.gds_validate_string(Username_, node, 'Username')
             self.Username = Username_
         elif nodeName_ == 'User_Password_Age':
-            User_Password_Age_ = common.DurationObjectAttributeType.factory()
-            User_Password_Age_.build(child_)
+            User_Password_Age_ = child_.text
+            User_Password_Age_ = self.gds_validate_string(User_Password_Age_, node, 'User_Password_Age')
             self.User_Password_Age = User_Password_Age_
         super(UserAccountObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class UserAccountObjectType

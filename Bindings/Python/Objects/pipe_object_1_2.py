@@ -443,8 +443,8 @@ class PipeObjectType(common.DefinedObjectType):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            Name_ = common.StringObjectAttributeType.factory()
-            Name_.build(child_)
+            Name_ = child_.text
+            Name_ = self.gds_validate_string(Name_, node, 'Name')
             self.Name = Name_
         super(PipeObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class PipeObjectType

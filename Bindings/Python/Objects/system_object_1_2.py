@@ -568,25 +568,25 @@ class SystemObjectType(common.DefinedObjectType):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Available_Physical_Memory':
-            Available_Physical_Memory_ = common.UnsignedLongObjectAttributeType().factory()
-            Available_Physical_Memory_.build(child_)
-            self.set_Available_Physical_Memory(Available_Physical_Memory_)
+            Available_Physical_Memory_ = child_.text
+            Available_Physical_Memory_ = self.gds_validate_string(Available_Physical_Memory_, node, 'Available_Physical_Memory')
+            self.Available_Physical_Memory = Available_Physical_Memory_
         elif nodeName_ == 'BIOS_Info':
             obj_ = BIOSInfoType.factory()
             obj_.build(child_)
             self.set_BIOS_Info(obj_)
         elif nodeName_ == 'Date':
-            Date_ = common.DateObjectAttributeType().factory()
-            Date_.build(child_)
-            self.set_Date(Date_)
+            Date_ = child_.text
+            Date_ = self.gds_validate_string(Date_, node, 'Date')
+            self.Date = Date_
         elif nodeName_ == 'Hostname':
-            Hostname_ = common.StringObjectAttributeType().factory()
-            Hostname_.build(child_)
-            self.set_Hostname(Hostname_)
+            Hostname_ = child_.text
+            Hostname_ = self.gds_validate_string(Hostname_, node, 'Hostname')
+            self.Hostname = Hostname_
         elif nodeName_ == 'Local_Time':
-            Local_Time_ = common.StringObjectAttributeType().factory()
-            Local_Time_.build(child_)
-            self.set_Local_Time(Local_Time_)
+            Local_Time_ = child_.text
+            Local_Time_ = self.gds_validate_string(Local_Time_, node, 'Local_Time')
+            self.Local_Time = Local_Time_
         elif nodeName_ == 'Network_Interface_List':
             obj_ = NetworkInterfaceListType.factory()
             obj_.build(child_)
@@ -596,18 +596,17 @@ class SystemObjectType(common.DefinedObjectType):
             obj_.build(child_)
             self.set_OS(obj_)
         elif nodeName_ == 'Processor':
-            Processor_ = common.StringObjectAttributeType().factory()
-            Processor_.build(child_)
-            self.self_Processor(Processor_)
+            Processor_ = child_.text
+            Processor_ = self.gds_validate_string(Processor_, node, 'Processor')
+            self.Processor = Processor_
         elif nodeName_ == 'Processor_Architecture':
-            obj_ = common.StringObjectAttributeType().factory()
-            obj_.build(child_)
+            obj_ = None
             self.set_Processor_Architecture(obj_)
             self.validate_ProcessorArchType(self.Processor_Architecture)    # validate type ProcessorArchType
         elif nodeName_ == 'System_Time':
-            System_Time_ = common.StringObjectAttributeType().factory()
-            System_Time_.buid(child_)
-            self.set_System_Time(System_Time_)
+            System_Time_ = child_.text
+            System_Time_ = self.gds_validate_string(System_Time_, node, 'System_Time')
+            self.System_Time = System_Time_
         elif nodeName_ == 'Timezone_DST':
             Timezone_DST_ = child_.text
             Timezone_DST_ = self.gds_validate_string(Timezone_DST_, node, 'Timezone_DST')
@@ -726,23 +725,23 @@ class BIOSInfoType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'BIOS_Date':
-            BIOS_Date_ = common.DateObjectAttributeType()
-            BIOS_Date_.build(child_)
-            self.set_BIOS_Date(BIOS_Date_)
+            BIOS_Date_ = child_.text
+            BIOS_Date_ = self.gds_validate_string(BIOS_Date_, node, 'BIOS_Date')
+            self.BIOS_Date = BIOS_Date_
         elif nodeName_ == 'BIOS_Version':
-            BIOS_Version_ = common.StringObjectAttributeType.factory()
-            BIOS_Version_.build(child_)
-            self.set_BIOS_Version(BIOS_Version_)
+            BIOS_Version_ = child_.text
+            BIOS_Version_ = self.gds_validate_string(BIOS_Version_, node, 'BIOS_Version')
+            self.BIOS_Version = BIOS_Version_
         elif nodeName_ == 'BIOS_Manufacturer':
-            BIOS_Manufacturer_ = common.StringObjectAttributeType.factory()
+            BIOS_Manufacturer_ = child_.text
             BIOS_Manufacturer_ = self.gds_validate_string(BIOS_Manufacturer_, node, 'BIOS_Manufacturer')
             self.BIOS_Manufacturer = BIOS_Manufacturer_
         elif nodeName_ == 'BIOS_Release_Date':
-            BIOS_Release_Date_ = common.StringObjectAttributeType.factory()
+            BIOS_Release_Date_ = child_.text
             BIOS_Release_Date_ = self.gds_validate_string(BIOS_Release_Date_, node, 'BIOS_Release_Date')
             self.BIOS_Release_Date = BIOS_Release_Date_
         elif nodeName_ == 'BIOS_Serial_Number':
-            BIOS_Serial_Number_ = common.StringObjectAttributeType.factory()
+            BIOS_Serial_Number_ = child_.text
             BIOS_Serial_Number_ = self.gds_validate_string(BIOS_Serial_Number_, node, 'BIOS_Serial_Number')
             self.BIOS_Serial_Number = BIOS_Serial_Number_
 # end class BIOSInfoType
@@ -897,9 +896,9 @@ class IPGatewayListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'IP_Gateway_Address':
-            IP_Gateway_Address_ = common.StringObjectAttributeType.factory()
-            IP_Gateway_Address_.build(child_)
-            self.set_IP_Gateway_Address(IP_Gateway_Address_)
+            IP_Gateway_Address_ = child_.text
+            IP_Gateway_Address_ = self.gds_validate_string(IP_Gateway_Address_, node, 'IP_Gateway_Address')
+            self.IP_Gateway_Address.append(IP_Gateway_Address_)
 # end class IPGatewayListType
 
 
@@ -1034,21 +1033,21 @@ class NetworkInterfaceType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Adapter':
-            Adapter_ = common.StringObjectAttributeType.factory()
-            Adapter_.build(child_)
-            self.set_Adapter(Adapter_)
+            Adapter_ = child_.text
+            Adapter_ = self.gds_validate_string(Adapter_, node, 'Adapter')
+            self.Adapter = Adapter_
         elif nodeName_ == 'Description':
-            Description_ = common.StringObjectAttributeType.factory()
-            Description_.build(child_)
-            self.set_Description(Description_)
+            Description_ = child_.text
+            Description_ = self.gds_validate_string(Description_, node, 'Description')
+            self.Description = Description_
         elif nodeName_ == 'DHCP_Lease_Expires':
-            DHCP_Lease_Expires_ = common.DateTimeObjectAttributeType()
-            DHCP_Lease_Expires_.build(child_)
-            self.set_DHCP_Lease_Expires(DHCP_Lease_Expires_)
+            DHCP_Lease_Expires_ = child_.text
+            DHCP_Lease_Expires_ = self.gds_validate_string(DHCP_Lease_Expires_, node, 'DHCP_Lease_Expires')
+            self.DHCP_Lease_Expires = DHCP_Lease_Expires_
         elif nodeName_ == 'DHCP_Lease_Obtained':
-            DHCP_Lease_Obtained_ = common.DateTimeObjectAttributeType()
-            DHCP_Lease_Obtained_.build(child_)
-            self.set_DHCP_Lease_Obtained(DHCP_Lease_Obtained_)
+            DHCP_Lease_Obtained_ = child_.text
+            DHCP_Lease_Obtained_ = self.gds_validate_string(DHCP_Lease_Obtained_, node, 'DHCP_Lease_Obtained')
+            self.DHCP_Lease_Obtained = DHCP_Lease_Obtained_
         elif nodeName_ == 'DHCP_Server_List':
             obj_ = DHCPServerListType.factory()
             obj_.build(child_)
@@ -1062,9 +1061,9 @@ class NetworkInterfaceType(GeneratedsSuper):
             obj_.build(child_)
             self.set_IP_List(obj_)
         elif nodeName_ == 'MAC':
-            MAC_ = common.StringObjectAttributeType.factory()
-            MAC_.build(child_)
-            self.set_MAC(MAC_)
+            MAC_ = child_.text
+            MAC_ = self.gds_validate_string(MAC_, node, 'MAC')
+            self.MAC = MAC_
 # end class NetworkInterfaceType
 
 
@@ -1295,9 +1294,9 @@ class DHCPServerListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'DHCP_Server_Address':
-            DHCP_Server_Address_ = common.StringObjectAttributeType.factory()
-            DHCP_Server_Address_.build(child_)
-            self.set_DHCP_Server_Address(DHCP_Server_Address_)
+            DHCP_Server_Address_ = child_.text
+            DHCP_Server_Address_ = self.gds_validate_string(DHCP_Server_Address_, node, 'DHCP_Server_Address')
+            self.DHCP_Server_Address.append(DHCP_Server_Address_)
 # end class DHCPServerListType
 
 

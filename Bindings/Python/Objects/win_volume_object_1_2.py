@@ -459,9 +459,9 @@ class WindowsVolumeObjectType(volume_object.VolumeObjectType):
             obj_.build(child_)
             self.set_Attributes_List(obj_)
         elif nodeName_ == 'Drive_Letter':
-            Drive_Letter_ = common.StringObjectAttributeType.factory()
-            Drive_Letter_.build(child_)
-            self.set_Drive_Letter(Drive_Letter_)
+            Drive_Letter_ = child_.text
+            Drive_Letter_ = self.gds_validate_string(Drive_Letter_, node, 'Drive_Letter')
+            self.Drive_Letter = Drive_Letter_
         elif nodeName_ == 'Drive_Type':
             obj_ = None
             self.set_Drive_Type(obj_)

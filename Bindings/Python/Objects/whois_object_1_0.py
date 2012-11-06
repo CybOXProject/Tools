@@ -2,15 +2,16 @@
 # -*- coding: utf-8 -*- 
 
 #
-# Generated Mon Oct 15 10:30:42 2012 by generateDS.py version 2.7c.
+# Generated Tue Nov 06 14:03:46 2012 by generateDS.py version 2.7c.
 #
 
 import sys
 import getopt
 import re as re_
-import common_types_1_0 as common
-import address_object_1_1 as address_object
-import uri_object_1_1 as uri_object
+
+import cybox_common_types_v1_0
+import uri_object_1_2
+import address_object_1_2
 
 etree_ = None
 Verbose_import_ = False
@@ -369,13 +370,360 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class WhoisObjectType(common.DefinedObjectType):
+class RegistrarInfoType(GeneratedsSuper):
+    subclass = None
+    superclass = None
+    def __init__(self, Name=None, Address=None, Email_Address=None, Phone_Number=None, Whois_Server=None, Referral_URL=None):
+        self.Name = Name
+        self.Address = Address
+        self.Email_Address = Email_Address
+        self.Phone_Number = Phone_Number
+        self.Whois_Server = Whois_Server
+        self.Referral_URL = Referral_URL
+    def factory(*args_, **kwargs_):
+        if RegistrarInfoType.subclass:
+            return RegistrarInfoType.subclass(*args_, **kwargs_)
+        else:
+            return RegistrarInfoType(*args_, **kwargs_)
+    factory = staticmethod(factory)
+    def get_Name(self): return self.Name
+    def set_Name(self, Name): self.Name = Name
+    def validate_StringObjectAttributeType(self, value):
+        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        pass
+    def get_Address(self): return self.Address
+    def set_Address(self, Address): self.Address = Address
+    def get_Email_Address(self): return self.Email_Address
+    def set_Email_Address(self, Email_Address): self.Email_Address = Email_Address
+    def get_Phone_Number(self): return self.Phone_Number
+    def set_Phone_Number(self, Phone_Number): self.Phone_Number = Phone_Number
+    def get_Whois_Server(self): return self.Whois_Server
+    def set_Whois_Server(self, Whois_Server): self.Whois_Server = Whois_Server
+    def get_Referral_URL(self): return self.Referral_URL
+    def set_Referral_URL(self, Referral_URL): self.Referral_URL = Referral_URL
+    def export(self, outfile, level, namespace_='WhoisObj:', name_='RegistrarInfoType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
+        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        already_processed = []
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='RegistrarInfoType')
+        if self.hasContent_():
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+        else:
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='WhoisObj:', name_='RegistrarInfoType'):
+        pass
+    def exportChildren(self, outfile, level, namespace_='WhoisObj:', name_='RegistrarInfoType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        if self.Name is not None:
+            self.Name.export(outfile, level, 'WhoisObj:', name_='Name', pretty_print=pretty_print)
+        if self.Address is not None:
+            self.Address.export(outfile, level, 'WhoisObj:', name_='Address', pretty_print=pretty_print)
+        if self.Email_Address is not None:
+            self.Email_Address.export(outfile, level, 'WhoisObj:', name_='Email_Address', pretty_print=pretty_print)
+        if self.Phone_Number is not None:
+            self.Phone_Number.export(outfile, level, 'WhoisObj:', name_='Phone_Number', pretty_print=pretty_print)
+        if self.Whois_Server is not None:
+            self.Whois_Server.export(outfile, level, 'WhoisObj:', name_='Whois_Server', pretty_print=pretty_print)
+        if self.Referral_URL is not None:
+            self.Referral_URL.export(outfile, level, 'WhoisObj:', name_='Referral_URL', pretty_print=pretty_print)
+    def hasContent_(self):
+        if (
+            self.Name is not None or
+            self.Address is not None or
+            self.Email_Address is not None or
+            self.Phone_Number is not None or
+            self.Whois_Server is not None or
+            self.Referral_URL is not None
+            ):
+            return True
+        else:
+            return False
+    def exportLiteral(self, outfile, level, name_='RegistrarInfoType'):
+        level += 1
+        self.exportLiteralAttributes(outfile, level, [], name_)
+        if self.hasContent_():
+            self.exportLiteralChildren(outfile, level, name_)
+    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
+        pass
+    def exportLiteralChildren(self, outfile, level, name_):
+        if self.Name is not None:
+            showIndent(outfile, level)
+            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            self.Name.exportLiteral(outfile, level, name_='Name')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Address is not None:
+            showIndent(outfile, level)
+            outfile.write('Address=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            self.Address.exportLiteral(outfile, level, name_='Address')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Email_Address is not None:
+            showIndent(outfile, level)
+            outfile.write('Email_Address=model_.address_object_1_2.AddressObjectType(\n')
+            self.Email_Address.exportLiteral(outfile, level, name_='Email_Address')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Phone_Number is not None:
+            showIndent(outfile, level)
+            outfile.write('Phone_Number=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            self.Phone_Number.exportLiteral(outfile, level, name_='Phone_Number')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Whois_Server is not None:
+            showIndent(outfile, level)
+            outfile.write('Whois_Server=model_.uri_object_1_2.URIObjectType(\n')
+            self.Whois_Server.exportLiteral(outfile, level, name_='Whois_Server')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Referral_URL is not None:
+            showIndent(outfile, level)
+            outfile.write('Referral_URL=model_.uri_object_1_2.URIObjectType(\n')
+            self.Referral_URL.exportLiteral(outfile, level, name_='Referral_URL')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+    def build(self, node):
+        self.buildAttributes(node, node.attrib, [])
+        for child in node:
+            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
+            self.buildChildren(child, node, nodeName_)
+    def buildAttributes(self, node, attrs, already_processed):
+        pass
+    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+        if nodeName_ == 'Name':
+            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Name(obj_)
+        elif nodeName_ == 'Address':
+            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Address(obj_)
+        elif nodeName_ == 'Email_Address':
+            obj_ = address_object_1_2.AddressObjectType.factory()
+            obj_.build(child_)
+            self.set_Email_Address(obj_)
+        elif nodeName_ == 'Phone_Number':
+            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Phone_Number(obj_)
+        elif nodeName_ == 'Whois_Server':
+            obj_ = uri_object_1_2.URIObjectType.factory()
+            obj_.build(child_)
+            self.set_Whois_Server(obj_)
+        elif nodeName_ == 'Referral_URL':
+            obj_ = uri_object_1_2.URIObjectType.factory()
+            obj_.build(child_)
+            self.set_Referral_URL(obj_)
+# end class RegistrarInfoType
+
+class RegistrarContactType(GeneratedsSuper):
+    """The contact_type attribute specifies what type of contact this is.
+    Only values from WhoisObj:RegistrarContactTypeEnum can be used."""
+    subclass = None
+    superclass = None
+    def __init__(self, contact_type=None, Name=None, Email_Address=None, Phone_Number=None):
+        self.contact_type = _cast(None, contact_type)
+        self.Name = Name
+        self.Email_Address = Email_Address
+        self.Phone_Number = Phone_Number
+    def factory(*args_, **kwargs_):
+        if RegistrarContactType.subclass:
+            return RegistrarContactType.subclass(*args_, **kwargs_)
+        else:
+            return RegistrarContactType(*args_, **kwargs_)
+    factory = staticmethod(factory)
+    def get_Name(self): return self.Name
+    def set_Name(self, Name): self.Name = Name
+    def validate_StringObjectAttributeType(self, value):
+        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        pass
+    def get_Email_Address(self): return self.Email_Address
+    def set_Email_Address(self, Email_Address): self.Email_Address = Email_Address
+    def get_Phone_Number(self): return self.Phone_Number
+    def set_Phone_Number(self, Phone_Number): self.Phone_Number = Phone_Number
+    def get_contact_type(self): return self.contact_type
+    def set_contact_type(self, contact_type): self.contact_type = contact_type
+    def export(self, outfile, level, namespace_='WhoisObj:', name_='RegistrarContactType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
+        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        already_processed = []
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='RegistrarContactType')
+        if self.hasContent_():
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+        else:
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='WhoisObj:', name_='RegistrarContactType'):
+        if self.contact_type is not None and 'contact_type' not in already_processed:
+            already_processed.append('contact_type')
+            outfile.write(' contact_type=%s' % (quote_attrib(self.contact_type), ))
+    def exportChildren(self, outfile, level, namespace_='WhoisObj:', name_='RegistrarContactType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        if self.Name is not None:
+            self.Name.export(outfile, level, 'WhoisObj:', name_='Name', pretty_print=pretty_print)
+        if self.Email_Address is not None:
+            self.Email_Address.export(outfile, level, 'WhoisObj:', name_='Email_Address', pretty_print=pretty_print)
+        if self.Phone_Number is not None:
+            self.Phone_Number.export(outfile, level, 'WhoisObj:', name_='Phone_Number', pretty_print=pretty_print)
+    def hasContent_(self):
+        if (
+            self.Name is not None or
+            self.Email_Address is not None or
+            self.Phone_Number is not None
+            ):
+            return True
+        else:
+            return False
+    def exportLiteral(self, outfile, level, name_='RegistrarContactType'):
+        level += 1
+        self.exportLiteralAttributes(outfile, level, [], name_)
+        if self.hasContent_():
+            self.exportLiteralChildren(outfile, level, name_)
+    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
+        if self.contact_type is not None and 'contact_type' not in already_processed:
+            already_processed.append('contact_type')
+            showIndent(outfile, level)
+            outfile.write('contact_type = %s,\n' % (self.contact_type,))
+    def exportLiteralChildren(self, outfile, level, name_):
+        if self.Name is not None:
+            showIndent(outfile, level)
+            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            self.Name.exportLiteral(outfile, level, name_='Name')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Email_Address is not None:
+            showIndent(outfile, level)
+            outfile.write('Email_Address=model_.address_object_1_2.AddressObjectType(\n')
+            self.Email_Address.exportLiteral(outfile, level, name_='Email_Address')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Phone_Number is not None:
+            showIndent(outfile, level)
+            outfile.write('Phone_Number=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            self.Phone_Number.exportLiteral(outfile, level, name_='Phone_Number')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+    def build(self, node):
+        self.buildAttributes(node, node.attrib, [])
+        for child in node:
+            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
+            self.buildChildren(child, node, nodeName_)
+    def buildAttributes(self, node, attrs, already_processed):
+        value = find_attr_value_('contact_type', node)
+        if value is not None and 'contact_type' not in already_processed:
+            already_processed.append('contact_type')
+            self.contact_type = value
+    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+        if nodeName_ == 'Name':
+            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Name(obj_)
+        elif nodeName_ == 'Email_Address':
+            obj_ = address_object_1_2.AddressObjectType.factory()
+            obj_.build(child_)
+            self.set_Email_Address(obj_)
+        elif nodeName_ == 'Phone_Number':
+            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Phone_Number(obj_)
+# end class RegistrarContactType
+
+class WhoisStatusType(cybox_common_types_v1_0.BaseObjectAttributeType):
+    """The WhoisStatusType specifies a status for a domain as listed in its
+    Whois entry. Only statuses defined by WhoisStatusTypeEnum can be
+    used."""
+    subclass = None
+    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(WhoisStatusType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
+        self.valueOf_ = valueOf_
+    def factory(*args_, **kwargs_):
+        if WhoisStatusType.subclass:
+            return WhoisStatusType.subclass(*args_, **kwargs_)
+        else:
+            return WhoisStatusType(*args_, **kwargs_)
+    factory = staticmethod(factory)
+    def get_valueOf_(self): return self.valueOf_
+    def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
+    def export(self, outfile, level, namespace_='WhoisObj:', name_='WhoisStatusType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
+        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        already_processed = []
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='WhoisStatusType')
+        if self.hasContent_():
+            outfile.write('>')
+            outfile.write(str(self.valueOf_).encode(ExternalEncoding))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+        else:
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='WhoisObj:', name_='WhoisStatusType'):
+        super(WhoisStatusType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='WhoisStatusType')
+    def exportChildren(self, outfile, level, namespace_='WhoisObj:', name_='WhoisStatusType', fromsubclass_=False, pretty_print=True):
+        super(WhoisStatusType, self).exportChildren(outfile, level, 'WhoisObj:', name_, True, pretty_print=pretty_print)
+        pass
+    def hasContent_(self):
+        if (
+            self.valueOf_ or
+            super(WhoisStatusType, self).hasContent_()
+            ):
+            return True
+        else:
+            return False
+    def exportLiteral(self, outfile, level, name_='WhoisStatusType'):
+        level += 1
+        self.exportLiteralAttributes(outfile, level, [], name_)
+        if self.hasContent_():
+            self.exportLiteralChildren(outfile, level, name_)
+        showIndent(outfile, level)
+        outfile.write('valueOf_ = """%s""",\n' % (self.valueOf_,))
+    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
+        super(WhoisStatusType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
+    def exportLiteralChildren(self, outfile, level, name_):
+        super(WhoisStatusType, self).exportLiteralChildren(outfile, level, name_)
+        pass
+    def build(self, node):
+        self.buildAttributes(node, node.attrib, [])
+        self.valueOf_ = get_all_text_(node)
+        for child in node:
+            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
+            self.buildChildren(child, node, nodeName_)
+    def buildAttributes(self, node, attrs, already_processed):
+        super(WhoisStatusType, self).buildAttributes(node, attrs, already_processed)
+    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+        pass
+# end class WhoisStatusType
+
+class WhoisObjectType(cybox_common_types_v1_0.DefinedObjectType):
     """The WhoisObjectType type is intended to characterize Whois
     information for a domain."""
     subclass = None
-    superclass = common.DefinedObjectType
-    def __init__(self, Domain_Name=None, Server_Name=None, IP_Address=None, Nameserver=None, Status=None, Updated_Date=None, Creation_Date=None, Expiration_Date=None, Registrar_Info=None, Registrar_Contact=None):
-        super(WhoisObjectType, self).__init__(None)
+    superclass = cybox_common_types_v1_0.DefinedObjectType
+    def __init__(self, object_reference=None, Domain_Name=None, Server_Name=None, IP_Address=None, Nameserver=None, Status=None, Updated_Date=None, Creation_Date=None, Expiration_Date=None, Registrar_Info=None, Registrar_Contact=None):
+        super(WhoisObjectType, self).__init__(object_reference, )
         self.Domain_Name = Domain_Name
         self.Server_Name = Server_Name
         self.IP_Address = IP_Address
@@ -420,6 +768,9 @@ class WhoisObjectType(common.DefinedObjectType):
         pass
     def get_Updated_Date(self): return self.Updated_Date
     def set_Updated_Date(self, Updated_Date): self.Updated_Date = Updated_Date
+    def validate_DateObjectAttributeType(self, value):
+        # Validate type cybox_common_types_v1_0.DateObjectAttributeType, a restriction on None.
+        pass
     def get_Creation_Date(self): return self.Creation_Date
     def set_Creation_Date(self, Creation_Date): self.Creation_Date = Creation_Date
     def get_Expiration_Date(self): return self.Expiration_Date
@@ -449,26 +800,27 @@ class WhoisObjectType(common.DefinedObjectType):
     def exportAttributes(self, outfile, level, already_processed, namespace_='WhoisObj:', name_='WhoisObjectType'):
         super(WhoisObjectType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='WhoisObjectType')
     def exportChildren(self, outfile, level, namespace_='WhoisObj:', name_='WhoisObjectType', fromsubclass_=False, pretty_print=True):
+        super(WhoisObjectType, self).exportChildren(outfile, level, 'WhoisObj:', name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
         if self.Domain_Name is not None:
-            self.Domain_Name.export(outfile, level, 'WhoisObj:', name_='Domain_Name')
+            self.Domain_Name.export(outfile, level, 'WhoisObj:', name_='Domain_Name', pretty_print=pretty_print)
         if self.Server_Name is not None:
-            self.Server_Name.export(outfile, level, 'WhoisObj:', name_='Server_Name')
+            self.Server_Name.export(outfile, level, 'WhoisObj:', name_='Server_Name', pretty_print=pretty_print)
         if self.IP_Address is not None:
-            self.IP_Address.export(outfile, level, 'WhoisObj:', name_='IP_Address')
+            self.IP_Address.export(outfile, level, 'WhoisObj:', name_='IP_Address', pretty_print=pretty_print)
         for Nameserver_ in self.Nameserver:
-            Nameserver_.export(outfile, level, 'WhoisObj:', name_='Nameserver')
+            Nameserver_.export(outfile, level, 'WhoisObj:', name_='Nameserver', pretty_print=pretty_print)
         for Status_ in self.Status:
             Status_.export(outfile, level, 'WhoisObj:', name_='Status', pretty_print=pretty_print)
         if self.Updated_Date is not None:
-            self.Updated_Date.export(outfile, level, 'WhoisObj:', name_='Updated_Date')
+            self.Updated_Date.export(outfile, level, 'WhoisObj:', name_='Updated_Date', pretty_print=pretty_print)
         if self.Creation_Date is not None:
-            self.Creation_Date.export(outfile, level, 'WhoisObj:', name_='Creation_Date')
+            self.Creation_Date.export(outfile, level, 'WhoisObj:', name_='Creation_Date', pretty_print=pretty_print)
         if self.Expiration_Date is not None:
-            self.Expiration_Date.export(outfile, level, 'WhoisObj:', name_='Expiration_Date')
+            self.Expiration_Date.export(outfile, level, 'WhoisObj:', name_='Expiration_Date', pretty_print=pretty_print)
         if self.Registrar_Info is not None:
             self.Registrar_Info.export(outfile, level, 'WhoisObj:', name_='Registrar_Info', pretty_print=pretty_print)
         for Registrar_Contact_ in self.Registrar_Contact:
@@ -484,7 +836,8 @@ class WhoisObjectType(common.DefinedObjectType):
             self.Creation_Date is not None or
             self.Expiration_Date is not None or
             self.Registrar_Info is not None or
-            self.Registrar_Contact
+            self.Registrar_Contact or
+            super(WhoisObjectType, self).hasContent_()
             ):
             return True
         else:
@@ -497,21 +850,34 @@ class WhoisObjectType(common.DefinedObjectType):
     def exportLiteralAttributes(self, outfile, level, already_processed, name_):
         super(WhoisObjectType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
     def exportLiteralChildren(self, outfile, level, name_):
+        super(WhoisObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Domain_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Domain_Name=%s,\n' % quote_python(self.Domain_Name).encode(ExternalEncoding))
+            outfile.write('Domain_Name=model_.uri_object_1_2.URIObjectType(\n')
+            self.Domain_Name.exportLiteral(outfile, level, name_='Domain_Name')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.Server_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Server_Name=%s,\n' % quote_python(self.Server_Name).encode(ExternalEncoding))
+            outfile.write('Server_Name=model_.uri_object_1_2.URIObjectType(\n')
+            self.Server_Name.exportLiteral(outfile, level, name_='Server_Name')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.IP_Address is not None:
             showIndent(outfile, level)
-            outfile.write('IP_Address=%s,\n' % quote_python(self.IP_Address).encode(ExternalEncoding))
+            outfile.write('IP_Address=model_.address_object_1_2.AddressObjectType(\n')
+            self.IP_Address.exportLiteral(outfile, level, name_='IP_Address')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         showIndent(outfile, level)
         outfile.write('Nameserver=[\n')
         level += 1
         for Nameserver_ in self.Nameserver:
             showIndent(outfile, level)
-            outfile.write('%s,\n' % quote_python(Nameserver_).encode(ExternalEncoding))
+            outfile.write('model_.uri_object_1_2.URIObjectType(\n')
+            Nameserver_.exportLiteral(outfile, level, name_='uri_object_1_2.URIObjectType')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         level -= 1
         showIndent(outfile, level)
         outfile.write('],\n')
@@ -529,13 +895,22 @@ class WhoisObjectType(common.DefinedObjectType):
         outfile.write('],\n')
         if self.Updated_Date is not None:
             showIndent(outfile, level)
-            outfile.write('Updated_Date=%s,\n' % quote_python(self.Updated_Date).encode(ExternalEncoding))
+            outfile.write('Updated_Date=model_.cybox_common_types_v1_0.DateObjectAttributeType(\n')
+            self.Updated_Date.exportLiteral(outfile, level, name_='Updated_Date')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.Creation_Date is not None:
             showIndent(outfile, level)
-            outfile.write('Creation_Date=%s,\n' % quote_python(self.Creation_Date).encode(ExternalEncoding))
+            outfile.write('Creation_Date=model_.cybox_common_types_v1_0.DateObjectAttributeType(\n')
+            self.Creation_Date.exportLiteral(outfile, level, name_='Creation_Date')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.Expiration_Date is not None:
             showIndent(outfile, level)
-            outfile.write('Expiration_Date=%s,\n' % quote_python(self.Expiration_Date).encode(ExternalEncoding))
+            outfile.write('Expiration_Date=model_.cybox_common_types_v1_0.DateObjectAttributeType(\n')
+            self.Expiration_Date.exportLiteral(outfile, level, name_='Expiration_Date')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.Registrar_Info is not None:
             showIndent(outfile, level)
             outfile.write('Registrar_Info=model_.RegistrarInfoType(\n')
@@ -563,37 +938,37 @@ class WhoisObjectType(common.DefinedObjectType):
         super(WhoisObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Domain_Name':
-            Domain_Name_ = uri_object.URIObjectType.factory()
-            Domain_Name_.build(child_)
-            self.Domain_Name = Domain_Name_
+            obj_ = uri_object_1_2.URIObjectType.factory()
+            obj_.build(child_)
+            self.set_Domain_Name(obj_)
         elif nodeName_ == 'Server_Name':
-            Server_Name_ = uri_object.URIObjectType.factory()
-            Server_Name_.build(child_)
-            self.Server_Name = Server_Name_
+            obj_ = uri_object_1_2.URIObjectType.factory()
+            obj_.build(child_)
+            self.set_Server_Name(obj_)
         elif nodeName_ == 'IP_Address':
-            IP_Address_ = address_object.AddressObjectType.factory()
-            IP_Address_.build(child_)
-            self.IP_Address = IP_Address_
+            obj_ = address_object_1_2.AddressObjectType.factory()
+            obj_.build(child_)
+            self.set_IP_Address(obj_)
         elif nodeName_ == 'Nameserver':
-            Nameserver_ = uri_object.URIObjectType.factory()
-            Nameserver_.build(child_)
-            self.Nameserver.append(Nameserver_)
+            obj_ = uri_object_1_2.URIObjectType.factory()
+            obj_.build(child_)
+            self.Nameserver.append(obj_)
         elif nodeName_ == 'Status':
-            Status_ = common.StringObjectAttributeType.factory()
-            Status_.build(child_)
-            self.Status.append(Status_)
+            obj_ = WhoisStatusType.factory()
+            obj_.build(child_)
+            self.Status.append(obj_)
         elif nodeName_ == 'Updated_Date':
-            Updated_Date_ = common.DateObjectAttributeType.factory()
-            Updated_Date_.build(child_)
-            self.Updated_Date = Updated_Date_
+            obj_ = cybox_common_types_v1_0.DateObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Updated_Date(obj_)
         elif nodeName_ == 'Creation_Date':
-            Creation_Date_ = common.DateObjectAttributeType.factory()
-            Creation_Date_.build(child_)
-            self.Creation_Date = Creation_Date_
+            obj_ = cybox_common_types_v1_0.DateObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Creation_Date(obj_)
         elif nodeName_ == 'Expiration_Date':
-            Expiration_Date_ = common.DateObjectAttributeType.factory()
-            Expiration_Date_.build(child_)
-            self.Expiration_Date = Expiration_Date_
+            obj_ = cybox_common_types_v1_0.DateObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Expiration_Date(obj_)
         elif nodeName_ == 'Registrar_Info':
             obj_ = RegistrarInfoType.factory()
             obj_.build(child_)
@@ -602,321 +977,8 @@ class WhoisObjectType(common.DefinedObjectType):
             obj_ = RegistrarContactType.factory()
             obj_.build(child_)
             self.Registrar_Contact.append(obj_)
-        super(WhoisObjectType, self).buildChildren(child_, node, nodeName_, True)    # end class WhoisObjectType
-
-
-class RegistrarInfoType(GeneratedsSuper):
-    subclass = None
-    superclass = None
-    def __init__(self, Name=None, Address=None, Email_Address=None, Phone_Number=None, Whois_Server=None, Referral_URL=None):
-        self.Name = Name
-        self.Address = Address
-        self.Email_Address = Email_Address
-        self.Phone_Number = Phone_Number
-        self.Whois_Server = Whois_Server
-        self.Referral_URL = Referral_URL
-    def factory(*args_, **kwargs_):
-        if RegistrarInfoType.subclass:
-            return RegistrarInfoType.subclass(*args_, **kwargs_)
-        else:
-            return RegistrarInfoType(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def get_Name(self): return self.Name
-    def set_Name(self, Name): self.Name = Name
-    def get_Address(self): return self.Address
-    def set_Address(self, Address): self.Address = Address
-    def get_Email_Address(self): return self.Email_Address
-    def set_Email_Address(self, Email_Address): self.Email_Address = Email_Address
-    def get_Phone_Number(self): return self.Phone_Number
-    def set_Phone_Number(self, Phone_Number): self.Phone_Number = Phone_Number
-    def get_Whois_Server(self): return self.Whois_Server
-    def set_Whois_Server(self, Whois_Server): self.Whois_Server = Whois_Server
-    def get_Referral_URL(self): return self.Referral_URL
-    def set_Referral_URL(self, Referral_URL): self.Referral_URL = Referral_URL
-    def export(self, outfile, level, namespace_='WhoisObj:', name_='RegistrarInfoType', namespacedef_='', pretty_print=True):
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='RegistrarInfoType')
-        if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
-            showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
-        else:
-            outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='WhoisObj:', name_='RegistrarInfoType'):
-        pass
-    def exportChildren(self, outfile, level, namespace_='WhoisObj:', name_='RegistrarInfoType', fromsubclass_=False, pretty_print=True):
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.Name is not None:
-            self.Name.export(outfile, level, 'WhoisObj:', name_='Name')
-        if self.Address is not None:
-            self.Address.export(outfile, level, 'WhoisObj:', name_='Address')
-        if self.Email_Address is not None:
-            self.Email_Address.export(outfile, level, 'WhoisObj:', name_='Email_Address')
-        if self.Phone_Number is not None:
-            self.Phone_Number.export(outfile, level, 'WhoisObj:', name_='Phone_Number')
-        if self.Whois_Server is not None:
-            self.Whois_Server.export(outfile, level, 'WhoisObj:', name_='Whois_Server')
-        if self.Referral_URL is not None:
-            self.Referral_URL.export(outfile, level, 'WhoisObj:', name_='Referral_URL')
-    def hasContent_(self):
-        if (
-            self.Name is not None or
-            self.Address is not None or
-            self.Email_Address is not None or
-            self.Phone_Number is not None or
-            self.Whois_Server is not None or
-            self.Referral_URL is not None
-            ):
-            return True
-        else:
-            return False
-    def exportLiteral(self, outfile, level, name_='RegistrarInfoType'):
-        level += 1
-        self.exportLiteralAttributes(outfile, level, [], name_)
-        if self.hasContent_():
-            self.exportLiteralChildren(outfile, level, name_)
-    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        pass
-    def exportLiteralChildren(self, outfile, level, name_):
-        if self.Name is not None:
-            showIndent(outfile, level)
-            outfile.write('Name=%s,\n' % quote_python(self.Name).encode(ExternalEncoding))
-        if self.Address is not None:
-            showIndent(outfile, level)
-            outfile.write('Address=%s,\n' % quote_python(self.Address).encode(ExternalEncoding))
-        if self.Email_Address is not None:
-            showIndent(outfile, level)
-            outfile.write('Email_Address=%s,\n' % quote_python(self.Email_Address).encode(ExternalEncoding))
-        if self.Phone_Number is not None:
-            showIndent(outfile, level)
-            outfile.write('Phone_Number=%s,\n' % quote_python(self.Phone_Number).encode(ExternalEncoding))
-        if self.Whois_Server is not None:
-            showIndent(outfile, level)
-            outfile.write('Whois_Server=%s,\n' % quote_python(self.Whois_Server).encode(ExternalEncoding))
-        if self.Referral_URL is not None:
-            showIndent(outfile, level)
-            outfile.write('Referral_URL=%s,\n' % quote_python(self.Referral_URL).encode(ExternalEncoding))
-    def build(self, node):
-        self.buildAttributes(node, node.attrib, [])
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-    def buildAttributes(self, node, attrs, already_processed):
-        pass
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'Name':
-            Name_ = common.StringObjectAttributeType.factory()
-            Name_.build(child_)
-            self.Name = Name_
-        elif nodeName_ == 'Address':
-            Address_ = common.StringObjectAttributeType.factory()
-            Address_.build(child_)
-            self.Address = Address_
-        elif nodeName_ == 'Email_Address':
-            Email_Address_ = address_object.AddressObjectType.factory()
-            Email_Address_.build(child_)
-            self.Email_Address = Email_Address_
-        elif nodeName_ == 'Phone_Number':
-            Phone_Number_ = common.StringObjectAttributeType.factory()
-            Phone_Number_.build(child_)
-            self.Phone_Number = Phone_Number_
-        elif nodeName_ == 'Whois_Server':
-            Whois_Server_ = uri_object.URIObjectType.factory()
-            Whois_Server_.build(child_)
-            self.Whois_Server = Whois_Server_
-        elif nodeName_ == 'Referral_URL':
-            Referral_URL_ = uri_object.URIObjectType.factory()
-            Referral_URL_.build(child_)
-            self.Referral_URL = Referral_URL_
-# end class RegistrarInfoType
-
-
-class RegistrarContactType(GeneratedsSuper):
-    """The contact_type attribute specifies what type of contact this is.
-    Only values from WhoisObj:RegistrarContactTypeEnum can be used."""
-    subclass = None
-    superclass = None
-    def __init__(self, contact_type=None, Name=None, Email_Address=None, Phone_Number=None):
-        self.contact_type = _cast(None, contact_type)
-        self.Name = Name
-        self.Email_Address = Email_Address
-        self.Phone_Number = Phone_Number
-    def factory(*args_, **kwargs_):
-        if RegistrarContactType.subclass:
-            return RegistrarContactType.subclass(*args_, **kwargs_)
-        else:
-            return RegistrarContactType(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def get_Name(self): return self.Name
-    def set_Name(self, Name): self.Name = Name
-    def get_Email_Address(self): return self.Email_Address
-    def set_Email_Address(self, Email_Address): self.Email_Address = Email_Address
-    def get_Phone_Number(self): return self.Phone_Number
-    def set_Phone_Number(self, Phone_Number): self.Phone_Number = Phone_Number
-    def get_contact_type(self): return self.contact_type
-    def set_contact_type(self, contact_type): self.contact_type = contact_type
-    def export(self, outfile, level, namespace_='WhoisObj:', name_='RegistrarContactType', namespacedef_='', pretty_print=True):
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='RegistrarContactType')
-        if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
-            showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
-        else:
-            outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='WhoisObj:', name_='RegistrarContactType'):
-        if self.contact_type is not None and 'contact_type' not in already_processed:
-            already_processed.append('contact_type')
-            outfile.write(' contact_type=%s' % (quote_attrib(self.contact_type), ))
-    def exportChildren(self, outfile, level, namespace_='WhoisObj:', name_='RegistrarContactType', fromsubclass_=False, pretty_print=True):
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.Name is not None:
-            self.Name.export(outfile, level, 'WhoisObj:', name_='Name')
-        if self.Email_Address is not None:
-            self.Email_Address.export(outfile, level, 'WhoisObj:', name_='Email_Address')
-        if self.Phone_Number is not None:
-            self.Phone_Number.export(outfile, level, 'WhoisObj:', name_='Phone_Number')
-    def hasContent_(self):
-        if (
-            self.Name is not None or
-            self.Email_Address is not None or
-            self.Phone_Number is not None
-            ):
-            return True
-        else:
-            return False
-    def exportLiteral(self, outfile, level, name_='RegistrarContactType'):
-        level += 1
-        self.exportLiteralAttributes(outfile, level, [], name_)
-        if self.hasContent_():
-            self.exportLiteralChildren(outfile, level, name_)
-    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        if self.contact_type is not None and 'contact_type' not in already_processed:
-            already_processed.append('contact_type')
-            showIndent(outfile, level)
-            outfile.write('contact_type = %s,\n' % (self.contact_type,))
-    def exportLiteralChildren(self, outfile, level, name_):
-        if self.Name is not None:
-            showIndent(outfile, level)
-            outfile.write('Name=%s,\n' % quote_python(self.Name).encode(ExternalEncoding))
-        if self.Email_Address is not None:
-            showIndent(outfile, level)
-            outfile.write('Email_Address=%s,\n' % quote_python(self.Email_Address).encode(ExternalEncoding))
-        if self.Phone_Number is not None:
-            showIndent(outfile, level)
-            outfile.write('Phone_Number=%s,\n' % quote_python(self.Phone_Number).encode(ExternalEncoding))
-    def build(self, node):
-        self.buildAttributes(node, node.attrib, [])
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-    def buildAttributes(self, node, attrs, already_processed):
-        value = find_attr_value_('contact_type', node)
-        if value is not None and 'contact_type' not in already_processed:
-            already_processed.append('contact_type')
-            self.contact_type = value
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'Name':
-            Name_ = common.StringObjectAttributeType.factory()
-            Name_.build(child_)
-            self.Name = Name_
-        elif nodeName_ == 'Email_Address':
-            Email_Address_ = address_object.AddressObjectType.factory()
-            Email_Address_.build(child_)
-            self.Email_Address = Email_Address_
-        elif nodeName_ == 'Phone_Number':
-            Phone_Number_ = common.StringObjectAttributeType.factory()
-            Phone_Number_.build(child_)
-            self.Phone_Number = Phone_Number_
-# end class RegistrarContactType
-
-
-class WhoisStatusType(GeneratedsSuper):
-    """The WhoisStatusType specifies a status for a domain as listed in its
-    Whois entry. Only statuses defined by WhoisStatusTypeEnum can be
-    used."""
-    subclass = None
-    superclass = None
-    def __init__(self, valueOf_=None):
-        self.valueOf_ = valueOf_
-    def factory(*args_, **kwargs_):
-        if WhoisStatusType.subclass:
-            return WhoisStatusType.subclass(*args_, **kwargs_)
-        else:
-            return WhoisStatusType(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def get_valueOf_(self): return self.valueOf_
-    def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='WhoisObj:', name_='WhoisStatusType', namespacedef_='', pretty_print=True):
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='WhoisStatusType')
-        if self.hasContent_():
-            outfile.write('>')
-            outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
-        else:
-            outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='WhoisObj:', name_='WhoisStatusType'):
-        pass
-    def exportChildren(self, outfile, level, namespace_='WhoisObj:', name_='WhoisStatusType', fromsubclass_=False, pretty_print=True):
-        pass
-    def hasContent_(self):
-        if (
-            self.valueOf_
-            ):
-            return True
-        else:
-            return False
-    def exportLiteral(self, outfile, level, name_='WhoisStatusType'):
-        level += 1
-        self.exportLiteralAttributes(outfile, level, [], name_)
-        if self.hasContent_():
-            self.exportLiteralChildren(outfile, level, name_)
-        showIndent(outfile, level)
-        outfile.write('valueOf_ = """%s""",\n' % (self.valueOf_,))
-    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        pass
-    def exportLiteralChildren(self, outfile, level, name_):
-        pass
-    def build(self, node):
-        self.buildAttributes(node, node.attrib, [])
-        self.valueOf_ = get_all_text_(node)
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-    def buildAttributes(self, node, attrs, already_processed):
-        pass
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        pass
-# end class WhoisStatusType
-
+        super(WhoisObjectType, self).buildChildren(child_, node, nodeName_, True)
+# end class WhoisObjectType
 
 USAGE_TEXT = """
 Usage: python <Parser>.py [ -s ] <in_xml_file>
@@ -926,12 +988,10 @@ def usage():
     print USAGE_TEXT
     sys.exit(1)
 
-
 def get_root_tag(node):
     tag = Tag_pattern_.match(node.tag).groups()[-1]
     rootClass = globals().get(tag)
     return tag, rootClass
-
 
 def parse(inFileName):
     doc = parsexml_(inFileName)
@@ -950,7 +1010,6 @@ def parse(inFileName):
         pretty_print=True)
     return rootObj
 
-
 def parseString(inString):
     from StringIO import StringIO
     doc = parsexml_(StringIO(inString))
@@ -968,7 +1027,6 @@ def parseString(inString):
         namespacedef_='')
     return rootObj
 
-
 def parseLiteral(inFileName):
     doc = parsexml_(inFileName)
     rootNode = doc.getroot()
@@ -980,13 +1038,12 @@ def parseLiteral(inFileName):
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
-    sys.stdout.write('#from whois_object_1_0 import *\n\n')
-    sys.stdout.write('import whois_object_1_0 as model_\n\n')
+    sys.stdout.write('#from temp import *\n\n')
+    sys.stdout.write('import temp as model_\n\n')
     sys.stdout.write('rootObj = model_.rootTag(\n')
     rootObj.exportLiteral(sys.stdout, 0, name_=rootTag)
     sys.stdout.write(')\n')
     return rootObj
-
 
 def main():
     args = sys.argv[1:]
@@ -995,15 +1052,13 @@ def main():
     else:
         usage()
 
-
 if __name__ == '__main__':
     #import pdb; pdb.set_trace()
     main()
 
-
 __all__ = [
-    "RegistrarContactType",
-    "RegistrarInfoType",
     "WhoisObjectType",
+    "RegistrarInfoType",
+    "RegistrarContactType",
     "WhoisStatusType"
     ]

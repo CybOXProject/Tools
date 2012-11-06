@@ -515,20 +515,20 @@ class MemoryObjectType(common.DefinedObjectType):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Hashes':
-            Hashes_ = common.HashListType.factory()
-            Hashes_.build(child_)
+            Hashes_ = child_.text
+            Hashes_ = self.gds_validate_string(Hashes_, node, 'Hashes')
             self.Hashes = Hashes_
         elif nodeName_ == 'Name':
-            Name_ = common.StringObjectAttributeType.factory()
-            Name_.build(child_)
+            Name_ = child_.text
+            Name_ = self.gds_validate_string(Name_, node, 'Name')
             self.Name = Name_
         elif nodeName_ == 'Region_Size':
-            Region_Size_ = common.UnsignedLongObjectAttributeType.factory()
-            Region_Size_.build(child_)
+            Region_Size_ = child_.text
+            Region_Size_ = self.gds_validate_string(Region_Size_, node, 'Region_Size')
             self.Region_Size = Region_Size_
         elif nodeName_ == 'Region_Start_Address':
-            Region_Start_Address_ = common.HexBinaryObjectAttributeType.factory()
-            Region_Start_Address_.build(child_)
+            Region_Start_Address_ = child_.text
+            Region_Start_Address_ = self.gds_validate_string(Region_Start_Address_, node, 'Region_Start_Address')
             self.Region_Start_Address = Region_Start_Address_
         super(MemoryObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class MemoryObjectType
