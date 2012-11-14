@@ -12,7 +12,7 @@ import re as re_
 import win_handle_object_1_3
 import memory_object_1_2
 import process_object_1_3
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -486,21 +486,21 @@ class StartupInfoType(GeneratedsSuper):
     def get_lpDesktop(self): return self.lpDesktop
     def set_lpDesktop(self, lpDesktop): self.lpDesktop = lpDesktop
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_lpTitle(self): return self.lpTitle
     def set_lpTitle(self, lpTitle): self.lpTitle = lpTitle
     def get_dwX(self): return self.dwX
     def set_dwX(self, dwX): self.dwX = dwX
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_dwY(self): return self.dwY
     def set_dwY(self, dwY): self.dwY = dwY
     def get_dwXSize(self): return self.dwXSize
     def set_dwXSize(self, dwXSize): self.dwXSize = dwXSize
     def validate_PositiveIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.PositiveIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.PositiveIntegerObjectAttributeType, a restriction on None.
         pass
     def get_dwYSize(self): return self.dwYSize
     def set_dwYSize(self, dwYSize): self.dwYSize = dwYSize
@@ -601,67 +601,67 @@ class StartupInfoType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.lpDesktop is not None:
             showIndent(outfile, level)
-            outfile.write('lpDesktop=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('lpDesktop=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.lpDesktop.exportLiteral(outfile, level, name_='lpDesktop')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.lpTitle is not None:
             showIndent(outfile, level)
-            outfile.write('lpTitle=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('lpTitle=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.lpTitle.exportLiteral(outfile, level, name_='lpTitle')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.dwX is not None:
             showIndent(outfile, level)
-            outfile.write('dwX=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('dwX=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.dwX.exportLiteral(outfile, level, name_='dwX')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.dwY is not None:
             showIndent(outfile, level)
-            outfile.write('dwY=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('dwY=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.dwY.exportLiteral(outfile, level, name_='dwY')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.dwXSize is not None:
             showIndent(outfile, level)
-            outfile.write('dwXSize=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('dwXSize=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.dwXSize.exportLiteral(outfile, level, name_='dwXSize')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.dwYSize is not None:
             showIndent(outfile, level)
-            outfile.write('dwYSize=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('dwYSize=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.dwYSize.exportLiteral(outfile, level, name_='dwYSize')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.dwXCountChars is not None:
             showIndent(outfile, level)
-            outfile.write('dwXCountChars=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('dwXCountChars=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.dwXCountChars.exportLiteral(outfile, level, name_='dwXCountChars')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.dwYCountChars is not None:
             showIndent(outfile, level)
-            outfile.write('dwYCountChars=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('dwYCountChars=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.dwYCountChars.exportLiteral(outfile, level, name_='dwYCountChars')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.dwFillAttribute is not None:
             showIndent(outfile, level)
-            outfile.write('dwFillAttribute=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('dwFillAttribute=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.dwFillAttribute.exportLiteral(outfile, level, name_='dwFillAttribute')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.dwFlags is not None:
             showIndent(outfile, level)
-            outfile.write('dwFlags=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('dwFlags=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.dwFlags.exportLiteral(outfile, level, name_='dwFlags')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.wShowWindow is not None:
             showIndent(outfile, level)
-            outfile.write('wShowWindow=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('wShowWindow=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.wShowWindow.exportLiteral(outfile, level, name_='wShowWindow')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -692,47 +692,47 @@ class StartupInfoType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'lpDesktop':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_lpDesktop(obj_)
         elif nodeName_ == 'lpTitle':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_lpTitle(obj_)
         elif nodeName_ == 'dwX':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_dwX(obj_)
         elif nodeName_ == 'dwY':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_dwY(obj_)
         elif nodeName_ == 'dwXSize':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_dwXSize(obj_)
         elif nodeName_ == 'dwYSize':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_dwYSize(obj_)
         elif nodeName_ == 'dwXCountChars':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_dwXCountChars(obj_)
         elif nodeName_ == 'dwYCountChars':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_dwYCountChars(obj_)
         elif nodeName_ == 'dwFillAttribute':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_dwFillAttribute(obj_)
         elif nodeName_ == 'dwFlags':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_dwFlags(obj_)
         elif nodeName_ == 'wShowWindow':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_wShowWindow(obj_)
         elif nodeName_ == 'hStdInput':
@@ -779,7 +779,7 @@ class WindowsProcessObjectType(process_object_1_3.ProcessObjectType):
     def get_Priority(self): return self.Priority
     def set_Priority(self, Priority): self.Priority = Priority
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Section_List(self): return self.Section_List
     def set_Section_List(self, Section_List): self.Section_List = Section_List
@@ -790,7 +790,7 @@ class WindowsProcessObjectType(process_object_1_3.ProcessObjectType):
     def get_Security_Type(self): return self.Security_Type
     def set_Security_Type(self, Security_Type): self.Security_Type = Security_Type
     def validate_SIDType(self, value):
-        # Validate type cybox_common_types_v1_0.SIDType, a restriction on None.
+        # Validate type cybox_common_types_1_0.SIDType, a restriction on None.
         pass
     def get_Window_Title(self): return self.Window_Title
     def set_Window_Title(self, Window_Title): self.Window_Title = Window_Title
@@ -881,7 +881,7 @@ class WindowsProcessObjectType(process_object_1_3.ProcessObjectType):
             outfile.write('),\n')
         if self.Priority is not None:
             showIndent(outfile, level)
-            outfile.write('Priority=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Priority=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Priority.exportLiteral(outfile, level, name_='Priority')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -893,7 +893,7 @@ class WindowsProcessObjectType(process_object_1_3.ProcessObjectType):
             outfile.write('),\n')
         if self.Security_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Security_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Security_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Security_ID.exportLiteral(outfile, level, name_='Security_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -905,13 +905,13 @@ class WindowsProcessObjectType(process_object_1_3.ProcessObjectType):
             outfile.write('),\n')
         if self.Security_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Security_Type=model_.cybox_common_types_v1_0.SIDType(\n')
+            outfile.write('Security_Type=model_.cybox_common_types_1_0.SIDType(\n')
             self.Security_Type.exportLiteral(outfile, level, name_='Security_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Window_Title is not None:
             showIndent(outfile, level)
-            outfile.write('Window_Title=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Window_Title=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Window_Title.exportLiteral(outfile, level, name_='Window_Title')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -946,7 +946,7 @@ class WindowsProcessObjectType(process_object_1_3.ProcessObjectType):
             obj_.build(child_)
             self.set_Handle_List(obj_)
         elif nodeName_ == 'Priority':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Priority(obj_)
         elif nodeName_ == 'Section_List':
@@ -954,7 +954,7 @@ class WindowsProcessObjectType(process_object_1_3.ProcessObjectType):
             obj_.build(child_)
             self.set_Section_List(obj_)
         elif nodeName_ == 'Security_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Security_ID(obj_)
         elif nodeName_ == 'Startup_Info':
@@ -962,11 +962,11 @@ class WindowsProcessObjectType(process_object_1_3.ProcessObjectType):
             obj_.build(child_)
             self.set_Startup_Info(obj_)
         elif nodeName_ == 'Security_Type':
-            obj_ = cybox_common_types_v1_0.SIDType.factory()
+            obj_ = cybox_common_types_1_0.SIDType.factory()
             obj_.build(child_)
             self.set_Security_Type(obj_)
         elif nodeName_ == 'Window_Title':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Window_Title(obj_)
         super(WindowsProcessObjectType, self).buildChildren(child_, node, nodeName_, True)

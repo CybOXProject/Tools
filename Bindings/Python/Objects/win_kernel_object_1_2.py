@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -475,14 +475,14 @@ class SSDTEntryType(GeneratedsSuper):
     def get_Service_Table_Base(self): return self.Service_Table_Base
     def set_Service_Table_Base(self, Service_Table_Base): self.Service_Table_Base = Service_Table_Base
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Service_Counter_Table_Base(self): return self.Service_Counter_Table_Base
     def set_Service_Counter_Table_Base(self, Service_Counter_Table_Base): self.Service_Counter_Table_Base = Service_Counter_Table_Base
     def get_Number_Of_Services(self): return self.Number_Of_Services
     def set_Number_Of_Services(self, Number_Of_Services): self.Number_Of_Services = Number_Of_Services
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Argument_Table_Base(self): return self.Argument_Table_Base
     def set_Argument_Table_Base(self, Argument_Table_Base): self.Argument_Table_Base = Argument_Table_Base
@@ -544,25 +544,25 @@ class SSDTEntryType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Service_Table_Base is not None:
             showIndent(outfile, level)
-            outfile.write('Service_Table_Base=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Service_Table_Base=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Service_Table_Base.exportLiteral(outfile, level, name_='Service_Table_Base')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Service_Counter_Table_Base is not None:
             showIndent(outfile, level)
-            outfile.write('Service_Counter_Table_Base=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Service_Counter_Table_Base=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Service_Counter_Table_Base.exportLiteral(outfile, level, name_='Service_Counter_Table_Base')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Number_Of_Services is not None:
             showIndent(outfile, level)
-            outfile.write('Number_Of_Services=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Number_Of_Services=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Number_Of_Services.exportLiteral(outfile, level, name_='Number_Of_Services')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Argument_Table_Base is not None:
             showIndent(outfile, level)
-            outfile.write('Argument_Table_Base=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Argument_Table_Base=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Argument_Table_Base.exportLiteral(outfile, level, name_='Argument_Table_Base')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -583,19 +583,19 @@ class SSDTEntryType(GeneratedsSuper):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Service_Table_Base':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Service_Table_Base(obj_)
         elif nodeName_ == 'Service_Counter_Table_Base':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Service_Counter_Table_Base(obj_)
         elif nodeName_ == 'Number_Of_Services':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Number_Of_Services(obj_)
         elif nodeName_ == 'Argument_Table_Base':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Argument_Table_Base(obj_)
 # end class SSDTEntryType
@@ -710,7 +710,7 @@ class IDTEntryType(GeneratedsSuper):
     def get_Type_Attr(self): return self.Type_Attr
     def set_Type_Attr(self, Type_Attr): self.Type_Attr = Type_Attr
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Offset_High(self): return self.Offset_High
     def set_Offset_High(self, Offset_High): self.Offset_High = Offset_High
@@ -774,31 +774,31 @@ class IDTEntryType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Type_Attr is not None:
             showIndent(outfile, level)
-            outfile.write('Type_Attr=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Type_Attr=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Type_Attr.exportLiteral(outfile, level, name_='Type_Attr')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Offset_High is not None:
             showIndent(outfile, level)
-            outfile.write('Offset_High=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Offset_High=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Offset_High.exportLiteral(outfile, level, name_='Offset_High')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Offset_Low is not None:
             showIndent(outfile, level)
-            outfile.write('Offset_Low=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Offset_Low=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Offset_Low.exportLiteral(outfile, level, name_='Offset_Low')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Offset_Middle is not None:
             showIndent(outfile, level)
-            outfile.write('Offset_Middle=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Offset_Middle=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Offset_Middle.exportLiteral(outfile, level, name_='Offset_Middle')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Selector is not None:
             showIndent(outfile, level)
-            outfile.write('Selector=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Selector=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Selector.exportLiteral(outfile, level, name_='Selector')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -811,32 +811,32 @@ class IDTEntryType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Type_Attr':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Type_Attr(obj_)
         elif nodeName_ == 'Offset_High':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Offset_High(obj_)
         elif nodeName_ == 'Offset_Low':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Offset_Low(obj_)
         elif nodeName_ == 'Offset_Middle':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Offset_Middle(obj_)
         elif nodeName_ == 'Selector':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Selector(obj_)
 # end class IDTEntryType
 
-class WindowsKernelObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class WindowsKernelObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The WindowsKernelObjectType type is intended to characterize Windows
     Kernel structures."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, IDT=None, SSDT=None):
         super(WindowsKernelObjectType, self).__init__(object_reference, )
         self.IDT = IDT

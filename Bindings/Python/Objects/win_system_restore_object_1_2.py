@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -387,7 +387,7 @@ class HiveListType(GeneratedsSuper):
     def add_Hive(self, value): self.Hive.append(value)
     def insert_Hive(self, index, value): self.Hive[index] = value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinSystemRestoreObj:', name_='HiveListType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -434,8 +434,8 @@ class HiveListType(GeneratedsSuper):
         level += 1
         for Hive_ in self.Hive:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
-            Hive_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.StringObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            Hive_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.StringObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -450,20 +450,20 @@ class HiveListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Hive':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.Hive.append(obj_)
 # end class HiveListType
 
-class ChangeLogEntryTypeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class ChangeLogEntryTypeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """ChangeLogEntryTypeType types, via a union of the
     ChangeLogEntryTypeEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(ChangeLogEntryTypeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -542,11 +542,11 @@ class ChangeLogEntryTypeType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class ChangeLogEntryTypeType
 
-class WindowsSystemRestoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class WindowsSystemRestoreObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The WindowsSystemRestoreObjectType is intended to characterize
     Windows system restore points."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Restore_Point_Description=None, Restore_Point_Full_Path=None, Restore_Point_Name=None, Restore_Point_Type=None, ACL_Change_SID=None, ACL_Change_Username=None, Backup_File_Name=None, Change_Event=None, ChangeLog_Entry_Flags=None, ChangeLog_Entry_Sequence_Number=None, ChangeLog_Entry_Type=None, Change_Log_File_Name=None, Created=None, File_Attributes=None, New_File_Name=None, Original_File_Name=None, Original_Short_File_Name=None, Process_Name=None, Registry_Hive_List=None):
         super(WindowsSystemRestoreObjectType, self).__init__(object_reference, )
         self.Restore_Point_Description = Restore_Point_Description
@@ -577,7 +577,7 @@ class WindowsSystemRestoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Restore_Point_Description(self): return self.Restore_Point_Description
     def set_Restore_Point_Description(self, Restore_Point_Description): self.Restore_Point_Description = Restore_Point_Description
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Restore_Point_Full_Path(self): return self.Restore_Point_Full_Path
     def set_Restore_Point_Full_Path(self, Restore_Point_Full_Path): self.Restore_Point_Full_Path = Restore_Point_Full_Path
@@ -601,7 +601,7 @@ class WindowsSystemRestoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_ChangeLog_Entry_Sequence_Number(self): return self.ChangeLog_Entry_Sequence_Number
     def set_ChangeLog_Entry_Sequence_Number(self, ChangeLog_Entry_Sequence_Number): self.ChangeLog_Entry_Sequence_Number = ChangeLog_Entry_Sequence_Number
     def validate_LongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.LongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.LongObjectAttributeType, a restriction on None.
         pass
     def get_ChangeLog_Entry_Type(self): return self.ChangeLog_Entry_Type
     def set_ChangeLog_Entry_Type(self, ChangeLog_Entry_Type): self.ChangeLog_Entry_Type = ChangeLog_Entry_Type
@@ -610,7 +610,7 @@ class WindowsSystemRestoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Created(self): return self.Created
     def set_Created(self, Created): self.Created = Created
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_File_Attributes(self): return self.File_Attributes
     def set_File_Attributes(self, File_Attributes): self.File_Attributes = File_Attributes
@@ -723,43 +723,43 @@ class WindowsSystemRestoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsSystemRestoreObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Restore_Point_Description is not None:
             showIndent(outfile, level)
-            outfile.write('Restore_Point_Description=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Restore_Point_Description=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Restore_Point_Description.exportLiteral(outfile, level, name_='Restore_Point_Description')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Restore_Point_Full_Path is not None:
             showIndent(outfile, level)
-            outfile.write('Restore_Point_Full_Path=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Restore_Point_Full_Path=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Restore_Point_Full_Path.exportLiteral(outfile, level, name_='Restore_Point_Full_Path')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Restore_Point_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Restore_Point_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Restore_Point_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Restore_Point_Name.exportLiteral(outfile, level, name_='Restore_Point_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Restore_Point_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Restore_Point_Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Restore_Point_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Restore_Point_Type.exportLiteral(outfile, level, name_='Restore_Point_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.ACL_Change_SID is not None:
             showIndent(outfile, level)
-            outfile.write('ACL_Change_SID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('ACL_Change_SID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.ACL_Change_SID.exportLiteral(outfile, level, name_='ACL_Change_SID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.ACL_Change_Username is not None:
             showIndent(outfile, level)
-            outfile.write('ACL_Change_Username=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('ACL_Change_Username=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.ACL_Change_Username.exportLiteral(outfile, level, name_='ACL_Change_Username')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Backup_File_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Backup_File_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Backup_File_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Backup_File_Name.exportLiteral(outfile, level, name_='Backup_File_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -771,13 +771,13 @@ class WindowsSystemRestoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.ChangeLog_Entry_Flags is not None:
             showIndent(outfile, level)
-            outfile.write('ChangeLog_Entry_Flags=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('ChangeLog_Entry_Flags=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.ChangeLog_Entry_Flags.exportLiteral(outfile, level, name_='ChangeLog_Entry_Flags')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.ChangeLog_Entry_Sequence_Number is not None:
             showIndent(outfile, level)
-            outfile.write('ChangeLog_Entry_Sequence_Number=model_.cybox_common_types_v1_0.LongObjectAttributeType(\n')
+            outfile.write('ChangeLog_Entry_Sequence_Number=model_.cybox_common_types_1_0.LongObjectAttributeType(\n')
             self.ChangeLog_Entry_Sequence_Number.exportLiteral(outfile, level, name_='ChangeLog_Entry_Sequence_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -789,43 +789,43 @@ class WindowsSystemRestoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Change_Log_File_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Change_Log_File_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Change_Log_File_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Change_Log_File_Name.exportLiteral(outfile, level, name_='Change_Log_File_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Created is not None:
             showIndent(outfile, level)
-            outfile.write('Created=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Created=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Created.exportLiteral(outfile, level, name_='Created')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.File_Attributes is not None:
             showIndent(outfile, level)
-            outfile.write('File_Attributes=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('File_Attributes=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.File_Attributes.exportLiteral(outfile, level, name_='File_Attributes')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.New_File_Name is not None:
             showIndent(outfile, level)
-            outfile.write('New_File_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('New_File_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.New_File_Name.exportLiteral(outfile, level, name_='New_File_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Original_File_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Original_File_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Original_File_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Original_File_Name.exportLiteral(outfile, level, name_='Original_File_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Original_Short_File_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Original_Short_File_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Original_Short_File_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Original_Short_File_Name.exportLiteral(outfile, level, name_='Original_Short_File_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Process_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Process_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Process_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Process_Name.exportLiteral(outfile, level, name_='Process_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -844,31 +844,31 @@ class WindowsSystemRestoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsSystemRestoreObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Restore_Point_Description':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Restore_Point_Description(obj_)
         elif nodeName_ == 'Restore_Point_Full_Path':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Restore_Point_Full_Path(obj_)
         elif nodeName_ == 'Restore_Point_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Restore_Point_Name(obj_)
         elif nodeName_ == 'Restore_Point_Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Restore_Point_Type(obj_)
         elif nodeName_ == 'ACL_Change_SID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ACL_Change_SID(obj_)
         elif nodeName_ == 'ACL_Change_Username':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ACL_Change_Username(obj_)
         elif nodeName_ == 'Backup_File_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Backup_File_Name(obj_)
         elif nodeName_ == 'Change_Event':
@@ -876,11 +876,11 @@ class WindowsSystemRestoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Change_Event(obj_)
         elif nodeName_ == 'ChangeLog_Entry_Flags':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ChangeLog_Entry_Flags(obj_)
         elif nodeName_ == 'ChangeLog_Entry_Sequence_Number':
-            obj_ = cybox_common_types_v1_0.LongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.LongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ChangeLog_Entry_Sequence_Number(obj_)
         elif nodeName_ == 'ChangeLog_Entry_Type':
@@ -888,31 +888,31 @@ class WindowsSystemRestoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_ChangeLog_Entry_Type(obj_)
         elif nodeName_ == 'Change_Log_File_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Change_Log_File_Name(obj_)
         elif nodeName_ == 'Created':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Created(obj_)
         elif nodeName_ == 'File_Attributes':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_File_Attributes(obj_)
         elif nodeName_ == 'New_File_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_New_File_Name(obj_)
         elif nodeName_ == 'Original_File_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Original_File_Name(obj_)
         elif nodeName_ == 'Original_Short_File_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Original_Short_File_Name(obj_)
         elif nodeName_ == 'Process_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Process_Name(obj_)
         elif nodeName_ == 'Registry_Hive_List':

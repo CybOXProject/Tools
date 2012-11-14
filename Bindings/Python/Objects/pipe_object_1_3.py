@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,11 +368,11 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class PipeObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class PipeObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The PipeObjectType type is intended to characterize generic system
     pipes.The named attribute specifies whether the pipe is named."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, named=None, Name=None):
         super(PipeObjectType, self).__init__(object_reference, )
         self.named = _cast(bool, named)
@@ -386,7 +386,7 @@ class PipeObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_named(self): return self.named
     def set_named(self, named): self.named = named
@@ -442,7 +442,7 @@ class PipeObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(PipeObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -464,7 +464,7 @@ class PipeObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(PipeObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         super(PipeObjectType, self).buildChildren(child_, node, nodeName_, True)

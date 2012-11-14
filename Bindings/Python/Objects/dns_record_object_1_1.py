@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import uri_object_1_2
 import address_object_1_2
 
@@ -370,11 +370,11 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class DNSRecordObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class DNSRecordObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The DNSRecordObjectType type is intended to characterize an
     individual DNS record."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Description=None, Domain_Name=None, IP_Address=None, Address_Class=None, Entry_Type=None, Record_Name=None, Record_Type=None, TTL=None, Flags=None, Data_Length=None, Record_Data=None):
         super(DNSRecordObjectType, self).__init__(object_reference, )
         self.Description = Description
@@ -403,7 +403,7 @@ class DNSRecordObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Address_Class(self): return self.Address_Class
     def set_Address_Class(self, Address_Class): self.Address_Class = Address_Class
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Entry_Type(self): return self.Entry_Type
     def set_Entry_Type(self, Entry_Type): self.Entry_Type = Entry_Type
@@ -414,12 +414,12 @@ class DNSRecordObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_TTL(self): return self.TTL
     def set_TTL(self, TTL): self.TTL = TTL
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Flags(self): return self.Flags
     def set_Flags(self, Flags): self.Flags = Flags
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Data_Length(self): return self.Data_Length
     def set_Data_Length(self, Data_Length): self.Data_Length = Data_Length
@@ -501,7 +501,7 @@ class DNSRecordObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(DNSRecordObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -519,43 +519,43 @@ class DNSRecordObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Address_Class is not None:
             showIndent(outfile, level)
-            outfile.write('Address_Class=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Address_Class=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Address_Class.exportLiteral(outfile, level, name_='Address_Class')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Entry_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Entry_Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Entry_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Entry_Type.exportLiteral(outfile, level, name_='Entry_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Record_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Record_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Record_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Record_Name.exportLiteral(outfile, level, name_='Record_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Record_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Record_Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Record_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Record_Type.exportLiteral(outfile, level, name_='Record_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.TTL is not None:
             showIndent(outfile, level)
-            outfile.write('TTL=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('TTL=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.TTL.exportLiteral(outfile, level, name_='TTL')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Flags is not None:
             showIndent(outfile, level)
-            outfile.write('Flags=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Flags=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Flags.exportLiteral(outfile, level, name_='Flags')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Data_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Data_Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Data_Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Data_Length.exportLiteral(outfile, level, name_='Data_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -571,7 +571,7 @@ class DNSRecordObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(DNSRecordObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Domain_Name':
@@ -583,31 +583,31 @@ class DNSRecordObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_IP_Address(obj_)
         elif nodeName_ == 'Address_Class':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Address_Class(obj_)
         elif nodeName_ == 'Entry_Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Entry_Type(obj_)
         elif nodeName_ == 'Record_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Record_Name(obj_)
         elif nodeName_ == 'Record_Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Record_Type(obj_)
         elif nodeName_ == 'TTL':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_TTL(obj_)
         elif nodeName_ == 'Flags':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Flags(obj_)
         elif nodeName_ == 'Data_Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Data_Length(obj_)
         elif nodeName_ == 'Record_Data':

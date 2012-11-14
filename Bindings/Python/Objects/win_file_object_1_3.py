@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import file_object_1_3
 import win_computer_account_object_1_3
 
@@ -621,15 +621,15 @@ class WindowsFilePermissionsType(file_object_1_3.FilePermissionsType):
         super(WindowsFilePermissionsType, self).buildChildren(child_, node, nodeName_, True)
 # end class WindowsFilePermissionsType
 
-class WindowsFileAttributeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class WindowsFileAttributeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """WindowsFileAttributeType specifies Windows file attributes via a
     union of the FileAttributesEnum type and the atomic xs:string
-    type. Its base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType,
+    type. Its base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType,
     for permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(WindowsFileAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -803,11 +803,11 @@ class WindowsFileAttributesType(file_object_1_3.FileAttributeType):
         super(WindowsFileAttributesType, self).buildChildren(child_, node, nodeName_, True)
 # end class WindowsFileAttributesType
 
-class StreamObjectType(cybox_common_types_v1_0.HashListType):
+class StreamObjectType(cybox_common_types_1_0.HashListType):
     """The StreamObjectType type is intended to characterize NTFS alternate
     data streams."""
     subclass = None
-    superclass = cybox_common_types_v1_0.HashListType
+    superclass = cybox_common_types_1_0.HashListType
     def __init__(self, Hash=None, Name=None, Size_In_Bytes=None):
         super(StreamObjectType, self).__init__(Hash, )
         self.Name = Name
@@ -821,12 +821,12 @@ class StreamObjectType(cybox_common_types_v1_0.HashListType):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Size_In_Bytes(self): return self.Size_In_Bytes
     def set_Size_In_Bytes(self, Size_In_Bytes): self.Size_In_Bytes = Size_In_Bytes
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinFileObj:', name_='StreamObjectType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -876,13 +876,13 @@ class StreamObjectType(cybox_common_types_v1_0.HashListType):
         super(StreamObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_In_Bytes is not None:
             showIndent(outfile, level)
-            outfile.write('Size_In_Bytes=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Size_In_Bytes=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Size_In_Bytes.exportLiteral(outfile, level, name_='Size_In_Bytes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -895,11 +895,11 @@ class StreamObjectType(cybox_common_types_v1_0.HashListType):
         super(StreamObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Size_In_Bytes':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_In_Bytes(obj_)
         super(StreamObjectType, self).buildChildren(child_, node, nodeName_, True)
@@ -928,7 +928,7 @@ class WindowsFileObjectType(file_object_1_3.FileObjectType):
     def get_Filename_Accessed_Time(self): return self.Filename_Accessed_Time
     def set_Filename_Accessed_Time(self, Filename_Accessed_Time): self.Filename_Accessed_Time = Filename_Accessed_Time
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Filename_Created_Time(self): return self.Filename_Created_Time
     def set_Filename_Created_Time(self, Filename_Created_Time): self.Filename_Created_Time = Filename_Created_Time
@@ -937,14 +937,14 @@ class WindowsFileObjectType(file_object_1_3.FileObjectType):
     def get_Drive(self): return self.Drive
     def set_Drive(self, Drive): self.Drive = Drive
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Security_ID(self): return self.Security_ID
     def set_Security_ID(self, Security_ID): self.Security_ID = Security_ID
     def get_Security_Type(self): return self.Security_Type
     def set_Security_Type(self, Security_Type): self.Security_Type = Security_Type
     def validate_SIDType(self, value):
-        # Validate type cybox_common_types_v1_0.SIDType, a restriction on None.
+        # Validate type cybox_common_types_1_0.SIDType, a restriction on None.
         pass
     def get_Stream_List(self): return self.Stream_List
     def set_Stream_List(self, Stream_List): self.Stream_List = Stream_List
@@ -1011,37 +1011,37 @@ class WindowsFileObjectType(file_object_1_3.FileObjectType):
         super(WindowsFileObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Filename_Accessed_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Filename_Accessed_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Filename_Accessed_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Filename_Accessed_Time.exportLiteral(outfile, level, name_='Filename_Accessed_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Filename_Created_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Filename_Created_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Filename_Created_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Filename_Created_Time.exportLiteral(outfile, level, name_='Filename_Created_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Filename_Modified_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Filename_Modified_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Filename_Modified_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Filename_Modified_Time.exportLiteral(outfile, level, name_='Filename_Modified_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Drive is not None:
             showIndent(outfile, level)
-            outfile.write('Drive=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Drive=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Drive.exportLiteral(outfile, level, name_='Drive')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Security_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Security_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Security_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Security_ID.exportLiteral(outfile, level, name_='Security_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Security_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Security_Type=model_.cybox_common_types_v1_0.SIDType(\n')
+            outfile.write('Security_Type=model_.cybox_common_types_1_0.SIDType(\n')
             self.Security_Type.exportLiteral(outfile, level, name_='Security_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1060,27 +1060,27 @@ class WindowsFileObjectType(file_object_1_3.FileObjectType):
         super(WindowsFileObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Filename_Accessed_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Filename_Accessed_Time(obj_)
         elif nodeName_ == 'Filename_Created_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Filename_Created_Time(obj_)
         elif nodeName_ == 'Filename_Modified_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Filename_Modified_Time(obj_)
         elif nodeName_ == 'Drive':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Drive(obj_)
         elif nodeName_ == 'Security_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Security_ID(obj_)
         elif nodeName_ == 'Security_Type':
-            obj_ = cybox_common_types_v1_0.SIDType.factory()
+            obj_ = cybox_common_types_1_0.SIDType.factory()
             obj_.build(child_)
             self.set_Security_Type(obj_)
         elif nodeName_ == 'Stream_List':

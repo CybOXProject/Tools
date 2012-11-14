@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import address_object_1_2
 import port_object_1_3
 
@@ -407,7 +407,7 @@ class SocketOptionsType(GeneratedsSuper):
     def get_IP_MULTICAST_IF(self): return self.IP_MULTICAST_IF
     def set_IP_MULTICAST_IF(self, IP_MULTICAST_IF): self.IP_MULTICAST_IF = IP_MULTICAST_IF
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_IP_MULTICAST_IF2(self): return self.IP_MULTICAST_IF2
     def set_IP_MULTICAST_IF2(self, IP_MULTICAST_IF2): self.IP_MULTICAST_IF2 = IP_MULTICAST_IF2
@@ -426,7 +426,7 @@ class SocketOptionsType(GeneratedsSuper):
     def get_SO_LINGER(self): return self.SO_LINGER
     def set_SO_LINGER(self, SO_LINGER): self.SO_LINGER = SO_LINGER
     def validate_UnsignedIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
         pass
     def get_SO_DONTLINGER(self): return self.SO_DONTLINGER
     def set_SO_DONTLINGER(self, SO_DONTLINGER): self.SO_DONTLINGER = SO_DONTLINGER
@@ -564,13 +564,13 @@ class SocketOptionsType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.IP_MULTICAST_IF is not None:
             showIndent(outfile, level)
-            outfile.write('IP_MULTICAST_IF=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('IP_MULTICAST_IF=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.IP_MULTICAST_IF.exportLiteral(outfile, level, name_='IP_MULTICAST_IF')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.IP_MULTICAST_IF2 is not None:
             showIndent(outfile, level)
-            outfile.write('IP_MULTICAST_IF2=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('IP_MULTICAST_IF2=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.IP_MULTICAST_IF2.exportLiteral(outfile, level, name_='IP_MULTICAST_IF2')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -579,7 +579,7 @@ class SocketOptionsType(GeneratedsSuper):
             outfile.write('IP_MULTICAST_LOOP=%s,\n' % self.IP_MULTICAST_LOOP)
         if self.IP_TOS is not None:
             showIndent(outfile, level)
-            outfile.write('IP_TOS=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('IP_TOS=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.IP_TOS.exportLiteral(outfile, level, name_='IP_TOS')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -597,7 +597,7 @@ class SocketOptionsType(GeneratedsSuper):
             outfile.write('SO_DONTROUTE=%s,\n' % self.SO_DONTROUTE)
         if self.SO_LINGER is not None:
             showIndent(outfile, level)
-            outfile.write('SO_LINGER=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('SO_LINGER=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.SO_LINGER.exportLiteral(outfile, level, name_='SO_LINGER')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -609,13 +609,13 @@ class SocketOptionsType(GeneratedsSuper):
             outfile.write('SO_OOBINLINE=%s,\n' % self.SO_OOBINLINE)
         if self.SO_RCVBUF is not None:
             showIndent(outfile, level)
-            outfile.write('SO_RCVBUF=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('SO_RCVBUF=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.SO_RCVBUF.exportLiteral(outfile, level, name_='SO_RCVBUF')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.SO_GROUP_PRIORITY is not None:
             showIndent(outfile, level)
-            outfile.write('SO_GROUP_PRIORITY=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('SO_GROUP_PRIORITY=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.SO_GROUP_PRIORITY.exportLiteral(outfile, level, name_='SO_GROUP_PRIORITY')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -627,31 +627,31 @@ class SocketOptionsType(GeneratedsSuper):
             outfile.write('SO_DEBUG=%s,\n' % self.SO_DEBUG)
         if self.SO_RCVTIMEO is not None:
             showIndent(outfile, level)
-            outfile.write('SO_RCVTIMEO=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('SO_RCVTIMEO=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.SO_RCVTIMEO.exportLiteral(outfile, level, name_='SO_RCVTIMEO')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.SO_SNDBUF is not None:
             showIndent(outfile, level)
-            outfile.write('SO_SNDBUF=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('SO_SNDBUF=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.SO_SNDBUF.exportLiteral(outfile, level, name_='SO_SNDBUF')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.SO_SNDTIMEO is not None:
             showIndent(outfile, level)
-            outfile.write('SO_SNDTIMEO=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('SO_SNDTIMEO=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.SO_SNDTIMEO.exportLiteral(outfile, level, name_='SO_SNDTIMEO')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.SO_UPDATE_ACCEPT_CONTEXT is not None:
             showIndent(outfile, level)
-            outfile.write('SO_UPDATE_ACCEPT_CONTEXT=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('SO_UPDATE_ACCEPT_CONTEXT=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.SO_UPDATE_ACCEPT_CONTEXT.exportLiteral(outfile, level, name_='SO_UPDATE_ACCEPT_CONTEXT')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.SO_TIMEOUT is not None:
             showIndent(outfile, level)
-            outfile.write('SO_TIMEOUT=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('SO_TIMEOUT=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.SO_TIMEOUT.exportLiteral(outfile, level, name_='SO_TIMEOUT')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -667,11 +667,11 @@ class SocketOptionsType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'IP_MULTICAST_IF':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_IP_MULTICAST_IF(obj_)
         elif nodeName_ == 'IP_MULTICAST_IF2':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_IP_MULTICAST_IF2(obj_)
         elif nodeName_ == 'IP_MULTICAST_LOOP':
@@ -685,7 +685,7 @@ class SocketOptionsType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'IP_MULTICAST_LOOP')
             self.IP_MULTICAST_LOOP = ival_
         elif nodeName_ == 'IP_TOS':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_IP_TOS(obj_)
         elif nodeName_ == 'SO_BROADCAST':
@@ -729,7 +729,7 @@ class SocketOptionsType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'SO_DONTROUTE')
             self.SO_DONTROUTE = ival_
         elif nodeName_ == 'SO_LINGER':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_SO_LINGER(obj_)
         elif nodeName_ == 'SO_DONTLINGER':
@@ -753,11 +753,11 @@ class SocketOptionsType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'SO_OOBINLINE')
             self.SO_OOBINLINE = ival_
         elif nodeName_ == 'SO_RCVBUF':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_SO_RCVBUF(obj_)
         elif nodeName_ == 'SO_GROUP_PRIORITY':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_SO_GROUP_PRIORITY(obj_)
         elif nodeName_ == 'SO_REUSEADDR':
@@ -781,23 +781,23 @@ class SocketOptionsType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'SO_DEBUG')
             self.SO_DEBUG = ival_
         elif nodeName_ == 'SO_RCVTIMEO':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_SO_RCVTIMEO(obj_)
         elif nodeName_ == 'SO_SNDBUF':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_SO_SNDBUF(obj_)
         elif nodeName_ == 'SO_SNDTIMEO':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_SO_SNDTIMEO(obj_)
         elif nodeName_ == 'SO_UPDATE_ACCEPT_CONTEXT':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_SO_UPDATE_ACCEPT_CONTEXT(obj_)
         elif nodeName_ == 'SO_TIMEOUT':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_SO_TIMEOUT(obj_)
         elif nodeName_ == 'TCP_NODELAY':
@@ -902,15 +902,15 @@ class SocketAddressType(GeneratedsSuper):
             self.set_Port(obj_)
 # end class SocketAddressType
 
-class ProtocolType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class ProtocolType(cybox_common_types_1_0.BaseObjectAttributeType):
     """ProtocolType specifies protocol types, via a union of the
     ProtocolTypeEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(ProtocolType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -989,15 +989,15 @@ class ProtocolType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class ProtocolType
 
-class SocketType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class SocketType(cybox_common_types_1_0.BaseObjectAttributeType):
     """SocketType specifies socket types, via a union of the SocketTypeEnum
     type and the atomic xs:string type. Its base type is the CybOX
-    Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e.
+    Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e.
     regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(SocketType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -1076,15 +1076,15 @@ class SocketType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class SocketType
 
-class DomainFamilyType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class DomainFamilyType(cybox_common_types_1_0.BaseObjectAttributeType):
     """DomainFamilyType specifies domain family types, via a union of the
     DomainTypeEnum type and the atomic xs:string type. Its base type
-    is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(DomainFamilyType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -1163,15 +1163,15 @@ class DomainFamilyType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class DomainFamilyType
 
-class AddressFamilyType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class AddressFamilyType(cybox_common_types_1_0.BaseObjectAttributeType):
     """AddressFamilyType specifies address family types, via a union of the
     AddressFamilyTypeEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(AddressFamilyType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -1250,13 +1250,13 @@ class AddressFamilyType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class AddressFamilyType
 
-class SocketObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class SocketObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The SocketObjectType type is intended to characterize network
     sockets.The isblocking attribute specifies whether or not the
     socket is in blocking mode. The islistening attribute specifies
     whether or not the socket is in listening mode."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, is_blocking=None, is_listening=None, Address_Family=None, Domain=None, Local_Address=None, Options=None, Protocol=None, Remote_Address=None, Type=None):
         super(SocketObjectType, self).__init__(object_reference, )
         self.is_blocking = _cast(bool, is_blocking)

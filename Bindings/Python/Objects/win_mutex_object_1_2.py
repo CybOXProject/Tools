@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import win_handle_object_1_3
 import mutex_object_1_3
 
@@ -390,7 +390,7 @@ class WindowsMutexObjectType(mutex_object_1_3.MutexObjectType):
     def get_Security_Attributes(self): return self.Security_Attributes
     def set_Security_Attributes(self, Security_Attributes): self.Security_Attributes = Security_Attributes
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinMutexObj:', name_='WindowsMutexObjectType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -446,7 +446,7 @@ class WindowsMutexObjectType(mutex_object_1_3.MutexObjectType):
             outfile.write('),\n')
         if self.Security_Attributes is not None:
             showIndent(outfile, level)
-            outfile.write('Security_Attributes=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Security_Attributes=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Security_Attributes.exportLiteral(outfile, level, name_='Security_Attributes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -463,7 +463,7 @@ class WindowsMutexObjectType(mutex_object_1_3.MutexObjectType):
             obj_.build(child_)
             self.set_Handle(obj_)
         elif nodeName_ == 'Security_Attributes':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Security_Attributes(obj_)
         super(WindowsMutexObjectType, self).buildChildren(child_, node, nodeName_, True)

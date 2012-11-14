@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,11 +368,11 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class GUIObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class GUIObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The GUIObjectType type is intended to characterize generic GUI
     objects."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Height=None, Width=None):
         super(GUIObjectType, self).__init__(object_reference, )
         self.Height = Height
@@ -386,7 +386,7 @@ class GUIObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Height(self): return self.Height
     def set_Height(self, Height): self.Height = Height
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Width(self): return self.Width
     def set_Width(self, Width): self.Width = Width
@@ -438,13 +438,13 @@ class GUIObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(GUIObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Height is not None:
             showIndent(outfile, level)
-            outfile.write('Height=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Height=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Height.exportLiteral(outfile, level, name_='Height')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Width is not None:
             showIndent(outfile, level)
-            outfile.write('Width=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Width=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Width.exportLiteral(outfile, level, name_='Width')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -457,11 +457,11 @@ class GUIObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(GUIObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Height':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Height(obj_)
         elif nodeName_ == 'Width':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Width(obj_)
         super(GUIObjectType, self).buildChildren(child_, node, nodeName_, True)

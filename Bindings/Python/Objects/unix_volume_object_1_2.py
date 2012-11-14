@@ -10,7 +10,7 @@ import getopt
 import re as re_
 
 import volume_object_1_3
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -387,7 +387,7 @@ class UnixVolumeObjectType(volume_object_1_3.VolumeObjectType):
     def get_Mount_Point(self): return self.Mount_Point
     def set_Mount_Point(self, Mount_Point): self.Mount_Point = Mount_Point
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Options(self): return self.Options
     def set_Options(self, Options): self.Options = Options
@@ -439,13 +439,13 @@ class UnixVolumeObjectType(volume_object_1_3.VolumeObjectType):
         super(UnixVolumeObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Mount_Point is not None:
             showIndent(outfile, level)
-            outfile.write('Mount_Point=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Mount_Point=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Mount_Point.exportLiteral(outfile, level, name_='Mount_Point')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Options is not None:
             showIndent(outfile, level)
-            outfile.write('Options=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Options=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Options.exportLiteral(outfile, level, name_='Options')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -458,11 +458,11 @@ class UnixVolumeObjectType(volume_object_1_3.VolumeObjectType):
         super(UnixVolumeObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Mount_Point':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Mount_Point(obj_)
         elif nodeName_ == 'Options':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Options(obj_)
         super(UnixVolumeObjectType, self).buildChildren(child_, node, nodeName_, True)

@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import address_object_1_2
 import port_object_1_3
 import http_session_object_1_0
@@ -493,7 +493,7 @@ class NetworkConnectionType(GeneratedsSuper):
     def get_Creation_Time(self): return self.Creation_Time
     def set_Creation_Time(self, Creation_Time): self.Creation_Time = Creation_Time
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Destination_IP_Address(self): return self.Destination_IP_Address
     def set_Destination_IP_Address(self, Destination_IP_Address): self.Destination_IP_Address = Destination_IP_Address
@@ -565,7 +565,7 @@ class NetworkConnectionType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Creation_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Creation_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Creation_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Creation_Time.exportLiteral(outfile, level, name_='Creation_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -610,7 +610,7 @@ class NetworkConnectionType(GeneratedsSuper):
         if nodeName_ == 'Creation_Time':
             obj_ = None
             self.set_Creation_Time(obj_)
-            self.validate_DateTimeObjectAttributeType(self.Creation_Time)    # validate type cybox_common_types_v1_0.DateTimeObjectAttributeType
+            self.validate_DateTimeObjectAttributeType(self.Creation_Time)    # validate type cybox_common_types_1_0.DateTimeObjectAttributeType
         elif nodeName_ == 'Destination_IP_Address':
             obj_ = address_object_1_2.AddressObjectType.factory()
             obj_.build(child_)
@@ -633,15 +633,15 @@ class NetworkConnectionType(GeneratedsSuper):
             self.validate_ConnectionStateType(self.TCP_State)    # validate type ConnectionStateType
 # end class NetworkConnectionType
 
-class Layer4ProtocolType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class Layer4ProtocolType(cybox_common_types_1_0.BaseObjectAttributeType):
     """port_object_1_3.Layer4ProtocolType specifies Layer 4 (OSI model) protocols, via a
     union of the Layer4ProtocolEnum type and the atomic xs:string
-    type. Its base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType,
+    type. Its base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType,
     for permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(port_object_1_3.Layer4ProtocolType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -720,15 +720,15 @@ class Layer4ProtocolType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class port_object_1_3.Layer4ProtocolType
 
-class Layer7ProtocolType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class Layer7ProtocolType(cybox_common_types_1_0.BaseObjectAttributeType):
     """Layer7ProtocolType specifies Layer 7 protocol types, via a union of
     the Layer7ProtocolEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(Layer7ProtocolType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -807,15 +807,15 @@ class Layer7ProtocolType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class Layer7ProtocolType
 
-class Layer3ProtocolType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class Layer3ProtocolType(cybox_common_types_1_0.BaseObjectAttributeType):
     """Layer3ProtocolType specifies Layer 3 protocol types, via a union of
     the Layer3ProtocolEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(Layer3ProtocolType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)

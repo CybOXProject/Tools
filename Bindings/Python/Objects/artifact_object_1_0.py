@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,7 +368,7 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class RawArtifactType(cybox_common_types_v1_0.StringObjectAttributeType):
+class RawArtifactType(cybox_common_types_1_0.StringObjectAttributeType):
     """The RawArtifactType is intended to convey, with minimal
     characterization, the content of the Raw Artifact itself."""
     subclass = None
@@ -922,7 +922,7 @@ class EncodingType(GeneratedsSuper):
         pass
 # end class EncodingType
 
-class ArtifactType(cybox_common_types_v1_0.DefinedObjectType):
+class ArtifactType(cybox_common_types_1_0.DefinedObjectType):
     """The ArtifactType type is intended to encapsulate and convey the
     content of a Raw Artifact.The type field specifies the general
     type of the artifact contained in this Defined Object.The
@@ -934,7 +934,7 @@ class ArtifactType(cybox_common_types_v1_0.DefinedObjectType):
     whether the content of the Raw_Artifact is believed to be
     malicoius."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, suspected_malicious=None, content_type_version=None, type_=None, content_type=None, Hashes=None, Packaging=None, Raw_Artifact=None, Raw_Artifact_Reference=None):
         super(ArtifactType, self).__init__(object_reference, )
         self.suspected_malicious = _cast(bool, suspected_malicious)
@@ -1050,7 +1050,7 @@ class ArtifactType(cybox_common_types_v1_0.DefinedObjectType):
         super(ArtifactType, self).exportLiteralChildren(outfile, level, name_)
         if self.Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Hashes.exportLiteral(outfile, level, name_='Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1099,7 +1099,7 @@ class ArtifactType(cybox_common_types_v1_0.DefinedObjectType):
         super(ArtifactType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Hashes(obj_)
         elif nodeName_ == 'Packaging':

@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import dns_record_object_1_1
 import uri_object_1_2
 
@@ -395,7 +395,7 @@ class DNSQuestionType(GeneratedsSuper):
     def get_QClass(self): return self.QClass
     def set_QClass(self, QClass): self.QClass = QClass
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSQuestionType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -457,7 +457,7 @@ class DNSQuestionType(GeneratedsSuper):
             outfile.write('),\n')
         if self.QClass is not None:
             showIndent(outfile, level)
-            outfile.write('QClass=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('QClass=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.QClass.exportLiteral(outfile, level, name_='QClass')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -478,7 +478,7 @@ class DNSQuestionType(GeneratedsSuper):
             obj_.build(child_)
             self.set_QType(obj_)
         elif nodeName_ == 'QClass':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_QClass(obj_)
 # end class DNSQuestionType
@@ -569,15 +569,15 @@ class DNSResourceRecordsType(GeneratedsSuper):
             self.Resource_Record.append(obj_)
 # end class DNSResourceRecordsType
 
-class DNSRecordType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class DNSRecordType(cybox_common_types_1_0.BaseObjectAttributeType):
     """DNSRecordType specifies DNS record types, via a union of the
     DNSRecordTypeEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(DNSRecordType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -656,12 +656,12 @@ class DNSRecordType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class DNSRecordType
 
-class DNSQueryObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class DNSQueryObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The DNSQueryType is intended to characterize a single DNS query and
     its components.The successful attribute specifies whether or not
     the DNS Query was successful."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, successful=None, Question=None, Answer_Resource_Records=None, Authority_Resource_Records=None, Additional_Records=None):
         super(DNSQueryObjectType, self).__init__(object_reference, )
         self.successful = _cast(bool, successful)

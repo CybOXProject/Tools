@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import network_route_entry_object_1_1
 import address_object_1_2
 
@@ -455,11 +455,11 @@ class RoutesType(GeneratedsSuper):
             self.Route.append(obj_)
 # end class RoutesType
 
-class NetworkSubnetObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class NetworkSubnetObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The NetworkSubnetObjectType type is intended to characterize a
     generic system network subnet."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Name=None, Description=None, NumberOfIPAddresses=None, Routes=None, anytypeobjs_=None):
         super(NetworkSubnetObjectType, self).__init__(object_reference, )
         self.Name = Name
@@ -479,14 +479,14 @@ class NetworkSubnetObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Description(self): return self.Description
     def set_Description(self, Description): self.Description = Description
     def get_NumberOfIPAddresses(self): return self.NumberOfIPAddresses
     def set_NumberOfIPAddresses(self, NumberOfIPAddresses): self.NumberOfIPAddresses = NumberOfIPAddresses
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Routes(self): return self.Routes
     def set_Routes(self, Routes): self.Routes = Routes
@@ -551,19 +551,19 @@ class NetworkSubnetObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(NetworkSubnetObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.NumberOfIPAddresses is not None:
             showIndent(outfile, level)
-            outfile.write('NumberOfIPAddresses=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('NumberOfIPAddresses=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.NumberOfIPAddresses.exportLiteral(outfile, level, name_='NumberOfIPAddresses')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -590,15 +590,15 @@ class NetworkSubnetObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(NetworkSubnetObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'NumberOfIPAddresses':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_NumberOfIPAddresses(obj_)
         elif nodeName_ == 'Routes':

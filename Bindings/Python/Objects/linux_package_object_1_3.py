@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,15 +368,15 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class ArchitectureType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class ArchitectureType(cybox_common_types_1_0.BaseObjectAttributeType):
     """ArchitectureType specifies CPU architecture types, via a union of
     the ArchitectureTypeEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(ArchitectureType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -455,11 +455,11 @@ class ArchitectureType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class ArchitectureType
 
-class LinuxPackageObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class LinuxPackageObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The LinuxPackageObjectType type is intended to characterize Linux
     packages."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Architecture=None, Category=None, Description=None, Epoch=None, EVR=None, Name=None, Release=None, Vendor=None, Version=None):
         super(LinuxPackageObjectType, self).__init__(object_reference, )
         self.Architecture = Architecture
@@ -485,7 +485,7 @@ class LinuxPackageObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Category(self): return self.Category
     def set_Category(self, Category): self.Category = Category
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Description(self): return self.Description
     def set_Description(self, Description): self.Description = Description
@@ -576,49 +576,49 @@ class LinuxPackageObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Category is not None:
             showIndent(outfile, level)
-            outfile.write('Category=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Category=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Category.exportLiteral(outfile, level, name_='Category')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Epoch is not None:
             showIndent(outfile, level)
-            outfile.write('Epoch=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Epoch=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Epoch.exportLiteral(outfile, level, name_='Epoch')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.EVR is not None:
             showIndent(outfile, level)
-            outfile.write('EVR=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('EVR=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.EVR.exportLiteral(outfile, level, name_='EVR')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Release is not None:
             showIndent(outfile, level)
-            outfile.write('Release=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Release=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Release.exportLiteral(outfile, level, name_='Release')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Vendor is not None:
             showIndent(outfile, level)
-            outfile.write('Vendor=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Vendor=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Vendor.exportLiteral(outfile, level, name_='Vendor')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Version is not None:
             showIndent(outfile, level)
-            outfile.write('Version=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Version=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Version.exportLiteral(outfile, level, name_='Version')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -635,35 +635,35 @@ class LinuxPackageObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Architecture(obj_)
         elif nodeName_ == 'Category':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Category(obj_)
         elif nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Epoch':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Epoch(obj_)
         elif nodeName_ == 'EVR':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_EVR(obj_)
         elif nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Release':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Release(obj_)
         elif nodeName_ == 'Vendor':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Vendor(obj_)
         elif nodeName_ == 'Version':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Version(obj_)
         super(LinuxPackageObjectType, self).buildChildren(child_, node, nodeName_, True)

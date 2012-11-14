@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -389,7 +389,7 @@ class UnformattedMessageListType(GeneratedsSuper):
     def add_Unformatted_Message(self, value): self.Unformatted_Message.append(value)
     def insert_Unformatted_Message(self, index, value): self.Unformatted_Message[index] = value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinEventLogObj:', name_='UnformattedMessageListType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -436,8 +436,8 @@ class UnformattedMessageListType(GeneratedsSuper):
         level += 1
         for Unformatted_Message_ in self.Unformatted_Message:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
-            Unformatted_Message_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.StringObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            Unformatted_Message_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.StringObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -452,16 +452,16 @@ class UnformattedMessageListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Unformatted_Message':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.Unformatted_Message.append(obj_)
 # end class UnformattedMessageListType
 
-class WindowsEventLogObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class WindowsEventLogObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The WindowsEventLogObjectType type is intended to characterize
     entries in the Windows event log."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, EID=None, Type=None, Log=None, Message=None, Category_Num=None, Category=None, Generation_Time=None, Source=None, Machine=None, User=None, Blob=None, Correlation_Activity_ID=None, Correlation_Related_Activity_ID=None, Execution_Process_ID=None, Execution_Thread_ID=None, Index=None, Reserved=None, Unformatted_Message_List=None, Write_Time=None):
         super(WindowsEventLogObjectType, self).__init__(object_reference, )
         self.EID = EID
@@ -492,12 +492,12 @@ class WindowsEventLogObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_EID(self): return self.EID
     def set_EID(self, EID): self.EID = EID
     def validate_LongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.LongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.LongObjectAttributeType, a restriction on None.
         pass
     def get_Type(self): return self.Type
     def set_Type(self, Type): self.Type = Type
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Log(self): return self.Log
     def set_Log(self, Log): self.Log = Log
@@ -510,7 +510,7 @@ class WindowsEventLogObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Generation_Time(self): return self.Generation_Time
     def set_Generation_Time(self, Generation_Time): self.Generation_Time = Generation_Time
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Source(self): return self.Source
     def set_Source(self, Source): self.Source = Source
@@ -521,7 +521,7 @@ class WindowsEventLogObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Blob(self): return self.Blob
     def set_Blob(self, Blob): self.Blob = Blob
     def validate_Base64BinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.Base64BinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.Base64BinaryObjectAttributeType, a restriction on None.
         pass
     def get_Correlation_Activity_ID(self): return self.Correlation_Activity_ID
     def set_Correlation_Activity_ID(self, Correlation_Activity_ID): self.Correlation_Activity_ID = Correlation_Activity_ID
@@ -638,103 +638,103 @@ class WindowsEventLogObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsEventLogObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.EID is not None:
             showIndent(outfile, level)
-            outfile.write('EID=model_.cybox_common_types_v1_0.LongObjectAttributeType(\n')
+            outfile.write('EID=model_.cybox_common_types_1_0.LongObjectAttributeType(\n')
             self.EID.exportLiteral(outfile, level, name_='EID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Type is not None:
             showIndent(outfile, level)
-            outfile.write('Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Type.exportLiteral(outfile, level, name_='Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Log is not None:
             showIndent(outfile, level)
-            outfile.write('Log=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Log=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Log.exportLiteral(outfile, level, name_='Log')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Message is not None:
             showIndent(outfile, level)
-            outfile.write('Message=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Message=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Message.exportLiteral(outfile, level, name_='Message')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Category_Num is not None:
             showIndent(outfile, level)
-            outfile.write('Category_Num=model_.cybox_common_types_v1_0.LongObjectAttributeType(\n')
+            outfile.write('Category_Num=model_.cybox_common_types_1_0.LongObjectAttributeType(\n')
             self.Category_Num.exportLiteral(outfile, level, name_='Category_Num')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Category is not None:
             showIndent(outfile, level)
-            outfile.write('Category=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Category=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Category.exportLiteral(outfile, level, name_='Category')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Generation_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Generation_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Generation_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Generation_Time.exportLiteral(outfile, level, name_='Generation_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Source is not None:
             showIndent(outfile, level)
-            outfile.write('Source=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Source=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Source.exportLiteral(outfile, level, name_='Source')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Machine is not None:
             showIndent(outfile, level)
-            outfile.write('Machine=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Machine=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Machine.exportLiteral(outfile, level, name_='Machine')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.User is not None:
             showIndent(outfile, level)
-            outfile.write('User=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('User=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.User.exportLiteral(outfile, level, name_='User')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Blob is not None:
             showIndent(outfile, level)
-            outfile.write('Blob=model_.cybox_common_types_v1_0.Base64BinaryObjectAttributeType(\n')
+            outfile.write('Blob=model_.cybox_common_types_1_0.Base64BinaryObjectAttributeType(\n')
             self.Blob.exportLiteral(outfile, level, name_='Blob')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Correlation_Activity_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Correlation_Activity_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Correlation_Activity_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Correlation_Activity_ID.exportLiteral(outfile, level, name_='Correlation_Activity_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Correlation_Related_Activity_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Correlation_Related_Activity_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Correlation_Related_Activity_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Correlation_Related_Activity_ID.exportLiteral(outfile, level, name_='Correlation_Related_Activity_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Execution_Process_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Execution_Process_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Execution_Process_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Execution_Process_ID.exportLiteral(outfile, level, name_='Execution_Process_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Execution_Thread_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Execution_Thread_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Execution_Thread_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Execution_Thread_ID.exportLiteral(outfile, level, name_='Execution_Thread_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Index is not None:
             showIndent(outfile, level)
-            outfile.write('Index=model_.cybox_common_types_v1_0.LongObjectAttributeType(\n')
+            outfile.write('Index=model_.cybox_common_types_1_0.LongObjectAttributeType(\n')
             self.Index.exportLiteral(outfile, level, name_='Index')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Reserved is not None:
             showIndent(outfile, level)
-            outfile.write('Reserved=model_.cybox_common_types_v1_0.LongObjectAttributeType(\n')
+            outfile.write('Reserved=model_.cybox_common_types_1_0.LongObjectAttributeType(\n')
             self.Reserved.exportLiteral(outfile, level, name_='Reserved')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -746,7 +746,7 @@ class WindowsEventLogObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Write_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Write_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Write_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Write_Time.exportLiteral(outfile, level, name_='Write_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -759,71 +759,71 @@ class WindowsEventLogObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsEventLogObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'EID':
-            obj_ = cybox_common_types_v1_0.LongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.LongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_EID(obj_)
         elif nodeName_ == 'Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Type(obj_)
         elif nodeName_ == 'Log':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Log(obj_)
         elif nodeName_ == 'Message':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Message(obj_)
         elif nodeName_ == 'Category_Num':
-            obj_ = cybox_common_types_v1_0.LongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.LongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Category_Num(obj_)
         elif nodeName_ == 'Category':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Category(obj_)
         elif nodeName_ == 'Generation_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Generation_Time(obj_)
         elif nodeName_ == 'Source':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Source(obj_)
         elif nodeName_ == 'Machine':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Machine(obj_)
         elif nodeName_ == 'User':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_User(obj_)
         elif nodeName_ == 'Blob':
-            obj_ = cybox_common_types_v1_0.Base64BinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.Base64BinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Blob(obj_)
         elif nodeName_ == 'Correlation_Activity_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Correlation_Activity_ID(obj_)
         elif nodeName_ == 'Correlation_Related_Activity_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Correlation_Related_Activity_ID(obj_)
         elif nodeName_ == 'Execution_Process_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Execution_Process_ID(obj_)
         elif nodeName_ == 'Execution_Thread_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Execution_Thread_ID(obj_)
         elif nodeName_ == 'Index':
-            obj_ = cybox_common_types_v1_0.LongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.LongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Index(obj_)
         elif nodeName_ == 'Reserved':
-            obj_ = cybox_common_types_v1_0.LongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.LongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Reserved(obj_)
         elif nodeName_ == 'Unformatted_Message_List':
@@ -831,7 +831,7 @@ class WindowsEventLogObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Unformatted_Message_List(obj_)
         elif nodeName_ == 'Write_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Write_Time(obj_)
         super(WindowsEventLogObjectType, self).buildChildren(child_, node, nodeName_, True)

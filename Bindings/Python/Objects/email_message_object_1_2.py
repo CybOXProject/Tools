@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import file_object_1_3
 import address_object_1_2
 import uri_object_1_2
@@ -489,14 +489,14 @@ class EmailHeaderType(GeneratedsSuper):
     def get_Subject(self): return self.Subject
     def set_Subject(self, Subject): self.Subject = Subject
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_In_Reply_To(self): return self.In_Reply_To
     def set_In_Reply_To(self, In_Reply_To): self.In_Reply_To = In_Reply_To
     def get_Date(self): return self.Date
     def set_Date(self, Date): self.Date = Date
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Message_ID(self): return self.Message_ID
     def set_Message_ID(self, Message_ID): self.Message_ID = Message_ID
@@ -602,25 +602,25 @@ class EmailHeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Subject is not None:
             showIndent(outfile, level)
-            outfile.write('Subject=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Subject=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Subject.exportLiteral(outfile, level, name_='Subject')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.In_Reply_To is not None:
             showIndent(outfile, level)
-            outfile.write('In_Reply_To=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('In_Reply_To=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.In_Reply_To.exportLiteral(outfile, level, name_='In_Reply_To')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Date is not None:
             showIndent(outfile, level)
-            outfile.write('Date=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Date=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Date.exportLiteral(outfile, level, name_='Date')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Message_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Message_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Message_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Message_ID.exportLiteral(outfile, level, name_='Message_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -638,7 +638,7 @@ class EmailHeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Errors_To is not None:
             showIndent(outfile, level)
-            outfile.write('Errors_To=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Errors_To=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Errors_To.exportLiteral(outfile, level, name_='Errors_To')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -667,19 +667,19 @@ class EmailHeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_From(obj_)
         elif nodeName_ == 'Subject':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Subject(obj_)
         elif nodeName_ == 'In_Reply_To':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_In_Reply_To(obj_)
         elif nodeName_ == 'Date':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Date(obj_)
         elif nodeName_ == 'Message_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Message_ID(obj_)
         elif nodeName_ == 'Sender':
@@ -691,7 +691,7 @@ class EmailHeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Reply_To(obj_)
         elif nodeName_ == 'Errors_To':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Errors_To(obj_)
 # end class EmailHeaderType
@@ -717,7 +717,7 @@ class EmailOptionalHeaderType(GeneratedsSuper):
     def get_Boundary(self): return self.Boundary
     def set_Boundary(self, Boundary): self.Boundary = Boundary
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Content_Type(self): return self.Content_Type
     def set_Content_Type(self, Content_Type): self.Content_Type = Content_Type
@@ -732,7 +732,7 @@ class EmailOptionalHeaderType(GeneratedsSuper):
     def get_X_Priority(self): return self.X_Priority
     def set_X_Priority(self, X_Priority): self.X_Priority = X_Priority
     def validate_PositiveIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.PositiveIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.PositiveIntegerObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='EmailMessageObj:', name_='EmailOptionalHeaderType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -794,31 +794,31 @@ class EmailOptionalHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Boundary is not None:
             showIndent(outfile, level)
-            outfile.write('Boundary=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Boundary=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Boundary.exportLiteral(outfile, level, name_='Boundary')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Content_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Content_Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Content_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Content_Type.exportLiteral(outfile, level, name_='Content_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.MIME_Version is not None:
             showIndent(outfile, level)
-            outfile.write('MIME_Version=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('MIME_Version=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.MIME_Version.exportLiteral(outfile, level, name_='MIME_Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Precedence is not None:
             showIndent(outfile, level)
-            outfile.write('Precedence=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Precedence=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Precedence.exportLiteral(outfile, level, name_='Precedence')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.X_Mailer is not None:
             showIndent(outfile, level)
-            outfile.write('X_Mailer=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('X_Mailer=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.X_Mailer.exportLiteral(outfile, level, name_='X_Mailer')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -830,7 +830,7 @@ class EmailOptionalHeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.X_Priority is not None:
             showIndent(outfile, level)
-            outfile.write('X_Priority=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('X_Priority=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.X_Priority.exportLiteral(outfile, level, name_='X_Priority')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -843,23 +843,23 @@ class EmailOptionalHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Boundary':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Boundary(obj_)
         elif nodeName_ == 'Content-Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Content_Type(obj_)
         elif nodeName_ == 'MIME-Version':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_MIME_Version(obj_)
         elif nodeName_ == 'Precedence':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Precedence(obj_)
         elif nodeName_ == 'X-Mailer':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_X_Mailer(obj_)
         elif nodeName_ == 'X-Originating-IP':
@@ -867,7 +867,7 @@ class EmailOptionalHeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_X_Originating_IP(obj_)
         elif nodeName_ == 'X-Priority':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_X_Priority(obj_)
 # end class EmailOptionalHeaderType
@@ -1042,11 +1042,11 @@ class LinksType(GeneratedsSuper):
             self.Link.append(obj_)
 # end class LinksType
 
-class EmailMessageObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class EmailMessageObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The EmailMessageObjectType type is intended to characterize an
     individual email message."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Attachments=None, Links=None, Header=None, Optional_Header=None, Email_Server=None, Raw_Body=None, Raw_Header=None):
         super(EmailMessageObjectType, self).__init__(object_reference, )
         self.Attachments = Attachments
@@ -1073,7 +1073,7 @@ class EmailMessageObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Email_Server(self): return self.Email_Server
     def set_Email_Server(self, Email_Server): self.Email_Server = Email_Server
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Raw_Body(self): return self.Raw_Body
     def set_Raw_Body(self, Raw_Body): self.Raw_Body = Raw_Body
@@ -1166,19 +1166,19 @@ class EmailMessageObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Email_Server is not None:
             showIndent(outfile, level)
-            outfile.write('Email_Server=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Email_Server=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Email_Server.exportLiteral(outfile, level, name_='Email_Server')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Raw_Body is not None:
             showIndent(outfile, level)
-            outfile.write('Raw_Body=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Raw_Body=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Raw_Body.exportLiteral(outfile, level, name_='Raw_Body')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Raw_Header is not None:
             showIndent(outfile, level)
-            outfile.write('Raw_Header=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Raw_Header=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Raw_Header.exportLiteral(outfile, level, name_='Raw_Header')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1207,15 +1207,15 @@ class EmailMessageObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Optional_Header(obj_)
         elif nodeName_ == 'Email_Server':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Email_Server(obj_)
         elif nodeName_ == 'Raw_Body':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Raw_Body(obj_)
         elif nodeName_ == 'Raw_Header':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Raw_Header(obj_)
         super(EmailMessageObjectType, self).buildChildren(child_, node, nodeName_, True)

@@ -10,7 +10,7 @@ import getopt
 import re as re_
 
 import process_object_1_3
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -390,7 +390,7 @@ class FileDescriptorListType(GeneratedsSuper):
     def add_File_Descriptor(self, value): self.File_Descriptor.append(value)
     def insert_File_Descriptor(self, index, value): self.File_Descriptor[index] = value
     def validate_UnsignedIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='UnixProcessObj:', name_='FileDescriptorListType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -437,8 +437,8 @@ class FileDescriptorListType(GeneratedsSuper):
         level += 1
         for File_Descriptor_ in self.File_Descriptor:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
-            File_Descriptor_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
+            File_Descriptor_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.UnsignedIntegerObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -453,21 +453,21 @@ class FileDescriptorListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'File_Descriptor':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.File_Descriptor.append(obj_)
 # end class FileDescriptorListType
 
-class UnixProcessStateType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class UnixProcessStateType(cybox_common_types_1_0.BaseObjectAttributeType):
     """UnixProcessStateType specifies Unix process states, via a union of
     the UnixProcessStateEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications. See "man ps" for more information.This attribute
     is optional and specifies the expected type for the value of the
     specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(UnixProcessStateType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -570,7 +570,7 @@ class UnixProcessStatusType(process_object_1_3.ProcessStatusType):
     def get_Timestamp(self): return self.Timestamp
     def set_Timestamp(self, Timestamp): self.Timestamp = Timestamp
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='UnixProcessObj:', name_='UnixProcessStatusType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -626,7 +626,7 @@ class UnixProcessStatusType(process_object_1_3.ProcessStatusType):
             outfile.write('),\n')
         if self.Timestamp is not None:
             showIndent(outfile, level)
-            outfile.write('Timestamp=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Timestamp=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Timestamp.exportLiteral(outfile, level, name_='Timestamp')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -643,7 +643,7 @@ class UnixProcessStatusType(process_object_1_3.ProcessStatusType):
             obj_.build(child_)
             self.set_Current_Status(obj_)
         elif nodeName_ == 'Timestamp':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Timestamp(obj_)
         super(UnixProcessStatusType, self).buildChildren(child_, node, nodeName_, True)
@@ -671,7 +671,7 @@ class UnixProcessObjectType(process_object_1_3.ProcessObjectType):
     def get_Priority(self): return self.Priority
     def set_Priority(self, Priority): self.Priority = Priority
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def get_RUID(self): return self.RUID
     def set_RUID(self, RUID): self.RUID = RUID
@@ -737,19 +737,19 @@ class UnixProcessObjectType(process_object_1_3.ProcessObjectType):
             outfile.write('),\n')
         if self.Priority is not None:
             showIndent(outfile, level)
-            outfile.write('Priority=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Priority=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Priority.exportLiteral(outfile, level, name_='Priority')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.RUID is not None:
             showIndent(outfile, level)
-            outfile.write('RUID=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('RUID=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.RUID.exportLiteral(outfile, level, name_='RUID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Session_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Session_ID=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Session_ID=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Session_ID.exportLiteral(outfile, level, name_='Session_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -766,15 +766,15 @@ class UnixProcessObjectType(process_object_1_3.ProcessObjectType):
             obj_.build(child_)
             self.set_Open_File_Descriptor_List(obj_)
         elif nodeName_ == 'Priority':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Priority(obj_)
         elif nodeName_ == 'RUID':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_RUID(obj_)
         elif nodeName_ == 'Session_ID':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Session_ID(obj_)
         super(UnixProcessObjectType, self).buildChildren(child_, node, nodeName_, True)

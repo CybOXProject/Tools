@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,13 +368,13 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class AccountObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class AccountObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The AccountObjectType type is intended to characterize generic
     accounts.The disabled attribute specifies whether or not the
     account is disabled.The locked_out attribute specifies whether
     or not the account is locked out."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, disabled=None, locked_out=None, Description=None, Domain=None, extensiontype_=None):
         super(AccountObjectType, self).__init__(object_reference, extensiontype_, )
         self.disabled = _cast(bool, disabled)
@@ -391,7 +391,7 @@ class AccountObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Description(self): return self.Description
     def set_Description(self, Description): self.Description = Description
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Domain(self): return self.Domain
     def set_Domain(self, Domain): self.Domain = Domain
@@ -467,13 +467,13 @@ class AccountObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(AccountObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Domain is not None:
             showIndent(outfile, level)
-            outfile.write('Domain=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Domain=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Domain.exportLiteral(outfile, level, name_='Domain')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -508,11 +508,11 @@ class AccountObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(AccountObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Domain':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Domain(obj_)
         super(AccountObjectType, self).buildChildren(child_, node, nodeName_, True)

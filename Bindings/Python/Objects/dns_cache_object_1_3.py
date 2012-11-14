@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import dns_record_object_1_1
 
 etree_ = None
@@ -388,7 +388,7 @@ class DNSCacheEntryType(GeneratedsSuper):
     def get_TTL(self): return self.TTL
     def set_TTL(self, TTL): self.TTL = TTL
     def validate_PositiveIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.PositiveIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.PositiveIntegerObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='DNSCacheObj:', name_='DNSCacheEntryType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -441,7 +441,7 @@ class DNSCacheEntryType(GeneratedsSuper):
             outfile.write('),\n')
         if self.TTL is not None:
             showIndent(outfile, level)
-            outfile.write('TTL=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('TTL=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.TTL.exportLiteral(outfile, level, name_='TTL')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -458,16 +458,16 @@ class DNSCacheEntryType(GeneratedsSuper):
             obj_.build(child_)
             self.set_DNS_Entry(obj_)
         elif nodeName_ == 'TTL':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_TTL(obj_)
 # end class DNSCacheEntryType
 
-class DNSCacheObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class DNSCacheObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The DNSCacheObjectType type is intended to characterize entries in a
     system's DNS cache."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, DNS_Cache_Entry=None):
         super(DNSCacheObjectType, self).__init__(object_reference, )
         if DNS_Cache_Entry is None:

@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -432,8 +432,8 @@ class TargetedPlatformsType(GeneratedsSuper):
         level += 1
         for Targeted_Platform_ in self.Targeted_Platform:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.CPESpecificationType(\n')
-            Targeted_Platform_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.CPESpecificationType')
+            outfile.write('model_.cybox_common_types_1_0.CPESpecificationType(\n')
+            Targeted_Platform_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.CPESpecificationType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -448,16 +448,16 @@ class TargetedPlatformsType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Targeted_Platform':
-            obj_ = cybox_common_types_v1_0.CPESpecificationType.factory()
+            obj_ = cybox_common_types_1_0.CPESpecificationType.factory()
             obj_.build(child_)
             self.set_Targeted_Platform(obj_)
 # end class TargetedPlatformsType
 
-class CodeObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class CodeObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The CodeObjectType type is intended to characterize a body of
     computer code."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Description=None, Type=None, Purpose=None, Code_Language=None, Targeted_Platforms=None, Processor_Family=None, Discovery_Method=None, Start_Address=None, Code_Segment=None, XOR_Pattern=None, Code_Segment_XOR=None, Digital_Signatures=None):
         super(CodeObjectType, self).__init__(object_reference, )
         self.Description = Description
@@ -470,7 +470,7 @@ class CodeObjectType(cybox_common_types_v1_0.DefinedObjectType):
         self.Start_Address = Start_Address
         self.Code_Segment = Code_Segment
         if XOR_Pattern is None:
-            self.XOR_Pattern = globals()['cybox_common_types_v1_0.HexBinaryObjectAttributeType']('55AA55AA55AA55BB')
+            self.XOR_Pattern = globals()['cybox_common_types_1_0.HexBinaryObjectAttributeType']('55AA55AA55AA55BB')
         else:
             self.XOR_Pattern = XOR_Pattern
         self.Code_Segment_XOR = Code_Segment_XOR
@@ -510,7 +510,7 @@ class CodeObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Start_Address(self): return self.Start_Address
     def set_Start_Address(self, Start_Address): self.Start_Address = Start_Address
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Code_Segment(self): return self.Code_Segment
     def set_Code_Segment(self, Code_Segment): self.Code_Segment = Code_Segment
@@ -600,7 +600,7 @@ class CodeObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(CodeObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -636,13 +636,13 @@ class CodeObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Discovery_Method is not None:
             showIndent(outfile, level)
-            outfile.write('Discovery_Method=model_.cybox_common_types_v1_0.MeasureSourceType(\n')
+            outfile.write('Discovery_Method=model_.cybox_common_types_1_0.MeasureSourceType(\n')
             self.Discovery_Method.exportLiteral(outfile, level, name_='Discovery_Method')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Start_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Start_Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Start_Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Start_Address.exportLiteral(outfile, level, name_='Start_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -651,7 +651,7 @@ class CodeObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('Code_Segment=%s,\n' % quote_python(self.Code_Segment).encode(ExternalEncoding))
         if self.XOR_Pattern is not None:
             showIndent(outfile, level)
-            outfile.write('XOR_Pattern=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('XOR_Pattern=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.XOR_Pattern.exportLiteral(outfile, level, name_='XOR_Pattern')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -660,7 +660,7 @@ class CodeObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('Code_Segment_XOR=%s,\n' % quote_python(self.Code_Segment_XOR).encode(ExternalEncoding))
         if self.Digital_Signatures is not None:
             showIndent(outfile, level)
-            outfile.write('Digital_Signatures=model_.cybox_common_types_v1_0.DigitalSignaturesType(\n')
+            outfile.write('Digital_Signatures=model_.cybox_common_types_1_0.DigitalSignaturesType(\n')
             self.Digital_Signatures.exportLiteral(outfile, level, name_='Digital_Signatures')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -673,7 +673,7 @@ class CodeObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(CodeObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Type':
@@ -697,11 +697,11 @@ class CodeObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Processor_Family(obj_)
         elif nodeName_ == 'Discovery_Method':
-            obj_ = cybox_common_types_v1_0.MeasureSourceType.factory()
+            obj_ = cybox_common_types_1_0.MeasureSourceType.factory()
             obj_.build(child_)
             self.set_Discovery_Method(obj_)
         elif nodeName_ == 'Start_Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Start_Address(obj_)
         elif nodeName_ == 'Code_Segment':
@@ -709,7 +709,7 @@ class CodeObjectType(cybox_common_types_v1_0.DefinedObjectType):
             Code_Segment_ = self.gds_validate_string(Code_Segment_, node, 'Code_Segment')
             self.Code_Segment = Code_Segment_
         elif nodeName_ == 'XOR_Pattern':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_XOR_Pattern(obj_)
         elif nodeName_ == 'Code_Segment_XOR':
@@ -717,21 +717,21 @@ class CodeObjectType(cybox_common_types_v1_0.DefinedObjectType):
             Code_Segment_XOR_ = self.gds_validate_string(Code_Segment_XOR_, node, 'Code_Segment_XOR')
             self.Code_Segment_XOR = Code_Segment_XOR_
         elif nodeName_ == 'Digital_Signatures':
-            obj_ = cybox_common_types_v1_0.DigitalSignaturesType.factory()
+            obj_ = cybox_common_types_1_0.DigitalSignaturesType.factory()
             obj_.build(child_)
             self.set_Digital_Signatures(obj_)
         super(CodeObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class CodeObjectType
 
-class CodeTypeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class CodeTypeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """CodeTypeType specifies types of code, via a union of the
     CodeTypeEnum type and the atomic xs:string type. Its base type
-    is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(CodeTypeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -810,15 +810,15 @@ class CodeTypeType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class CodeTypeType
 
-class CodePurposeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class CodePurposeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """CodePurposeType specifies intended purposes of code, via a union of
     the CodePurposeEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(CodePurposeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -897,15 +897,15 @@ class CodePurposeType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class CodePurposeType
 
-class CodeLanguageType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class CodeLanguageType(cybox_common_types_1_0.BaseObjectAttributeType):
     """CodeLanguageType specifies languages of code, via a union of the
     CodeLanguageEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(CodeLanguageType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -984,15 +984,15 @@ class CodeLanguageType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class CodeLanguageType
 
-class ProcessorTypeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class ProcessorTypeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """ProcessorTypeType specifies relevant processor families, via a union
     of the ProcessorTypeEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(ProcessorTypeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)

@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import disk_partition_object_1_3
 
 etree_ = None
@@ -454,15 +454,15 @@ class PartitionListType(GeneratedsSuper):
             self.Partition.append(obj_)
 # end class PartitionListType
 
-class DiskType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class DiskType(cybox_common_types_1_0.BaseObjectAttributeType):
     """DiskType specifies disk types, via a union of the DiskTypeEnum type
     and the atomic xs:string type. Its base type is the CybOX Core
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(DiskType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -541,10 +541,10 @@ class DiskType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class DiskType
 
-class DiskObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class DiskObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The DiskObjectType type is intended to characterize disk drives."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Disk_Name=None, Disk_Size=None, Free_Space=None, Partition_List=None, Type=None):
         super(DiskObjectType, self).__init__(object_reference, )
         self.Disk_Name = Disk_Name
@@ -561,12 +561,12 @@ class DiskObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Disk_Name(self): return self.Disk_Name
     def set_Disk_Name(self, Disk_Name): self.Disk_Name = Disk_Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Disk_Size(self): return self.Disk_Size
     def set_Disk_Size(self, Disk_Size): self.Disk_Size = Disk_Size
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def get_Free_Space(self): return self.Free_Space
     def set_Free_Space(self, Free_Space): self.Free_Space = Free_Space
@@ -634,19 +634,19 @@ class DiskObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(DiskObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Disk_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Disk_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Disk_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Disk_Name.exportLiteral(outfile, level, name_='Disk_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Disk_Size is not None:
             showIndent(outfile, level)
-            outfile.write('Disk_Size=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Disk_Size=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Disk_Size.exportLiteral(outfile, level, name_='Disk_Size')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Free_Space is not None:
             showIndent(outfile, level)
-            outfile.write('Free_Space=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Free_Space=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Free_Space.exportLiteral(outfile, level, name_='Free_Space')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -671,15 +671,15 @@ class DiskObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(DiskObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Disk_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Disk_Name(obj_)
         elif nodeName_ == 'Disk_Size':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Disk_Size(obj_)
         elif nodeName_ == 'Free_Space':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Free_Space(obj_)
         elif nodeName_ == 'Partition_List':

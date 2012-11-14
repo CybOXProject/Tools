@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import user_account_object_1_2
 
 etree_ = None
@@ -386,7 +386,7 @@ class WindowsPrivilegeType(user_account_object_1_2.PrivilegeType):
     def get_User_Right(self): return self.User_Right
     def set_User_Right(self, User_Right): self.User_Right = User_Right
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinUserAccountObj:', name_='WindowsPrivilegeType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -433,7 +433,7 @@ class WindowsPrivilegeType(user_account_object_1_2.PrivilegeType):
         super(WindowsPrivilegeType, self).exportLiteralChildren(outfile, level, name_)
         if self.User_Right is not None:
             showIndent(outfile, level)
-            outfile.write('User_Right=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('User_Right=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.User_Right.exportLiteral(outfile, level, name_='User_Right')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -446,7 +446,7 @@ class WindowsPrivilegeType(user_account_object_1_2.PrivilegeType):
         super(WindowsPrivilegeType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'User_Right':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_User_Right(obj_)
         super(WindowsPrivilegeType, self).buildChildren(child_, node, nodeName_, True)
@@ -468,7 +468,7 @@ class WindowsGroupType(user_account_object_1_2.GroupType):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinUserAccountObj:', name_='WindowsGroupType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -515,7 +515,7 @@ class WindowsGroupType(user_account_object_1_2.GroupType):
         super(WindowsGroupType, self).exportLiteralChildren(outfile, level, name_)
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -528,7 +528,7 @@ class WindowsGroupType(user_account_object_1_2.GroupType):
         super(WindowsGroupType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         super(WindowsGroupType, self).buildChildren(child_, node, nodeName_, True)
@@ -552,12 +552,12 @@ class WindowsUserAccountObjectType(user_account_object_1_2.UserAccountObjectType
     def get_Security_ID(self): return self.Security_ID
     def set_Security_ID(self, Security_ID): self.Security_ID = Security_ID
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Security_Type(self): return self.Security_Type
     def set_Security_Type(self, Security_Type): self.Security_Type = Security_Type
     def validate_SIDType(self, value):
-        # Validate type cybox_common_types_v1_0.SIDType, a restriction on None.
+        # Validate type cybox_common_types_1_0.SIDType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinUserAccountObj:', name_='WindowsUserAccountObjectType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -607,13 +607,13 @@ class WindowsUserAccountObjectType(user_account_object_1_2.UserAccountObjectType
         super(WindowsUserAccountObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Security_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Security_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Security_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Security_ID.exportLiteral(outfile, level, name_='Security_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Security_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Security_Type=model_.cybox_common_types_v1_0.SIDType(\n')
+            outfile.write('Security_Type=model_.cybox_common_types_1_0.SIDType(\n')
             self.Security_Type.exportLiteral(outfile, level, name_='Security_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -626,11 +626,11 @@ class WindowsUserAccountObjectType(user_account_object_1_2.UserAccountObjectType
         super(WindowsUserAccountObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Security_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Security_ID(obj_)
         elif nodeName_ == 'Security_Type':
-            obj_ = cybox_common_types_v1_0.SIDType.factory()
+            obj_ = cybox_common_types_1_0.SIDType.factory()
             obj_.build(child_)
             self.set_Security_Type(obj_)
         super(WindowsUserAccountObjectType, self).buildChildren(child_, node, nodeName_, True)

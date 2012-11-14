@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -454,15 +454,15 @@ class WindowsHandleListType(GeneratedsSuper):
             self.Handle.append(obj_)
 # end class WindowsHandleListType
 
-class HandleType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class HandleType(cybox_common_types_1_0.BaseObjectAttributeType):
     """HandleType specifies Windows handle types via a union of the
     HandleTypeEnum type and the atomic xs:string type. Its base type
-    is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(HandleType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -541,11 +541,11 @@ class HandleType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class HandleType
 
-class WindowsHandleObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class WindowsHandleObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The WindowsHandleObjectType type is intended to characterize Windows
     handles."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, ID=None, Name=None, Type=None, Object_Address=None, Access_Mask=None, Pointer_Count=None):
         super(WindowsHandleObjectType, self).__init__(object_reference, )
         self.ID = ID
@@ -563,12 +563,12 @@ class WindowsHandleObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_ID(self): return self.ID
     def set_ID(self, ID): self.ID = ID
     def validate_UnsignedIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Type(self): return self.Type
     def set_Type(self, Type): self.Type = Type
@@ -578,7 +578,7 @@ class WindowsHandleObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Object_Address(self): return self.Object_Address
     def set_Object_Address(self, Object_Address): self.Object_Address = Object_Address
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def get_Access_Mask(self): return self.Access_Mask
     def set_Access_Mask(self, Access_Mask): self.Access_Mask = Access_Mask
@@ -644,13 +644,13 @@ class WindowsHandleObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsHandleObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.ID is not None:
             showIndent(outfile, level)
-            outfile.write('ID=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('ID=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.ID.exportLiteral(outfile, level, name_='ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -662,19 +662,19 @@ class WindowsHandleObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Object_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Object_Address=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Object_Address=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Object_Address.exportLiteral(outfile, level, name_='Object_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Access_Mask is not None:
             showIndent(outfile, level)
-            outfile.write('Access_Mask=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Access_Mask=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Access_Mask.exportLiteral(outfile, level, name_='Access_Mask')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Pointer_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Pointer_Count=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Pointer_Count=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Pointer_Count.exportLiteral(outfile, level, name_='Pointer_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -687,11 +687,11 @@ class WindowsHandleObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsHandleObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'ID':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ID(obj_)
         elif nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Type':
@@ -699,15 +699,15 @@ class WindowsHandleObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Type(obj_)
         elif nodeName_ == 'Object_Address':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Object_Address(obj_)
         elif nodeName_ == 'Access_Mask':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Access_Mask(obj_)
         elif nodeName_ == 'Pointer_Count':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Pointer_Count(obj_)
         super(WindowsHandleObjectType, self).buildChildren(child_, node, nodeName_, True)

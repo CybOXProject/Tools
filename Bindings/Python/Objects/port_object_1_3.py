@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,11 +368,11 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class PortObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class PortObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The PortObjectType type is intended to characterize networking
     ports."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Port_Value=None, Layer4_Protocol=None):
         super(PortObjectType, self).__init__(object_reference, )
         self.Port_Value = Port_Value
@@ -386,7 +386,7 @@ class PortObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Port_Value(self): return self.Port_Value
     def set_Port_Value(self, Port_Value): self.Port_Value = Port_Value
     def validate_PositiveIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.PositiveIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.PositiveIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Layer4_Protocol(self): return self.Layer4_Protocol
     def set_Layer4_Protocol(self, Layer4_Protocol): self.Layer4_Protocol = Layer4_Protocol
@@ -441,7 +441,7 @@ class PortObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(PortObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Port_Value is not None:
             showIndent(outfile, level)
-            outfile.write('Port_Value=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('Port_Value=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.Port_Value.exportLiteral(outfile, level, name_='Port_Value')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -460,7 +460,7 @@ class PortObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(PortObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Port_Value':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Port_Value(obj_)
         elif nodeName_ == 'Layer4_Protocol':
@@ -470,15 +470,15 @@ class PortObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(PortObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class PortObjectType
 
-class Layer4ProtocolType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class Layer4ProtocolType(cybox_common_types_1_0.BaseObjectAttributeType):
     """Layer4ProtocolType specifies Layer 4 (OSI model) protocols, via a
     union of the Layer4ProtocolEnum type and the atomic xs:string
-    type. Its base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType,
+    type. Its base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType,
     for permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(Layer4ProtocolType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)

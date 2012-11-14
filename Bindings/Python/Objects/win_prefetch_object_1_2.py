@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import win_volume_object_1_3
 import device_object_1_1
 
@@ -391,7 +391,7 @@ class AccessedFileListType(GeneratedsSuper):
     def add_Accessed_Filename(self, value): self.Accessed_Filename.append(value)
     def insert_Accessed_Filename(self, index, value): self.Accessed_Filename[index] = value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinPrefetchObj:', name_='AccessedFileListType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -438,8 +438,8 @@ class AccessedFileListType(GeneratedsSuper):
         level += 1
         for Accessed_Filename_ in self.Accessed_Filename:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
-            Accessed_Filename_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.StringObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            Accessed_Filename_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.StringObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -454,7 +454,7 @@ class AccessedFileListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Accessed_Filename':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.Accessed_Filename.append(obj_)
 # end class AccessedFileListType
@@ -480,7 +480,7 @@ class AccessedDirectoryListType(GeneratedsSuper):
     def add_Accessed_Directory(self, value): self.Accessed_Directory.append(value)
     def insert_Accessed_Directory(self, index, value): self.Accessed_Directory[index] = value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinPrefetchObj:', name_='AccessedDirectoryListType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -527,8 +527,8 @@ class AccessedDirectoryListType(GeneratedsSuper):
         level += 1
         for Accessed_Directory_ in self.Accessed_Directory:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
-            Accessed_Directory_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.StringObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            Accessed_Directory_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.StringObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -543,7 +543,7 @@ class AccessedDirectoryListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Accessed_Directory':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.Accessed_Directory.append(obj_)
 # end class AccessedDirectoryListType
@@ -661,14 +661,14 @@ class VolumeType(GeneratedsSuper):
             self.DeviceItem.append(obj_)
 # end class VolumeType
 
-class WindowsPrefetchObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class WindowsPrefetchObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The WindowsPrefetchObjectType type is intended to characterize
     entries in the Windows prefetch files. Starting with Windows XP,
     prefetching was introduced to speed up application startup. The
     prefetch object draws upon the descriptions and XML sample at
     http://www.forensicswiki.org/wiki/Prefetch_XML"""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Application_File_Name=None, Prefetch_Hash=None, Times_Executed=None, First_Run=None, Last_Run=None, Volume=None, Accessed_File_List=None, Accessed_Directory_List=None):
         super(WindowsPrefetchObjectType, self).__init__(object_reference, )
         self.Application_File_Name = Application_File_Name
@@ -688,19 +688,19 @@ class WindowsPrefetchObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Application_File_Name(self): return self.Application_File_Name
     def set_Application_File_Name(self, Application_File_Name): self.Application_File_Name = Application_File_Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Prefetch_Hash(self): return self.Prefetch_Hash
     def set_Prefetch_Hash(self, Prefetch_Hash): self.Prefetch_Hash = Prefetch_Hash
     def get_Times_Executed(self): return self.Times_Executed
     def set_Times_Executed(self, Times_Executed): self.Times_Executed = Times_Executed
     def validate_LongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.LongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.LongObjectAttributeType, a restriction on None.
         pass
     def get_First_Run(self): return self.First_Run
     def set_First_Run(self, First_Run): self.First_Run = First_Run
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Last_Run(self): return self.Last_Run
     def set_Last_Run(self, Last_Run): self.Last_Run = Last_Run
@@ -776,31 +776,31 @@ class WindowsPrefetchObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsPrefetchObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Application_File_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Application_File_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Application_File_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Application_File_Name.exportLiteral(outfile, level, name_='Application_File_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Prefetch_Hash is not None:
             showIndent(outfile, level)
-            outfile.write('Prefetch_Hash=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Prefetch_Hash=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Prefetch_Hash.exportLiteral(outfile, level, name_='Prefetch_Hash')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Times_Executed is not None:
             showIndent(outfile, level)
-            outfile.write('Times_Executed=model_.cybox_common_types_v1_0.LongObjectAttributeType(\n')
+            outfile.write('Times_Executed=model_.cybox_common_types_1_0.LongObjectAttributeType(\n')
             self.Times_Executed.exportLiteral(outfile, level, name_='Times_Executed')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.First_Run is not None:
             showIndent(outfile, level)
-            outfile.write('First_Run=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('First_Run=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.First_Run.exportLiteral(outfile, level, name_='First_Run')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Last_Run is not None:
             showIndent(outfile, level)
-            outfile.write('Last_Run=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Last_Run=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Last_Run.exportLiteral(outfile, level, name_='Last_Run')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -831,23 +831,23 @@ class WindowsPrefetchObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsPrefetchObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Application_File_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Application_File_Name(obj_)
         elif nodeName_ == 'Prefetch_Hash':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Prefetch_Hash(obj_)
         elif nodeName_ == 'Times_Executed':
-            obj_ = cybox_common_types_v1_0.LongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.LongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Times_Executed(obj_)
         elif nodeName_ == 'First_Run':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_First_Run(obj_)
         elif nodeName_ == 'Last_Run':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Last_Run(obj_)
         elif nodeName_ == 'Volume':

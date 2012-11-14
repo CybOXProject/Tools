@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -391,12 +391,12 @@ class X509CertificateType(GeneratedsSuper):
     def get_Issuer(self): return self.Issuer
     def set_Issuer(self, Issuer): self.Issuer = Issuer
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Serial_Number(self): return self.Serial_Number
     def set_Serial_Number(self, Serial_Number): self.Serial_Number = Serial_Number
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Signature_Algorithm(self): return self.Signature_Algorithm
     def set_Signature_Algorithm(self, Signature_Algorithm): self.Signature_Algorithm = Signature_Algorithm
@@ -468,25 +468,25 @@ class X509CertificateType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Issuer is not None:
             showIndent(outfile, level)
-            outfile.write('Issuer=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Issuer=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Issuer.exportLiteral(outfile, level, name_='Issuer')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Serial_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Serial_Number=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Serial_Number=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Serial_Number.exportLiteral(outfile, level, name_='Serial_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Signature_Algorithm is not None:
             showIndent(outfile, level)
-            outfile.write('Signature_Algorithm=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Signature_Algorithm=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Signature_Algorithm.exportLiteral(outfile, level, name_='Signature_Algorithm')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Subject is not None:
             showIndent(outfile, level)
-            outfile.write('Subject=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Subject=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Subject.exportLiteral(outfile, level, name_='Subject')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -504,7 +504,7 @@ class X509CertificateType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Version is not None:
             showIndent(outfile, level)
-            outfile.write('Version=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Version=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Version.exportLiteral(outfile, level, name_='Version')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -517,19 +517,19 @@ class X509CertificateType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Issuer':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Issuer(obj_)
         elif nodeName_ == 'Serial_Number':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Serial_Number(obj_)
         elif nodeName_ == 'Signature_Algorithm':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Signature_Algorithm(obj_)
         elif nodeName_ == 'Subject':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Subject(obj_)
         elif nodeName_ == 'Subject_Public_Key':
@@ -541,7 +541,7 @@ class X509CertificateType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Validity(obj_)
         elif nodeName_ == 'Version':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Version(obj_)
 # end class X509CertificateType
@@ -563,7 +563,7 @@ class X509CertificateSignatureType(GeneratedsSuper):
     def get_Signature(self): return self.Signature
     def set_Signature(self, Signature): self.Signature = Signature
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Signature_Algorithm(self): return self.Signature_Algorithm
     def set_Signature_Algorithm(self, Signature_Algorithm): self.Signature_Algorithm = Signature_Algorithm
@@ -612,13 +612,13 @@ class X509CertificateSignatureType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Signature is not None:
             showIndent(outfile, level)
-            outfile.write('Signature=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Signature=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Signature.exportLiteral(outfile, level, name_='Signature')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Signature_Algorithm is not None:
             showIndent(outfile, level)
-            outfile.write('Signature_Algorithm=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Signature_Algorithm=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Signature_Algorithm.exportLiteral(outfile, level, name_='Signature_Algorithm')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -631,11 +631,11 @@ class X509CertificateSignatureType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Signature':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Signature(obj_)
         elif nodeName_ == 'Signature_Algorithm':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Signature_Algorithm(obj_)
 # end class X509CertificateSignatureType
@@ -657,7 +657,7 @@ class SubjectPublicKeyType(GeneratedsSuper):
     def get_Public_Key_Algorithm(self): return self.Public_Key_Algorithm
     def set_Public_Key_Algorithm(self, Public_Key_Algorithm): self.Public_Key_Algorithm = Public_Key_Algorithm
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_RSA_Public_Key(self): return self.RSA_Public_Key
     def set_RSA_Public_Key(self, RSA_Public_Key): self.RSA_Public_Key = RSA_Public_Key
@@ -706,7 +706,7 @@ class SubjectPublicKeyType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Public_Key_Algorithm is not None:
             showIndent(outfile, level)
-            outfile.write('Public_Key_Algorithm=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Public_Key_Algorithm=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Public_Key_Algorithm.exportLiteral(outfile, level, name_='Public_Key_Algorithm')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -725,7 +725,7 @@ class SubjectPublicKeyType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Public_Key_Algorithm':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Public_Key_Algorithm(obj_)
         elif nodeName_ == 'RSA_Public_Key':
@@ -752,7 +752,7 @@ class ValidityType(GeneratedsSuper):
     def get_Not_Before(self): return self.Not_Before
     def set_Not_Before(self, Not_Before): self.Not_Before = Not_Before
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Not_After(self): return self.Not_After
     def set_Not_After(self, Not_After): self.Not_After = Not_After
@@ -801,13 +801,13 @@ class ValidityType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Not_Before is not None:
             showIndent(outfile, level)
-            outfile.write('Not_Before=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Not_Before=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Not_Before.exportLiteral(outfile, level, name_='Not_Before')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Not_After is not None:
             showIndent(outfile, level)
-            outfile.write('Not_After=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Not_After=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Not_After.exportLiteral(outfile, level, name_='Not_After')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -820,11 +820,11 @@ class ValidityType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Not_Before':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Not_Before(obj_)
         elif nodeName_ == 'Not_After':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Not_After(obj_)
 # end class ValidityType
@@ -845,7 +845,7 @@ class RSAPublicKeyType(GeneratedsSuper):
     def get_Modulus(self): return self.Modulus
     def set_Modulus(self, Modulus): self.Modulus = Modulus
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Exponent(self): return self.Exponent
     def set_Exponent(self, Exponent): self.Exponent = Exponent
@@ -894,13 +894,13 @@ class RSAPublicKeyType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Modulus is not None:
             showIndent(outfile, level)
-            outfile.write('Modulus=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Modulus=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Modulus.exportLiteral(outfile, level, name_='Modulus')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Exponent is not None:
             showIndent(outfile, level)
-            outfile.write('Exponent=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Exponent=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Exponent.exportLiteral(outfile, level, name_='Exponent')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -913,20 +913,20 @@ class RSAPublicKeyType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Modulus':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Modulus(obj_)
         elif nodeName_ == 'Exponent':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Exponent(obj_)
 # end class RSAPublicKeyType
 
-class X509CertificateObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class X509CertificateObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The X509CertificateObjectType type is intended to characterize X.509
     certificates."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Certificate=None, Certificate_Signature=None):
         super(X509CertificateObjectType, self).__init__(object_reference, )
         self.Certificate = Certificate

@@ -10,7 +10,7 @@ import getopt
 import re as re_
 
 import user_account_object_1_2
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -387,7 +387,7 @@ class UnixPrivilegeType(user_account_object_1_2.PrivilegeType):
     def get_Permissions_Mask(self): return self.Permissions_Mask
     def set_Permissions_Mask(self, Permissions_Mask): self.Permissions_Mask = Permissions_Mask
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='UnixUserAccountObj:', name_='UnixPrivilegeType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -434,7 +434,7 @@ class UnixPrivilegeType(user_account_object_1_2.PrivilegeType):
         super(UnixPrivilegeType, self).exportLiteralChildren(outfile, level, name_)
         if self.Permissions_Mask is not None:
             showIndent(outfile, level)
-            outfile.write('Permissions_Mask=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Permissions_Mask=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Permissions_Mask.exportLiteral(outfile, level, name_='Permissions_Mask')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -447,7 +447,7 @@ class UnixPrivilegeType(user_account_object_1_2.PrivilegeType):
         super(UnixPrivilegeType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Permissions_Mask':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Permissions_Mask(obj_)
         super(UnixPrivilegeType, self).buildChildren(child_, node, nodeName_, True)
@@ -471,7 +471,7 @@ class UnixGroupType(user_account_object_1_2.GroupType):
     def get_Group_ID(self): return self.Group_ID
     def set_Group_ID(self, Group_ID): self.Group_ID = Group_ID
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='UnixUserAccountObj:', name_='UnixGroupType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -518,7 +518,7 @@ class UnixGroupType(user_account_object_1_2.GroupType):
         super(UnixGroupType, self).exportLiteralChildren(outfile, level, name_)
         if self.Group_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Group_ID=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Group_ID=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Group_ID.exportLiteral(outfile, level, name_='Group_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -531,7 +531,7 @@ class UnixGroupType(user_account_object_1_2.GroupType):
         super(UnixGroupType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Group_ID':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Group_ID(obj_)
         super(UnixGroupType, self).buildChildren(child_, node, nodeName_, True)
@@ -556,14 +556,14 @@ class UnixUserAccountObjectType(user_account_object_1_2.UserAccountObjectType):
     def get_Group_ID(self): return self.Group_ID
     def set_Group_ID(self, Group_ID): self.Group_ID = Group_ID
     def validate_UnsignedIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
         pass
     def get_User_ID(self): return self.User_ID
     def set_User_ID(self, User_ID): self.User_ID = User_ID
     def get_Login_Shell(self): return self.Login_Shell
     def set_Login_Shell(self, Login_Shell): self.Login_Shell = Login_Shell
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='UnixUserAccountObj:', name_='UnixUserAccountObjectType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -616,19 +616,19 @@ class UnixUserAccountObjectType(user_account_object_1_2.UserAccountObjectType):
         super(UnixUserAccountObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Group_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Group_ID=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('Group_ID=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.Group_ID.exportLiteral(outfile, level, name_='Group_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.User_ID is not None:
             showIndent(outfile, level)
-            outfile.write('User_ID=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('User_ID=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.User_ID.exportLiteral(outfile, level, name_='User_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Login_Shell is not None:
             showIndent(outfile, level)
-            outfile.write('Login_Shell=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Login_Shell=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Login_Shell.exportLiteral(outfile, level, name_='Login_Shell')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -641,15 +641,15 @@ class UnixUserAccountObjectType(user_account_object_1_2.UserAccountObjectType):
         super(UnixUserAccountObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Group_ID':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Group_ID(obj_)
         elif nodeName_ == 'User_ID':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_User_ID(obj_)
         elif nodeName_ == 'Login_Shell':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Login_Shell(obj_)
         super(UnixUserAccountObjectType, self).buildChildren(child_, node, nodeName_, True)

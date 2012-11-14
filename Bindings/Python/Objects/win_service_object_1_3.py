@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import win_process_object_1_3
 
 etree_ = None
@@ -389,7 +389,7 @@ class ServiceDescriptionListType(GeneratedsSuper):
     def add_Description(self, value): self.Description.append(value)
     def insert_Description(self, index, value): self.Description[index] = value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinServiceObj:', name_='ServiceDescriptionListType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -436,8 +436,8 @@ class ServiceDescriptionListType(GeneratedsSuper):
         level += 1
         for Description_ in self.Description:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
-            Description_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.StringObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            Description_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.StringObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -452,20 +452,20 @@ class ServiceDescriptionListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.Description.append(obj_)
 # end class ServiceDescriptionListType
 
-class ServiceType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class ServiceType(cybox_common_types_1_0.BaseObjectAttributeType):
     """ServiceType specifies Windows service types via a union of the
     ServiceTypeEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(ServiceType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -544,15 +544,15 @@ class ServiceType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class ServiceType
 
-class ServiceStatusType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class ServiceStatusType(cybox_common_types_1_0.BaseObjectAttributeType):
     """ServiceModeType specifies Windows service states via a union of the
     ServiceStatusEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(ServiceStatusType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -631,15 +631,15 @@ class ServiceStatusType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class ServiceStatusType
 
-class ServiceModeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class ServiceModeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """ServiceModeType specifies Windows service modes via a union of the
     ServiceModeEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(ServiceModeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -754,7 +754,7 @@ class WindowsServiceObjectType(win_process_object_1_3.WindowsProcessObjectType):
     def get_Display_Name(self): return self.Display_Name
     def set_Display_Name(self, Display_Name): self.Display_Name = Display_Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Group_Name(self): return self.Group_Name
     def set_Group_Name(self, Group_Name): self.Group_Name = Group_Name
@@ -897,55 +897,55 @@ class WindowsServiceObjectType(win_process_object_1_3.WindowsProcessObjectType):
             outfile.write('),\n')
         if self.Display_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Display_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Display_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Display_Name.exportLiteral(outfile, level, name_='Display_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Group_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Group_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Group_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Group_Name.exportLiteral(outfile, level, name_='Group_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Service_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Service_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Service_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Service_Name.exportLiteral(outfile, level, name_='Service_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Service_DLL is not None:
             showIndent(outfile, level)
-            outfile.write('Service_DLL=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Service_DLL=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Service_DLL.exportLiteral(outfile, level, name_='Service_DLL')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Service_DLL_Certificate_Issuer is not None:
             showIndent(outfile, level)
-            outfile.write('Service_DLL_Certificate_Issuer=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Service_DLL_Certificate_Issuer=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Service_DLL_Certificate_Issuer.exportLiteral(outfile, level, name_='Service_DLL_Certificate_Issuer')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Service_DLL_Certificate_Subject is not None:
             showIndent(outfile, level)
-            outfile.write('Service_DLL_Certificate_Subject=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Service_DLL_Certificate_Subject=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Service_DLL_Certificate_Subject.exportLiteral(outfile, level, name_='Service_DLL_Certificate_Subject')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Service_DLL_Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Service_DLL_Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Service_DLL_Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Service_DLL_Hashes.exportLiteral(outfile, level, name_='Service_DLL_Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Service_DLL_Signature_Description is not None:
             showIndent(outfile, level)
-            outfile.write('Service_DLL_Signature_Description=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Service_DLL_Signature_Description=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Service_DLL_Signature_Description.exportLiteral(outfile, level, name_='Service_DLL_Signature_Description')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Startup_Command_Line is not None:
             showIndent(outfile, level)
-            outfile.write('Startup_Command_Line=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Startup_Command_Line=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Startup_Command_Line.exportLiteral(outfile, level, name_='Startup_Command_Line')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -969,7 +969,7 @@ class WindowsServiceObjectType(win_process_object_1_3.WindowsProcessObjectType):
             outfile.write('),\n')
         if self.Started_As is not None:
             showIndent(outfile, level)
-            outfile.write('Started_As=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Started_As=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Started_As.exportLiteral(outfile, level, name_='Started_As')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1004,39 +1004,39 @@ class WindowsServiceObjectType(win_process_object_1_3.WindowsProcessObjectType):
             obj_.build(child_)
             self.set_Description_List(obj_)
         elif nodeName_ == 'Display_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Display_Name(obj_)
         elif nodeName_ == 'Group_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Group_Name(obj_)
         elif nodeName_ == 'Service_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Service_Name(obj_)
         elif nodeName_ == 'Service_DLL':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Service_DLL(obj_)
         elif nodeName_ == 'Service_DLL_Certificate_Issuer':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Service_DLL_Certificate_Issuer(obj_)
         elif nodeName_ == 'Service_DLL_Certificate_Subject':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Service_DLL_Certificate_Subject(obj_)
         elif nodeName_ == 'Service_DLL_Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Service_DLL_Hashes(obj_)
         elif nodeName_ == 'Service_DLL_Signature_Description':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Service_DLL_Signature_Description(obj_)
         elif nodeName_ == 'Startup_Command_Line':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Startup_Command_Line(obj_)
         elif nodeName_ == 'Startup_Type':
@@ -1052,7 +1052,7 @@ class WindowsServiceObjectType(win_process_object_1_3.WindowsProcessObjectType):
             obj_.build(child_)
             self.set_Service_Type(obj_)
         elif nodeName_ == 'Started_As':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Started_As(obj_)
         super(WindowsServiceObjectType, self).buildChildren(child_, node, nodeName_, True)

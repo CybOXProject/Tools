@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,7 +368,7 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class FilePathType(cybox_common_types_v1_0.StringObjectAttributeType):
+class FilePathType(cybox_common_types_1_0.StringObjectAttributeType):
     """The FilePathType type specifies the path to the file, not including
     the device. Whether the path is relative or fully-qualified can
     be specified via the 'type' attribute.The fully_qualified
@@ -676,7 +676,7 @@ class PackerType(GeneratedsSuper):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Version(self): return self.Version
     def set_Version(self, Version): self.Version = Version
@@ -738,19 +738,19 @@ class PackerType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Version is not None:
             showIndent(outfile, level)
-            outfile.write('Version=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Version=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Version.exportLiteral(outfile, level, name_='Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.PEiD is not None:
             showIndent(outfile, level)
-            outfile.write('PEiD=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('PEiD=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.PEiD.exportLiteral(outfile, level, name_='PEiD')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -769,15 +769,15 @@ class PackerType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Version':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Version(obj_)
         elif nodeName_ == 'PEiD':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_PEiD(obj_)
         elif nodeName_ == 'Type':
@@ -806,7 +806,7 @@ class SymLinksListType(GeneratedsSuper):
     def add_Sym_Link(self, value): self.Sym_Link.append(value)
     def insert_Sym_Link(self, index, value): self.Sym_Link[index] = value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='FileObj:', name_='SymLinksListType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -853,8 +853,8 @@ class SymLinksListType(GeneratedsSuper):
         level += 1
         for Sym_Link_ in self.Sym_Link:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
-            Sym_Link_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.StringObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            Sym_Link_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.StringObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -869,20 +869,20 @@ class SymLinksListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Sym_Link':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.Sym_Link.append(obj_)
 # end class SymLinksListType
 
-class PackerClassType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class PackerClassType(cybox_common_types_1_0.BaseObjectAttributeType):
     """PackerCassType specifies packer classes, via a union of the
     PackerTypeEnum type and the atomic xs:string type. Its base type
-    is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(PackerClassType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -961,12 +961,12 @@ class PackerClassType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class PackerClassType
 
-class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class FileObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The File_ObjectType type is intended to characterize generic
     files.The ispacked attribute is used to indicate whether the
     file is packed or not."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, is_packed=None, File_Name=None, File_Path=None, Device_Path=None, Full_Path=None, File_Extension=None, Size_In_Bytes=None, Magic_Number=None, File_Format=None, Hashes=None, Digital_Signatures=None, Modified_Time=None, Accessed_Time=None, Created_Time=None, File_Attributes_List=None, Permissions=None, User_Owner=None, Packer_List=None, Peak_Entropy=None, Sym_Links=None, Byte_Runs=None):
         super(FileObjectType, self).__init__(object_reference, )
         self.is_packed = _cast(bool, is_packed)
@@ -999,7 +999,7 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_File_Name(self): return self.File_Name
     def set_File_Name(self, File_Name): self.File_Name = File_Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_File_Path(self): return self.File_Path
     def set_File_Path(self, File_Path): self.File_Path = File_Path
@@ -1012,12 +1012,12 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Size_In_Bytes(self): return self.Size_In_Bytes
     def set_Size_In_Bytes(self, Size_In_Bytes): self.Size_In_Bytes = Size_In_Bytes
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def get_Magic_Number(self): return self.Magic_Number
     def set_Magic_Number(self, Magic_Number): self.Magic_Number = Magic_Number
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_File_Format(self): return self.File_Format
     def set_File_Format(self, File_Format): self.File_Format = File_Format
@@ -1032,7 +1032,7 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Created_Time(self): return self.Created_Time
     def set_Created_Time(self, Created_Time): self.Created_Time = Created_Time
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_File_Attributes_List(self): return self.File_Attributes_List
     def set_File_Attributes_List(self, File_Attributes_List): self.File_Attributes_List = File_Attributes_List
@@ -1045,7 +1045,7 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Peak_Entropy(self): return self.Peak_Entropy
     def set_Peak_Entropy(self, Peak_Entropy): self.Peak_Entropy = Peak_Entropy
     def validate_DoubleObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DoubleObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DoubleObjectAttributeType, a restriction on None.
         pass
     def get_Sym_Links(self): return self.Sym_Links
     def set_Sym_Links(self, Sym_Links): self.Sym_Links = Sym_Links
@@ -1162,7 +1162,7 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(FileObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.File_Name is not None:
             showIndent(outfile, level)
-            outfile.write('File_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('File_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.File_Name.exportLiteral(outfile, level, name_='File_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1174,67 +1174,67 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Device_Path is not None:
             showIndent(outfile, level)
-            outfile.write('Device_Path=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Device_Path=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Device_Path.exportLiteral(outfile, level, name_='Device_Path')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Full_Path is not None:
             showIndent(outfile, level)
-            outfile.write('Full_Path=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Full_Path=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Full_Path.exportLiteral(outfile, level, name_='Full_Path')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.File_Extension is not None:
             showIndent(outfile, level)
-            outfile.write('File_Extension=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('File_Extension=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.File_Extension.exportLiteral(outfile, level, name_='File_Extension')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_In_Bytes is not None:
             showIndent(outfile, level)
-            outfile.write('Size_In_Bytes=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Size_In_Bytes=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Size_In_Bytes.exportLiteral(outfile, level, name_='Size_In_Bytes')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Magic_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Magic_Number=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Magic_Number=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Magic_Number.exportLiteral(outfile, level, name_='Magic_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.File_Format is not None:
             showIndent(outfile, level)
-            outfile.write('File_Format=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('File_Format=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.File_Format.exportLiteral(outfile, level, name_='File_Format')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Hashes.exportLiteral(outfile, level, name_='Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Digital_Signatures is not None:
             showIndent(outfile, level)
-            outfile.write('Digital_Signatures=model_.cybox_common_types_v1_0.DigitalSignaturesType(\n')
+            outfile.write('Digital_Signatures=model_.cybox_common_types_1_0.DigitalSignaturesType(\n')
             self.Digital_Signatures.exportLiteral(outfile, level, name_='Digital_Signatures')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Modified_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Modified_Time=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Modified_Time=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Modified_Time.exportLiteral(outfile, level, name_='Modified_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Accessed_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Accessed_Time=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Accessed_Time=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Accessed_Time.exportLiteral(outfile, level, name_='Accessed_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Created_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Created_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Created_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Created_Time.exportLiteral(outfile, level, name_='Created_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1252,7 +1252,7 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.User_Owner is not None:
             showIndent(outfile, level)
-            outfile.write('User_Owner=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('User_Owner=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.User_Owner.exportLiteral(outfile, level, name_='User_Owner')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1264,7 +1264,7 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Peak_Entropy is not None:
             showIndent(outfile, level)
-            outfile.write('Peak_Entropy=model_.cybox_common_types_v1_0.DoubleObjectAttributeType(\n')
+            outfile.write('Peak_Entropy=model_.cybox_common_types_1_0.DoubleObjectAttributeType(\n')
             self.Peak_Entropy.exportLiteral(outfile, level, name_='Peak_Entropy')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1276,7 +1276,7 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Byte_Runs is not None:
             showIndent(outfile, level)
-            outfile.write('Byte_Runs=model_.cybox_common_types_v1_0.ByteRunsType(\n')
+            outfile.write('Byte_Runs=model_.cybox_common_types_1_0.ByteRunsType(\n')
             self.Byte_Runs.exportLiteral(outfile, level, name_='Byte_Runs')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1298,7 +1298,7 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(FileObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'File_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_File_Name(obj_)
         elif nodeName_ == 'File_Path':
@@ -1306,47 +1306,47 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_File_Path(obj_)
         elif nodeName_ == 'Device_Path':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Device_Path(obj_)
         elif nodeName_ == 'Full_Path':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Full_Path(obj_)
         elif nodeName_ == 'File_Extension':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_File_Extension(obj_)
         elif nodeName_ == 'Size_In_Bytes':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_In_Bytes(obj_)
         elif nodeName_ == 'Magic_Number':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Magic_Number(obj_)
         elif nodeName_ == 'File_Format':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_File_Format(obj_)
         elif nodeName_ == 'Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Hashes(obj_)
         elif nodeName_ == 'Digital_Signatures':
-            obj_ = cybox_common_types_v1_0.DigitalSignaturesType.factory()
+            obj_ = cybox_common_types_1_0.DigitalSignaturesType.factory()
             obj_.build(child_)
             self.set_Digital_Signatures(obj_)
         elif nodeName_ == 'Modified_Time':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Modified_Time(obj_)
         elif nodeName_ == 'Accessed_Time':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Accessed_Time(obj_)
         elif nodeName_ == 'Created_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Created_Time(obj_)
         elif nodeName_ == 'File_Attributes_List':
@@ -1384,7 +1384,7 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
                     'Class not implemented for <Permissions> element')
             self.set_Permissions(obj_)
         elif nodeName_ == 'User_Owner':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_User_Owner(obj_)
         elif nodeName_ == 'Packer_List':
@@ -1392,7 +1392,7 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Packer_List(obj_)
         elif nodeName_ == 'Peak_Entropy':
-            obj_ = cybox_common_types_v1_0.DoubleObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DoubleObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Peak_Entropy(obj_)
         elif nodeName_ == 'Sym_Links':
@@ -1400,7 +1400,7 @@ class FileObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Sym_Links(obj_)
         elif nodeName_ == 'Byte_Runs':
-            obj_ = cybox_common_types_v1_0.ByteRunsType.factory()
+            obj_ = cybox_common_types_1_0.ByteRunsType.factory()
             obj_.build(child_)
             self.set_Byte_Runs(obj_)
         super(FileObjectType, self).buildChildren(child_, node, nodeName_, True)

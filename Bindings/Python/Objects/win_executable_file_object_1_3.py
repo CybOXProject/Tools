@@ -10,7 +10,7 @@ import getopt
 import re as re_
 
 import win_file_object_1_3
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -400,7 +400,7 @@ class PEAttributesType(GeneratedsSuper):
     def get_Base_Address(self): return self.Base_Address
     def set_Base_Address(self, Base_Address): self.Base_Address = Base_Address
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Detected_EntryPoint_Signatures(self): return self.Detected_EntryPoint_Signatures
     def set_Detected_EntryPoint_Signatures(self, Detected_EntryPoint_Signatures): self.Detected_EntryPoint_Signatures = Detected_EntryPoint_Signatures
@@ -413,7 +413,7 @@ class PEAttributesType(GeneratedsSuper):
     def get_Extraneous_Bytes(self): return self.Extraneous_Bytes
     def set_Extraneous_Bytes(self, Extraneous_Bytes): self.Extraneous_Bytes = Extraneous_Bytes
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Headers(self): return self.Headers
     def set_Headers(self, Headers): self.Headers = Headers
@@ -424,7 +424,7 @@ class PEAttributesType(GeneratedsSuper):
     def get_PE_Timestamp(self): return self.PE_Timestamp
     def set_PE_Timestamp(self, PE_Timestamp): self.PE_Timestamp = PE_Timestamp
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Resources(self): return self.Resources
     def set_Resources(self, Resources): self.Resources = Resources
@@ -526,7 +526,7 @@ class PEAttributesType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Base_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Base_Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Base_Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Base_Address.exportLiteral(outfile, level, name_='Base_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -538,7 +538,7 @@ class PEAttributesType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Digital_Signature is not None:
             showIndent(outfile, level)
-            outfile.write('Digital_Signature=model_.cybox_common_types_v1_0.DigitalSignatureInfoType(\n')
+            outfile.write('Digital_Signature=model_.cybox_common_types_1_0.DigitalSignatureInfoType(\n')
             self.Digital_Signature.exportLiteral(outfile, level, name_='Digital_Signature')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -556,7 +556,7 @@ class PEAttributesType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Extraneous_Bytes is not None:
             showIndent(outfile, level)
-            outfile.write('Extraneous_Bytes=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Extraneous_Bytes=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Extraneous_Bytes.exportLiteral(outfile, level, name_='Extraneous_Bytes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -580,7 +580,7 @@ class PEAttributesType(GeneratedsSuper):
             outfile.write('),\n')
         if self.PE_Timestamp is not None:
             showIndent(outfile, level)
-            outfile.write('PE_Timestamp=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('PE_Timestamp=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.PE_Timestamp.exportLiteral(outfile, level, name_='PE_Timestamp')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -623,7 +623,7 @@ class PEAttributesType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Base_Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Base_Address(obj_)
         elif nodeName_ == 'Detected_EntryPoint_Signatures':
@@ -631,7 +631,7 @@ class PEAttributesType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Detected_EntryPoint_Signatures(obj_)
         elif nodeName_ == 'Digital_Signature':
-            obj_ = cybox_common_types_v1_0.DigitalSignatureInfoType.factory()
+            obj_ = cybox_common_types_1_0.DigitalSignatureInfoType.factory()
             obj_.build(child_)
             self.set_Digital_Signature(obj_)
         elif nodeName_ == 'EP_Jump_Codes':
@@ -643,7 +643,7 @@ class PEAttributesType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Exports(obj_)
         elif nodeName_ == 'Extraneous_Bytes':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Extraneous_Bytes(obj_)
         elif nodeName_ == 'Headers':
@@ -659,7 +659,7 @@ class PEAttributesType(GeneratedsSuper):
             obj_.build(child_)
             self.set_PE_Checksum(obj_)
         elif nodeName_ == 'PE_Timestamp':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_PE_Timestamp(obj_)
         elif nodeName_ == 'Resources':
@@ -702,7 +702,7 @@ class PEChecksumType(GeneratedsSuper):
     def get_PE_Computed_API(self): return self.PE_Computed_API
     def set_PE_Computed_API(self, PE_Computed_API): self.PE_Computed_API = PE_Computed_API
     def validate_LongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.LongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.LongObjectAttributeType, a restriction on None.
         pass
     def get_PE_File_API(self): return self.PE_File_API
     def set_PE_File_API(self, PE_File_API): self.PE_File_API = PE_File_API
@@ -756,19 +756,19 @@ class PEChecksumType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.PE_Computed_API is not None:
             showIndent(outfile, level)
-            outfile.write('PE_Computed_API=model_.cybox_common_types_v1_0.LongObjectAttributeType(\n')
+            outfile.write('PE_Computed_API=model_.cybox_common_types_1_0.LongObjectAttributeType(\n')
             self.PE_Computed_API.exportLiteral(outfile, level, name_='PE_Computed_API')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.PE_File_API is not None:
             showIndent(outfile, level)
-            outfile.write('PE_File_API=model_.cybox_common_types_v1_0.LongObjectAttributeType(\n')
+            outfile.write('PE_File_API=model_.cybox_common_types_1_0.LongObjectAttributeType(\n')
             self.PE_File_API.exportLiteral(outfile, level, name_='PE_File_API')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.PE_File_Raw is not None:
             showIndent(outfile, level)
-            outfile.write('PE_File_Raw=model_.cybox_common_types_v1_0.LongObjectAttributeType(\n')
+            outfile.write('PE_File_Raw=model_.cybox_common_types_1_0.LongObjectAttributeType(\n')
             self.PE_File_Raw.exportLiteral(outfile, level, name_='PE_File_Raw')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -781,15 +781,15 @@ class PEChecksumType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'PE_Computed_API':
-            obj_ = cybox_common_types_v1_0.LongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.LongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_PE_Computed_API(obj_)
         elif nodeName_ == 'PE_File_API':
-            obj_ = cybox_common_types_v1_0.LongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.LongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_PE_File_API(obj_)
         elif nodeName_ == 'PE_File_Raw':
-            obj_ = cybox_common_types_v1_0.LongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.LongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_PE_File_Raw(obj_)
 # end class PEChecksumType
@@ -818,12 +818,12 @@ class PEExportsType(GeneratedsSuper):
     def get_Exports_Time_Stamp(self): return self.Exports_Time_Stamp
     def set_Exports_Time_Stamp(self, Exports_Time_Stamp): self.Exports_Time_Stamp = Exports_Time_Stamp
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Number_Of_Addresses(self): return self.Number_Of_Addresses
     def set_Number_Of_Addresses(self, Number_Of_Addresses): self.Number_Of_Addresses = Number_Of_Addresses
     def validate_LongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.LongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.LongObjectAttributeType, a restriction on None.
         pass
     def get_Number_Of_Names(self): return self.Number_Of_Names
     def set_Number_Of_Names(self, Number_Of_Names): self.Number_Of_Names = Number_Of_Names
@@ -884,19 +884,19 @@ class PEExportsType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Exports_Time_Stamp is not None:
             showIndent(outfile, level)
-            outfile.write('Exports_Time_Stamp=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Exports_Time_Stamp=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Exports_Time_Stamp.exportLiteral(outfile, level, name_='Exports_Time_Stamp')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Number_Of_Addresses is not None:
             showIndent(outfile, level)
-            outfile.write('Number_Of_Addresses=model_.cybox_common_types_v1_0.LongObjectAttributeType(\n')
+            outfile.write('Number_Of_Addresses=model_.cybox_common_types_1_0.LongObjectAttributeType(\n')
             self.Number_Of_Addresses.exportLiteral(outfile, level, name_='Number_Of_Addresses')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Number_Of_Names is not None:
             showIndent(outfile, level)
-            outfile.write('Number_Of_Names=model_.cybox_common_types_v1_0.LongObjectAttributeType(\n')
+            outfile.write('Number_Of_Names=model_.cybox_common_types_1_0.LongObjectAttributeType(\n')
             self.Number_Of_Names.exportLiteral(outfile, level, name_='Number_Of_Names')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -913,15 +913,15 @@ class PEExportsType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Exported_Functions(obj_)
         elif nodeName_ == 'Exports_Time_Stamp':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Exports_Time_Stamp(obj_)
         elif nodeName_ == 'Number_Of_Addresses':
-            obj_ = cybox_common_types_v1_0.LongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.LongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Number_Of_Addresses(obj_)
         elif nodeName_ == 'Number_Of_Names':
-            obj_ = cybox_common_types_v1_0.LongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.LongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Number_Of_Names(obj_)
 # end class PEExportsType
@@ -1111,12 +1111,12 @@ class EPJumpCodeType(GeneratedsSuper):
     def get_Depth(self): return self.Depth
     def set_Depth(self, Depth): self.Depth = Depth
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Opcodes(self): return self.Opcodes
     def set_Opcodes(self, Opcodes): self.Opcodes = Opcodes
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinExecutableFileObj:', name_='EPJumpCodeType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -1163,13 +1163,13 @@ class EPJumpCodeType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Depth is not None:
             showIndent(outfile, level)
-            outfile.write('Depth=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Depth=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Depth.exportLiteral(outfile, level, name_='Depth')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Opcodes is not None:
             showIndent(outfile, level)
-            outfile.write('Opcodes=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Opcodes=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Opcodes.exportLiteral(outfile, level, name_='Opcodes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1182,11 +1182,11 @@ class EPJumpCodeType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Depth':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Depth(obj_)
         elif nodeName_ == 'Opcodes':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Opcodes(obj_)
 # end class EPJumpCodeType
@@ -1207,7 +1207,7 @@ class EntryPointSignatureType(GeneratedsSuper):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Type(self): return self.Type
     def set_Type(self, Type): self.Type = Type
@@ -1259,7 +1259,7 @@ class EntryPointSignatureType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1278,7 +1278,7 @@ class EntryPointSignatureType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Type':
@@ -1474,7 +1474,7 @@ class EntropyType(GeneratedsSuper):
     def get_Value(self): return self.Value
     def set_Value(self, Value): self.Value = Value
     def validate_FloatObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.FloatObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.FloatObjectAttributeType, a restriction on None.
         pass
     def get_Min(self): return self.Min
     def set_Min(self, Min): self.Min = Min
@@ -1528,19 +1528,19 @@ class EntropyType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Value is not None:
             showIndent(outfile, level)
-            outfile.write('Value=model_.cybox_common_types_v1_0.FloatObjectAttributeType(\n')
+            outfile.write('Value=model_.cybox_common_types_1_0.FloatObjectAttributeType(\n')
             self.Value.exportLiteral(outfile, level, name_='Value')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Min is not None:
             showIndent(outfile, level)
-            outfile.write('Min=model_.cybox_common_types_v1_0.FloatObjectAttributeType(\n')
+            outfile.write('Min=model_.cybox_common_types_1_0.FloatObjectAttributeType(\n')
             self.Min.exportLiteral(outfile, level, name_='Min')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Max is not None:
             showIndent(outfile, level)
-            outfile.write('Max=model_.cybox_common_types_v1_0.FloatObjectAttributeType(\n')
+            outfile.write('Max=model_.cybox_common_types_1_0.FloatObjectAttributeType(\n')
             self.Max.exportLiteral(outfile, level, name_='Max')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1553,15 +1553,15 @@ class EntropyType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Value':
-            obj_ = cybox_common_types_v1_0.FloatObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.FloatObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Value(obj_)
         elif nodeName_ == 'Min':
-            obj_ = cybox_common_types_v1_0.FloatObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.FloatObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Min(obj_)
         elif nodeName_ == 'Max':
-            obj_ = cybox_common_types_v1_0.FloatObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.FloatObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Max(obj_)
 # end class EntropyType
@@ -1593,19 +1593,19 @@ class PEStringType(GeneratedsSuper):
     def get_Address(self): return self.Address
     def set_Address(self, Address): self.Address = Address
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Hashes(self): return self.Hashes
     def set_Hashes(self, Hashes): self.Hashes = Hashes
     def get_Language(self): return self.Language
     def set_Language(self, Language): self.Language = Language
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
     def validate_PositiveIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.PositiveIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.PositiveIntegerObjectAttributeType, a restriction on None.
         pass
     def get_String_Value(self): return self.String_Value
     def set_String_Value(self, String_Value): self.String_Value = String_Value
@@ -1674,37 +1674,37 @@ class PEStringType(GeneratedsSuper):
             outfile.write('Encoding=%s,\n' % quote_python(self.Encoding).encode(ExternalEncoding))
         if self.Address is not None:
             showIndent(outfile, level)
-            outfile.write('Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Address.exportLiteral(outfile, level, name_='Address')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Hashes.exportLiteral(outfile, level, name_='Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Language is not None:
             showIndent(outfile, level)
-            outfile.write('Language=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Language=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Language.exportLiteral(outfile, level, name_='Language')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.String_Value is not None:
             showIndent(outfile, level)
-            outfile.write('String_Value=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('String_Value=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.String_Value.exportLiteral(outfile, level, name_='String_Value')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Translation is not None:
             showIndent(outfile, level)
-            outfile.write('Translation=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Translation=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Translation.exportLiteral(outfile, level, name_='Translation')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1721,27 +1721,27 @@ class PEStringType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Encoding(obj_)
         elif nodeName_ == 'Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Address(obj_)
         elif nodeName_ == 'Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Hashes(obj_)
         elif nodeName_ == 'Language':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Language(obj_)
         elif nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'String_Value':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_String_Value(obj_)
         elif nodeName_ == 'Translation':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Translation(obj_)
 # end class PEStringType
@@ -1774,14 +1774,14 @@ class PEImportType(GeneratedsSuper):
     def get_File_Name(self): return self.File_Name
     def set_File_Name(self, File_Name): self.File_Name = File_Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Imported_Functions(self): return self.Imported_Functions
     def set_Imported_Functions(self, Imported_Functions): self.Imported_Functions = Imported_Functions
     def get_Virtual_Address(self): return self.Virtual_Address
     def set_Virtual_Address(self, Virtual_Address): self.Virtual_Address = Virtual_Address
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_initially_visible(self): return self.initially_visible
     def set_initially_visible(self, initially_visible): self.initially_visible = initially_visible
@@ -1847,7 +1847,7 @@ class PEImportType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.File_Name is not None:
             showIndent(outfile, level)
-            outfile.write('File_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('File_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.File_Name.exportLiteral(outfile, level, name_='File_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1859,7 +1859,7 @@ class PEImportType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Virtual_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Virtual_Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Virtual_Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Virtual_Address.exportLiteral(outfile, level, name_='Virtual_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1889,7 +1889,7 @@ class PEImportType(GeneratedsSuper):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'File_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_File_Name(obj_)
         elif nodeName_ == 'Imported_Functions':
@@ -1897,7 +1897,7 @@ class PEImportType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Imported_Functions(obj_)
         elif nodeName_ == 'Virtual_Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Virtual_Address(obj_)
 # end class PEImportType
@@ -2011,7 +2011,7 @@ class PEResourceType(GeneratedsSuper):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Hashes(self): return self.Hashes
     def set_Hashes(self, Hashes): self.Hashes = Hashes
@@ -2072,13 +2072,13 @@ class PEResourceType(GeneratedsSuper):
             outfile.write('Type=%s,\n' % quote_python(self.Type).encode(ExternalEncoding))
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Hashes.exportLiteral(outfile, level, name_='Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2098,11 +2098,11 @@ class PEResourceType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Type(obj_)
         elif nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Hashes(obj_)
 # end class PEResourceType
@@ -2137,7 +2137,7 @@ class PEVersionInfoResourceType(PEResourceType):
     def get_Comments(self): return self.Comments
     def set_Comments(self, Comments): self.Comments = Comments
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_CompanyName(self): return self.CompanyName
     def set_CompanyName(self, CompanyName): self.CompanyName = CompanyName
@@ -2239,73 +2239,73 @@ class PEVersionInfoResourceType(PEResourceType):
         super(PEVersionInfoResourceType, self).exportLiteralChildren(outfile, level, name_)
         if self.Comments is not None:
             showIndent(outfile, level)
-            outfile.write('Comments=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Comments=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Comments.exportLiteral(outfile, level, name_='Comments')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.CompanyName is not None:
             showIndent(outfile, level)
-            outfile.write('CompanyName=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('CompanyName=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.CompanyName.exportLiteral(outfile, level, name_='CompanyName')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.FileDescription is not None:
             showIndent(outfile, level)
-            outfile.write('FileDescription=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('FileDescription=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.FileDescription.exportLiteral(outfile, level, name_='FileDescription')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.FileVersion is not None:
             showIndent(outfile, level)
-            outfile.write('FileVersion=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('FileVersion=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.FileVersion.exportLiteral(outfile, level, name_='FileVersion')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.InternalName is not None:
             showIndent(outfile, level)
-            outfile.write('InternalName=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('InternalName=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.InternalName.exportLiteral(outfile, level, name_='InternalName')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.LegalCopyright is not None:
             showIndent(outfile, level)
-            outfile.write('LegalCopyright=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('LegalCopyright=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.LegalCopyright.exportLiteral(outfile, level, name_='LegalCopyright')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.LegalTrademarks is not None:
             showIndent(outfile, level)
-            outfile.write('LegalTrademarks=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('LegalTrademarks=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.LegalTrademarks.exportLiteral(outfile, level, name_='LegalTrademarks')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.OriginalFilename is not None:
             showIndent(outfile, level)
-            outfile.write('OriginalFilename=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('OriginalFilename=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.OriginalFilename.exportLiteral(outfile, level, name_='OriginalFilename')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.PrivateBuild is not None:
             showIndent(outfile, level)
-            outfile.write('PrivateBuild=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('PrivateBuild=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.PrivateBuild.exportLiteral(outfile, level, name_='PrivateBuild')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.ProductName is not None:
             showIndent(outfile, level)
-            outfile.write('ProductName=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('ProductName=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.ProductName.exportLiteral(outfile, level, name_='ProductName')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.ProductVersion is not None:
             showIndent(outfile, level)
-            outfile.write('ProductVersion=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('ProductVersion=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.ProductVersion.exportLiteral(outfile, level, name_='ProductVersion')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.SpecialBuild is not None:
             showIndent(outfile, level)
-            outfile.write('SpecialBuild=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('SpecialBuild=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.SpecialBuild.exportLiteral(outfile, level, name_='SpecialBuild')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2318,51 +2318,51 @@ class PEVersionInfoResourceType(PEResourceType):
         super(PEVersionInfoResourceType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Comments':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Comments(obj_)
         elif nodeName_ == 'CompanyName':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_CompanyName(obj_)
         elif nodeName_ == 'FileDescription':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_FileDescription(obj_)
         elif nodeName_ == 'FileVersion':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_FileVersion(obj_)
         elif nodeName_ == 'InternalName':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_InternalName(obj_)
         elif nodeName_ == 'LegalCopyright':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_LegalCopyright(obj_)
         elif nodeName_ == 'LegalTrademarks':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_LegalTrademarks(obj_)
         elif nodeName_ == 'OriginalFilename':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_OriginalFilename(obj_)
         elif nodeName_ == 'PrivateBuild':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_PrivateBuild(obj_)
         elif nodeName_ == 'ProductName':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ProductName(obj_)
         elif nodeName_ == 'ProductVersion':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ProductVersion(obj_)
         elif nodeName_ == 'SpecialBuild':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_SpecialBuild(obj_)
         super(PEVersionInfoResourceType, self).buildChildren(child_, node, nodeName_, True)
@@ -2385,17 +2385,17 @@ class PEExportedFunctionType(GeneratedsSuper):
     def get_Function_Name(self): return self.Function_Name
     def set_Function_Name(self, Function_Name): self.Function_Name = Function_Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Entry_Point(self): return self.Entry_Point
     def set_Entry_Point(self, Entry_Point): self.Entry_Point = Entry_Point
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Ordinal(self): return self.Ordinal
     def set_Ordinal(self, Ordinal): self.Ordinal = Ordinal
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinExecutableFileObj:', name_='PEExportedFunctionType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -2445,19 +2445,19 @@ class PEExportedFunctionType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Function_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Function_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Function_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Function_Name.exportLiteral(outfile, level, name_='Function_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Entry_Point is not None:
             showIndent(outfile, level)
-            outfile.write('Entry_Point=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Entry_Point=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Entry_Point.exportLiteral(outfile, level, name_='Entry_Point')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Ordinal is not None:
             showIndent(outfile, level)
-            outfile.write('Ordinal=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Ordinal=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Ordinal.exportLiteral(outfile, level, name_='Ordinal')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2470,15 +2470,15 @@ class PEExportedFunctionType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Function_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Function_Name(obj_)
         elif nodeName_ == 'Entry_Point':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Entry_Point(obj_)
         elif nodeName_ == 'Ordinal':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Ordinal(obj_)
 # end class PEExportedFunctionType
@@ -2589,17 +2589,17 @@ class PEImportedFunctionType(GeneratedsSuper):
     def get_Function_Name(self): return self.Function_Name
     def set_Function_Name(self, Function_Name): self.Function_Name = Function_Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Hint(self): return self.Hint
     def set_Hint(self, Hint): self.Hint = Hint
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Ordinal(self): return self.Ordinal
     def set_Ordinal(self, Ordinal): self.Ordinal = Ordinal
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Bound(self): return self.Bound
     def set_Bound(self, Bound): self.Bound = Bound
@@ -2659,31 +2659,31 @@ class PEImportedFunctionType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Function_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Function_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Function_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Function_Name.exportLiteral(outfile, level, name_='Function_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Hint is not None:
             showIndent(outfile, level)
-            outfile.write('Hint=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Hint=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Hint.exportLiteral(outfile, level, name_='Hint')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Ordinal is not None:
             showIndent(outfile, level)
-            outfile.write('Ordinal=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Ordinal=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Ordinal.exportLiteral(outfile, level, name_='Ordinal')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Bound is not None:
             showIndent(outfile, level)
-            outfile.write('Bound=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Bound=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Bound.exportLiteral(outfile, level, name_='Bound')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Virtual_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Virtual_Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Virtual_Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Virtual_Address.exportLiteral(outfile, level, name_='Virtual_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2696,23 +2696,23 @@ class PEImportedFunctionType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Function_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Function_Name(obj_)
         elif nodeName_ == 'Hint':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Hint(obj_)
         elif nodeName_ == 'Ordinal':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Ordinal(obj_)
         elif nodeName_ == 'Bound':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Bound(obj_)
         elif nodeName_ == 'Virtual_Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Virtual_Address(obj_)
 # end class PEImportedFunctionType
@@ -2896,7 +2896,7 @@ class PESectionType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Data_Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Data_Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Data_Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Data_Hashes.exportLiteral(outfile, level, name_='Data_Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2908,7 +2908,7 @@ class PESectionType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Header_Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Header_Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Header_Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Header_Hashes.exportLiteral(outfile, level, name_='Header_Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2931,7 +2931,7 @@ class PESectionType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Section_Header(obj_)
         elif nodeName_ == 'Data_Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Data_Hashes(obj_)
         elif nodeName_ == 'Entropy':
@@ -2939,7 +2939,7 @@ class PESectionType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Entropy(obj_)
         elif nodeName_ == 'Header_Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Header_Hashes(obj_)
         elif nodeName_ == 'Type':
@@ -2965,12 +2965,12 @@ class PEDataDirectoryStructType(GeneratedsSuper):
     def get_Virtual_Address(self): return self.Virtual_Address
     def set_Virtual_Address(self, Virtual_Address): self.Virtual_Address = Virtual_Address
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Size(self): return self.Size
     def set_Size(self, Size): self.Size = Size
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinExecutableFileObj:', name_='PEDataDirectoryStructType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -3017,13 +3017,13 @@ class PEDataDirectoryStructType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Virtual_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Virtual_Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Virtual_Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Virtual_Address.exportLiteral(outfile, level, name_='Virtual_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size is not None:
             showIndent(outfile, level)
-            outfile.write('Size=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Size=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Size.exportLiteral(outfile, level, name_='Size')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3036,11 +3036,11 @@ class PEDataDirectoryStructType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Virtual_Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Virtual_Address(obj_)
         elif nodeName_ == 'Size':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size(obj_)
 # end class PEDataDirectoryStructType
@@ -3070,12 +3070,12 @@ class PESectionHeaderStructType(GeneratedsSuper):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Physical_Address(self): return self.Physical_Address
     def set_Physical_Address(self, Physical_Address): self.Physical_Address = Physical_Address
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Virtual_Address(self): return self.Virtual_Address
     def set_Virtual_Address(self, Virtual_Address): self.Virtual_Address = Virtual_Address
@@ -3090,7 +3090,7 @@ class PESectionHeaderStructType(GeneratedsSuper):
     def get_Number_Of_Relocations(self): return self.Number_Of_Relocations
     def set_Number_Of_Relocations(self, Number_Of_Relocations): self.Number_Of_Relocations = Number_Of_Relocations
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Number_Of_Linenumbers(self): return self.Number_Of_Linenumbers
     def set_Number_Of_Linenumbers(self, Number_Of_Linenumbers): self.Number_Of_Linenumbers = Number_Of_Linenumbers
@@ -3165,61 +3165,61 @@ class PESectionHeaderStructType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Physical_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Physical_Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Physical_Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Physical_Address.exportLiteral(outfile, level, name_='Physical_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Virtual_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Virtual_Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Virtual_Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Virtual_Address.exportLiteral(outfile, level, name_='Virtual_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_Of_Raw_Data is not None:
             showIndent(outfile, level)
-            outfile.write('Size_Of_Raw_Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Size_Of_Raw_Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Size_Of_Raw_Data.exportLiteral(outfile, level, name_='Size_Of_Raw_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Pointer_To_Raw_Data is not None:
             showIndent(outfile, level)
-            outfile.write('Pointer_To_Raw_Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Pointer_To_Raw_Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Pointer_To_Raw_Data.exportLiteral(outfile, level, name_='Pointer_To_Raw_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Pointer_To_Relocations is not None:
             showIndent(outfile, level)
-            outfile.write('Pointer_To_Relocations=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Pointer_To_Relocations=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Pointer_To_Relocations.exportLiteral(outfile, level, name_='Pointer_To_Relocations')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Pointer_To_Linenumbers is not None:
             showIndent(outfile, level)
-            outfile.write('Pointer_To_Linenumbers=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Pointer_To_Linenumbers=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Pointer_To_Linenumbers.exportLiteral(outfile, level, name_='Pointer_To_Linenumbers')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Number_Of_Relocations is not None:
             showIndent(outfile, level)
-            outfile.write('Number_Of_Relocations=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Number_Of_Relocations=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Number_Of_Relocations.exportLiteral(outfile, level, name_='Number_Of_Relocations')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Number_Of_Linenumbers is not None:
             showIndent(outfile, level)
-            outfile.write('Number_Of_Linenumbers=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Number_Of_Linenumbers=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Number_Of_Linenumbers.exportLiteral(outfile, level, name_='Number_Of_Linenumbers')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Characteristics is not None:
             showIndent(outfile, level)
-            outfile.write('Characteristics=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Characteristics=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Characteristics.exportLiteral(outfile, level, name_='Characteristics')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3232,43 +3232,43 @@ class PESectionHeaderStructType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Physical_Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Physical_Address(obj_)
         elif nodeName_ == 'Virtual_Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Virtual_Address(obj_)
         elif nodeName_ == 'Size_Of_Raw_Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_Of_Raw_Data(obj_)
         elif nodeName_ == 'Pointer_To_Raw_Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Pointer_To_Raw_Data(obj_)
         elif nodeName_ == 'Pointer_To_Relocations':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Pointer_To_Relocations(obj_)
         elif nodeName_ == 'Pointer_To_Linenumbers':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Pointer_To_Linenumbers(obj_)
         elif nodeName_ == 'Number_Of_Relocations':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Number_Of_Relocations(obj_)
         elif nodeName_ == 'Number_Of_Linenumbers':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Number_Of_Linenumbers(obj_)
         elif nodeName_ == 'Characteristics':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Characteristics(obj_)
 # end class PESectionHeaderStructType
@@ -3315,7 +3315,7 @@ class DOSHeaderType(GeneratedsSuper):
     def get_e_magic(self): return self.e_magic
     def set_e_magic(self, e_magic): self.e_magic = e_magic
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_e_cblp(self): return self.e_cblp
     def set_e_cblp(self, e_cblp): self.e_cblp = e_cblp
@@ -3456,85 +3456,85 @@ class DOSHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.e_magic is not None:
             showIndent(outfile, level)
-            outfile.write('e_magic=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_magic=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_magic.exportLiteral(outfile, level, name_='e_magic')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_cblp is not None:
             showIndent(outfile, level)
-            outfile.write('e_cblp=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_cblp=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_cblp.exportLiteral(outfile, level, name_='e_cblp')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_cp is not None:
             showIndent(outfile, level)
-            outfile.write('e_cp=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_cp=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_cp.exportLiteral(outfile, level, name_='e_cp')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_crlc is not None:
             showIndent(outfile, level)
-            outfile.write('e_crlc=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_crlc=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_crlc.exportLiteral(outfile, level, name_='e_crlc')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_cparhdr is not None:
             showIndent(outfile, level)
-            outfile.write('e_cparhdr=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_cparhdr=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_cparhdr.exportLiteral(outfile, level, name_='e_cparhdr')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_minalloc is not None:
             showIndent(outfile, level)
-            outfile.write('e_minalloc=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_minalloc=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_minalloc.exportLiteral(outfile, level, name_='e_minalloc')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_maxalloc is not None:
             showIndent(outfile, level)
-            outfile.write('e_maxalloc=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_maxalloc=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_maxalloc.exportLiteral(outfile, level, name_='e_maxalloc')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_ss is not None:
             showIndent(outfile, level)
-            outfile.write('e_ss=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_ss=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_ss.exportLiteral(outfile, level, name_='e_ss')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_sp is not None:
             showIndent(outfile, level)
-            outfile.write('e_sp=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_sp=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_sp.exportLiteral(outfile, level, name_='e_sp')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_csum is not None:
             showIndent(outfile, level)
-            outfile.write('e_csum=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_csum=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_csum.exportLiteral(outfile, level, name_='e_csum')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_ip is not None:
             showIndent(outfile, level)
-            outfile.write('e_ip=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_ip=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_ip.exportLiteral(outfile, level, name_='e_ip')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_cs is not None:
             showIndent(outfile, level)
-            outfile.write('e_cs=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_cs=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_cs.exportLiteral(outfile, level, name_='e_cs')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_lfarlc is not None:
             showIndent(outfile, level)
-            outfile.write('e_lfarlc=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_lfarlc=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_lfarlc.exportLiteral(outfile, level, name_='e_lfarlc')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_ovro is not None:
             showIndent(outfile, level)
-            outfile.write('e_ovro=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_ovro=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_ovro.exportLiteral(outfile, level, name_='e_ovro')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3543,8 +3543,8 @@ class DOSHeaderType(GeneratedsSuper):
         level += 1
         for reserved1_ in self.reserved1:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
-            reserved1_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.HexBinaryObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
+            reserved1_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.HexBinaryObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -3552,31 +3552,31 @@ class DOSHeaderType(GeneratedsSuper):
         outfile.write('],\n')
         if self.e_oemid is not None:
             showIndent(outfile, level)
-            outfile.write('e_oemid=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_oemid=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_oemid.exportLiteral(outfile, level, name_='e_oemid')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_oeminfo is not None:
             showIndent(outfile, level)
-            outfile.write('e_oeminfo=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_oeminfo=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_oeminfo.exportLiteral(outfile, level, name_='e_oeminfo')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.reserved2 is not None:
             showIndent(outfile, level)
-            outfile.write('reserved2=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('reserved2=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.reserved2.exportLiteral(outfile, level, name_='reserved2')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.e_lfanew is not None:
             showIndent(outfile, level)
-            outfile.write('e_lfanew=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('e_lfanew=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.e_lfanew.exportLiteral(outfile, level, name_='e_lfanew')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Hashes.exportLiteral(outfile, level, name_='Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3589,83 +3589,83 @@ class DOSHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'e_magic':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_magic(obj_)
         elif nodeName_ == 'e_cblp':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_cblp(obj_)
         elif nodeName_ == 'e_cp':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_cp(obj_)
         elif nodeName_ == 'e_crlc':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_crlc(obj_)
         elif nodeName_ == 'e_cparhdr':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_cparhdr(obj_)
         elif nodeName_ == 'e_minalloc':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_minalloc(obj_)
         elif nodeName_ == 'e_maxalloc':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_maxalloc(obj_)
         elif nodeName_ == 'e_ss':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_ss(obj_)
         elif nodeName_ == 'e_sp':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_sp(obj_)
         elif nodeName_ == 'e_csum':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_csum(obj_)
         elif nodeName_ == 'e_ip':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_ip(obj_)
         elif nodeName_ == 'e_cs':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_cs(obj_)
         elif nodeName_ == 'e_lfarlc':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_lfarlc(obj_)
         elif nodeName_ == 'e_ovro':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_ovro(obj_)
         elif nodeName_ == 'reserved1':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.reserved1.append(obj_)
         elif nodeName_ == 'e_oemid':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_oemid(obj_)
         elif nodeName_ == 'e_oeminfo':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_oeminfo(obj_)
         elif nodeName_ == 'reserved2':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_reserved2(obj_)
         elif nodeName_ == 'e_lfanew':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_e_lfanew(obj_)
         elif nodeName_ == 'Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Hashes(obj_)
 # end class DOSHeaderType
@@ -3692,7 +3692,7 @@ class PEHeadersType(GeneratedsSuper):
     def get_Signature(self): return self.Signature
     def set_Signature(self, Signature): self.Signature = Signature
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_File_Header(self): return self.File_Header
     def set_File_Header(self, File_Header): self.File_Header = File_Header
@@ -3765,7 +3765,7 @@ class PEHeadersType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Signature is not None:
             showIndent(outfile, level)
-            outfile.write('Signature=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Signature=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Signature.exportLiteral(outfile, level, name_='Signature')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3789,7 +3789,7 @@ class PEHeadersType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Hashes.exportLiteral(outfile, level, name_='Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3806,7 +3806,7 @@ class PEHeadersType(GeneratedsSuper):
             obj_.build(child_)
             self.set_DOS_Header(obj_)
         elif nodeName_ == 'Signature':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Signature(obj_)
         elif nodeName_ == 'File_Header':
@@ -3822,7 +3822,7 @@ class PEHeadersType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Entropy(obj_)
         elif nodeName_ == 'Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Hashes(obj_)
 # end class PEHeadersType
@@ -3850,12 +3850,12 @@ class PEFileHeaderType(GeneratedsSuper):
     def get_Machine(self): return self.Machine
     def set_Machine(self, Machine): self.Machine = Machine
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Number_Of_Sections(self): return self.Number_Of_Sections
     def set_Number_Of_Sections(self, Number_Of_Sections): self.Number_Of_Sections = Number_Of_Sections
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Time_Date_Stamp(self): return self.Time_Date_Stamp
     def set_Time_Date_Stamp(self, Time_Date_Stamp): self.Time_Date_Stamp = Time_Date_Stamp
@@ -3932,49 +3932,49 @@ class PEFileHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Machine is not None:
             showIndent(outfile, level)
-            outfile.write('Machine=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Machine=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Machine.exportLiteral(outfile, level, name_='Machine')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Number_Of_Sections is not None:
             showIndent(outfile, level)
-            outfile.write('Number_Of_Sections=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Number_Of_Sections=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Number_Of_Sections.exportLiteral(outfile, level, name_='Number_Of_Sections')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Time_Date_Stamp is not None:
             showIndent(outfile, level)
-            outfile.write('Time_Date_Stamp=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Time_Date_Stamp=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Time_Date_Stamp.exportLiteral(outfile, level, name_='Time_Date_Stamp')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Pointer_To_Symbol_Table is not None:
             showIndent(outfile, level)
-            outfile.write('Pointer_To_Symbol_Table=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Pointer_To_Symbol_Table=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Pointer_To_Symbol_Table.exportLiteral(outfile, level, name_='Pointer_To_Symbol_Table')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Number_Of_Symbols is not None:
             showIndent(outfile, level)
-            outfile.write('Number_Of_Symbols=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Number_Of_Symbols=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Number_Of_Symbols.exportLiteral(outfile, level, name_='Number_Of_Symbols')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_Of_Optional_Header is not None:
             showIndent(outfile, level)
-            outfile.write('Size_Of_Optional_Header=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Size_Of_Optional_Header=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Size_Of_Optional_Header.exportLiteral(outfile, level, name_='Size_Of_Optional_Header')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Characteristics is not None:
             showIndent(outfile, level)
-            outfile.write('Characteristics=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Characteristics=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Characteristics.exportLiteral(outfile, level, name_='Characteristics')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Hashes.exportLiteral(outfile, level, name_='Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3987,35 +3987,35 @@ class PEFileHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Machine':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Machine(obj_)
         elif nodeName_ == 'Number_Of_Sections':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Number_Of_Sections(obj_)
         elif nodeName_ == 'Time_Date_Stamp':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Time_Date_Stamp(obj_)
         elif nodeName_ == 'Pointer_To_Symbol_Table':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Pointer_To_Symbol_Table(obj_)
         elif nodeName_ == 'Number_Of_Symbols':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Number_Of_Symbols(obj_)
         elif nodeName_ == 'Size_Of_Optional_Header':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_Of_Optional_Header(obj_)
         elif nodeName_ == 'Characteristics':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Characteristics(obj_)
         elif nodeName_ == 'Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Hashes(obj_)
 # end class PEFileHeaderType
@@ -4068,7 +4068,7 @@ class PEOptionalHeaderType(GeneratedsSuper):
     def get_Magic(self): return self.Magic
     def set_Magic(self, Magic): self.Magic = Magic
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Major_Linker_Version(self): return self.Major_Linker_Version
     def set_Major_Linker_Version(self, Major_Linker_Version): self.Major_Linker_Version = Major_Linker_Version
@@ -4267,181 +4267,181 @@ class PEOptionalHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Magic is not None:
             showIndent(outfile, level)
-            outfile.write('Magic=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Magic=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Magic.exportLiteral(outfile, level, name_='Magic')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Major_Linker_Version is not None:
             showIndent(outfile, level)
-            outfile.write('Major_Linker_Version=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Major_Linker_Version=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Major_Linker_Version.exportLiteral(outfile, level, name_='Major_Linker_Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Minor_Linker_Version is not None:
             showIndent(outfile, level)
-            outfile.write('Minor_Linker_Version=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Minor_Linker_Version=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Minor_Linker_Version.exportLiteral(outfile, level, name_='Minor_Linker_Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_Of_Code is not None:
             showIndent(outfile, level)
-            outfile.write('Size_Of_Code=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Size_Of_Code=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Size_Of_Code.exportLiteral(outfile, level, name_='Size_Of_Code')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_Of_Initialized_Data is not None:
             showIndent(outfile, level)
-            outfile.write('Size_Of_Initialized_Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Size_Of_Initialized_Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Size_Of_Initialized_Data.exportLiteral(outfile, level, name_='Size_Of_Initialized_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_Of_Uninitialized_Data is not None:
             showIndent(outfile, level)
-            outfile.write('Size_Of_Uninitialized_Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Size_Of_Uninitialized_Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Size_Of_Uninitialized_Data.exportLiteral(outfile, level, name_='Size_Of_Uninitialized_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Address_Of_Entry_Point is not None:
             showIndent(outfile, level)
-            outfile.write('Address_Of_Entry_Point=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Address_Of_Entry_Point=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Address_Of_Entry_Point.exportLiteral(outfile, level, name_='Address_Of_Entry_Point')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Base_Of_Code is not None:
             showIndent(outfile, level)
-            outfile.write('Base_Of_Code=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Base_Of_Code=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Base_Of_Code.exportLiteral(outfile, level, name_='Base_Of_Code')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Base_Of_Data is not None:
             showIndent(outfile, level)
-            outfile.write('Base_Of_Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Base_Of_Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Base_Of_Data.exportLiteral(outfile, level, name_='Base_Of_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Image_Base is not None:
             showIndent(outfile, level)
-            outfile.write('Image_Base=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Image_Base=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Image_Base.exportLiteral(outfile, level, name_='Image_Base')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Section_Alignment is not None:
             showIndent(outfile, level)
-            outfile.write('Section_Alignment=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Section_Alignment=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Section_Alignment.exportLiteral(outfile, level, name_='Section_Alignment')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.File_Alignment is not None:
             showIndent(outfile, level)
-            outfile.write('File_Alignment=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('File_Alignment=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.File_Alignment.exportLiteral(outfile, level, name_='File_Alignment')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Major_OS_Version is not None:
             showIndent(outfile, level)
-            outfile.write('Major_OS_Version=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Major_OS_Version=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Major_OS_Version.exportLiteral(outfile, level, name_='Major_OS_Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Minor_OS_Version is not None:
             showIndent(outfile, level)
-            outfile.write('Minor_OS_Version=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Minor_OS_Version=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Minor_OS_Version.exportLiteral(outfile, level, name_='Minor_OS_Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Major_Image_Version is not None:
             showIndent(outfile, level)
-            outfile.write('Major_Image_Version=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Major_Image_Version=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Major_Image_Version.exportLiteral(outfile, level, name_='Major_Image_Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Minor_Image_Version is not None:
             showIndent(outfile, level)
-            outfile.write('Minor_Image_Version=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Minor_Image_Version=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Minor_Image_Version.exportLiteral(outfile, level, name_='Minor_Image_Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Major_Subsystem_Version is not None:
             showIndent(outfile, level)
-            outfile.write('Major_Subsystem_Version=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Major_Subsystem_Version=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Major_Subsystem_Version.exportLiteral(outfile, level, name_='Major_Subsystem_Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Minor_Subsystem_Version is not None:
             showIndent(outfile, level)
-            outfile.write('Minor_Subsystem_Version=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Minor_Subsystem_Version=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Minor_Subsystem_Version.exportLiteral(outfile, level, name_='Minor_Subsystem_Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Win32_Version_Value is not None:
             showIndent(outfile, level)
-            outfile.write('Win32_Version_Value=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Win32_Version_Value=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Win32_Version_Value.exportLiteral(outfile, level, name_='Win32_Version_Value')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_Of_Image is not None:
             showIndent(outfile, level)
-            outfile.write('Size_Of_Image=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Size_Of_Image=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Size_Of_Image.exportLiteral(outfile, level, name_='Size_Of_Image')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_Of_Headers is not None:
             showIndent(outfile, level)
-            outfile.write('Size_Of_Headers=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Size_Of_Headers=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Size_Of_Headers.exportLiteral(outfile, level, name_='Size_Of_Headers')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Checksum is not None:
             showIndent(outfile, level)
-            outfile.write('Checksum=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Checksum=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Checksum.exportLiteral(outfile, level, name_='Checksum')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Subsystem is not None:
             showIndent(outfile, level)
-            outfile.write('Subsystem=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Subsystem=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Subsystem.exportLiteral(outfile, level, name_='Subsystem')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.DLL_Characteristics is not None:
             showIndent(outfile, level)
-            outfile.write('DLL_Characteristics=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('DLL_Characteristics=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.DLL_Characteristics.exportLiteral(outfile, level, name_='DLL_Characteristics')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_Of_Stack_Reserve is not None:
             showIndent(outfile, level)
-            outfile.write('Size_Of_Stack_Reserve=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Size_Of_Stack_Reserve=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Size_Of_Stack_Reserve.exportLiteral(outfile, level, name_='Size_Of_Stack_Reserve')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_Of_Stack_Commit is not None:
             showIndent(outfile, level)
-            outfile.write('Size_Of_Stack_Commit=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Size_Of_Stack_Commit=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Size_Of_Stack_Commit.exportLiteral(outfile, level, name_='Size_Of_Stack_Commit')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_Of_Heap_Reserve is not None:
             showIndent(outfile, level)
-            outfile.write('Size_Of_Heap_Reserve=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Size_Of_Heap_Reserve=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Size_Of_Heap_Reserve.exportLiteral(outfile, level, name_='Size_Of_Heap_Reserve')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size_Of_Heap_Commit is not None:
             showIndent(outfile, level)
-            outfile.write('Size_Of_Heap_Commit=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Size_Of_Heap_Commit=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Size_Of_Heap_Commit.exportLiteral(outfile, level, name_='Size_Of_Heap_Commit')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Loader_Flags is not None:
             showIndent(outfile, level)
-            outfile.write('Loader_Flags=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Loader_Flags=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Loader_Flags.exportLiteral(outfile, level, name_='Loader_Flags')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Number_Of_Rva_And_Sizes is not None:
             showIndent(outfile, level)
-            outfile.write('Number_Of_Rva_And_Sizes=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Number_Of_Rva_And_Sizes=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Number_Of_Rva_And_Sizes.exportLiteral(outfile, level, name_='Number_Of_Rva_And_Sizes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4453,7 +4453,7 @@ class PEOptionalHeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Hashes.exportLiteral(outfile, level, name_='Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4466,91 +4466,91 @@ class PEOptionalHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Magic':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Magic(obj_)
         elif nodeName_ == 'Major_Linker_Version':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Major_Linker_Version(obj_)
         elif nodeName_ == 'Minor_Linker_Version':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Minor_Linker_Version(obj_)
         elif nodeName_ == 'Size_Of_Code':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_Of_Code(obj_)
         elif nodeName_ == 'Size_Of_Initialized_Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_Of_Initialized_Data(obj_)
         elif nodeName_ == 'Size_Of_Uninitialized_Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_Of_Uninitialized_Data(obj_)
         elif nodeName_ == 'Address_Of_Entry_Point':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Address_Of_Entry_Point(obj_)
         elif nodeName_ == 'Base_Of_Code':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Base_Of_Code(obj_)
         elif nodeName_ == 'Base_Of_Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Base_Of_Data(obj_)
         elif nodeName_ == 'Image_Base':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Image_Base(obj_)
         elif nodeName_ == 'Section_Alignment':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Section_Alignment(obj_)
         elif nodeName_ == 'File_Alignment':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_File_Alignment(obj_)
         elif nodeName_ == 'Major_OS_Version':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Major_OS_Version(obj_)
         elif nodeName_ == 'Minor_OS_Version':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Minor_OS_Version(obj_)
         elif nodeName_ == 'Major_Image_Version':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Major_Image_Version(obj_)
         elif nodeName_ == 'Minor_Image_Version':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Minor_Image_Version(obj_)
         elif nodeName_ == 'Major_Subsystem_Version':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Major_Subsystem_Version(obj_)
         elif nodeName_ == 'Minor_Subsystem_Version':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Minor_Subsystem_Version(obj_)
         elif nodeName_ == 'Win32_Version_Value':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Win32_Version_Value(obj_)
         elif nodeName_ == 'Size_Of_Image':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_Of_Image(obj_)
         elif nodeName_ == 'Size_Of_Headers':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_Of_Headers(obj_)
         elif nodeName_ == 'Checksum':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Checksum(obj_)
         elif nodeName_ == 'Subsystem':
@@ -4558,31 +4558,31 @@ class PEOptionalHeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Subsystem(obj_)
         elif nodeName_ == 'DLL_Characteristics':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_DLL_Characteristics(obj_)
         elif nodeName_ == 'Size_Of_Stack_Reserve':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_Of_Stack_Reserve(obj_)
         elif nodeName_ == 'Size_Of_Stack_Commit':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_Of_Stack_Commit(obj_)
         elif nodeName_ == 'Size_Of_Heap_Reserve':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_Of_Heap_Reserve(obj_)
         elif nodeName_ == 'Size_Of_Heap_Commit':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size_Of_Heap_Commit(obj_)
         elif nodeName_ == 'Loader_Flags':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Loader_Flags(obj_)
         elif nodeName_ == 'Number_Of_Rva_And_Sizes':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Number_Of_Rva_And_Sizes(obj_)
         elif nodeName_ == 'Data_Directory':
@@ -4590,7 +4590,7 @@ class PEOptionalHeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Data_Directory(obj_)
         elif nodeName_ == 'Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Hashes(obj_)
 # end class PEOptionalHeaderType
@@ -4912,15 +4912,15 @@ class DataDirectoryType(GeneratedsSuper):
             self.set_Reserved(obj_)
 # end class DataDirectoryType
 
-class SectionType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class SectionType(cybox_common_types_1_0.BaseObjectAttributeType):
     """SectionTypes specifies PE section types via a union of the
     SectionTypeEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(SectionType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -4999,15 +4999,15 @@ class SectionType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class SectionType
 
-class PEType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class PEType(cybox_common_types_1_0.BaseObjectAttributeType):
     """PEType specifies PE file types via a union of the PETypeEnum type
     and the atomic xs:string type. Its base type is the CybOX Core
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(PEType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -5086,15 +5086,15 @@ class PEType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class PEType
 
-class DetectedType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class DetectedType(cybox_common_types_1_0.BaseObjectAttributeType):
     """DetectedType specifies the type of entrypoint that was detected via
     a union of the DetectedTypeEnum type and the atomic xs:string
-    type. Its base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType,
+    type. Its base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType,
     for permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(DetectedType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -5173,15 +5173,15 @@ class DetectedType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class DetectedType
 
-class SubsystemType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class SubsystemType(cybox_common_types_1_0.BaseObjectAttributeType):
     """SubsystemTypes specifies subsystem types via a union of the
     SubsystemTypeEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(SubsystemType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)

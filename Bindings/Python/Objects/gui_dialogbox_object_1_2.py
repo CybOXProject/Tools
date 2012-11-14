@@ -10,7 +10,7 @@ import getopt
 import re as re_
 
 import gui_object_1_2
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -387,7 +387,7 @@ class GUIDialogboxObjectType(gui_object_1_2.GUIObjectType):
     def get_Box_Caption(self): return self.Box_Caption
     def set_Box_Caption(self, Box_Caption): self.Box_Caption = Box_Caption
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Box_Text(self): return self.Box_Text
     def set_Box_Text(self, Box_Text): self.Box_Text = Box_Text
@@ -439,13 +439,13 @@ class GUIDialogboxObjectType(gui_object_1_2.GUIObjectType):
         super(GUIDialogboxObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Box_Caption is not None:
             showIndent(outfile, level)
-            outfile.write('Box_Caption=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Box_Caption=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Box_Caption.exportLiteral(outfile, level, name_='Box_Caption')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Box_Text is not None:
             showIndent(outfile, level)
-            outfile.write('Box_Text=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Box_Text=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Box_Text.exportLiteral(outfile, level, name_='Box_Text')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -458,11 +458,11 @@ class GUIDialogboxObjectType(gui_object_1_2.GUIObjectType):
         super(GUIDialogboxObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Box_Caption':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Box_Caption(obj_)
         elif nodeName_ == 'Box_Text':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Box_Text(obj_)
         super(GUIDialogboxObjectType, self).buildChildren(child_, node, nodeName_, True)

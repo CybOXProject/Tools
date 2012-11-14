@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import address_object_1_2
 import port_object_1_3
 import uri_object_1_2
@@ -698,7 +698,7 @@ class HTTPRequestLineType(GeneratedsSuper):
     def get_Value(self): return self.Value
     def set_Value(self, Value): self.Value = Value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Version(self): return self.Version
     def set_Version(self, Version): self.Version = Version
@@ -756,13 +756,13 @@ class HTTPRequestLineType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Value is not None:
             showIndent(outfile, level)
-            outfile.write('Value=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Value=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Value.exportLiteral(outfile, level, name_='Value')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Version is not None:
             showIndent(outfile, level)
-            outfile.write('Version=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Version=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Version.exportLiteral(outfile, level, name_='Version')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -779,11 +779,11 @@ class HTTPRequestLineType(GeneratedsSuper):
             obj_.build(child_)
             self.set_HTTP_Method(obj_)
         elif nodeName_ == 'Value':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Value(obj_)
         elif nodeName_ == 'Version':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Version(obj_)
 # end class HTTPRequestLineType
@@ -805,7 +805,7 @@ class HTTPRequestHeaderType(GeneratedsSuper):
     def get_Raw_Header(self): return self.Raw_Header
     def set_Raw_Header(self, Raw_Header): self.Raw_Header = Raw_Header
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Parsed_Header(self): return self.Parsed_Header
     def set_Parsed_Header(self, Parsed_Header): self.Parsed_Header = Parsed_Header
@@ -854,7 +854,7 @@ class HTTPRequestHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Raw_Header is not None:
             showIndent(outfile, level)
-            outfile.write('Raw_Header=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Raw_Header=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Raw_Header.exportLiteral(outfile, level, name_='Raw_Header')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -873,7 +873,7 @@ class HTTPRequestHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Raw_Header':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Raw_Header(obj_)
         elif nodeName_ == 'Parsed_Header':
@@ -932,7 +932,7 @@ class HTTPRequestHeaderFieldsType(GeneratedsSuper):
     def get_Accept(self): return self.Accept
     def set_Accept(self, Accept): self.Accept = Accept
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Accept_Charset(self): return self.Accept_Charset
     def set_Accept_Charset(self, Accept_Charset): self.Accept_Charset = Accept_Charset
@@ -953,7 +953,7 @@ class HTTPRequestHeaderFieldsType(GeneratedsSuper):
     def get_Content_Length(self): return self.Content_Length
     def set_Content_Length(self, Content_Length): self.Content_Length = Content_Length
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Content_MD5(self): return self.Content_MD5
     def set_Content_MD5(self, Content_MD5): self.Content_MD5 = Content_MD5
@@ -962,7 +962,7 @@ class HTTPRequestHeaderFieldsType(GeneratedsSuper):
     def get_Date(self): return self.Date
     def set_Date(self, Date): self.Date = Date
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Expect(self): return self.Expect
     def set_Expect(self, Expect): self.Expect = Expect
@@ -1152,85 +1152,85 @@ class HTTPRequestHeaderFieldsType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Accept is not None:
             showIndent(outfile, level)
-            outfile.write('Accept=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Accept=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Accept.exportLiteral(outfile, level, name_='Accept')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Accept_Charset is not None:
             showIndent(outfile, level)
-            outfile.write('Accept_Charset=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Accept_Charset=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Accept_Charset.exportLiteral(outfile, level, name_='Accept_Charset')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Accept_Language is not None:
             showIndent(outfile, level)
-            outfile.write('Accept_Language=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Accept_Language=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Accept_Language.exportLiteral(outfile, level, name_='Accept_Language')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Accept_Datetime is not None:
             showIndent(outfile, level)
-            outfile.write('Accept_Datetime=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Accept_Datetime=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Accept_Datetime.exportLiteral(outfile, level, name_='Accept_Datetime')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Accept_Encoding is not None:
             showIndent(outfile, level)
-            outfile.write('Accept_Encoding=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Accept_Encoding=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Accept_Encoding.exportLiteral(outfile, level, name_='Accept_Encoding')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Authorization is not None:
             showIndent(outfile, level)
-            outfile.write('Authorization=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Authorization=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Authorization.exportLiteral(outfile, level, name_='Authorization')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Cache_Control is not None:
             showIndent(outfile, level)
-            outfile.write('Cache_Control=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Cache_Control=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Cache_Control.exportLiteral(outfile, level, name_='Cache_Control')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Connection is not None:
             showIndent(outfile, level)
-            outfile.write('Connection=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Connection=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Connection.exportLiteral(outfile, level, name_='Connection')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Cookie is not None:
             showIndent(outfile, level)
-            outfile.write('Cookie=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Cookie=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Cookie.exportLiteral(outfile, level, name_='Cookie')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Content_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Content_Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Content_Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Content_Length.exportLiteral(outfile, level, name_='Content_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Content_MD5 is not None:
             showIndent(outfile, level)
-            outfile.write('Content_MD5=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Content_MD5=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Content_MD5.exportLiteral(outfile, level, name_='Content_MD5')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Content_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Content_Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Content_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Content_Type.exportLiteral(outfile, level, name_='Content_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Date is not None:
             showIndent(outfile, level)
-            outfile.write('Date=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Date=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Date.exportLiteral(outfile, level, name_='Date')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Expect is not None:
             showIndent(outfile, level)
-            outfile.write('Expect=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Expect=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Expect.exportLiteral(outfile, level, name_='Expect')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1248,55 +1248,55 @@ class HTTPRequestHeaderFieldsType(GeneratedsSuper):
             outfile.write('),\n')
         if self.If_Match is not None:
             showIndent(outfile, level)
-            outfile.write('If_Match=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('If_Match=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.If_Match.exportLiteral(outfile, level, name_='If_Match')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.If_Modified_Since is not None:
             showIndent(outfile, level)
-            outfile.write('If_Modified_Since=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('If_Modified_Since=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.If_Modified_Since.exportLiteral(outfile, level, name_='If_Modified_Since')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.If_None_Match is not None:
             showIndent(outfile, level)
-            outfile.write('If_None_Match=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('If_None_Match=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.If_None_Match.exportLiteral(outfile, level, name_='If_None_Match')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.If_Range is not None:
             showIndent(outfile, level)
-            outfile.write('If_Range=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('If_Range=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.If_Range.exportLiteral(outfile, level, name_='If_Range')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.If_Unmodified_Since is not None:
             showIndent(outfile, level)
-            outfile.write('If_Unmodified_Since=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('If_Unmodified_Since=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.If_Unmodified_Since.exportLiteral(outfile, level, name_='If_Unmodified_Since')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Max_Forwards is not None:
             showIndent(outfile, level)
-            outfile.write('Max_Forwards=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Max_Forwards=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Max_Forwards.exportLiteral(outfile, level, name_='Max_Forwards')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Pragma is not None:
             showIndent(outfile, level)
-            outfile.write('Pragma=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Pragma=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Pragma.exportLiteral(outfile, level, name_='Pragma')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Proxy_Authorization is not None:
             showIndent(outfile, level)
-            outfile.write('Proxy_Authorization=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Proxy_Authorization=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Proxy_Authorization.exportLiteral(outfile, level, name_='Proxy_Authorization')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Range is not None:
             showIndent(outfile, level)
-            outfile.write('Range=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Range=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Range.exportLiteral(outfile, level, name_='Range')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1308,25 +1308,25 @@ class HTTPRequestHeaderFieldsType(GeneratedsSuper):
             outfile.write('),\n')
         if self.TE is not None:
             showIndent(outfile, level)
-            outfile.write('TE=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('TE=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.TE.exportLiteral(outfile, level, name_='TE')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.User_Agent is not None:
             showIndent(outfile, level)
-            outfile.write('User_Agent=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('User_Agent=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.User_Agent.exportLiteral(outfile, level, name_='User_Agent')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Via is not None:
             showIndent(outfile, level)
-            outfile.write('Via=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Via=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Via.exportLiteral(outfile, level, name_='Via')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Warning is not None:
             showIndent(outfile, level)
-            outfile.write('Warning=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Warning=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Warning.exportLiteral(outfile, level, name_='Warning')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1338,19 +1338,19 @@ class HTTPRequestHeaderFieldsType(GeneratedsSuper):
             outfile.write('),\n')
         if self.X_Requested_With is not None:
             showIndent(outfile, level)
-            outfile.write('X_Requested_With=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('X_Requested_With=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.X_Requested_With.exportLiteral(outfile, level, name_='X_Requested_With')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.X_Requested_For is not None:
             showIndent(outfile, level)
-            outfile.write('X_Requested_For=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('X_Requested_For=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.X_Requested_For.exportLiteral(outfile, level, name_='X_Requested_For')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.X_ATT_DeviceId is not None:
             showIndent(outfile, level)
-            outfile.write('X_ATT_DeviceId=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('X_ATT_DeviceId=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.X_ATT_DeviceId.exportLiteral(outfile, level, name_='X_ATT_DeviceId')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1369,59 +1369,59 @@ class HTTPRequestHeaderFieldsType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Accept':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Accept(obj_)
         elif nodeName_ == 'Accept-Charset':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Accept_Charset(obj_)
         elif nodeName_ == 'Accept-Language':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Accept_Language(obj_)
         elif nodeName_ == 'Accept-Datetime':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Accept_Datetime(obj_)
         elif nodeName_ == 'Accept-Encoding':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Accept_Encoding(obj_)
         elif nodeName_ == 'Authorization':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Authorization(obj_)
         elif nodeName_ == 'Cache-Control':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Cache_Control(obj_)
         elif nodeName_ == 'Connection':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Connection(obj_)
         elif nodeName_ == 'Cookie':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Cookie(obj_)
         elif nodeName_ == 'Content-Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Content_Length(obj_)
         elif nodeName_ == 'Content-MD5':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Content_MD5(obj_)
         elif nodeName_ == 'Content-Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Content_Type(obj_)
         elif nodeName_ == 'Date':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Date(obj_)
         elif nodeName_ == 'Expect':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Expect(obj_)
         elif nodeName_ == 'From':
@@ -1433,39 +1433,39 @@ class HTTPRequestHeaderFieldsType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Host(obj_)
         elif nodeName_ == 'If-Match':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_If_Match(obj_)
         elif nodeName_ == 'If-Modified-Since':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_If_Modified_Since(obj_)
         elif nodeName_ == 'If-None-Match':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_If_None_Match(obj_)
         elif nodeName_ == 'If-Range':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Range(obj_)
         elif nodeName_ == 'If-Unmodified-Since':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_If_Unmodified_Since(obj_)
         elif nodeName_ == 'Max-Forwards':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Max_Forwards(obj_)
         elif nodeName_ == 'Pragma':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Pragma(obj_)
         elif nodeName_ == 'Proxy-Authorization':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Authorization(obj_)
         elif nodeName_ == 'Range':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Range(obj_)
         elif nodeName_ == 'Referer':
@@ -1473,19 +1473,19 @@ class HTTPRequestHeaderFieldsType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Referer(obj_)
         elif nodeName_ == 'TE':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_TE(obj_)
         elif nodeName_ == 'User-Agent':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_User_Agent(obj_)
         elif nodeName_ == 'Via':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Via(obj_)
         elif nodeName_ == 'Warning':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Warning(obj_)
         elif nodeName_ == 'DNT':
@@ -1493,15 +1493,15 @@ class HTTPRequestHeaderFieldsType(GeneratedsSuper):
             obj_.build(child_)
             self.set_DNT(obj_)
         elif nodeName_ == 'X-Requested-With':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_X_Requested_With(obj_)
         elif nodeName_ == 'X-Requested-For':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_X_Requested_For(obj_)
         elif nodeName_ == 'X-ATT-DeviceId':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_X_ATT_DeviceId(obj_)
         elif nodeName_ == 'X-Wap-Profile':
@@ -1527,7 +1527,7 @@ class HTTPResponseHeaderType(GeneratedsSuper):
     def get_Raw_Header(self): return self.Raw_Header
     def set_Raw_Header(self, Raw_Header): self.Raw_Header = Raw_Header
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Parsed_Header(self): return self.Parsed_Header
     def set_Parsed_Header(self, Parsed_Header): self.Parsed_Header = Parsed_Header
@@ -1576,7 +1576,7 @@ class HTTPResponseHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Raw_Header is not None:
             showIndent(outfile, level)
-            outfile.write('Raw_Header=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Raw_Header=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Raw_Header.exportLiteral(outfile, level, name_='Raw_Header')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1595,7 +1595,7 @@ class HTTPResponseHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Raw_Header':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Raw_Header(obj_)
         elif nodeName_ == 'Parsed_Header':
@@ -1658,14 +1658,14 @@ class HTTPResponseHeaderFieldsType(GeneratedsSuper):
     def get_Access_Control_Allow_Origin(self): return self.Access_Control_Allow_Origin
     def set_Access_Control_Allow_Origin(self, Access_Control_Allow_Origin): self.Access_Control_Allow_Origin = Access_Control_Allow_Origin
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Accept_Ranges(self): return self.Accept_Ranges
     def set_Accept_Ranges(self, Accept_Ranges): self.Accept_Ranges = Accept_Ranges
     def get_Age(self): return self.Age
     def set_Age(self, Age): self.Age = Age
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Cache_Control(self): return self.Cache_Control
     def set_Cache_Control(self, Cache_Control): self.Cache_Control = Cache_Control
@@ -1690,7 +1690,7 @@ class HTTPResponseHeaderFieldsType(GeneratedsSuper):
     def get_Date(self): return self.Date
     def set_Date(self, Date): self.Date = Date
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_ETag(self): return self.ETag
     def set_ETag(self, ETag): self.ETag = ETag
@@ -1898,109 +1898,109 @@ class HTTPResponseHeaderFieldsType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Access_Control_Allow_Origin is not None:
             showIndent(outfile, level)
-            outfile.write('Access_Control_Allow_Origin=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Access_Control_Allow_Origin=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Access_Control_Allow_Origin.exportLiteral(outfile, level, name_='Access_Control_Allow_Origin')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Accept_Ranges is not None:
             showIndent(outfile, level)
-            outfile.write('Accept_Ranges=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Accept_Ranges=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Accept_Ranges.exportLiteral(outfile, level, name_='Accept_Ranges')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Age is not None:
             showIndent(outfile, level)
-            outfile.write('Age=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Age=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Age.exportLiteral(outfile, level, name_='Age')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Cache_Control is not None:
             showIndent(outfile, level)
-            outfile.write('Cache_Control=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Cache_Control=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Cache_Control.exportLiteral(outfile, level, name_='Cache_Control')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Connection is not None:
             showIndent(outfile, level)
-            outfile.write('Connection=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Connection=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Connection.exportLiteral(outfile, level, name_='Connection')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Content_Encoding is not None:
             showIndent(outfile, level)
-            outfile.write('Content_Encoding=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Content_Encoding=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Content_Encoding.exportLiteral(outfile, level, name_='Content_Encoding')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Content_Language is not None:
             showIndent(outfile, level)
-            outfile.write('Content_Language=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Content_Language=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Content_Language.exportLiteral(outfile, level, name_='Content_Language')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Content_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Content_Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Content_Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Content_Length.exportLiteral(outfile, level, name_='Content_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Content_Location is not None:
             showIndent(outfile, level)
-            outfile.write('Content_Location=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Content_Location=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Content_Location.exportLiteral(outfile, level, name_='Content_Location')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Content_MD5 is not None:
             showIndent(outfile, level)
-            outfile.write('Content_MD5=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Content_MD5=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Content_MD5.exportLiteral(outfile, level, name_='Content_MD5')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Content_Disposition is not None:
             showIndent(outfile, level)
-            outfile.write('Content_Disposition=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Content_Disposition=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Content_Disposition.exportLiteral(outfile, level, name_='Content_Disposition')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Content_Range is not None:
             showIndent(outfile, level)
-            outfile.write('Content_Range=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Content_Range=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Content_Range.exportLiteral(outfile, level, name_='Content_Range')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Content_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Content_Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Content_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Content_Type.exportLiteral(outfile, level, name_='Content_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Date is not None:
             showIndent(outfile, level)
-            outfile.write('Date=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Date=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Date.exportLiteral(outfile, level, name_='Date')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.ETag is not None:
             showIndent(outfile, level)
-            outfile.write('ETag=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('ETag=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.ETag.exportLiteral(outfile, level, name_='ETag')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Expires is not None:
             showIndent(outfile, level)
-            outfile.write('Expires=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Expires=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Expires.exportLiteral(outfile, level, name_='Expires')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Last_Modified is not None:
             showIndent(outfile, level)
-            outfile.write('Last_Modified=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Last_Modified=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Last_Modified.exportLiteral(outfile, level, name_='Last_Modified')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Link is not None:
             showIndent(outfile, level)
-            outfile.write('Link=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Link=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Link.exportLiteral(outfile, level, name_='Link')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2012,61 +2012,61 @@ class HTTPResponseHeaderFieldsType(GeneratedsSuper):
             outfile.write('),\n')
         if self.P3P is not None:
             showIndent(outfile, level)
-            outfile.write('P3P=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('P3P=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.P3P.exportLiteral(outfile, level, name_='P3P')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Pragma is not None:
             showIndent(outfile, level)
-            outfile.write('Pragma=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Pragma=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Pragma.exportLiteral(outfile, level, name_='Pragma')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Proxy_Authenticate is not None:
             showIndent(outfile, level)
-            outfile.write('Proxy_Authenticate=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Proxy_Authenticate=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Proxy_Authenticate.exportLiteral(outfile, level, name_='Proxy_Authenticate')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Refresh is not None:
             showIndent(outfile, level)
-            outfile.write('Refresh=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Refresh=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Refresh.exportLiteral(outfile, level, name_='Refresh')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Retry_After is not None:
             showIndent(outfile, level)
-            outfile.write('Retry_After=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Retry_After=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Retry_After.exportLiteral(outfile, level, name_='Retry_After')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Server is not None:
             showIndent(outfile, level)
-            outfile.write('Server=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Server=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Server.exportLiteral(outfile, level, name_='Server')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Set_Cookie is not None:
             showIndent(outfile, level)
-            outfile.write('Set_Cookie=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Set_Cookie=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Set_Cookie.exportLiteral(outfile, level, name_='Set_Cookie')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Strict_Transport_Security is not None:
             showIndent(outfile, level)
-            outfile.write('Strict_Transport_Security=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Strict_Transport_Security=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Strict_Transport_Security.exportLiteral(outfile, level, name_='Strict_Transport_Security')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Trailer is not None:
             showIndent(outfile, level)
-            outfile.write('Trailer=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Trailer=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Trailer.exportLiteral(outfile, level, name_='Trailer')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Transfer_Encoding is not None:
             showIndent(outfile, level)
-            outfile.write('Transfer_Encoding=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Transfer_Encoding=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Transfer_Encoding.exportLiteral(outfile, level, name_='Transfer_Encoding')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2078,55 +2078,55 @@ class HTTPResponseHeaderFieldsType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Via is not None:
             showIndent(outfile, level)
-            outfile.write('Via=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Via=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Via.exportLiteral(outfile, level, name_='Via')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Warning is not None:
             showIndent(outfile, level)
-            outfile.write('Warning=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Warning=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Warning.exportLiteral(outfile, level, name_='Warning')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.WWW_Authenticate is not None:
             showIndent(outfile, level)
-            outfile.write('WWW_Authenticate=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('WWW_Authenticate=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.WWW_Authenticate.exportLiteral(outfile, level, name_='WWW_Authenticate')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.X_Frame_Options is not None:
             showIndent(outfile, level)
-            outfile.write('X_Frame_Options=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('X_Frame_Options=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.X_Frame_Options.exportLiteral(outfile, level, name_='X_Frame_Options')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.X_XSS_Protection is not None:
             showIndent(outfile, level)
-            outfile.write('X_XSS_Protection=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('X_XSS_Protection=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.X_XSS_Protection.exportLiteral(outfile, level, name_='X_XSS_Protection')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.X_Content_Type_Options is not None:
             showIndent(outfile, level)
-            outfile.write('X_Content_Type_Options=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('X_Content_Type_Options=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.X_Content_Type_Options.exportLiteral(outfile, level, name_='X_Content_Type_Options')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.X_Forwarded_Proto is not None:
             showIndent(outfile, level)
-            outfile.write('X_Forwarded_Proto=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('X_Forwarded_Proto=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.X_Forwarded_Proto.exportLiteral(outfile, level, name_='X_Forwarded_Proto')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.X_Powered_By is not None:
             showIndent(outfile, level)
-            outfile.write('X_Powered_By=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('X_Powered_By=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.X_Powered_By.exportLiteral(outfile, level, name_='X_Powered_By')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.X_UA_Compatible is not None:
             showIndent(outfile, level)
-            outfile.write('X_UA_Compatible=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('X_UA_Compatible=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.X_UA_Compatible.exportLiteral(outfile, level, name_='X_UA_Compatible')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2139,35 +2139,35 @@ class HTTPResponseHeaderFieldsType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Access-Control-Allow-Origin':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Access_Control_Allow_Origin(obj_)
         elif nodeName_ == 'Accept-Ranges':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Accept_Ranges(obj_)
         elif nodeName_ == 'Age':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Age(obj_)
         elif nodeName_ == 'Cache-Control':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Cache_Control(obj_)
         elif nodeName_ == 'Connection':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Connection(obj_)
         elif nodeName_ == 'Content-Encoding':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Content_Encoding(obj_)
         elif nodeName_ == 'Content-Language':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Content_Language(obj_)
         elif nodeName_ == 'Content-Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Content_Length(obj_)
         elif nodeName_ == 'Content-Location':
@@ -2175,39 +2175,39 @@ class HTTPResponseHeaderFieldsType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Location(obj_)
         elif nodeName_ == 'Content-MD5':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Content_MD5(obj_)
         elif nodeName_ == 'Content-Disposition':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Content_Disposition(obj_)
         elif nodeName_ == 'Content-Range':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Content_Range(obj_)
         elif nodeName_ == 'Content-Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Content_Type(obj_)
         elif nodeName_ == 'Date':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Date(obj_)
         elif nodeName_ == 'ETag':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ETag(obj_)
         elif nodeName_ == 'Expires':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Expires(obj_)
         elif nodeName_ == 'Last-Modified':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Last_Modified(obj_)
         elif nodeName_ == 'Link':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Link(obj_)
         elif nodeName_ == 'Location':
@@ -2215,43 +2215,43 @@ class HTTPResponseHeaderFieldsType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Location(obj_)
         elif nodeName_ == 'P3P':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_P3P(obj_)
         elif nodeName_ == 'Pragma':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Pragma(obj_)
         elif nodeName_ == 'Proxy-Authenticate':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Proxy_Authenticate(obj_)
         elif nodeName_ == 'Refresh':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Refresh(obj_)
         elif nodeName_ == 'Retry-After':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Retry_After(obj_)
         elif nodeName_ == 'Server':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Server(obj_)
         elif nodeName_ == 'Set-Cookie':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Cookie(obj_)
         elif nodeName_ == 'Strict-Transport-Security':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Strict_Transport_Security(obj_)
         elif nodeName_ == 'Trailer':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Trailer(obj_)
         elif nodeName_ == 'Transfer-Encoding':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Transfer_Encoding(obj_)
         elif nodeName_ == 'Vary':
@@ -2259,39 +2259,39 @@ class HTTPResponseHeaderFieldsType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Vary(obj_)
         elif nodeName_ == 'Via':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Via(obj_)
         elif nodeName_ == 'Warning':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Warning(obj_)
         elif nodeName_ == 'WWW-Authenticate':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_WWW_Authenticate(obj_)
         elif nodeName_ == 'X-Frame-Options':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_X_Frame_Options(obj_)
         elif nodeName_ == 'X-XSS-Protection':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_X_XSS_Protection(obj_)
         elif nodeName_ == 'X-Content-Type-Options':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_X_Content_Type_Options(obj_)
         elif nodeName_ == 'X-Forwarded-Proto':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_X_Forwarded_Proto(obj_)
         elif nodeName_ == 'X-Powered-By':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_X_Powered_By(obj_)
         elif nodeName_ == 'X-UA-Compatible':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_X_UA_Compatible(obj_)
 # end class HTTPResponseHeaderFieldsType
@@ -2313,12 +2313,12 @@ class HTTPMessageType(GeneratedsSuper):
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
     def validate_PositiveIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.PositiveIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.PositiveIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Message_Body(self): return self.Message_Body
     def set_Message_Body(self, Message_Body): self.Message_Body = Message_Body
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='HTTPSessionObj:', name_='HTTPMessageType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -2365,13 +2365,13 @@ class HTTPMessageType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Message_Body is not None:
             showIndent(outfile, level)
-            outfile.write('Message_Body=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Message_Body=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Message_Body.exportLiteral(outfile, level, name_='Message_Body')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2384,11 +2384,11 @@ class HTTPMessageType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'Message_Body':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Message_Body(obj_)
 # end class HTTPMessageType
@@ -2410,12 +2410,12 @@ class HTTPStatusLineType(GeneratedsSuper):
     def get_Version(self): return self.Version
     def set_Version(self, Version): self.Version = Version
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Status_Code(self): return self.Status_Code
     def set_Status_Code(self, Status_Code): self.Status_Code = Status_Code
     def validate_PositiveIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.PositiveIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.PositiveIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Reason_Phrase(self): return self.Reason_Phrase
     def set_Reason_Phrase(self, Reason_Phrase): self.Reason_Phrase = Reason_Phrase
@@ -2467,19 +2467,19 @@ class HTTPStatusLineType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Version is not None:
             showIndent(outfile, level)
-            outfile.write('Version=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Version=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Version.exportLiteral(outfile, level, name_='Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Status_Code is not None:
             showIndent(outfile, level)
-            outfile.write('Status_Code=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('Status_Code=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.Status_Code.exportLiteral(outfile, level, name_='Status_Code')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Reason_Phrase is not None:
             showIndent(outfile, level)
-            outfile.write('Reason_Phrase=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Reason_Phrase=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Reason_Phrase.exportLiteral(outfile, level, name_='Reason_Phrase')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2492,15 +2492,15 @@ class HTTPStatusLineType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Version':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Version(obj_)
         elif nodeName_ == 'Status_Code':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Status_Code(obj_)
         elif nodeName_ == 'Reason_Phrase':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Reason_Phrase(obj_)
 # end class HTTPStatusLineType
@@ -2596,15 +2596,15 @@ class HostFieldType(GeneratedsSuper):
             self.set_Port(obj_)
 # end class HostFieldType
 
-class HTTPMethodType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class HTTPMethodType(cybox_common_types_1_0.BaseObjectAttributeType):
     """HTTPMethodType specifies HTTP method types, via a union of the
     HTTPMethodEnum type and the atomic xs:string type. Its base type
-    is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(HTTPMethodType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -2683,11 +2683,11 @@ class HTTPMethodType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class HTTPMethodType
 
-class HTTPSessionObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class HTTPSessionObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The HTTPSessionObjectType is intended to capture the details of an
     HTTP session."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, HTTP_Request_Response=None):
         super(HTTPSessionObjectType, self).__init__(object_reference, )
         if HTTP_Request_Response is None:

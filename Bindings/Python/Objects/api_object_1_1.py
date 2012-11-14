@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,11 +368,11 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class APIObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class APIObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The APIObjectType type is intended to characterize a specific
     Application Programming Interface."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Description=None, Function_Name=None, Normalized_Function_Name=None, Platform=None, Address=None):
         super(APIObjectType, self).__init__(object_reference, )
         self.Description = Description
@@ -391,7 +391,7 @@ class APIObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Function_Name(self): return self.Function_Name
     def set_Function_Name(self, Function_Name): self.Function_Name = Function_Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Normalized_Function_Name(self): return self.Normalized_Function_Name
     def set_Normalized_Function_Name(self, Normalized_Function_Name): self.Normalized_Function_Name = Normalized_Function_Name
@@ -400,7 +400,7 @@ class APIObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Address(self): return self.Address
     def set_Address(self, Address): self.Address = Address
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='APIObj:', name_='APIObjectType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -459,31 +459,31 @@ class APIObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(APIObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Function_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Function_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Function_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Function_Name.exportLiteral(outfile, level, name_='Function_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Normalized_Function_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Normalized_Function_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Normalized_Function_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Normalized_Function_Name.exportLiteral(outfile, level, name_='Normalized_Function_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Platform is not None:
             showIndent(outfile, level)
-            outfile.write('Platform=model_.cybox_common_types_v1_0.CPESpecificationType(\n')
+            outfile.write('Platform=model_.cybox_common_types_1_0.CPESpecificationType(\n')
             self.Platform.exportLiteral(outfile, level, name_='Platform')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Address is not None:
             showIndent(outfile, level)
-            outfile.write('Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Address.exportLiteral(outfile, level, name_='Address')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -496,23 +496,23 @@ class APIObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(APIObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Function_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Function_Name(obj_)
         elif nodeName_ == 'Normalized_Function_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Normalized_Function_Name(obj_)
         elif nodeName_ == 'Platform':
-            obj_ = cybox_common_types_v1_0.CPESpecificationType.factory()
+            obj_ = cybox_common_types_1_0.CPESpecificationType.factory()
             obj_.build(child_)
             self.set_Platform(obj_)
         elif nodeName_ == 'Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Address(obj_)
         super(APIObjectType, self).buildChildren(child_, node, nodeName_, True)

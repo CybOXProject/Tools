@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import address_object_1_2
 
 etree_ = None
@@ -369,15 +369,15 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class RouteType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class RouteType(cybox_common_types_1_0.BaseObjectAttributeType):
     """RouteType specifies route types, via a union of the RouteTypeEnum
     type and the atomic xs:string type. Its base type is the CybOX
-    Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e.
+    Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e.
     regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(RouteType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -456,7 +456,7 @@ class RouteType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class RouteType
 
-class NetworkRouteEntryObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class NetworkRouteEntryObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The NetworkRouteEntryObjectType type is intended to characterize
     generic system network routing table entries.The isipv6
     attribute specifies whether the route uses IPv6 addresses.The
@@ -468,7 +468,7 @@ class NetworkRouteEntryObjectType(cybox_common_types_v1_0.DefinedObjectType):
     packets sent to local network addresses.The is_publish attribute
     specifies whether the route is published."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, is_publish=None, is_autoconfigure_address=None, is_loopback=None, is_immortal=None, is_ipv6=None, Destination_Address=None, Origin=None, Netmask=None, Gateway_Address=None, Metric=None, Type=None, Protocol=None, Interface=None, Preferred_Lifetime=None, Valid_Lifetime=None, Route_Age=None):
         super(NetworkRouteEntryObjectType, self).__init__(object_reference, )
         self.is_publish = _cast(bool, is_publish)
@@ -504,7 +504,7 @@ class NetworkRouteEntryObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Metric(self): return self.Metric
     def set_Metric(self, Metric): self.Metric = Metric
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def get_Type(self): return self.Type
     def set_Type(self, Type): self.Type = Type
@@ -514,14 +514,14 @@ class NetworkRouteEntryObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Protocol(self): return self.Protocol
     def set_Protocol(self, Protocol): self.Protocol = Protocol
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Interface(self): return self.Interface
     def set_Interface(self, Interface): self.Interface = Interface
     def get_Preferred_Lifetime(self): return self.Preferred_Lifetime
     def set_Preferred_Lifetime(self, Preferred_Lifetime): self.Preferred_Lifetime = Preferred_Lifetime
     def validate_DurationObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DurationObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DurationObjectAttributeType, a restriction on None.
         pass
     def get_Valid_Lifetime(self): return self.Valid_Lifetime
     def set_Valid_Lifetime(self, Valid_Lifetime): self.Valid_Lifetime = Valid_Lifetime
@@ -671,7 +671,7 @@ class NetworkRouteEntryObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Metric is not None:
             showIndent(outfile, level)
-            outfile.write('Metric=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Metric=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Metric.exportLiteral(outfile, level, name_='Metric')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -683,31 +683,31 @@ class NetworkRouteEntryObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Protocol is not None:
             showIndent(outfile, level)
-            outfile.write('Protocol=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Protocol=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Protocol.exportLiteral(outfile, level, name_='Protocol')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Interface is not None:
             showIndent(outfile, level)
-            outfile.write('Interface=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Interface=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Interface.exportLiteral(outfile, level, name_='Interface')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Preferred_Lifetime is not None:
             showIndent(outfile, level)
-            outfile.write('Preferred_Lifetime=model_.cybox_common_types_v1_0.DurationObjectAttributeType(\n')
+            outfile.write('Preferred_Lifetime=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
             self.Preferred_Lifetime.exportLiteral(outfile, level, name_='Preferred_Lifetime')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Valid_Lifetime is not None:
             showIndent(outfile, level)
-            outfile.write('Valid_Lifetime=model_.cybox_common_types_v1_0.DurationObjectAttributeType(\n')
+            outfile.write('Valid_Lifetime=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
             self.Valid_Lifetime.exportLiteral(outfile, level, name_='Valid_Lifetime')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Route_Age is not None:
             showIndent(outfile, level)
-            outfile.write('Route_Age=model_.cybox_common_types_v1_0.DurationObjectAttributeType(\n')
+            outfile.write('Route_Age=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
             self.Route_Age.exportLiteral(outfile, level, name_='Route_Age')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -781,7 +781,7 @@ class NetworkRouteEntryObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Gateway_Address(obj_)
         elif nodeName_ == 'Metric':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Metric(obj_)
         elif nodeName_ == 'Type':
@@ -789,23 +789,23 @@ class NetworkRouteEntryObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Type(obj_)
         elif nodeName_ == 'Protocol':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Protocol(obj_)
         elif nodeName_ == 'Interface':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Interface(obj_)
         elif nodeName_ == 'Preferred_Lifetime':
-            obj_ = cybox_common_types_v1_0.DurationObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Preferred_Lifetime(obj_)
         elif nodeName_ == 'Valid_Lifetime':
-            obj_ = cybox_common_types_v1_0.DurationObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Valid_Lifetime(obj_)
         elif nodeName_ == 'Route_Age':
-            obj_ = cybox_common_types_v1_0.DurationObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Route_Age(obj_)
         super(NetworkRouteEntryObjectType, self).buildChildren(child_, node, nodeName_, True)

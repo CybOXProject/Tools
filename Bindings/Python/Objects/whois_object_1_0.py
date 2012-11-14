@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import uri_object_1_2
 import address_object_1_2
 
@@ -389,7 +389,7 @@ class RegistrarInfoType(GeneratedsSuper):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Address(self): return self.Address
     def set_Address(self, Address): self.Address = Address
@@ -458,13 +458,13 @@ class RegistrarInfoType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Address is not None:
             showIndent(outfile, level)
-            outfile.write('Address=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Address=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Address.exportLiteral(outfile, level, name_='Address')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -476,7 +476,7 @@ class RegistrarInfoType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Phone_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Phone_Number=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Phone_Number=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Phone_Number.exportLiteral(outfile, level, name_='Phone_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -501,11 +501,11 @@ class RegistrarInfoType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Address':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Address(obj_)
         elif nodeName_ == 'Email_Address':
@@ -513,7 +513,7 @@ class RegistrarInfoType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Email_Address(obj_)
         elif nodeName_ == 'Phone_Number':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Phone_Number(obj_)
         elif nodeName_ == 'Whois_Server':
@@ -545,7 +545,7 @@ class RegistrarContactType(GeneratedsSuper):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Email_Address(self): return self.Email_Address
     def set_Email_Address(self, Email_Address): self.Email_Address = Email_Address
@@ -606,7 +606,7 @@ class RegistrarContactType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -618,7 +618,7 @@ class RegistrarContactType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Phone_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Phone_Number=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Phone_Number=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Phone_Number.exportLiteral(outfile, level, name_='Phone_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -634,7 +634,7 @@ class RegistrarContactType(GeneratedsSuper):
             self.contact_type = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Email_Address':
@@ -642,17 +642,17 @@ class RegistrarContactType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Email_Address(obj_)
         elif nodeName_ == 'Phone_Number':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Phone_Number(obj_)
 # end class RegistrarContactType
 
-class WhoisStatusType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class WhoisStatusType(cybox_common_types_1_0.BaseObjectAttributeType):
     """The WhoisStatusType specifies a status for a domain as listed in its
     Whois entry. Only statuses defined by WhoisStatusTypeEnum can be
     used."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(WhoisStatusType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.valueOf_ = valueOf_
@@ -717,11 +717,11 @@ class WhoisStatusType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class WhoisStatusType
 
-class WhoisObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class WhoisObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The WhoisObjectType type is intended to characterize Whois
     information for a domain."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Domain_Name=None, Server_Name=None, IP_Address=None, Nameserver=None, Status=None, Updated_Date=None, Creation_Date=None, Expiration_Date=None, Registrar_Info=None, Registrar_Contact=None):
         super(WhoisObjectType, self).__init__(object_reference, )
         self.Domain_Name = Domain_Name
@@ -769,7 +769,7 @@ class WhoisObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Updated_Date(self): return self.Updated_Date
     def set_Updated_Date(self, Updated_Date): self.Updated_Date = Updated_Date
     def validate_DateObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateObjectAttributeType, a restriction on None.
         pass
     def get_Creation_Date(self): return self.Creation_Date
     def set_Creation_Date(self, Creation_Date): self.Creation_Date = Creation_Date
@@ -895,19 +895,19 @@ class WhoisObjectType(cybox_common_types_v1_0.DefinedObjectType):
         outfile.write('],\n')
         if self.Updated_Date is not None:
             showIndent(outfile, level)
-            outfile.write('Updated_Date=model_.cybox_common_types_v1_0.DateObjectAttributeType(\n')
+            outfile.write('Updated_Date=model_.cybox_common_types_1_0.DateObjectAttributeType(\n')
             self.Updated_Date.exportLiteral(outfile, level, name_='Updated_Date')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Creation_Date is not None:
             showIndent(outfile, level)
-            outfile.write('Creation_Date=model_.cybox_common_types_v1_0.DateObjectAttributeType(\n')
+            outfile.write('Creation_Date=model_.cybox_common_types_1_0.DateObjectAttributeType(\n')
             self.Creation_Date.exportLiteral(outfile, level, name_='Creation_Date')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Expiration_Date is not None:
             showIndent(outfile, level)
-            outfile.write('Expiration_Date=model_.cybox_common_types_v1_0.DateObjectAttributeType(\n')
+            outfile.write('Expiration_Date=model_.cybox_common_types_1_0.DateObjectAttributeType(\n')
             self.Expiration_Date.exportLiteral(outfile, level, name_='Expiration_Date')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -958,15 +958,15 @@ class WhoisObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.Status.append(obj_)
         elif nodeName_ == 'Updated_Date':
-            obj_ = cybox_common_types_v1_0.DateObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Updated_Date(obj_)
         elif nodeName_ == 'Creation_Date':
-            obj_ = cybox_common_types_v1_0.DateObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Creation_Date(obj_)
         elif nodeName_ == 'Expiration_Date':
-            obj_ = cybox_common_types_v1_0.DateObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Expiration_Date(obj_)
         elif nodeName_ == 'Registrar_Info':

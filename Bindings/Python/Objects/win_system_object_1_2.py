@@ -11,7 +11,7 @@ import re as re_
 
 import win_handle_object_1_3
 import system_object_1_3
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -475,14 +475,14 @@ class GlobalFlagType(GeneratedsSuper):
     def get_Abbreviation(self): return self.Abbreviation
     def set_Abbreviation(self, Abbreviation): self.Abbreviation = Abbreviation
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Destination(self): return self.Destination
     def set_Destination(self, Destination): self.Destination = Destination
     def get_Hexadecimal_Value(self): return self.Hexadecimal_Value
     def set_Hexadecimal_Value(self, Hexadecimal_Value): self.Hexadecimal_Value = Hexadecimal_Value
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Symbolic_Name(self): return self.Symbolic_Name
     def set_Symbolic_Name(self, Symbolic_Name): self.Symbolic_Name = Symbolic_Name
@@ -537,25 +537,25 @@ class GlobalFlagType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Abbreviation is not None:
             showIndent(outfile, level)
-            outfile.write('Abbreviation=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Abbreviation=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Abbreviation.exportLiteral(outfile, level, name_='Abbreviation')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Destination is not None:
             showIndent(outfile, level)
-            outfile.write('Destination=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Destination=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Destination.exportLiteral(outfile, level, name_='Destination')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Hexadecimal_Value is not None:
             showIndent(outfile, level)
-            outfile.write('Hexadecimal_Value=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Hexadecimal_Value=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Hexadecimal_Value.exportLiteral(outfile, level, name_='Hexadecimal_Value')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Symbolic_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Symbolic_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Symbolic_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Symbolic_Name.exportLiteral(outfile, level, name_='Symbolic_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -568,19 +568,19 @@ class GlobalFlagType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Abbreviation':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Abbreviation(obj_)
         elif nodeName_ == 'Destination':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Destination(obj_)
         elif nodeName_ == 'Hexadecimal_Value':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Hexadecimal_Value(obj_)
         elif nodeName_ == 'Symbolic_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Symbolic_Name(obj_)
 # end class GlobalFlagType
@@ -617,7 +617,7 @@ class WindowsSystemObjectType(system_object_1_3.SystemObjectType):
     def add_Domain(self, value): self.Domain.append(value)
     def insert_Domain(self, index, value): self.Domain[index] = value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Global_Flag_List(self): return self.Global_Flag_List
     def set_Global_Flag_List(self, Global_Flag_List): self.Global_Flag_List = Global_Flag_List
@@ -717,8 +717,8 @@ class WindowsSystemObjectType(system_object_1_3.SystemObjectType):
         level += 1
         for Domain_ in self.Domain:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
-            Domain_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.StringObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            Domain_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.StringObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -732,7 +732,7 @@ class WindowsSystemObjectType(system_object_1_3.SystemObjectType):
             outfile.write('),\n')
         if self.NetBIOS_Name is not None:
             showIndent(outfile, level)
-            outfile.write('NetBIOS_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('NetBIOS_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.NetBIOS_Name.exportLiteral(outfile, level, name_='NetBIOS_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -744,43 +744,43 @@ class WindowsSystemObjectType(system_object_1_3.SystemObjectType):
             outfile.write('),\n')
         if self.Product_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Product_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Product_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Product_ID.exportLiteral(outfile, level, name_='Product_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Product_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Product_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Product_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Product_Name.exportLiteral(outfile, level, name_='Product_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Registered_Organization is not None:
             showIndent(outfile, level)
-            outfile.write('Registered_Organization=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Registered_Organization=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Registered_Organization.exportLiteral(outfile, level, name_='Registered_Organization')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Registered_Owner is not None:
             showIndent(outfile, level)
-            outfile.write('Registered_Owner=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Registered_Owner=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Registered_Owner.exportLiteral(outfile, level, name_='Registered_Owner')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Windows_Directory is not None:
             showIndent(outfile, level)
-            outfile.write('Windows_Directory=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Windows_Directory=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Windows_Directory.exportLiteral(outfile, level, name_='Windows_Directory')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Windows_System_Directory is not None:
             showIndent(outfile, level)
-            outfile.write('Windows_System_Directory=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Windows_System_Directory=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Windows_System_Directory.exportLiteral(outfile, level, name_='Windows_System_Directory')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Windows_Temp_Directory is not None:
             showIndent(outfile, level)
-            outfile.write('Windows_Temp_Directory=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Windows_Temp_Directory=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Windows_Temp_Directory.exportLiteral(outfile, level, name_='Windows_Temp_Directory')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -793,7 +793,7 @@ class WindowsSystemObjectType(system_object_1_3.SystemObjectType):
         super(WindowsSystemObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Domain':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.Domain.append(obj_)
         elif nodeName_ == 'Global_Flag_List':
@@ -801,7 +801,7 @@ class WindowsSystemObjectType(system_object_1_3.SystemObjectType):
             obj_.build(child_)
             self.set_Global_Flag_List(obj_)
         elif nodeName_ == 'NetBIOS_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_NetBIOS_Name(obj_)
         elif nodeName_ == 'Open_Handle_List':
@@ -809,31 +809,31 @@ class WindowsSystemObjectType(system_object_1_3.SystemObjectType):
             obj_.build(child_)
             self.set_Open_Handle_List(obj_)
         elif nodeName_ == 'Product_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Product_ID(obj_)
         elif nodeName_ == 'Product_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Product_Name(obj_)
         elif nodeName_ == 'Registered_Organization':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Registered_Organization(obj_)
         elif nodeName_ == 'Registered_Owner':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Registered_Owner(obj_)
         elif nodeName_ == 'Windows_Directory':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Windows_Directory(obj_)
         elif nodeName_ == 'Windows_System_Directory':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Windows_System_Directory(obj_)
         elif nodeName_ == 'Windows_Temp_Directory':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Windows_Temp_Directory(obj_)
         super(WindowsSystemObjectType, self).buildChildren(child_, node, nodeName_, True)
