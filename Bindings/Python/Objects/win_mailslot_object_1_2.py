@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import win_handle_object_1_3
 
 etree_ = None
@@ -369,11 +369,11 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class WindowsMailslotObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class WindowsMailslotObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The WindowsMailslotObjectType is intended to characterize Windows
     mailslot objects."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Handle=None, Max_Message_Size=None, Name=None, Read_Timeout=None, Security_Attributes=None):
         super(WindowsMailslotObjectType, self).__init__(object_reference, )
         self.Handle = Handle
@@ -392,12 +392,12 @@ class WindowsMailslotObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Max_Message_Size(self): return self.Max_Message_Size
     def set_Max_Message_Size(self, Max_Message_Size): self.Max_Message_Size = Max_Message_Size
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Read_Timeout(self): return self.Read_Timeout
     def set_Read_Timeout(self, Read_Timeout): self.Read_Timeout = Read_Timeout
@@ -466,25 +466,25 @@ class WindowsMailslotObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Max_Message_Size is not None:
             showIndent(outfile, level)
-            outfile.write('Max_Message_Size=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Max_Message_Size=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Max_Message_Size.exportLiteral(outfile, level, name_='Max_Message_Size')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Read_Timeout is not None:
             showIndent(outfile, level)
-            outfile.write('Read_Timeout=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Read_Timeout=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Read_Timeout.exportLiteral(outfile, level, name_='Read_Timeout')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Security_Attributes is not None:
             showIndent(outfile, level)
-            outfile.write('Security_Attributes=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Security_Attributes=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Security_Attributes.exportLiteral(outfile, level, name_='Security_Attributes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -501,19 +501,19 @@ class WindowsMailslotObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Handle(obj_)
         elif nodeName_ == 'Max_Message_Size':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Max_Message_Size(obj_)
         elif nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Read_Timeout':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Read_Timeout(obj_)
         elif nodeName_ == 'Security_Attributes':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Security_Attributes(obj_)
         super(WindowsMailslotObjectType, self).buildChildren(child_, node, nodeName_, True)

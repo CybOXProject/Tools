@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import win_handle_object_1_3
 
 etree_ = None
@@ -369,16 +369,16 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class ThreadRunningStatusType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class ThreadRunningStatusType(cybox_common_types_1_0.BaseObjectAttributeType):
     """ThreadRunningStatusType specifies Windows thread running states via
     a union of the ThreadRunningStatusEnum type and the atomic
     xs:string type. Its base type is the CybOX Core
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(ThreadRunningStatusType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -457,12 +457,12 @@ class ThreadRunningStatusType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class ThreadRunningStatusType
 
-class WindowsThreadObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class WindowsThreadObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The Windows_ThreadObjectType is intended to characterize Windows
     process threads. See also: http://msdn.microsoft.com/en-
     us/library/windows/desktop/ms684852(v=vs.85).aspx"""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Thread_ID=None, Handle=None, Running_Status=None, Context=None, Priority=None, Creation_Flags=None, Creation_Time=None, Start_Address=None, Parameter_Address=None, Security_Attributes=None, Stack_Size=None):
         super(WindowsThreadObjectType, self).__init__(object_reference, )
         self.Thread_ID = Thread_ID
@@ -485,7 +485,7 @@ class WindowsThreadObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Thread_ID(self): return self.Thread_ID
     def set_Thread_ID(self, Thread_ID): self.Thread_ID = Thread_ID
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Handle(self): return self.Handle
     def set_Handle(self, Handle): self.Handle = Handle
@@ -497,22 +497,22 @@ class WindowsThreadObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Context(self): return self.Context
     def set_Context(self, Context): self.Context = Context
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Priority(self): return self.Priority
     def set_Priority(self, Priority): self.Priority = Priority
     def validate_UnsignedIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Creation_Flags(self): return self.Creation_Flags
     def set_Creation_Flags(self, Creation_Flags): self.Creation_Flags = Creation_Flags
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Creation_Time(self): return self.Creation_Time
     def set_Creation_Time(self, Creation_Time): self.Creation_Time = Creation_Time
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Start_Address(self): return self.Start_Address
     def set_Start_Address(self, Start_Address): self.Start_Address = Start_Address
@@ -597,7 +597,7 @@ class WindowsThreadObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsThreadObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Thread_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Thread_ID=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Thread_ID=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Thread_ID.exportLiteral(outfile, level, name_='Thread_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -615,49 +615,49 @@ class WindowsThreadObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Context is not None:
             showIndent(outfile, level)
-            outfile.write('Context=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Context=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Context.exportLiteral(outfile, level, name_='Context')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Priority is not None:
             showIndent(outfile, level)
-            outfile.write('Priority=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('Priority=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.Priority.exportLiteral(outfile, level, name_='Priority')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Creation_Flags is not None:
             showIndent(outfile, level)
-            outfile.write('Creation_Flags=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Creation_Flags=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Creation_Flags.exportLiteral(outfile, level, name_='Creation_Flags')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Creation_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Creation_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Creation_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Creation_Time.exportLiteral(outfile, level, name_='Creation_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Start_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Start_Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Start_Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Start_Address.exportLiteral(outfile, level, name_='Start_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Parameter_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Parameter_Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Parameter_Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Parameter_Address.exportLiteral(outfile, level, name_='Parameter_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Security_Attributes is not None:
             showIndent(outfile, level)
-            outfile.write('Security_Attributes=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Security_Attributes=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Security_Attributes.exportLiteral(outfile, level, name_='Security_Attributes')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Stack_Size is not None:
             showIndent(outfile, level)
-            outfile.write('Stack_Size=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Stack_Size=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Stack_Size.exportLiteral(outfile, level, name_='Stack_Size')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -670,7 +670,7 @@ class WindowsThreadObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsThreadObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Thread_ID':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Thread_ID(obj_)
         elif nodeName_ == 'Handle':
@@ -682,35 +682,35 @@ class WindowsThreadObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Running_Status(obj_)
         elif nodeName_ == 'Context':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Context(obj_)
         elif nodeName_ == 'Priority':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Priority(obj_)
         elif nodeName_ == 'Creation_Flags':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Creation_Flags(obj_)
         elif nodeName_ == 'Creation_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Creation_Time(obj_)
         elif nodeName_ == 'Start_Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Start_Address(obj_)
         elif nodeName_ == 'Parameter_Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Parameter_Address(obj_)
         elif nodeName_ == 'Security_Attributes':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Security_Attributes(obj_)
         elif nodeName_ == 'Stack_Size':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Stack_Size(obj_)
         super(WindowsThreadObjectType, self).buildChildren(child_, node, nodeName_, True)

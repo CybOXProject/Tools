@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import win_handle_object_1_3
 
 etree_ = None
@@ -388,7 +388,7 @@ class RegistryValueType(GeneratedsSuper):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Data(self): return self.Data
     def set_Data(self, Data): self.Data = Data
@@ -450,13 +450,13 @@ class RegistryValueType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -468,7 +468,7 @@ class RegistryValueType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Byte_Runs is not None:
             showIndent(outfile, level)
-            outfile.write('Byte_Runs=model_.cybox_common_types_v1_0.ByteRunsType(\n')
+            outfile.write('Byte_Runs=model_.cybox_common_types_1_0.ByteRunsType(\n')
             self.Byte_Runs.exportLiteral(outfile, level, name_='Byte_Runs')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -481,11 +481,11 @@ class RegistryValueType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
         elif nodeName_ == 'Datatype':
@@ -493,7 +493,7 @@ class RegistryValueType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Datatype(obj_)
         elif nodeName_ == 'Byte_Runs':
-            obj_ = cybox_common_types_v1_0.ByteRunsType.factory()
+            obj_ = cybox_common_types_1_0.ByteRunsType.factory()
             obj_.build(child_)
             self.set_Byte_Runs(obj_)
 # end class RegistryValueType
@@ -670,15 +670,15 @@ class RegistrySubkeysType(GeneratedsSuper):
             self.Subkey.append(obj_)
 # end class RegistrySubkeysType
 
-class RegistryHiveType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class RegistryHiveType(cybox_common_types_1_0.BaseObjectAttributeType):
     """RegistryHiveType specifies Windows registry hive types via a union
     of the RegistryHiveEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(RegistryHiveType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -757,15 +757,15 @@ class RegistryHiveType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class RegistryHiveType
 
-class RegistryDatatypeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class RegistryDatatypeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """Registry_Datatype specifies Windows registry datatypes via a union
     of the RegistryDataTypesEnum type and the atomic xs:string type.
-    Its base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    Its base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(RegistryDatatypeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -844,11 +844,11 @@ class RegistryDatatypeType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class RegistryDatatypeType
 
-class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class WindowsRegistryKeyObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The WindowsRegistryObjectType type is intended to characterize
     Windows registry objects, including Keys and Key/Value pairs."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Key=None, Hive=None, Number_Values=None, Values=None, Modified_Time=None, Creator_Username=None, Handle_List=None, Number_Subkeys=None, Subkeys=None, Byte_Runs=None):
         super(WindowsRegistryKeyObjectType, self).__init__(object_reference, )
         self.Key = Key
@@ -870,7 +870,7 @@ class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Key(self): return self.Key
     def set_Key(self, Key): self.Key = Key
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Hive(self): return self.Hive
     def set_Hive(self, Hive): self.Hive = Hive
@@ -880,14 +880,14 @@ class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Number_Values(self): return self.Number_Values
     def set_Number_Values(self, Number_Values): self.Number_Values = Number_Values
     def validate_UnsignedIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Values(self): return self.Values
     def set_Values(self, Values): self.Values = Values
     def get_Modified_Time(self): return self.Modified_Time
     def set_Modified_Time(self, Modified_Time): self.Modified_Time = Modified_Time
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Creator_Username(self): return self.Creator_Username
     def set_Creator_Username(self, Creator_Username): self.Creator_Username = Creator_Username
@@ -971,7 +971,7 @@ class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsRegistryKeyObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Key is not None:
             showIndent(outfile, level)
-            outfile.write('Key=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Key=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Key.exportLiteral(outfile, level, name_='Key')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -983,7 +983,7 @@ class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Number_Values is not None:
             showIndent(outfile, level)
-            outfile.write('Number_Values=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('Number_Values=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.Number_Values.exportLiteral(outfile, level, name_='Number_Values')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -995,13 +995,13 @@ class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Modified_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Modified_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Modified_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Modified_Time.exportLiteral(outfile, level, name_='Modified_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Creator_Username is not None:
             showIndent(outfile, level)
-            outfile.write('Creator_Username=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Creator_Username=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Creator_Username.exportLiteral(outfile, level, name_='Creator_Username')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1013,7 +1013,7 @@ class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Number_Subkeys is not None:
             showIndent(outfile, level)
-            outfile.write('Number_Subkeys=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('Number_Subkeys=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.Number_Subkeys.exportLiteral(outfile, level, name_='Number_Subkeys')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1025,7 +1025,7 @@ class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Byte_Runs is not None:
             showIndent(outfile, level)
-            outfile.write('Byte_Runs=model_.cybox_common_types_v1_0.ByteRunsType(\n')
+            outfile.write('Byte_Runs=model_.cybox_common_types_1_0.ByteRunsType(\n')
             self.Byte_Runs.exportLiteral(outfile, level, name_='Byte_Runs')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1038,7 +1038,7 @@ class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsRegistryKeyObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Key':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Key(obj_)
         elif nodeName_ == 'Hive':
@@ -1046,7 +1046,7 @@ class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Hive(obj_)
         elif nodeName_ == 'Number_Values':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Number_Values(obj_)
         elif nodeName_ == 'Values':
@@ -1054,11 +1054,11 @@ class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Values(obj_)
         elif nodeName_ == 'Modified_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Modified_Time(obj_)
         elif nodeName_ == 'Creator_Username':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Creator_Username(obj_)
         elif nodeName_ == 'Handle_List':
@@ -1066,7 +1066,7 @@ class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Handle_List(obj_)
         elif nodeName_ == 'Number_Subkeys':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Number_Subkeys(obj_)
         elif nodeName_ == 'Subkeys':
@@ -1074,7 +1074,7 @@ class WindowsRegistryKeyObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Subkeys(obj_)
         elif nodeName_ == 'Byte_Runs':
-            obj_ = cybox_common_types_v1_0.ByteRunsType.factory()
+            obj_ = cybox_common_types_1_0.ByteRunsType.factory()
             obj_.build(child_)
             self.set_Byte_Runs(obj_)
         super(WindowsRegistryKeyObjectType, self).buildChildren(child_, node, nodeName_, True)

@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,8 +368,8 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class cybox_common_types_v1_0.LibraryType(GeneratedsSuper):
-    """The cybox_common_types_v1_0.LibraryType identifies a single library incorporated into the
+class cybox_common_types_1_0.LibraryType(GeneratedsSuper):
+    """The cybox_common_types_1_0.LibraryType identifies a single library incorporated into the
     build of the tool.This field identifies the name of the
     library.This field identifies the version of the library."""
     subclass = None
@@ -379,16 +379,16 @@ class cybox_common_types_v1_0.LibraryType(GeneratedsSuper):
         self.name = _cast(None, name)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
-        if cybox_common_types_v1_0.LibraryType.subclass:
-            return cybox_common_types_v1_0.LibraryType.subclass(*args_, **kwargs_)
+        if cybox_common_types_1_0.LibraryType.subclass:
+            return cybox_common_types_1_0.LibraryType.subclass(*args_, **kwargs_)
         else:
-            return cybox_common_types_v1_0.LibraryType(*args_, **kwargs_)
+            return cybox_common_types_1_0.LibraryType(*args_, **kwargs_)
     factory = staticmethod(factory)
     def get_version(self): return self.version
     def set_version(self, version): self.version = version
     def get_name(self): return self.name
     def set_name(self, name): self.name = name
-    def export(self, outfile, level, namespace_='LibraryObj:', name_='cybox_common_types_v1_0.LibraryType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespace_='LibraryObj:', name_='cybox_common_types_1_0.LibraryType', namespacedef_='', pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -396,21 +396,21 @@ class cybox_common_types_v1_0.LibraryType(GeneratedsSuper):
         showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='cybox_common_types_v1_0.LibraryType')
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='cybox_common_types_1_0.LibraryType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
             self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='LibraryObj:', name_='cybox_common_types_v1_0.LibraryType'):
+    def exportAttributes(self, outfile, level, already_processed, namespace_='LibraryObj:', name_='cybox_common_types_1_0.LibraryType'):
         if self.version is not None and 'version' not in already_processed:
             already_processed.append('version')
             outfile.write(' version=%s' % (self.gds_format_string(quote_attrib(self.version).encode(ExternalEncoding), input_name='version'), ))
         if self.name is not None and 'name' not in already_processed:
             already_processed.append('name')
             outfile.write(' name=%s' % (self.gds_format_string(quote_attrib(self.name).encode(ExternalEncoding), input_name='name'), ))
-    def exportChildren(self, outfile, level, namespace_='LibraryObj:', name_='cybox_common_types_v1_0.LibraryType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespace_='LibraryObj:', name_='cybox_common_types_1_0.LibraryType', fromsubclass_=False, pretty_print=True):
         pass
     def hasContent_(self):
         if (
@@ -419,7 +419,7 @@ class cybox_common_types_v1_0.LibraryType(GeneratedsSuper):
             return True
         else:
             return False
-    def exportLiteral(self, outfile, level, name_='cybox_common_types_v1_0.LibraryType'):
+    def exportLiteral(self, outfile, level, name_='cybox_common_types_1_0.LibraryType'):
         level += 1
         self.exportLiteralAttributes(outfile, level, [], name_)
         if self.hasContent_():
@@ -451,13 +451,13 @@ class cybox_common_types_v1_0.LibraryType(GeneratedsSuper):
             self.name = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         pass
-# end class cybox_common_types_v1_0.LibraryType
+# end class cybox_common_types_1_0.LibraryType
 
-class LibraryObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class LibraryObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The LibraryObjectType type is intended to characterize software
     libraries."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Name=None, Path=None, Size=None, Type=None, Version=None, Base_Address=None):
         super(LibraryObjectType, self).__init__(object_reference, )
         self.Name = Name
@@ -475,26 +475,26 @@ class LibraryObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Path(self): return self.Path
     def set_Path(self, Path): self.Path = Path
     def get_Size(self): return self.Size
     def set_Size(self, Size): self.Size = Size
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def get_Type(self): return self.Type
     def set_Type(self, Type): self.Type = Type
     def validate_LibraryType(self, value):
-        # Validate type cybox_common_types_v1_0.LibraryType, a restriction on None.
+        # Validate type cybox_common_types_1_0.LibraryType, a restriction on None.
         pass
     def get_Version(self): return self.Version
     def set_Version(self, Version): self.Version = Version
     def get_Base_Address(self): return self.Base_Address
     def set_Base_Address(self, Base_Address): self.Base_Address = Base_Address
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='LibraryObj:', name_='LibraryObjectType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -556,37 +556,37 @@ class LibraryObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(LibraryObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Path is not None:
             showIndent(outfile, level)
-            outfile.write('Path=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Path=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Path.exportLiteral(outfile, level, name_='Path')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Size is not None:
             showIndent(outfile, level)
-            outfile.write('Size=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Size=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Size.exportLiteral(outfile, level, name_='Size')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Type is not None:
             showIndent(outfile, level)
-            outfile.write('Type=model_.cybox_common_types_v1_0.LibraryType(\n')
+            outfile.write('Type=model_.cybox_common_types_1_0.LibraryType(\n')
             self.Type.exportLiteral(outfile, level, name_='Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Version is not None:
             showIndent(outfile, level)
-            outfile.write('Version=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Version=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Version.exportLiteral(outfile, level, name_='Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Base_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Base_Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Base_Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Base_Address.exportLiteral(outfile, level, name_='Base_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -599,27 +599,27 @@ class LibraryObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(LibraryObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Path':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Path(obj_)
         elif nodeName_ == 'Size':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Size(obj_)
         elif nodeName_ == 'Type':
-            obj_ = cybox_common_types_v1_0.LibraryType.factory()
+            obj_ = cybox_common_types_1_0.LibraryType.factory()
             obj_.build(child_)
             self.set_Type(obj_)
         elif nodeName_ == 'Version':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Version(obj_)
         elif nodeName_ == 'Base_Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Base_Address(obj_)
         super(LibraryObjectType, self).buildChildren(child_, node, nodeName_, True)

@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -518,15 +518,15 @@ class FileSystemFlagListType(GeneratedsSuper):
             self.File_System_Flag.append(obj_)
 # end class FileSystemFlagListType
 
-class VolumeFileSystemFlagType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class VolumeFileSystemFlagType(cybox_common_types_1_0.BaseObjectAttributeType):
     """VolumeFileSystemFlagType specifies file system flags, via a union of
     the VolumeFileSystemFlagEnum type and the atomic xs:string type.
-    Its base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    Its base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(VolumeFileSystemFlagType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -605,12 +605,12 @@ class VolumeFileSystemFlagType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class VolumeFileSystemFlagType
 
-class VolumeObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class VolumeObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The VolumeObjectType type is intended to characterize generic drive
     volumes.The ismounted attribute specifies whether the volume is
     mounted."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, is_mounted=None, Name=None, Device_Path=None, File_System_Type=None, Total_Allocation_Units=None, Sectors_Per_Allocation_Unit=None, Bytes_Per_Sector=None, Actual_Available_Allocation_Units=None, Creation_Time=None, File_System_Flag_List=None, Serial_Number=None):
         super(VolumeObjectType, self).__init__(object_reference, )
         self.is_mounted = _cast(bool, is_mounted)
@@ -633,7 +633,7 @@ class VolumeObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Device_Path(self): return self.Device_Path
     def set_Device_Path(self, Device_Path): self.Device_Path = Device_Path
@@ -642,24 +642,24 @@ class VolumeObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Total_Allocation_Units(self): return self.Total_Allocation_Units
     def set_Total_Allocation_Units(self, Total_Allocation_Units): self.Total_Allocation_Units = Total_Allocation_Units
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def get_Sectors_Per_Allocation_Unit(self): return self.Sectors_Per_Allocation_Unit
     def set_Sectors_Per_Allocation_Unit(self, Sectors_Per_Allocation_Unit): self.Sectors_Per_Allocation_Unit = Sectors_Per_Allocation_Unit
     def validate_UnsignedIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Bytes_Per_Sector(self): return self.Bytes_Per_Sector
     def set_Bytes_Per_Sector(self, Bytes_Per_Sector): self.Bytes_Per_Sector = Bytes_Per_Sector
     def validate_PositiveIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.PositiveIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.PositiveIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Actual_Available_Allocation_Units(self): return self.Actual_Available_Allocation_Units
     def set_Actual_Available_Allocation_Units(self, Actual_Available_Allocation_Units): self.Actual_Available_Allocation_Units = Actual_Available_Allocation_Units
     def get_Creation_Time(self): return self.Creation_Time
     def set_Creation_Time(self, Creation_Time): self.Creation_Time = Creation_Time
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_File_System_Flag_List(self): return self.File_System_Flag_List
     def set_File_System_Flag_List(self, File_System_Flag_List): self.File_System_Flag_List = File_System_Flag_List
@@ -746,49 +746,49 @@ class VolumeObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(VolumeObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Device_Path is not None:
             showIndent(outfile, level)
-            outfile.write('Device_Path=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Device_Path=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Device_Path.exportLiteral(outfile, level, name_='Device_Path')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.File_System_Type is not None:
             showIndent(outfile, level)
-            outfile.write('File_System_Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('File_System_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.File_System_Type.exportLiteral(outfile, level, name_='File_System_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Total_Allocation_Units is not None:
             showIndent(outfile, level)
-            outfile.write('Total_Allocation_Units=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Total_Allocation_Units=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Total_Allocation_Units.exportLiteral(outfile, level, name_='Total_Allocation_Units')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Sectors_Per_Allocation_Unit is not None:
             showIndent(outfile, level)
-            outfile.write('Sectors_Per_Allocation_Unit=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('Sectors_Per_Allocation_Unit=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.Sectors_Per_Allocation_Unit.exportLiteral(outfile, level, name_='Sectors_Per_Allocation_Unit')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Bytes_Per_Sector is not None:
             showIndent(outfile, level)
-            outfile.write('Bytes_Per_Sector=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('Bytes_Per_Sector=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.Bytes_Per_Sector.exportLiteral(outfile, level, name_='Bytes_Per_Sector')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Actual_Available_Allocation_Units is not None:
             showIndent(outfile, level)
-            outfile.write('Actual_Available_Allocation_Units=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Actual_Available_Allocation_Units=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Actual_Available_Allocation_Units.exportLiteral(outfile, level, name_='Actual_Available_Allocation_Units')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Creation_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Creation_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Creation_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Creation_Time.exportLiteral(outfile, level, name_='Creation_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -800,7 +800,7 @@ class VolumeObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Serial_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Serial_Number=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Serial_Number=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Serial_Number.exportLiteral(outfile, level, name_='Serial_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -822,35 +822,35 @@ class VolumeObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(VolumeObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Device_Path':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Device_Path(obj_)
         elif nodeName_ == 'File_System_Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_File_System_Type(obj_)
         elif nodeName_ == 'Total_Allocation_Units':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Total_Allocation_Units(obj_)
         elif nodeName_ == 'Sectors_Per_Allocation_Unit':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Sectors_Per_Allocation_Unit(obj_)
         elif nodeName_ == 'Bytes_Per_Sector':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Bytes_Per_Sector(obj_)
         elif nodeName_ == 'Actual_Available_Allocation_Units':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Actual_Available_Allocation_Units(obj_)
         elif nodeName_ == 'Creation_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Creation_Time(obj_)
         elif nodeName_ == 'File_System_Flag_List':
@@ -858,7 +858,7 @@ class VolumeObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_File_System_Flag_List(obj_)
         elif nodeName_ == 'Serial_Number':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Serial_Number(obj_)
         super(VolumeObjectType, self).buildChildren(child_, node, nodeName_, True)

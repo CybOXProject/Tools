@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import network_route_entry_object_1_1
 
 etree_ = None
@@ -390,17 +390,17 @@ class UnixNetworkRouteEntryObjectType(network_route_entry_object_1_1.NetworkRout
     def get_Flags(self): return self.Flags
     def set_Flags(self, Flags): self.Flags = Flags
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_MSS(self): return self.MSS
     def set_MSS(self, MSS): self.MSS = MSS
     def validate_UnsignedIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Ref(self): return self.Ref
     def set_Ref(self, Ref): self.Ref = Ref
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def get_Use(self): return self.Use
     def set_Use(self, Use): self.Use = Use
@@ -463,31 +463,31 @@ class UnixNetworkRouteEntryObjectType(network_route_entry_object_1_1.NetworkRout
         super(UnixNetworkRouteEntryObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Flags is not None:
             showIndent(outfile, level)
-            outfile.write('Flags=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Flags=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Flags.exportLiteral(outfile, level, name_='Flags')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.MSS is not None:
             showIndent(outfile, level)
-            outfile.write('MSS=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('MSS=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.MSS.exportLiteral(outfile, level, name_='MSS')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Ref is not None:
             showIndent(outfile, level)
-            outfile.write('Ref=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Ref=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Ref.exportLiteral(outfile, level, name_='Ref')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Use is not None:
             showIndent(outfile, level)
-            outfile.write('Use=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Use=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Use.exportLiteral(outfile, level, name_='Use')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Window is not None:
             showIndent(outfile, level)
-            outfile.write('Window=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('Window=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.Window.exportLiteral(outfile, level, name_='Window')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -500,23 +500,23 @@ class UnixNetworkRouteEntryObjectType(network_route_entry_object_1_1.NetworkRout
         super(UnixNetworkRouteEntryObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Flags':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Flags(obj_)
         elif nodeName_ == 'MSS':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_MSS(obj_)
         elif nodeName_ == 'Ref':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Ref(obj_)
         elif nodeName_ == 'Use':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Use(obj_)
         elif nodeName_ == 'Window':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Window(obj_)
         super(UnixNetworkRouteEntryObjectType, self).buildChildren(child_, node, nodeName_, True)

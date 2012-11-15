@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,7 +368,7 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class MemoryObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class MemoryObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The MemoryObjectType type is intended to characterize generic memory
     objects.The isinjected attribute specifies whether or not the
     particular memory object has had data/code injected into it by
@@ -379,7 +379,7 @@ class MemoryObjectType(cybox_common_types_v1_0.DefinedObjectType):
     particular memory object is protected (read/write only from the
     process that allocated it)."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, is_protected=None, is_injected=None, is_mapped=None, Hashes=None, Name=None, Region_Size=None, Region_Start_Address=None):
         super(MemoryObjectType, self).__init__(object_reference, )
         self.is_protected = _cast(bool, is_protected)
@@ -400,17 +400,17 @@ class MemoryObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Region_Size(self): return self.Region_Size
     def set_Region_Size(self, Region_Size): self.Region_Size = Region_Size
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def get_Region_Start_Address(self): return self.Region_Start_Address
     def set_Region_Start_Address(self, Region_Start_Address): self.Region_Start_Address = Region_Start_Address
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_is_protected(self): return self.is_protected
     def set_is_protected(self, is_protected): self.is_protected = is_protected
@@ -493,25 +493,25 @@ class MemoryObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(MemoryObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Hashes.exportLiteral(outfile, level, name_='Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Region_Size is not None:
             showIndent(outfile, level)
-            outfile.write('Region_Size=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Region_Size=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Region_Size.exportLiteral(outfile, level, name_='Region_Size')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Region_Start_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Region_Start_Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Region_Start_Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Region_Start_Address.exportLiteral(outfile, level, name_='Region_Start_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -551,19 +551,19 @@ class MemoryObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(MemoryObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Hashes(obj_)
         elif nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Region_Size':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Region_Size(obj_)
         elif nodeName_ == 'Region_Start_Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Region_Start_Address(obj_)
         super(MemoryObjectType, self).buildChildren(child_, node, nodeName_, True)

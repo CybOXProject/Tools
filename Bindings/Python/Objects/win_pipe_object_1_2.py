@@ -11,7 +11,7 @@ import re as re_
 
 import win_handle_object_1_3
 import pipe_object_1_3
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -394,7 +394,7 @@ class WindowsPipeObjectType(pipe_object_1_3.PipeObjectType):
     def get_Default_Time_Out(self): return self.Default_Time_Out
     def set_Default_Time_Out(self, Default_Time_Out): self.Default_Time_Out = Default_Time_Out
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Handle(self): return self.Handle
     def set_Handle(self, Handle): self.Handle = Handle
@@ -405,7 +405,7 @@ class WindowsPipeObjectType(pipe_object_1_3.PipeObjectType):
     def get_Open_Mode(self): return self.Open_Mode
     def set_Open_Mode(self, Open_Mode): self.Open_Mode = Open_Mode
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Out_Buffer_Size(self): return self.Out_Buffer_Size
     def set_Out_Buffer_Size(self, Out_Buffer_Size): self.Out_Buffer_Size = Out_Buffer_Size
@@ -414,7 +414,7 @@ class WindowsPipeObjectType(pipe_object_1_3.PipeObjectType):
     def get_Security_Attributes(self): return self.Security_Attributes
     def set_Security_Attributes(self, Security_Attributes): self.Security_Attributes = Security_Attributes
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinPipeObj:', name_='WindowsPipeObjectType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -482,7 +482,7 @@ class WindowsPipeObjectType(pipe_object_1_3.PipeObjectType):
         super(WindowsPipeObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Default_Time_Out is not None:
             showIndent(outfile, level)
-            outfile.write('Default_Time_Out=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Default_Time_Out=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Default_Time_Out.exportLiteral(outfile, level, name_='Default_Time_Out')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -494,37 +494,37 @@ class WindowsPipeObjectType(pipe_object_1_3.PipeObjectType):
             outfile.write('),\n')
         if self.In_Buffer_Size is not None:
             showIndent(outfile, level)
-            outfile.write('In_Buffer_Size=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('In_Buffer_Size=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.In_Buffer_Size.exportLiteral(outfile, level, name_='In_Buffer_Size')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Max_Instances is not None:
             showIndent(outfile, level)
-            outfile.write('Max_Instances=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Max_Instances=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Max_Instances.exportLiteral(outfile, level, name_='Max_Instances')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Open_Mode is not None:
             showIndent(outfile, level)
-            outfile.write('Open_Mode=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Open_Mode=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Open_Mode.exportLiteral(outfile, level, name_='Open_Mode')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Out_Buffer_Size is not None:
             showIndent(outfile, level)
-            outfile.write('Out_Buffer_Size=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Out_Buffer_Size=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Out_Buffer_Size.exportLiteral(outfile, level, name_='Out_Buffer_Size')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Pipe_Mode is not None:
             showIndent(outfile, level)
-            outfile.write('Pipe_Mode=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Pipe_Mode=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Pipe_Mode.exportLiteral(outfile, level, name_='Pipe_Mode')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Security_Attributes is not None:
             showIndent(outfile, level)
-            outfile.write('Security_Attributes=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Security_Attributes=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Security_Attributes.exportLiteral(outfile, level, name_='Security_Attributes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -537,7 +537,7 @@ class WindowsPipeObjectType(pipe_object_1_3.PipeObjectType):
         super(WindowsPipeObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Default_Time_Out':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Default_Time_Out(obj_)
         elif nodeName_ == 'Handle':
@@ -545,27 +545,27 @@ class WindowsPipeObjectType(pipe_object_1_3.PipeObjectType):
             obj_.build(child_)
             self.set_Handle(obj_)
         elif nodeName_ == 'In_Buffer_Size':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_In_Buffer_Size(obj_)
         elif nodeName_ == 'Max_Instances':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Max_Instances(obj_)
         elif nodeName_ == 'Open_Mode':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Open_Mode(obj_)
         elif nodeName_ == 'Out_Buffer_Size':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Out_Buffer_Size(obj_)
         elif nodeName_ == 'Pipe_Mode':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Pipe_Mode(obj_)
         elif nodeName_ == 'Security_Attributes':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Security_Attributes(obj_)
         super(WindowsPipeObjectType, self).buildChildren(child_, node, nodeName_, True)

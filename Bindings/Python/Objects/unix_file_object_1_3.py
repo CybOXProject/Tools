@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import file_object_1_3
 
 etree_ = None
@@ -369,15 +369,15 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class UnixFileType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class UnixFileType(cybox_common_types_1_0.BaseObjectAttributeType):
     """UnixFileType specifies Unix file types, via a union of the
     UnixFileTypeEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(UnixFileType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -763,12 +763,12 @@ class UnixFileObjectType(file_object_1_3.FileObjectType):
     def get_Group_Owner(self): return self.Group_Owner
     def set_Group_Owner(self, Group_Owner): self.Group_Owner = Group_Owner
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_INode(self): return self.INode
     def set_INode(self, INode): self.INode = INode
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def get_Type(self): return self.Type
     def set_Type(self, Type): self.Type = Type
@@ -826,13 +826,13 @@ class UnixFileObjectType(file_object_1_3.FileObjectType):
         super(UnixFileObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Group_Owner is not None:
             showIndent(outfile, level)
-            outfile.write('Group_Owner=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Group_Owner=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Group_Owner.exportLiteral(outfile, level, name_='Group_Owner')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.INode is not None:
             showIndent(outfile, level)
-            outfile.write('INode=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('INode=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.INode.exportLiteral(outfile, level, name_='INode')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -851,11 +851,11 @@ class UnixFileObjectType(file_object_1_3.FileObjectType):
         super(UnixFileObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Group_Owner':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Group_Owner(obj_)
         elif nodeName_ == 'INode':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_INode(obj_)
         elif nodeName_ == 'Type':

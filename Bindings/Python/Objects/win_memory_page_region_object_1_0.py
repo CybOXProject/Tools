@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import memory_object_1_2
 
 etree_ = None
@@ -369,15 +369,15 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class MemoryPageTypeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class MemoryPageTypeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """MemoryPageTypeType specifies memory protection type, via a union of
     the MemoryPageTypeEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(MemoryPageTypeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -456,15 +456,15 @@ class MemoryPageTypeType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class MemoryPageTypeType
 
-class MemoryPageStateType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class MemoryPageStateType(cybox_common_types_1_0.BaseObjectAttributeType):
     """MemoryPageStateType specifies memory protection states, via a union
     of the MemoryPageStateEnum type and the atomic xs:string type.
-    Its base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    Its base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(MemoryPageStateType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -543,16 +543,16 @@ class MemoryPageStateType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class MemoryPageStateType
 
-class MemoryPageProtectionType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class MemoryPageProtectionType(cybox_common_types_1_0.BaseObjectAttributeType):
     """MemoryPageProtectionType specifies memory protection constant types,
     via a union of the MemoryPageProtectionEnum type and the atomic
     xs:string type. Its base type is the CybOX Core
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(MemoryPageProtectionType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -657,7 +657,7 @@ class WindowsMemoryPageRegionObjectType(memory_object_1_2.MemoryObjectType):
     def get_Allocation_Base_Address(self): return self.Allocation_Base_Address
     def set_Allocation_Base_Address(self, Allocation_Base_Address): self.Allocation_Base_Address = Allocation_Base_Address
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Allocation_Protect(self): return self.Allocation_Protect
     def set_Allocation_Protect(self, Allocation_Protect): self.Allocation_Protect = Allocation_Protect
@@ -734,7 +734,7 @@ class WindowsMemoryPageRegionObjectType(memory_object_1_2.MemoryObjectType):
             outfile.write('),\n')
         if self.Allocation_Base_Address is not None:
             showIndent(outfile, level)
-            outfile.write('Allocation_Base_Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Allocation_Base_Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Allocation_Base_Address.exportLiteral(outfile, level, name_='Allocation_Base_Address')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -769,7 +769,7 @@ class WindowsMemoryPageRegionObjectType(memory_object_1_2.MemoryObjectType):
             obj_.build(child_)
             self.set_Type(obj_)
         elif nodeName_ == 'Allocation_Base_Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Allocation_Base_Address(obj_)
         elif nodeName_ == 'Allocation_Protect':

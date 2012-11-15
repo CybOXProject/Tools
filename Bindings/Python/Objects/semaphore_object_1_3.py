@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,12 +368,12 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class SemaphoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class SemaphoreObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The SemaphoreObjectType type is intended to characterize generic
     semaphore objects.The named attribute specifies whether the
     Semaphore is named."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, named=None, Current_Count=None, Maximum_Count=None, Name=None):
         super(SemaphoreObjectType, self).__init__(object_reference, )
         self.named = _cast(bool, named)
@@ -389,17 +389,17 @@ class SemaphoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Current_Count(self): return self.Current_Count
     def set_Current_Count(self, Current_Count): self.Current_Count = Current_Count
     def validate_UnsignedIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Maximum_Count(self): return self.Maximum_Count
     def set_Maximum_Count(self, Maximum_Count): self.Maximum_Count = Maximum_Count
     def validate_PositiveIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.PositiveIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.PositiveIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_named(self): return self.named
     def set_named(self, named): self.named = named
@@ -461,19 +461,19 @@ class SemaphoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(SemaphoreObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Current_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Current_Count=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('Current_Count=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.Current_Count.exportLiteral(outfile, level, name_='Current_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Maximum_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Maximum_Count=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('Maximum_Count=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.Maximum_Count.exportLiteral(outfile, level, name_='Maximum_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -495,15 +495,15 @@ class SemaphoreObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(SemaphoreObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Current_Count':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Current_Count(obj_)
         elif nodeName_ == 'Maximum_Count':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Maximum_Count(obj_)
         elif nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         super(SemaphoreObjectType, self).buildChildren(child_, node, nodeName_, True)

@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import account_object_1_2
 import port_object_1_3
 
@@ -387,7 +387,7 @@ class FullyQualifiedNameType(GeneratedsSuper):
     def get_NetBEUI_Name(self): return self.NetBEUI_Name
     def set_NetBEUI_Name(self, NetBEUI_Name): self.NetBEUI_Name = NetBEUI_Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Full_Name(self): return self.Full_Name
     def set_Full_Name(self, Full_Name): self.Full_Name = Full_Name
@@ -436,13 +436,13 @@ class FullyQualifiedNameType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.NetBEUI_Name is not None:
             showIndent(outfile, level)
-            outfile.write('NetBEUI_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('NetBEUI_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.NetBEUI_Name.exportLiteral(outfile, level, name_='NetBEUI_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Full_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Full_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Full_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Full_Name.exportLiteral(outfile, level, name_='Full_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -455,11 +455,11 @@ class FullyQualifiedNameType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'NetBEUI_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_NetBEUI_Name(obj_)
         elif nodeName_ == 'Full_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Full_Name(obj_)
 # end class FullyQualifiedNameType
@@ -483,7 +483,7 @@ class KerberosType(GeneratedsSuper):
     def get_Ticket(self): return self.Ticket
     def set_Ticket(self, Ticket): self.Ticket = Ticket
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinComputerAccountObj:', name_='KerberosType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -536,7 +536,7 @@ class KerberosType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Ticket is not None:
             showIndent(outfile, level)
-            outfile.write('Ticket=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Ticket=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Ticket.exportLiteral(outfile, level, name_='Ticket')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -553,7 +553,7 @@ class KerberosType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Delegation(obj_)
         elif nodeName_ == 'Ticket':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Ticket(obj_)
 # end class KerberosType
@@ -575,7 +575,7 @@ class KerberosDelegationType(GeneratedsSuper):
     def get_Bitmask(self): return self.Bitmask
     def set_Bitmask(self, Bitmask): self.Bitmask = Bitmask
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Service(self): return self.Service
     def set_Service(self, Service): self.Service = Service
@@ -624,7 +624,7 @@ class KerberosDelegationType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Bitmask is not None:
             showIndent(outfile, level)
-            outfile.write('Bitmask=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Bitmask=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Bitmask.exportLiteral(outfile, level, name_='Bitmask')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -643,7 +643,7 @@ class KerberosDelegationType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Bitmask':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Bitmask(obj_)
         elif nodeName_ == 'Service':
@@ -671,7 +671,7 @@ class KerberosServiceType(GeneratedsSuper):
     def get_Computer(self): return self.Computer
     def set_Computer(self, Computer): self.Computer = Computer
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
@@ -730,13 +730,13 @@ class KerberosServiceType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Computer is not None:
             showIndent(outfile, level)
-            outfile.write('Computer=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Computer=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Computer.exportLiteral(outfile, level, name_='Computer')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -748,7 +748,7 @@ class KerberosServiceType(GeneratedsSuper):
             outfile.write('),\n')
         if self.User is not None:
             showIndent(outfile, level)
-            outfile.write('User=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('User=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.User.exportLiteral(outfile, level, name_='User')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -761,11 +761,11 @@ class KerberosServiceType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Computer':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Computer(obj_)
         elif nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Port':
@@ -773,7 +773,7 @@ class KerberosServiceType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Port(obj_)
         elif nodeName_ == 'User':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_User(obj_)
 # end class KerberosServiceType
@@ -803,12 +803,12 @@ class WinComputerAccountObjectType(account_object_1_2.AccountObjectType):
     def get_Security_ID(self): return self.Security_ID
     def set_Security_ID(self, Security_ID): self.Security_ID = Security_ID
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Security_Type(self): return self.Security_Type
     def set_Security_Type(self, Security_Type): self.Security_Type = Security_Type
     def validate_SIDType(self, value):
-        # Validate type cybox_common_types_v1_0.SIDType, a restriction on None.
+        # Validate type cybox_common_types_1_0.SIDType, a restriction on None.
         pass
     def get_Type(self): return self.Type
     def set_Type(self, Type): self.Type = Type
@@ -881,19 +881,19 @@ class WinComputerAccountObjectType(account_object_1_2.AccountObjectType):
             outfile.write('),\n')
         if self.Security_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Security_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Security_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Security_ID.exportLiteral(outfile, level, name_='Security_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Security_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Security_Type=model_.cybox_common_types_v1_0.SIDType(\n')
+            outfile.write('Security_Type=model_.cybox_common_types_1_0.SIDType(\n')
             self.Security_Type.exportLiteral(outfile, level, name_='Security_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Type is not None:
             showIndent(outfile, level)
-            outfile.write('Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Type.exportLiteral(outfile, level, name_='Type')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -914,15 +914,15 @@ class WinComputerAccountObjectType(account_object_1_2.AccountObjectType):
             obj_.build(child_)
             self.set_Kerberos(obj_)
         elif nodeName_ == 'Security_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Security_ID(obj_)
         elif nodeName_ == 'Security_Type':
-            obj_ = cybox_common_types_v1_0.SIDType.factory()
+            obj_ = cybox_common_types_1_0.SIDType.factory()
             obj_.build(child_)
             self.set_Security_Type(obj_)
         elif nodeName_ == 'Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Type(obj_)
         super(WinComputerAccountObjectType, self).buildChildren(child_, node, nodeName_, True)

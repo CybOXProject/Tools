@@ -10,7 +10,7 @@ import getopt
 import re as re_
 
 import pipe_object_1_3
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -385,7 +385,7 @@ class UnixPipeObjectType(pipe_object_1_3.PipeObjectType):
     def get_Permission_Mode(self): return self.Permission_Mode
     def set_Permission_Mode(self, Permission_Mode): self.Permission_Mode = Permission_Mode
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='UnixPipeObj:', name_='UnixPipeObjectType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -432,7 +432,7 @@ class UnixPipeObjectType(pipe_object_1_3.PipeObjectType):
         super(UnixPipeObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Permission_Mode is not None:
             showIndent(outfile, level)
-            outfile.write('Permission_Mode=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Permission_Mode=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Permission_Mode.exportLiteral(outfile, level, name_='Permission_Mode')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -445,7 +445,7 @@ class UnixPipeObjectType(pipe_object_1_3.PipeObjectType):
         super(UnixPipeObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Permission_Mode':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Permission_Mode(obj_)
         super(UnixPipeObjectType, self).buildChildren(child_, node, nodeName_, True)

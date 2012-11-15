@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,11 +368,11 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class ProductObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class ProductObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The ProductObjectType type is intended to characterize software or
     hardware products."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Edition=None, Language=None, Product=None, Update=None, Vendor=None, Version=None):
         super(ProductObjectType, self).__init__(object_reference, )
         self.Edition = Edition
@@ -390,7 +390,7 @@ class ProductObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Edition(self): return self.Edition
     def set_Edition(self, Edition): self.Edition = Edition
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Language(self): return self.Language
     def set_Language(self, Language): self.Language = Language
@@ -462,37 +462,37 @@ class ProductObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(ProductObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Edition is not None:
             showIndent(outfile, level)
-            outfile.write('Edition=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Edition=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Edition.exportLiteral(outfile, level, name_='Edition')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Language is not None:
             showIndent(outfile, level)
-            outfile.write('Language=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Language=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Language.exportLiteral(outfile, level, name_='Language')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Product is not None:
             showIndent(outfile, level)
-            outfile.write('Product=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Product=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Product.exportLiteral(outfile, level, name_='Product')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Update is not None:
             showIndent(outfile, level)
-            outfile.write('Update=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Update=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Update.exportLiteral(outfile, level, name_='Update')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Vendor is not None:
             showIndent(outfile, level)
-            outfile.write('Vendor=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Vendor=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Vendor.exportLiteral(outfile, level, name_='Vendor')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Version is not None:
             showIndent(outfile, level)
-            outfile.write('Version=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Version=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Version.exportLiteral(outfile, level, name_='Version')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -505,11 +505,11 @@ class ProductObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(ProductObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Edition':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Edition(obj_)
         elif nodeName_ == 'Language':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Language(obj_)
         elif nodeName_ == 'Product':
@@ -517,15 +517,15 @@ class ProductObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Product(obj_)
         elif nodeName_ == 'Update':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Update(obj_)
         elif nodeName_ == 'Vendor':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Vendor(obj_)
         elif nodeName_ == 'Version':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Version(obj_)
         super(ProductObjectType, self).buildChildren(child_, node, nodeName_, True)

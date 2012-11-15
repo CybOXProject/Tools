@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,11 +368,11 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class UserSessionObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class UserSessionObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The UserSessionObjectType type is intended to characterize user
     sessions."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Effective_Group=None, Effective_Group_ID=None, Effective_User=None, Effective_User_ID=None, Login_Time=None, Logout_Time=None):
         super(UserSessionObjectType, self).__init__(object_reference, )
         self.Effective_Group = Effective_Group
@@ -390,7 +390,7 @@ class UserSessionObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Effective_Group(self): return self.Effective_Group
     def set_Effective_Group(self, Effective_Group): self.Effective_Group = Effective_Group
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Effective_Group_ID(self): return self.Effective_Group_ID
     def set_Effective_Group_ID(self, Effective_Group_ID): self.Effective_Group_ID = Effective_Group_ID
@@ -401,7 +401,7 @@ class UserSessionObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Login_Time(self): return self.Login_Time
     def set_Login_Time(self, Login_Time): self.Login_Time = Login_Time
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Logout_Time(self): return self.Logout_Time
     def set_Logout_Time(self, Logout_Time): self.Logout_Time = Logout_Time
@@ -465,37 +465,37 @@ class UserSessionObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(UserSessionObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Effective_Group is not None:
             showIndent(outfile, level)
-            outfile.write('Effective_Group=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Effective_Group=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Effective_Group.exportLiteral(outfile, level, name_='Effective_Group')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Effective_Group_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Effective_Group_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Effective_Group_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Effective_Group_ID.exportLiteral(outfile, level, name_='Effective_Group_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Effective_User is not None:
             showIndent(outfile, level)
-            outfile.write('Effective_User=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Effective_User=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Effective_User.exportLiteral(outfile, level, name_='Effective_User')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Effective_User_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Effective_User_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Effective_User_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Effective_User_ID.exportLiteral(outfile, level, name_='Effective_User_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Login_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Login_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Login_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Login_Time.exportLiteral(outfile, level, name_='Login_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Logout_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Logout_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Logout_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Logout_Time.exportLiteral(outfile, level, name_='Logout_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -508,27 +508,27 @@ class UserSessionObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(UserSessionObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Effective_Group':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Effective_Group(obj_)
         elif nodeName_ == 'Effective_Group_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Effective_Group_ID(obj_)
         elif nodeName_ == 'Effective_User':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Effective_User(obj_)
         elif nodeName_ == 'Effective_User_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Effective_User_ID(obj_)
         elif nodeName_ == 'Login_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Login_Time(obj_)
         elif nodeName_ == 'Logout_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Logout_Time(obj_)
         super(UserSessionObjectType, self).buildChildren(child_, node, nodeName_, True)

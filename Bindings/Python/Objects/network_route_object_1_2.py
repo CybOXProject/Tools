@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import network_route_entry_object_1_1
 
 etree_ = None
@@ -455,7 +455,7 @@ class NetworkRouteEntriesType(GeneratedsSuper):
             self.Network_Route_Entry.append(obj_)
 # end class NetworkRouteEntriesType
 
-class NetRouteObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class NetRouteObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The NetRouteObjectType type is intended to characterize a specific
     network route.The is_ipv6 attribute specifies whether or not the
     route uses IPv6 addresses.The is_autoconfigure_address specifies
@@ -465,7 +465,7 @@ class NetRouteObjectType(cybox_common_types_v1_0.DefinedObjectType):
     the local host).The is_publish attribute specifies if the route
     is published."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, is_publish=None, is_autoconfigure_address=None, is_loopback=None, is_immortal=None, is_ipv6=None, Description=None, Network_Route_Entries=None, Preferred_Lifetime=None, Valid_Lifetime=None, Route_Age=None):
         super(NetRouteObjectType, self).__init__(object_reference, )
         self.is_publish = _cast(bool, is_publish)
@@ -491,7 +491,7 @@ class NetRouteObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Preferred_Lifetime(self): return self.Preferred_Lifetime
     def set_Preferred_Lifetime(self, Preferred_Lifetime): self.Preferred_Lifetime = Preferred_Lifetime
     def validate_DurationObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DurationObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DurationObjectAttributeType, a restriction on None.
         pass
     def get_Valid_Lifetime(self): return self.Valid_Lifetime
     def set_Valid_Lifetime(self, Valid_Lifetime): self.Valid_Lifetime = Valid_Lifetime
@@ -599,7 +599,7 @@ class NetRouteObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(NetRouteObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -611,19 +611,19 @@ class NetRouteObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Preferred_Lifetime is not None:
             showIndent(outfile, level)
-            outfile.write('Preferred_Lifetime=model_.cybox_common_types_v1_0.DurationObjectAttributeType(\n')
+            outfile.write('Preferred_Lifetime=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
             self.Preferred_Lifetime.exportLiteral(outfile, level, name_='Preferred_Lifetime')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Valid_Lifetime is not None:
             showIndent(outfile, level)
-            outfile.write('Valid_Lifetime=model_.cybox_common_types_v1_0.DurationObjectAttributeType(\n')
+            outfile.write('Valid_Lifetime=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
             self.Valid_Lifetime.exportLiteral(outfile, level, name_='Valid_Lifetime')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Route_Age is not None:
             showIndent(outfile, level)
-            outfile.write('Route_Age=model_.cybox_common_types_v1_0.DurationObjectAttributeType(\n')
+            outfile.write('Route_Age=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
             self.Route_Age.exportLiteral(outfile, level, name_='Route_Age')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -681,7 +681,7 @@ class NetRouteObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(NetRouteObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Network_Route_Entries':
@@ -689,15 +689,15 @@ class NetRouteObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Network_Route_Entries(obj_)
         elif nodeName_ == 'Preferred_Lifetime':
-            obj_ = cybox_common_types_v1_0.DurationObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Preferred_Lifetime(obj_)
         elif nodeName_ == 'Valid_Lifetime':
-            obj_ = cybox_common_types_v1_0.DurationObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Valid_Lifetime(obj_)
         elif nodeName_ == 'Route_Age':
-            obj_ = cybox_common_types_v1_0.DurationObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Route_Age(obj_)
         super(NetRouteObjectType, self).buildChildren(child_, node, nodeName_, True)

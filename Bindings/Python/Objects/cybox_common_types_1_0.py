@@ -6513,8 +6513,9 @@ class SimpleHashValueType(HexBinaryObjectAttributeType):
     hash value."""
     subclass = None
     superclass = HexBinaryObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None):
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(SimpleHashValueType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, )
+        self.valueOf_ = valueOf_
         pass
     def factory(*args_, **kwargs_):
         if SimpleHashValueType.subclass:
@@ -6522,6 +6523,8 @@ class SimpleHashValueType(HexBinaryObjectAttributeType):
         else:
             return SimpleHashValueType(*args_, **kwargs_)
     factory = staticmethod(factory)
+    def get_valueOf_(self): return self.valueOf_
+    def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def export(self, outfile, level, namespace_='Common:', name_='SimpleHashValueType', namespacedef_='', pretty_print=True):
         if pretty_print:
             eol_ = '\n'
@@ -6532,7 +6535,8 @@ class SimpleHashValueType(HexBinaryObjectAttributeType):
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='SimpleHashValueType')
         if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
+            outfile.write('>')
+            outfile.write(str(self.valueOf_).encode(ExternalEncoding))
             self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
@@ -6544,6 +6548,7 @@ class SimpleHashValueType(HexBinaryObjectAttributeType):
         pass
     def hasContent_(self):
         if (
+            self.valueOf_ or
             super(SimpleHashValueType, self).hasContent_()
             ):
             return True
@@ -6554,6 +6559,9 @@ class SimpleHashValueType(HexBinaryObjectAttributeType):
         self.exportLiteralAttributes(outfile, level, [], name_)
         if self.hasContent_():
             self.exportLiteralChildren(outfile, level, name_)
+        showIndent(outfile, level)
+        outfile.write('valueOf_ = """%s""",\n' % (self.valueOf_,))
+        
     def exportLiteralAttributes(self, outfile, level, already_processed, name_):
         super(SimpleHashValueType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
     def exportLiteralChildren(self, outfile, level, name_):
@@ -6561,6 +6569,7 @@ class SimpleHashValueType(HexBinaryObjectAttributeType):
         pass
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
+        self.valueOf_ = get_all_text_(node)
         for child in node:
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)

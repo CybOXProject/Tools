@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,11 +368,11 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class DeviceObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class DeviceObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The DeviceObjectType type is intended to characterize a specific
     Device."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Description=None, Device_Type=None, Manufacturer=None, Model=None, Serial_Number=None):
         super(DeviceObjectType, self).__init__(object_reference, )
         self.Description = Description
@@ -391,7 +391,7 @@ class DeviceObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Device_Type(self): return self.Device_Type
     def set_Device_Type(self, Device_Type): self.Device_Type = Device_Type
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Manufacturer(self): return self.Manufacturer
     def set_Manufacturer(self, Manufacturer): self.Manufacturer = Manufacturer
@@ -456,31 +456,31 @@ class DeviceObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(DeviceObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Device_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Device_Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Device_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Device_Type.exportLiteral(outfile, level, name_='Device_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Manufacturer is not None:
             showIndent(outfile, level)
-            outfile.write('Manufacturer=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Manufacturer=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Manufacturer.exportLiteral(outfile, level, name_='Manufacturer')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Model is not None:
             showIndent(outfile, level)
-            outfile.write('Model=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Model=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Model.exportLiteral(outfile, level, name_='Model')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Serial_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Serial_Number=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Serial_Number=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Serial_Number.exportLiteral(outfile, level, name_='Serial_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -493,23 +493,23 @@ class DeviceObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(DeviceObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Device_Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Device_Type(obj_)
         elif nodeName_ == 'Manufacturer':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Manufacturer(obj_)
         elif nodeName_ == 'Model':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Model(obj_)
         elif nodeName_ == 'Serial_Number':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Serial_Number(obj_)
         super(DeviceObjectType, self).buildChildren(child_, node, nodeName_, True)

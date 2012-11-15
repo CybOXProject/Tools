@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import account_object_1_2
 
 etree_ = None
@@ -715,7 +715,7 @@ class UserAccountObjectType(account_object_1_2.AccountObjectType):
     def get_Full_Name(self): return self.Full_Name
     def set_Full_Name(self, Full_Name): self.Full_Name = Full_Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Group_List(self): return self.Group_List
     def set_Group_List(self, Group_List): self.Group_List = Group_List
@@ -724,7 +724,7 @@ class UserAccountObjectType(account_object_1_2.AccountObjectType):
     def get_Last_Login(self): return self.Last_Login
     def set_Last_Login(self, Last_Login): self.Last_Login = Last_Login
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Privilege_List(self): return self.Privilege_List
     def set_Privilege_List(self, Privilege_List): self.Privilege_List = Privilege_List
@@ -735,7 +735,7 @@ class UserAccountObjectType(account_object_1_2.AccountObjectType):
     def get_User_Password_Age(self): return self.User_Password_Age
     def set_User_Password_Age(self, User_Password_Age): self.User_Password_Age = User_Password_Age
     def validate_DurationObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DurationObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DurationObjectAttributeType, a restriction on None.
         pass
     def get_password_required(self): return self.password_required
     def set_password_required(self, password_required): self.password_required = password_required
@@ -812,7 +812,7 @@ class UserAccountObjectType(account_object_1_2.AccountObjectType):
         super(UserAccountObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Full_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Full_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Full_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Full_Name.exportLiteral(outfile, level, name_='Full_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -824,13 +824,13 @@ class UserAccountObjectType(account_object_1_2.AccountObjectType):
             outfile.write('),\n')
         if self.Home_Directory is not None:
             showIndent(outfile, level)
-            outfile.write('Home_Directory=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Home_Directory=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Home_Directory.exportLiteral(outfile, level, name_='Home_Directory')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Last_Login is not None:
             showIndent(outfile, level)
-            outfile.write('Last_Login=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Last_Login=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Last_Login.exportLiteral(outfile, level, name_='Last_Login')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -842,19 +842,19 @@ class UserAccountObjectType(account_object_1_2.AccountObjectType):
             outfile.write('),\n')
         if self.Script_Path is not None:
             showIndent(outfile, level)
-            outfile.write('Script_Path=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Script_Path=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Script_Path.exportLiteral(outfile, level, name_='Script_Path')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Username is not None:
             showIndent(outfile, level)
-            outfile.write('Username=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Username=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Username.exportLiteral(outfile, level, name_='Username')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.User_Password_Age is not None:
             showIndent(outfile, level)
-            outfile.write('User_Password_Age=model_.cybox_common_types_v1_0.DurationObjectAttributeType(\n')
+            outfile.write('User_Password_Age=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
             self.User_Password_Age.exportLiteral(outfile, level, name_='User_Password_Age')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -876,7 +876,7 @@ class UserAccountObjectType(account_object_1_2.AccountObjectType):
         super(UserAccountObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Full_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Full_Name(obj_)
         elif nodeName_ == 'Group_List':
@@ -884,11 +884,11 @@ class UserAccountObjectType(account_object_1_2.AccountObjectType):
             obj_.build(child_)
             self.set_Group_List(obj_)
         elif nodeName_ == 'Home_Directory':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Home_Directory(obj_)
         elif nodeName_ == 'Last_Login':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Last_Login(obj_)
         elif nodeName_ == 'Privilege_List':
@@ -896,15 +896,15 @@ class UserAccountObjectType(account_object_1_2.AccountObjectType):
             obj_.build(child_)
             self.set_Privilege_List(obj_)
         elif nodeName_ == 'Script_Path':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Script_Path(obj_)
         elif nodeName_ == 'Username':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Username(obj_)
         elif nodeName_ == 'User_Password_Age':
-            obj_ = cybox_common_types_v1_0.DurationObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
             obj_.build(child_)
             self.set_User_Password_Age(obj_)
         super(UserAccountObjectType, self).buildChildren(child_, node, nodeName_, True)

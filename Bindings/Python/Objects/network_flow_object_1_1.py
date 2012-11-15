@@ -12,7 +12,7 @@ import re as re_
 import network_packet_object_1_1
 import address_object_1_2
 import port_object_1_3
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -549,14 +549,14 @@ class NetworkFlowLabelType(NetworkLayerInfoType):
     def get_Ingress_Interface_Index(self): return self.Ingress_Interface_Index
     def set_Ingress_Interface_Index(self, Ingress_Interface_Index): self.Ingress_Interface_Index = Ingress_Interface_Index
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Egress_Interface_Index(self): return self.Egress_Interface_Index
     def set_Egress_Interface_Index(self, Egress_Interface_Index): self.Egress_Interface_Index = Egress_Interface_Index
     def get_IP_Type_Of_Service(self): return self.IP_Type_Of_Service
     def set_IP_Type_Of_Service(self, IP_Type_Of_Service): self.IP_Type_Of_Service = IP_Type_Of_Service
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='NetFlowObj:', name_='NetworkFlowLabelType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -609,19 +609,19 @@ class NetworkFlowLabelType(NetworkLayerInfoType):
         super(NetworkFlowLabelType, self).exportLiteralChildren(outfile, level, name_)
         if self.Ingress_Interface_Index is not None:
             showIndent(outfile, level)
-            outfile.write('Ingress_Interface_Index=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Ingress_Interface_Index=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Ingress_Interface_Index.exportLiteral(outfile, level, name_='Ingress_Interface_Index')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Egress_Interface_Index is not None:
             showIndent(outfile, level)
-            outfile.write('Egress_Interface_Index=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Egress_Interface_Index=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Egress_Interface_Index.exportLiteral(outfile, level, name_='Egress_Interface_Index')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.IP_Type_Of_Service is not None:
             showIndent(outfile, level)
-            outfile.write('IP_Type_Of_Service=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('IP_Type_Of_Service=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.IP_Type_Of_Service.exportLiteral(outfile, level, name_='IP_Type_Of_Service')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -634,15 +634,15 @@ class NetworkFlowLabelType(NetworkLayerInfoType):
         super(NetworkFlowLabelType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Ingress_Interface_Index':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Ingress_Interface_Index(obj_)
         elif nodeName_ == 'Egress_Interface_Index':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Egress_Interface_Index(obj_)
         elif nodeName_ == 'IP_Type_Of_Service':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_IP_Type_Of_Service(obj_)
         super(NetworkFlowLabelType, self).buildChildren(child_, node, nodeName_, True)
@@ -973,14 +973,14 @@ class IPFIXMessageHeaderType(GeneratedsSuper):
     def get_Version(self): return self.Version
     def set_Version(self, Version): self.Version = Version
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Byte_Length(self): return self.Byte_Length
     def set_Byte_Length(self, Byte_Length): self.Byte_Length = Byte_Length
     def get_Export_Timestamp(self): return self.Export_Timestamp
     def set_Export_Timestamp(self, Export_Timestamp): self.Export_Timestamp = Export_Timestamp
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Sequence_Number(self): return self.Sequence_Number
     def set_Sequence_Number(self, Sequence_Number): self.Sequence_Number = Sequence_Number
@@ -1040,31 +1040,31 @@ class IPFIXMessageHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Version is not None:
             showIndent(outfile, level)
-            outfile.write('Version=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Version=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Version.exportLiteral(outfile, level, name_='Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Byte_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Byte_Length=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Byte_Length=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Byte_Length.exportLiteral(outfile, level, name_='Byte_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Export_Timestamp is not None:
             showIndent(outfile, level)
-            outfile.write('Export_Timestamp=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Export_Timestamp=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Export_Timestamp.exportLiteral(outfile, level, name_='Export_Timestamp')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Sequence_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Sequence_Number=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Sequence_Number=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Sequence_Number.exportLiteral(outfile, level, name_='Sequence_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Observation_Domain_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Observation_Domain_ID=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Observation_Domain_ID=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Observation_Domain_ID.exportLiteral(outfile, level, name_='Observation_Domain_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1077,23 +1077,23 @@ class IPFIXMessageHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Version':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Version(obj_)
         elif nodeName_ == 'Byte_Length':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Byte_Length(obj_)
         elif nodeName_ == 'Export_Timestamp':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Export_Timestamp(obj_)
         elif nodeName_ == 'Sequence_Number':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Sequence_Number(obj_)
         elif nodeName_ == 'Observation_Domain_ID':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Observation_Domain_ID(obj_)
 # end class IPFIXMessageHeaderType
@@ -1236,7 +1236,7 @@ class IPFIXTemplateSetType(GeneratedsSuper):
     def get_Padding(self): return self.Padding
     def set_Padding(self, Padding): self.Padding = Padding
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='NetFlowObj:', name_='IPFIXTemplateSetType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -1304,7 +1304,7 @@ class IPFIXTemplateSetType(GeneratedsSuper):
         outfile.write('],\n')
         if self.Padding is not None:
             showIndent(outfile, level)
-            outfile.write('Padding=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Padding=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Padding.exportLiteral(outfile, level, name_='Padding')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1325,7 +1325,7 @@ class IPFIXTemplateSetType(GeneratedsSuper):
             obj_.build(child_)
             self.Template_Record.append(obj_)
         elif nodeName_ == 'Padding':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Padding(obj_)
 # end class IPFIXTemplateSetType
@@ -1360,7 +1360,7 @@ class IPFIXOptionsTemplateSetType(GeneratedsSuper):
     def get_Padding(self): return self.Padding
     def set_Padding(self, Padding): self.Padding = Padding
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='NetFlowObj:', name_='IPFIXOptionsTemplateSetType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -1428,7 +1428,7 @@ class IPFIXOptionsTemplateSetType(GeneratedsSuper):
         outfile.write('],\n')
         if self.Padding is not None:
             showIndent(outfile, level)
-            outfile.write('Padding=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Padding=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Padding.exportLiteral(outfile, level, name_='Padding')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1449,7 +1449,7 @@ class IPFIXOptionsTemplateSetType(GeneratedsSuper):
             obj_.build(child_)
             self.Options_Template_Record.append(obj_)
         elif nodeName_ == 'Padding':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Padding(obj_)
 # end class IPFIXOptionsTemplateSetType
@@ -1483,7 +1483,7 @@ class IPFIXDataSetType(GeneratedsSuper):
     def get_Padding(self): return self.Padding
     def set_Padding(self, Padding): self.Padding = Padding
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='NetFlowObj:', name_='IPFIXDataSetType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -1551,7 +1551,7 @@ class IPFIXDataSetType(GeneratedsSuper):
         outfile.write('],\n')
         if self.Padding is not None:
             showIndent(outfile, level)
-            outfile.write('Padding=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Padding=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Padding.exportLiteral(outfile, level, name_='Padding')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1572,7 +1572,7 @@ class IPFIXDataSetType(GeneratedsSuper):
             obj_.build(child_)
             self.Data_Record.append(obj_)
         elif nodeName_ == 'Padding':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Padding(obj_)
 # end class IPFIXDataSetType
@@ -1593,7 +1593,7 @@ class IPFIXSetHeaderType(GeneratedsSuper):
     def get_Set_ID(self): return self.Set_ID
     def set_Set_ID(self, Set_ID): self.Set_ID = Set_ID
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
@@ -1642,13 +1642,13 @@ class IPFIXSetHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Set_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Set_ID=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Set_ID=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Set_ID.exportLiteral(outfile, level, name_='Set_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1661,11 +1661,11 @@ class IPFIXSetHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Set_ID':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Set_ID(obj_)
         elif nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
 # end class IPFIXSetHeaderType
@@ -1791,12 +1791,12 @@ class IPFIXTemplateRecordHeaderType(GeneratedsSuper):
     def get_Template_ID(self): return self.Template_ID
     def set_Template_ID(self, Template_ID): self.Template_ID = Template_ID
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Field_Count(self): return self.Field_Count
     def set_Field_Count(self, Field_Count): self.Field_Count = Field_Count
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='NetFlowObj:', name_='IPFIXTemplateRecordHeaderType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -1843,13 +1843,13 @@ class IPFIXTemplateRecordHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Template_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Template_ID=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Template_ID=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Template_ID.exportLiteral(outfile, level, name_='Template_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Field_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Field_Count=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Field_Count=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Field_Count.exportLiteral(outfile, level, name_='Field_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1862,11 +1862,11 @@ class IPFIXTemplateRecordHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Template_ID':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Template_ID(obj_)
         elif nodeName_ == 'Field_Count':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Field_Count(obj_)
 # end class IPFIXTemplateRecordHeaderType
@@ -1892,7 +1892,7 @@ class IPFIXTemplateRecordFieldSpecifiersType(GeneratedsSuper):
     def get_Information_Element_ID(self): return self.Information_Element_ID
     def set_Information_Element_ID(self, Information_Element_ID): self.Information_Element_ID = Information_Element_ID
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Field_Length(self): return self.Field_Length
     def set_Field_Length(self, Field_Length): self.Field_Length = Field_Length
@@ -1953,19 +1953,19 @@ class IPFIXTemplateRecordFieldSpecifiersType(GeneratedsSuper):
             outfile.write('Enterprise_Bit=%s,\n' % self.Enterprise_Bit)
         if self.Information_Element_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Information_Element_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Information_Element_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Information_Element_ID.exportLiteral(outfile, level, name_='Information_Element_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Field_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Field_Length=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Field_Length=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Field_Length.exportLiteral(outfile, level, name_='Field_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Enterprise_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Enterprise_Number=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Enterprise_Number=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Enterprise_Number.exportLiteral(outfile, level, name_='Enterprise_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1988,15 +1988,15 @@ class IPFIXTemplateRecordFieldSpecifiersType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'Enterprise_Bit')
             self.Enterprise_Bit = ival_
         elif nodeName_ == 'Information_Element_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Information_Element_ID(obj_)
         elif nodeName_ == 'Field_Length':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Field_Length(obj_)
         elif nodeName_ == 'Enterprise_Number':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Enterprise_Number(obj_)
 # end class IPFIXTemplateRecordFieldSpecifiersType
@@ -2122,17 +2122,17 @@ class IPFIXOptionsTemplateRecordHeaderType(GeneratedsSuper):
     def get_Template_ID(self): return self.Template_ID
     def set_Template_ID(self, Template_ID): self.Template_ID = Template_ID
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Field_Count(self): return self.Field_Count
     def set_Field_Count(self, Field_Count): self.Field_Count = Field_Count
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Scope_Field_Count(self): return self.Scope_Field_Count
     def set_Scope_Field_Count(self, Scope_Field_Count): self.Scope_Field_Count = Scope_Field_Count
     def validate_PositiveIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.PositiveIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.PositiveIntegerObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='NetFlowObj:', name_='IPFIXOptionsTemplateRecordHeaderType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -2182,19 +2182,19 @@ class IPFIXOptionsTemplateRecordHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Template_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Template_ID=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Template_ID=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Template_ID.exportLiteral(outfile, level, name_='Template_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Field_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Field_Count=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Field_Count=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Field_Count.exportLiteral(outfile, level, name_='Field_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Scope_Field_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Scope_Field_Count=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('Scope_Field_Count=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.Scope_Field_Count.exportLiteral(outfile, level, name_='Scope_Field_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2207,15 +2207,15 @@ class IPFIXOptionsTemplateRecordHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Template_ID':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Template_ID(obj_)
         elif nodeName_ == 'Field_Count':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Field_Count(obj_)
         elif nodeName_ == 'Scope_Field_Count':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Scope_Field_Count(obj_)
 # end class IPFIXOptionsTemplateRecordHeaderType
@@ -2247,12 +2247,12 @@ class IPFIXOptionsTemplateRecordFieldSpecifiersType(GeneratedsSuper):
     def get_Scope_Information_Element_ID(self): return self.Scope_Information_Element_ID
     def set_Scope_Information_Element_ID(self, Scope_Information_Element_ID): self.Scope_Information_Element_ID = Scope_Information_Element_ID
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Scope_Field_Length(self): return self.Scope_Field_Length
     def set_Scope_Field_Length(self, Scope_Field_Length): self.Scope_Field_Length = Scope_Field_Length
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Scope_Enterprise_Number(self): return self.Scope_Enterprise_Number
     def set_Scope_Enterprise_Number(self, Scope_Enterprise_Number): self.Scope_Enterprise_Number = Scope_Enterprise_Number
@@ -2332,19 +2332,19 @@ class IPFIXOptionsTemplateRecordFieldSpecifiersType(GeneratedsSuper):
             outfile.write('Scope_Enterprise_Bit=%s,\n' % self.Scope_Enterprise_Bit)
         if self.Scope_Information_Element_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Scope_Information_Element_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Scope_Information_Element_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Scope_Information_Element_ID.exportLiteral(outfile, level, name_='Scope_Information_Element_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Scope_Field_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Scope_Field_Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Scope_Field_Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Scope_Field_Length.exportLiteral(outfile, level, name_='Scope_Field_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Scope_Enterprise_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Scope_Enterprise_Number=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Scope_Enterprise_Number=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Scope_Enterprise_Number.exportLiteral(outfile, level, name_='Scope_Enterprise_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2353,19 +2353,19 @@ class IPFIXOptionsTemplateRecordFieldSpecifiersType(GeneratedsSuper):
             outfile.write('Option_Enterprise_Bit=%s,\n' % self.Option_Enterprise_Bit)
         if self.Option_Information_Element_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Option_Information_Element_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Option_Information_Element_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Option_Information_Element_ID.exportLiteral(outfile, level, name_='Option_Information_Element_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Option_Field_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Option_Field_Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Option_Field_Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Option_Field_Length.exportLiteral(outfile, level, name_='Option_Field_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Option_Enterprise_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Option_Enterprise_Number=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Option_Enterprise_Number=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Option_Enterprise_Number.exportLiteral(outfile, level, name_='Option_Enterprise_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2388,15 +2388,15 @@ class IPFIXOptionsTemplateRecordFieldSpecifiersType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'Scope_Enterprise_Bit')
             self.Scope_Enterprise_Bit = ival_
         elif nodeName_ == 'Scope_Information_Element_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Scope_Information_Element_ID(obj_)
         elif nodeName_ == 'Scope_Field_Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Scope_Field_Length(obj_)
         elif nodeName_ == 'Scope_Enterprise_Number':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Scope_Enterprise_Number(obj_)
         elif nodeName_ == 'Option_Enterprise_Bit':
@@ -2410,15 +2410,15 @@ class IPFIXOptionsTemplateRecordFieldSpecifiersType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'Option_Enterprise_Bit')
             self.Option_Enterprise_Bit = ival_
         elif nodeName_ == 'Option_Information_Element_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Option_Information_Element_ID(obj_)
         elif nodeName_ == 'Option_Field_Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Option_Field_Length(obj_)
         elif nodeName_ == 'Option_Enterprise_Number':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Option_Enterprise_Number(obj_)
 # end class IPFIXOptionsTemplateRecordFieldSpecifiersType
@@ -2444,7 +2444,7 @@ class IPFIXDataRecordType(GeneratedsSuper):
     def add_Field_Value(self, value): self.Field_Value.append(value)
     def insert_Field_Value(self, index, value): self.Field_Value[index] = value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='NetFlowObj:', name_='IPFIXDataRecordType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -2491,8 +2491,8 @@ class IPFIXDataRecordType(GeneratedsSuper):
         level += 1
         for Field_Value_ in self.Field_Value:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
-            Field_Value_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.StringObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            Field_Value_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.StringObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -2507,7 +2507,7 @@ class IPFIXDataRecordType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Field_Value':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.Field_Value.append(obj_)
 # end class IPFIXDataRecordType
@@ -2636,12 +2636,12 @@ class NetflowV9PacketHeaderType(GeneratedsSuper):
     def get_Version(self): return self.Version
     def set_Version(self, Version): self.Version = Version
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Record_Count(self): return self.Record_Count
     def set_Record_Count(self, Record_Count): self.Record_Count = Record_Count
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Sys_Up_Time(self): return self.Sys_Up_Time
     def set_Sys_Up_Time(self, Sys_Up_Time): self.Sys_Up_Time = Sys_Up_Time
@@ -2708,37 +2708,37 @@ class NetflowV9PacketHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Version is not None:
             showIndent(outfile, level)
-            outfile.write('Version=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Version=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Version.exportLiteral(outfile, level, name_='Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Record_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Record_Count=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Record_Count=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Record_Count.exportLiteral(outfile, level, name_='Record_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Sys_Up_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Sys_Up_Time=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Sys_Up_Time=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Sys_Up_Time.exportLiteral(outfile, level, name_='Sys_Up_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Unix_Secs is not None:
             showIndent(outfile, level)
-            outfile.write('Unix_Secs=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Unix_Secs=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Unix_Secs.exportLiteral(outfile, level, name_='Unix_Secs')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Sequence_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Sequence_Number=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Sequence_Number=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Sequence_Number.exportLiteral(outfile, level, name_='Sequence_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Source_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Source_ID=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Source_ID=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Source_ID.exportLiteral(outfile, level, name_='Source_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2751,27 +2751,27 @@ class NetflowV9PacketHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Version':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Version(obj_)
         elif nodeName_ == 'Record_Count':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Record_Count(obj_)
         elif nodeName_ == 'Sys_Up_Time':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Sys_Up_Time(obj_)
         elif nodeName_ == 'Unix_Secs':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Unix_Secs(obj_)
         elif nodeName_ == 'Sequence_Number':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Sequence_Number(obj_)
         elif nodeName_ == 'Source_ID':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Source_ID(obj_)
 # end class NetflowV9PacketHeaderType
@@ -2905,12 +2905,12 @@ class NetflowV9TemplateFlowSetType(GeneratedsSuper):
     def get_Flow_Set_ID(self): return self.Flow_Set_ID
     def set_Flow_Set_ID(self, Flow_Set_ID): self.Flow_Set_ID = Flow_Set_ID
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Template_Record(self): return self.Template_Record
     def set_Template_Record(self, Template_Record): self.Template_Record = Template_Record
@@ -2964,13 +2964,13 @@ class NetflowV9TemplateFlowSetType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Flow_Set_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Flow_Set_ID=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Flow_Set_ID=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Flow_Set_ID.exportLiteral(outfile, level, name_='Flow_Set_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2995,11 +2995,11 @@ class NetflowV9TemplateFlowSetType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Flow_Set_ID':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Flow_Set_ID(obj_)
         elif nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'Template_Record':
@@ -3028,7 +3028,7 @@ class NetflowV9TemplateRecordType(GeneratedsSuper):
     def get_Template_ID(self): return self.Template_ID
     def set_Template_ID(self, Template_ID): self.Template_ID = Template_ID
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Field_Count(self): return self.Field_Count
     def set_Field_Count(self, Field_Count): self.Field_Count = Field_Count
@@ -3040,7 +3040,7 @@ class NetflowV9TemplateRecordType(GeneratedsSuper):
     def get_Field_Length(self): return self.Field_Length
     def set_Field_Length(self, Field_Length): self.Field_Length = Field_Length
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='NetFlowObj:', name_='NetflowV9TemplateRecordType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -3093,13 +3093,13 @@ class NetflowV9TemplateRecordType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Template_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Template_ID=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Template_ID=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Template_ID.exportLiteral(outfile, level, name_='Template_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Field_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Field_Count=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Field_Count=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Field_Count.exportLiteral(outfile, level, name_='Field_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3111,7 +3111,7 @@ class NetflowV9TemplateRecordType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Field_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Field_Length=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Field_Length=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Field_Length.exportLiteral(outfile, level, name_='Field_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3124,11 +3124,11 @@ class NetflowV9TemplateRecordType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Template_ID':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Template_ID(obj_)
         elif nodeName_ == 'Field_Count':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Field_Count(obj_)
         elif nodeName_ == 'Field_Type':
@@ -3136,7 +3136,7 @@ class NetflowV9TemplateRecordType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Field_Type(obj_)
         elif nodeName_ == 'Field_Length':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Field_Length(obj_)
 # end class NetflowV9TemplateRecordType
@@ -3164,12 +3164,12 @@ class NetflowV9OptionsTemplateFlowSetType(GeneratedsSuper):
     def get_Flow_Set_ID(self): return self.Flow_Set_ID
     def set_Flow_Set_ID(self, Flow_Set_ID): self.Flow_Set_ID = Flow_Set_ID
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Options_Template_Record(self): return self.Options_Template_Record
     def set_Options_Template_Record(self, Options_Template_Record): self.Options_Template_Record = Options_Template_Record
@@ -3228,13 +3228,13 @@ class NetflowV9OptionsTemplateFlowSetType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Flow_Set_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Flow_Set_ID=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Flow_Set_ID=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Flow_Set_ID.exportLiteral(outfile, level, name_='Flow_Set_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3252,7 +3252,7 @@ class NetflowV9OptionsTemplateFlowSetType(GeneratedsSuper):
         outfile.write('],\n')
         if self.Padding is not None:
             showIndent(outfile, level)
-            outfile.write('Padding=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Padding=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Padding.exportLiteral(outfile, level, name_='Padding')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3265,11 +3265,11 @@ class NetflowV9OptionsTemplateFlowSetType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Flow_Set_ID':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Flow_Set_ID(obj_)
         elif nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'Options_Template_Record':
@@ -3277,7 +3277,7 @@ class NetflowV9OptionsTemplateFlowSetType(GeneratedsSuper):
             obj_.build(child_)
             self.Options_Template_Record.append(obj_)
         elif nodeName_ == 'Padding':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Padding(obj_)
 # end class NetflowV9OptionsTemplateFlowSetType
@@ -3305,12 +3305,12 @@ class NetflowV9OptionsTemplateRecordType(GeneratedsSuper):
     def get_Template_ID(self): return self.Template_ID
     def set_Template_ID(self, Template_ID): self.Template_ID = Template_ID
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Option_Scope_Length(self): return self.Option_Scope_Length
     def set_Option_Scope_Length(self, Option_Scope_Length): self.Option_Scope_Length = Option_Scope_Length
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Option_Length(self): return self.Option_Length
     def set_Option_Length(self, Option_Length): self.Option_Length = Option_Length
@@ -3388,19 +3388,19 @@ class NetflowV9OptionsTemplateRecordType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Template_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Template_ID=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Template_ID=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Template_ID.exportLiteral(outfile, level, name_='Template_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Option_Scope_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Option_Scope_Length=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Option_Scope_Length=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Option_Scope_Length.exportLiteral(outfile, level, name_='Option_Scope_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Option_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Option_Length=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Option_Length=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Option_Length.exportLiteral(outfile, level, name_='Option_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3412,7 +3412,7 @@ class NetflowV9OptionsTemplateRecordType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Scope_Field_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Scope_Field_Length=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Scope_Field_Length=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Scope_Field_Length.exportLiteral(outfile, level, name_='Scope_Field_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3424,7 +3424,7 @@ class NetflowV9OptionsTemplateRecordType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Option_Field_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Option_Field_Length=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Option_Field_Length=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Option_Field_Length.exportLiteral(outfile, level, name_='Option_Field_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3437,15 +3437,15 @@ class NetflowV9OptionsTemplateRecordType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Template_ID':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Template_ID(obj_)
         elif nodeName_ == 'Option_Scope_Length':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Option_Scope_Length(obj_)
         elif nodeName_ == 'Option_Length':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Option_Length(obj_)
         elif nodeName_ == 'Scope_Field_Type':
@@ -3453,7 +3453,7 @@ class NetflowV9OptionsTemplateRecordType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Scope_Field_Type(obj_)
         elif nodeName_ == 'Scope_Field_Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Scope_Field_Length(obj_)
         elif nodeName_ == 'Option_Field_Type':
@@ -3461,7 +3461,7 @@ class NetflowV9OptionsTemplateRecordType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Option_Field_Type(obj_)
         elif nodeName_ == 'Option_Field_Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Option_Field_Length(obj_)
 # end class NetflowV9OptionsTemplateRecordType
@@ -3491,7 +3491,7 @@ class NetflowV9DataFlowSetType(GeneratedsSuper):
     def get_Flow_Set_ID_Template_ID(self): return self.Flow_Set_ID_Template_ID
     def set_Flow_Set_ID_Template_ID(self, Flow_Set_ID_Template_ID): self.Flow_Set_ID_Template_ID = Flow_Set_ID_Template_ID
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
@@ -3502,7 +3502,7 @@ class NetflowV9DataFlowSetType(GeneratedsSuper):
     def get_Padding(self): return self.Padding
     def set_Padding(self, Padding): self.Padding = Padding
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='NetFlowObj:', name_='NetflowV9DataFlowSetType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -3555,13 +3555,13 @@ class NetflowV9DataFlowSetType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Flow_Set_ID_Template_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Flow_Set_ID_Template_ID=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Flow_Set_ID_Template_ID=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Flow_Set_ID_Template_ID.exportLiteral(outfile, level, name_='Flow_Set_ID_Template_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3579,7 +3579,7 @@ class NetflowV9DataFlowSetType(GeneratedsSuper):
         outfile.write('],\n')
         if self.Padding is not None:
             showIndent(outfile, level)
-            outfile.write('Padding=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Padding=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Padding.exportLiteral(outfile, level, name_='Padding')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3592,11 +3592,11 @@ class NetflowV9DataFlowSetType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Flow_Set_ID_Template_ID':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Flow_Set_ID_Template_ID(obj_)
         elif nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'Data_Record':
@@ -3604,7 +3604,7 @@ class NetflowV9DataFlowSetType(GeneratedsSuper):
             obj_.build(child_)
             self.Data_Record.append(obj_)
         elif nodeName_ == 'Padding':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Padding(obj_)
 # end class NetflowV9DataFlowSetType
@@ -3832,7 +3832,7 @@ class FlowCollectionElementType(GeneratedsSuper):
     def add_Flow_Record_Field_Value(self, value): self.Flow_Record_Field_Value.append(value)
     def insert_Flow_Record_Field_Value(self, index, value): self.Flow_Record_Field_Value[index] = value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='NetFlowObj:', name_='FlowCollectionElementType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -3879,8 +3879,8 @@ class FlowCollectionElementType(GeneratedsSuper):
         level += 1
         for Flow_Record_Field_Value_ in self.Flow_Record_Field_Value:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
-            Flow_Record_Field_Value_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.StringObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            Flow_Record_Field_Value_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.StringObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -3895,7 +3895,7 @@ class FlowCollectionElementType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Flow_Record_Field_Value':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.Flow_Record_Field_Value.append(obj_)
 # end class FlowCollectionElementType
@@ -3921,7 +3921,7 @@ class OptionsDataRecordType(GeneratedsSuper):
     def get_Scope_Field_Value(self): return self.Scope_Field_Value
     def set_Scope_Field_Value(self, Scope_Field_Value): self.Scope_Field_Value = Scope_Field_Value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Option_Record_Collection_Element(self): return self.Option_Record_Collection_Element
     def set_Option_Record_Collection_Element(self, Option_Record_Collection_Element): self.Option_Record_Collection_Element = Option_Record_Collection_Element
@@ -3972,7 +3972,7 @@ class OptionsDataRecordType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Scope_Field_Value is not None:
             showIndent(outfile, level)
-            outfile.write('Scope_Field_Value=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Scope_Field_Value=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Scope_Field_Value.exportLiteral(outfile, level, name_='Scope_Field_Value')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3997,7 +3997,7 @@ class OptionsDataRecordType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Scope_Field_Value':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Scope_Field_Value(obj_)
         elif nodeName_ == 'Option_Record_Collection_Element':
@@ -4027,7 +4027,7 @@ class OptionCollectionElementType(GeneratedsSuper):
     def add_Option_Record_Field_Value(self, value): self.Option_Record_Field_Value.append(value)
     def insert_Option_Record_Field_Value(self, index, value): self.Option_Record_Field_Value[index] = value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='NetFlowObj:', name_='OptionCollectionElementType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -4074,8 +4074,8 @@ class OptionCollectionElementType(GeneratedsSuper):
         level += 1
         for Option_Record_Field_Value_ in self.Option_Record_Field_Value:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
-            Option_Record_Field_Value_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.StringObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            Option_Record_Field_Value_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.StringObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -4090,7 +4090,7 @@ class OptionCollectionElementType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Option_Record_Field_Value':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.Option_Record_Field_Value.append(obj_)
 # end class OptionCollectionElementType
@@ -4206,7 +4206,7 @@ class NetflowV5FlowHeaderType(GeneratedsSuper):
     superclass = None
     def __init__(self, Version=None, Count=None, Sys_Up_Time=None, Unix_Secs=None, Unix_Nsecs=None, Flow_Sequence=None, Engine_Type=None, Engine_ID=None, Sampling_Interval=None):
         if Version is None:
-            self.Version = globals()['cybox_common_types_v1_0.HexBinaryObjectAttributeType']('05')
+            self.Version = globals()['cybox_common_types_1_0.HexBinaryObjectAttributeType']('05')
         else:
             self.Version = Version
         self.Count = Count
@@ -4226,12 +4226,12 @@ class NetflowV5FlowHeaderType(GeneratedsSuper):
     def get_Version(self): return self.Version
     def set_Version(self, Version): self.Version = Version
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Count(self): return self.Count
     def set_Count(self, Count): self.Count = Count
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Sys_Up_Time(self): return self.Sys_Up_Time
     def set_Sys_Up_Time(self, Sys_Up_Time): self.Sys_Up_Time = Sys_Up_Time
@@ -4244,7 +4244,7 @@ class NetflowV5FlowHeaderType(GeneratedsSuper):
     def get_Engine_Type(self): return self.Engine_Type
     def set_Engine_Type(self, Engine_Type): self.Engine_Type = Engine_Type
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Engine_ID(self): return self.Engine_ID
     def set_Engine_ID(self, Engine_ID): self.Engine_ID = Engine_ID
@@ -4316,55 +4316,55 @@ class NetflowV5FlowHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Version is not None:
             showIndent(outfile, level)
-            outfile.write('Version=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Version=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Version.exportLiteral(outfile, level, name_='Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Count is not None:
             showIndent(outfile, level)
-            outfile.write('Count=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Count=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Count.exportLiteral(outfile, level, name_='Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Sys_Up_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Sys_Up_Time=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Sys_Up_Time=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Sys_Up_Time.exportLiteral(outfile, level, name_='Sys_Up_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Unix_Secs is not None:
             showIndent(outfile, level)
-            outfile.write('Unix_Secs=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Unix_Secs=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Unix_Secs.exportLiteral(outfile, level, name_='Unix_Secs')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Unix_Nsecs is not None:
             showIndent(outfile, level)
-            outfile.write('Unix_Nsecs=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Unix_Nsecs=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Unix_Nsecs.exportLiteral(outfile, level, name_='Unix_Nsecs')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Flow_Sequence is not None:
             showIndent(outfile, level)
-            outfile.write('Flow_Sequence=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Flow_Sequence=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Flow_Sequence.exportLiteral(outfile, level, name_='Flow_Sequence')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Engine_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Engine_Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Engine_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Engine_Type.exportLiteral(outfile, level, name_='Engine_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Engine_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Engine_ID=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Engine_ID=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Engine_ID.exportLiteral(outfile, level, name_='Engine_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Sampling_Interval is not None:
             showIndent(outfile, level)
-            outfile.write('Sampling_Interval=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Sampling_Interval=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Sampling_Interval.exportLiteral(outfile, level, name_='Sampling_Interval')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4377,39 +4377,39 @@ class NetflowV5FlowHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Version':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Version(obj_)
         elif nodeName_ == 'Count':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Count(obj_)
         elif nodeName_ == 'Sys_Up_Time':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Sys_Up_Time(obj_)
         elif nodeName_ == 'Unix_Secs':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Unix_Secs(obj_)
         elif nodeName_ == 'Unix_Nsecs':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Unix_Nsecs(obj_)
         elif nodeName_ == 'Flow_Sequence':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Flow_Sequence(obj_)
         elif nodeName_ == 'Engine_Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Engine_Type(obj_)
         elif nodeName_ == 'Engine_ID':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Engine_ID(obj_)
         elif nodeName_ == 'Sampling_Interval':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Sampling_Interval(obj_)
 # end class NetflowV5FlowHeaderType
@@ -4445,7 +4445,7 @@ class NetflowV5FlowRecordType(GeneratedsSuper):
     def get_Packet_Count(self): return self.Packet_Count
     def set_Packet_Count(self, Packet_Count): self.Packet_Count = Packet_Count
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Byte_Count(self): return self.Byte_Count
     def set_Byte_Count(self, Byte_Count): self.Byte_Count = Byte_Count
@@ -4456,7 +4456,7 @@ class NetflowV5FlowRecordType(GeneratedsSuper):
     def get_Padding1(self): return self.Padding1
     def set_Padding1(self, Padding1): self.Padding1 = Padding1
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_TCP_Flags(self): return self.TCP_Flags
     def set_TCP_Flags(self, TCP_Flags): self.TCP_Flags = TCP_Flags
@@ -4467,7 +4467,7 @@ class NetflowV5FlowRecordType(GeneratedsSuper):
     def get_Src_IP_Mask_Bit_Count(self): return self.Src_IP_Mask_Bit_Count
     def set_Src_IP_Mask_Bit_Count(self, Src_IP_Mask_Bit_Count): self.Src_IP_Mask_Bit_Count = Src_IP_Mask_Bit_Count
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Dest_IP_Mask_Bit_Count(self): return self.Dest_IP_Mask_Bit_Count
     def set_Dest_IP_Mask_Bit_Count(self, Dest_IP_Mask_Bit_Count): self.Dest_IP_Mask_Bit_Count = Dest_IP_Mask_Bit_Count
@@ -4554,67 +4554,67 @@ class NetflowV5FlowRecordType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Packet_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Packet_Count=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Packet_Count=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Packet_Count.exportLiteral(outfile, level, name_='Packet_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Byte_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Byte_Count=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Byte_Count=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Byte_Count.exportLiteral(outfile, level, name_='Byte_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.SysUpTime_Start is not None:
             showIndent(outfile, level)
-            outfile.write('SysUpTime_Start=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('SysUpTime_Start=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.SysUpTime_Start.exportLiteral(outfile, level, name_='SysUpTime_Start')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.SysUpTime_End is not None:
             showIndent(outfile, level)
-            outfile.write('SysUpTime_End=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('SysUpTime_End=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.SysUpTime_End.exportLiteral(outfile, level, name_='SysUpTime_End')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Padding1 is not None:
             showIndent(outfile, level)
-            outfile.write('Padding1=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Padding1=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Padding1.exportLiteral(outfile, level, name_='Padding1')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.TCP_Flags is not None:
             showIndent(outfile, level)
-            outfile.write('TCP_Flags=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('TCP_Flags=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.TCP_Flags.exportLiteral(outfile, level, name_='TCP_Flags')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Src_Autonomous_System is not None:
             showIndent(outfile, level)
-            outfile.write('Src_Autonomous_System=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Src_Autonomous_System=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Src_Autonomous_System.exportLiteral(outfile, level, name_='Src_Autonomous_System')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Dest_Autonomous_System is not None:
             showIndent(outfile, level)
-            outfile.write('Dest_Autonomous_System=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Dest_Autonomous_System=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Dest_Autonomous_System.exportLiteral(outfile, level, name_='Dest_Autonomous_System')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Src_IP_Mask_Bit_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Src_IP_Mask_Bit_Count=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Src_IP_Mask_Bit_Count=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Src_IP_Mask_Bit_Count.exportLiteral(outfile, level, name_='Src_IP_Mask_Bit_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Dest_IP_Mask_Bit_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Dest_IP_Mask_Bit_Count=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Dest_IP_Mask_Bit_Count=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Dest_IP_Mask_Bit_Count.exportLiteral(outfile, level, name_='Dest_IP_Mask_Bit_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Padding2 is not None:
             showIndent(outfile, level)
-            outfile.write('Padding2=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Padding2=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Padding2.exportLiteral(outfile, level, name_='Padding2')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4631,47 +4631,47 @@ class NetflowV5FlowRecordType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Nexthop_IPv4_Addr(obj_)
         elif nodeName_ == 'Packet_Count':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Packet_Count(obj_)
         elif nodeName_ == 'Byte_Count':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Byte_Count(obj_)
         elif nodeName_ == 'SysUpTime_Start':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_SysUpTime_Start(obj_)
         elif nodeName_ == 'SysUpTime_End':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_SysUpTime_End(obj_)
         elif nodeName_ == 'Padding1':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Padding1(obj_)
         elif nodeName_ == 'TCP_Flags':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_TCP_Flags(obj_)
         elif nodeName_ == 'Src_Autonomous_System':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Src_Autonomous_System(obj_)
         elif nodeName_ == 'Dest_Autonomous_System':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Dest_Autonomous_System(obj_)
         elif nodeName_ == 'Src_IP_Mask_Bit_Count':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Src_IP_Mask_Bit_Count(obj_)
         elif nodeName_ == 'Dest_IP_Mask_Bit_Count':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Dest_IP_Mask_Bit_Count(obj_)
         elif nodeName_ == 'Padding2':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Padding2(obj_)
 # end class NetflowV5FlowRecordType
@@ -4716,14 +4716,14 @@ class SiLKRecordType(GeneratedsSuper):
     def get_Packet_Count(self): return self.Packet_Count
     def set_Packet_Count(self, Packet_Count): self.Packet_Count = Packet_Count
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Byte_Count(self): return self.Byte_Count
     def set_Byte_Count(self, Byte_Count): self.Byte_Count = Byte_Count
     def get_TCP_Flags(self): return self.TCP_Flags
     def set_TCP_Flags(self, TCP_Flags): self.TCP_Flags = TCP_Flags
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Start_Time(self): return self.Start_Time
     def set_Start_Time(self, Start_Time): self.Start_Time = Start_Time
@@ -4770,7 +4770,7 @@ class SiLKRecordType(GeneratedsSuper):
     def get_Src_MAPNAME(self): return self.Src_MAPNAME
     def set_Src_MAPNAME(self, Src_MAPNAME): self.Src_MAPNAME = Src_MAPNAME
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Dest_MAPNAME(self): return self.Dest_MAPNAME
     def set_Dest_MAPNAME(self, Dest_MAPNAME): self.Dest_MAPNAME = Dest_MAPNAME
@@ -4873,37 +4873,37 @@ class SiLKRecordType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Packet_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Packet_Count=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Packet_Count=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Packet_Count.exportLiteral(outfile, level, name_='Packet_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Byte_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Byte_Count=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Byte_Count=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Byte_Count.exportLiteral(outfile, level, name_='Byte_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.TCP_Flags is not None:
             showIndent(outfile, level)
-            outfile.write('TCP_Flags=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('TCP_Flags=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.TCP_Flags.exportLiteral(outfile, level, name_='TCP_Flags')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Start_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Start_Time=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Start_Time=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Start_Time.exportLiteral(outfile, level, name_='Start_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Duration is not None:
             showIndent(outfile, level)
-            outfile.write('Duration=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Duration=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Duration.exportLiteral(outfile, level, name_='Duration')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.End_Time is not None:
             showIndent(outfile, level)
-            outfile.write('End_Time=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('End_Time=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.End_Time.exportLiteral(outfile, level, name_='End_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4915,13 +4915,13 @@ class SiLKRecordType(GeneratedsSuper):
             outfile.write('),\n')
         if self.ICMP_Type is not None:
             showIndent(outfile, level)
-            outfile.write('ICMP_Type=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('ICMP_Type=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.ICMP_Type.exportLiteral(outfile, level, name_='ICMP_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.ICMP_Code is not None:
             showIndent(outfile, level)
-            outfile.write('ICMP_Code=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('ICMP_Code=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.ICMP_Code.exportLiteral(outfile, level, name_='ICMP_Code')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4939,7 +4939,7 @@ class SiLKRecordType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Session_TCP_Flags is not None:
             showIndent(outfile, level)
-            outfile.write('Session_TCP_Flags=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Session_TCP_Flags=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Session_TCP_Flags.exportLiteral(outfile, level, name_='Session_TCP_Flags')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4981,13 +4981,13 @@ class SiLKRecordType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Src_MAPNAME is not None:
             showIndent(outfile, level)
-            outfile.write('Src_MAPNAME=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Src_MAPNAME=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Src_MAPNAME.exportLiteral(outfile, level, name_='Src_MAPNAME')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Dest_MAPNAME is not None:
             showIndent(outfile, level)
-            outfile.write('Dest_MAPNAME=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Dest_MAPNAME=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Dest_MAPNAME.exportLiteral(outfile, level, name_='Dest_MAPNAME')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5000,27 +5000,27 @@ class SiLKRecordType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Packet_Count':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Packet_Count(obj_)
         elif nodeName_ == 'Byte_Count':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Byte_Count(obj_)
         elif nodeName_ == 'TCP_Flags':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_TCP_Flags(obj_)
         elif nodeName_ == 'Start_Time':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Start_Time(obj_)
         elif nodeName_ == 'Duration':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Duration(obj_)
         elif nodeName_ == 'End_Time':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_End_Time(obj_)
         elif nodeName_ == 'Sensor_Info':
@@ -5028,11 +5028,11 @@ class SiLKRecordType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Sensor_Info(obj_)
         elif nodeName_ == 'ICMP_Type':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ICMP_Type(obj_)
         elif nodeName_ == 'ICMP_Code':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ICMP_Code(obj_)
         elif nodeName_ == 'Router_Next_Hop_IP':
@@ -5044,7 +5044,7 @@ class SiLKRecordType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Initial_TCP_Flags(obj_)
         elif nodeName_ == 'Session_TCP_Flags':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Session_TCP_Flags(obj_)
         elif nodeName_ == 'Flow_Attributes':
@@ -5072,11 +5072,11 @@ class SiLKRecordType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Dest_Country_Code(obj_)
         elif nodeName_ == 'Src_MAPNAME':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Src_MAPNAME(obj_)
         elif nodeName_ == 'Dest_MAPNAME':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Dest_MAPNAME(obj_)
 # end class SiLKRecordType
@@ -5098,7 +5098,7 @@ class SiLKSensorInfoType(GeneratedsSuper):
     def get_Sensor_ID(self): return self.Sensor_ID
     def set_Sensor_ID(self, Sensor_ID): self.Sensor_ID = Sensor_ID
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Class(self): return self.Class
     def set_Class(self, Class): self.Class = Class
@@ -5158,7 +5158,7 @@ class SiLKSensorInfoType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Sensor_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Sensor_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Sensor_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Sensor_ID.exportLiteral(outfile, level, name_='Sensor_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5183,7 +5183,7 @@ class SiLKSensorInfoType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Sensor_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Sensor_ID(obj_)
         elif nodeName_ == 'Class':
@@ -5322,7 +5322,7 @@ class YAFFlowType(GeneratedsSuper):
     def get_Flow_Start_Milliseconds(self): return self.Flow_Start_Milliseconds
     def set_Flow_Start_Milliseconds(self, Flow_Start_Milliseconds): self.Flow_Start_Milliseconds = Flow_Start_Milliseconds
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Flow_End_Milliseconds(self): return self.Flow_End_Milliseconds
     def set_Flow_End_Milliseconds(self, Flow_End_Milliseconds): self.Flow_End_Milliseconds = Flow_End_Milliseconds
@@ -5333,7 +5333,7 @@ class YAFFlowType(GeneratedsSuper):
     def get_Flow_End_Reason(self): return self.Flow_End_Reason
     def set_Flow_End_Reason(self, Flow_End_Reason): self.Flow_End_Reason = Flow_End_Reason
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_SiLK_App_Label(self): return self.SiLK_App_Label
     def set_SiLK_App_Label(self, SiLK_App_Label): self.SiLK_App_Label = SiLK_App_Label
@@ -5434,49 +5434,49 @@ class YAFFlowType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Flow_Start_Milliseconds is not None:
             showIndent(outfile, level)
-            outfile.write('Flow_Start_Milliseconds=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Flow_Start_Milliseconds=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Flow_Start_Milliseconds.exportLiteral(outfile, level, name_='Flow_Start_Milliseconds')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Flow_End_Milliseconds is not None:
             showIndent(outfile, level)
-            outfile.write('Flow_End_Milliseconds=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Flow_End_Milliseconds=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Flow_End_Milliseconds.exportLiteral(outfile, level, name_='Flow_End_Milliseconds')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Octet_Total_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Octet_Total_Count=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Octet_Total_Count=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Octet_Total_Count.exportLiteral(outfile, level, name_='Octet_Total_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Packet_Total_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Packet_Total_Count=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Packet_Total_Count=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Packet_Total_Count.exportLiteral(outfile, level, name_='Packet_Total_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Flow_End_Reason is not None:
             showIndent(outfile, level)
-            outfile.write('Flow_End_Reason=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Flow_End_Reason=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Flow_End_Reason.exportLiteral(outfile, level, name_='Flow_End_Reason')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.SiLK_App_Label is not None:
             showIndent(outfile, level)
-            outfile.write('SiLK_App_Label=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('SiLK_App_Label=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.SiLK_App_Label.exportLiteral(outfile, level, name_='SiLK_App_Label')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Payload_Entropy is not None:
             showIndent(outfile, level)
-            outfile.write('Payload_Entropy=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Payload_Entropy=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Payload_Entropy.exportLiteral(outfile, level, name_='Payload_Entropy')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.ML_App_Label is not None:
             showIndent(outfile, level)
-            outfile.write('ML_App_Label=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('ML_App_Label=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.ML_App_Label.exportLiteral(outfile, level, name_='ML_App_Label')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5500,19 +5500,19 @@ class YAFFlowType(GeneratedsSuper):
             outfile.write('),\n')
         if self.First_Packet_Banner is not None:
             showIndent(outfile, level)
-            outfile.write('First_Packet_Banner=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('First_Packet_Banner=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.First_Packet_Banner.exportLiteral(outfile, level, name_='First_Packet_Banner')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Second_Packet_Banner is not None:
             showIndent(outfile, level)
-            outfile.write('Second_Packet_Banner=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Second_Packet_Banner=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Second_Packet_Banner.exportLiteral(outfile, level, name_='Second_Packet_Banner')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.N_Bytes_Payload is not None:
             showIndent(outfile, level)
-            outfile.write('N_Bytes_Payload=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('N_Bytes_Payload=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.N_Bytes_Payload.exportLiteral(outfile, level, name_='N_Bytes_Payload')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5525,35 +5525,35 @@ class YAFFlowType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Flow_Start_Milliseconds':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Flow_Start_Milliseconds(obj_)
         elif nodeName_ == 'Flow_End_Milliseconds':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Flow_End_Milliseconds(obj_)
         elif nodeName_ == 'Octet_Total_Count':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Octet_Total_Count(obj_)
         elif nodeName_ == 'Packet_Total_Count':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Packet_Total_Count(obj_)
         elif nodeName_ == 'Flow_End_Reason':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Flow_End_Reason(obj_)
         elif nodeName_ == 'SiLK_App_Label':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_SiLK_App_Label(obj_)
         elif nodeName_ == 'Payload_Entropy':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Payload_Entropy(obj_)
         elif nodeName_ == 'ML_App_Label':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ML_App_Label(obj_)
         elif nodeName_ == 'TCP_Flow':
@@ -5569,15 +5569,15 @@ class YAFFlowType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Passive_OS_FIngerprinting(obj_)
         elif nodeName_ == 'First_Packet_Banner':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_First_Packet_Banner(obj_)
         elif nodeName_ == 'Second_Packet_Banner':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Second_Packet_Banner(obj_)
         elif nodeName_ == 'N_Bytes_Payload':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_N_Bytes_Payload(obj_)
 # end class YAFFlowType
@@ -5606,7 +5606,7 @@ class YAFReverseFlowType(GeneratedsSuper):
     def get_Reverse_Octet_Total_Count(self): return self.Reverse_Octet_Total_Count
     def set_Reverse_Octet_Total_Count(self, Reverse_Octet_Total_Count): self.Reverse_Octet_Total_Count = Reverse_Octet_Total_Count
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Reverse_Packet_Total_Count(self): return self.Reverse_Packet_Total_Count
     def set_Reverse_Packet_Total_Count(self, Reverse_Packet_Total_Count): self.Reverse_Packet_Total_Count = Reverse_Packet_Total_Count
@@ -5623,7 +5623,7 @@ class YAFReverseFlowType(GeneratedsSuper):
     def get_Reverse_First_Packet(self): return self.Reverse_First_Packet
     def set_Reverse_First_Packet(self, Reverse_First_Packet): self.Reverse_First_Packet = Reverse_First_Packet
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Reverse_N_Bytes_Payload(self): return self.Reverse_N_Bytes_Payload
     def set_Reverse_N_Bytes_Payload(self, Reverse_N_Bytes_Payload): self.Reverse_N_Bytes_Payload = Reverse_N_Bytes_Payload
@@ -5693,25 +5693,25 @@ class YAFReverseFlowType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Reverse_Octet_Total_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Reverse_Octet_Total_Count=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Reverse_Octet_Total_Count=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Reverse_Octet_Total_Count.exportLiteral(outfile, level, name_='Reverse_Octet_Total_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Reverse_Packet_Total_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Reverse_Packet_Total_Count=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Reverse_Packet_Total_Count=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Reverse_Packet_Total_Count.exportLiteral(outfile, level, name_='Reverse_Packet_Total_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Reverse_Payload_Entropy is not None:
             showIndent(outfile, level)
-            outfile.write('Reverse_Payload_Entropy=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Reverse_Payload_Entropy=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Reverse_Payload_Entropy.exportLiteral(outfile, level, name_='Reverse_Payload_Entropy')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Reverse_Flow_Delta_Milliseconds is not None:
             showIndent(outfile, level)
-            outfile.write('Reverse_Flow_Delta_Milliseconds=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Reverse_Flow_Delta_Milliseconds=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Reverse_Flow_Delta_Milliseconds.exportLiteral(outfile, level, name_='Reverse_Flow_Delta_Milliseconds')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5735,13 +5735,13 @@ class YAFReverseFlowType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Reverse_First_Packet is not None:
             showIndent(outfile, level)
-            outfile.write('Reverse_First_Packet=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Reverse_First_Packet=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Reverse_First_Packet.exportLiteral(outfile, level, name_='Reverse_First_Packet')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Reverse_N_Bytes_Payload is not None:
             showIndent(outfile, level)
-            outfile.write('Reverse_N_Bytes_Payload=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Reverse_N_Bytes_Payload=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Reverse_N_Bytes_Payload.exportLiteral(outfile, level, name_='Reverse_N_Bytes_Payload')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5754,19 +5754,19 @@ class YAFReverseFlowType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Reverse_Octet_Total_Count':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Reverse_Octet_Total_Count(obj_)
         elif nodeName_ == 'Reverse_Packet_Total_Count':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Reverse_Packet_Total_Count(obj_)
         elif nodeName_ == 'Reverse_Payload_Entropy':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Reverse_Payload_Entropy(obj_)
         elif nodeName_ == 'Reverse_Flow_Delta_Milliseconds':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Reverse_Flow_Delta_Milliseconds(obj_)
         elif nodeName_ == 'TCP_Reverse_Flow':
@@ -5782,11 +5782,11 @@ class YAFReverseFlowType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Reverse_Passive_OS_Fingerprinting(obj_)
         elif nodeName_ == 'Reverse_First_Packet':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Reverse_First_Packet(obj_)
         elif nodeName_ == 'Reverse_N_Bytes_Payload':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Reverse_N_Bytes_Payload(obj_)
 # end class YAFReverseFlowType
@@ -5808,14 +5808,14 @@ class YAFTCPFlowType(GeneratedsSuper):
     def get_TCP_Sequence_Number(self): return self.TCP_Sequence_Number
     def set_TCP_Sequence_Number(self, TCP_Sequence_Number): self.TCP_Sequence_Number = TCP_Sequence_Number
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Initial_TCP_Flags(self): return self.Initial_TCP_Flags
     def set_Initial_TCP_Flags(self, Initial_TCP_Flags): self.Initial_TCP_Flags = Initial_TCP_Flags
     def get_Union_TCP_Flags(self): return self.Union_TCP_Flags
     def set_Union_TCP_Flags(self, Union_TCP_Flags): self.Union_TCP_Flags = Union_TCP_Flags
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='NetFlowObj:', name_='YAFTCPFlowType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -5865,7 +5865,7 @@ class YAFTCPFlowType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.TCP_Sequence_Number is not None:
             showIndent(outfile, level)
-            outfile.write('TCP_Sequence_Number=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('TCP_Sequence_Number=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.TCP_Sequence_Number.exportLiteral(outfile, level, name_='TCP_Sequence_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5877,7 +5877,7 @@ class YAFTCPFlowType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Union_TCP_Flags is not None:
             showIndent(outfile, level)
-            outfile.write('Union_TCP_Flags=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Union_TCP_Flags=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Union_TCP_Flags.exportLiteral(outfile, level, name_='Union_TCP_Flags')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5890,7 +5890,7 @@ class YAFTCPFlowType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'TCP_Sequence_Number':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_TCP_Sequence_Number(obj_)
         elif nodeName_ == 'Initial_TCP_Flags':
@@ -5898,7 +5898,7 @@ class YAFTCPFlowType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Initial_TCP_Flags(obj_)
         elif nodeName_ == 'Union_TCP_Flags':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Union_TCP_Flags(obj_)
 # end class YAFTCPFlowType
@@ -5921,7 +5921,7 @@ class YAFOSInformationType(GeneratedsSuper):
     def get_OS_Name(self): return self.OS_Name
     def set_OS_Name(self, OS_Name): self.OS_Name = OS_Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_OS_Version(self): return self.OS_Version
     def set_OS_Version(self, OS_Version): self.OS_Version = OS_Version
@@ -5970,13 +5970,13 @@ class YAFOSInformationType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.OS_Name is not None:
             showIndent(outfile, level)
-            outfile.write('OS_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('OS_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.OS_Name.exportLiteral(outfile, level, name_='OS_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.OS_Version is not None:
             showIndent(outfile, level)
-            outfile.write('OS_Version=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('OS_Version=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.OS_Version.exportLiteral(outfile, level, name_='OS_Version')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5989,24 +5989,24 @@ class YAFOSInformationType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'OS_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_OS_Name(obj_)
         elif nodeName_ == 'OS_Version':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_OS_Version(obj_)
 # end class YAFOSInformationType
 
-class SiLKSensorClassType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class SiLKSensorClassType(cybox_common_types_1_0.BaseObjectAttributeType):
     """SiLKSensorClassType specifies the sensor class, via a union of the
     SiLKSensorClassTypeEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(SiLKSensorClassType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -6085,15 +6085,15 @@ class SiLKSensorClassType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class SiLKSensorClassType
 
-class SiLKDirectionType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class SiLKDirectionType(cybox_common_types_1_0.BaseObjectAttributeType):
     """SiLKType specifies direction of SiLK traffic, via a union of the
     SiLKDirectionTypeEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(SiLKDirectionType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -6172,16 +6172,16 @@ class SiLKDirectionType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class SiLKDirectionType
 
-class SiLKCountryCodeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class SiLKCountryCodeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """SiLKCountryCodeType specifies country codes used by SiLK, via a
     union of the SiLKCountryCodeTypeEnum type and the atomic
     xs:string type. Its base type is the CybOX Core
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(SiLKCountryCodeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -6260,15 +6260,15 @@ class SiLKCountryCodeType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class SiLKCountryCodeType
 
-class SiLKAddressType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class SiLKAddressType(cybox_common_types_1_0.BaseObjectAttributeType):
     """SiLKAddressType specifies SiLK address types, via a union of the
     SiLKAddressTypeEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(SiLKAddressType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -6347,15 +6347,15 @@ class SiLKAddressType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class SiLKAddressType
 
-class SiLKFlowAttributesType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class SiLKFlowAttributesType(cybox_common_types_1_0.BaseObjectAttributeType):
     """SiLKFlowAttributesType specifies SiLK flow attributes, via a union
     of the SiLKFlowAttributesTypeEnum type and the atomic xs:string
-    type. Its base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType,
+    type. Its base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType,
     for permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(SiLKFlowAttributesType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -6434,16 +6434,16 @@ class SiLKFlowAttributesType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class SiLKFlowAttributesType
 
-class NetflowV9ScopeFieldType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class NetflowV9ScopeFieldType(cybox_common_types_1_0.BaseObjectAttributeType):
     """NetflowV9ScopeFieldType specifies scope field types for Netflow v9,
     via a union of the NetflowV9ScopeFieldTypeEnum type and the
     atomic xs:string type. Its base type is the CybOX Core
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(NetflowV9ScopeFieldType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -6522,16 +6522,16 @@ class NetflowV9ScopeFieldType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class NetflowV9ScopeFieldType
 
-class NetflowV9FieldType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class NetflowV9FieldType(cybox_common_types_1_0.BaseObjectAttributeType):
     """NetflowV9FieldType specifies possible fields types for Netflow v9,
     via a union of the NetflowV9FieldTypeEnum type and the atomic
     xs:string type. Its base type is the CybOX Core
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(NetflowV9FieldType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -6610,14 +6610,14 @@ class NetflowV9FieldType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class NetflowV9FieldType
 
-class NetworkFlowObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class NetworkFlowObjectType(cybox_common_types_1_0.DefinedObjectType):
     """Defines the fields necessary to summarize network traffic, expressed
     as flows of multiple packets. Does not include the packet
     payload data (i.e. the actual data that was uploaded/downloaded
     to and from the Dest IP to Source IP as included in packet
     monitoring tools, such as Wireshark)."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Network_Flow_Label=None, Unidirectional_Flow_Record=None, Bidirectional_Flow_Record=None):
         super(NetworkFlowObjectType, self).__init__(object_reference, )
         self.Network_Flow_Label = Network_Flow_Label

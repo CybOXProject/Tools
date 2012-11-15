@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 from email_message_object_1_2 import EmailMessageObjectType
 
 etree_ = None
@@ -472,7 +472,7 @@ class ObservablesType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Observable_Package_Source is not None:
             showIndent(outfile, level)
-            outfile.write('Observable_Package_Source=model_.cybox_common_types_v1_0.MeasureSourceType(\n')
+            outfile.write('Observable_Package_Source=model_.cybox_common_types_1_0.MeasureSourceType(\n')
             self.Observable_Package_Source.exportLiteral(outfile, level, name_='Observable_Package_Source')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -514,7 +514,7 @@ class ObservablesType(GeneratedsSuper):
             self.extensiontype_ = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Observable_Package_Source':
-            obj_ = cybox_common_types_v1_0.MeasureSourceType.factory()
+            obj_ = cybox_common_types_1_0.MeasureSourceType.factory()
             obj_.build(child_)
             self.set_Observable_Package_Source(obj_)
         elif nodeName_ == 'Observable':
@@ -674,7 +674,7 @@ class ObservableType(GeneratedsSuper):
             outfile.write('Title=%s,\n' % quote_python(self.Title).encode(ExternalEncoding))
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -689,7 +689,7 @@ class ObservableType(GeneratedsSuper):
         outfile.write('],\n')
         if self.Observable_Source is not None:
             showIndent(outfile, level)
-            outfile.write('Observable_Source=model_.cybox_common_types_v1_0.MeasureSourceType(\n')
+            outfile.write('Observable_Source=model_.cybox_common_types_1_0.MeasureSourceType(\n')
             self.Observable_Source.exportLiteral(outfile, level, name_='Observable_Source')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -743,7 +743,7 @@ class ObservableType(GeneratedsSuper):
             Title_ = self.gds_validate_string(Title_, node, 'Title')
             self.Title = Title_
         elif nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Keywords':
@@ -751,7 +751,7 @@ class ObservableType(GeneratedsSuper):
             Keywords_ = self.gds_validate_string(Keywords_, node, 'Keywords')
             self.Keywords.append(Keywords_)
         elif nodeName_ == 'Observable_Source':
-            obj_ = cybox_common_types_v1_0.MeasureSourceType.factory()
+            obj_ = cybox_common_types_1_0.MeasureSourceType.factory()
             obj_.build(child_)
             self.set_Observable_Source(obj_)
         elif nodeName_ == 'Stateful_Measure':
@@ -870,7 +870,7 @@ class StatefulMeasureType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -901,7 +901,7 @@ class StatefulMeasureType(GeneratedsSuper):
             self.name = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Object':
@@ -1025,13 +1025,13 @@ class EventType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Producer_Observer is not None:
             showIndent(outfile, level)
-            outfile.write('Producer_Observer=model_.cybox_common_types_v1_0.MeasureSourceType(\n')
+            outfile.write('Producer_Observer=model_.cybox_common_types_1_0.MeasureSourceType(\n')
             self.Producer_Observer.exportLiteral(outfile, level, name_='Producer_Observer')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1073,11 +1073,11 @@ class EventType(GeneratedsSuper):
             self.id = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Producer-Observer':
-            obj_ = cybox_common_types_v1_0.MeasureSourceType.factory()
+            obj_ = cybox_common_types_1_0.MeasureSourceType.factory()
             obj_.build(child_)
             self.set_Producer_Observer(obj_)
         elif nodeName_ == 'Actions':
@@ -1547,7 +1547,7 @@ class ActionType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1565,7 +1565,7 @@ class ActionType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Discovery_Method is not None:
             showIndent(outfile, level)
-            outfile.write('Discovery_Method=model_.cybox_common_types_v1_0.MeasureSourceType(\n')
+            outfile.write('Discovery_Method=model_.cybox_common_types_1_0.MeasureSourceType(\n')
             self.Discovery_Method.exportLiteral(outfile, level, name_='Discovery_Method')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1644,7 +1644,7 @@ class ActionType(GeneratedsSuper):
                 self.anyAttributes_[name] = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Action_Aliases':
@@ -1656,7 +1656,7 @@ class ActionType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Action_Arguments(obj_)
         elif nodeName_ == 'Discovery_Method':
-            obj_ = cybox_common_types_v1_0.MeasureSourceType.factory()
+            obj_ = cybox_common_types_1_0.MeasureSourceType.factory()
             obj_.build(child_)
             self.set_Discovery_Method(obj_)
         elif nodeName_ == 'Associated_Objects':
@@ -2644,14 +2644,14 @@ class ObjectType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
-        if self.cybox_common_types_v1_0.DefinedObjectType is not None:
+        if self.cybox_common_types_1_0.DefinedObjectType is not None:
             showIndent(outfile, level)
-            outfile.write('cybox_common_types_v1_0.DefinedObjectType=model_.cybox_common_types_v1_0.DefinedObjectType(\n')
-            self.cybox_common_types_v1_0.DefinedObjectType.exportLiteral(outfile, level)
+            outfile.write('cybox_common_types_1_0.DefinedObjectType=model_.cybox_common_types_1_0.DefinedObjectType(\n')
+            self.cybox_common_types_1_0.DefinedObjectType.exportLiteral(outfile, level)
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.DomainSpecificObjectAttributesType is not None:
@@ -2680,7 +2680,7 @@ class ObjectType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Discovery_Method is not None:
             showIndent(outfile, level)
-            outfile.write('Discovery_Method=model_.cybox_common_types_v1_0.MeasureSourceType(\n')
+            outfile.write('Discovery_Method=model_.cybox_common_types_1_0.MeasureSourceType(\n')
             self.Discovery_Method.exportLiteral(outfile, level, name_='Discovery_Method')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2716,7 +2716,7 @@ class ObjectType(GeneratedsSuper):
             self.extensiontype_ = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Defined_Object':
@@ -2779,7 +2779,7 @@ class ObjectType(GeneratedsSuper):
                     'Class not implemented for <Defined_Effect> element')
             self.set_Defined_Effect(obj_)
         elif nodeName_ == 'Discovery_Method':
-            obj_ = cybox_common_types_v1_0.MeasureSourceType.factory()
+            obj_ = cybox_common_types_1_0.MeasureSourceType.factory()
             obj_.build(child_)
             self.set_Discovery_Method(obj_)
 # end class ObjectType
@@ -3358,10 +3358,10 @@ class StateType(GeneratedsSuper):
             self.Object.exportLiteral(outfile, level, name_='Object')
             showIndent(outfile, level)
             outfile.write('),\n')
-        if self.cybox_common_types_v1_0.DefinedObjectType is not None:
+        if self.cybox_common_types_1_0.DefinedObjectType is not None:
             showIndent(outfile, level)
-            outfile.write('cybox_common_types_v1_0.DefinedObjectType=model_.cybox_common_types_v1_0.DefinedObjectType(\n')
-            self.cybox_common_types_v1_0.DefinedObjectType.exportLiteral(outfile, level)
+            outfile.write('cybox_common_types_1_0.DefinedObjectType=model_.cybox_common_types_1_0.DefinedObjectType(\n')
+            self.cybox_common_types_1_0.DefinedObjectType.exportLiteral(outfile, level)
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Object_IDRef is not None:
@@ -3467,7 +3467,7 @@ class DataReadEffectType(DefinedEffectType):
         super(DataReadEffectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.DataSegmentType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.DataSegmentType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3480,7 +3480,7 @@ class DataReadEffectType(DefinedEffectType):
         super(DataReadEffectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.DataSegmentType.factory()
+            obj_ = cybox_common_types_1_0.DataSegmentType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
         super(DataReadEffectType, self).buildChildren(child_, node, nodeName_, True)
@@ -3548,7 +3548,7 @@ class DataWrittenEffectType(DefinedEffectType):
         super(DataWrittenEffectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.DataSegmentType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.DataSegmentType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3561,7 +3561,7 @@ class DataWrittenEffectType(DefinedEffectType):
         super(DataWrittenEffectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.DataSegmentType.factory()
+            obj_ = cybox_common_types_1_0.DataSegmentType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
         super(DataWrittenEffectType, self).buildChildren(child_, node, nodeName_, True)
@@ -3629,7 +3629,7 @@ class DataSentEffectType(DefinedEffectType):
         super(DataSentEffectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.DataSegmentType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.DataSegmentType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3642,7 +3642,7 @@ class DataSentEffectType(DefinedEffectType):
         super(DataSentEffectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.DataSegmentType.factory()
+            obj_ = cybox_common_types_1_0.DataSegmentType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
         super(DataSentEffectType, self).buildChildren(child_, node, nodeName_, True)
@@ -3710,7 +3710,7 @@ class DataReceivedEffectType(DefinedEffectType):
         super(DataReceivedEffectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.DataSegmentType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.DataSegmentType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3723,7 +3723,7 @@ class DataReceivedEffectType(DefinedEffectType):
         super(DataReceivedEffectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.DataSegmentType.factory()
+            obj_ = cybox_common_types_1_0.DataSegmentType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
         super(DataReceivedEffectType, self).buildChildren(child_, node, nodeName_, True)
@@ -4975,7 +4975,7 @@ class ObfuscationTechniqueType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4994,7 +4994,7 @@ class ObfuscationTechniqueType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Observables':
@@ -5003,12 +5003,12 @@ class ObfuscationTechniqueType(GeneratedsSuper):
             self.set_Observables(obj_)
 # end class ObfuscationTechniqueType
 
-class AttributeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class AttributeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """The AttibuteType is a complex type representing the specification of
     a single Object Attribute.The name attribute specifies a name
     for this attribute."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, name=None, valueOf_=None):
         super(AttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.name = _cast(None, name)

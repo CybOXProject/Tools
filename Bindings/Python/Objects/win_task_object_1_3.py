@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import email_message_object_1_2
 
 etree_ = None
@@ -480,12 +480,12 @@ class TriggerType(GeneratedsSuper):
     def get_Trigger_Begin(self): return self.Trigger_Begin
     def set_Trigger_Begin(self, Trigger_Begin): self.Trigger_Begin = Trigger_Begin
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Trigger_Delay(self): return self.Trigger_Delay
     def set_Trigger_Delay(self, Trigger_Delay): self.Trigger_Delay = Trigger_Delay
     def validate_DurationObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DurationObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DurationObjectAttributeType, a restriction on None.
         pass
     def get_Trigger_End(self): return self.Trigger_End
     def set_Trigger_End(self, Trigger_End): self.Trigger_End = Trigger_End
@@ -499,7 +499,7 @@ class TriggerType(GeneratedsSuper):
     def get_Trigger_Session_Change_Type(self): return self.Trigger_Session_Change_Type
     def set_Trigger_Session_Change_Type(self, Trigger_Session_Change_Type): self.Trigger_Session_Change_Type = Trigger_Session_Change_Type
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Trigger_Type(self): return self.Trigger_Type
     def set_Trigger_Type(self, Trigger_Type): self.Trigger_Type = Trigger_Type
@@ -570,19 +570,19 @@ class TriggerType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Trigger_Begin is not None:
             showIndent(outfile, level)
-            outfile.write('Trigger_Begin=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Trigger_Begin=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Trigger_Begin.exportLiteral(outfile, level, name_='Trigger_Begin')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Trigger_Delay is not None:
             showIndent(outfile, level)
-            outfile.write('Trigger_Delay=model_.cybox_common_types_v1_0.DurationObjectAttributeType(\n')
+            outfile.write('Trigger_Delay=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
             self.Trigger_Delay.exportLiteral(outfile, level, name_='Trigger_Delay')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Trigger_End is not None:
             showIndent(outfile, level)
-            outfile.write('Trigger_End=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Trigger_End=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Trigger_End.exportLiteral(outfile, level, name_='Trigger_End')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -594,13 +594,13 @@ class TriggerType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Trigger_Max_Run_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Trigger_Max_Run_Time=model_.cybox_common_types_v1_0.DurationObjectAttributeType(\n')
+            outfile.write('Trigger_Max_Run_Time=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
             self.Trigger_Max_Run_Time.exportLiteral(outfile, level, name_='Trigger_Max_Run_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Trigger_Session_Change_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Trigger_Session_Change_Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Trigger_Session_Change_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Trigger_Session_Change_Type.exportLiteral(outfile, level, name_='Trigger_Session_Change_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -627,15 +627,15 @@ class TriggerType(GeneratedsSuper):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Trigger_Begin':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Trigger_Begin(obj_)
         elif nodeName_ == 'Trigger_Delay':
-            obj_ = cybox_common_types_v1_0.DurationObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Trigger_Delay(obj_)
         elif nodeName_ == 'Trigger_End':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Trigger_End(obj_)
         elif nodeName_ == 'Trigger_Frequency':
@@ -643,11 +643,11 @@ class TriggerType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Trigger_Frequency(obj_)
         elif nodeName_ == 'Trigger_Max_Run_Time':
-            obj_ = cybox_common_types_v1_0.DurationObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Trigger_Max_Run_Time(obj_)
         elif nodeName_ == 'Trigger_Session_Change_Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Trigger_Session_Change_Type(obj_)
         elif nodeName_ == 'Trigger_Type':
@@ -766,7 +766,7 @@ class TaskActionType(GeneratedsSuper):
     def get_Action_ID(self): return self.Action_ID
     def set_Action_ID(self, Action_ID): self.Action_ID = Action_ID
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_IEmailAction(self): return self.IEmailAction
     def set_IEmailAction(self, IEmailAction): self.IEmailAction = IEmailAction
@@ -839,7 +839,7 @@ class TaskActionType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Action_ID is not None:
             showIndent(outfile, level)
-            outfile.write('Action_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Action_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Action_ID.exportLiteral(outfile, level, name_='Action_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -880,7 +880,7 @@ class TaskActionType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Action_Type(obj_)
         elif nodeName_ == 'Action_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Action_ID(obj_)
         elif nodeName_ == 'IEmailAction':
@@ -917,7 +917,7 @@ class IComHandlerActionType(GeneratedsSuper):
     def get_COM_Data(self): return self.COM_Data
     def set_COM_Data(self, COM_Data): self.COM_Data = COM_Data
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_COM_Class_ID(self): return self.COM_Class_ID
     def set_COM_Class_ID(self, COM_Class_ID): self.COM_Class_ID = COM_Class_ID
@@ -966,13 +966,13 @@ class IComHandlerActionType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.COM_Data is not None:
             showIndent(outfile, level)
-            outfile.write('COM_Data=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('COM_Data=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.COM_Data.exportLiteral(outfile, level, name_='COM_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.COM_Class_ID is not None:
             showIndent(outfile, level)
-            outfile.write('COM_Class_ID=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('COM_Class_ID=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.COM_Class_ID.exportLiteral(outfile, level, name_='COM_Class_ID')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -985,11 +985,11 @@ class IComHandlerActionType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'COM_Data':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_COM_Data(obj_)
         elif nodeName_ == 'COM_Class_ID':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_COM_Class_ID(obj_)
 # end class IComHandlerActionType
@@ -1012,7 +1012,7 @@ class IExecActionType(GeneratedsSuper):
     def get_Exec_Arguments(self): return self.Exec_Arguments
     def set_Exec_Arguments(self, Exec_Arguments): self.Exec_Arguments = Exec_Arguments
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Exec_Program_Path(self): return self.Exec_Program_Path
     def set_Exec_Program_Path(self, Exec_Program_Path): self.Exec_Program_Path = Exec_Program_Path
@@ -1071,25 +1071,25 @@ class IExecActionType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Exec_Arguments is not None:
             showIndent(outfile, level)
-            outfile.write('Exec_Arguments=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Exec_Arguments=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Exec_Arguments.exportLiteral(outfile, level, name_='Exec_Arguments')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Exec_Program_Path is not None:
             showIndent(outfile, level)
-            outfile.write('Exec_Program_Path=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Exec_Program_Path=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Exec_Program_Path.exportLiteral(outfile, level, name_='Exec_Program_Path')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Exec_Working_Directory is not None:
             showIndent(outfile, level)
-            outfile.write('Exec_Working_Directory=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Exec_Working_Directory=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Exec_Working_Directory.exportLiteral(outfile, level, name_='Exec_Working_Directory')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Exec_Program_Hashes is not None:
             showIndent(outfile, level)
-            outfile.write('Exec_Program_Hashes=model_.cybox_common_types_v1_0.HashListType(\n')
+            outfile.write('Exec_Program_Hashes=model_.cybox_common_types_1_0.HashListType(\n')
             self.Exec_Program_Hashes.exportLiteral(outfile, level, name_='Exec_Program_Hashes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1102,19 +1102,19 @@ class IExecActionType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Exec_Arguments':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Exec_Arguments(obj_)
         elif nodeName_ == 'Exec_Program_Path':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Exec_Program_Path(obj_)
         elif nodeName_ == 'Exec_Working_Directory':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Exec_Working_Directory(obj_)
         elif nodeName_ == 'Exec_Program_Hashes':
-            obj_ = cybox_common_types_v1_0.HashListType.factory()
+            obj_ = cybox_common_types_1_0.HashListType.factory()
             obj_.build(child_)
             self.set_Exec_Program_Hashes(obj_)
 # end class IExecActionType
@@ -1135,7 +1135,7 @@ class IShowMessageActionType(GeneratedsSuper):
     def get_Show_Message_Body(self): return self.Show_Message_Body
     def set_Show_Message_Body(self, Show_Message_Body): self.Show_Message_Body = Show_Message_Body
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Show_Message_Title(self): return self.Show_Message_Title
     def set_Show_Message_Title(self, Show_Message_Title): self.Show_Message_Title = Show_Message_Title
@@ -1184,13 +1184,13 @@ class IShowMessageActionType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Show_Message_Body is not None:
             showIndent(outfile, level)
-            outfile.write('Show_Message_Body=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Show_Message_Body=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Show_Message_Body.exportLiteral(outfile, level, name_='Show_Message_Body')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Show_Message_Title is not None:
             showIndent(outfile, level)
-            outfile.write('Show_Message_Title=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Show_Message_Title=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Show_Message_Title.exportLiteral(outfile, level, name_='Show_Message_Title')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1203,24 +1203,24 @@ class IShowMessageActionType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Show_Message_Body':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Show_Message_Body(obj_)
         elif nodeName_ == 'Show_Message_Title':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Show_Message_Title(obj_)
 # end class IShowMessageActionType
 
-class TaskStatusType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class TaskStatusType(cybox_common_types_1_0.BaseObjectAttributeType):
     """The TaskStatusType type specifies Windows Task states via a union of
     the TaskStatusEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(TaskStatusType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -1299,16 +1299,16 @@ class TaskStatusType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class TaskStatusType
 
-class TaskTriggerType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class TaskTriggerType(cybox_common_types_1_0.BaseObjectAttributeType):
     """The TaskTriggerType type specifies Windows Task trigger types via a
     union of the TriggerTypeEnum enumeration and the atomic
     xs:string type. Its base type is the CybOX Core
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(TaskTriggerType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -1387,16 +1387,16 @@ class TaskTriggerType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class TaskTriggerType
 
-class TaskTriggerFrequencyType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class TaskTriggerFrequencyType(cybox_common_types_1_0.BaseObjectAttributeType):
     """The TaskTriggerFrequencyType type specifies Windows Task trigger
     frequency types via a union of the TriggerFrequencyEnum type and
     the atomic xs:string type. Its base type is the CybOX Core
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(TaskTriggerFrequencyType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -1475,15 +1475,15 @@ class TaskTriggerFrequencyType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class TaskTriggerFrequencyType
 
-class TaskPriorityType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class TaskPriorityType(cybox_common_types_1_0.BaseObjectAttributeType):
     """The TaskPriorityType type specifies Windows Task priority types via
     a union of the TaskPriorityEnum type and the atomic xs:string
-    type. Its base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType,
+    type. Its base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType,
     for permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(TaskPriorityType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -1562,15 +1562,15 @@ class TaskPriorityType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class TaskPriorityType
 
-class TaskFlagType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class TaskFlagType(cybox_common_types_1_0.BaseObjectAttributeType):
     """The TaskFlagType type specifies Windows Task flag types via a union
     of the TaskFlagEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(TaskFlagType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -1649,12 +1649,12 @@ class TaskFlagType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class TaskFlagType
 
-class TaskActionTypeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class TaskActionTypeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """The TaskActionTypeType characterizes the specific types of task
     actions.This attribute is optional and specifies the expected
     type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(TaskActionTypeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -1733,12 +1733,12 @@ class TaskActionTypeType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class TaskActionTypeType
 
-class WindowsTaskObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class WindowsTaskObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The WindowsTaskObjectType type is intended to characterize Windows
     task scheduler tasks. See Also: http://msdn.microsoft.com/en-
     us/library/windows/desktop/aa381311(v=vs.85).aspx"""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Status=None, Priority=None, Name=None, Application_Name=None, Parameters=None, Flags=None, Account_Name=None, Account_Run_Level=None, Account_Logon_Type=None, Creator=None, Creation_Date=None, Most_Recent_Run_Time=None, Exit_Code=None, Max_Run_Time=None, Next_Run_Time=None, Action_List=None, Trigger_List=None, Comment=None, Working_Directory=None, Work_Item_Data=None):
         super(WindowsTaskObjectType, self).__init__(object_reference, )
         self.Status = Status
@@ -1780,7 +1780,7 @@ class WindowsTaskObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Application_Name(self): return self.Application_Name
     def set_Application_Name(self, Application_Name): self.Application_Name = Application_Name
@@ -1802,19 +1802,19 @@ class WindowsTaskObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Creation_Date(self): return self.Creation_Date
     def set_Creation_Date(self, Creation_Date): self.Creation_Date = Creation_Date
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Most_Recent_Run_Time(self): return self.Most_Recent_Run_Time
     def set_Most_Recent_Run_Time(self, Most_Recent_Run_Time): self.Most_Recent_Run_Time = Most_Recent_Run_Time
     def get_Exit_Code(self): return self.Exit_Code
     def set_Exit_Code(self, Exit_Code): self.Exit_Code = Exit_Code
     def validate_LongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.LongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.LongObjectAttributeType, a restriction on None.
         pass
     def get_Max_Run_Time(self): return self.Max_Run_Time
     def set_Max_Run_Time(self, Max_Run_Time): self.Max_Run_Time = Max_Run_Time
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def get_Next_Run_Time(self): return self.Next_Run_Time
     def set_Next_Run_Time(self, Next_Run_Time): self.Next_Run_Time = Next_Run_Time
@@ -1829,7 +1829,7 @@ class WindowsTaskObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Work_Item_Data(self): return self.Work_Item_Data
     def set_Work_Item_Data(self, Work_Item_Data): self.Work_Item_Data = Work_Item_Data
     def validate_Base64BinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.Base64BinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.Base64BinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinTaskObj:', name_='WindowsTaskObjectType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -1945,19 +1945,19 @@ class WindowsTaskObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Name.exportLiteral(outfile, level, name_='Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Application_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Application_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Application_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Application_Name.exportLiteral(outfile, level, name_='Application_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Parameters is not None:
             showIndent(outfile, level)
-            outfile.write('Parameters=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Parameters=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Parameters.exportLiteral(outfile, level, name_='Parameters')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1969,55 +1969,55 @@ class WindowsTaskObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Account_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Account_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Account_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Account_Name.exportLiteral(outfile, level, name_='Account_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Account_Run_Level is not None:
             showIndent(outfile, level)
-            outfile.write('Account_Run_Level=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Account_Run_Level=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Account_Run_Level.exportLiteral(outfile, level, name_='Account_Run_Level')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Account_Logon_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Account_Logon_Type=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Account_Logon_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Account_Logon_Type.exportLiteral(outfile, level, name_='Account_Logon_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Creator is not None:
             showIndent(outfile, level)
-            outfile.write('Creator=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Creator=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Creator.exportLiteral(outfile, level, name_='Creator')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Creation_Date is not None:
             showIndent(outfile, level)
-            outfile.write('Creation_Date=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Creation_Date=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Creation_Date.exportLiteral(outfile, level, name_='Creation_Date')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Most_Recent_Run_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Most_Recent_Run_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Most_Recent_Run_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Most_Recent_Run_Time.exportLiteral(outfile, level, name_='Most_Recent_Run_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Exit_Code is not None:
             showIndent(outfile, level)
-            outfile.write('Exit_Code=model_.cybox_common_types_v1_0.LongObjectAttributeType(\n')
+            outfile.write('Exit_Code=model_.cybox_common_types_1_0.LongObjectAttributeType(\n')
             self.Exit_Code.exportLiteral(outfile, level, name_='Exit_Code')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Max_Run_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Max_Run_Time=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Max_Run_Time=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Max_Run_Time.exportLiteral(outfile, level, name_='Max_Run_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Next_Run_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Next_Run_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Next_Run_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Next_Run_Time.exportLiteral(outfile, level, name_='Next_Run_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2035,19 +2035,19 @@ class WindowsTaskObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Comment is not None:
             showIndent(outfile, level)
-            outfile.write('Comment=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Comment=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Comment.exportLiteral(outfile, level, name_='Comment')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Working_Directory is not None:
             showIndent(outfile, level)
-            outfile.write('Working_Directory=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Working_Directory=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Working_Directory.exportLiteral(outfile, level, name_='Working_Directory')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Work_Item_Data is not None:
             showIndent(outfile, level)
-            outfile.write('Work_Item_Data=model_.cybox_common_types_v1_0.Base64BinaryObjectAttributeType(\n')
+            outfile.write('Work_Item_Data=model_.cybox_common_types_1_0.Base64BinaryObjectAttributeType(\n')
             self.Work_Item_Data.exportLiteral(outfile, level, name_='Work_Item_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2068,15 +2068,15 @@ class WindowsTaskObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Priority(obj_)
         elif nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Application_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Application_Name(obj_)
         elif nodeName_ == 'Parameters':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Parameters(obj_)
         elif nodeName_ == 'Flags':
@@ -2084,39 +2084,39 @@ class WindowsTaskObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Flags(obj_)
         elif nodeName_ == 'Account_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Account_Name(obj_)
         elif nodeName_ == 'Account_Run_Level':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Account_Run_Level(obj_)
         elif nodeName_ == 'Account_Logon_Type':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Account_Logon_Type(obj_)
         elif nodeName_ == 'Creator':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Creator(obj_)
         elif nodeName_ == 'Creation_Date':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Creation_Date(obj_)
         elif nodeName_ == 'Most_Recent_Run_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Most_Recent_Run_Time(obj_)
         elif nodeName_ == 'Exit_Code':
-            obj_ = cybox_common_types_v1_0.LongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.LongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Exit_Code(obj_)
         elif nodeName_ == 'Max_Run_Time':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Max_Run_Time(obj_)
         elif nodeName_ == 'Next_Run_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Next_Run_Time(obj_)
         elif nodeName_ == 'Action_List':
@@ -2128,15 +2128,15 @@ class WindowsTaskObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Trigger_List(obj_)
         elif nodeName_ == 'Comment':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Comment(obj_)
         elif nodeName_ == 'Working_Directory':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Working_Directory(obj_)
         elif nodeName_ == 'Work_Item_Data':
-            obj_ = cybox_common_types_v1_0.Base64BinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.Base64BinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Work_Item_Data(obj_)
         super(WindowsTaskObjectType, self).buildChildren(child_, node, nodeName_, True)

@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import address_object_1_2
 
 etree_ = None
@@ -388,12 +388,12 @@ class BIOSInfoType(GeneratedsSuper):
     def get_BIOS_Date(self): return self.BIOS_Date
     def set_BIOS_Date(self, BIOS_Date): self.BIOS_Date = BIOS_Date
     def validate_DateObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateObjectAttributeType, a restriction on None.
         pass
     def get_BIOS_Version(self): return self.BIOS_Version
     def set_BIOS_Version(self, BIOS_Version): self.BIOS_Version = BIOS_Version
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_BIOS_Manufacturer(self): return self.BIOS_Manufacturer
     def set_BIOS_Manufacturer(self, BIOS_Manufacturer): self.BIOS_Manufacturer = BIOS_Manufacturer
@@ -455,31 +455,31 @@ class BIOSInfoType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.BIOS_Date is not None:
             showIndent(outfile, level)
-            outfile.write('BIOS_Date=model_.cybox_common_types_v1_0.DateObjectAttributeType(\n')
+            outfile.write('BIOS_Date=model_.cybox_common_types_1_0.DateObjectAttributeType(\n')
             self.BIOS_Date.exportLiteral(outfile, level, name_='BIOS_Date')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.BIOS_Version is not None:
             showIndent(outfile, level)
-            outfile.write('BIOS_Version=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('BIOS_Version=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.BIOS_Version.exportLiteral(outfile, level, name_='BIOS_Version')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.BIOS_Manufacturer is not None:
             showIndent(outfile, level)
-            outfile.write('BIOS_Manufacturer=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('BIOS_Manufacturer=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.BIOS_Manufacturer.exportLiteral(outfile, level, name_='BIOS_Manufacturer')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.BIOS_Release_Date is not None:
             showIndent(outfile, level)
-            outfile.write('BIOS_Release_Date=model_.cybox_common_types_v1_0.DateObjectAttributeType(\n')
+            outfile.write('BIOS_Release_Date=model_.cybox_common_types_1_0.DateObjectAttributeType(\n')
             self.BIOS_Release_Date.exportLiteral(outfile, level, name_='BIOS_Release_Date')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.BIOS_Serial_Number is not None:
             showIndent(outfile, level)
-            outfile.write('BIOS_Serial_Number=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('BIOS_Serial_Number=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.BIOS_Serial_Number.exportLiteral(outfile, level, name_='BIOS_Serial_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -492,23 +492,23 @@ class BIOSInfoType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'BIOS_Date':
-            obj_ = cybox_common_types_v1_0.DateObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateObjectAttributeType.factory()
             obj_.build(child_)
             self.set_BIOS_Date(obj_)
         elif nodeName_ == 'BIOS_Version':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_BIOS_Version(obj_)
         elif nodeName_ == 'BIOS_Manufacturer':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_BIOS_Manufacturer(obj_)
         elif nodeName_ == 'BIOS_Release_Date':
-            obj_ = cybox_common_types_v1_0.DateObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateObjectAttributeType.factory()
             obj_.build(child_)
             self.set_BIOS_Release_Date(obj_)
         elif nodeName_ == 'BIOS_Serial_Number':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_BIOS_Serial_Number(obj_)
 # end class BIOSInfoType
@@ -708,14 +708,14 @@ class NetworkInterfaceType(GeneratedsSuper):
     def get_Adapter(self): return self.Adapter
     def set_Adapter(self, Adapter): self.Adapter = Adapter
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Description(self): return self.Description
     def set_Description(self, Description): self.Description = Description
     def get_DHCP_Lease_Expires(self): return self.DHCP_Lease_Expires
     def set_DHCP_Lease_Expires(self, DHCP_Lease_Expires): self.DHCP_Lease_Expires = DHCP_Lease_Expires
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_DHCP_Lease_Obtained(self): return self.DHCP_Lease_Obtained
     def set_DHCP_Lease_Obtained(self, DHCP_Lease_Obtained): self.DHCP_Lease_Obtained = DHCP_Lease_Obtained
@@ -790,25 +790,25 @@ class NetworkInterfaceType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Adapter is not None:
             showIndent(outfile, level)
-            outfile.write('Adapter=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Adapter=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Adapter.exportLiteral(outfile, level, name_='Adapter')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.DHCP_Lease_Expires is not None:
             showIndent(outfile, level)
-            outfile.write('DHCP_Lease_Expires=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('DHCP_Lease_Expires=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.DHCP_Lease_Expires.exportLiteral(outfile, level, name_='DHCP_Lease_Expires')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.DHCP_Lease_Obtained is not None:
             showIndent(outfile, level)
-            outfile.write('DHCP_Lease_Obtained=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('DHCP_Lease_Obtained=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.DHCP_Lease_Obtained.exportLiteral(outfile, level, name_='DHCP_Lease_Obtained')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -832,7 +832,7 @@ class NetworkInterfaceType(GeneratedsSuper):
             outfile.write('),\n')
         if self.MAC is not None:
             showIndent(outfile, level)
-            outfile.write('MAC=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('MAC=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.MAC.exportLiteral(outfile, level, name_='MAC')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -845,19 +845,19 @@ class NetworkInterfaceType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Adapter':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Adapter(obj_)
         elif nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'DHCP_Lease_Expires':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_DHCP_Lease_Expires(obj_)
         elif nodeName_ == 'DHCP_Lease_Obtained':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_DHCP_Lease_Obtained(obj_)
         elif nodeName_ == 'DHCP_Server_List':
@@ -873,7 +873,7 @@ class NetworkInterfaceType(GeneratedsSuper):
             obj_.build(child_)
             self.set_IP_List(obj_)
         elif nodeName_ == 'MAC':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_MAC(obj_)
 # end class NetworkInterfaceType
@@ -1141,11 +1141,11 @@ class DHCPServerListType(GeneratedsSuper):
             self.DHCP_Server_Address.append(obj_)
 # end class DHCPServerListType
 
-class SystemObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class SystemObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The SystemObjectType type is intended to characterize computer
     systems (as a combination of both software and hardware)."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Available_Physical_Memory=None, BIOS_Info=None, Date=None, Hostname=None, Local_Time=None, Network_Interface_List=None, OS=None, Processor=None, Processor_Architecture=None, System_Time=None, Timezone_DST=None, Timezone_Standard=None, Total_Physical_Memory=None, Uptime=None, Username=None):
         super(SystemObjectType, self).__init__(object_reference, )
         self.Available_Physical_Memory = Available_Physical_Memory
@@ -1172,24 +1172,24 @@ class SystemObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Available_Physical_Memory(self): return self.Available_Physical_Memory
     def set_Available_Physical_Memory(self, Available_Physical_Memory): self.Available_Physical_Memory = Available_Physical_Memory
     def validate_UnsignedLongObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedLongObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedLongObjectAttributeType, a restriction on None.
         pass
     def get_BIOS_Info(self): return self.BIOS_Info
     def set_BIOS_Info(self, BIOS_Info): self.BIOS_Info = BIOS_Info
     def get_Date(self): return self.Date
     def set_Date(self, Date): self.Date = Date
     def validate_DateObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateObjectAttributeType, a restriction on None.
         pass
     def get_Hostname(self): return self.Hostname
     def set_Hostname(self, Hostname): self.Hostname = Hostname
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Local_Time(self): return self.Local_Time
     def set_Local_Time(self, Local_Time): self.Local_Time = Local_Time
     def validate_TimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.TimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.TimeObjectAttributeType, a restriction on None.
         pass
     def get_Network_Interface_List(self): return self.Network_Interface_List
     def set_Network_Interface_List(self, Network_Interface_List): self.Network_Interface_List = Network_Interface_List
@@ -1213,7 +1213,7 @@ class SystemObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Uptime(self): return self.Uptime
     def set_Uptime(self, Uptime): self.Uptime = Uptime
     def validate_DurationObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DurationObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DurationObjectAttributeType, a restriction on None.
         pass
     def get_Username(self): return self.Username
     def set_Username(self, Username): self.Username = Username
@@ -1304,7 +1304,7 @@ class SystemObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(SystemObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Available_Physical_Memory is not None:
             showIndent(outfile, level)
-            outfile.write('Available_Physical_Memory=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Available_Physical_Memory=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Available_Physical_Memory.exportLiteral(outfile, level, name_='Available_Physical_Memory')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1316,19 +1316,19 @@ class SystemObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Date is not None:
             showIndent(outfile, level)
-            outfile.write('Date=model_.cybox_common_types_v1_0.DateObjectAttributeType(\n')
+            outfile.write('Date=model_.cybox_common_types_1_0.DateObjectAttributeType(\n')
             self.Date.exportLiteral(outfile, level, name_='Date')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Hostname is not None:
             showIndent(outfile, level)
-            outfile.write('Hostname=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Hostname=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Hostname.exportLiteral(outfile, level, name_='Hostname')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Local_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Local_Time=model_.cybox_common_types_v1_0.TimeObjectAttributeType(\n')
+            outfile.write('Local_Time=model_.cybox_common_types_1_0.TimeObjectAttributeType(\n')
             self.Local_Time.exportLiteral(outfile, level, name_='Local_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1346,7 +1346,7 @@ class SystemObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Processor is not None:
             showIndent(outfile, level)
-            outfile.write('Processor=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Processor=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Processor.exportLiteral(outfile, level, name_='Processor')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1358,37 +1358,37 @@ class SystemObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.System_Time is not None:
             showIndent(outfile, level)
-            outfile.write('System_Time=model_.cybox_common_types_v1_0.TimeObjectAttributeType(\n')
+            outfile.write('System_Time=model_.cybox_common_types_1_0.TimeObjectAttributeType(\n')
             self.System_Time.exportLiteral(outfile, level, name_='System_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Timezone_DST is not None:
             showIndent(outfile, level)
-            outfile.write('Timezone_DST=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Timezone_DST=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Timezone_DST.exportLiteral(outfile, level, name_='Timezone_DST')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Timezone_Standard is not None:
             showIndent(outfile, level)
-            outfile.write('Timezone_Standard=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Timezone_Standard=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Timezone_Standard.exportLiteral(outfile, level, name_='Timezone_Standard')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Total_Physical_Memory is not None:
             showIndent(outfile, level)
-            outfile.write('Total_Physical_Memory=model_.cybox_common_types_v1_0.UnsignedLongObjectAttributeType(\n')
+            outfile.write('Total_Physical_Memory=model_.cybox_common_types_1_0.UnsignedLongObjectAttributeType(\n')
             self.Total_Physical_Memory.exportLiteral(outfile, level, name_='Total_Physical_Memory')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Uptime is not None:
             showIndent(outfile, level)
-            outfile.write('Uptime=model_.cybox_common_types_v1_0.DurationObjectAttributeType(\n')
+            outfile.write('Uptime=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
             self.Uptime.exportLiteral(outfile, level, name_='Uptime')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Username is not None:
             showIndent(outfile, level)
-            outfile.write('Username=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Username=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Username.exportLiteral(outfile, level, name_='Username')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1401,7 +1401,7 @@ class SystemObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(SystemObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Available_Physical_Memory':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Available_Physical_Memory(obj_)
         elif nodeName_ == 'BIOS_Info':
@@ -1409,15 +1409,15 @@ class SystemObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_BIOS_Info(obj_)
         elif nodeName_ == 'Date':
-            obj_ = cybox_common_types_v1_0.DateObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Date(obj_)
         elif nodeName_ == 'Hostname':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Hostname(obj_)
         elif nodeName_ == 'Local_Time':
-            obj_ = cybox_common_types_v1_0.TimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.TimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Local_Time(obj_)
         elif nodeName_ == 'Network_Interface_List':
@@ -1429,7 +1429,7 @@ class SystemObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_OS(obj_)
         elif nodeName_ == 'Processor':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Processor(obj_)
         elif nodeName_ == 'Processor_Architecture':
@@ -1437,38 +1437,38 @@ class SystemObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Processor_Architecture(obj_)
         elif nodeName_ == 'System_Time':
-            obj_ = cybox_common_types_v1_0.TimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.TimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_System_Time(obj_)
         elif nodeName_ == 'Timezone_DST':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Timezone_DST(obj_)
         elif nodeName_ == 'Timezone_Standard':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Timezone_Standard(obj_)
         elif nodeName_ == 'Total_Physical_Memory':
-            obj_ = cybox_common_types_v1_0.UnsignedLongObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedLongObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Total_Physical_Memory(obj_)
         elif nodeName_ == 'Uptime':
-            obj_ = cybox_common_types_v1_0.DurationObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Uptime(obj_)
         elif nodeName_ == 'Username':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Username(obj_)
         super(SystemObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class SystemObjectType
 
-class OSType(cybox_common_types_v1_0.CPESpecificationType):
+class OSType(cybox_common_types_1_0.CPESpecificationType):
     """The OSType type specifies information about an operating system. It
-    imports and extends the cybox_common_types_v1_0.CPESpecificationType from the CybOX
+    imports and extends the cybox_common_types_1_0.CPESpecificationType from the CybOX
     Common Types."""
     subclass = None
-    superclass = cybox_common_types_v1_0.CPESpecificationType
+    superclass = cybox_common_types_1_0.CPESpecificationType
     def __init__(self, CPE_Name=None, Title=None, Meta_Item_Metadata=None, Bitness=None, Build_Number=None, Environment_Variable_List=None, Install_Date=None, Patch_Level=None):
         super(OSType, self).__init__(CPE_Name, Title, Meta_Item_Metadata, )
         self.Bitness = Bitness
@@ -1490,14 +1490,14 @@ class OSType(cybox_common_types_v1_0.CPESpecificationType):
     def get_Build_Number(self): return self.Build_Number
     def set_Build_Number(self, Build_Number): self.Build_Number = Build_Number
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Environment_Variable_List(self): return self.Environment_Variable_List
     def set_Environment_Variable_List(self, Environment_Variable_List): self.Environment_Variable_List = Environment_Variable_List
     def get_Install_Date(self): return self.Install_Date
     def set_Install_Date(self, Install_Date): self.Install_Date = Install_Date
     def validate_DateObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateObjectAttributeType, a restriction on None.
         pass
     def get_Patch_Level(self): return self.Patch_Level
     def set_Patch_Level(self, Patch_Level): self.Patch_Level = Patch_Level
@@ -1564,25 +1564,25 @@ class OSType(cybox_common_types_v1_0.CPESpecificationType):
             outfile.write('),\n')
         if self.Build_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Build_Number=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Build_Number=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Build_Number.exportLiteral(outfile, level, name_='Build_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Environment_Variable_List is not None:
             showIndent(outfile, level)
-            outfile.write('Environment_Variable_List=model_.cybox_common_types_v1_0.EnvironmentVariableListType(\n')
+            outfile.write('Environment_Variable_List=model_.cybox_common_types_1_0.EnvironmentVariableListType(\n')
             self.Environment_Variable_List.exportLiteral(outfile, level, name_='Environment_Variable_List')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Install_Date is not None:
             showIndent(outfile, level)
-            outfile.write('Install_Date=model_.cybox_common_types_v1_0.DateObjectAttributeType(\n')
+            outfile.write('Install_Date=model_.cybox_common_types_1_0.DateObjectAttributeType(\n')
             self.Install_Date.exportLiteral(outfile, level, name_='Install_Date')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Patch_Level is not None:
             showIndent(outfile, level)
-            outfile.write('Patch_Level=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Patch_Level=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Patch_Level.exportLiteral(outfile, level, name_='Patch_Level')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1599,33 +1599,33 @@ class OSType(cybox_common_types_v1_0.CPESpecificationType):
             obj_.build(child_)
             self.set_Bitness(obj_)
         elif nodeName_ == 'Build_Number':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Build_Number(obj_)
         elif nodeName_ == 'Environment_Variable_List':
-            obj_ = cybox_common_types_v1_0.EnvironmentVariableListType.factory()
+            obj_ = cybox_common_types_1_0.EnvironmentVariableListType.factory()
             obj_.build(child_)
             self.set_Environment_Variable_List(obj_)
         elif nodeName_ == 'Install_Date':
-            obj_ = cybox_common_types_v1_0.DateObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Install_Date(obj_)
         elif nodeName_ == 'Patch_Level':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Patch_Level(obj_)
         super(OSType, self).buildChildren(child_, node, nodeName_, True)
 # end class OSType
 
-class ProcessorArchType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class ProcessorArchType(cybox_common_types_1_0.BaseObjectAttributeType):
     """ProcessorArchType specifies CPU architecture types, via a union of
     the ProcessorArchEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(ProcessorArchType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -1704,15 +1704,15 @@ class ProcessorArchType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class ProcessorArchType
 
-class BitnessType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class BitnessType(cybox_common_types_1_0.BaseObjectAttributeType):
     """BitnessType specifies CPU architecture bitness, via a union of the
     BitnessEnum type and the atomic xs:string type. Its base type is
-    the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex
+    the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex
     (i.e. regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(BitnessType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)

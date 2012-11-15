@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import address_object_1_2
 import port_object_1_3
 
@@ -729,7 +729,7 @@ class EthernetHeaderType(GeneratedsSuper):
     def get_Checksum(self): return self.Checksum
     def set_Checksum(self, Checksum): self.Checksum = Checksum
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='EthernetHeaderType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -800,7 +800,7 @@ class EthernetHeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Checksum is not None:
             showIndent(outfile, level)
-            outfile.write('Checksum=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Checksum=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Checksum.exportLiteral(outfile, level, name_='Checksum')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -825,7 +825,7 @@ class EthernetHeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Type_Or_Length(obj_)
         elif nodeName_ == 'Checksum':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Checksum(obj_)
 # end class EthernetHeaderType
@@ -847,7 +847,7 @@ class TypeLengthType(GeneratedsSuper):
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Internet_Layer_Type(self): return self.Internet_Layer_Type
     def set_Internet_Layer_Type(self, Internet_Layer_Type): self.Internet_Layer_Type = Internet_Layer_Type
@@ -899,7 +899,7 @@ class TypeLengthType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -918,7 +918,7 @@ class TypeLengthType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'Internet_Layer_Type':
@@ -965,7 +965,7 @@ class ARPType(GeneratedsSuper):
     def get_Hardware_Addr_Size(self): return self.Hardware_Addr_Size
     def set_Hardware_Addr_Size(self, Hardware_Addr_Size): self.Hardware_Addr_Size = Hardware_Addr_Size
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Protol_Addr_Size(self): return self.Protol_Addr_Size
     def set_Protol_Addr_Size(self, Protol_Addr_Size): self.Protol_Addr_Size = Protol_Addr_Size
@@ -1060,13 +1060,13 @@ class ARPType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Hardware_Addr_Size is not None:
             showIndent(outfile, level)
-            outfile.write('Hardware_Addr_Size=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Hardware_Addr_Size=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Hardware_Addr_Size.exportLiteral(outfile, level, name_='Hardware_Addr_Size')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Protol_Addr_Size is not None:
             showIndent(outfile, level)
-            outfile.write('Protol_Addr_Size=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Protol_Addr_Size=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Protol_Addr_Size.exportLiteral(outfile, level, name_='Protol_Addr_Size')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1117,11 +1117,11 @@ class ARPType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Proto_Addr_Type(obj_)
         elif nodeName_ == 'Hardware_Addr_Size':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Hardware_Addr_Size(obj_)
         elif nodeName_ == 'Protol_Addr_Size':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Protol_Addr_Size(obj_)
         elif nodeName_ == 'Op_Type':
@@ -1494,7 +1494,7 @@ class RouterAdvertisementType(GeneratedsSuper):
     def get_Cur_Hop_Limit(self): return self.Cur_Hop_Limit
     def set_Cur_Hop_Limit(self, Cur_Hop_Limit): self.Cur_Hop_Limit = Cur_Hop_Limit
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Router_Lifetime(self): return self.Router_Lifetime
     def set_Router_Lifetime(self, Router_Lifetime): self.Router_Lifetime = Router_Lifetime
@@ -1574,25 +1574,25 @@ class RouterAdvertisementType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Cur_Hop_Limit is not None:
             showIndent(outfile, level)
-            outfile.write('Cur_Hop_Limit=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Cur_Hop_Limit=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Cur_Hop_Limit.exportLiteral(outfile, level, name_='Cur_Hop_Limit')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Router_Lifetime is not None:
             showIndent(outfile, level)
-            outfile.write('Router_Lifetime=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Router_Lifetime=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Router_Lifetime.exportLiteral(outfile, level, name_='Router_Lifetime')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Reachable_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Reachable_Time=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Reachable_Time=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Reachable_Time.exportLiteral(outfile, level, name_='Reachable_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Retrans_Timer is not None:
             showIndent(outfile, level)
-            outfile.write('Retrans_Timer=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Retrans_Timer=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Retrans_Timer.exportLiteral(outfile, level, name_='Retrans_Timer')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1628,19 +1628,19 @@ class RouterAdvertisementType(GeneratedsSuper):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Cur_Hop_Limit':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Cur_Hop_Limit(obj_)
         elif nodeName_ == 'Router_Lifetime':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Router_Lifetime(obj_)
         elif nodeName_ == 'Reachable_Time':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Reachable_Time(obj_)
         elif nodeName_ == 'Retrans_Timer':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Retrans_Timer(obj_)
         elif nodeName_ == 'Options':
@@ -2376,7 +2376,7 @@ class NDPSrcLinkAddrType(GeneratedsSuper):
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Link_Layer_MAC_Addr(self): return self.Link_Layer_MAC_Addr
     def set_Link_Layer_MAC_Addr(self, Link_Layer_MAC_Addr): self.Link_Layer_MAC_Addr = Link_Layer_MAC_Addr
@@ -2425,7 +2425,7 @@ class NDPSrcLinkAddrType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2444,7 +2444,7 @@ class NDPSrcLinkAddrType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'Link_Layer_MAC_Addr':
@@ -2470,7 +2470,7 @@ class NDPTargetLinkAddrType(GeneratedsSuper):
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Link_Layer_MAC_Addr(self): return self.Link_Layer_MAC_Addr
     def set_Link_Layer_MAC_Addr(self, Link_Layer_MAC_Addr): self.Link_Layer_MAC_Addr = Link_Layer_MAC_Addr
@@ -2519,7 +2519,7 @@ class NDPTargetLinkAddrType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2538,7 +2538,7 @@ class NDPTargetLinkAddrType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'Link_Layer_MAC_Addr':
@@ -2576,7 +2576,7 @@ class NDPPrefixInfoType(GeneratedsSuper):
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Prefix_Length(self): return self.Prefix_Length
     def set_Prefix_Length(self, Prefix_Length): self.Prefix_Length = Prefix_Length
@@ -2656,25 +2656,25 @@ class NDPPrefixInfoType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Prefix_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Prefix_Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Prefix_Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Prefix_Length.exportLiteral(outfile, level, name_='Prefix_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Valid_Lifetime is not None:
             showIndent(outfile, level)
-            outfile.write('Valid_Lifetime=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Valid_Lifetime=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Valid_Lifetime.exportLiteral(outfile, level, name_='Valid_Lifetime')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Preferred_Lifetime is not None:
             showIndent(outfile, level)
-            outfile.write('Preferred_Lifetime=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Preferred_Lifetime=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Preferred_Lifetime.exportLiteral(outfile, level, name_='Preferred_Lifetime')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2710,19 +2710,19 @@ class NDPPrefixInfoType(GeneratedsSuper):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'Prefix_Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Prefix_Length(obj_)
         elif nodeName_ == 'Valid_Lifetime':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Valid_Lifetime(obj_)
         elif nodeName_ == 'Preferred_Lifetime':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Preferred_Lifetime(obj_)
         elif nodeName_ == 'Prefix':
@@ -2749,12 +2749,12 @@ class NDPRedirectedHeaderType(GeneratedsSuper):
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_IPHeader_And_Data(self): return self.IPHeader_And_Data
     def set_IPHeader_And_Data(self, IPHeader_And_Data): self.IPHeader_And_Data = IPHeader_And_Data
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='NDPRedirectedHeaderType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -2801,13 +2801,13 @@ class NDPRedirectedHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.IPHeader_And_Data is not None:
             showIndent(outfile, level)
-            outfile.write('IPHeader_And_Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('IPHeader_And_Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.IPHeader_And_Data.exportLiteral(outfile, level, name_='IPHeader_And_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2820,11 +2820,11 @@ class NDPRedirectedHeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'IPHeader_And_Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_IPHeader_And_Data(obj_)
 # end class NDPRedirectedHeaderType
@@ -2847,7 +2847,7 @@ class NDPMTUType(GeneratedsSuper):
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_MTU(self): return self.MTU
     def set_MTU(self, MTU): self.MTU = MTU
@@ -2896,13 +2896,13 @@ class NDPMTUType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.MTU is not None:
             showIndent(outfile, level)
-            outfile.write('MTU=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('MTU=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.MTU.exportLiteral(outfile, level, name_='MTU')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2915,7 +2915,7 @@ class NDPMTUType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'MTU':
@@ -3071,7 +3071,7 @@ class IPv4PacketType(GeneratedsSuper):
     def get_Data(self): return self.Data
     def set_Data(self, Data): self.Data = Data
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='IPv4PacketType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -3124,7 +3124,7 @@ class IPv4PacketType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3141,7 +3141,7 @@ class IPv4PacketType(GeneratedsSuper):
             obj_.build(child_)
             self.set_IPv4_Header(obj_)
         elif nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
 # end class IPv4PacketType
@@ -3185,12 +3185,12 @@ class IPv4HeaderType(GeneratedsSuper):
     def get_Header_Length(self): return self.Header_Length
     def set_Header_Length(self, Header_Length): self.Header_Length = Header_Length
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_DSCP(self): return self.DSCP
     def set_DSCP(self, DSCP): self.DSCP = DSCP
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_ECN(self): return self.ECN
     def set_ECN(self, ECN): self.ECN = ECN
@@ -3199,7 +3199,7 @@ class IPv4HeaderType(GeneratedsSuper):
     def get_Identification(self): return self.Identification
     def set_Identification(self, Identification): self.Identification = Identification
     def validate_PositiveIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.PositiveIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.PositiveIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Flags(self): return self.Flags
     def set_Flags(self, Flags): self.Flags = Flags
@@ -3309,31 +3309,31 @@ class IPv4HeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Header_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Header_Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Header_Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Header_Length.exportLiteral(outfile, level, name_='Header_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.DSCP is not None:
             showIndent(outfile, level)
-            outfile.write('DSCP=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('DSCP=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.DSCP.exportLiteral(outfile, level, name_='DSCP')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.ECN is not None:
             showIndent(outfile, level)
-            outfile.write('ECN=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('ECN=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.ECN.exportLiteral(outfile, level, name_='ECN')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Total_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Total_Length=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Total_Length=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Total_Length.exportLiteral(outfile, level, name_='Total_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Identification is not None:
             showIndent(outfile, level)
-            outfile.write('Identification=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('Identification=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.Identification.exportLiteral(outfile, level, name_='Identification')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3345,13 +3345,13 @@ class IPv4HeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Fragment_Offset is not None:
             showIndent(outfile, level)
-            outfile.write('Fragment_Offset=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Fragment_Offset=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Fragment_Offset.exportLiteral(outfile, level, name_='Fragment_Offset')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.TTL is not None:
             showIndent(outfile, level)
-            outfile.write('TTL=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('TTL=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.TTL.exportLiteral(outfile, level, name_='TTL')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3363,7 +3363,7 @@ class IPv4HeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Checksum is not None:
             showIndent(outfile, level)
-            outfile.write('Checksum=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Checksum=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Checksum.exportLiteral(outfile, level, name_='Checksum')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3404,23 +3404,23 @@ class IPv4HeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_IP_Version(obj_)
         elif nodeName_ == 'Header_Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Header_Length(obj_)
         elif nodeName_ == 'DSCP':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_DSCP(obj_)
         elif nodeName_ == 'ECN':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ECN(obj_)
         elif nodeName_ == 'Total_Length':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Total_Length(obj_)
         elif nodeName_ == 'Identification':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Identification(obj_)
         elif nodeName_ == 'Flags':
@@ -3428,11 +3428,11 @@ class IPv4HeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Flags(obj_)
         elif nodeName_ == 'Fragment_Offset':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Fragment_Offset(obj_)
         elif nodeName_ == 'TTL':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_TTL(obj_)
         elif nodeName_ == 'Protocol':
@@ -3440,7 +3440,7 @@ class IPv4HeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Protocol(obj_)
         elif nodeName_ == 'Checksum':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Checksum(obj_)
         elif nodeName_ == 'Src_IPv4_Addr':
@@ -3477,7 +3477,7 @@ class IPv4FlagsType(GeneratedsSuper):
     def get_Reserved(self): return self.Reserved
     def set_Reserved(self, Reserved): self.Reserved = Reserved
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Do_Not_Fragment(self): return self.Do_Not_Fragment
     def set_Do_Not_Fragment(self, Do_Not_Fragment): self.Do_Not_Fragment = Do_Not_Fragment
@@ -3537,7 +3537,7 @@ class IPv4FlagsType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Reserved is not None:
             showIndent(outfile, level)
-            outfile.write('Reserved=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Reserved=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Reserved.exportLiteral(outfile, level, name_='Reserved')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3562,7 +3562,7 @@ class IPv4FlagsType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Reserved':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Reserved(obj_)
         elif nodeName_ == 'Do_Not_Fragment':
@@ -3822,7 +3822,7 @@ class IPv6HeaderType(GeneratedsSuper):
     def get_Traffic_Class(self): return self.Traffic_Class
     def set_Traffic_Class(self, Traffic_Class): self.Traffic_Class = Traffic_Class
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Flow_Label(self): return self.Flow_Label
     def set_Flow_Label(self, Flow_Label): self.Flow_Label = Flow_Label
@@ -3836,7 +3836,7 @@ class IPv6HeaderType(GeneratedsSuper):
     def get_TTL(self): return self.TTL
     def set_TTL(self, TTL): self.TTL = TTL
     def validate_PositiveIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.PositiveIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.PositiveIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Src_IPv6_Addr(self): return self.Src_IPv6_Addr
     def set_Src_IPv6_Addr(self, Src_IPv6_Addr): self.Src_IPv6_Addr = Src_IPv6_Addr
@@ -3908,19 +3908,19 @@ class IPv6HeaderType(GeneratedsSuper):
             outfile.write('IP_Version=%s,\n' % quote_python(self.IP_Version).encode(ExternalEncoding))
         if self.Traffic_Class is not None:
             showIndent(outfile, level)
-            outfile.write('Traffic_Class=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Traffic_Class=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Traffic_Class.exportLiteral(outfile, level, name_='Traffic_Class')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Flow_Label is not None:
             showIndent(outfile, level)
-            outfile.write('Flow_Label=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Flow_Label=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Flow_Label.exportLiteral(outfile, level, name_='Flow_Label')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Payload_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Payload_Length=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Payload_Length=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Payload_Length.exportLiteral(outfile, level, name_='Payload_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3932,7 +3932,7 @@ class IPv6HeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.TTL is not None:
             showIndent(outfile, level)
-            outfile.write('TTL=model_.cybox_common_types_v1_0.PositiveIntegerObjectAttributeType(\n')
+            outfile.write('TTL=model_.cybox_common_types_1_0.PositiveIntegerObjectAttributeType(\n')
             self.TTL.exportLiteral(outfile, level, name_='TTL')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3961,15 +3961,15 @@ class IPv6HeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_IP_Version(obj_)
         elif nodeName_ == 'Traffic_Class':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Traffic_Class(obj_)
         elif nodeName_ == 'Flow_Label':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Flow_Label(obj_)
         elif nodeName_ == 'Payload_Length':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Payload_Length(obj_)
         elif nodeName_ == 'Next_Header':
@@ -3977,7 +3977,7 @@ class IPv6HeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Next_Header(obj_)
         elif nodeName_ == 'TTL':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_TTL(obj_)
         elif nodeName_ == 'Src_IPv6_Addr':
@@ -4187,7 +4187,7 @@ class IPv6OptionType(GeneratedsSuper):
     def get_Option_Byte(self): return self.Option_Byte
     def set_Option_Byte(self, Option_Byte): self.Option_Byte = Option_Byte
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='IPv6OptionType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -4249,7 +4249,7 @@ class IPv6OptionType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Option_Byte is not None:
             showIndent(outfile, level)
-            outfile.write('Option_Byte=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Option_Byte=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Option_Byte.exportLiteral(outfile, level, name_='Option_Byte')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4270,7 +4270,7 @@ class IPv6OptionType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Packet_Change(obj_)
         elif nodeName_ == 'Option_Byte':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Option_Byte(obj_)
 # end class IPv6OptionType
@@ -4387,7 +4387,7 @@ class TCPType(GeneratedsSuper):
     def get_Options(self): return self.Options
     def set_Options(self, Options): self.Options = Options
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Data(self): return self.Data
     def set_Data(self, Data): self.Data = Data
@@ -4445,13 +4445,13 @@ class TCPType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Options is not None:
             showIndent(outfile, level)
-            outfile.write('Options=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Options=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Options.exportLiteral(outfile, level, name_='Options')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.DataSegmentType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.DataSegmentType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4472,7 +4472,7 @@ class TCPType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Options(obj_)
         elif nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
 # end class TCPType
@@ -4550,7 +4550,7 @@ class UDPType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.DataSegmentType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.DataSegmentType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4567,7 +4567,7 @@ class UDPType(GeneratedsSuper):
             obj_.build(child_)
             self.set_UDP_Header(obj_)
         elif nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
 # end class UDPType
@@ -4602,7 +4602,7 @@ class TCPHeaderType(GeneratedsSuper):
     def get_Seq_Num(self): return self.Seq_Num
     def set_Seq_Num(self, Seq_Num): self.Seq_Num = Seq_Num
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_ACK_Num(self): return self.ACK_Num
     def set_ACK_Num(self, ACK_Num): self.ACK_Num = ACK_Num
@@ -4699,25 +4699,25 @@ class TCPHeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Seq_Num is not None:
             showIndent(outfile, level)
-            outfile.write('Seq_Num=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Seq_Num=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Seq_Num.exportLiteral(outfile, level, name_='Seq_Num')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.ACK_Num is not None:
             showIndent(outfile, level)
-            outfile.write('ACK_Num=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('ACK_Num=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.ACK_Num.exportLiteral(outfile, level, name_='ACK_Num')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Data_Offset is not None:
             showIndent(outfile, level)
-            outfile.write('Data_Offset=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Data_Offset=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Data_Offset.exportLiteral(outfile, level, name_='Data_Offset')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Reserved is not None:
             showIndent(outfile, level)
-            outfile.write('Reserved=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Reserved=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Reserved.exportLiteral(outfile, level, name_='Reserved')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4729,19 +4729,19 @@ class TCPHeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Window is not None:
             showIndent(outfile, level)
-            outfile.write('Window=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Window=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Window.exportLiteral(outfile, level, name_='Window')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Checksum is not None:
             showIndent(outfile, level)
-            outfile.write('Checksum=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Checksum=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Checksum.exportLiteral(outfile, level, name_='Checksum')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Urg_Ptr is not None:
             showIndent(outfile, level)
-            outfile.write('Urg_Ptr=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Urg_Ptr=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Urg_Ptr.exportLiteral(outfile, level, name_='Urg_Ptr')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4762,19 +4762,19 @@ class TCPHeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Dest_Port(obj_)
         elif nodeName_ == 'Seq_Num':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Seq_Num(obj_)
         elif nodeName_ == 'ACK_Num':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_ACK_Num(obj_)
         elif nodeName_ == 'Data_Offset':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Data_Offset(obj_)
         elif nodeName_ == 'Reserved':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Reserved(obj_)
         elif nodeName_ == 'TCP_Flags':
@@ -4782,15 +4782,15 @@ class TCPHeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_TCP_Flags(obj_)
         elif nodeName_ == 'Window':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Window(obj_)
         elif nodeName_ == 'Checksum':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Checksum(obj_)
         elif nodeName_ == 'Urg_Ptr':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Urg_Ptr(obj_)
 # end class TCPHeaderType
@@ -5063,12 +5063,12 @@ class UDPHeaderType(GeneratedsSuper):
     def get_Length(self): return self.Length
     def set_Length(self, Length): self.Length = Length
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Checksum(self): return self.Checksum
     def set_Checksum(self, Checksum): self.Checksum = Checksum
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='UDPHeaderType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -5133,13 +5133,13 @@ class UDPHeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Length is not None:
             showIndent(outfile, level)
-            outfile.write('Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Length.exportLiteral(outfile, level, name_='Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Checksum is not None:
             showIndent(outfile, level)
-            outfile.write('Checksum=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Checksum=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Checksum.exportLiteral(outfile, level, name_='Checksum')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5160,11 +5160,11 @@ class UDPHeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_DestPort(obj_)
         elif nodeName_ == 'Length':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'Checksum':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Checksum(obj_)
 # end class UDPHeaderType
@@ -5312,7 +5312,7 @@ class ICMPv4HeaderType(GeneratedsSuper):
     def get_Type(self): return self.Type
     def set_Type(self, Type): self.Type = Type
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Code(self): return self.Code
     def set_Code(self, Code): self.Code = Code
@@ -5366,19 +5366,19 @@ class ICMPv4HeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Type is not None:
             showIndent(outfile, level)
-            outfile.write('Type=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Type=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Type.exportLiteral(outfile, level, name_='Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Code is not None:
             showIndent(outfile, level)
-            outfile.write('Code=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Code=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Code.exportLiteral(outfile, level, name_='Code')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Checksum is not None:
             showIndent(outfile, level)
-            outfile.write('Checksum=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Checksum=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Checksum.exportLiteral(outfile, level, name_='Checksum')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5391,15 +5391,15 @@ class ICMPv4HeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Type':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Type(obj_)
         elif nodeName_ == 'Code':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Code(obj_)
         elif nodeName_ == 'Checksum':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Checksum(obj_)
 # end class ICMPv4HeaderType
@@ -5562,7 +5562,7 @@ class ICMPv4ErrorMessageContentType(GeneratedsSuper):
     def get_First_Eight_Bytes(self): return self.First_Eight_Bytes
     def set_First_Eight_Bytes(self, First_Eight_Bytes): self.First_Eight_Bytes = First_Eight_Bytes
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='ICMPv4ErrorMessageContentType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -5615,7 +5615,7 @@ class ICMPv4ErrorMessageContentType(GeneratedsSuper):
             outfile.write('),\n')
         if self.First_Eight_Bytes is not None:
             showIndent(outfile, level)
-            outfile.write('First_Eight_Bytes=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('First_Eight_Bytes=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.First_Eight_Bytes.exportLiteral(outfile, level, name_='First_Eight_Bytes')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5632,7 +5632,7 @@ class ICMPv4ErrorMessageContentType(GeneratedsSuper):
             obj_.build(child_)
             self.set_IP_Header(obj_)
         elif nodeName_ == 'First_Eight_Bytes':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_First_Eight_Bytes(obj_)
 # end class ICMPv4ErrorMessageContentType
@@ -5825,7 +5825,7 @@ class ICMPv4InfoMessageContentType(GeneratedsSuper):
     def get_Identifier(self): return self.Identifier
     def set_Identifier(self, Identifier): self.Identifier = Identifier
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Sequence_Number(self): return self.Sequence_Number
     def set_Sequence_Number(self, Sequence_Number): self.Sequence_Number = Sequence_Number
@@ -5874,13 +5874,13 @@ class ICMPv4InfoMessageContentType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Identifier is not None:
             showIndent(outfile, level)
-            outfile.write('Identifier=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Identifier=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Identifier.exportLiteral(outfile, level, name_='Identifier')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Sequence_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Sequence_Number=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Sequence_Number=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Sequence_Number.exportLiteral(outfile, level, name_='Sequence_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -5893,11 +5893,11 @@ class ICMPv4InfoMessageContentType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Identifier':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Identifier(obj_)
         elif nodeName_ == 'Sequence_Number':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Sequence_Number(obj_)
 # end class ICMPv4InfoMessageContentType
@@ -5930,7 +5930,7 @@ class ICMPv4TracerouteType(GeneratedsSuper):
     def get_Identifier(self): return self.Identifier
     def set_Identifier(self, Identifier): self.Identifier = Identifier
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Outbound_Hop_Count(self): return self.Outbound_Hop_Count
     def set_Outbound_Hop_Count(self, Outbound_Hop_Count): self.Outbound_Hop_Count = Outbound_Hop_Count
@@ -6008,31 +6008,31 @@ class ICMPv4TracerouteType(GeneratedsSuper):
             outfile.write('Outbound_Packet_no_Route=%s,\n' % self.Outbound_Packet_no_Route)
         if self.Identifier is not None:
             showIndent(outfile, level)
-            outfile.write('Identifier=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Identifier=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Identifier.exportLiteral(outfile, level, name_='Identifier')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Outbound_Hop_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Outbound_Hop_Count=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Outbound_Hop_Count=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Outbound_Hop_Count.exportLiteral(outfile, level, name_='Outbound_Hop_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Return_Hop_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Return_Hop_Count=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Return_Hop_Count=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Return_Hop_Count.exportLiteral(outfile, level, name_='Return_Hop_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Output_Link_Speed is not None:
             showIndent(outfile, level)
-            outfile.write('Output_Link_Speed=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Output_Link_Speed=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Output_Link_Speed.exportLiteral(outfile, level, name_='Output_Link_Speed')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Output_Link_MTU is not None:
             showIndent(outfile, level)
-            outfile.write('Output_Link_MTU=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Output_Link_MTU=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Output_Link_MTU.exportLiteral(outfile, level, name_='Output_Link_MTU')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -6065,23 +6065,23 @@ class ICMPv4TracerouteType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'Outbound_Packet_no_Route')
             self.Outbound_Packet_no_Route = ival_
         elif nodeName_ == 'Identifier':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Identifier(obj_)
         elif nodeName_ == 'Outbound_Hop_Count':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Outbound_Hop_Count(obj_)
         elif nodeName_ == 'Return_Hop_Count':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Return_Hop_Count(obj_)
         elif nodeName_ == 'Output_Link_Speed':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Output_Link_Speed(obj_)
         elif nodeName_ == 'Output_Link_MTU':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Output_Link_MTU(obj_)
 # end class ICMPv4TracerouteType
@@ -6219,7 +6219,7 @@ class ICMPv6HeaderType(GeneratedsSuper):
     def get_Type(self): return self.Type
     def set_Type(self, Type): self.Type = Type
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Code(self): return self.Code
     def set_Code(self, Code): self.Code = Code
@@ -6273,19 +6273,19 @@ class ICMPv6HeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Type is not None:
             showIndent(outfile, level)
-            outfile.write('Type=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Type=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Type.exportLiteral(outfile, level, name_='Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Code is not None:
             showIndent(outfile, level)
-            outfile.write('Code=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Code=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Code.exportLiteral(outfile, level, name_='Code')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Checksum is not None:
             showIndent(outfile, level)
-            outfile.write('Checksum=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Checksum=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Checksum.exportLiteral(outfile, level, name_='Checksum')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -6298,15 +6298,15 @@ class ICMPv6HeaderType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Type':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Type(obj_)
         elif nodeName_ == 'Code':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Code(obj_)
         elif nodeName_ == 'Checksum':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Checksum(obj_)
 # end class ICMPv6HeaderType
@@ -6341,7 +6341,7 @@ class ICMPv6ErrorMessageType(GeneratedsSuper):
     def get_Invoking_Packet(self): return self.Invoking_Packet
     def set_Invoking_Packet(self, Invoking_Packet): self.Invoking_Packet = Invoking_Packet
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='ICMPv6ErrorMessageType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -6421,7 +6421,7 @@ class ICMPv6ErrorMessageType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Invoking_Packet is not None:
             showIndent(outfile, level)
-            outfile.write('Invoking_Packet=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Invoking_Packet=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Invoking_Packet.exportLiteral(outfile, level, name_='Invoking_Packet')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -6450,7 +6450,7 @@ class ICMPv6ErrorMessageType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Parameter_Problem(obj_)
         elif nodeName_ == 'Invoking_Packet':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Invoking_Packet(obj_)
 # end class ICMPv6ErrorMessageType
@@ -6581,7 +6581,7 @@ class ICMPv6InfoMessageContentType(GeneratedsSuper):
     def get_Identifier(self): return self.Identifier
     def set_Identifier(self, Identifier): self.Identifier = Identifier
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Sequence_Number(self): return self.Sequence_Number
     def set_Sequence_Number(self, Sequence_Number): self.Sequence_Number = Sequence_Number
@@ -6630,13 +6630,13 @@ class ICMPv6InfoMessageContentType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Identifier is not None:
             showIndent(outfile, level)
-            outfile.write('Identifier=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Identifier=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Identifier.exportLiteral(outfile, level, name_='Identifier')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Sequence_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Sequence_Number=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Sequence_Number=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Sequence_Number.exportLiteral(outfile, level, name_='Sequence_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -6649,11 +6649,11 @@ class ICMPv6InfoMessageContentType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Identifier':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Identifier(obj_)
         elif nodeName_ == 'Sequence_Number':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Sequence_Number(obj_)
 # end class ICMPv6InfoMessageContentType
@@ -6676,7 +6676,7 @@ class ICMPv4EchoReplyType(GeneratedsSuper):
     def get_Data(self): return self.Data
     def set_Data(self, Data): self.Data = Data
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='ICMPv4EchoReplyType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -6726,7 +6726,7 @@ class ICMPv4EchoReplyType(GeneratedsSuper):
             outfile.write('Echo_Reply=%s,\n' % self.Echo_Reply)
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -6748,7 +6748,7 @@ class ICMPv4EchoReplyType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'Echo_Reply')
             self.Echo_Reply = ival_
         elif nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
 # end class ICMPv4EchoReplyType
@@ -7147,7 +7147,7 @@ class FragmentationRequiredType(GeneratedsSuper):
     def get_Next_Hop_MTU(self): return self.Next_Hop_MTU
     def set_Next_Hop_MTU(self, Next_Hop_MTU): self.Next_Hop_MTU = Next_Hop_MTU
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='FragmentationRequiredType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -7197,7 +7197,7 @@ class FragmentationRequiredType(GeneratedsSuper):
             outfile.write('Fragmentation_Required=%s,\n' % self.Fragmentation_Required)
         if self.Next_Hop_MTU is not None:
             showIndent(outfile, level)
-            outfile.write('Next_Hop_MTU=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Next_Hop_MTU=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Next_Hop_MTU.exportLiteral(outfile, level, name_='Next_Hop_MTU')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -7219,7 +7219,7 @@ class FragmentationRequiredType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'Fragmentation_Required')
             self.Fragmentation_Required = ival_
         elif nodeName_ == 'Next_Hop_MTU':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Next_Hop_MTU(obj_)
 # end class FragmentationRequiredType
@@ -7472,7 +7472,7 @@ class ICMPv4EchoRequestType(GeneratedsSuper):
     def get_Data(self): return self.Data
     def set_Data(self, Data): self.Data = Data
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='ICMPv4EchoRequestType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -7522,7 +7522,7 @@ class ICMPv4EchoRequestType(GeneratedsSuper):
             outfile.write('Echo_Request=%s,\n' % self.Echo_Request)
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -7544,7 +7544,7 @@ class ICMPv4EchoRequestType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'Echo_Request')
             self.Echo_Request = ival_
         elif nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
 # end class ICMPv4EchoRequestType
@@ -7665,7 +7665,7 @@ class ICMPv4TimestampRequestType(GeneratedsSuper):
     def get_Originate_Timestamp(self): return self.Originate_Timestamp
     def set_Originate_Timestamp(self, Originate_Timestamp): self.Originate_Timestamp = Originate_Timestamp
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='ICMPv4TimestampRequestType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -7716,7 +7716,7 @@ class ICMPv4TimestampRequestType(GeneratedsSuper):
             outfile.write('Timestamp=%s,\n' % self.Timestamp)
         if self.Originate_Timestamp is not None:
             showIndent(outfile, level)
-            outfile.write('Originate_Timestamp=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Originate_Timestamp=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Originate_Timestamp.exportLiteral(outfile, level, name_='Originate_Timestamp')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -7739,7 +7739,7 @@ class ICMPv4TimestampRequestType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'Timestamp')
             self.Timestamp = ival_
         elif nodeName_ == 'Originate_Timestamp':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Originate_Timestamp(obj_)
 # end class ICMPv4TimestampRequestType
@@ -7764,7 +7764,7 @@ class ICMPv4TimestampReplyType(GeneratedsSuper):
     def get_Originate_Timestamp(self): return self.Originate_Timestamp
     def set_Originate_Timestamp(self, Originate_Timestamp): self.Originate_Timestamp = Originate_Timestamp
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Receive_Timestamp(self): return self.Receive_Timestamp
     def set_Receive_Timestamp(self, Receive_Timestamp): self.Receive_Timestamp = Receive_Timestamp
@@ -7824,19 +7824,19 @@ class ICMPv4TimestampReplyType(GeneratedsSuper):
             outfile.write('Timestamp_Reply=%s,\n' % self.Timestamp_Reply)
         if self.Originate_Timestamp is not None:
             showIndent(outfile, level)
-            outfile.write('Originate_Timestamp=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Originate_Timestamp=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Originate_Timestamp.exportLiteral(outfile, level, name_='Originate_Timestamp')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Receive_Timestamp is not None:
             showIndent(outfile, level)
-            outfile.write('Receive_Timestamp=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Receive_Timestamp=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Receive_Timestamp.exportLiteral(outfile, level, name_='Receive_Timestamp')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Transmit_Timestamp is not None:
             showIndent(outfile, level)
-            outfile.write('Transmit_Timestamp=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Transmit_Timestamp=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Transmit_Timestamp.exportLiteral(outfile, level, name_='Transmit_Timestamp')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -7858,15 +7858,15 @@ class ICMPv4TimestampReplyType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'Timestamp_Reply')
             self.Timestamp_Reply = ival_
         elif nodeName_ == 'Originate_Timestamp':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Originate_Timestamp(obj_)
         elif nodeName_ == 'Receive_Timestamp':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Receive_Timestamp(obj_)
         elif nodeName_ == 'Transmit_Timestamp':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Transmit_Timestamp(obj_)
 # end class ICMPv4TimestampReplyType
@@ -8271,7 +8271,7 @@ class ICMPv6PacketTooBigType(GeneratedsSuper):
     def get_MTU(self): return self.MTU
     def set_MTU(self, MTU): self.MTU = MTU
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='ICMPv6PacketTooBigType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -8321,7 +8321,7 @@ class ICMPv6PacketTooBigType(GeneratedsSuper):
             outfile.write('Packet_Too_Big=%s,\n' % self.Packet_Too_Big)
         if self.MTU is not None:
             showIndent(outfile, level)
-            outfile.write('MTU=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('MTU=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.MTU.exportLiteral(outfile, level, name_='MTU')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -8470,7 +8470,7 @@ class ICMPv6ParameterProblemType(GeneratedsSuper):
     def get_Pointer(self): return self.Pointer
     def set_Pointer(self, Pointer): self.Pointer = Pointer
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='ICMPv6ParameterProblemType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -8535,7 +8535,7 @@ class ICMPv6ParameterProblemType(GeneratedsSuper):
             outfile.write('Unrecognized_IPv6_Option=%s,\n' % self.Unrecognized_IPv6_Option)
         if self.Pointer is not None:
             showIndent(outfile, level)
-            outfile.write('Pointer=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Pointer=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Pointer.exportLiteral(outfile, level, name_='Pointer')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -8578,7 +8578,7 @@ class ICMPv6ParameterProblemType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'Unrecognized_IPv6_Option')
             self.Unrecognized_IPv6_Option = ival_
         elif nodeName_ == 'Pointer':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Pointer(obj_)
 # end class ICMPv6ParameterProblemType
@@ -8601,7 +8601,7 @@ class ICMPv6EchoRequestType(GeneratedsSuper):
     def get_Data(self): return self.Data
     def set_Data(self, Data): self.Data = Data
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='ICMPv6EchoRequestType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -8651,7 +8651,7 @@ class ICMPv6EchoRequestType(GeneratedsSuper):
             outfile.write('Echo_Request=%s,\n' % self.Echo_Request)
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -8673,7 +8673,7 @@ class ICMPv6EchoRequestType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'Echo_Request')
             self.Echo_Request = ival_
         elif nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
 # end class ICMPv6EchoRequestType
@@ -8696,7 +8696,7 @@ class ICMPv6EchoReplyType(GeneratedsSuper):
     def get_Data(self): return self.Data
     def set_Data(self, Data): self.Data = Data
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='ICMPv6EchoReplyType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -8746,7 +8746,7 @@ class ICMPv6EchoReplyType(GeneratedsSuper):
             outfile.write('Echo_Reply=%s,\n' % self.Echo_Reply)
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -8768,7 +8768,7 @@ class ICMPv6EchoReplyType(GeneratedsSuper):
             ival_ = self.gds_validate_boolean(ival_, node, 'Echo_Reply')
             self.Echo_Reply = ival_
         elif nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
 # end class ICMPv6EchoReplyType
@@ -8891,7 +8891,7 @@ class HopByHopOptionsType(GeneratedsSuper):
     def get_Header_Ext_Len(self): return self.Header_Ext_Len
     def set_Header_Ext_Len(self, Header_Ext_Len): self.Header_Ext_Len = Header_Ext_Len
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Option_Data(self): return self.Option_Data
     def set_Option_Data(self, Option_Data): self.Option_Data = Option_Data
@@ -8951,7 +8951,7 @@ class HopByHopOptionsType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Header_Ext_Len is not None:
             showIndent(outfile, level)
-            outfile.write('Header_Ext_Len=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Header_Ext_Len=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Header_Ext_Len.exportLiteral(outfile, level, name_='Header_Ext_Len')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -8980,7 +8980,7 @@ class HopByHopOptionsType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Next_Header(obj_)
         elif nodeName_ == 'Header_Ext_Len':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Header_Ext_Len(obj_)
         elif nodeName_ == 'Option_Data':
@@ -9012,7 +9012,7 @@ class OptionDataType(GeneratedsSuper):
     def get_Option_Data_Len(self): return self.Option_Data_Len
     def set_Option_Data_Len(self, Option_Data_Len): self.Option_Data_Len = Option_Data_Len
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Pad1(self): return self.Pad1
     def set_Pad1(self, Pad1): self.Pad1 = Pad1
@@ -9075,7 +9075,7 @@ class OptionDataType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Option_Data_Len is not None:
             showIndent(outfile, level)
-            outfile.write('Option_Data_Len=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Option_Data_Len=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Option_Data_Len.exportLiteral(outfile, level, name_='Option_Data_Len')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -9104,7 +9104,7 @@ class OptionDataType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Option_Type(obj_)
         elif nodeName_ == 'Option_Data_Len':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Option_Data_Len(obj_)
         elif nodeName_ == 'Pad1':
@@ -9144,19 +9144,19 @@ class RoutingType(GeneratedsSuper):
     def get_Header_Ext_Len(self): return self.Header_Ext_Len
     def set_Header_Ext_Len(self, Header_Ext_Len): self.Header_Ext_Len = Header_Ext_Len
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Routing_Type(self): return self.Routing_Type
     def set_Routing_Type(self, Routing_Type): self.Routing_Type = Routing_Type
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Segments_Left(self): return self.Segments_Left
     def set_Segments_Left(self, Segments_Left): self.Segments_Left = Segments_Left
     def get_Type_Specific_Data(self): return self.Type_Specific_Data
     def set_Type_Specific_Data(self, Type_Specific_Data): self.Type_Specific_Data = Type_Specific_Data
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='RoutingType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -9218,25 +9218,25 @@ class RoutingType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Header_Ext_Len is not None:
             showIndent(outfile, level)
-            outfile.write('Header_Ext_Len=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Header_Ext_Len=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Header_Ext_Len.exportLiteral(outfile, level, name_='Header_Ext_Len')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Routing_Type is not None:
             showIndent(outfile, level)
-            outfile.write('Routing_Type=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Routing_Type=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Routing_Type.exportLiteral(outfile, level, name_='Routing_Type')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Segments_Left is not None:
             showIndent(outfile, level)
-            outfile.write('Segments_Left=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Segments_Left=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Segments_Left.exportLiteral(outfile, level, name_='Segments_Left')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Type_Specific_Data is not None:
             showIndent(outfile, level)
-            outfile.write('Type_Specific_Data=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Type_Specific_Data=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Type_Specific_Data.exportLiteral(outfile, level, name_='Type_Specific_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -9253,19 +9253,19 @@ class RoutingType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Next_Header(obj_)
         elif nodeName_ == 'Header_Ext_Len':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Header_Ext_Len(obj_)
         elif nodeName_ == 'Routing_Type':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Routing_Type(obj_)
         elif nodeName_ == 'Segments_Left':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Segments_Left(obj_)
         elif nodeName_ == 'Type_Specific_Data':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Type_Specific_Data(obj_)
 # end class RoutingType
@@ -9290,7 +9290,7 @@ class FragmentType(GeneratedsSuper):
     def get_Fragment(self): return self.Fragment
     def set_Fragment(self, Fragment): self.Fragment = Fragment
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='FragmentType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -9343,7 +9343,7 @@ class FragmentType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Fragment is not None:
             showIndent(outfile, level)
-            outfile.write('Fragment=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Fragment=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Fragment.exportLiteral(outfile, level, name_='Fragment')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -9392,7 +9392,7 @@ class DestinationOptionsType(GeneratedsSuper):
     def get_Header_Ext_Len(self): return self.Header_Ext_Len
     def set_Header_Ext_Len(self, Header_Ext_Len): self.Header_Ext_Len = Header_Ext_Len
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Option_Data(self): return self.Option_Data
     def set_Option_Data(self, Option_Data): self.Option_Data = Option_Data
@@ -9452,7 +9452,7 @@ class DestinationOptionsType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Header_Ext_Len is not None:
             showIndent(outfile, level)
-            outfile.write('Header_Ext_Len=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Header_Ext_Len=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Header_Ext_Len.exportLiteral(outfile, level, name_='Header_Ext_Len')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -9481,7 +9481,7 @@ class DestinationOptionsType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Next_Header(obj_)
         elif nodeName_ == 'Header_Ext_Len':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Header_Ext_Len(obj_)
         elif nodeName_ == 'Option_Data':
@@ -9517,7 +9517,7 @@ class AuthenticationHeaderType(GeneratedsSuper):
     def get_Header_Ext_Len(self): return self.Header_Ext_Len
     def set_Header_Ext_Len(self, Header_Ext_Len): self.Header_Ext_Len = Header_Ext_Len
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Security_Parameters_Index(self): return self.Security_Parameters_Index
     def set_Security_Parameters_Index(self, Security_Parameters_Index): self.Security_Parameters_Index = Security_Parameters_Index
@@ -9585,25 +9585,25 @@ class AuthenticationHeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Header_Ext_Len is not None:
             showIndent(outfile, level)
-            outfile.write('Header_Ext_Len=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Header_Ext_Len=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Header_Ext_Len.exportLiteral(outfile, level, name_='Header_Ext_Len')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Security_Parameters_Index is not None:
             showIndent(outfile, level)
-            outfile.write('Security_Parameters_Index=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Security_Parameters_Index=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Security_Parameters_Index.exportLiteral(outfile, level, name_='Security_Parameters_Index')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Sequence_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Sequence_Number=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Sequence_Number=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Sequence_Number.exportLiteral(outfile, level, name_='Sequence_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Authenication_Data is not None:
             showIndent(outfile, level)
-            outfile.write('Authenication_Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Authenication_Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Authenication_Data.exportLiteral(outfile, level, name_='Authenication_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -9620,19 +9620,19 @@ class AuthenticationHeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Next_Header(obj_)
         elif nodeName_ == 'Header_Ext_Len':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Header_Ext_Len(obj_)
         elif nodeName_ == 'Security_Parameters_Index':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Security_Parameters_Index(obj_)
         elif nodeName_ == 'Sequence_Number':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Sequence_Number(obj_)
         elif nodeName_ == 'Authenication_Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Authenication_Data(obj_)
 # end class AuthenticationHeaderType
@@ -9661,7 +9661,7 @@ class ExcapsulatingSecurityPayloadType(GeneratedsSuper):
     def get_Security_Parameters_Index(self): return self.Security_Parameters_Index
     def set_Security_Parameters_Index(self, Security_Parameters_Index): self.Security_Parameters_Index = Security_Parameters_Index
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Sequence_Number(self): return self.Sequence_Number
     def set_Sequence_Number(self, Sequence_Number): self.Sequence_Number = Sequence_Number
@@ -9738,31 +9738,31 @@ class ExcapsulatingSecurityPayloadType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Security_Parameters_Index is not None:
             showIndent(outfile, level)
-            outfile.write('Security_Parameters_Index=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Security_Parameters_Index=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Security_Parameters_Index.exportLiteral(outfile, level, name_='Security_Parameters_Index')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Sequence_Number is not None:
             showIndent(outfile, level)
-            outfile.write('Sequence_Number=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Sequence_Number=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Sequence_Number.exportLiteral(outfile, level, name_='Sequence_Number')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Payload_Data is not None:
             showIndent(outfile, level)
-            outfile.write('Payload_Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Payload_Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Payload_Data.exportLiteral(outfile, level, name_='Payload_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Padding is not None:
             showIndent(outfile, level)
-            outfile.write('Padding=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Padding=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Padding.exportLiteral(outfile, level, name_='Padding')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Padding_Len is not None:
             showIndent(outfile, level)
-            outfile.write('Padding_Len=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Padding_Len=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Padding_Len.exportLiteral(outfile, level, name_='Padding_Len')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -9774,7 +9774,7 @@ class ExcapsulatingSecurityPayloadType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Authenication_Data is not None:
             showIndent(outfile, level)
-            outfile.write('Authenication_Data=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Authenication_Data=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Authenication_Data.exportLiteral(outfile, level, name_='Authenication_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -9787,23 +9787,23 @@ class ExcapsulatingSecurityPayloadType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Security_Parameters_Index':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Security_Parameters_Index(obj_)
         elif nodeName_ == 'Sequence_Number':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Sequence_Number(obj_)
         elif nodeName_ == 'Payload_Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Payload_Data(obj_)
         elif nodeName_ == 'Padding':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Padding(obj_)
         elif nodeName_ == 'Padding_Len':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Padding_Len(obj_)
         elif nodeName_ == 'Next_Header':
@@ -9811,7 +9811,7 @@ class ExcapsulatingSecurityPayloadType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Next_Header(obj_)
         elif nodeName_ == 'Authenication_Data':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Authenication_Data(obj_)
 # end class ExcapsulatingSecurityPayloadType
@@ -9833,7 +9833,7 @@ class Pad1Type(GeneratedsSuper):
     def get_Octet(self): return self.Octet
     def set_Octet(self, Octet): self.Octet = Octet
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='PacketObj:', name_='Pad1Type', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -9877,7 +9877,7 @@ class Pad1Type(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Octet is not None:
             showIndent(outfile, level)
-            outfile.write('Octet=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Octet=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Octet.exportLiteral(outfile, level, name_='Octet')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -9890,7 +9890,7 @@ class Pad1Type(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Octet':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Octet(obj_)
 # end class Pad1Type
@@ -9913,12 +9913,12 @@ class PadNType(GeneratedsSuper):
     def get_Octet(self): return self.Octet
     def set_Octet(self, Octet): self.Octet = Octet
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Option_Data_Length(self): return self.Option_Data_Length
     def set_Option_Data_Length(self, Option_Data_Length): self.Option_Data_Length = Option_Data_Length
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_Option_Data(self): return self.Option_Data
     def set_Option_Data(self, Option_Data): self.Option_Data = Option_Data
@@ -9970,19 +9970,19 @@ class PadNType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Octet is not None:
             showIndent(outfile, level)
-            outfile.write('Octet=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Octet=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Octet.exportLiteral(outfile, level, name_='Octet')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Option_Data_Length is not None:
             showIndent(outfile, level)
-            outfile.write('Option_Data_Length=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Option_Data_Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Option_Data_Length.exportLiteral(outfile, level, name_='Option_Data_Length')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Option_Data is not None:
             showIndent(outfile, level)
-            outfile.write('Option_Data=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('Option_Data=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.Option_Data.exportLiteral(outfile, level, name_='Option_Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -9995,11 +9995,11 @@ class PadNType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Octet':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Octet(obj_)
         elif nodeName_ == 'Option_Data_Length':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Option_Data_Length(obj_)
         elif nodeName_ == 'Option_Data':
@@ -10028,7 +10028,7 @@ class FragmentHeaderType(GeneratedsSuper):
     def get_Next_Header(self): return self.Next_Header
     def set_Next_Header(self, Next_Header): self.Next_Header = Next_Header
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Fragment_Offset(self): return self.Fragment_Offset
     def set_Fragment_Offset(self, Fragment_Offset): self.Fragment_Offset = Fragment_Offset
@@ -10090,13 +10090,13 @@ class FragmentHeaderType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Next_Header is not None:
             showIndent(outfile, level)
-            outfile.write('Next_Header=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Next_Header=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Next_Header.exportLiteral(outfile, level, name_='Next_Header')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Fragment_Offset is not None:
             showIndent(outfile, level)
-            outfile.write('Fragment_Offset=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Fragment_Offset=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Fragment_Offset.exportLiteral(outfile, level, name_='Fragment_Offset')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -10108,7 +10108,7 @@ class FragmentHeaderType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Identification is not None:
             showIndent(outfile, level)
-            outfile.write('Identification=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Identification=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Identification.exportLiteral(outfile, level, name_='Identification')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -10125,7 +10125,7 @@ class FragmentHeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Next_Header(obj_)
         elif nodeName_ == 'Fragment_Offset':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Fragment_Offset(obj_)
         elif nodeName_ == 'M_Flag':
@@ -10133,20 +10133,20 @@ class FragmentHeaderType(GeneratedsSuper):
             obj_.build(child_)
             self.set_M_Flag(obj_)
         elif nodeName_ == 'Identification':
-            obj_ = cybox_common_types_v1_0.PositiveIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.PositiveIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Identification(obj_)
 # end class FragmentHeaderType
 
-class MFlagType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class MFlagType(cybox_common_types_1_0.BaseObjectAttributeType):
     """MFlagType specifies whether there are more fragments, via a union of
     the MFlagTypeEnum type and the atomic xs:string type. Its base
-    type is the cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex
+    type is the cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex
     (i.e. regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(MFlagType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -10225,15 +10225,15 @@ class MFlagType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class MFlagType
 
-class IANAPortNumberRegistryType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class IANAPortNumberRegistryType(cybox_common_types_1_0.BaseObjectAttributeType):
     """IANAPortNumberRegistryType specifies port numbers, via a union of
     the IANAPortNumberRegistryTypeEnum type and the atomic xs:string
-    type. Its base type is the cybox_common_types_v1_0.BaseObjectAttributeType, for
+    type. Its base type is the cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(IANAPortNumberRegistryType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -10312,15 +10312,15 @@ class IANAPortNumberRegistryType(cybox_common_types_v1_0.BaseObjectAttributeType
         pass
 # end class IANAPortNumberRegistryType
 
-class IANAAssignedIPNumbersType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class IANAAssignedIPNumbersType(cybox_common_types_1_0.BaseObjectAttributeType):
     """IANAAssignedIPNumbersType specifies Internet Protocol numbers, via a
     union of the IANAAssignedIPNumbersTypeEnum type and the atomic
-    xs:string type. Its base type is the cybox_common_types_v1_0.BaseObjectAttributeType,
+    xs:string type. Its base type is the cybox_common_types_1_0.BaseObjectAttributeType,
     for permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(IANAAssignedIPNumbersType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -10399,15 +10399,15 @@ class IANAAssignedIPNumbersType(cybox_common_types_v1_0.BaseObjectAttributeType)
         pass
 # end class IANAAssignedIPNumbersType
 
-class IANAEtherType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class IANAEtherType(cybox_common_types_1_0.BaseObjectAttributeType):
     """EtherObjectType specifies "type" field of Ethernets, via a union of
     the IANAEtherTypeEnum type and the atomic xs:string type. Its
-    base type is the cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex
+    base type is the cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex
     (i.e. regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(IANAEtherType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -10486,15 +10486,15 @@ class IANAEtherType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class IANAEtherType
 
-class IANAHardwareType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class IANAHardwareType(cybox_common_types_1_0.BaseObjectAttributeType):
     """IANAHardwareType specifies the type of hardware, via a union of the
     IANAHardwareTypeEnum type and the atomic xs:string type. Its
-    base type is the cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex
+    base type is the cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex
     (i.e. regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(IANAHardwareType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -10573,17 +10573,17 @@ class IANAHardwareType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class IANAHardwareType
 
-class IPVersionType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class IPVersionType(cybox_common_types_1_0.BaseObjectAttributeType):
     """IPVersionType specifies IP versions, via a union of the
     IPVersionTypeEnum type and the atomic xs:string type. See
     http://www.iana.org/assignments/version-numbers/version-
     numbers.xml for a complete list. Its base type is the
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(IPVersionType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -10662,15 +10662,15 @@ class IPVersionType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class IPVersionType
 
-class IPv6PacketChangeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class IPv6PacketChangeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """IPV6PacketChangeType specifies whether a packet has changed, via a
     union of the IPv6PacketChangeTypeEnum type and the atomic
-    xs:string type. Its base type is the cybox_common_types_v1_0.BaseObjectAttributeType,
+    xs:string type. Its base type is the cybox_common_types_1_0.BaseObjectAttributeType,
     for permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(IPv6PacketChangeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -10749,16 +10749,16 @@ class IPv6PacketChangeType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class IPv6PacketChangeType
 
-class IPv6DoNotRecogActionType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class IPv6DoNotRecogActionType(cybox_common_types_1_0.BaseObjectAttributeType):
     """IPv6DoNotRecogActionType specifies possible actions when option is
     not recognized, via a union of the IPv6DoNotRecogActionTypeEnum
     type and the atomic xs:string type. Its base type is the
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(IPv6DoNotRecogActionType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -10837,15 +10837,15 @@ class IPv6DoNotRecogActionType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class IPv6DoNotRecogActionType
 
-class IPv4OptionsType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class IPv4OptionsType(cybox_common_types_1_0.BaseObjectAttributeType):
     """IPv4OptionsType specifies IPv4 options, via a union of the
     IPv4OptionsTypeEnum type and the atomic xs:string type. Its base
-    type is the cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex
+    type is the cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex
     (i.e. regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(IPv4OptionsType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -10924,15 +10924,15 @@ class IPv4OptionsType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class IPv4OptionsType
 
-class IPv4ClassType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class IPv4ClassType(cybox_common_types_1_0.BaseObjectAttributeType):
     """IPv4ClassType specifies IPv4 class type, via a union of the
     IPv4ClassTypeEnum type and the atomic xs:string type. Its base
-    type is the cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex
+    type is the cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex
     (i.e. regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(IPv4ClassType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -11011,15 +11011,15 @@ class IPv4ClassType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class IPv4ClassType
 
-class IPv4CopyFlagType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class IPv4CopyFlagType(cybox_common_types_1_0.BaseObjectAttributeType):
     """IPv4CopyFlagType specifies value of IPv4 copy flag, via a union of
     the IPv4CopyFlagTypeEnum type and the atomic xs:string type. Its
-    base type is the cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex
+    base type is the cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex
     (i.e. regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(IPv4CopyFlagType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -11098,15 +11098,15 @@ class IPv4CopyFlagType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class IPv4CopyFlagType
 
-class MoreFragmentsType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class MoreFragmentsType(cybox_common_types_1_0.BaseObjectAttributeType):
     """MoreFragmentsType specifies whether there are more fragments, via a
     union of the MoreFragmentsTypeEnum type and the atomic xs:string
-    type. Its base type is the cybox_common_types_v1_0.BaseObjectAttributeType, for
+    type. Its base type is the cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(MoreFragmentsType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -11185,15 +11185,15 @@ class MoreFragmentsType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class MoreFragmentsType
 
-class DoNotFragmentType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class DoNotFragmentType(cybox_common_types_1_0.BaseObjectAttributeType):
     """DoNotFragmentType specifies fragmenting options, via a union of the
     DoNotFragmentTypeEnum type and the atomic xs:string type. Its
-    base type is the cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex
+    base type is the cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex
     (i.e. regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(DoNotFragmentType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -11272,15 +11272,15 @@ class DoNotFragmentType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class DoNotFragmentType
 
-class ARPOpType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class ARPOpType(cybox_common_types_1_0.BaseObjectAttributeType):
     """ARPOpType specifies types of ARP operations, via a union of the
     ARPOpTypeEnum type and the atomic xs:string type. Its base type
-    is the cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e.
+    is the cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e.
     regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(ARPOpType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -11359,7 +11359,7 @@ class ARPOpType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class ARPOpType
 
-class NetworkPacketType(cybox_common_types_v1_0.DefinedObjectType):
+class NetworkPacketType(cybox_common_types_1_0.DefinedObjectType):
     """The definition of network packet is based on the TCP/IP
     model/Internet protocol suite. In the TCP/IP stack, "packet" is
     generally defined as IP header plus payload, but we also include
@@ -11368,7 +11368,7 @@ class NetworkPacketType(cybox_common_types_v1_0.DefinedObjectType):
     provided but requirements are not enforced/captured; all fields
     are optional."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Link_Layer=None, Internet_Layer=None, Transport_Layer=None):
         super(NetworkPacketType, self).__init__(object_reference, )
         self.Link_Layer = Link_Layer

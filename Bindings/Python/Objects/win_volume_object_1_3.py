@@ -10,7 +10,7 @@ import getopt
 import re as re_
 
 import volume_object_1_3
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -457,16 +457,16 @@ class WindowsVolumeAttributesListType(GeneratedsSuper):
             self.Attribute.append(obj_)
 # end class WindowsVolumeAttributesListType
 
-class WindowsVolumeAttributeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class WindowsVolumeAttributeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """WindowsVolumeAttributeType specifies Windows volume attributes via a
     union of the WindowsVolumeAttributeEnum type and the atomic
     xs:string type. Its base type is the CybOX Core
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(WindowsVolumeAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -545,15 +545,15 @@ class WindowsVolumeAttributeType(cybox_common_types_v1_0.BaseObjectAttributeType
         pass
 # end class WindowsVolumeAttributeType
 
-class WindowsDriveType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class WindowsDriveType(cybox_common_types_1_0.BaseObjectAttributeType):
     """WindowsDriveType specifies Windows drive types via a union of the
     WindowsDriveTypeEnum type and the atomic xs:string type. Its
-    base type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for
+    base type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(WindowsDriveType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -653,7 +653,7 @@ class WindowsVolumeObjectType(volume_object_1_3.VolumeObjectType):
     def get_Drive_Letter(self): return self.Drive_Letter
     def set_Drive_Letter(self, Drive_Letter): self.Drive_Letter = Drive_Letter
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Drive_Type(self): return self.Drive_Type
     def set_Drive_Type(self, Drive_Type): self.Drive_Type = Drive_Type
@@ -717,7 +717,7 @@ class WindowsVolumeObjectType(volume_object_1_3.VolumeObjectType):
             outfile.write('),\n')
         if self.Drive_Letter is not None:
             showIndent(outfile, level)
-            outfile.write('Drive_Letter=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Drive_Letter=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Drive_Letter.exportLiteral(outfile, level, name_='Drive_Letter')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -740,7 +740,7 @@ class WindowsVolumeObjectType(volume_object_1_3.VolumeObjectType):
             obj_.build(child_)
             self.set_Attributes_List(obj_)
         elif nodeName_ == 'Drive_Letter':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Drive_Letter(obj_)
         elif nodeName_ == 'Drive_Type':

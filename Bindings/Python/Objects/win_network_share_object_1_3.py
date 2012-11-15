@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,16 +368,16 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class SharedResourceType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class SharedResourceType(cybox_common_types_1_0.BaseObjectAttributeType):
     """SharedResourceType specifies Windows shared resource types via a
     union of the SharedResourceTypeEnum type and the atomic
     xs:string type. Its base type is the CybOX Core
-    cybox_common_types_v1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
+    cybox_common_types_1_0.BaseObjectAttributeType, for permitting complex (i.e. regular-
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(SharedResourceType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
@@ -456,11 +456,11 @@ class SharedResourceType(cybox_common_types_v1_0.BaseObjectAttributeType):
         pass
 # end class SharedResourceType
 
-class WindowsNetworkShareObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class WindowsNetworkShareObjectType(cybox_common_types_1_0.DefinedObjectType):
     """he WindowsNetworkShareObjectType type is intended to characterize
     Windows network shares."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, ACCESS_PERM=None, ACCESS_ATRIB=None, ACCESS_ALL=None, ACCESS_READ=None, ACCESS_DELETE=None, ACCESS_WRITE=None, ACCESS_CREATE=None, ACCESS_EXEC=None, Current_Uses=None, Local_Path=None, Max_Uses=None, Netname=None, Type=None):
         super(WindowsNetworkShareObjectType, self).__init__(object_reference, )
         self.ACCESS_PERM = _cast(bool, ACCESS_PERM)
@@ -485,12 +485,12 @@ class WindowsNetworkShareObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Current_Uses(self): return self.Current_Uses
     def set_Current_Uses(self, Current_Uses): self.Current_Uses = Current_Uses
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Local_Path(self): return self.Local_Path
     def set_Local_Path(self, Local_Path): self.Local_Path = Local_Path
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Max_Uses(self): return self.Max_Uses
     def set_Max_Uses(self, Max_Uses): self.Max_Uses = Max_Uses
@@ -630,25 +630,25 @@ class WindowsNetworkShareObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsNetworkShareObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Current_Uses is not None:
             showIndent(outfile, level)
-            outfile.write('Current_Uses=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Current_Uses=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Current_Uses.exportLiteral(outfile, level, name_='Current_Uses')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Local_Path is not None:
             showIndent(outfile, level)
-            outfile.write('Local_Path=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Local_Path=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Local_Path.exportLiteral(outfile, level, name_='Local_Path')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Max_Uses is not None:
             showIndent(outfile, level)
-            outfile.write('Max_Uses=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Max_Uses=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Max_Uses.exportLiteral(outfile, level, name_='Max_Uses')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Netname is not None:
             showIndent(outfile, level)
-            outfile.write('Netname=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Netname=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Netname.exportLiteral(outfile, level, name_='Netname')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -739,19 +739,19 @@ class WindowsNetworkShareObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WindowsNetworkShareObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Current_Uses':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Current_Uses(obj_)
         elif nodeName_ == 'Local_Path':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Local_Path(obj_)
         elif nodeName_ == 'Max_Uses':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Max_Uses(obj_)
         elif nodeName_ == 'Netname':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Netname(obj_)
         elif nodeName_ == 'Type':

@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,12 +368,12 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class URIObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class URIObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The URIObjectType type is intended to characterize Uniform Resource
     Identifiers (URI's).The Type attribute specifies the type of URI
     that is being defined."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, type_=None, Value=None):
         super(URIObjectType, self).__init__(object_reference, )
         self.type_ = _cast(None, type_)
@@ -387,7 +387,7 @@ class URIObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Value(self): return self.Value
     def set_Value(self, Value): self.Value = Value
     def validate_AnyURIObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.AnyURIObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.AnyURIObjectAttributeType, a restriction on None.
         pass
     def get_type(self): return self.type_
     def set_type(self, type_): self.type_ = type_
@@ -443,7 +443,7 @@ class URIObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(URIObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Value is not None:
             showIndent(outfile, level)
-            outfile.write('Value=model_.cybox_common_types_v1_0.AnyURIObjectAttributeType(\n')
+            outfile.write('Value=model_.cybox_common_types_1_0.AnyURIObjectAttributeType(\n')
             self.Value.exportLiteral(outfile, level, name_='Value')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -460,7 +460,7 @@ class URIObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(URIObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Value':
-            obj_ = cybox_common_types_v1_0.AnyURIObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.AnyURIObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Value(obj_)
         super(URIObjectType, self).buildChildren(child_, node, nodeName_, True)

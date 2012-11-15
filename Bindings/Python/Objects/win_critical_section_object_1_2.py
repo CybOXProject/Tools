@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,11 +368,11 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class WinCriticalSectionObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class WinCriticalSectionObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The WinCriticalSectionObjectType type is intended to characterize
     Windows Critical Section objects."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, Address=None, Spin_Count=None):
         super(WinCriticalSectionObjectType, self).__init__(object_reference, )
         self.Address = Address
@@ -386,12 +386,12 @@ class WinCriticalSectionObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Address(self): return self.Address
     def set_Address(self, Address): self.Address = Address
     def validate_HexBinaryObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.HexBinaryObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
         pass
     def get_Spin_Count(self): return self.Spin_Count
     def set_Spin_Count(self, Spin_Count): self.Spin_Count = Spin_Count
     def validate_NonNegativeIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='WinCriticalSectionObj:', name_='WinCriticalSectionObjectType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -441,13 +441,13 @@ class WinCriticalSectionObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WinCriticalSectionObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Address is not None:
             showIndent(outfile, level)
-            outfile.write('Address=model_.cybox_common_types_v1_0.HexBinaryObjectAttributeType(\n')
+            outfile.write('Address=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
             self.Address.exportLiteral(outfile, level, name_='Address')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Spin_Count is not None:
             showIndent(outfile, level)
-            outfile.write('Spin_Count=model_.cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType(\n')
+            outfile.write('Spin_Count=model_.cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType(\n')
             self.Spin_Count.exportLiteral(outfile, level, name_='Spin_Count')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -460,11 +460,11 @@ class WinCriticalSectionObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(WinCriticalSectionObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Address':
-            obj_ = cybox_common_types_v1_0.HexBinaryObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Address(obj_)
         elif nodeName_ == 'Spin_Count':
-            obj_ = cybox_common_types_v1_0.NonNegativeIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Spin_Count(obj_)
         super(WinCriticalSectionObjectType, self).buildChildren(child_, node, nodeName_, True)

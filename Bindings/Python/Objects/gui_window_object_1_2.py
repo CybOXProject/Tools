@@ -10,7 +10,7 @@ import getopt
 import re as re_
 
 import gui_object_1_2
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -387,7 +387,7 @@ class GUIWindowObjectType(gui_object_1_2.GUIObjectType):
     def get_Owner_Window(self): return self.Owner_Window
     def set_Owner_Window(self, Owner_Window): self.Owner_Window = Owner_Window
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Parent_Window(self): return self.Parent_Window
     def set_Parent_Window(self, Parent_Window): self.Parent_Window = Parent_Window
@@ -444,19 +444,19 @@ class GUIWindowObjectType(gui_object_1_2.GUIObjectType):
         super(GUIWindowObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Owner_Window is not None:
             showIndent(outfile, level)
-            outfile.write('Owner_Window=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Owner_Window=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Owner_Window.exportLiteral(outfile, level, name_='Owner_Window')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Parent_Window is not None:
             showIndent(outfile, level)
-            outfile.write('Parent_Window=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Parent_Window=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Parent_Window.exportLiteral(outfile, level, name_='Parent_Window')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Window_Display_Name is not None:
             showIndent(outfile, level)
-            outfile.write('Window_Display_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Window_Display_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Window_Display_Name.exportLiteral(outfile, level, name_='Window_Display_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -469,15 +469,15 @@ class GUIWindowObjectType(gui_object_1_2.GUIObjectType):
         super(GUIWindowObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Owner_Window':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Owner_Window(obj_)
         elif nodeName_ == 'Parent_Window':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Parent_Window(obj_)
         elif nodeName_ == 'Window_Display_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Window_Display_Name(obj_)
         super(GUIWindowObjectType, self).buildChildren(child_, node, nodeName_, True)

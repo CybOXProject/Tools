@@ -9,7 +9,7 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -368,7 +368,7 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class AddressObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class AddressObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The AddressObjectType is intended to characterize cyber addresses.
     It is based on the IODEF address element.The category attribute
     specifies the address category that is being defined. The
@@ -376,7 +376,7 @@ class AddressObjectType(cybox_common_types_v1_0.DefinedObjectType):
     is_destination attribute specifies if this is a "Destination"
     address"""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, category='ipv4-addr', is_source=None, is_destination=None, Address_Value=None, Ext_Category=None, VLAN_Name=None, VLAN_Num=None):
         super(AddressObjectType, self).__init__(object_reference, )
         self.category = _cast(None, category)
@@ -395,7 +395,7 @@ class AddressObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Address_Value(self): return self.Address_Value
     def set_Address_Value(self, Address_Value): self.Address_Value = Address_Value
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Ext_Category(self): return self.Ext_Category
     def set_Ext_Category(self, Ext_Category): self.Ext_Category = Ext_Category
@@ -404,7 +404,7 @@ class AddressObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_VLAN_Num(self): return self.VLAN_Num
     def set_VLAN_Num(self, VLAN_Num): self.VLAN_Num = VLAN_Num
     def validate_IntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.IntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
         pass
     def get_category(self): return self.category
     def set_category(self, category): self.category = category
@@ -487,25 +487,25 @@ class AddressObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(AddressObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Address_Value is not None:
             showIndent(outfile, level)
-            outfile.write('Address_Value=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Address_Value=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Address_Value.exportLiteral(outfile, level, name_='Address_Value')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Ext_Category is not None:
             showIndent(outfile, level)
-            outfile.write('Ext_Category=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('Ext_Category=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.Ext_Category.exportLiteral(outfile, level, name_='Ext_Category')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.VLAN_Name is not None:
             showIndent(outfile, level)
-            outfile.write('VLAN_Name=model_.cybox_common_types_v1_0.StringObjectAttributeType(\n')
+            outfile.write('VLAN_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
             self.VLAN_Name.exportLiteral(outfile, level, name_='VLAN_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.VLAN_Num is not None:
             showIndent(outfile, level)
-            outfile.write('VLAN_Num=model_.cybox_common_types_v1_0.IntegerObjectAttributeType(\n')
+            outfile.write('VLAN_Num=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
             self.VLAN_Num.exportLiteral(outfile, level, name_='VLAN_Num')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -540,19 +540,19 @@ class AddressObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(AddressObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Address_Value':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Address_Value(obj_)
         elif nodeName_ == 'Ext_Category':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Ext_Category(obj_)
         elif nodeName_ == 'VLAN_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_VLAN_Name(obj_)
         elif nodeName_ == 'VLAN_Num':
-            obj_ = cybox_common_types_v1_0.IntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_VLAN_Num(obj_)
         super(AddressObjectType, self).buildChildren(child_, node, nodeName_, True)
