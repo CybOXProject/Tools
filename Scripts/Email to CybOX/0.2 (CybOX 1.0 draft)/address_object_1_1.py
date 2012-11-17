@@ -476,21 +476,21 @@ class AddressObjectType(common.DefinedObjectType):
         super(AddressObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Address_Value':
-            Address_Value_ = common.StringObjectAttributeType.factory()
-            Address_Value_.build(child_)
-            self.Address_Value = Address_Value_
+            obj_ = common.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Address_Value(obj_)
         elif nodeName_ == 'Ext_Category':
-            Ext_Category_ = common.StringObjectAttributeType.factory()
-            Ext_Category_.build(child_)
-            self.Ext_Category = Ext_Category_
+            obj_ = common.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Ext_Category(obj_)
         elif nodeName_ == 'VLAN_Name':
-            VLAN_Name_ = common.StringObjectAttributeType.factory()
-            VLAN_Name_.build(child_)
-            self.VLAN_Name = VLAN_Name_
+            obj_ = common.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_VLAN_Name(obj_)
         elif nodeName_ == 'VLAN_Num':
-            VLAN_Num_ = common.StringObjectAttributeType.factory()
-            VLAN_Num_.build(child_)
-            self.VLAN_Num = VLAN_Num_
+            obj_ = common.IntegerObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_VLAN_Num(obj_)
         super(AddressObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class AddressObjectType
 

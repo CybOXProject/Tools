@@ -2,13 +2,16 @@
 # -*- coding: utf-8 -*- 
 
 #
-# Generated Tue Apr 10 13:54:54 2012 by generateDS.py version 2.7b.
+# Generated Tue Nov 06 14:02:28 2012 by generateDS.py version 2.7c.
 #
 
 import sys
 import getopt
 import re as re_
-import common_types_1_0 as common
+
+import cybox_common_types_1_0
+import uri_object_1_2
+import address_object_1_2
 
 etree_ = None
 Verbose_import_ = False
@@ -192,9 +195,10 @@ Namespace_extract_pat_ = re_.compile(r'{(.*)}(.*)')
 # Support/utility functions.
 #
 
-def showIndent(outfile, level):
-    for idx in range(level):
-        outfile.write('    ')
+def showIndent(outfile, level, pretty_print=True):
+    if pretty_print:
+        for idx in range(level):
+            outfile.write('    ')
 
 def quote_xml(inStr):
     if not inStr:
@@ -299,7 +303,7 @@ class MixedContainer:
         return self.value
     def getName(self):
         return self.name
-    def export(self, outfile, level, name, namespace):
+    def export(self, outfile, level, name, namespace, pretty_print=True):
         if self.category == MixedContainer.CategoryText:
             # Prevent exporting empty content as empty lines.
             if self.value.strip(): 
@@ -307,7 +311,7 @@ class MixedContainer:
         elif self.category == MixedContainer.CategorySimple:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
-            self.value.export(outfile, level, namespace,name)
+            self.value.export(outfile, level, namespace, name, pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
             outfile.write('<%s>%s</%s>' % (self.name, self.value, self.name))
@@ -366,85 +370,252 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class URIObjectType(common.DefinedObjectType):
-    """The URIObjectType type is intended to characterize Uniform Resource
-    Identifiers (URI's).The Type attribute specifies the type of URI
-    that is being defined."""
+class DNSRecordObjectType(cybox_common_types_1_0.DefinedObjectType):
+    """The DNSRecordObjectType type is intended to characterize an
+    individual DNS record."""
     subclass = None
-    superclass = common.DefinedObjectType
-    def __init__(self, type_=None, Value=None):
-        super(URIObjectType, self).__init__(None)
-        self.type_ = _cast(None, type_)
-        self.Value = Value
+    superclass = cybox_common_types_1_0.DefinedObjectType
+    def __init__(self, object_reference=None, Description=None, Domain_Name=None, IP_Address=None, Address_Class=None, Entry_Type=None, Record_Name=None, Record_Type=None, TTL=None, Flags=None, Data_Length=None, Record_Data=None):
+        super(DNSRecordObjectType, self).__init__(object_reference, )
+        self.Description = Description
+        self.Domain_Name = Domain_Name
+        self.IP_Address = IP_Address
+        self.Address_Class = Address_Class
+        self.Entry_Type = Entry_Type
+        self.Record_Name = Record_Name
+        self.Record_Type = Record_Type
+        self.TTL = TTL
+        self.Flags = Flags
+        self.Data_Length = Data_Length
+        self.Record_Data = Record_Data
     def factory(*args_, **kwargs_):
-        if URIObjectType.subclass:
-            return URIObjectType.subclass(*args_, **kwargs_)
+        if DNSRecordObjectType.subclass:
+            return DNSRecordObjectType.subclass(*args_, **kwargs_)
         else:
-            return URIObjectType(*args_, **kwargs_)
+            return DNSRecordObjectType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_Value(self): return self.Value
-    def set_Value(self, Value): self.Value = Value
-    def get_type(self): return self.type_
-    def set_type(self, type_): self.type_ = type_
-    def export(self, outfile, level, namespace_='URIObj:', name_='URIObjectType', namespacedef_=''):
-        showIndent(outfile, level)
+    def get_Description(self): return self.Description
+    def set_Description(self, Description): self.Description = Description
+    def get_Domain_Name(self): return self.Domain_Name
+    def set_Domain_Name(self, Domain_Name): self.Domain_Name = Domain_Name
+    def get_IP_Address(self): return self.IP_Address
+    def set_IP_Address(self, IP_Address): self.IP_Address = IP_Address
+    def get_Address_Class(self): return self.Address_Class
+    def set_Address_Class(self, Address_Class): self.Address_Class = Address_Class
+    def validate_StringObjectAttributeType(self, value):
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
+        pass
+    def get_Entry_Type(self): return self.Entry_Type
+    def set_Entry_Type(self, Entry_Type): self.Entry_Type = Entry_Type
+    def get_Record_Name(self): return self.Record_Name
+    def set_Record_Name(self, Record_Name): self.Record_Name = Record_Name
+    def get_Record_Type(self): return self.Record_Type
+    def set_Record_Type(self, Record_Type): self.Record_Type = Record_Type
+    def get_TTL(self): return self.TTL
+    def set_TTL(self, TTL): self.TTL = TTL
+    def validate_IntegerObjectAttributeType(self, value):
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
+        pass
+    def get_Flags(self): return self.Flags
+    def set_Flags(self, Flags): self.Flags = Flags
+    def validate_HexBinaryObjectAttributeType(self, value):
+        # Validate type cybox_common_types_1_0.HexBinaryObjectAttributeType, a restriction on None.
+        pass
+    def get_Data_Length(self): return self.Data_Length
+    def set_Data_Length(self, Data_Length): self.Data_Length = Data_Length
+    def get_Record_Data(self): return self.Record_Data
+    def set_Record_Data(self, Record_Data): self.Record_Data = Record_Data
+    def export(self, outfile, level, namespace_='DNSRecordObj:', name_='DNSRecordObjectType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='URIObjectType')
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='DNSRecordObjectType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
-    def exportAttributes(self, outfile, level, already_processed, namespace_='URIObj:', name_='URIObjectType'):
-        super(URIObjectType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='URIObjectType')
-        if self.type_ is not None and 'type_' not in already_processed:
-            already_processed.append('type_')
-            outfile.write(' type=%s' % (quote_attrib(self.type_), ))
-    def exportChildren(self, outfile, level, namespace_='URIObj:', name_='URIObjectType', fromsubclass_=False):
-        if self.Value is not None:
-            self.Value.export(outfile, level, 'URIObj:', name_='Value')
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='DNSRecordObj:', name_='DNSRecordObjectType'):
+        super(DNSRecordObjectType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='DNSRecordObjectType')
+    def exportChildren(self, outfile, level, namespace_='DNSRecordObj:', name_='DNSRecordObjectType', fromsubclass_=False, pretty_print=True):
+        super(DNSRecordObjectType, self).exportChildren(outfile, level, 'DNSRecordObj:', name_, True, pretty_print=pretty_print)
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        if self.Description is not None:
+            self.Description.export(outfile, level, 'DNSRecordObj:', name_='Description', pretty_print=pretty_print)
+        if self.Domain_Name is not None:
+            self.Domain_Name.export(outfile, level, 'DNSRecordObj:', name_='Domain_Name', pretty_print=pretty_print)
+        if self.IP_Address is not None:
+            self.IP_Address.export(outfile, level, 'DNSRecordObj:', name_='IP_Address', pretty_print=pretty_print)
+        if self.Address_Class is not None:
+            self.Address_Class.export(outfile, level, 'DNSRecordObj:', name_='Address_Class', pretty_print=pretty_print)
+        if self.Entry_Type is not None:
+            self.Entry_Type.export(outfile, level, 'DNSRecordObj:', name_='Entry_Type', pretty_print=pretty_print)
+        if self.Record_Name is not None:
+            self.Record_Name.export(outfile, level, 'DNSRecordObj:', name_='Record_Name', pretty_print=pretty_print)
+        if self.Record_Type is not None:
+            self.Record_Type.export(outfile, level, 'DNSRecordObj:', name_='Record_Type', pretty_print=pretty_print)
+        if self.TTL is not None:
+            self.TTL.export(outfile, level, 'DNSRecordObj:', name_='TTL', pretty_print=pretty_print)
+        if self.Flags is not None:
+            self.Flags.export(outfile, level, 'DNSRecordObj:', name_='Flags', pretty_print=pretty_print)
+        if self.Data_Length is not None:
+            self.Data_Length.export(outfile, level, 'DNSRecordObj:', name_='Data_Length', pretty_print=pretty_print)
+        if self.Record_Data is not None:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sRecord_Data>%s</%sRecord_Data>%s' % ('DNSRecordObj:', self.gds_format_string(quote_xml(self.Record_Data).encode(ExternalEncoding), input_name='Record_Data'), 'DNSRecordObj:', eol_))
     def hasContent_(self):
         if (
-            self.Value is not None
+            self.Description is not None or
+            self.Domain_Name is not None or
+            self.IP_Address is not None or
+            self.Address_Class is not None or
+            self.Entry_Type is not None or
+            self.Record_Name is not None or
+            self.Record_Type is not None or
+            self.TTL is not None or
+            self.Flags is not None or
+            self.Data_Length is not None or
+            self.Record_Data is not None or
+            super(DNSRecordObjectType, self).hasContent_()
             ):
             return True
         else:
             return False
-    def exportLiteral(self, outfile, level, name_='URIObjectType'):
+    def exportLiteral(self, outfile, level, name_='DNSRecordObjectType'):
         level += 1
         self.exportLiteralAttributes(outfile, level, [], name_)
         if self.hasContent_():
             self.exportLiteralChildren(outfile, level, name_)
     def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        if self.type_ is not None and 'type_' not in already_processed:
-            already_processed.append('type_')
-            showIndent(outfile, level)
-            outfile.write('type_ = %s,\n' % (self.type_,))
+        super(DNSRecordObjectType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
     def exportLiteralChildren(self, outfile, level, name_):
-        if self.Value is not None:
+        super(DNSRecordObjectType, self).exportLiteralChildren(outfile, level, name_)
+        if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Value=%s,\n' % quote_python(self.Value).encode(ExternalEncoding))
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
+            self.Description.exportLiteral(outfile, level, name_='Description')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Domain_Name is not None:
+            showIndent(outfile, level)
+            outfile.write('Domain_Name=model_.uri_object_1_2.URIObjectType(\n')
+            self.Domain_Name.exportLiteral(outfile, level, name_='Domain_Name')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.IP_Address is not None:
+            showIndent(outfile, level)
+            outfile.write('IP_Address=model_.address_object_1_2.AddressObjectType(\n')
+            self.IP_Address.exportLiteral(outfile, level, name_='IP_Address')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Address_Class is not None:
+            showIndent(outfile, level)
+            outfile.write('Address_Class=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Address_Class.exportLiteral(outfile, level, name_='Address_Class')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Entry_Type is not None:
+            showIndent(outfile, level)
+            outfile.write('Entry_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Entry_Type.exportLiteral(outfile, level, name_='Entry_Type')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Record_Name is not None:
+            showIndent(outfile, level)
+            outfile.write('Record_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Record_Name.exportLiteral(outfile, level, name_='Record_Name')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Record_Type is not None:
+            showIndent(outfile, level)
+            outfile.write('Record_Type=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Record_Type.exportLiteral(outfile, level, name_='Record_Type')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.TTL is not None:
+            showIndent(outfile, level)
+            outfile.write('TTL=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
+            self.TTL.exportLiteral(outfile, level, name_='TTL')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Flags is not None:
+            showIndent(outfile, level)
+            outfile.write('Flags=model_.cybox_common_types_1_0.HexBinaryObjectAttributeType(\n')
+            self.Flags.exportLiteral(outfile, level, name_='Flags')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Data_Length is not None:
+            showIndent(outfile, level)
+            outfile.write('Data_Length=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
+            self.Data_Length.exportLiteral(outfile, level, name_='Data_Length')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Record_Data is not None:
+            showIndent(outfile, level)
+            outfile.write('Record_Data=%s,\n' % quote_python(self.Record_Data).encode(ExternalEncoding))
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
         for child in node:
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
     def buildAttributes(self, node, attrs, already_processed):
-        value = find_attr_value_('type', node)
-        if value is not None and 'type' not in already_processed:
-            already_processed.append('type')
-            self.type_ = value
+        super(DNSRecordObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'Value':
-            Value_ = common.StringObjectAttributeType.factory()
-            Value_.build(child_)
-            self.Value = Value_
-        super(URIObjectType, self).buildChildren(child_, node, nodeName_, True)
-# end class URIObjectType
-
+        if nodeName_ == 'Description':
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
+            obj_.build(child_)
+            self.set_Description(obj_)
+        elif nodeName_ == 'Domain_Name':
+            obj_ = uri_object_1_2.URIObjectType.factory()
+            obj_.build(child_)
+            self.set_Domain_Name(obj_)
+        elif nodeName_ == 'IP_Address':
+            obj_ = address_object_1_2.AddressObjectType.factory()
+            obj_.build(child_)
+            self.set_IP_Address(obj_)
+        elif nodeName_ == 'Address_Class':
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Address_Class(obj_)
+        elif nodeName_ == 'Entry_Type':
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Entry_Type(obj_)
+        elif nodeName_ == 'Record_Name':
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Record_Name(obj_)
+        elif nodeName_ == 'Record_Type':
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Record_Type(obj_)
+        elif nodeName_ == 'TTL':
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_TTL(obj_)
+        elif nodeName_ == 'Flags':
+            obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Flags(obj_)
+        elif nodeName_ == 'Data_Length':
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Data_Length(obj_)
+        elif nodeName_ == 'Record_Data':
+            Record_Data_ = child_.text
+            Record_Data_ = self.gds_validate_string(Record_Data_, node, 'Record_Data')
+            self.Record_Data = Record_Data_
+        super(DNSRecordObjectType, self).buildChildren(child_, node, nodeName_, True)
+# end class DNSRecordObjectType
 
 USAGE_TEXT = """
 Usage: python <Parser>.py [ -s ] <in_xml_file>
@@ -454,29 +625,27 @@ def usage():
     print USAGE_TEXT
     sys.exit(1)
 
-
 def get_root_tag(node):
     tag = Tag_pattern_.match(node.tag).groups()[-1]
     rootClass = globals().get(tag)
     return tag, rootClass
-
 
 def parse(inFileName):
     doc = parsexml_(inFileName)
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'URI'
-        rootClass = URIObjectType
+        rootTag = 'DNS_Record'
+        rootClass = DNSRecordObjectType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
     sys.stdout.write('<?xml version="1.0" ?>\n')
-    rootObj.export(sys.stdout, 0, name_=rootTag, 
-        namespacedef_='')
+    rootObj.export(sys.stdout, 0, name_=rootTag,
+        namespacedef_='',
+        pretty_print=True)
     return rootObj
-
 
 def parseString(inString):
     from StringIO import StringIO
@@ -484,36 +653,34 @@ def parseString(inString):
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'URI'
-        rootClass = URIObjectType
+        rootTag = 'DNS_Record'
+        rootClass = DNSRecordObjectType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
     sys.stdout.write('<?xml version="1.0" ?>\n')
-    rootObj.export(sys.stdout, 0, name_="URI",
+    rootObj.export(sys.stdout, 0, name_="DNS_Record",
         namespacedef_='')
     return rootObj
-
 
 def parseLiteral(inFileName):
     doc = parsexml_(inFileName)
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'URI'
-        rootClass = URIObjectType
+        rootTag = 'DNS_Record'
+        rootClass = DNSRecordObjectType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
-    sys.stdout.write('#from URI_Object import *\n\n')
-    sys.stdout.write('import URI_Object as model_\n\n')
+    sys.stdout.write('#from temp import *\n\n')
+    sys.stdout.write('import temp as model_\n\n')
     sys.stdout.write('rootObj = model_.rootTag(\n')
     rootObj.exportLiteral(sys.stdout, 0, name_=rootTag)
     sys.stdout.write(')\n')
     return rootObj
-
 
 def main():
     args = sys.argv[1:]
@@ -522,12 +689,10 @@ def main():
     else:
         usage()
 
-
 if __name__ == '__main__':
     #import pdb; pdb.set_trace()
     main()
 
-
 __all__ = [
-    "URIObjectType"
+    "DNSRecordObjectType"
     ]
