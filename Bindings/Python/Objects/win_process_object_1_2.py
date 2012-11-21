@@ -10,8 +10,7 @@ import getopt
 import re as re_
 import process_object_1_2 as process_object
 import common_types_1_0 as common
-import win_handle_object_1_2 as winhandleobj
-import memory_object_1_1 as memoryobj
+import win_handle_object_1_2 as win_handle_object
 
 etree_ = None
 Verbose_import_ = False
@@ -433,6 +432,7 @@ class WindowsProcessObjectType(process_object.ProcessObjectType):
             already_processed.append('dep_enabled')
             outfile.write(' dep_enabled="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.dep_enabled)), input_name='dep_enabled'))
     def exportChildren(self, outfile, level, namespace_='WinProcessObj:', name_='WindowsProcessObjectType', fromsubclass_=False):
+        super(WindowsProcessObjectType, self).exportChildren(outfile, level, namespace_, name_, True)
         if self.Handle_List is not None:
             self.Handle_List.export(outfile, level, namespace_, name_='Handle_List')
         if self.Priority is not None:
@@ -447,7 +447,6 @@ class WindowsProcessObjectType(process_object.ProcessObjectType):
             self.Security_Type.export(outfile, level, namespace_, name_='Security_Type')
         if self.Window_Title is not None:
             self.Window_Title.export(outfile, level, namespace_, name_='Window_Title')
-        super(WindowsProcessObjectType, self).exportChildren(outfile, level, namespace_, name_, True)
     def hasContent_(self):
         if (
             self.Handle_List is not None or
@@ -456,7 +455,8 @@ class WindowsProcessObjectType(process_object.ProcessObjectType):
             self.Security_ID is not None or
             self.Startup_Info is not None or
             self.Security_Type is not None or
-            self.Window_Title is not None
+            self.Window_Title is not None or
+            super(WindowsProcessObjectType, self).hasContent_()
             ):
             return True
         else:
@@ -529,9 +529,9 @@ class WindowsProcessObjectType(process_object.ProcessObjectType):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Handle_List':
-            Handle_List_ = winhandleobj.WindowsHandleListType.factory()
-            Handle_List_.build(child_)
-            self.set_Handle_List(Handle_List_)
+            Handle_List_ = child_.text
+            Handle_List_ = self.gds_validate_string(Handle_List_, node, 'Handle_List')
+            self.Handle_List = Handle_List_
         elif nodeName_ == 'Priority':
             Priority_ = child_.text
             Priority_ = self.gds_validate_string(Priority_, node, 'Priority')
@@ -541,21 +541,21 @@ class WindowsProcessObjectType(process_object.ProcessObjectType):
             obj_.build(child_)
             self.set_Section_List(obj_)
         elif nodeName_ == 'Security_ID':
-            Security_ID_ = common.StringObjectAttributeType.factory()
-            Security_ID_.build(child_)
-            self.set_Security_ID(Security_ID_)
+            Security_ID_ = child_.text
+            Security_ID_ = self.gds_validate_string(Security_ID_, node, 'Security_ID')
+            self.Security_ID = Security_ID_
         elif nodeName_ == 'Startup_Info':
             obj_ = StartupInfoType.factory()
             obj_.build(child_)
             self.set_Startup_Info(obj_)
         elif nodeName_ == 'Security_Type':
-            Security_Type_ = common.StringObjectAttributeType.factory()
-            Security_Type_.build(child_)
-            self.set_Security_Type(Security_Type_)
+            Security_Type_ = child_.text
+            Security_Type_ = self.gds_validate_string(Security_Type_, node, 'Security_Type')
+            self.Security_Type = Security_Type_
         elif nodeName_ == 'Window_Title':
-            Window_Title_ = common.StringObjectAttributeType.factory()
-            Window_Title_.build(child_)
-            self.set_Window_Title(Window_Title_)
+            Window_Title_ = child_.text
+            Window_Title_ = self.gds_validate_string(Window_Title_, node, 'Window_Title')
+            self.Window_Title = Window_Title_
         super(WindowsProcessObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class WindowsProcessObjectType
 
@@ -630,8 +630,8 @@ class MemorySectionListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Memory_Section':
-            Memory_Section_ = memoryobj.MemoryObjectType().factory()
-            Memory_Section_.build(child_)
+            Memory_Section_ = child_.text
+            Memory_Section_ = self.gds_validate_string(Memory_Section_, node, 'Memory_Section')
             self.Memory_Section.append(Memory_Section_)
 # end class MemorySectionListType
 

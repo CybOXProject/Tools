@@ -372,7 +372,8 @@ class WindowsUserAccountObjectType(user_account_object.UserAccountObjectType):
     Windows user accounts."""
     subclass = None
     superclass = user_account_object.UserAccountObjectType
-    def __init__(self, Security_ID=None, Security_Type=None):
+    def __init__(self, disabled=None, locked_out=None, Description=None, Domain=None, password_required=None, User_ID=None, Full_Name=None, Group_List=None, Home_Directory=None, Last_Login=None, Privilege_List=None, Script_Path=None, Username=None, User_Password_Age=None, Security_ID=None, Security_Type=None):
+        super(WindowsUserAccountObjectType, self).__init__(disabled, locked_out, Description, Domain, password_required, User_ID, Full_Name, Group_List, Home_Directory, Last_Login, Privilege_List, Script_Path, Username, User_Password_Age)
         self.Security_ID = Security_ID
         self.Security_Type = Security_Type
     def factory(*args_, **kwargs_):
@@ -436,21 +437,21 @@ class WindowsUserAccountObjectType(user_account_object.UserAccountObjectType):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Security_ID':
-            Security_ID_ = common.StringObjectAttributeType.factory()
-            Security_ID_.build(child_)
-            self.set_Security_ID(Security_ID_)
+            Security_ID_ = child_.text
+            Security_ID_ = self.gds_validate_string(Security_ID_, node, 'Security_ID')
+            self.Security_ID = Security_ID_
         elif nodeName_ == 'Security_Type':
-            Security_Type_ = common.StringObjectAttributeType.factory()
-            Security_Type_.build(child_)
-            self.set_Security_Type(Security_Type_)
+            Security_Type_ = child_.text
+            Security_Type_ = self.gds_validate_string(Security_Type_, node, 'Security_Type')
+            self.Security_Type = Security_Type_
         super(WindowsUserAccountObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class WindowsUserAccountObjectType
 
 
-class WindowsGroupType(GeneratedsSuper):
+class WindowsGroupType(user_account_object.GroupType):
     """Windows Group represents a single windows group."""
     subclass = None
-    superclass = None
+    superclass = user_account_object.GroupType
     def __init__(self, Name=None):
         self.Name = Name
     def factory(*args_, **kwargs_):
@@ -474,7 +475,7 @@ class WindowsGroupType(GeneratedsSuper):
         else:
             outfile.write('/>\n')
     def exportAttributes(self, outfile, level, already_processed, namespace_='WinUserAccountObj:', name_='WindowsGroupType'):
-        pass
+        super(WindowsGroupType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='WindowsGroupType')
     def exportChildren(self, outfile, level, namespace_='WinUserAccountObj:', name_='WindowsGroupType', fromsubclass_=False):
         if self.Name is not None:
             self.Name.export(outfile, level, namespace_, name_='Name')
@@ -512,11 +513,11 @@ class WindowsGroupType(GeneratedsSuper):
 # end class WindowsGroupType
 
 
-class WindowsPrivilegeType(GeneratedsSuper):
+class WindowsPrivilegeType(user_account_object.PrivilegeType):
     """Windows Privilege represents a single privilege that a user may have
     within Windows."""
     subclass = None
-    superclass = None
+    superclass = user_account_object.PrivilegeType
     def __init__(self, User_Right=None):
         self.User_Right = User_Right
     def factory(*args_, **kwargs_):
@@ -540,7 +541,7 @@ class WindowsPrivilegeType(GeneratedsSuper):
         else:
             outfile.write('/>\n')
     def exportAttributes(self, outfile, level, already_processed, namespace_='WinUserAccountObj:', name_='WindowsPrivilegeType'):
-        pass
+        super(WindowsPrivilegeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='WindowsPrivilegeType')
     def exportChildren(self, outfile, level, namespace_='WinUserAccountObj:', name_='WindowsPrivilegeType', fromsubclass_=False):
         if self.User_Right is not None:
             self.User_Right.export(outfile, level, namespace_, name_='User_Right')

@@ -528,44 +528,44 @@ class VolumeObjectType(common.DefinedObjectType):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            Name_ = common.StringObjectAttributeType.factory()
-            Name_.build(child_)
+            Name_ = child_.text
+            Name_ = self.gds_validate_string(Name_, node, 'Name')
             self.Name = Name_
         elif nodeName_ == 'Device_Path':
-            Device_Path_ = common.StringObjectAttributeType.factory()
-            Device_Path_.build(child_)
+            Device_Path_ = child_.text
+            Device_Path_ = self.gds_validate_string(Device_Path_, node, 'Device_Path')
             self.Device_Path = Device_Path_
         elif nodeName_ == 'File_System_Type':
-            File_System_Type_ = common.StringObjectAttributeType.factory()
-            File_System_Type_.build(child_)
+            File_System_Type_ = child_.text
+            File_System_Type_ = self.gds_validate_string(File_System_Type_, node, 'File_System_Type')
             self.File_System_Type = File_System_Type_
         elif nodeName_ == 'Total_Allocation_Units':
-            Total_Allocation_Units_ = common.UnsignedLongObjectAttributeType.factory()
-            Total_Allocation_Units_.build(child_)
+            Total_Allocation_Units_ = child_.text
+            Total_Allocation_Units_ = self.gds_validate_string(Total_Allocation_Units_, node, 'Total_Allocation_Units')
             self.Total_Allocation_Units = Total_Allocation_Units_
         elif nodeName_ == 'Sectors_Per_Allocation_Unit':
-            Sectors_Per_Allocation_Unit_ = common.UnsignedIntegerObjectAttributeType.factory()
-            Sectors_Per_Allocation_Unit_.build(child_)
+            Sectors_Per_Allocation_Unit_ = child_.text
+            Sectors_Per_Allocation_Unit_ = self.gds_validate_string(Sectors_Per_Allocation_Unit_, node, 'Sectors_Per_Allocation_Unit')
             self.Sectors_Per_Allocation_Unit = Sectors_Per_Allocation_Unit_
         elif nodeName_ == 'Bytes_Per_Sector':
-            Bytes_Per_Sector_ = common.PositiveIntegerObjectAttributeType.factory()
-            Bytes_Per_Sector_.build(child_)
+            Bytes_Per_Sector_ = child_.text
+            Bytes_Per_Sector_ = self.gds_validate_string(Bytes_Per_Sector_, node, 'Bytes_Per_Sector')
             self.Bytes_Per_Sector = Bytes_Per_Sector_
         elif nodeName_ == 'Actual_Available_Allocation_Units':
-            Actual_Available_Allocation_Units_ = common.UnsignedLongObjectAttributeType.factory()
-            Actual_Available_Allocation_Units_.build(child_)
+            Actual_Available_Allocation_Units_ = child_.text
+            Actual_Available_Allocation_Units_ = self.gds_validate_string(Actual_Available_Allocation_Units_, node, 'Actual_Available_Allocation_Units')
             self.Actual_Available_Allocation_Units = Actual_Available_Allocation_Units_
         elif nodeName_ == 'Creation_Time':
-            Creation_Time_ = common.DateObjectAttributeType.factory()
-            Creation_Time_.build(child_)
+            Creation_Time_ = child_.text
+            Creation_Time_ = self.gds_validate_string(Creation_Time_, node, 'Creation_Time')
             self.Creation_Time = Creation_Time_
         elif nodeName_ == 'File_System_Flag_List':
             obj_ = FileSystemFlagListType.factory()
             obj_.build(child_)
             self.set_File_System_Flag_List(obj_)
         elif nodeName_ == 'Serial_Number':
-            Serial_Number_ = common.StringObjectAttributeType.factory()
-            Serial_Number_.build(child_)
+            Serial_Number_ = child_.text
+            Serial_Number_ = self.gds_validate_string(Serial_Number_, node, 'Serial_Number')
             self.Serial_Number = Serial_Number_
         super(VolumeObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class VolumeObjectType
@@ -705,8 +705,7 @@ class FileSystemFlagListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'File_System_Flag':
-            obj_ = VolumeFileSystemFlagType.factory()
-            obj_.build(child_)
+            obj_ = None
             self.File_System_Flag.append(obj_)
             self.validate_VolumeFileSystemFlagType(self.File_System_Flag)    # validate type VolumeFileSystemFlagType
 # end class FileSystemFlagListType

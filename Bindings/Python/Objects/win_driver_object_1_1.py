@@ -748,144 +748,144 @@ class WindowsDriverObjectType(common.DefinedObjectType):
             obj_.build(child_)
             self.set_Device_Object_List(obj_)
         elif nodeName_ == 'Driver_Init':
-            Driver_Init_ = common.UnsignedLongObjectAttributeType.factory()
-            Driver_Init_.build(child_)
+            Driver_Init_ = child_.text
+            Driver_Init_ = self.gds_validate_string(Driver_Init_, node, 'Driver_Init')
             self.Driver_Init = Driver_Init_
         elif nodeName_ == 'Driver_Name':
-            Driver_Name_ = common.StringObjectAttributeType.factory()
-            Driver_Name_.build(child_)
+            Driver_Name_ = child_.text
+            Driver_Name_ = self.gds_validate_string(Driver_Name_, node, 'Driver_Name')
             self.Driver_Name = Driver_Name_
         elif nodeName_ == 'Driver_Object_Address':
-            Driver_Object_Address_ = common.HexBinaryObjectAttributeType.factory()
-            Driver_Object_Address_.build(child_)
+            Driver_Object_Address_ = child_.text
+            Driver_Object_Address_ = self.gds_validate_string(Driver_Object_Address_, node, 'Driver_Object_Address')
             self.Driver_Object_Address = Driver_Object_Address_
         elif nodeName_ == 'Driver_Start_IO':
-            Driver_Start_IO_ = common.HexBinaryObjectAttributeType.factory()
-            Driver_Start_IO_.build(child_)
+            Driver_Start_IO_ = child_.text
+            Driver_Start_IO_ = self.gds_validate_string(Driver_Start_IO_, node, 'Driver_Start_IO')
             self.Driver_Start_IO = Driver_Start_IO_
         elif nodeName_ == 'Driver_Unload':
-            Driver_Unload_ = common.HexBinaryObjectAttributeType.factory()
-            Driver_Unload_.build(child_)
+            Driver_Unload_ = child_.text
+            Driver_Unload_ = self.gds_validate_string(Driver_Unload_, node, 'Driver_Unload')
             self.Driver_Unload = Driver_Unload_
         elif nodeName_ == 'Image_Base':
-            Image_Base_ = common.HexBinaryObjectAttributeType.factory()
-            Image_Base_.build(child_)
+            Image_Base_ = child_.text
+            Image_Base_ = self.gds_validate_string(Image_Base_, node, 'Image_Base')
             self.Image_Base = Image_Base_
         elif nodeName_ == 'Image_Size':
-            Image_Size_ = common.HexBinaryObjectAttributeType.factory()
-            Image_Size_.build(child_)
+            Image_Size_ = child_.text
+            Image_Size_ = self.gds_validate_string(Image_Size_, node, 'Image_Size')
             self.Image_Size = Image_Size_
         elif nodeName_ == 'IRP_MJ_CLEANUP':
-            IRP_MJ_CLEANUP_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_CLEANUP_.build(child_)
+            IRP_MJ_CLEANUP_ = child_.text
+            IRP_MJ_CLEANUP_ = self.gds_validate_string(IRP_MJ_CLEANUP_, node, 'IRP_MJ_CLEANUP')
             self.IRP_MJ_CLEANUP = IRP_MJ_CLEANUP_
         elif nodeName_ == 'IRP_MJ_CLOSE':
-            IRP_MJ_CLOSE_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_CLOSE_.build(child_)
+            IRP_MJ_CLOSE_ = child_.text
+            IRP_MJ_CLOSE_ = self.gds_validate_string(IRP_MJ_CLOSE_, node, 'IRP_MJ_CLOSE')
             self.IRP_MJ_CLOSE = IRP_MJ_CLOSE_
         elif nodeName_ == 'IRP_MJ_CREATE':
-            IRP_MJ_CREATE_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_CREATE_.build(child_)
+            IRP_MJ_CREATE_ = child_.text
+            IRP_MJ_CREATE_ = self.gds_validate_string(IRP_MJ_CREATE_, node, 'IRP_MJ_CREATE')
             self.IRP_MJ_CREATE = IRP_MJ_CREATE_
         elif nodeName_ == 'IRP_MJ_CREATE_MAILSLOT':
-            IRP_MJ_CREATE_MAILSLOT_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_CREATE_MAILSLOT_.build(child_)
+            IRP_MJ_CREATE_MAILSLOT_ = child_.text
+            IRP_MJ_CREATE_MAILSLOT_ = self.gds_validate_string(IRP_MJ_CREATE_MAILSLOT_, node, 'IRP_MJ_CREATE_MAILSLOT')
             self.IRP_MJ_CREATE_MAILSLOT = IRP_MJ_CREATE_MAILSLOT_
         elif nodeName_ == 'IRP_MJ_CREATE_NAMED_PIPE':
-            IRP_MJ_CREATE_NAMED_PIPE_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_CREATE_NAMED_PIPE_.build(child_)
+            IRP_MJ_CREATE_NAMED_PIPE_ = child_.text
+            IRP_MJ_CREATE_NAMED_PIPE_ = self.gds_validate_string(IRP_MJ_CREATE_NAMED_PIPE_, node, 'IRP_MJ_CREATE_NAMED_PIPE')
             self.IRP_MJ_CREATE_NAMED_PIPE = IRP_MJ_CREATE_NAMED_PIPE_
         elif nodeName_ == 'IRP_MJ_DEVICE_CHANGE':
-            IRP_MJ_DEVICE_CHANGE_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_DEVICE_CHANGE_.build(child_)
+            IRP_MJ_DEVICE_CHANGE_ = child_.text
+            IRP_MJ_DEVICE_CHANGE_ = self.gds_validate_string(IRP_MJ_DEVICE_CHANGE_, node, 'IRP_MJ_DEVICE_CHANGE')
             self.IRP_MJ_DEVICE_CHANGE = IRP_MJ_DEVICE_CHANGE_
         elif nodeName_ == 'IRP_MJ_DEVICE_CONTROL':
-            IRP_MJ_DEVICE_CONTROL_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_DEVICE_CONTROL_.build(child_)
+            IRP_MJ_DEVICE_CONTROL_ = child_.text
+            IRP_MJ_DEVICE_CONTROL_ = self.gds_validate_string(IRP_MJ_DEVICE_CONTROL_, node, 'IRP_MJ_DEVICE_CONTROL')
             self.IRP_MJ_DEVICE_CONTROL = IRP_MJ_DEVICE_CONTROL_
         elif nodeName_ == 'IRP_MJ_DIRECTORY_CONTROL':
-            IRP_MJ_DIRECTORY_CONTROL_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_DIRECTORY_CONTROL_.build(child_)
+            IRP_MJ_DIRECTORY_CONTROL_ = child_.text
+            IRP_MJ_DIRECTORY_CONTROL_ = self.gds_validate_string(IRP_MJ_DIRECTORY_CONTROL_, node, 'IRP_MJ_DIRECTORY_CONTROL')
             self.IRP_MJ_DIRECTORY_CONTROL = IRP_MJ_DIRECTORY_CONTROL_
         elif nodeName_ == 'IRP_MJ_FILE_SYSTEM_CONTROL':
-            IRP_MJ_FILE_SYSTEM_CONTROL_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_FILE_SYSTEM_CONTROL_.build(child_)
+            IRP_MJ_FILE_SYSTEM_CONTROL_ = child_.text
+            IRP_MJ_FILE_SYSTEM_CONTROL_ = self.gds_validate_string(IRP_MJ_FILE_SYSTEM_CONTROL_, node, 'IRP_MJ_FILE_SYSTEM_CONTROL')
             self.IRP_MJ_FILE_SYSTEM_CONTROL = IRP_MJ_FILE_SYSTEM_CONTROL_
         elif nodeName_ == 'IRP_MJ_FLUSH_BUFFERS':
-            IRP_MJ_FLUSH_BUFFERS_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_FLUSH_BUFFERS_.build(child_)
+            IRP_MJ_FLUSH_BUFFERS_ = child_.text
+            IRP_MJ_FLUSH_BUFFERS_ = self.gds_validate_string(IRP_MJ_FLUSH_BUFFERS_, node, 'IRP_MJ_FLUSH_BUFFERS')
             self.IRP_MJ_FLUSH_BUFFERS = IRP_MJ_FLUSH_BUFFERS_
         elif nodeName_ == 'IRP_MJ_INTERNAL_DEVICE_CONTROL':
-            IRP_MJ_INTERNAL_DEVICE_CONTROL_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_INTERNAL_DEVICE_CONTROL_.build(child_)
+            IRP_MJ_INTERNAL_DEVICE_CONTROL_ = child_.text
+            IRP_MJ_INTERNAL_DEVICE_CONTROL_ = self.gds_validate_string(IRP_MJ_INTERNAL_DEVICE_CONTROL_, node, 'IRP_MJ_INTERNAL_DEVICE_CONTROL')
             self.IRP_MJ_INTERNAL_DEVICE_CONTROL = IRP_MJ_INTERNAL_DEVICE_CONTROL_
         elif nodeName_ == 'IRP_MJ_LOCK_CONTROL':
-            IRP_MJ_LOCK_CONTROL_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_LOCK_CONTROL_.build(child_)
+            IRP_MJ_LOCK_CONTROL_ = child_.text
+            IRP_MJ_LOCK_CONTROL_ = self.gds_validate_string(IRP_MJ_LOCK_CONTROL_, node, 'IRP_MJ_LOCK_CONTROL')
             self.IRP_MJ_LOCK_CONTROL = IRP_MJ_LOCK_CONTROL_
         elif nodeName_ == 'IRP_MJ_PNP':
-            IRP_MJ_PNP_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_PNP_.build(child_)
+            IRP_MJ_PNP_ = child_.text
+            IRP_MJ_PNP_ = self.gds_validate_string(IRP_MJ_PNP_, node, 'IRP_MJ_PNP')
             self.IRP_MJ_PNP = IRP_MJ_PNP_
         elif nodeName_ == 'IRP_MJ_POWER':
-            IRP_MJ_POWER_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_POWER_.build(child_)
+            IRP_MJ_POWER_ = child_.text
+            IRP_MJ_POWER_ = self.gds_validate_string(IRP_MJ_POWER_, node, 'IRP_MJ_POWER')
             self.IRP_MJ_POWER = IRP_MJ_POWER_
         elif nodeName_ == 'IRP_MJ_READ':
-            IRP_MJ_READ_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_READ_.build(child_)
+            IRP_MJ_READ_ = child_.text
+            IRP_MJ_READ_ = self.gds_validate_string(IRP_MJ_READ_, node, 'IRP_MJ_READ')
             self.IRP_MJ_READ = IRP_MJ_READ_
         elif nodeName_ == 'IRP_MJ_QUERY_EA':
-            IRP_MJ_QUERY_EA_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_QUERY_EA_.build(child_)
+            IRP_MJ_QUERY_EA_ = child_.text
+            IRP_MJ_QUERY_EA_ = self.gds_validate_string(IRP_MJ_QUERY_EA_, node, 'IRP_MJ_QUERY_EA')
             self.IRP_MJ_QUERY_EA = IRP_MJ_QUERY_EA_
         elif nodeName_ == 'IRP_MJ_QUERY_INFORMATION':
-            IRP_MJ_QUERY_INFORMATION_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_QUERY_INFORMATION_.build(child_)
+            IRP_MJ_QUERY_INFORMATION_ = child_.text
+            IRP_MJ_QUERY_INFORMATION_ = self.gds_validate_string(IRP_MJ_QUERY_INFORMATION_, node, 'IRP_MJ_QUERY_INFORMATION')
             self.IRP_MJ_QUERY_INFORMATION = IRP_MJ_QUERY_INFORMATION_
         elif nodeName_ == 'IRP_MJ_QUERY_SECURITY':
-            IRP_MJ_QUERY_SECURITY_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_QUERY_SECURITY_.build(child_)
+            IRP_MJ_QUERY_SECURITY_ = child_.text
+            IRP_MJ_QUERY_SECURITY_ = self.gds_validate_string(IRP_MJ_QUERY_SECURITY_, node, 'IRP_MJ_QUERY_SECURITY')
             self.IRP_MJ_QUERY_SECURITY = IRP_MJ_QUERY_SECURITY_
         elif nodeName_ == 'IRP_MJ_QUERY_QUOTA':
-            IRP_MJ_QUERY_QUOTA_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_QUERY_QUOTA_.build(child_)
+            IRP_MJ_QUERY_QUOTA_ = child_.text
+            IRP_MJ_QUERY_QUOTA_ = self.gds_validate_string(IRP_MJ_QUERY_QUOTA_, node, 'IRP_MJ_QUERY_QUOTA')
             self.IRP_MJ_QUERY_QUOTA = IRP_MJ_QUERY_QUOTA_
         elif nodeName_ == 'IRP_MJ_QUERY_VOLUME_INFORMATION':
-            IRP_MJ_QUERY_VOLUME_INFORMATION_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_QUERY_VOLUME_INFORMATION_.build(child_)
+            IRP_MJ_QUERY_VOLUME_INFORMATION_ = child_.text
+            IRP_MJ_QUERY_VOLUME_INFORMATION_ = self.gds_validate_string(IRP_MJ_QUERY_VOLUME_INFORMATION_, node, 'IRP_MJ_QUERY_VOLUME_INFORMATION')
             self.IRP_MJ_QUERY_VOLUME_INFORMATION = IRP_MJ_QUERY_VOLUME_INFORMATION_
         elif nodeName_ == 'IRP_MJ_SET_EA':
-            IRP_MJ_SET_EA_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_SET_EA_.build(child_)
+            IRP_MJ_SET_EA_ = child_.text
+            IRP_MJ_SET_EA_ = self.gds_validate_string(IRP_MJ_SET_EA_, node, 'IRP_MJ_SET_EA')
             self.IRP_MJ_SET_EA = IRP_MJ_SET_EA_
         elif nodeName_ == 'IRP_MJ_SET_INFORMATION':
-            IRP_MJ_SET_INFORMATION_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_SET_INFORMATION_.build(child_)
+            IRP_MJ_SET_INFORMATION_ = child_.text
+            IRP_MJ_SET_INFORMATION_ = self.gds_validate_string(IRP_MJ_SET_INFORMATION_, node, 'IRP_MJ_SET_INFORMATION')
             self.IRP_MJ_SET_INFORMATION = IRP_MJ_SET_INFORMATION_
         elif nodeName_ == 'IRP_MJ_SET_SECURITY':
-            IRP_MJ_SET_SECURITY_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_SET_SECURITY_.build(child_)
+            IRP_MJ_SET_SECURITY_ = child_.text
+            IRP_MJ_SET_SECURITY_ = self.gds_validate_string(IRP_MJ_SET_SECURITY_, node, 'IRP_MJ_SET_SECURITY')
             self.IRP_MJ_SET_SECURITY = IRP_MJ_SET_SECURITY_
         elif nodeName_ == 'IRP_MJ_SET_QUOTA':
-            IRP_MJ_SET_QUOTA_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_SET_QUOTA_.build(child_)
+            IRP_MJ_SET_QUOTA_ = child_.text
+            IRP_MJ_SET_QUOTA_ = self.gds_validate_string(IRP_MJ_SET_QUOTA_, node, 'IRP_MJ_SET_QUOTA')
             self.IRP_MJ_SET_QUOTA = IRP_MJ_SET_QUOTA_
         elif nodeName_ == 'IRP_MJ_SET_VOLUME_INFORMATION':
-            IRP_MJ_SET_VOLUME_INFORMATION_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_SET_VOLUME_INFORMATION_.build(child_)
+            IRP_MJ_SET_VOLUME_INFORMATION_ = child_.text
+            IRP_MJ_SET_VOLUME_INFORMATION_ = self.gds_validate_string(IRP_MJ_SET_VOLUME_INFORMATION_, node, 'IRP_MJ_SET_VOLUME_INFORMATION')
             self.IRP_MJ_SET_VOLUME_INFORMATION = IRP_MJ_SET_VOLUME_INFORMATION_
         elif nodeName_ == 'IRP_MJ_SHUTDOWN':
-            IRP_MJ_SHUTDOWN_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_SHUTDOWN_.build(child_)
+            IRP_MJ_SHUTDOWN_ = child_.text
+            IRP_MJ_SHUTDOWN_ = self.gds_validate_string(IRP_MJ_SHUTDOWN_, node, 'IRP_MJ_SHUTDOWN')
             self.IRP_MJ_SHUTDOWN = IRP_MJ_SHUTDOWN_
         elif nodeName_ == 'IRP_MJ_SYSTEM_CONTROL':
-            IRP_MJ_SYSTEM_CONTROL_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_SYSTEM_CONTROL_.build(child_)
+            IRP_MJ_SYSTEM_CONTROL_ = child_.text
+            IRP_MJ_SYSTEM_CONTROL_ = self.gds_validate_string(IRP_MJ_SYSTEM_CONTROL_, node, 'IRP_MJ_SYSTEM_CONTROL')
             self.IRP_MJ_SYSTEM_CONTROL = IRP_MJ_SYSTEM_CONTROL_
         elif nodeName_ == 'IRP_MJ_WRITE':
-            IRP_MJ_WRITE_ = common.UnsignedLongObjectAttributeType.factory()
-            IRP_MJ_WRITE_.build(child_)
+            IRP_MJ_WRITE_ = child_.text
+            IRP_MJ_WRITE_ = self.gds_validate_string(IRP_MJ_WRITE_, node, 'IRP_MJ_WRITE')
             self.IRP_MJ_WRITE = IRP_MJ_WRITE_
         super(WindowsDriverObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class WindowsDriverObjectType
@@ -1043,48 +1043,48 @@ class DeviceObjectType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Attached_Device_Name':
-            Attached_Device_Name_ = common.StringObjectAttributeType.factory()
-            Attached_Device_Name_.build(child_)
+            Attached_Device_Name_ = child_.text
+            Attached_Device_Name_ = self.gds_validate_string(Attached_Device_Name_, node, 'Attached_Device_Name')
             self.Attached_Device_Name = Attached_Device_Name_
         elif nodeName_ == 'Attached_Device_Object':
-            Attached_Device_Object_ = common.StringObjectAttributeType.factory()
-            Attached_Device_Object_.build(child_)
+            Attached_Device_Object_ = child_.text
+            Attached_Device_Object_ = self.gds_validate_string(Attached_Device_Object_, node, 'Attached_Device_Object')
             self.Attached_Device_Object = Attached_Device_Object_
         elif nodeName_ == 'Attached_Driver_Name':
-            Attached_Driver_Name_ = common.StringObjectAttributeType.factory()
-            Attached_Driver_Name_.build(child_)
+            Attached_Driver_Name_ = child_.text
+            Attached_Driver_Name_ = self.gds_validate_string(Attached_Driver_Name_, node, 'Attached_Driver_Name')
             self.Attached_Driver_Name = Attached_Driver_Name_
         elif nodeName_ == 'Attached_Driver_Object':
-            Attached_Driver_Object_ = common.StringObjectAttributeType.factory()
-            Attached_Driver_Object_.build(child_)
+            Attached_Driver_Object_ = child_.text
+            Attached_Driver_Object_ = self.gds_validate_string(Attached_Driver_Object_, node, 'Attached_Driver_Object')
             self.Attached_Driver_Object = Attached_Driver_Object_
         elif nodeName_ == 'Attached_To_Device_Name':
-            Attached_To_Device_Name_ = common.StringObjectAttributeType.factory()
-            Attached_To_Device_Name_.build(child_)
+            Attached_To_Device_Name_ = child_.text
+            Attached_To_Device_Name_ = self.gds_validate_string(Attached_To_Device_Name_, node, 'Attached_To_Device_Name')
             self.Attached_To_Device_Name = Attached_To_Device_Name_
         elif nodeName_ == 'Attached_To_Device_Object':
-            Attached_To_Device_Object_ = common.StringObjectAttributeType.factory()
-            Attached_To_Device_Object_.build(child_)
+            Attached_To_Device_Object_ = child_.text
+            Attached_To_Device_Object_ = self.gds_validate_string(Attached_To_Device_Object_, node, 'Attached_To_Device_Object')
             self.Attached_To_Device_Object = Attached_To_Device_Object_
         elif nodeName_ == 'Attached_To_Driver_Object':
-            Attached_To_Driver_Object_ = common.StringObjectAttributeType.factory()
-            Attached_To_Driver_Object_.build(child_)
+            Attached_To_Driver_Object_ = child_.text
+            Attached_To_Driver_Object_ = self.gds_validate_string(Attached_To_Driver_Object_, node, 'Attached_To_Driver_Object')
             self.Attached_To_Driver_Object = Attached_To_Driver_Object_
         elif nodeName_ == 'Attached_To_Driver_Name':
-            Attached_To_Driver_Name_ = common.StringObjectAttributeType.factory()
-            Attached_To_Driver_Name_.build(child_)
+            Attached_To_Driver_Name_ = child_.text
+            Attached_To_Driver_Name_ = self.gds_validate_string(Attached_To_Driver_Name_, node, 'Attached_To_Driver_Name')
             self.Attached_To_Driver_Name = Attached_To_Driver_Name_
         elif nodeName_ == 'Device_Name':
-            Device_Name_ = common.StringObjectAttributeType.factory()
-            Device_Name_.build(child_)
+            Device_Name_ = child_.text
+            Device_Name_ = self.gds_validate_string(Device_Name_, node, 'Device_Name')
             self.Device_Name = Device_Name_
         elif nodeName_ == 'Device_Object':
-            Device_Object_ = common.StringObjectAttributeType.factory()
-            Device_Object_.build(child_)
+            Device_Object_ = child_.text
+            Device_Object_ = self.gds_validate_string(Device_Object_, node, 'Device_Object')
             self.Device_Object = Device_Object_
         elif nodeName_ == 'Driver_Name':
-            Driver_Name_ = common.StringObjectAttributeType.factory()
-            Driver_Name_.build(child_)
+            Driver_Name_ = child_.text
+            Driver_Name_ = self.gds_validate_string(Driver_Name_, node, 'Driver_Name')
             self.Driver_Name = Driver_Name_
 # end class DeviceObjectType
 

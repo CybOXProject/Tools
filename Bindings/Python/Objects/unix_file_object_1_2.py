@@ -451,16 +451,15 @@ class UnixFileObjectType(file_object.FileObjectType):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Group_Owner':
-            Group_Owner_ = common.StringObjectAttributeType
-            Group_Owner_.build(child_)
+            Group_Owner_ = child_.text
+            Group_Owner_ = self.gds_validate_string(Group_Owner_, node, 'Group_Owner')
             self.Group_Owner = Group_Owner_
         elif nodeName_ == 'INode':
-            INode_ = common.UnsignedLongObjectAttributeType.factory()
-            INode_.build(child_)
+            INode_ = child_.text
+            INode_ = self.gds_validate_string(INode_, node, 'INode')
             self.INode = INode_
         elif nodeName_ == 'Type':
-            obj_ = UnixFileType.factory()
-            obj_.build(child_)
+            obj_ = None
             self.set_Type(obj_)
             self.validate_UnixFileType(self.Type)    # validate type UnixFileType
         super(UnixFileObjectType, self).buildChildren(child_, node, nodeName_, True)

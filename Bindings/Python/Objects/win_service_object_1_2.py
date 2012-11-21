@@ -457,6 +457,7 @@ class WindowsServiceObjectType(win_process_object.WindowsProcessObjectType):
             already_processed.append('service_dll_signature_exists')
             outfile.write(' service_dll_signature_exists="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.service_dll_signature_exists)), input_name='service_dll_signature_exists'))
     def exportChildren(self, outfile, level, namespace_='WinServiceObj:', name_='WindowsServiceObjectType', fromsubclass_=False):
+        super(WindowsServiceObjectType, self).exportChildren(outfile, level, namespace_, name_, True)
         if self.Description_List is not None:
             self.Description_List.export(outfile, level, namespace_, name_='Description_List')
         if self.Display_Name is not None:
@@ -483,7 +484,6 @@ class WindowsServiceObjectType(win_process_object.WindowsProcessObjectType):
             self.Service_Type.export(outfile, level, namespace_, name_='Service_Type')
         if self.Started_As is not None:
             self.Started_As.export(outfile, level, namespace_, name_='Started_As')
-        super(WindowsServiceObjectType, self).exportChildren(outfile, level, namespace_, name_, True)
     def hasContent_(self):
         if (
             self.Description_List is not None or
@@ -498,7 +498,8 @@ class WindowsServiceObjectType(win_process_object.WindowsProcessObjectType):
             self.Startup_Type is not None or
             self.Service_Status is not None or
             self.Service_Type is not None or
-            self.Started_As is not None
+            self.Started_As is not None or
+            super(WindowsServiceObjectType, self).hasContent_()
             ):
             return True
         else:
@@ -603,49 +604,49 @@ class WindowsServiceObjectType(win_process_object.WindowsProcessObjectType):
             Display_Name_ = self.gds_validate_string(Display_Name_, node, 'Display_Name')
             self.Display_Name = Display_Name_
         elif nodeName_ == 'Service_Name':
-            Service_Name_ = common.StringObjectAttributeType.factory()
-            Service_Name_.build(child_)
-            self.set_Service_Name(Service_Name_)
+            Service_Name_ = child_.text
+            Service_Name_ = self.gds_validate_string(Service_Name_, node, 'Service_Name')
+            self.Service_Name = Service_Name_
         elif nodeName_ == 'Service_DLL':
-            Service_DLL_ = common.StringObjectAttributeType.factory()
-            Service_DLL_.build(child_)
-            self.set_Service_DLL(Service_DLL_)
+            Service_DLL_ = child_.text
+            Service_DLL_ = self.gds_validate_string(Service_DLL_, node, 'Service_DLL')
+            self.Service_DLL = Service_DLL_
         elif nodeName_ == 'Service_DLL_Certificate_Issuer':
-            Service_DLL_Certificate_Issuer_ = common.StringObjectAttributeType.factory()
-            Service_DLL_Certificate_Issuer_.build(child_)
-            self.set_Service_DLL_Certificate_Issuer(Service_DLL_Certificate_Issuer_)
+            Service_DLL_Certificate_Issuer_ = child_.text
+            Service_DLL_Certificate_Issuer_ = self.gds_validate_string(Service_DLL_Certificate_Issuer_, node, 'Service_DLL_Certificate_Issuer')
+            self.Service_DLL_Certificate_Issuer = Service_DLL_Certificate_Issuer_
         elif nodeName_ == 'Service_DLL_Certificate_Subject':
             Service_DLL_Certificate_Subject_ = child_.text
             Service_DLL_Certificate_Subject_ = self.gds_validate_string(Service_DLL_Certificate_Subject_, node, 'Service_DLL_Certificate_Subject')
             self.Service_DLL_Certificate_Subject = Service_DLL_Certificate_Subject_
         elif nodeName_ == 'Service_DLL_Hashes':
-            Service_DLL_Hashes_ = common.HashType.factory()
-            Service_DLL_Hashes_.build(child_)
-            self.set_Service_DLL_Hashes(Service_DLL_Hashes_)
+            Service_DLL_Hashes_ = child_.text
+            Service_DLL_Hashes_ = self.gds_validate_string(Service_DLL_Hashes_, node, 'Service_DLL_Hashes')
+            self.Service_DLL_Hashes = Service_DLL_Hashes_
         elif nodeName_ == 'Service_DLL_Signature_Description':
-            Service_DLL_Signature_Description_ = common.StringObjectAttributeType.factory()
-            Service_DLL_Signature_Description_.build(child_)
-            self.set_Service_DLL_Signature_Description(Service_DLL_Signature_Description_)
+            Service_DLL_Signature_Description_ = child_.text
+            Service_DLL_Signature_Description_ = self.gds_validate_string(Service_DLL_Signature_Description_, node, 'Service_DLL_Signature_Description')
+            self.Service_DLL_Signature_Description = Service_DLL_Signature_Description_
         elif nodeName_ == 'Startup_Command_Line':
-            Startup_Command_Line_ = common.StringObjectAttributeType.factory()
-            Startup_Command_Line_.build(child_)
-            self.set_Startup_Command_Line(Startup_Command_Line_)
+            Startup_Command_Line_ = child_.text
+            Startup_Command_Line_ = self.gds_validate_string(Startup_Command_Line_, node, 'Startup_Command_Line')
+            self.Startup_Command_Line = Startup_Command_Line_
         elif nodeName_ == 'Startup_Type':
-            obj_ = common.StringObjectAttributeType.factory()
-            obj_.build(child_)
-            self.set_Startup_Type(obj_) 
+            obj_ = None
+            self.set_Startup_Type(obj_)
+            self.validate_ServiceModeType(self.Startup_Type)    # validate type ServiceModeType
         elif nodeName_ == 'Service_Status':
-            Security_ = common.StringObjectAttributeType.factory()
-            Security_.build(child_)
-            self.set_Service_Status(Security_)
+            obj_ = None
+            self.set_Service_Status(obj_)
+            self.validate_ServiceStatusType(self.Service_Status)    # validate type ServiceStatusType
         elif nodeName_ == 'Service_Type':
             obj_ = None
             self.set_Service_Type(obj_)
             self.validate_ServiceType(self.Service_Type)    # validate type ServiceType
         elif nodeName_ == 'Started_As':
-            Started_As_ = common.StringObjectAttributeType.factory()
-            Started_As_.build(child_)
-            self.set_Started_As(Started_As_)
+            Started_As_ = child_.text
+            Started_As_ = self.gds_validate_string(Started_As_, node, 'Started_As')
+            self.Started_As = Started_As_
         super(WindowsServiceObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class WindowsServiceObjectType
 
@@ -719,8 +720,8 @@ class ServiceDescriptionListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            Description_ = common.StringObjectAttributeType.factory()
-            Description_.build(child_)
+            Description_ = child_.text
+            Description_ = self.gds_validate_string(Description_, node, 'Description')
             self.Description.append(Description_)
 # end class ServiceDescriptionListType
 

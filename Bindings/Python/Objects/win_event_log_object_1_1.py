@@ -591,80 +591,80 @@ class WindowsEventLogObjectType(common.DefinedObjectType):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'EID':
-            EID_ = common.LongObjectAttributeType.factory()
-            EID_.build(child_)
+            EID_ = child_.text
+            EID_ = self.gds_validate_string(EID_, node, 'EID')
             self.EID = EID_
         elif nodeName_ == 'Type':
-            Type_ = common.StringObjectAttributeType.factory()
-            Type_.build(child_)
+            Type_ = child_.text
+            Type_ = self.gds_validate_string(Type_, node, 'Type')
             self.Type = Type_
         elif nodeName_ == 'Log':
-            Log_ = common.StringObjectAttributeType.factory()
-            Log_.build(child_)
+            Log_ = child_.text
+            Log_ = self.gds_validate_string(Log_, node, 'Log')
             self.Log = Log_
         elif nodeName_ == 'Message':
-            Message_ = common.StringObjectAttributeType.factory()
-            Message_.build(child_)
+            Message_ = child_.text
+            Message_ = self.gds_validate_string(Message_, node, 'Message')
             self.Message = Message_
         elif nodeName_ == 'Category_Num':
-            Category_Num_ = common.LongObjectAttributeType.factory()
-            Category_Num_.build(child_)
+            Category_Num_ = child_.text
+            Category_Num_ = self.gds_validate_string(Category_Num_, node, 'Category_Num')
             self.Category_Num = Category_Num_
         elif nodeName_ == 'Category':
-            Category_ = common.StringObjectAttributeType.factory()
-            Category_.build(child_)
+            Category_ = child_.text
+            Category_ = self.gds_validate_string(Category_, node, 'Category')
             self.Category = Category_
         elif nodeName_ == 'Generation_Time':
-            Generation_Time_ = common.DateTimeObjectAttributeType.factory()
-            Generation_Time_.build(child_)
+            Generation_Time_ = child_.text
+            Generation_Time_ = self.gds_validate_string(Generation_Time_, node, 'Generation_Time')
             self.Generation_Time = Generation_Time_
         elif nodeName_ == 'Source':
-            Source_ = common.StringObjectAttributeType.factory()
-            Source_.build(child_)
+            Source_ = child_.text
+            Source_ = self.gds_validate_string(Source_, node, 'Source')
             self.Source = Source_
         elif nodeName_ == 'Machine':
-            Machine_ = common.StringObjectAttributeType.factory()
-            Machine_.build(child_)
+            Machine_ = child_.text
+            Machine_ = self.gds_validate_string(Machine_, node, 'Machine')
             self.Machine = Machine_
         elif nodeName_ == 'User':
-            User_ = common.StringObjectAttributeType.factory()
-            User_.build(child_)
+            User_ = child_.text
+            User_ = self.gds_validate_string(User_, node, 'User')
             self.User = User_
         elif nodeName_ == 'Blob':
-            Blob_ = common.Base64BinaryObjectAttributeType.factory()
-            Blob_.build(child_)
+            Blob_ = child_.text
+            Blob_ = self.gds_validate_string(Blob_, node, 'Blob')
             self.Blob = Blob_
         elif nodeName_ == 'Correlation_Activity_ID':
-            Correlation_Activity_ID_ = common.StringObjectAttributeType.factory()
-            Correlation_Activity_ID_.build(child_)
+            Correlation_Activity_ID_ = child_.text
+            Correlation_Activity_ID_ = self.gds_validate_string(Correlation_Activity_ID_, node, 'Correlation_Activity_ID')
             self.Correlation_Activity_ID = Correlation_Activity_ID_
         elif nodeName_ == 'Correlation_Related_Activity_ID':
-            Correlation_Related_Activity_ID_ = common.StringObjectAttributeType.factory()
-            Correlation_Related_Activity_ID_.build(child_)
+            Correlation_Related_Activity_ID_ = child_.text
+            Correlation_Related_Activity_ID_ = self.gds_validate_string(Correlation_Related_Activity_ID_, node, 'Correlation_Related_Activity_ID')
             self.Correlation_Related_Activity_ID = Correlation_Related_Activity_ID_
         elif nodeName_ == 'Execution_Process_ID':
-            Execution_Process_ID_ = common.StringObjectAttributeType.factory()
-            Execution_Process_ID_.build(child_)
+            Execution_Process_ID_ = child_.text
+            Execution_Process_ID_ = self.gds_validate_string(Execution_Process_ID_, node, 'Execution_Process_ID')
             self.Execution_Process_ID = Execution_Process_ID_
         elif nodeName_ == 'Execution_Thread_ID':
-            Execution_Thread_ID_ = common.StringObjectAttributeType.factory()
-            Execution_Thread_ID_.build(child_)
+            Execution_Thread_ID_ = child_.text
+            Execution_Thread_ID_ = self.gds_validate_string(Execution_Thread_ID_, node, 'Execution_Thread_ID')
             self.Execution_Thread_ID = Execution_Thread_ID_
         elif nodeName_ == 'Index':
-            Index_ = common.LongObjectAttributeType.factory()
-            Index_.build(child_)
+            Index_ = child_.text
+            Index_ = self.gds_validate_string(Index_, node, 'Index')
             self.Index = Index_
         elif nodeName_ == 'Reserved':
-            Reserved_ = common.LongObjectAttributeType.factory()
-            Reserved_.build(child_)
+            Reserved_ = child_.text
+            Reserved_ = self.gds_validate_string(Reserved_, node, 'Reserved')
             self.Reserved = Reserved_
         elif nodeName_ == 'Unformatted_Message_List':
             obj_ = UnformattedMessageListType.factory()
             obj_.build(child_)
             self.set_Unformatted_Message_List(obj_)
         elif nodeName_ == 'Write_Time':
-            Write_Time_ = common.DateTimeObjectAttributeType.factory()
-            Write_Time_.build(child_)
+            Write_Time_ = child_.text
+            Write_Time_ = self.gds_validate_string(Write_Time_, node, 'Write_Time')
             self.Write_Time = Write_Time_
         super(WindowsEventLogObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class WindowsEventLogObjectType
@@ -740,8 +740,8 @@ class UnformattedMessageListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Unformatted_Message':
-            Unformatted_Message_ = common.StringObjectAttributeType.factory()
-            Unformatted_Message_.build(child_)
+            Unformatted_Message_ = child_.text
+            Unformatted_Message_ = self.gds_validate_string(Unformatted_Message_, node, 'Unformatted_Message')
             self.Unformatted_Message.append(Unformatted_Message_)
 # end class UnformattedMessageListType
 

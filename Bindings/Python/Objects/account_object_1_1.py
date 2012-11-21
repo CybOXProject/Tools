@@ -473,12 +473,12 @@ class AccountObjectType(common.DefinedObjectType):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            Description_ = common.StringObjectAttributeType.factory()
-            Description_.build(child_)
+            Description_ = child_.text
+            Description_ = self.gds_validate_string(Description_, node, 'Description')
             self.Description = Description_
         elif nodeName_ == 'Domain':
-            Domain_ = common.StringObjectAttributeType.factory()
-            Domain_.build(child_)
+            Domain_ = child_.text
+            Domain_ = self.gds_validate_string(Domain_, node, 'Domain')
             self.Domain = Domain_
         super(AccountObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class AccountObjectType

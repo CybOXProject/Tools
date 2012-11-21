@@ -10,6 +10,7 @@ import getopt
 import re as re_
 import system_object_1_2 as system_object
 import common_types_1_0 as common
+import win_handle_object_1_2 as win_handle_object
 
 etree_ = None
 Verbose_import_ = False
@@ -433,6 +434,7 @@ class WindowsSystemObjectType(system_object.SystemObjectType):
     def exportAttributes(self, outfile, level, already_processed, namespace_='WinSystemObj:', name_='WindowsSystemObjectType'):
         super(WindowsSystemObjectType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='WindowsSystemObjectType')
     def exportChildren(self, outfile, level, namespace_='WinSystemObj:', name_='WindowsSystemObjectType', fromsubclass_=False):
+        super(WindowsSystemObjectType, self).exportChildren(outfile, level, namespace_, name_, True)
         for Domain_ in self.Domain:
             Domain_.export(outfile, level, namespace_, name_='Domain')
         if self.Global_Flag_List is not None:
@@ -455,7 +457,6 @@ class WindowsSystemObjectType(system_object.SystemObjectType):
             self.Windows_System_Directory.export(outfile, level, namespace_, name_='Windows_System_Directory')
         if self.Windows_Temp_Directory is not None:
             self.Windows_Temp_Directory.export(outfile, level, namespace_, name_='Windows_Temp_Directory')
-        super(WindowsSystemObjectType, self).exportChildren(outfile, level, namespace_, name_, True)
     def hasContent_(self):
         if (
             self.Domain or
@@ -468,7 +469,8 @@ class WindowsSystemObjectType(system_object.SystemObjectType):
             self.Registered_Owner is not None or
             self.Windows_Directory is not None or
             self.Windows_System_Directory is not None or
-            self.Windows_Temp_Directory is not None
+            self.Windows_Temp_Directory is not None or
+            super(WindowsSystemObjectType, self).hasContent_()
             ):
             return True
         else:
@@ -529,52 +531,52 @@ class WindowsSystemObjectType(system_object.SystemObjectType):
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
     def buildAttributes(self, node, attrs, already_processed):
-        super(FileObjectType, self).buildAttributes(node, attrs, already_processed)
+        pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Domain':
-            Domain_ = common.StringObjectAttributeType.factory()
-            Domain_.build(child_)
-            self.set_Domain(Domain_)
+            Domain_ = child_.text
+            Domain_ = self.gds_validate_string(Domain_, node, 'Domain')
+            self.Domain.append(Domain_)
         elif nodeName_ == 'Global_Flag_List':
             obj_ = GlobalFlagListType.factory()
             obj_.build(child_)
             self.set_Global_Flag_List(obj_)
         elif nodeName_ == 'NetBIOS_Name':
-            NetBIOS_Name_ = common.StringObjectAttributeType.factory()
-            NetBIOS_Name_.build(child_)
-            self.set_NetBIOS_Name(NetBIOS_Name_)
+            NetBIOS_Name_ = child_.text
+            NetBIOS_Name_ = self.gds_validate_string(NetBIOS_Name_, node, 'NetBIOS_Name')
+            self.NetBIOS_Name = NetBIOS_Name_
         elif nodeName_ == 'Open_Handle_List':
-            Open_Handle_List_ = common.StringObjectAttributeType.factory()
-            Open_Handle_List_.build(child_)
-            self.set_Open_Handle_List(Open_Handle_List_)
+            Open_Handle_List_ = child_.text
+            Open_Handle_List_ = self.gds_validate_string(Open_Handle_List_, node, 'Open_Handle_List')
+            self.Open_Handle_List = Open_Handle_List_
         elif nodeName_ == 'Product_ID':
-            Product_ID_ = common.StringObjectAttributeType.factory()
-            Product_ID_.build(child_)
-            self.set_Product_ID(Product_ID_)
+            Product_ID_ = child_.text
+            Product_ID_ = self.gds_validate_string(Product_ID_, node, 'Product_ID')
+            self.Product_ID = Product_ID_
         elif nodeName_ == 'Product_Name':
-            Product_Name_ = common.StringObjectAttributeType.factory()
-            Product_Name_.build(child_)
-            self.set_Product_Name(Product_Name_)
+            Product_Name_ = child_.text
+            Product_Name_ = self.gds_validate_string(Product_Name_, node, 'Product_Name')
+            self.Product_Name = Product_Name_
         elif nodeName_ == 'Registered_Organization':
-            Registered_Organization_ = common.StringObjectAttributeType.factory()
-            Registered_Organization_.build(child_)
-            self.set_Registered_Organization(Registered_Organization_)
+            Registered_Organization_ = child_.text
+            Registered_Organization_ = self.gds_validate_string(Registered_Organization_, node, 'Registered_Organization')
+            self.Registered_Organization = Registered_Organization_
         elif nodeName_ == 'Registered_Owner':
-            Registered_Owner_ = common.StringObjectAttributeType.factory()
-            Registered_Owner_.build(child_)
-            self.set_Registered_Owner(Registered_Owner_)
+            Registered_Owner_ = child_.text
+            Registered_Owner_ = self.gds_validate_string(Registered_Owner_, node, 'Registered_Owner')
+            self.Registered_Owner = Registered_Owner_
         elif nodeName_ == 'Windows_Directory':
-            Windows_Directory_ = common.StringObjectAttributeType.factory()
-            Windows_Directory_.build(child_)
-            self.set_Windows_Directory(Windows_Directory_)
+            Windows_Directory_ = child_.text
+            Windows_Directory_ = self.gds_validate_string(Windows_Directory_, node, 'Windows_Directory')
+            self.Windows_Directory = Windows_Directory_
         elif nodeName_ == 'Windows_System_Directory':
-            Windows_System_Directory_ = common.StringObjectAttributeType.factory()
-            Windows_System_Directory_.build(child_)
-            self.set_Windows_System_Directory(Windows_System_Directory_)
+            Windows_System_Directory_ = child_.text
+            Windows_System_Directory_ = self.gds_validate_string(Windows_System_Directory_, node, 'Windows_System_Directory')
+            self.Windows_System_Directory = Windows_System_Directory_
         elif nodeName_ == 'Windows_Temp_Directory':
-            Windows_Temp_Directory_ = common.StringObjectAttributeType.factory()
-            Windows_Temp_Directory_.build(child_)
-            self.set_Windows_Temp_Directory(Windows_Temp_Directory_)
+            Windows_Temp_Directory_ = child_.text
+            Windows_Temp_Directory_ = self.gds_validate_string(Windows_Temp_Directory_, node, 'Windows_Temp_Directory')
+            self.Windows_Temp_Directory = Windows_Temp_Directory_
         super(WindowsSystemObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class WindowsSystemObjectType
 

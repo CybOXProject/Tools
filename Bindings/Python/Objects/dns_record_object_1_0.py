@@ -9,7 +9,6 @@ import sys
 import getopt
 import re as re_
 import common_types_1_0 as common
-import uri_object_1_1 as uriobj
 
 etree_ = None
 Verbose_import_ = False
@@ -517,50 +516,48 @@ class DNSRecordObjectType(common.DefinedObjectType):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            Description_ = common.StringObjectAttributeType.factory()
-            Description_.build(child_)
+            Description_ = child_.text
+            Description_ = self.gds_validate_string(Description_, node, 'Description')
             self.Description = Description_
         elif nodeName_ == 'Domain_Name':
-            Domain_Name_ = uriobj.URIObjectType()
-            uri = common.AnyURIObjectAttributeType.factory()
-            uri.build(child_)
-            Domain_Name_.set_Value(uri)
+            Domain_Name_ = child_.text
+            Domain_Name_ = self.gds_validate_string(Domain_Name_, node, 'Domain_Name')
             self.Domain_Name = Domain_Name_
         elif nodeName_ == 'IP_Address':
-            IP_Address_ = common.StringObjectAttributeType.factory()
-            IP_Address_.build(child_)
+            IP_Address_ = child_.text
+            IP_Address_ = self.gds_validate_string(IP_Address_, node, 'IP_Address')
             self.IP_Address = IP_Address_
         elif nodeName_ == 'Address_Class':
-            Address_Class_ = common.StringObjectAttributeType.factory()
-            Address_Class_.build(child_)
+            Address_Class_ = child_.text
+            Address_Class_ = self.gds_validate_string(Address_Class_, node, 'Address_Class')
             self.Address_Class = Address_Class_
         elif nodeName_ == 'Entry_Type':
-            Entry_Type_ = common.StringObjectAttributeType.factory()
-            Entry_Type_.build(child_)
+            Entry_Type_ = child_.text
+            Entry_Type_ = self.gds_validate_string(Entry_Type_, node, 'Entry_Type')
             self.Entry_Type = Entry_Type_
         elif nodeName_ == 'Record_Name':
-            Record_Name_ = common.StringObjectAttributeType.factory()
-            Record_Name_.build(child_)
+            Record_Name_ = child_.text
+            Record_Name_ = self.gds_validate_string(Record_Name_, node, 'Record_Name')
             self.Record_Name = Record_Name_
         elif nodeName_ == 'Record_Type':
-            Record_Type_ = common.StringObjectAttributeType.factory()
-            Record_Type_.build(child_)
+            Record_Type_ = child_.text
+            Record_Type_ = self.gds_validate_string(Record_Type_, node, 'Record_Type')
             self.Record_Type = Record_Type_
         elif nodeName_ == 'TTL':
-            TTL_ = common.IntegerObjectAttributeType.factory()
-            TTL_.build(child_)
+            TTL_ = child_.text
+            TTL_ = self.gds_validate_string(TTL_, node, 'TTL')
             self.TTL = TTL_
         elif nodeName_ == 'Flags':
-            Flags_ = common.HexBinaryObjectAttributeType.factory()
-            Flags_.build(child_)
+            Flags_ = child_.text
+            Flags_ = self.gds_validate_string(Flags_, node, 'Flags')
             self.Flags = Flags_
         elif nodeName_ == 'Data_Length':
-            Data_Length_ = common.IntegerObjectAttributeType.factory()
-            Data_Length_.build(child_)
+            Data_Length_ = child_.text
+            Data_Length_ = self.gds_validate_string(Data_Length_, node, 'Data_Length')
             self.Data_Length = Data_Length_
         elif nodeName_ == 'Record_Data':
-            Record_Data_ = common.StringObjectAttributeType.factory()
-            Record_Data_.build(child_)
+            Record_Data_ = child_.text
+            Record_Data_ = self.gds_validate_string(Record_Data_, node, 'Record_Data')
             self.Record_Data = Record_Data_
         super(DNSRecordObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class DNSRecordObjectType

@@ -372,7 +372,7 @@ class WindowsRegistryKeyObjectType(common.DefinedObjectType):
     Windows registry objects, including Keys and Key/Value pairs."""
     subclass = None
     superclass = common.DefinedObjectType
-    def __init__(self, Key=None, Hive=None, Number_Values=None, Values=None, Modified_Time=None, Creator_Username=None, Handle_List=None, Number_Subkeys=None, Subkeys=None, Byte_Runs=None, object_reference=None):
+    def __init__(self, Key=None, Hive=None, Number_Values=None, Values=None, Modified_Time=None, Creator_Username=None, Handle_List=None, Number_Subkeys=None, Subkeys=None, Byte_Runs=None):
         super(WindowsRegistryKeyObjectType, self).__init__(None)
         self.Key = Key
         self.Hive = Hive
@@ -384,8 +384,6 @@ class WindowsRegistryKeyObjectType(common.DefinedObjectType):
         self.Number_Subkeys = Number_Subkeys
         self.Subkeys = Subkeys
         self.Byte_Runs = Byte_Runs
-        self.anyAttributes_= {}
-        self.object_reference = object_reference
     def factory(*args_, **kwargs_):
         if WindowsRegistryKeyObjectType.subclass:
             return WindowsRegistryKeyObjectType.subclass(*args_, **kwargs_)
@@ -519,41 +517,40 @@ class WindowsRegistryKeyObjectType(common.DefinedObjectType):
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
     def buildAttributes(self, node, attrs, already_processed):
-        super(WindowsRegistryKeyObjectType, self).buildAttributes(node, attrs, already_processed)
+        pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Key':
-            Key_ = common.StringObjectAttributeType.factory()
-            Key_.build(child_)
-            self.set_Key(Key_)
+            Key_ = child_.text
+            Key_ = self.gds_validate_string(Key_, node, 'Key')
+            self.Key = Key_
         elif nodeName_ == 'Hive':
-            obj_ = common.StringObjectAttributeType.factory()
-            obj_.build(child_)
+            obj_ = None
             self.set_Hive(obj_)
             self.validate_RegistryHiveType(self.Hive)    # validate type RegistryHiveType
         elif nodeName_ == 'Number_Values':
-            Number_Values_ = common.UnsignedIntegerObjectAttributeType.factory()
-            Number_Values_.build(child_)
-            self.set_Number_Values(Number_Values_)
+            Number_Values_ = child_.text
+            Number_Values_ = self.gds_validate_string(Number_Values_, node, 'Number_Values')
+            self.Number_Values = Number_Values_
         elif nodeName_ == 'Values':
             obj_ = RegistryValuesType.factory()
             obj_.build(child_)
             self.set_Values(obj_)
         elif nodeName_ == 'Modified_Time':
-            Modified_Time_ = common.DateTimeObjectAttributeType.factory()
-            Modified_Time_.build(child_)
-            self.set_Modified_Time(Modified_Time_)
+            Modified_Time_ = child_.text
+            Modified_Time_ = self.gds_validate_string(Modified_Time_, node, 'Modified_Time')
+            self.Modified_Time = Modified_Time_
         elif nodeName_ == 'Creator_Username':
-            Creator_Username_ = common.StringObjectAttributeType.factory()
-            Creator_Username_.build(child_)
-            self.set_Creator_Username(Creator_Username_)
+            Creator_Username_ = child_.text
+            Creator_Username_ = self.gds_validate_string(Creator_Username_, node, 'Creator_Username')
+            self.Creator_Username = Creator_Username_
         elif nodeName_ == 'Handle_List':
             Handle_List_ = child_.text
             Handle_List_ = self.gds_validate_string(Handle_List_, node, 'Handle_List')
             self.Handle_List = Handle_List_
         elif nodeName_ == 'Number_Subkeys':
-            Number_Subkeys_ = common.UnsignedIntegerObjectAttributeType.factory()
-            Number_Subkeys_.build(child_)
-            self.set_Number_Subkeys(Number_Subkeys_)
+            Number_Subkeys_ = child_.text
+            Number_Subkeys_ = self.gds_validate_string(Number_Subkeys_, node, 'Number_Subkeys')
+            self.Number_Subkeys = Number_Subkeys_
         elif nodeName_ == 'Subkeys':
             obj_ = RegistrySubkeysType.factory()
             obj_.build(child_)
@@ -658,16 +655,15 @@ class RegistryValueType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            Name_ = common.StringObjectAttributeType.factory()
-            Name_.build(child_)
-            self.set_Name(Name_)
+            Name_ = child_.text
+            Name_ = self.gds_validate_string(Name_, node, 'Name')
+            self.Name = Name_
         elif nodeName_ == 'Data':
-            Data_ = common.StringObjectAttributeType.factory()
-            Data_.build(child_)
-            self.set_Data(Data_)
+            Data_ = child_.text
+            Data_ = self.gds_validate_string(Data_, node, 'Data')
+            self.Data = Data_
         elif nodeName_ == 'Datatype':
-            obj_ = common.StringObjectAttributeType.factory()
-            obj_.build(child_)
+            obj_ = None
             self.set_Datatype(obj_)
             self.validate_RegistryDatatypeType(self.Datatype)    # validate type RegistryDatatypeType
         elif nodeName_ == 'Byte_Runs':

@@ -624,49 +624,48 @@ class NetworkRouteEntryObjectType(common.DefinedObjectType):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Destination_Address':
-            Destination_Address_ = address_object.AddressObjectType.factory()
-            Destination_Address_.build(child_)
+            Destination_Address_ = child_.text
+            Destination_Address_ = self.gds_validate_string(Destination_Address_, node, 'Destination_Address')
             self.Destination_Address = Destination_Address_
         elif nodeName_ == 'Origin':
-            Origin_ = address_object.AddressObjectType.factory()
-            Origin_.build(child_)
+            Origin_ = child_.text
+            Origin_ = self.gds_validate_string(Origin_, node, 'Origin')
             self.Origin = Origin_
         elif nodeName_ == 'Netmask':
-            Netmask_ = address_object.AddressObjectType.factory()
-            Netmask_.build(child_)
+            Netmask_ = child_.text
+            Netmask_ = self.gds_validate_string(Netmask_, node, 'Netmask')
             self.Netmask = Netmask_
         elif nodeName_ == 'Gateway_Address':
-            Gateway_Address_ = address_object.AddressObjectType.factory()
-            Gateway_Address_.build(child_)
+            Gateway_Address_ = child_.text
+            Gateway_Address_ = self.gds_validate_string(Gateway_Address_, node, 'Gateway_Address')
             self.Gateway_Address = Gateway_Address_
         elif nodeName_ == 'Metric':
-            Metric_ = common.UnsignedLongObjectAttributeType.factory()
-            Metric_.build(child_)
+            Metric_ = child_.text
+            Metric_ = self.gds_validate_string(Metric_, node, 'Metric')
             self.Metric = Metric_
         elif nodeName_ == 'Type':
-            obj_ = RouteType.factory()
-            obj_.build(child_)
+            obj_ = None
             self.set_Type(obj_)
             self.validate_RouteType(self.Type)    # validate type RouteType
         elif nodeName_ == 'Protocol':
-            Protocol_ = common.StringObjectAttributeType.factory()
-            Protocol_.build(child_)
+            Protocol_ = child_.text
+            Protocol_ = self.gds_validate_string(Protocol_, node, 'Protocol')
             self.Protocol = Protocol_
         elif nodeName_ == 'Interface':
-            Interface_ = common.StringObjectAttributeType.factory()
-            Interface_.build(child_)
+            Interface_ = child_.text
+            Interface_ = self.gds_validate_string(Interface_, node, 'Interface')
             self.Interface = Interface_
         elif nodeName_ == 'Preferred_Lifetime':
-            Preferred_Lifetime_ = common.DurationObjectAttributeType.factory()
-            Preferred_Lifetime_.build(child_)
+            Preferred_Lifetime_ = child_.text
+            Preferred_Lifetime_ = self.gds_validate_string(Preferred_Lifetime_, node, 'Preferred_Lifetime')
             self.Preferred_Lifetime = Preferred_Lifetime_
         elif nodeName_ == 'Valid_Lifetime':
-            Valid_Lifetime_ = common.DurationObjectAttributeType.factory()
-            Valid_Lifetime_.build(child_)
+            Valid_Lifetime_ = child_.text
+            Valid_Lifetime_ = self.gds_validate_string(Valid_Lifetime_, node, 'Valid_Lifetime')
             self.Valid_Lifetime = Valid_Lifetime_
         elif nodeName_ == 'Route_Age':
-            Route_Age_ = common.DurationObjectAttributeType.factory()
-            Route_Age_.build(child_)
+            Route_Age_ = child_.text
+            Route_Age_ = self.gds_validate_string(Route_Age_, node, 'Route_Age')
             self.Route_Age = Route_Age_
         super(NetworkRouteEntryObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class NetworkRouteEntryObjectType

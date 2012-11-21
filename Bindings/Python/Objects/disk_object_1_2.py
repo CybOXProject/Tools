@@ -470,24 +470,23 @@ class DiskObjectType(common.DefinedObjectType):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Disk_Name':
-            Disk_Name_ = common.StringObjectAttributeType.factory()
-            Disk_Name_.build(child_)
+            Disk_Name_ = child_.text
+            Disk_Name_ = self.gds_validate_string(Disk_Name_, node, 'Disk_Name')
             self.Disk_Name = Disk_Name_
         elif nodeName_ == 'Disk_Size':
-            Disk_Size_ = common.UnsignedLongObjectAttributeType.factory()
-            Disk_Size_.build(child_)
+            Disk_Size_ = child_.text
+            Disk_Size_ = self.gds_validate_string(Disk_Size_, node, 'Disk_Size')
             self.Disk_Size = Disk_Size_
         elif nodeName_ == 'Free_Space':
-            Free_Space_ = common.UnsignedLongObjectAttributeType.factory()
-            Free_Space_.build(child_)
+            Free_Space_ = child_.text
+            Free_Space_ = self.gds_validate_string(Free_Space_, node, 'Free_Space')
             self.Free_Space = Free_Space_
         elif nodeName_ == 'Partition_List':
             obj_ = PartitionListType.factory()
             obj_.build(child_)
             self.set_Partition_List(obj_)
         elif nodeName_ == 'Type':
-            obj_ = DiskType.factory()
-            obj_.build(child_)
+            obj_ = None
             self.set_Type(obj_)
             self.validate_DiskType(self.Type)    # validate type DiskType
         super(DiskObjectType, self).buildChildren(child_, node, nodeName_, True)

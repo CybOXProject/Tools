@@ -513,44 +513,43 @@ class DiskPartitionObjectType(common.DefinedObjectType):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Created':
-            Created_ = common.StringObjectAttributeType.factory()
-            Created_.build(child_)
+            Created_ = child_.text
+            Created_ = self.gds_validate_string(Created_, node, 'Created')
             self.Created = Created_
         elif nodeName_ == 'Device_Name':
-            Device_Name_ = common.StringObjectAttributeType.factory()
-            Device_Name_.build(child_)
+            Device_Name_ = child_.text
+            Device_Name_ = self.gds_validate_string(Device_Name_, node, 'Device_Name')
             self.Device_Name = Device_Name_
         elif nodeName_ == 'Mount_Point':
-            Mount_Point_ = common.StringObjectAttributeType.factory()
-            Mount_Point_.build(child_)
+            Mount_Point_ = child_.text
+            Mount_Point_ = self.gds_validate_string(Mount_Point_, node, 'Mount_Point')
             self.Mount_Point = Mount_Point_
         elif nodeName_ == 'Partition_ID':
-            Partition_ID_ = common.IntegerObjectAttributeType.factory()
-            Partition_ID_.build(child_)
+            Partition_ID_ = child_.text
+            Partition_ID_ = self.gds_validate_string(Partition_ID_, node, 'Partition_ID')
             self.Partition_ID = Partition_ID_
         elif nodeName_ == 'Partition_Length':
-            Partition_Length_ = common.UnsignedLongObjectAttributeType.factory()
-            Partition_Length_.build(child_)
+            Partition_Length_ = child_.text
+            Partition_Length_ = self.gds_validate_string(Partition_Length_, node, 'Partition_Length')
             self.Partition_Length = Partition_Length_
         elif nodeName_ == 'Partition_Offset':
-            Partition_Offset_ = common.UnsignedLongObjectAttributeType.factory()
-            Partition_Offset_.build(child_)
+            Partition_Offset_ = child_.text
+            Partition_Offset_ = self.gds_validate_string(Partition_Offset_, node, 'Partition_Offset')
             self.Partition_Offset = Partition_Offset_
         elif nodeName_ == 'Space_Left':
-            Space_Left_ = common.UnsignedLongObjectAttributeType.factory()
-            Space_Left_.build(child_)
+            Space_Left_ = child_.text
+            Space_Left_ = self.gds_validate_string(Space_Left_, node, 'Space_Left')
             self.Space_Left = Space_Left_
         elif nodeName_ == 'Space_Used':
-            Space_Used_ = common.UnsignedLongObjectAttributeType.factory()
-            Space_Used.build(child_)
+            Space_Used_ = child_.text
+            Space_Used_ = self.gds_validate_string(Space_Used_, node, 'Space_Used')
             self.Space_Used = Space_Used_
         elif nodeName_ == 'Total_Space':
-            Total_Space_ = common.UnsignedLongObjectAttributeType.factory()
-            Total_Space_.build(child_)
+            Total_Space_ = child_.text
+            Total_Space_ = self.gds_validate_string(Total_Space_, node, 'Total_Space')
             self.Total_Space = Total_Space_
         elif nodeName_ == 'Type':
-            obj_ = PartitionType.factory()
-            obj_.build(child_)
+            obj_ = None
             self.set_Type(obj_)
             self.validate_PartitionType(self.Type)    # validate type PartitionType
         super(DiskPartitionObjectType, self).buildChildren(child_, node, nodeName_, True)
