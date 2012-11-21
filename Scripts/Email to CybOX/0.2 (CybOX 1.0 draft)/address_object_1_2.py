@@ -2,13 +2,14 @@
 # -*- coding: utf-8 -*- 
 
 #
-# Generated Tue Apr 10 13:54:54 2012 by generateDS.py version 2.7b.
+# Generated Tue Nov 06 14:02:15 2012 by generateDS.py version 2.7c.
 #
 
 import sys
 import getopt
 import re as re_
-import common_types_1_0 as common
+
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -192,9 +193,10 @@ Namespace_extract_pat_ = re_.compile(r'{(.*)}(.*)')
 # Support/utility functions.
 #
 
-def showIndent(outfile, level):
-    for idx in range(level):
-        outfile.write('    ')
+def showIndent(outfile, level, pretty_print=True):
+    if pretty_print:
+        for idx in range(level):
+            outfile.write('    ')
 
 def quote_xml(inStr):
     if not inStr:
@@ -299,7 +301,7 @@ class MixedContainer:
         return self.value
     def getName(self):
         return self.name
-    def export(self, outfile, level, name, namespace):
+    def export(self, outfile, level, name, namespace, pretty_print=True):
         if self.category == MixedContainer.CategoryText:
             # Prevent exporting empty content as empty lines.
             if self.value.strip(): 
@@ -307,7 +309,7 @@ class MixedContainer:
         elif self.category == MixedContainer.CategorySimple:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
-            self.value.export(outfile, level, namespace,name)
+            self.value.export(outfile, level, namespace, name, pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
             outfile.write('<%s>%s</%s>' % (self.name, self.value, self.name))
@@ -366,85 +368,195 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class URIObjectType(common.DefinedObjectType):
-    """The URIObjectType type is intended to characterize Uniform Resource
-    Identifiers (URI's).The Type attribute specifies the type of URI
-    that is being defined."""
+class AddressObjectType(cybox_common_types_1_0.DefinedObjectType):
+    """The AddressObjectType is intended to characterize cyber addresses.
+    It is based on the IODEF address element.The category attribute
+    specifies the address category that is being defined. The
+    is_source attribute specifies if this is a "Source" addressThe
+    is_destination attribute specifies if this is a "Destination"
+    address"""
     subclass = None
-    superclass = common.DefinedObjectType
-    def __init__(self, type_=None, Value=None):
-        super(URIObjectType, self).__init__(None)
-        self.type_ = _cast(None, type_)
-        self.Value = Value
+    superclass = cybox_common_types_1_0.DefinedObjectType
+    def __init__(self, object_reference=None, category='ipv4-addr', is_source=None, is_destination=None, Address_Value=None, Ext_Category=None, VLAN_Name=None, VLAN_Num=None):
+        super(AddressObjectType, self).__init__(object_reference, )
+        self.category = _cast(None, category)
+        self.is_source = _cast(bool, is_source)
+        self.is_destination = _cast(bool, is_destination)
+        self.Address_Value = Address_Value
+        self.Ext_Category = Ext_Category
+        self.VLAN_Name = VLAN_Name
+        self.VLAN_Num = VLAN_Num
     def factory(*args_, **kwargs_):
-        if URIObjectType.subclass:
-            return URIObjectType.subclass(*args_, **kwargs_)
+        if AddressObjectType.subclass:
+            return AddressObjectType.subclass(*args_, **kwargs_)
         else:
-            return URIObjectType(*args_, **kwargs_)
+            return AddressObjectType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_Value(self): return self.Value
-    def set_Value(self, Value): self.Value = Value
-    def get_type(self): return self.type_
-    def set_type(self, type_): self.type_ = type_
-    def export(self, outfile, level, namespace_='URIObj:', name_='URIObjectType', namespacedef_=''):
-        showIndent(outfile, level)
+    def get_Address_Value(self): return self.Address_Value
+    def set_Address_Value(self, Address_Value): self.Address_Value = Address_Value
+    def validate_StringObjectAttributeType(self, value):
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
+        pass
+    def get_Ext_Category(self): return self.Ext_Category
+    def set_Ext_Category(self, Ext_Category): self.Ext_Category = Ext_Category
+    def get_VLAN_Name(self): return self.VLAN_Name
+    def set_VLAN_Name(self, VLAN_Name): self.VLAN_Name = VLAN_Name
+    def get_VLAN_Num(self): return self.VLAN_Num
+    def set_VLAN_Num(self, VLAN_Num): self.VLAN_Num = VLAN_Num
+    def validate_IntegerObjectAttributeType(self, value):
+        # Validate type cybox_common_types_1_0.IntegerObjectAttributeType, a restriction on None.
+        pass
+    def get_category(self): return self.category
+    def set_category(self, category): self.category = category
+    def get_is_source(self): return self.is_source
+    def set_is_source(self, is_source): self.is_source = is_source
+    def get_is_destination(self): return self.is_destination
+    def set_is_destination(self, is_destination): self.is_destination = is_destination
+    def export(self, outfile, level, namespace_='AddressObj:', name_='AddressObjectType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='URIObjectType')
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='AddressObjectType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
-    def exportAttributes(self, outfile, level, already_processed, namespace_='URIObj:', name_='URIObjectType'):
-        super(URIObjectType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='URIObjectType')
-        if self.type_ is not None and 'type_' not in already_processed:
-            already_processed.append('type_')
-            outfile.write(' type=%s' % (quote_attrib(self.type_), ))
-    def exportChildren(self, outfile, level, namespace_='URIObj:', name_='URIObjectType', fromsubclass_=False):
-        if self.Value is not None:
-            self.Value.export(outfile, level, 'URIObj:', name_='Value')
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='AddressObj:', name_='AddressObjectType'):
+        super(AddressObjectType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='AddressObjectType')
+        if self.category is not None and 'category' not in already_processed:
+            already_processed.append('category')
+            outfile.write(' category=%s' % (quote_attrib(self.category), ))
+        if self.is_source is not None and 'is_source' not in already_processed:
+            already_processed.append('is_source')
+            outfile.write(' is_source="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.is_source)), input_name='is_source'))
+        if self.is_destination is not None and 'is_destination' not in already_processed:
+            already_processed.append('is_destination')
+            outfile.write(' is_destination="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.is_destination)), input_name='is_destination'))
+    def exportChildren(self, outfile, level, namespace_='AddressObj:', name_='AddressObjectType', fromsubclass_=False, pretty_print=True):
+        super(AddressObjectType, self).exportChildren(outfile, level, 'AddressObj:', name_, True, pretty_print=pretty_print)
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        if self.Address_Value is not None:
+            self.Address_Value.export(outfile, level, 'AddressObj:', name_='Address_Value', pretty_print=pretty_print)
+        if self.Ext_Category is not None:
+            self.Ext_Category.export(outfile, level, 'AddressObj:', name_='Ext_Category', pretty_print=pretty_print)
+        if self.VLAN_Name is not None:
+            self.VLAN_Name.export(outfile, level, 'AddressObj:', name_='VLAN_Name', pretty_print=pretty_print)
+        if self.VLAN_Num is not None:
+            self.VLAN_Num.export(outfile, level, 'AddressObj:', name_='VLAN_Num', pretty_print=pretty_print)
     def hasContent_(self):
         if (
-            self.Value is not None
+            self.Address_Value is not None or
+            self.Ext_Category is not None or
+            self.VLAN_Name is not None or
+            self.VLAN_Num is not None or
+            super(AddressObjectType, self).hasContent_()
             ):
             return True
         else:
             return False
-    def exportLiteral(self, outfile, level, name_='URIObjectType'):
+    def exportLiteral(self, outfile, level, name_='AddressObjectType'):
         level += 1
         self.exportLiteralAttributes(outfile, level, [], name_)
         if self.hasContent_():
             self.exportLiteralChildren(outfile, level, name_)
     def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        if self.type_ is not None and 'type_' not in already_processed:
-            already_processed.append('type_')
+        if self.category is not None and 'category' not in already_processed:
+            already_processed.append('category')
             showIndent(outfile, level)
-            outfile.write('type_ = %s,\n' % (self.type_,))
+            outfile.write('category = %s,\n' % (self.category,))
+        if self.is_source is not None and 'is_source' not in already_processed:
+            already_processed.append('is_source')
+            showIndent(outfile, level)
+            outfile.write('is_source = %s,\n' % (self.is_source,))
+        if self.is_destination is not None and 'is_destination' not in already_processed:
+            already_processed.append('is_destination')
+            showIndent(outfile, level)
+            outfile.write('is_destination = %s,\n' % (self.is_destination,))
+        super(AddressObjectType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
     def exportLiteralChildren(self, outfile, level, name_):
-        if self.Value is not None:
+        super(AddressObjectType, self).exportLiteralChildren(outfile, level, name_)
+        if self.Address_Value is not None:
             showIndent(outfile, level)
-            outfile.write('Value=%s,\n' % quote_python(self.Value).encode(ExternalEncoding))
+            outfile.write('Address_Value=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Address_Value.exportLiteral(outfile, level, name_='Address_Value')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Ext_Category is not None:
+            showIndent(outfile, level)
+            outfile.write('Ext_Category=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Ext_Category.exportLiteral(outfile, level, name_='Ext_Category')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.VLAN_Name is not None:
+            showIndent(outfile, level)
+            outfile.write('VLAN_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.VLAN_Name.exportLiteral(outfile, level, name_='VLAN_Name')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.VLAN_Num is not None:
+            showIndent(outfile, level)
+            outfile.write('VLAN_Num=model_.cybox_common_types_1_0.IntegerObjectAttributeType(\n')
+            self.VLAN_Num.exportLiteral(outfile, level, name_='VLAN_Num')
+            showIndent(outfile, level)
+            outfile.write('),\n')
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
         for child in node:
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
     def buildAttributes(self, node, attrs, already_processed):
-        value = find_attr_value_('type', node)
-        if value is not None and 'type' not in already_processed:
-            already_processed.append('type')
-            self.type_ = value
+        value = find_attr_value_('category', node)
+        if value is not None and 'category' not in already_processed:
+            already_processed.append('category')
+            self.category = value
+        value = find_attr_value_('is_source', node)
+        if value is not None and 'is_source' not in already_processed:
+            already_processed.append('is_source')
+            if value in ('true', '1'):
+                self.is_source = True
+            elif value in ('false', '0'):
+                self.is_source = False
+            else:
+                raise_parse_error(node, 'Bad boolean attribute')
+        value = find_attr_value_('is_destination', node)
+        if value is not None and 'is_destination' not in already_processed:
+            already_processed.append('is_destination')
+            if value in ('true', '1'):
+                self.is_destination = True
+            elif value in ('false', '0'):
+                self.is_destination = False
+            else:
+                raise_parse_error(node, 'Bad boolean attribute')
+        super(AddressObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'Value':
-            Value_ = common.StringObjectAttributeType.factory()
-            Value_.build(child_)
-            self.Value = Value_
-        super(URIObjectType, self).buildChildren(child_, node, nodeName_, True)
-# end class URIObjectType
-
+        if nodeName_ == 'Address_Value':
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Address_Value(obj_)
+        elif nodeName_ == 'Ext_Category':
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Ext_Category(obj_)
+        elif nodeName_ == 'VLAN_Name':
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_VLAN_Name(obj_)
+        elif nodeName_ == 'VLAN_Num':
+            obj_ = cybox_common_types_1_0.IntegerObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_VLAN_Num(obj_)
+        super(AddressObjectType, self).buildChildren(child_, node, nodeName_, True)
+# end class AddressObjectType
 
 USAGE_TEXT = """
 Usage: python <Parser>.py [ -s ] <in_xml_file>
@@ -454,29 +566,27 @@ def usage():
     print USAGE_TEXT
     sys.exit(1)
 
-
 def get_root_tag(node):
     tag = Tag_pattern_.match(node.tag).groups()[-1]
     rootClass = globals().get(tag)
     return tag, rootClass
-
 
 def parse(inFileName):
     doc = parsexml_(inFileName)
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'URI'
-        rootClass = URIObjectType
+        rootTag = 'Address'
+        rootClass = AddressObjectType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
     sys.stdout.write('<?xml version="1.0" ?>\n')
-    rootObj.export(sys.stdout, 0, name_=rootTag, 
-        namespacedef_='')
+    rootObj.export(sys.stdout, 0, name_=rootTag,
+        namespacedef_='',
+        pretty_print=True)
     return rootObj
-
 
 def parseString(inString):
     from StringIO import StringIO
@@ -484,36 +594,34 @@ def parseString(inString):
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'URI'
-        rootClass = URIObjectType
+        rootTag = 'Address'
+        rootClass = AddressObjectType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
     sys.stdout.write('<?xml version="1.0" ?>\n')
-    rootObj.export(sys.stdout, 0, name_="URI",
+    rootObj.export(sys.stdout, 0, name_="Address",
         namespacedef_='')
     return rootObj
-
 
 def parseLiteral(inFileName):
     doc = parsexml_(inFileName)
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'URI'
-        rootClass = URIObjectType
+        rootTag = 'Address'
+        rootClass = AddressObjectType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
-    sys.stdout.write('#from URI_Object import *\n\n')
-    sys.stdout.write('import URI_Object as model_\n\n')
+    sys.stdout.write('#from temp import *\n\n')
+    sys.stdout.write('import temp as model_\n\n')
     sys.stdout.write('rootObj = model_.rootTag(\n')
     rootObj.exportLiteral(sys.stdout, 0, name_=rootTag)
     sys.stdout.write(')\n')
     return rootObj
-
 
 def main():
     args = sys.argv[1:]
@@ -522,12 +630,10 @@ def main():
     else:
         usage()
 
-
 if __name__ == '__main__':
     #import pdb; pdb.set_trace()
     main()
 
-
 __all__ = [
-    "URIObjectType"
+    "AddressObjectType"
     ]
