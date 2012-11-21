@@ -368,8 +368,8 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class cybox_common_types_1_0.LibraryType(GeneratedsSuper):
-    """The cybox_common_types_1_0.LibraryType identifies a single library incorporated into the
+class LibraryType(GeneratedsSuper):
+    """The LibraryType identifies a single library incorporated into the
     build of the tool.This field identifies the name of the
     library.This field identifies the version of the library."""
     subclass = None
@@ -379,10 +379,10 @@ class cybox_common_types_1_0.LibraryType(GeneratedsSuper):
         self.name = _cast(None, name)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
-        if cybox_common_types_1_0.LibraryType.subclass:
-            return cybox_common_types_1_0.LibraryType.subclass(*args_, **kwargs_)
+        if LibraryType.subclass:
+            return LibraryType.subclass(*args_, **kwargs_)
         else:
-            return cybox_common_types_1_0.LibraryType(*args_, **kwargs_)
+            return LibraryType(*args_, **kwargs_)
     factory = staticmethod(factory)
     def get_version(self): return self.version
     def set_version(self, version): self.version = version
@@ -396,21 +396,21 @@ class cybox_common_types_1_0.LibraryType(GeneratedsSuper):
         showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='cybox_common_types_1_0.LibraryType')
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='LibraryType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
             self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='LibraryObj:', name_='cybox_common_types_1_0.LibraryType'):
+    def exportAttributes(self, outfile, level, already_processed, namespace_='LibraryObj:', name_='LibraryType'):
         if self.version is not None and 'version' not in already_processed:
             already_processed.append('version')
             outfile.write(' version=%s' % (self.gds_format_string(quote_attrib(self.version).encode(ExternalEncoding), input_name='version'), ))
         if self.name is not None and 'name' not in already_processed:
             already_processed.append('name')
             outfile.write(' name=%s' % (self.gds_format_string(quote_attrib(self.name).encode(ExternalEncoding), input_name='name'), ))
-    def exportChildren(self, outfile, level, namespace_='LibraryObj:', name_='cybox_common_types_1_0.LibraryType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespace_='LibraryObj:', name_='LibraryType', fromsubclass_=False, pretty_print=True):
         pass
     def hasContent_(self):
         if (
@@ -419,7 +419,7 @@ class cybox_common_types_1_0.LibraryType(GeneratedsSuper):
             return True
         else:
             return False
-    def exportLiteral(self, outfile, level, name_='cybox_common_types_1_0.LibraryType'):
+    def exportLiteral(self, outfile, level, name_='LibraryType'):
         level += 1
         self.exportLiteralAttributes(outfile, level, [], name_)
         if self.hasContent_():
@@ -451,7 +451,7 @@ class cybox_common_types_1_0.LibraryType(GeneratedsSuper):
             self.name = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         pass
-# end class cybox_common_types_1_0.LibraryType
+# end class LibraryType
 
 class LibraryObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The LibraryObjectType type is intended to characterize software
@@ -611,7 +611,7 @@ class LibraryObjectType(cybox_common_types_1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Size(obj_)
         elif nodeName_ == 'Type':
-            obj_ = cybox_common_types_1_0.LibraryType.factory()
+            obj_ = LibraryType.factory()
             obj_.build(child_)
             self.set_Type(obj_)
         elif nodeName_ == 'Version':
