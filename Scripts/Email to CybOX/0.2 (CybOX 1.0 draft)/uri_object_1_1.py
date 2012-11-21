@@ -439,8 +439,8 @@ class URIObjectType(common.DefinedObjectType):
             self.type_ = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Value':
-            Value_ = child_.text
-            Value_ = self.gds_validate_string(Value_, node, 'Value')
+            Value_ = common.StringObjectAttributeType.factory()
+            Value_.build(child_)
             self.Value = Value_
         super(URIObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class URIObjectType

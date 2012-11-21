@@ -6311,10 +6311,10 @@ class SimpleHashValueType(HexBinaryObjectAttributeType):
     hash value."""
     subclass = None
     superclass = HexBinaryObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        self.valueOf_ = valueOf_
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='hexBinary', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
         super(SimpleHashValueType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_)
-        pass
+        self.valueOf_ = valueOf_
+        
     def factory(*args_, **kwargs_):
         if SimpleHashValueType.subclass:
             return SimpleHashValueType.subclass(*args_, **kwargs_)
@@ -6329,7 +6329,8 @@ class SimpleHashValueType(HexBinaryObjectAttributeType):
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='SimpleHashValueType')
         if self.hasContent_():
-            outfile.write('>\n')
+            outfile.write('>')
+            outfile.write(str(self.valueOf_).encode(ExternalEncoding))
             self.exportChildren(outfile, level + 1, namespace_, name_)
             outfile.write('</%s%s>\n' % (namespace_, name_))
         else:
@@ -6340,9 +6341,7 @@ class SimpleHashValueType(HexBinaryObjectAttributeType):
         super(SimpleHashValueType, self).exportChildren(outfile, level, namespace_, name_, True)
         pass
     def hasContent_(self):
-        if (
-            super(SimpleHashValueType, self).hasContent_()
-            ):
+        if ( self.valueOf_ or super(SimpleHashValueType, self).hasContent_() ):
             return True
         else:
             return False
@@ -6376,22 +6375,27 @@ class FuzzyHashValueType(StringObjectAttributeType):
     string based hash value."""
     subclass = None
     superclass = StringObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None):
-        super(FuzzyHashValueType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, )
-        pass
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
+        super(FuzzyHashValueType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_ )
+        self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
         if FuzzyHashValueType.subclass:
             return FuzzyHashValueType.subclass(*args_, **kwargs_)
         else:
             return FuzzyHashValueType(*args_, **kwargs_)
     factory = staticmethod(factory)
+    
+    def get_valueOf_(self):
+        return super(SimpleHashValueType, self).get_valueOf_()
+    
     def export(self, outfile, level, namespace_='Common:', name_='FuzzyHashValueType', namespacedef_=''):
         showIndent(outfile, level)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='FuzzyHashValueType')
         if self.hasContent_():
-            outfile.write('>\n')
+            outfile.write('>')
+            outfile.write(str(self.valueOf_).encode(ExternalEncoding))
             self.exportChildren(outfile, level + 1, namespace_, name_)
             outfile.write('</%s%s>\n' % (namespace_, name_))
         else:
@@ -6402,9 +6406,7 @@ class FuzzyHashValueType(StringObjectAttributeType):
         super(FuzzyHashValueType, self).exportChildren(outfile, level, namespace_, name_, True)
         pass
     def hasContent_(self):
-        if (
-            super(FuzzyHashValueType, self).hasContent_()
-            ):
+        if ( self.valueOf_ or super(FuzzyHashValueType, self).hasContent_() ):
             return True
         else:
             return False
@@ -6420,6 +6422,7 @@ class FuzzyHashValueType(StringObjectAttributeType):
         pass
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
+        self.valueOf_ = get_all_text_(node)
         for child in node:
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)

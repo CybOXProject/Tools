@@ -614,6 +614,7 @@ class FileObjectType(common.DefinedObjectType):
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
     def buildAttributes(self, node, attrs, already_processed):
+        super(FileObjectType, self).buildAttributes(node, attrs, already_processed)
         value = find_attr_value_('is_packed', node)
         if value is not None and 'is_packed' not in already_processed:
             already_processed.append('is_packed')
@@ -629,7 +630,7 @@ class FileObjectType(common.DefinedObjectType):
             File_Name_.build(child_)
             self.set_File_Name(File_Name_)
         elif nodeName_ == 'File_Path':
-            obj_ = common.StringObjectAttributeType.factory()
+            obj_ = FilePathType.factory()
             obj_.build(child_)
             self.set_File_Path(obj_)
         elif nodeName_ == 'Device_Path':
@@ -1263,15 +1264,17 @@ class PackerType(GeneratedsSuper):
 # end class PackerType
 
 
-class FilePathType(GeneratedsSuper):
+class FilePathType(common.StringObjectAttributeType):
     """The FilePathType type specifies the path to the file, not including
     the device. Whether the path is relative or fully-qualified can
     be specified via the 'type' attribute.The fully_qualified
     attribute specifies whether the path is fully qualified."""
     subclass = None
-    superclass = None
-    def __init__(self, fully_qualified=None):
+    superclass = common.StringObjectAttributeType
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None, extensiontype_=None, fully_qualified=None):
+        super(FilePathType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, extensiontype_)
         self.fully_qualified = _cast(bool, fully_qualified)
+        self.valueOf_ = valueOf_
         pass
     def factory(*args_, **kwargs_):
         if FilePathType.subclass:
@@ -1281,13 +1284,16 @@ class FilePathType(GeneratedsSuper):
     factory = staticmethod(factory)
     def get_fully_qualified(self): return self.fully_qualified
     def set_fully_qualified(self, fully_qualified): self.fully_qualified = fully_qualified
+    def get_valueOf_(self): return self.valueOf_
+    def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def export(self, outfile, level, namespace_='FileObj:', name_='FilePathType', namespacedef_=''):
         showIndent(outfile, level)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='FilePathType')
         if self.hasContent_():
-            outfile.write('>\n')
+            outfile.write('>')
+            outfile.write(str(self.valueOf_).encode(ExternalEncoding))
             self.exportChildren(outfile, level + 1, namespace_, name_)
             outfile.write('</%s%s>\n' % (namespace_, name_))
         else:
@@ -1300,7 +1306,8 @@ class FilePathType(GeneratedsSuper):
         pass
     def hasContent_(self):
         if (
-
+            self.valueOf_ or
+            super(FilePathType, self).hasContent_()
             ):
             return True
         else:
@@ -1319,6 +1326,7 @@ class FilePathType(GeneratedsSuper):
         pass
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
+        self.valueOf_ = get_all_text_(node)
         for child in node:
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
@@ -1332,9 +1340,9 @@ class FilePathType(GeneratedsSuper):
                 self.fully_qualified = False
             else:
                 raise_parse_error(node, 'Bad boolean attribute')
+        super(FilePathType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         super(FilePathType, self).buildChildren(child_, node, nodeName_, True)
-        pass
 # end class FilePathType
 
 
