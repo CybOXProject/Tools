@@ -372,9 +372,9 @@ class RawArtifactType(cybox_common_types_1_0.StringObjectAttributeType):
     """The RawArtifactType is intended to convey, with minimal
     characterization, the content of the Raw Artifact itself."""
     subclass = None
-    superclass = None
+    superclass = cybox_common_types_1_0.StringObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None):
-        pass
+        super(RawArtifactType, self).__init__(end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None)
     def factory(*args_, **kwargs_):
         if RawArtifactType.subclass:
             return RawArtifactType.subclass(*args_, **kwargs_)
