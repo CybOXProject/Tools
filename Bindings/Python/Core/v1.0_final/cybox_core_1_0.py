@@ -2821,6 +2821,8 @@ class ObjectType(GeneratedsSuper):
                     type_name_ = type_names_[0]
                 else:
                     type_name_ = type_names_[1]
+                if type_name_ == 'AVClassificationsType':
+                    exec("from maec_bundle_3_0 import AVClassificationsType") in globals()
                 class_ = globals()[type_name_]
                 obj_ = class_.factory()
                 obj_.build(child_)
