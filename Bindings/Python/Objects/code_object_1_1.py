@@ -470,7 +470,7 @@ class CodeObjectType(cybox_common_types_1_0.DefinedObjectType):
         self.Start_Address = Start_Address
         self.Code_Segment = Code_Segment
         if XOR_Pattern is None:
-            self.XOR_Pattern = globals()['cybox_common_types_1_0.HexBinaryObjectAttributeType']('55AA55AA55AA55BB')
+            self.XOR_Pattern = cybox_common_types_1_0.HexBinaryObjectAttributeType(datatype='hexBinary', valueOf_='55AA55AA55AA55BB')
         else:
             self.XOR_Pattern = XOR_Pattern
         self.Code_Segment_XOR = Code_Segment_XOR
