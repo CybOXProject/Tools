@@ -472,42 +472,57 @@ class Layer7ConnectionsType(GeneratedsSuper):
             self.DNS_Query.append(obj_)
 # end class Layer7ConnectionsType
 
-class NetworkConnectionType(GeneratedsSuper):
-    """The NetworkConnectionType type captures the critical information
-    about a TCP or UDP network connection."""
+class NetworkConnectionType(cybox_common_types_1_0.DefinedObjectType):
+    """The NetworkConnectionType is intended as a way of characterizing
+    local or remote (i.e. Internet) network connections.The tls_used
+    attribute specifies whether or not Transport Layer Security
+    (TLS) is used in the network connection."""
     subclass = None
-    superclass = None
-    def __init__(self, Creation_Time=None, Destination_IP_Address=None, Destination_Port=None, Source_IP_Address=None, Source_Port=None, TCP_State=None):
-        self.Creation_Time = Creation_Time
-        self.Destination_IP_Address = Destination_IP_Address
-        self.Destination_Port = Destination_Port
-        self.Source_IP_Address = Source_IP_Address
-        self.Source_Port = Source_Port
-        self.TCP_State = TCP_State
+    superclass = cybox_common_types_1_0.DefinedObjectType
+    def __init__(self, tls_used=None, Layer3_Protocol=None, Layer4_Protocol=None, Layer7_Protocol=None, Local_IP_Address=None, Local_Port=None, Remote_IP_Address=None, Remote_Port=None, Layer7_Connections=None):
+        super(NetworkConnectionType, self).__init__(object_reference, )
+        self.tls_used = _cast(bool, tls_used)
+        self.Layer3_Protocol = Layer3_Protocol
+        self.Layer4_Protocol = Layer4_Protocol
+        self.Layer7_Protocol = Layer7_Protocol
+        self.Local_IP_Address = Local_IP_Address
+        self.Local_Port = Local_Port
+        self.Remote_IP_Address = Remote_IP_Address
+        self.Remote_Port = Remote_Port
+        self.Layer7_Connections = Layer7_Connections
     def factory(*args_, **kwargs_):
         if NetworkConnectionType.subclass:
             return NetworkConnectionType.subclass(*args_, **kwargs_)
         else:
             return NetworkConnectionType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_Creation_Time(self): return self.Creation_Time
-    def set_Creation_Time(self, Creation_Time): self.Creation_Time = Creation_Time
-    def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
+    def get_Layer3_Protocol(self): return self.Layer3_Protocol
+    def set_Layer3_Protocol(self, Layer3_Protocol): self.Layer3_Protocol = Layer3_Protocol
+    def validate_Layer3ProtocolType(self, value):
+        # Validate type Layer3ProtocolType, a restriction on None.
         pass
-    def get_Destination_IP_Address(self): return self.Destination_IP_Address
-    def set_Destination_IP_Address(self, Destination_IP_Address): self.Destination_IP_Address = Destination_IP_Address
-    def get_Destination_Port(self): return self.Destination_Port
-    def set_Destination_Port(self, Destination_Port): self.Destination_Port = Destination_Port
-    def get_Source_IP_Address(self): return self.Source_IP_Address
-    def set_Source_IP_Address(self, Source_IP_Address): self.Source_IP_Address = Source_IP_Address
-    def get_Source_Port(self): return self.Source_Port
-    def set_Source_Port(self, Source_Port): self.Source_Port = Source_Port
-    def get_TCP_State(self): return self.TCP_State
-    def set_TCP_State(self, TCP_State): self.TCP_State = TCP_State
-    def validate_ConnectionStateType(self, value):
-        # Validate type ConnectionStateType, a restriction on None.
+    def get_Layer4_Protocol(self): return self.Layer4_Protocol
+    def set_Layer4_Protocol(self, Layer4_Protocol): self.Layer4_Protocol = Layer4_Protocol
+    def validate_Layer4ProtocolType(self, value):
+        # Validate type Layer4ProtocolType, a restriction on None.
         pass
+    def get_Layer7_Protocol(self): return self.Layer7_Protocol
+    def set_Layer7_Protocol(self, Layer7_Protocol): self.Layer7_Protocol = Layer7_Protocol
+    def validate_Layer7ProtocolType(self, value):
+        # Validate type Layer7ProtocolType, a restriction on None.
+        pass
+    def get_Local_IP_Address(self): return self.Local_IP_Address
+    def set_Local_IP_Address(self, Local_IP_Address): self.Local_IP_Address = Local_IP_Address
+    def get_Local_Port(self): return self.Local_Port
+    def set_Local_Port(self, Local_Port): self.Local_Port = Local_Port
+    def get_Remote_IP_Address(self): return self.Remote_IP_Address
+    def set_Remote_IP_Address(self, Remote_IP_Address): self.Remote_IP_Address = Remote_IP_Address
+    def get_Remote_Port(self): return self.Remote_Port
+    def set_Remote_Port(self, Remote_Port): self.Remote_Port = Remote_Port
+    def get_Layer7_Connections(self): return self.Layer7_Connections
+    def set_Layer7_Connections(self, Layer7_Connections): self.Layer7_Connections = Layer7_Connections
+    def get_tls_used(self): return self.tls_used
+    def set_tls_used(self, tls_used): self.tls_used = tls_used
     def export(self, outfile, level, namespace_='NetworkConnectionObj:', name_='NetworkConnectionType', namespacedef_='', pretty_print=True):
         if pretty_print:
             eol_ = '\n'
@@ -525,32 +540,42 @@ class NetworkConnectionType(GeneratedsSuper):
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='NetworkConnectionObj:', name_='NetworkConnectionType'):
-        pass
+        super(NetworkConnectionType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='NetworkConnectionType')
+        if self.tls_used is not None and 'tls_used' not in already_processed:
+            already_processed.append('tls_used')
+            outfile.write(' tls_used="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.tls_used)), input_name='tls_used'))
     def exportChildren(self, outfile, level, namespace_='NetworkConnectionObj:', name_='NetworkConnectionType', fromsubclass_=False, pretty_print=True):
+        super(NetworkConnectionType, self).exportChildren(outfile, level, 'NetworkConnectionObj:', name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
-        if self.Creation_Time is not None:
-            self.Creation_Time.export(outfile, level, 'NetworkConnectionObj:', name_='Creation_Time', pretty_print=pretty_print)
-        if self.Destination_IP_Address is not None:
-            self.Destination_IP_Address.export(outfile, level, 'NetworkConnectionObj:', name_='Destination_IP_Address', pretty_print=pretty_print)
-        if self.Destination_Port is not None:
-            self.Destination_Port.export(outfile, level, 'NetworkConnectionObj:', name_='Destination_Port', pretty_print=pretty_print)
-        if self.Source_IP_Address is not None:
-            self.Source_IP_Address.export(outfile, level, 'NetworkConnectionObj:', name_='Source_IP_Address', pretty_print=pretty_print)
-        if self.Source_Port is not None:
-            self.Source_Port.export(outfile, level, 'NetworkConnectionObj:', name_='Source_Port', pretty_print=pretty_print)
-        if self.TCP_State is not None:
-            self.TCP_State.export(outfile, level, 'NetworkConnectionObj:', name_='TCP_State', pretty_print=pretty_print)
+        if self.Layer3_Protocol is not None:
+            self.Layer3_Protocol.export(outfile, level, 'NetworkConnectionObj:', name_='Layer3_Protocol', pretty_print=pretty_print)
+        if self.Layer4_Protocol is not None:
+            self.Layer4_Protocol.export(outfile, level, 'NetworkConnectionObj:', name_='Layer4_Protocol', pretty_print=pretty_print)
+        if self.Layer7_Protocol is not None:
+            self.Layer7_Protocol.export(outfile, level, 'NetworkConnectionObj:', name_='Layer7_Protocol', pretty_print=pretty_print)
+        if self.Local_IP_Address is not None:
+            self.Local_IP_Address.export(outfile, level, 'NetworkConnectionObj:', name_='Local_IP_Address', pretty_print=pretty_print)
+        if self.Local_Port is not None:
+            self.Local_Port.export(outfile, level, 'NetworkConnectionObj:', name_='Local_Port', pretty_print=pretty_print)
+        if self.Remote_IP_Address is not None:
+            self.Remote_IP_Address.export(outfile, level, 'NetworkConnectionObj:', name_='Remote_IP_Address', pretty_print=pretty_print)
+        if self.Remote_Port is not None:
+            self.Remote_Port.export(outfile, level, 'NetworkConnectionObj:', name_='Remote_Port', pretty_print=pretty_print)
+        if self.Layer7_Connections is not None:
+            self.Layer7_Connections.export(outfile, level, namespace_, name_='Layer7_Connections', pretty_print=pretty_print)
     def hasContent_(self):
         if (
-            self.Creation_Time is not None or
-            self.Destination_IP_Address is not None or
-            self.Destination_Port is not None or
-            self.Source_IP_Address is not None or
-            self.Source_Port is not None or
-            self.TCP_State is not None
+            self.Layer3_Protocol is not None or
+            self.Layer4_Protocol is not None or
+            self.Layer7_Protocol is not None or
+            self.Local_IP_Address is not None or
+            self.Local_Port is not None or
+            self.Remote_IP_Address is not None or
+            self.Remote_Port is not None or
+            self.Layer7_Connections is not None
             ):
             return True
         else:
@@ -561,42 +586,45 @@ class NetworkConnectionType(GeneratedsSuper):
         if self.hasContent_():
             self.exportLiteralChildren(outfile, level, name_)
     def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        pass
+        if self.tls_used is not None and 'tls_used' not in already_processed:
+            already_processed.append('tls_used')
+            showIndent(outfile, level)
+            outfile.write('tls_used = %s,\n' % (self.tls_used,))
     def exportLiteralChildren(self, outfile, level, name_):
-        if self.Creation_Time is not None:
+        if self.Layer3_Protocol is not None:
             showIndent(outfile, level)
-            outfile.write('Creation_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
-            self.Creation_Time.exportLiteral(outfile, level, name_='Creation_Time')
-            showIndent(outfile, level)
-            outfile.write('),\n')
-        if self.Destination_IP_Address is not None:
-            showIndent(outfile, level)
-            outfile.write('Destination_IP_Address=model_.address_object_1_2.AddressObjectType(\n')
-            self.Destination_IP_Address.exportLiteral(outfile, level, name_='Destination_IP_Address')
+            outfile.write('Layer3_Protocol=model_.Layer3ProtocolType(\n')
+            self.Layer3_Protocol.exportLiteral(outfile, level, name_='Layer3_Protocol')
             showIndent(outfile, level)
             outfile.write('),\n')
-        if self.Destination_Port is not None:
+        if self.Layer4_Protocol is not None:
             showIndent(outfile, level)
-            outfile.write('Destination_Port=model_.port_object_1_3.PortObjectType(\n')
-            self.Destination_Port.exportLiteral(outfile, level, name_='Destination_Port')
-            showIndent(outfile, level)
-            outfile.write('),\n')
-        if self.Source_IP_Address is not None:
-            showIndent(outfile, level)
-            outfile.write('Source_IP_Address=model_.address_object_1_2.AddressObjectType(\n')
-            self.Source_IP_Address.exportLiteral(outfile, level, name_='Source_IP_Address')
+            outfile.write('Layer4_Protocol=model_.Layer4ProtocolType(\n')
+            self.Layer4_Protocol.exportLiteral(outfile, level, name_='Layer4_Protocol')
             showIndent(outfile, level)
             outfile.write('),\n')
-        if self.Source_Port is not None:
+        if self.Layer7_Protocol is not None:
             showIndent(outfile, level)
-            outfile.write('Source_Port=model_.port_object_1_3.PortObjectType(\n')
-            self.Source_Port.exportLiteral(outfile, level, name_='Source_Port')
+            outfile.write('Layer7_Protocol=model_.Layer7ProtocolType(\n')
+            self.Layer7_Protocol.exportLiteral(outfile, level, name_='Layer7_Protocol')
             showIndent(outfile, level)
             outfile.write('),\n')
-        if self.TCP_State is not None:
+        if self.Local_IP_Address is not None:
             showIndent(outfile, level)
-            outfile.write('TCP_State=model_.ConnectionStateType(\n')
-            self.TCP_State.exportLiteral(outfile, level, name_='TCP_State')
+            outfile.write('Local_IP_Address=%s,\n' % quote_python(self.Local_IP_Address).encode(ExternalEncoding))
+        if self.Local_Port is not None:
+            showIndent(outfile, level)
+            outfile.write('Local_Port=%s,\n' % quote_python(self.Local_Port).encode(ExternalEncoding))
+        if self.Remote_IP_Address is not None:
+            showIndent(outfile, level)
+            outfile.write('Remote_IP_Address=%s,\n' % quote_python(self.Remote_IP_Address).encode(ExternalEncoding))
+        if self.Remote_Port is not None:
+            showIndent(outfile, level)
+            outfile.write('Remote_Port=%s,\n' % quote_python(self.Remote_Port).encode(ExternalEncoding))
+        if self.Layer7_Connections is not None:
+            showIndent(outfile, level)
+            outfile.write('Layer7_Connections=model_.Layer7ConnectionsType(\n')
+            self.Layer7_Connections.exportLiteral(outfile, level, name_='Layer7_Connections')
             showIndent(outfile, level)
             outfile.write('),\n')
     def build(self, node):
@@ -605,32 +633,49 @@ class NetworkConnectionType(GeneratedsSuper):
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
     def buildAttributes(self, node, attrs, already_processed):
-        pass
+        value = find_attr_value_('tls_used', node)
+        if value is not None and 'tls_used' not in already_processed:
+            already_processed.append('tls_used')
+            if value in ('true', '1'):
+                self.tls_used = True
+            elif value in ('false', '0'):
+                self.tls_used = False
+            else:
+                raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'Creation_Time':
-            obj_ = None
-            self.set_Creation_Time(obj_)
-            self.validate_DateTimeObjectAttributeType(self.Creation_Time)    # validate type cybox_common_types_1_0.DateTimeObjectAttributeType
-        elif nodeName_ == 'Destination_IP_Address':
+        if nodeName_ == 'Layer3_Protocol':
+            obj_ = Layer3ProtocolType.factory()
+            obj_.build(child_)
+            self.set_Layer3_Protocol(obj_)
+        elif nodeName_ == 'Layer4_Protocol':
+            obj_ = Layer4ProtocolType.factory()
+            obj_.build(child_)
+            self.set_Layer4_Protocol(obj_)
+        elif nodeName_ == 'Layer7_Protocol':
+            obj_ = Layer7ProtocolType.factory()
+            obj_.build(child_)
+            self.set_Layer7_Protocol(obj_)
+        elif nodeName_ == 'Local_IP_Address':
             obj_ = address_object_1_2.AddressObjectType.factory()
             obj_.build(child_)
-            self.set_Destination_IP_Address(obj_)
-        elif nodeName_ == 'Destination_Port':
+            self.set_Local_IP_Address(obj_)
+        elif nodeName_ == 'Local_Port':
             obj_ = port_object_1_3.PortObjectType.factory()
             obj_.build(child_)
-            self.set_Destination_Port(obj_)
-        elif nodeName_ == 'Source_IP_Address':
+            self.set_Local_Port(obj_)
+        elif nodeName_ == 'Remote_IP_Address':
             obj_ = address_object_1_2.AddressObjectType.factory()
             obj_.build(child_)
-            self.set_Source_IP_Address(obj_)
-        elif nodeName_ == 'Source_Port':
+            self.set_Remote_IP_Address(obj_)
+        elif nodeName_ == 'Remote_Port':
             obj_ = port_object_1_3.PortObjectType.factory()
             obj_.build(child_)
-            self.set_Source_Port(obj_)
-        elif nodeName_ == 'TCP_State':
-            obj_ = None
-            self.set_TCP_State(obj_)
-            self.validate_ConnectionStateType(self.TCP_State)    # validate type ConnectionStateType
+            self.set_Remote_Port(obj_)
+        elif nodeName_ == 'Layer7_Connections':
+            obj_ = Layer7ConnectionsType.factory()
+            obj_.build(child_)
+            self.set_Layer7_Connections(obj_)
+        super(NetworkConnectionType, self).buildChildren(child_, node, nodeName_, True)
 # end class NetworkConnectionType
 
 class Layer4ProtocolType(cybox_common_types_1_0.BaseObjectAttributeType):

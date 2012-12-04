@@ -10,7 +10,82 @@ import getopt
 import re as re_
 
 import cybox_common_types_1_0
-from email_message_object_1_2 import EmailMessageObjectType
+
+#Objects path - set to point to the CybOX Objects Bindings folder
+objects_path = ''
+#Dictionary for storing Defined Objects and their main types
+defined_objects = {'account_object_1_2' : 'AccountObjectType',
+                   'AddressObjectType' : 'address_object_1_2',
+                   'APIObjectType' : 'api_object_1_1',
+                   'ArtifactType' : 'artifact_object_1_0',
+                   'CodeObjectType' : 'code_object_1_1',
+                   'DeviceObjectType' : 'device_object_1_1',
+                   'DiskObjectType' : 'disk_object_1_3',
+                   'DiskPartitionObjectType' : 'disk_partition_object_1_3',
+                   'DNSCacheEntryType' : 'dns_cache_object_1_3',
+                   'DNSQueryObjectType' : 'dns_query_object_1_0',
+                   'DNSRecordObjectType' : 'dns_record_object_1_1',
+                   'EmailMessageObjectType' : 'email_message_object_1_2',
+                   'FileObjectType' : 'file_object_1_3',
+                   'GUIDialogboxObjectType' : 'gui_dialogbox_object_1_2',
+                   'GUIObjectType' : 'gui_object_1_2',
+                   'GUIWindowObjectType' : 'gui_window_object_1_2',
+                   'HTTPSessionObjectType' : 'http_session_object_1_0',
+                   'LibraryObjectType' : 'library_object_1_3',
+                   'LinuxPackageObjectType' : 'linux_package_object_1_3',
+                   'MemoryObjectType' : 'memory_object_1_2',
+                   'MutexObjectType' : 'mutex_object_1_3',
+                   'NetworkConnectionType' : 'network_connection_object_1_0',
+                   'NetworkFlowObjectType' : 'network_flow_object_1_1',
+                   'NetworkPacketType' : 'network_packet_object_1_1',
+                   'NetRouteObjectType' : 'network_route_object_1_2',
+                   'NetworkSubnetObjectType' : 'network_subnet_object_1_1',
+                   'PipeObjectType' : 'pipe_object_1_3',
+                   'PortObjectType' : 'port_object_1_3',
+                   'ProcessObjectType' : 'process_object_1_3',
+                   'SemaphoreObjectType' : 'semaphore_object_1_3',
+                   'SocketObjectType' : 'socket_object_1_4',
+                   'SystemObjectType' : 'system_object_1_3',
+                   'UnixFileObjectType' : 'unix_file_object_1_3',
+                   'UnixNetworkRouteEntryObjectType' : 'unix_network_route_entry_object_1_1',
+                   'UnixPipeObjectType' : 'unix_pipe_object_1_2',
+                   'UnixProcessObjectType' : 'unix_process_object_1_3',
+                   'UnixUserAccountObjectType' : 'unix_user_account_object_1_2',
+                   'UnixVolumeObjectType' : 'unix_volume_object_1_2',
+                   'URIObjectType' : 'uri_object_1_2',
+                   'UserAccountObjectType' : 'user_account_object_1_2',
+                   'VolumeObjectType' : 'volume_object_1_3',
+                   'WhoisObjectType' : 'whois_object_1_0',
+                   'WinComputerAccountObjectType' : 'win_computer_account_object_1_3',
+                   'WinCriticalSectionObjectType' : 'win_critical_section_object_1_2',
+                   'WindowsDriverObjectType' : 'win_driver_object_1_2',
+                   'WindowsEventLogObjectType' : 'win_event_log_object_1_2',
+                   'WindowsEventObjectType' : 'win_event_object_1_3',
+                   'WindowsExecutableFileObjectType' : 'win_executable_file_object_1_3',
+                   'WindowsFileObjectType' : 'win_file_object_1_3',
+                   'WindowsHandleObjectType' : 'win_handle_object_1_3',
+                   'WindowsKernelHookObjectType' : 'win_kernel_hook_object_1_3',
+                   'WindowsKernelObjectType' : 'win_kernel_object_1_2',
+                   'WindowsMailslotObjectType' : 'win_mailslot_object_1_2',
+                   'WindowsMemoryPageRegionObjectType' : 'win_memory_page_region_object_1_0',
+                   'WindowsMutexObjectType' : 'win_mutex_object_1_2',
+                   'WindowsNetworkRouteEntryObjectType' : 'win_network_route_entry_object_1_3',
+                   'WindowsNetworkShareObjectType' : 'win_network_share_object_1_3',
+                   'WindowsPipeObjectType' : 'win_pipe_object_1_2',
+                   'WindowsPrefetchObjectType' : 'win_prefetch_object_1_2',
+                   'WindowsProcessObjectType' : 'win_process_object_1_3',
+                   'WindowsRegistryKeyObjectType' : 'win_registry_key_object_1_3',
+                   'WindowsSemaphoreObjectType' : 'win_semaphore_object_1_2',
+                   'WindowsServiceObjectType' : 'win_service_object_1_3',
+                   'WindowsSystemObjectType' : 'win_system_object_1_2',
+                   'WindowsSystemRestoreObjectType' : 'win_system_restore_object_1_2',
+                   'WindowsTaskObjectType' : 'win_task_object_1_3',
+                   'WindowsThreadObjectType' : 'win_thread_object_1_3',
+                   'WindowsUserAccountObjectType' : 'win_user_account_object_1_3',
+                   'WindowsVolumeObjectType' : 'win_volume_object_1_3',
+                   'WindowsWaitableTimerObjectType' : 'win_waitable_timer_object_1_3',
+                   'X509CertificateObjectType' : 'x509_certificate_object_1_2' }
+
 
 etree_ = None
 Verbose_import_ = False
@@ -767,12 +842,12 @@ class ObservableType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Observable_Composition(obj_)
         elif nodeName_ == 'Noisiness':
-            obj_ = NoisinessEnum.factory()
-            obj_.build(child_)
+            obj_ = child_.text 
+            obj_ = self.gds_validate_string(obj_, node, 'Noisiness') 
             self.set_Noisiness(obj_)
         elif nodeName_ == 'Ease_of_Obfuscation':
-            obj_ = EaseOfObfuscationEnum.factory()
-            obj_.build(child_)
+            obj_ = child_.text 
+            obj_ = self.gds_validate_string(obj_, node, 'Ease_of_Obfuscation') 
             self.set_Ease_of_Obfuscation(obj_)
         elif nodeName_ == 'Obfuscation_Techniques':
             obj_ = ObfuscationTechniquesType.factory()
@@ -2729,7 +2804,7 @@ class ObjectType(GeneratedsSuper):
                     type_name_ = type_names_[0]
                 else:
                     type_name_ = type_names_[1]
-                class_ = globals()[type_name_]
+                class_ = getattr(__import__(objects_path + defined_objects.get(type_name_), globals(), fromlist=[type_name_]),type_name_)
                 obj_ = class_.factory()
                 obj_.build(child_)
             else:

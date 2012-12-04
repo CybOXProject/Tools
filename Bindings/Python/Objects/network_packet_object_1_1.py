@@ -6742,11 +6742,6 @@ class ICMPv4EchoReplyType(GeneratedsSuper):
             obj_ = ICMPv4EchoReplyType.factory()
             obj_.build(child_)
             self.set_Echo_Reply(obj_)
-                ival_ = False
-            else:
-                raise_parse_error(child_, 'requires boolean')
-            ival_ = self.gds_validate_boolean(ival_, node, 'Echo_Reply')
-            self.Echo_Reply = ival_
         elif nodeName_ == 'Data':
             obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
@@ -7213,11 +7208,6 @@ class FragmentationRequiredType(GeneratedsSuper):
             obj_ = FragmentationRequiredType.factory()
             obj_.build(child_)
             self.set_Fragmentation_Required(obj_)
-                ival_ = False
-            else:
-                raise_parse_error(child_, 'requires boolean')
-            ival_ = self.gds_validate_boolean(ival_, node, 'Fragmentation_Required')
-            self.Fragmentation_Required = ival_
         elif nodeName_ == 'Next_Hop_MTU':
             obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
@@ -7293,11 +7283,6 @@ class ICMPv4SourceQuenchType(GeneratedsSuper):
             obj_ = ICMPv4SourceQuenchType.factory()
             obj_.build(child_)
             self.set_Source_Quench(obj_)
-                ival_ = False
-            else:
-                raise_parse_error(child_, 'requires boolean')
-            ival_ = self.gds_validate_boolean(ival_, node, 'Source_Quench')
-            self.Source_Quench = ival_
 # end class ICMPv4SourceQuenchType
 
 class ICMPv4RedirectMessageType(GeneratedsSuper):
@@ -7538,11 +7523,6 @@ class ICMPv4EchoRequestType(GeneratedsSuper):
             obj_ = ICMPv4EchoRequestType.factory()
             obj_.build(child_)
             self.set_Echo_Request(obj_)
-                ival_ = False
-            else:
-                raise_parse_error(child_, 'requires boolean')
-            ival_ = self.gds_validate_boolean(ival_, node, 'Echo_Request')
-            self.Echo_Request = ival_
         elif nodeName_ == 'Data':
             obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
@@ -7852,11 +7832,6 @@ class ICMPv4TimestampReplyType(GeneratedsSuper):
             obj_ = ICMPv4TimestampReplyType.factory()
             obj_.build(child_)
             self.set_Timestamp_Reply(obj_)
-                ival_ = False
-            else:
-                raise_parse_error(child_, 'requires boolean')
-            ival_ = self.gds_validate_boolean(ival_, node, 'Timestamp_Reply')
-            self.Timestamp_Reply = ival_
         elif nodeName_ == 'Originate_Timestamp':
             obj_ = cybox_common_types_1_0.NonNegativeIntegerObjectAttributeType.factory()
             obj_.build(child_)
@@ -7952,11 +7927,6 @@ class ICMPv4AddressMaskRequestType(GeneratedsSuper):
             obj_ = ICMPv4AddressMaskRequestType.factory()
             obj_.build(child_)
             self.set_Address_Mask_Request(obj_)
-                ival_ = False
-            else:
-                raise_parse_error(child_, 'requires boolean')
-            ival_ = self.gds_validate_boolean(ival_, node, 'Address_Mask_Request')
-            self.Address_Mask_Request = ival_
         elif nodeName_ == 'Address_Mask':
             obj_ = address_object_1_2.AddressObjectType.factory()
             obj_.build(child_)
@@ -8044,11 +8014,6 @@ class ICMPv4AddressMaskReplyType(GeneratedsSuper):
             obj_ = ICMPv4AddressMaskReplyType.factory()
             obj_.build(child_)
             self.set_Address_Mask_Reply(obj_)
-                ival_ = False
-            else:
-                raise_parse_error(child_, 'requires boolean')
-            ival_ = self.gds_validate_boolean(ival_, node, 'Address_Mask_Reply')
-            self.Address_Mask_Reply = ival_
         elif nodeName_ == 'Address_Mask':
             obj_ = address_object_1_2.AddressObjectType.factory()
             obj_.build(child_)
@@ -8337,11 +8302,6 @@ class ICMPv6PacketTooBigType(GeneratedsSuper):
             obj_ = ICMPv6PacketTooBigType.factory()
             obj_.build(child_)
             self.set_Packet_Too_Big(obj_)
-                ival_ = False
-            else:
-                raise_parse_error(child_, 'requires boolean')
-            ival_ = self.gds_validate_boolean(ival_, node, 'Packet_Too_Big')
-            self.Packet_Too_Big = ival_
         elif nodeName_ == 'MTU':
             obj_ = NDPMTUType.factory()
             obj_.build(child_)
@@ -8667,11 +8627,6 @@ class ICMPv6EchoRequestType(GeneratedsSuper):
             obj_ = ICMPv4EchoRequestType.factory()
             obj_.build(child_)
             self.set_Echo_Request(obj_)
-                ival_ = False
-            else:
-                raise_parse_error(child_, 'requires boolean')
-            ival_ = self.gds_validate_boolean(ival_, node, 'Echo_Request')
-            self.Echo_Request = ival_
         elif nodeName_ == 'Data':
             obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
@@ -8762,11 +8717,6 @@ class ICMPv6EchoReplyType(GeneratedsSuper):
             obj_ = ICMPv4EchoReplyType.factory()
             obj_.build(child_)
             self.set_Echo_Reply(obj_)
-                ival_ = False
-            else:
-                raise_parse_error(child_, 'requires boolean')
-            ival_ = self.gds_validate_boolean(ival_, node, 'Echo_Reply')
-            self.Echo_Reply = ival_
         elif nodeName_ == 'Data':
             obj_ = cybox_common_types_1_0.HexBinaryObjectAttributeType.factory()
             obj_.build(child_)
