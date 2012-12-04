@@ -46,11 +46,14 @@ Flags:
     --exclude-raw-body    : exclude raw body from email message object 
     --exclude-raw-headers : exclude raw headers from email message object
     --exclude-urls        : do not attempt to parse urls from input
+    --no-http-whois       : Use a standard WHOIS service over port 43 instead of default HTTP WHOIS over port 80
     --headers <one,two>   : comma separated list of header fields to be included
                             in the cybox email message object. SPACES NOT 
                             ALLOWED IN LIST OF FIELDS
                             fields('to', 'cc', 'bcc', 'from', 'subject', 'in-reply-to', 
                                    'date', 'message-id', 'sender', 'reply-to', 'errors-to')
+
+    --use-dns-server <dns server> :  use this DNS server for DNS lookup of domains
     
     --opt-headers <one,two,...>      : comma separated list of optional header fields 
                                        to be included in the cybox email message object. 
@@ -80,6 +83,7 @@ ALLOWED_OPTIONAL_HEADER_FIELDS = ('boundary', 'content-type', 'mime-version',
                                   'x-priority')
 
 HTTP_WHOIS_URL = 'http://whoiz.herokuapp.com/lookup.json?url='
+NAMESERVER = None
 
 # END GLOBAL VARIABLES
 
@@ -97,9 +101,10 @@ class email_translator:
      __OPT_INC_RAW_BODY, 
      __OPT_INC_RAW_HEADERS, 
      __OPT_INC_HEADERS, 
-     __OPT_INC_OPT_HEADERS ) = ('inline-files','include-urls', 'include-attachments', 
-                                'include-raw-body', 'include-raw-headers', 'include-headers', 
-                                'include-opt-headers')
+     __OPT_INC_OPT_HEADERS,
+     __OPT_HTTP_WHOIS ) = ('inline-files','include-urls', 'include-attachments', 
+                            'include-raw-body', 'include-raw-headers', 'include-headers', 
+                            'include-opt-headers', 'no-http-whois')
     
     
     __map_general_options = {   'inline-files' : False,
@@ -108,7 +113,8 @@ class email_translator:
                                 'include-raw-body' : True,
                                 'include-raw-headers' : True,
                                 'include-headers' : True,
-                                'include-opt-headers' : True
+                                'include-opt-headers' : True,
+                                'no-http-whois' : True
                             }
     
     __map_header_options =  ('to','cc','bcc','from','subject', 'in-reply-to',
@@ -158,6 +164,9 @@ class email_translator:
         
     def set_include_opt_headers(self, enable):
         self.__map_general_options[self.__OPT_INC_OPT_HEADERS] = enable
+                
+    def set_use_http_whois(self, enable):
+        self.__map_general_options[self.__OPT_HTTP_WHOIS] = enable
         
     def is_enabled_inline_files(self):
         return self.__map_general_options[self.__OPT_INLINE_FILES]
@@ -179,6 +188,9 @@ class email_translator:
     
     def is_enabled_include_opt_headers(self):
         return self.__map_general_options[self.__OPT_INC_OPT_HEADERS]
+        
+    def is_enabled_http_whois(self):
+        return self.__map_general_options[self.__OPT_HTTP_WHOIS]
     
 
 
@@ -676,7 +688,11 @@ class email_translator:
         if(self.__verbose_output):
             print "** creating Whois object for: " + domain
         
-        record = self.__get_whois_record_http(domain)
+        if self.is_enabled_http_whois():
+            record = self.__get_whois_record_http(domain)
+        else:
+            record = self.__get_whois_record(domain)
+        
         if not record:
             return None
         
@@ -946,6 +962,8 @@ class email_translator:
     
     """Creates new object containers for new domains and objects related to domains (whois, dns, addresses)"""
     def __create_domain_objs(self, domain):
+        global NAMESERVER
+        
         new_objs = {}
         uri_container = self._newObjContainer(self.__create_cybox_id(), self.__create_domain_name_object(domain))
         
@@ -962,7 +980,7 @@ class email_translator:
         uri_container.add_relationship(query_container.idref, 'DNS Query', 'Searched_For_By')
         
         new_objs['DNSQueryV4'] = query_container
-        dns_record_obj = self.__create_dns_record_object(domain,'A')
+        dns_record_obj = self.__create_dns_record_object(domain,'A', NAMESERVER)
         if dns_record_obj:
             (new_objs['ipv4'], new_objs['DNSResultV4']) = self.__create_dns_objs(query_container, uri_container, dns_record_obj, 'ipv4-addr')
         
@@ -973,7 +991,7 @@ class email_translator:
         uri_container.add_relationship(query_container.idref, 'DNS Query', 'Searched_For_By')
         
         new_objs['DNSQueryV6'] = query_container
-        dns_record_obj = self.__create_dns_record_object(domain,'AAAA')
+        dns_record_obj = self.__create_dns_record_object(domain,'AAAA', NAMESERVER)
         if dns_record_obj:
             (new_objs['ipv6'], new_objs['DNSResultV6']) = self.__create_dns_objs(query_container, uri_container, dns_record_obj, 'ipv6-addr')
         
@@ -1244,6 +1262,7 @@ def main():
     global VERBOSE_OUTPUT
     global ALLOWED_HEADER_FIELDS
     global ALLOWED_OPTIONAL_HEADER_FIELDS
+    global NAMESERVER
    
     output_filename = 'output.xml'
     args = sys.argv[1:]
@@ -1255,8 +1274,10 @@ def main():
     
     (OPT_INLINE_FILES, OPT_RAW_BODY, 
      OPT_RAW_HEADERS, OPT_ATTACHMENTS, 
-     OPT_URLS, OPT_HEADERS, OPT_OPT_HEADERS) =  ('inline-files', 'include-raw-body', 'include-raw-headers', 
-                                                 'include-attachments', 'include-urls', 'include-headers', 'include-opt-headers')
+     OPT_URLS, OPT_HEADERS, 
+     OPT_OPT_HEADERS, OPT_HTTP_WHOIS) =  ( 'inline-files', 'include-raw-body', 'include-raw-headers', 
+                                           'include-attachments', 'include-urls', 'include-headers', 
+                                           'include-opt-headers', 'no-http-whois')
         
     for i in range(0,len(args)):
         if args[i] == '-o':
@@ -1267,6 +1288,8 @@ def main():
             input_data = sys.stdin
         elif args[i] == '-i':
             input_data = open(args[i+1], 'r')
+        elif args[i] == '--use-dns-server':
+            NAMESERVER = args[i+1]
         elif args[i] == '--headers':
             header_options = parse_header_options(args[i+1])
         elif args[i] == '--opt-headers':
@@ -1283,6 +1306,8 @@ def main():
             map_general_options[OPT_URLS] = False
         elif args[i] == '--exclude-opt-headers':
             map_general_options[OPT_OPT_HEADERS] = False
+        elif args[i] == '--no-http-whois':
+            map_general_options[OPT_HTTP_WHOIS] = False
         elif args[i] == '-h':
             usage()
             
@@ -1309,7 +1334,9 @@ def main():
         if(OPT_HEADERS in map_general_options):
             translator.set_include_headers(map_general_options[OPT_HEADERS])
         if(OPT_OPT_HEADERS in map_general_options):
-            translator.set_include_opt_headers(map_general_options[OPT_OPT_HEADERS])
+            translator.set_include_opt_headers(map_general_options[OPT_OPT_HEADERS])        
+        if(OPT_HTTP_WHOIS in map_general_options):
+            translator.set_use_http_whois(map_general_options[OPT_HTTP_WHOIS])
         
         cybox_objects = translator.generate_cybox_from_email_file(input_data)
         translator.write_cybox(cybox_objects, output_filename) 
