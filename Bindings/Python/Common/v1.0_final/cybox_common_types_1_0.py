@@ -1300,7 +1300,7 @@ class ToolInformationType(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sVendor>%s</%sVendor>%s' % ('Common:', self.gds_format_string(quote_xml(self.Vendor).encode(ExternalEncoding), input_name='Vendor'), 'Common:', eol_))
         if self.Name is not None:
-            self.Name.export(outfile, level, 'Common:', name_='Name', pretty_print=pretty_print)
+            outfile.write('<%sName>%s</%sName>%s' % ('Common:', self.gds_format_string(quote_xml(self.Name).encode(ExternalEncoding), input_name='Name'), 'Common:', eol_))
         if self.Version is not None:
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sVersion>%s</%sVersion>%s' % ('Common:', self.gds_format_string(quote_xml(self.Version).encode(ExternalEncoding), input_name='Version'), 'Common:', eol_))
@@ -7479,9 +7479,10 @@ class StructuredTextType(GeneratedsSuper):
             Text_ = self.gds_validate_string(Text_, node, 'Text')
             self.Text.append(Text_)
         elif nodeName_ == 'Code_Example_Language':
-            obj_ = LanguageTypeEnum.factory()
-            obj_.build(child_)
-            self.Code_Example_Language.append(obj_)
+            Code_Example_Language_ = child_.text
+            Code_Example_Language_ = self.gds_validate_string(Code_Example_Language_, node, 'Code_Example_Language')
+            self.Code_Example_Language.append(Code_Example_Language_)
+
         elif nodeName_ == 'Code':
             Code_ = child_.text
             Code_ = self.gds_validate_string(Code_, node, 'Code')
@@ -7499,6 +7500,243 @@ class StructuredTextType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Block(obj_)
 # end class StructuredTextType
+
+
+
+class Block(GeneratedsSuper):
+    """Block is a Structured_Text element consisting of one of Text_Title,
+    Text, Code_Example_Language, or Code followed by another Block
+    element. Structured_Text elements help define whitespace and
+    text segments. This attribute identifies the nature of the
+    content contained within the Block."""
+    subclass = None
+    superclass = None
+    def __init__(self, block_nature=None, Text_Title=None, Text=None, Code_Example_Language=None, Code=None, Comment=None, Images=None, Block=None):
+        self.block_nature = _cast(None, block_nature)
+        if Text_Title is None:
+            self.Text_Title = []
+        else:
+            self.Text_Title = Text_Title
+        if Text is None:
+            self.Text = []
+        else:
+            self.Text = Text
+        if Code_Example_Language is None:
+            self.Code_Example_Language = []
+        else:
+            self.Code_Example_Language = Code_Example_Language
+        if Code is None:
+            self.Code = []
+        else:
+            self.Code = Code
+        if Comment is None:
+            self.Comment = []
+        else:
+            self.Comment = Comment
+        self.Images = Images
+        self.Block = Block
+    def factory(*args_, **kwargs_):
+        if Block.subclass:
+            return Block.subclass(*args_, **kwargs_)
+        else:
+            return Block(*args_, **kwargs_)
+    factory = staticmethod(factory)
+    def get_Text_Title(self): return self.Text_Title
+    def set_Text_Title(self, Text_Title): self.Text_Title = Text_Title
+    def add_Text_Title(self, value): self.Text_Title.append(value)
+    def insert_Text_Title(self, index, value): self.Text_Title[index] = value
+    def get_Text(self): return self.Text
+    def set_Text(self, Text): self.Text = Text
+    def add_Text(self, value): self.Text.append(value)
+    def insert_Text(self, index, value): self.Text[index] = value
+    def get_Code_Example_Language(self): return self.Code_Example_Language
+    def set_Code_Example_Language(self, Code_Example_Language): self.Code_Example_Language = Code_Example_Language
+    def add_Code_Example_Language(self, value): self.Code_Example_Language.append(value)
+    def insert_Code_Example_Language(self, index, value): self.Code_Example_Language[index] = value
+    def validate_LanguageTypeEnum(self, value):
+        # Validate type LanguageTypeEnum, a restriction on xs:string.
+        pass
+    def get_Code(self): return self.Code
+    def set_Code(self, Code): self.Code = Code
+    def add_Code(self, value): self.Code.append(value)
+    def insert_Code(self, index, value): self.Code[index] = value
+    def get_Comment(self): return self.Comment
+    def set_Comment(self, Comment): self.Comment = Comment
+    def add_Comment(self, value): self.Comment.append(value)
+    def insert_Comment(self, index, value): self.Comment[index] = value
+    def get_Images(self): return self.Images
+    def set_Images(self, Images): self.Images = Images
+    def get_Block(self): return self.Block
+    def set_Block(self, Block): self.Block = Block
+    def get_block_nature(self): return self.block_nature
+    def set_block_nature(self, block_nature): self.block_nature = block_nature
+    def export(self, outfile, level, namespace_='Common:', name_='Block', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
+        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        already_processed = []
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='Block')
+        if self.hasContent_():
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+        else:
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='Block'):
+        if self.block_nature is not None and 'block_nature' not in already_processed:
+            already_processed.append('block_nature')
+            outfile.write(' block_nature=%s' % (quote_attrib(self.block_nature), ))
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='Block', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        for Text_Title_ in self.Text_Title:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sText_Title>%s</%sText_Title>%s' % (namespace_, self.gds_format_string(quote_xml(Text_Title_).encode(ExternalEncoding), input_name='Text_Title'), namespace_, eol_))
+        for Text_ in self.Text:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sText>%s</%sText>%s' % (namespace_, self.gds_format_string(quote_xml(Text_).encode(ExternalEncoding), input_name='Text'), namespace_, eol_))
+        for Code_Example_Language_ in self.Code_Example_Language:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sCode_Example_Language>%s</%sCode_Example_Language>%s' % (namespace_, self.gds_format_string(quote_xml(Code_Example_Language_).encode(ExternalEncoding), input_name='Code_Example_Language'), namespace_, eol_))
+        for Code_ in self.Code:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sCode>%s</%sCode>%s' % (namespace_, self.gds_format_string(quote_xml(Code_).encode(ExternalEncoding), input_name='Code'), namespace_, eol_))
+        for Comment_ in self.Comment:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sComment>%s</%sComment>%s' % (namespace_, self.gds_format_string(quote_xml(Comment_).encode(ExternalEncoding), input_name='Comment'), namespace_, eol_))
+        if self.Images is not None:
+            self.Images.export(outfile, level, namespace_, name_='Images', pretty_print=pretty_print)
+        if self.Block is not None:
+            self.Block.export(outfile, level, namespace_, name_='Block', pretty_print=pretty_print)
+    def hasContent_(self):
+        if (
+            self.Text_Title or
+            self.Text or
+            self.Code_Example_Language or
+            self.Code or
+            self.Comment or
+            self.Images is not None or
+            self.Block is not None
+            ):
+            return True
+        else:
+            return False
+    def exportLiteral(self, outfile, level, name_='Block'):
+        level += 1
+        self.exportLiteralAttributes(outfile, level, [], name_)
+        if self.hasContent_():
+            self.exportLiteralChildren(outfile, level, name_)
+    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
+        if self.block_nature is not None and 'block_nature' not in already_processed:
+            already_processed.append('block_nature')
+            showIndent(outfile, level)
+            outfile.write('block_nature = %s,\n' % (self.block_nature,))
+    def exportLiteralChildren(self, outfile, level, name_):
+        showIndent(outfile, level)
+        outfile.write('Text_Title=[\n')
+        level += 1
+        for Text_Title_ in self.Text_Title:
+            showIndent(outfile, level)
+            outfile.write('%s,\n' % quote_python(Text_Title_).encode(ExternalEncoding))
+        level -= 1
+        showIndent(outfile, level)
+        outfile.write('],\n')
+        showIndent(outfile, level)
+        outfile.write('Text=[\n')
+        level += 1
+        for Text_ in self.Text:
+            showIndent(outfile, level)
+            outfile.write('%s,\n' % quote_python(Text_).encode(ExternalEncoding))
+        level -= 1
+        showIndent(outfile, level)
+        outfile.write('],\n')
+        showIndent(outfile, level)
+        outfile.write('Code_Example_Language=[\n')
+        level += 1
+        for Code_Example_Language_ in self.Code_Example_Language:
+            showIndent(outfile, level)
+            outfile.write('%s,\n' % quote_python(Code_Example_Language_).encode(ExternalEncoding))
+        level -= 1
+        showIndent(outfile, level)
+        outfile.write('],\n')
+        showIndent(outfile, level)
+        outfile.write('Code=[\n')
+        level += 1
+        for Code_ in self.Code:
+            showIndent(outfile, level)
+            outfile.write('%s,\n' % quote_python(Code_).encode(ExternalEncoding))
+        level -= 1
+        showIndent(outfile, level)
+        outfile.write('],\n')
+        showIndent(outfile, level)
+        outfile.write('Comment=[\n')
+        level += 1
+        for Comment_ in self.Comment:
+            showIndent(outfile, level)
+            outfile.write('%s,\n' % quote_python(Comment_).encode(ExternalEncoding))
+        level -= 1
+        showIndent(outfile, level)
+        outfile.write('],\n')
+        if self.Images is not None:
+            showIndent(outfile, level)
+            outfile.write('Images=model_.ImagesType(\n')
+            self.Images.exportLiteral(outfile, level, name_='Images')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Block is not None:
+            showIndent(outfile, level)
+            outfile.write('Block=model_.Block(\n')
+            self.Block.exportLiteral(outfile, level)
+            showIndent(outfile, level)
+            outfile.write('),\n')
+    def build(self, node):
+        self.buildAttributes(node, node.attrib, [])
+        for child in node:
+            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
+            self.buildChildren(child, node, nodeName_)
+    def buildAttributes(self, node, attrs, already_processed):
+        value = find_attr_value_('block_nature', node)
+        if value is not None and 'block_nature' not in already_processed:
+            already_processed.append('block_nature')
+            self.block_nature = value
+    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+        if nodeName_ == 'Text_Title':
+            Text_Title_ = child_.text
+            Text_Title_ = self.gds_validate_string(Text_Title_, node, 'Text_Title')
+            self.Text_Title.append(Text_Title_)
+        elif nodeName_ == 'Text':
+            Text_ = child_.text
+            Text_ = self.gds_validate_string(Text_, node, 'Text')
+            self.Text.append(Text_)
+        elif nodeName_ == 'Code_Example_Language':
+            Code_Example_Language_ = child_.text
+            Code_Example_Language_ = self.gds_validate_string(Code_Example_Language_, node, 'Code_Example_Language')
+            self.Code_Example_Language.append(Code_Example_Language_)
+            self.validate_LanguageTypeEnum(self.Code_Example_Language)    # validate type LanguageTypeEnum
+        elif nodeName_ == 'Code':
+            Code_ = child_.text
+            Code_ = self.gds_validate_string(Code_, node, 'Code')
+            self.Code.append(Code_)
+        elif nodeName_ == 'Comment':
+            Comment_ = child_.text
+            Comment_ = self.gds_validate_string(Comment_, node, 'Comment')
+            self.Comment.append(Comment_)
+        elif nodeName_ == 'Images':
+            obj_ = ImagesType.factory()
+            obj_.build(child_)
+            self.set_Images(obj_)
+        elif nodeName_ == 'Block':
+            obj_ = Block.factory()
+            obj_.build(child_)
+            self.set_Block(obj_)
+# end class Block
+
 
 class ImagesType(GeneratedsSuper):
     """The ImagesType specifies a set of images."""
@@ -8694,7 +8932,8 @@ class MetadataType(GeneratedsSuper):
             eol_ = ''
         if self.Value is not None:
             showIndent(outfile, level, pretty_print)
-            self.Value.export(outfile, level, 'Common:', name_='Value', pretty_print=pretty_print)
+            #self.Value.export(outfile, level, 'Common:', name_='Value', pretty_print=pretty_print)
+            outfile.write('<%sValue>%s</%sValue>%s' % ('Common:', self.gds_format_string(quote_xml(self.Value).encode(ExternalEncoding), input_name='Value'), 'Common:', eol_))
         for SubDatum_ in self.SubDatum:
             SubDatum_.export(outfile, level, 'Common:', name_='SubDatum', pretty_print=pretty_print)
     def hasContent_(self):
@@ -9314,6 +9553,7 @@ if __name__ == '__main__':
     main()
 
 __all__ = [
+    "Block"
     "MeasureSourceType",
     "ContributorType",
     "DateRangeType",
