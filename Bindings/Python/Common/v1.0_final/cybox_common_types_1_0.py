@@ -7373,7 +7373,8 @@ class StructuredTextType(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sText>%s</%sText>%s' % ('Common:', self.gds_format_string(quote_xml(Text_).encode(ExternalEncoding), input_name='Text'), 'Common:', eol_))
         for Code_Example_Language_ in self.Code_Example_Language:
-            self.Code_Example_Language.export(outfile, level, 'Common:', name_='Code_Example_Language', pretty_print=pretty_print)
+            #self.Code_Example_Language.export(outfile, level, 'Common:', name_='Code_Example_Language', pretty_print=pretty_print)
+            outfile.write('<%sCode_Example_Language>%s</%sCode_Example_Language>%s' % ('Common:', self.gds_format_string(quote_xml(Code_Example_Language_).encode(ExternalEncoding), input_name='Code_Example_Language'), 'Common:', eol_))
         for Code_ in self.Code:
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sCode>%s</%sCode>%s' % ('Common:', self.gds_format_string(quote_xml(Code_).encode(ExternalEncoding), input_name='Code'), 'Common:', eol_))
