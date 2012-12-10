@@ -26,7 +26,7 @@ import cybox_core_1_0 as cybox
 
 cybox.parse('some_input_file.xml')
 
-Similarly, for export of CybOX XML to a file, create and open a file and then pass it to the export method of the Observables object you're using.  The latest version of the core bindings will write out all of the namespaces and schema locations for you, so you don't need to declare it.
+Similarly, for export of CybOX XML to a file, create and open a file and then pass it to the export method of the Observables object you're using.  The latest version of the core bindings will write out all of the namespaces and schema locations for you, so you don't need to declare them (via the namespacedef_ parameter).
 E.g.,
 
 import cybox_core_1_0 as cybox
