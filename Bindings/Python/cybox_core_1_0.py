@@ -5262,7 +5262,7 @@ def parse(inFileName):
     #rootObj.export(sys.stdout, 0, name_=rootTag,
     #    namespacedef_='',
     #    pretty_print=True)
-    #return rootObj
+    return rootObj
 
 def parseString(inString):
     from StringIO import StringIO
