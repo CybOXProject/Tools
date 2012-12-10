@@ -3,8 +3,10 @@ CybOX v1.0 Final Python Bindings
 These are the latest Python bindings for CybOX v1.0 final.
 
 -cybox_core_1_0: the CybOX Core Schema bindings.
--cybox_common_types_1_0: the CybOX Common Types bindings.
--*_object_* : the CybOX defined object bindings.
+
+-cybox_common_types_1_0: the CybOX Common Types bindings. 
+
+-*_object_* : the CybOX defined object bindings. 
 
 Dependencies
 ------------
