@@ -485,6 +485,20 @@ class ObservablesType(GeneratedsSuper):
             if defined_object.get_anyAttributes_() is not None:
                 any_attributes = defined_object.get_anyAttributes_()
                 self.__get_defined_object_namespace(any_attributes)
+        if object.get_Discovery_Method() is not None:
+            discovery_method = object.get_Discovery_Method()
+            if discovery_method.get_System() is not None:
+                self.__add_object_namespace('SystemObjectType')
+            if discovery_method.get_Tools() is not None:
+                for tool in discovery_method.get_Tools().get_Tool():
+                    if tool.get_Execution_Environment() is not None:
+                        execution_environment = tool.get_Execution_Environment()
+                        if execution_environment.get_System() is not None:
+                            self.__add_object_namespace('SystemObjectType')
+                        if execution_environment.get_User_Account_Info() is not None:
+                            self.__add_object_namespace('UserAccountObjectType')
+            if discovery_method.get_Instance() is not None:
+                self.__add_object_namespace('ProcessObjectType')
     def __get_defined_object_namespace(self, any_attributes):
         for key, value in any_attributes.items():
             if (key == '{http://www.w3.org/2001/XMLSchema-instance}type' or key == 'xsi:type') and value.split(':')[1] in defined_objects.keys():
@@ -509,11 +523,6 @@ class ObservablesType(GeneratedsSuper):
         output_string += 'xmlns:Common="http://cybox.mitre.org/Common_v1" \n '
         schemalocs.append('http://cybox.mitre.org/cybox_v1 http://cybox.mitre.org/XMLSchema/cybox_core_v1.0.xsd')
         schemalocs.append(' http://cybox.mitre.org/Common_v1 http://cybox.mitre.org/XMLSchema/cybox_common_types_v1.0.xsd')
-        #Add the required (per CybOX Common)
-        self.__add_object_namespace('SystemObjectType')
-        self.__add_object_namespace('ProcessObjectType')
-        self.__add_object_namespace('CodeObjectType')
-        self.__add_object_namespace('UserAccountObjectType')
         for object_type in self.__object_types:
             namespace_prefix = defined_objects.get(object_type).get('namespace_prefix')
             namespace = defined_objects.get(object_type).get('namespace')
