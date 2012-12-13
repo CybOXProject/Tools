@@ -528,9 +528,10 @@ class ObservablesType(GeneratedsSuper):
             namespace = defined_objects.get(object_type).get('namespace')
             output_string += ('xmlns:' + namespace_prefix + '=' + '"' + namespace + '"' + ' \n ')
         for object_type_dependency in self.__object_type_dependencies:
-            namespace_prefix = defined_objects.get(object_type_dependency).get('namespace_prefix')
-            namespace = defined_objects.get(object_type_dependency).get('namespace')
-            output_string += ('xmlns:' + namespace_prefix + '=' + '"' + namespace + '"' + ' \n ')
+            if object_type_dependency not in self.__object_types:
+                namespace_prefix = defined_objects.get(object_type_dependency).get('namespace_prefix')
+                namespace = defined_objects.get(object_type_dependency).get('namespace')
+                output_string += ('xmlns:' + namespace_prefix + '=' + '"' + namespace + '"' + ' \n ')
         output_string += 'xsi:schemaLocation="'
         for object_type in self.__object_types:
             namespace = defined_objects.get(object_type).get('namespace')
