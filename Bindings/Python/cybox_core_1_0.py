@@ -438,6 +438,7 @@ class ObservablesType(GeneratedsSuper):
         self.extensiontype_ = extensiontype_
         #A list of the types of objects in the Observables
         self.__object_types = []
+        self.__object_type_dependencies = []
     def factory(*args_, **kwargs_):
         if ObservablesType.subclass:
             return ObservablesType.subclass(*args_, **kwargs_)
@@ -512,7 +513,7 @@ class ObservablesType(GeneratedsSuper):
                 dependencies = defined_objects.get(object_type).get('dependencies').split(',')
                 for dependency in dependencies:
                     if dependency not in self.__object_types:
-                        self.__object_types.append(dependency)
+                        self.__object_type_dependencies.append(dependency)
     #Build the namespace/schemalocation declaration string
     def __build_namespaces_schemalocations(self):
         output_string = '\n '
@@ -525,6 +526,10 @@ class ObservablesType(GeneratedsSuper):
         for object_type in self.__object_types:
             namespace_prefix = defined_objects.get(object_type).get('namespace_prefix')
             namespace = defined_objects.get(object_type).get('namespace')
+            output_string += ('xmlns:' + namespace_prefix + '=' + '"' + namespace + '"' + ' \n ')
+        for object_type_dependency in self.__object_type_dependencies:
+            namespace_prefix = defined_objects.get(object_type_dependency).get('namespace_prefix')
+            namespace = defined_objects.get(object_type_dependency).get('namespace')
             output_string += ('xmlns:' + namespace_prefix + '=' + '"' + namespace + '"' + ' \n ')
         output_string += 'xsi:schemaLocation="'
         for object_type in self.__object_types:
