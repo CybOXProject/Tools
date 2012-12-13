@@ -522,7 +522,6 @@ class ObservablesType(GeneratedsSuper):
         output_string += 'xmlns:cybox="http://cybox.mitre.org/cybox_v1" \n '
         output_string += 'xmlns:Common="http://cybox.mitre.org/Common_v1" \n '
         schemalocs.append('http://cybox.mitre.org/cybox_v1 http://cybox.mitre.org/XMLSchema/cybox_core_v1.0.xsd')
-        schemalocs.append(' http://cybox.mitre.org/Common_v1 http://cybox.mitre.org/XMLSchema/cybox_common_types_v1.0.xsd')
         for object_type in self.__object_types:
             namespace_prefix = defined_objects.get(object_type).get('namespace_prefix')
             namespace = defined_objects.get(object_type).get('namespace')
