@@ -2019,15 +2019,11 @@ class ActionArgumentType(GeneratedsSuper):
             eol_ = '\n'
         else:
             eol_ = ''
-        showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='ActionArgumentType')
         if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
-        else:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+            already_processed = []
+            self.exportAttributes(outfile, level, already_processed, namespace_, name_='ActionArgumentType')
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='cybox:', name_='ActionArgumentType'):
         if self.undefined_argument_name is not None and 'undefined_argument_name' not in already_processed:
@@ -2043,7 +2039,9 @@ class ActionArgumentType(GeneratedsSuper):
         pass
     def hasContent_(self):
         if (
-
+            self.defined_argument_name is not None or
+            self.undefined_argument_name is not None or
+            self.argument_value is not None
             ):
             return True
         else:
