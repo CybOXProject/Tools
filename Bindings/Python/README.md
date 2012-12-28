@@ -39,4 +39,8 @@ output_file = file('some_file.xml', 'w')
 
 observables.export(output_file, 0)
 
+Examples
+-----
+For up-to-date examples of how to use the Bindings, please see the Tools wiki:
 
+https://github.com/CybOXProject/Tools/wiki
