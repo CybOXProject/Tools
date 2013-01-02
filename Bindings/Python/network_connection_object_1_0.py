@@ -452,7 +452,7 @@ class NetworkConnectionType(cybox_common_types_1_0.DefinedObjectType):
     (TLS) is used in the network connection."""
     subclass = None
     superclass = cybox_common_types_1_0.DefinedObjectType
-    def __init__(self, tls_used=None, Layer3_Protocol=None, Layer4_Protocol=None, Layer7_Protocol=None, Local_IP_Address=None, Local_Port=None, Remote_IP_Address=None, Remote_Port=None, Layer7_Connections=None):
+    def __init__(self, object_reference=None, tls_used=None, Layer3_Protocol=None, Layer4_Protocol=None, Layer7_Protocol=None, Local_IP_Address=None, Local_Port=None, Remote_IP_Address=None, Remote_Port=None, Layer7_Connections=None):
         super(NetworkConnectionType, self).__init__(object_reference, )
         self.tls_used = _cast(bool, tls_used)
         self.Layer3_Protocol = Layer3_Protocol
@@ -606,6 +606,7 @@ class NetworkConnectionType(cybox_common_types_1_0.DefinedObjectType):
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
     def buildAttributes(self, node, attrs, already_processed):
+        super(NetworkConnectionType, self).buildAttributes(node, attrs, already_processed)
         value = find_attr_value_('tls_used', node)
         if value is not None and 'tls_used' not in already_processed:
             already_processed.append('tls_used')
