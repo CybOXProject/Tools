@@ -10,12 +10,21 @@ import email
 import re
 import time
 import datetime
-import common_types_1_0 as common
-import cybox_1_0 as cybox
-import email_message_object_1_1 as email_message_object
-import uri_object_1_1 as uri_object
-import file_object_1_2 as file_object
-import address_object_1_1 as address_object
+import urllib2
+import socket
+from collections import defaultdict
+import cybox_common_types_1_0 as common
+import cybox_core_1_0 as cybox
+import email_message_object_1_2 as email_message_object
+import uri_object_1_2 as uri_object
+import file_object_1_3 as file_object
+import address_object_1_2 as address_object
+import whois_object_1_0 as whois_object
+import dns_query_object_1_0 as dns_query_object
+import dns_record_object_1_1 as dns_record_object
+import pywhois
+import pywhois.parser
+import dns.resolver
 
 # BEGIN GLOBAL VARIABLES
 
@@ -37,11 +46,14 @@ Flags:
     --exclude-raw-body    : exclude raw body from email message object 
     --exclude-raw-headers : exclude raw headers from email message object
     --exclude-urls        : do not attempt to parse urls from input
+    --no-http-whois       : Use a standard WHOIS service over port 43 instead of default HTTP WHOIS over port 80
     --headers <one,two>   : comma separated list of header fields to be included
                             in the cybox email message object. SPACES NOT 
                             ALLOWED IN LIST OF FIELDS
                             fields('to', 'cc', 'bcc', 'from', 'subject', 'in-reply-to', 
                                    'date', 'message-id', 'sender', 'reply-to', 'errors-to')
+
+    --use-dns-server <dns server> :  use this DNS server for DNS lookup of domains
     
     --opt-headers <one,two,...>      : comma separated list of optional header fields 
                                        to be included in the cybox email message object. 
@@ -70,6 +82,9 @@ ALLOWED_OPTIONAL_HEADER_FIELDS = ('boundary', 'content-type', 'mime-version',
                                   'precedence', 'x-mailer', 'x-originating-ip',
                                   'x-priority')
 
+HTTP_WHOIS_URL = 'http://whoiz.herokuapp.com/lookup.json?url='
+NAMESERVER = None
+
 # END GLOBAL VARIABLES
 
 
@@ -86,9 +101,10 @@ class email_translator:
      __OPT_INC_RAW_BODY, 
      __OPT_INC_RAW_HEADERS, 
      __OPT_INC_HEADERS, 
-     __OPT_INC_OPT_HEADERS ) = ('inline-files','include-urls', 'include-attachments', 
-                                'include-raw-body', 'include-raw-headers', 'include-headers', 
-                                'include-opt-headers')
+     __OPT_INC_OPT_HEADERS,
+     __OPT_HTTP_WHOIS ) = ('inline-files','include-urls', 'include-attachments', 
+                            'include-raw-body', 'include-raw-headers', 'include-headers', 
+                            'include-opt-headers', 'no-http-whois')
     
     
     __map_general_options = {   'inline-files' : False,
@@ -97,7 +113,8 @@ class email_translator:
                                 'include-raw-body' : True,
                                 'include-raw-headers' : True,
                                 'include-headers' : True,
-                                'include-opt-headers' : True
+                                'include-opt-headers' : True,
+                                'no-http-whois' : True
                             }
     
     __map_header_options =  ('to','cc','bcc','from','subject', 'in-reply-to',
@@ -110,13 +127,15 @@ class email_translator:
 
     __verbose_output = False
     
+    __email_obj_container = None
+
     
     
     """ Constructor """ 
     def __init__(self, verbose = False):
         self.__verbose_output = verbose
-
-   
+        self.__email_obj_container = self._newObjContainer(self.__create_cybox_id("object"), None)
+        
     def set_header_options(self, tuple_options):
         # The FROM field is required by the schema in v1.1
         tuple_options.append('from')
@@ -145,6 +164,9 @@ class email_translator:
         
     def set_include_opt_headers(self, enable):
         self.__map_general_options[self.__OPT_INC_OPT_HEADERS] = enable
+                
+    def set_use_http_whois(self, enable):
+        self.__map_general_options[self.__OPT_HTTP_WHOIS] = enable
         
     def is_enabled_inline_files(self):
         return self.__map_general_options[self.__OPT_INLINE_FILES]
@@ -166,8 +188,38 @@ class email_translator:
     
     def is_enabled_include_opt_headers(self):
         return self.__map_general_options[self.__OPT_INC_OPT_HEADERS]
+        
+    def is_enabled_http_whois(self):
+        return self.__map_general_options[self.__OPT_HTTP_WHOIS]
     
 
+
+    """Private class for storing new objects and their relationships"""
+    class _newObjContainer:
+        def __init__(self, idref, obj):
+            self.idref = idref
+            self.obj = obj
+            self.relationships = []
+            
+        def add_relationship(self, idref, type_, relationship):
+            self.relationships.append({'idref':idref, 'type':type_, 'relationship':relationship})
+        
+        def get_relationship_objects(self):
+            related_objects = cybox.RelatedObjectsType()
+            for r in self.relationships:
+                related_object = cybox.RelatedObjectType(idref = r['idref'], type_ = r['type'], relationship = r['relationship'])
+                related_objects.add_Related_Object(related_object)
+            return related_objects
+            
+    def __get_email_obj_id(self):
+        return self.__email_obj_container.idref
+    
+    def __get_email_obj_container(self):
+        return self.__email_obj_container
+    
+    def __add_email_obj_relationship(self, idref, type_, relationship):
+        self.__email_obj_container.add_relationship(idref, type_, relationship)
+    
     """ Returns an email.Message object """ 
     def __parse_email_string(self, data):
         if self.__verbose_output:
@@ -185,14 +237,19 @@ class email_translator:
         
         msg = email.message_from_file(data)     
         return msg
-
-
-
+        
     """ Returns a unique cybox id """
     def __create_cybox_id(self, item_type = "guid"):
         return "cybox:" + item_type + "-" + str(uuid.uuid1())
 
-
+    """ Returns a unique cybox id for the Email message Object"""
+    def __get_email_id(self, item_type = "guid"):
+        if self._EMAIL_OBJECT_ID:
+            return EMAIL_OBJECT_ID
+        else:
+            EMAIL_OBJECT_ID = self.__create_cybox_id()
+            return EMAIL_OBJECT_ID
+    
     """ Returns file size of base64 decompressed attachment """
 
     def __get_file_size(self, base64_enc_data):
@@ -258,8 +315,69 @@ class email_translator:
             xml_mod_date = self.__get_xml_datetime_fmt(mod_date_tup)
                       
         return xml_mod_date
+    
+    def __get_whois_record_http(self, domain):
+        global HTTP_WHOIS_URL
         
+        request = urllib2.Request(HTTP_WHOIS_URL + domain)
+        request.add_header('Accept', 'application/json')
+        request.add_header('Content-type', 'application/x-www-form-urlencoded')
+        try: 
+            response = urllib2.urlopen(request)
+        except urllib2.HTTPError, e:
+            print 'The WHOIS http service failed to fulfill the request because:'
+            print 'Error code: ', e.code
+            print 'No Whois information for domain: '+domain+' will be captured.\n'
+            return None
+        except urllib2.URLError, e:
+            print 'Cannot reach the WHOIS http service because:' + e.reason
+            print 'No Whois information for domain: '+domain+' will be captured.\n'
+            return None
+        else:
+            response_text = response.read()
+            response_lower = response_text.lower()
+        
+        if '"error"' in response_lower or 'not found' in response_lower or 'no match' in response_lower:
+            return None
+        
+        formatted_response = response_text.replace('\\r','').replace('\\n','\n')
+        parsed = pywhois.WhoisEntry.load(domain, formatted_response)
+        record = defaultdict(none_factory, status=[], registrar_contacts=[], name_servers=[])
+        
+        if parsed.registrar:     record['registrar'] = parsed.registrar[0]
+        if parsed.whois_server:  record['whois_server']  = parsed.whois_server[0]
+        if parsed.domain_name:   record['domain_name']   = domain
+        if parsed.referral_url:  record['referral_url']  = parsed.referral_url[0]
+        if parsed.creation_date: record['creation_date'] = self.__get_xml_date_fmt(pywhois.parser.cast_date(parsed.creation_date[0]))
+        if parsed.updated_date:  record['updated_date']  = self.__get_xml_date_fmt(pywhois.parser.cast_date(parsed.updated_date[0]))
+        if parsed.expiration_date: record['expiration_date'] = self.__get_xml_date_fmt(pywhois.parser.cast_date(parsed.expiration_date[0]))
+        #These list comprehensions get rid of empty strings that the parser sometimes adds to the lists
+        if parsed.status: record['status'] = [x.replace(' ', '_') for x in parsed.status if len(x.strip())]
+        if parsed.emails: record['registrar_contacts'] = [x for x in parsed.emails if len(x.strip())]
+        if parsed.name_servers: record['name_servers'] = [x for x in parsed.name_servers if len(x.strip())]
+        
+        return record
 
+    def __get_whois_record(self, domain):
+        return pywhois.whois(domain)
+
+    def __get_dns_record(self, domain, record_type, nameserver=None):
+        record = None
+        resolver = dns.resolver.Resolver()
+        if nameserver:
+            resolver.nameservers = [nameserver]
+        
+        try:
+            dns_response = resolver.query(domain, record_type)
+            record = {'Entry_Type':record_type, 'Domain_Name':domain, 'IP_Address':dns_response[0]}
+            record['Record_Data'] = dns_response.response.to_text()
+            #The spec for hex values seems to be no leading 0x, all upper case
+            record['Flags'] = hex(dns_response.response.flags).replace('0x','').upper()
+        except Exception, e:
+            return None
+              
+        return record
+        
     """ Returns a map of file objects, keyed by a cybox uuid
         Attachments can be identified within multipart messages
         by their Content-Disposition header.
@@ -302,7 +420,10 @@ class email_translator:
                                Created_Time = self.__create_date_time_object_attr_type(created_date))
                     
                     file_obj.set_anyAttributes_({'xsi:type' : 'FileObj:FileObjectType'})
-                    map_file_objs[cybox_id] = file_obj
+                    file_obj_container = self._newObjContainer(cybox_id,file_obj)
+                    file_obj_container.add_relationship(self.__get_email_obj_id(),'Email Message','Contained_Within')
+                    self.__add_email_obj_relationship(cybox_id, 'File', 'Contains')
+                    map_file_objs[cybox_id] = file_obj_container
                 #end if
             # end for
         # end if
@@ -338,7 +459,12 @@ class email_translator:
             
         return xml_datetime
         
-    
+    """ Takes a time tuple and converts it to an xs:date formatted string """
+    def __get_xml_date_fmt(self, datetime_tup):
+        year  = datetime_tup[0]
+        month = datetime_tup[1]
+        day   = datetime_tup[2]
+        return "%02d-%02d-%02d" % (year, month, day)
 
     """ Returns a CybOX EmailHeaderType object """ 
     def __create_cybox_headers(self, msg):
@@ -539,8 +665,97 @@ class email_translator:
         return uri_obj
 
 
+    """ Creates a CybOX URIObjectType object """
+    def __create_domain_name_object(self, domain):
+        if not domain:
+            return None
+        
+        if( self.__verbose_output):
+            print "** creating domain name object for: " + domain
+            
+        uri_obj = uri_object.URIObjectType(type_ = "Domain Name", 
+                                           Value = common.AnyURIObjectAttributeType(valueOf_ = domain))
+        
+        uri_obj.set_anyAttributes_({'xsi:type' : 'URIObj:URIObjectType'})
+        
+        return uri_obj       
 
+    """ Creates a CybOX WHOISObjectType object """
+    def __create_whois_object(self, domain):
+        if not domain:
+            return None
+        
+        if(self.__verbose_output):
+            print "** creating Whois object for: " + domain
+        
+        if self.is_enabled_http_whois():
+            record = self.__get_whois_record_http(domain)
+        else:
+            record = self.__get_whois_record(domain)
+        
+        if not record:
+            return None
+        
+        #A status of ACTIVE isn't valid, change it to OK if its there
+        record['status'] = ['OK' if status=='ACTIVE' else status for status in record['status']]
+        
+        #Only build registrar info objects if we have the relevant info
+        registrar_info = None
+        if record['registrar'] or record['whois_server'] or record['registrar_address'] or record['referral_url']:
+            registrar_info = whois_object.RegistrarInfoType( Name    = self.__create_string_object_attr_type(record['registrar']),
+                                                             Address = self.__create_string_object_attr_type(record['registrar_address']),
+                                                             Email_Address = None,
+                                                             Phone_Number  = None,
+                                                             Whois_Server  = self.__create_url_object(record['whois_server']),
+                                                             Referral_URL  = self.__create_url_object(record['referral_url']))
+        
+        registrar_contacts = []
+        for email in record['registrar_contacts']:
+            registrar_contacts.append(whois_object.RegistrarContactType(contact_type  = 'ADMIN', 
+                                                                        Name = self.__create_string_object_attr_type(record['registrar']),
+                                                                        Email_Address = self.__create_email_address_object(email),
+                                                                        Phone_Number  = None))
+        
+        whois_obj = whois_object.WhoisObjectType( Domain_Name = self.__create_domain_name_object(record['domain_name']),
+                                                  Server_Name = None,
+                                                  Nameserver  = [self.__create_url_object(url) for url in record['name_servers']],
+                                                  Status      = [whois_object.WhoisStatusType(valueOf_= status) for status in record['status']],
+                                                  Updated_Date    = self.__create_date_object_attr_type(record['updated_date']),
+                                                  Creation_Date   = self.__create_date_object_attr_type(record['creation_date']),
+                                                  Expiration_Date = self.__create_date_object_attr_type(record['expiration_date']),
+                                                  Registrar_Info  = registrar_info,
+                                                  Registrar_Contact = registrar_contacts)
+        
+        whois_obj.set_anyAttributes_({'xsi:type' : 'WhoisObj:WhoisObjectType'})
+        return whois_obj
 
+    """Creates a CybOX DNSQueryType Object"""
+    def __create_dns_query_object(self, domain, record_type, nameserver=None):
+        dns_question_obj = dns_query_object.DNSQuestionType( QName = self.__create_domain_name_object(domain),
+                                                             QType = dns_query_object.DNSRecordType(valueOf_= record_type),
+                                                             QClass= self.__create_string_object_attr_type('IN'))
+        
+        dns_query_obj = dns_query_object.DNSQueryObjectType(successful = False, Question = dns_question_obj)
+        dns_query_obj.set_anyAttributes_({'xsi:type' : 'DNSQueryObj:DNSQueryObjectType'})
+        
+        return dns_query_obj
+    
+    """Creates a CybOX DNSRecordType Object"""
+    def __create_dns_record_object(self, domain, record_type, nameserver=None):
+        record = self.__get_dns_record(domain, record_type, nameserver)
+        if not record:
+            return None
+        
+        dns_record_obj = dns_record_object.DNSRecordObjectType( Domain_Name = self.__create_domain_name_object(record['Domain_Name']),
+                                                                IP_Address  = self.__create_ip_address_object(record['IP_Address']),
+                                                                Entry_Type  = self.__create_string_object_attr_type(record['Entry_Type']),
+                                                                Flags = self.__create_hex_binary_object_attr_type(record['Flags']),
+                                                                Record_Data = record['Record_Data']
+                                                              )
+        dns_record_obj.set_anyAttributes_({'xsi:type' : 'DNSRecordObj:DNSRecordObjectType'})
+        return dns_record_obj
+    
+    
     """ Returns a CybOX AddressType Object for use with Email addresses """
     def __create_email_address_object(self, email_addr):
         if not email_addr:
@@ -575,7 +790,7 @@ class email_translator:
         return hash_list_object
         
     
-    """ Returns a CybOX AddressType Object for use with IPv4 addresses """
+    """ Returns a CybOX AddressType Object for use with IPv4 or IPv6 addresses """
     def __create_ip_address_object(self, ip_addr):
         if not ip_addr:
             return None
@@ -583,9 +798,16 @@ class email_translator:
         if self.__verbose_output:
             print "** creating ip address object for: " + ip_addr
 
+        
+        if ':' in str(ip_addr):
+            category = 'ipv6-addr'
+        else:
+            category = 'ipv4-addr'
+            
         addr_obj = address_object.AddressObjectType(
-                   Address_Value = self.__create_string_object_attr_type(ip_addr))
-
+                   Address_Value = self.__create_string_object_attr_type(ip_addr),
+                   category = category)
+        addr_obj.set_anyAttributes_({'xsi:type' : 'AddressObj:AddressObjectType'})
         return addr_obj
 
 
@@ -610,8 +832,26 @@ class email_translator:
         return datetime_obj
         
 
+    """ Returns a CybOX DateTimeObjectAttributeType object with a value
+        of @value """
+    def __create_date_object_attr_type(self, value):
+        if not value:
+            return None
+        
+        date_obj = common.DateObjectAttributeType(valueOf_= value)
+        
+        return date_obj
 
-
+    """ Returns a CybOX HexBinaryObjectAttributeType object with a value
+        of @value """
+    def __create_hex_binary_object_attr_type(self, value):
+        if not value:
+            return None        
+        
+        hex_obj = common.HexBinaryObjectAttributeType(valueOf_= value)
+        
+        return hex_obj
+    
     """ Extracts the body of the email message from the Message object.
         Multipart MIME documents can embed other multipart documents 
         within them. As a result, a depth-first approach is taken to
@@ -652,14 +892,15 @@ class email_translator:
         and modified. The original is considered under public domain"""
     def __parse_urls(self, list_body_tups):    
         map_urls = {}
+        map_domains = {}
         list_observed_urls = []
+        list_observed_domains = {}
         
         if(self.__verbose_output):
             print "** parsing urls from email body"
             
         url = r"""(?i)\b((?:(https?|ftp)://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?]))"""
         url_re = re.compile(url, re.VERBOSE | re.MULTILINE)
-        
         
         for body_tup in list_body_tups: 
             encoding = body_tup[0]
@@ -669,18 +910,94 @@ class email_translator:
                 body = quopri.decodestring(body)
         
             for match in url_re.findall(body):
-                found_url = match[0]            
+                found_url = match[0]
+                found_domain = pywhois.extract_domain(found_url)
+                
                 if found_url not in list_observed_urls:
                     url_obj = self.__create_url_object(found_url)
-                    cybox_id = self.__create_cybox_id()
-                    map_urls[cybox_id] = url_obj
+                    url_id  = self.__create_cybox_id()
                     list_observed_urls.append(found_url)
-            
-        return map_urls
-
-
+                    url_obj_container = self._newObjContainer(url_id, url_obj)
+                    if found_domain in list_observed_domains:
+                        domain_id = list_observed_domains[found_domain]
+                    else:
+                        domain_related_objs = self.__create_domain_objs(found_domain)
+                        domain_id = domain_related_objs['URI'].idref
+                        list_observed_domains[found_domain] = domain_id
+                        for obj_container in domain_related_objs.values():
+                            map_domains[obj_container.idref] = obj_container
+                    
+                    map_domains[domain_id].add_relationship(url_id, 'URL', 'Extracted_From')
+                    map_domains[domain_id].add_relationship(url_id, 'URL', 'FQDN_Of')
+                    
+                    url_obj_container.add_relationship(domain_id, 'URI', 'Contains')
+                    url_obj_container.add_relationship(self.__get_email_obj_id(), 'Email Message', 'Contained_Within')
+                    self.__add_email_obj_relationship(url_id, 'URL', 'Contains')
+                    map_urls[url_id] = url_obj_container
+                    
+        return (map_urls, map_domains)
+        
+    """Given a dns query, the URI of the domain, a dns record for the domain, and an address class, 
+    adds the necessary relationships and returns a container for the resolved address and the record """
+    def __create_dns_objs(self, query_container, uri_container, dns_record_obj, address_class):
+        addr_container = self._newObjContainer(self.__create_cybox_id(), dns_record_obj.get_IP_Address())
+        record_container = self._newObjContainer(self.__create_cybox_id(), dns_record_obj)
+        
+        #add dns record reference to dns query
+        dns_record_ref = dns_record_object.DNSRecordObjectType(object_reference = record_container.idref)
+        dns_record_ref.set_anyAttributes_({'xsi:type' : 'DNSRecordObj:DNSRecordObjectType'})
+        query_container.obj.set_Answer_Resource_Records(dns_query_object.DNSResourceRecordsType(Resource_Record=[dns_record_ref]))
+        query_container.obj.set_successful(True)
+        
+        record_container.add_relationship(uri_container.idref, 'URI',  'Characterizes')
+        record_container.add_relationship(query_container.idref, 'DNS Query',  'Contained_Within')
+        query_container.add_relationship(record_container.idref, 'DNS Record',  'Contains')
+        uri_container.add_relationship(record_container.idref, 'DNS Record', 'Characterized_By')
+        uri_container.add_relationship(addr_container.idref, 'IP Address', 'Resolved_To')
+        addr_container.add_relationship(uri_container.idref, 'URI', 'Resolved_To')
+        addr_container.add_relationship(query_container.idref, 'DNS Query', 'Contained_Within')
+        addr_container.add_relationship(record_container.idref,'DNS Record','Contained_Within')
+        
+        return (addr_container, record_container)
     
-
+    """Creates new object containers for new domains and objects related to domains (whois, dns, addresses)"""
+    def __create_domain_objs(self, domain):
+        global NAMESERVER
+        
+        new_objs = {}
+        uri_container = self._newObjContainer(self.__create_cybox_id(), self.__create_domain_name_object(domain))
+        
+        whois_obj = self.__create_whois_object(domain)
+        if whois_obj:
+            whois_container = self._newObjContainer(self.__create_cybox_id(), whois_obj)
+            whois_container.add_relationship(uri_container.idref, 'URI',  'Characterizes')
+            uri_container.add_relationship(whois_container.idref, 'WHOIS','Characterized_By')
+            new_objs['Whois'] = whois_container
+        
+        #get ipv4 dns record for domain
+        query_container = self._newObjContainer(self.__create_cybox_id(), self.__create_dns_query_object(domain,'A'))
+        query_container.add_relationship(uri_container.idref, 'URI', 'Searched_For')
+        uri_container.add_relationship(query_container.idref, 'DNS Query', 'Searched_For_By')
+        
+        new_objs['DNSQueryV4'] = query_container
+        dns_record_obj = self.__create_dns_record_object(domain,'A', NAMESERVER)
+        if dns_record_obj:
+            (new_objs['ipv4'], new_objs['DNSResultV4']) = self.__create_dns_objs(query_container, uri_container, dns_record_obj, 'ipv4-addr')
+        
+        
+        #get ipv6 dns record for domain
+        query_container = self._newObjContainer(self.__create_cybox_id(), self.__create_dns_query_object(domain,'AAAA'))
+        query_container.add_relationship(uri_container.idref, 'URI', 'Searched_For')
+        uri_container.add_relationship(query_container.idref, 'DNS Query', 'Searched_For_By')
+        
+        new_objs['DNSQueryV6'] = query_container
+        dns_record_obj = self.__create_dns_record_object(domain,'AAAA', NAMESERVER)
+        if dns_record_obj:
+            (new_objs['ipv6'], new_objs['DNSResultV6']) = self.__create_dns_objs(query_container, uri_container, dns_record_obj, 'ipv6-addr')
+        
+        new_objs['URI'] = uri_container
+        return new_objs
+        
     """ Creates a CybOX AttachmentsType object from the map_files input.
         The input map should be of the form {object_id:cybox_file_object}"""
     def __create_cybox_attachments(self, map_files):
@@ -691,12 +1008,12 @@ class email_translator:
             
             for file_id, f in map_files.iteritems():
                 if(self.is_enabled_inline_files()):
-                    attachments.add_File(f)
+                    attachments.add_File(f.obj)
                 else:    
                     file_obj = file_object.FileObjectType()
                     file_obj.set_anyAttributes_({'xsi:type' : 'FileObj:FileObjectType'})
                     file_obj.set_object_reference(file_id) 
-                    attachments.add_File(file_obj)                    
+                    attachments.add_File(file_obj)
         
         return attachments
 
@@ -721,8 +1038,8 @@ class email_translator:
         relationship (An EmailMessageObject can point to its related
         child objects).
     """
-    def __add_related_objects(self, obj, idref, obj_type):
-        related_object = cybox.RelatedObjectType(idref = idref, type_ = obj_type, relationship = "Contained_Within")
+    def __add_related_objects(self, obj, idref, type_, relationship="Contained Within"):
+        related_object = cybox.RelatedObjectType(idref = idref, type_ = type_, relationship = relationship)
         related_objects = obj.get_Related_Objects()
         if not related_objects:
             related_objects = cybox.RelatedObjectsType()
@@ -738,10 +1055,11 @@ class email_translator:
           sure how to discover the server type/name without developing
           some home-brew signature method
     """
-    def __create_cybox_email_message_object(self, attachments = None, headers = None, optional_headers = None, email_server = None, raw_body = None, raw_headers = None):
+    def __create_cybox_email_message_object(self, attachments = None, links = None, headers = None, optional_headers = None, email_server = None, raw_body = None, raw_headers = None):
         
         email_message_obj = email_message_object.EmailMessageObjectType(
                             Attachments = attachments,
+                            Links = links,
                             Header = headers,
                             Optional_Header = optional_headers,
                             Email_Server = email_server,
@@ -752,50 +1070,43 @@ class email_translator:
 
         return email_message_obj
 
-
-    """ Generates a CybOX Oberservable Document from the input map of CybOX Objects."""
-    def __create_cybox_observables(self, map_objs):    
-        email_obj_map =  map_objs['message']
-        file_obj_map = map_objs['files']
-        url_obj_map = map_objs['urls'] 
+    """ Generates a list of cybox observables given a map of object containers """
+    def __create_cybox_observable_list(self, object_map):
+        list_observables = []
+        for obj_id, obj_cont in object_map.iteritems():
+            observable_id = self.__create_cybox_id("observable")
+            observable   = cybox.ObservableType(id = observable_id)
+            cybox_object = cybox.ObjectType(id = obj_id)
+            cybox_object.set_Defined_Object(obj_cont.obj)
+            cybox_object.set_Related_Objects(obj_cont.get_relationship_objects())
+            stateful_measure = cybox.StatefulMeasureType()    
+            stateful_measure.set_Object(cybox_object)
+            observable.set_Stateful_Measure(stateful_measure)
+            list_observables.append(observable)   
         
-        child_object_map = {}
-        if self.is_enabled_include_attachments() and (not self.is_enabled_inline_files()):
-            child_object_map.update(file_obj_map)
-        
-        if self.is_enabled_include_urls():
-            child_object_map.update(url_obj_map)
-        
-        
-        root_observable_comp = cybox.ObservableCompositionType(operator="AND")
-        root_observable = cybox.ObservableType(id = self.__create_cybox_id("observable"), Observable_Composition = root_observable_comp)
-        root_observables = cybox.ObservablesType(cybox_major_version = "1", cybox_minor_version= "0", Observable = [root_observable])
-        
+        return list_observables
+    
+    """ Generates a CybOX Observable Document from the input map of CybOX Objects."""
+    def __create_cybox_observables(self, map_objs):
         # set up the email observable
-        email_observable = cybox.ObservableType(id = self.__create_cybox_id("observable"))    
+        email_observable = cybox.ObservableType(id = self.__create_cybox_id("observable"))   
+        email_obj_map =  map_objs['message']
         (email_id, email_obj) = email_obj_map.iteritems().next()
         email_stateful_measure = cybox.StatefulMeasureType()
         cybox_email_obj = cybox.ObjectType(id = email_id)
         cybox_email_obj.set_Defined_Object(email_obj)
+        cybox_email_obj.set_Related_Objects(self.__get_email_obj_container().get_relationship_objects())
         email_stateful_measure.set_Object(cybox_email_obj)
         email_observable.set_Stateful_Measure(email_stateful_measure)
+        list_observables = [email_observable]
+        root_observables = cybox.ObservablesType(cybox_major_version = "1", cybox_minor_version= "0", Observable = list_observables)
         
-        map_child_observables = {}
-        for obj_id, obj in child_object_map.iteritems():
-            observable_id = self.__create_cybox_id("observable")
-            observable = cybox.ObservableType(id = observable_id)
-            cybox_object = cybox.ObjectType(id = obj_id)
-            cybox_object.set_Defined_Object(obj)
-            self.__add_related_objects(cybox_object, email_id, "Email Message")    
-            stateful_measure = cybox.StatefulMeasureType()    
-            stateful_measure.set_Object(cybox_object)
-            observable.set_Stateful_Measure(stateful_measure)
-            map_child_observables[obj_id] = observable
+        if self.is_enabled_include_attachments() and (not self.is_enabled_inline_files()):
+            list_observables.extend(self.__create_cybox_observable_list(map_objs['files']))
         
-        for observable in map_child_observables.itervalues():
-            root_observable_comp.add_Observable(observable)
-        
-        root_observable_comp.add_Observable(email_observable)
+        if self.is_enabled_include_urls():
+            list_observables.extend(self.__create_cybox_observable_list(map_objs['urls']))
+            list_observables.extend(self.__create_cybox_observable_list(map_objs['domains']))
         
         return root_observables
   
@@ -843,19 +1154,23 @@ class email_translator:
             cybox_raw_body = None
         
         if(self.is_enabled_include_urls()):
-            map_urls = self.__parse_urls(list_raw_body)
+            (map_urls, map_domains) = self.__parse_urls(list_raw_body)
+            link_objs = [x.obj for x in map_urls.values()]
+            cybox_links = email_message_object.LinksType(Link = link_objs)
         else:
-            map_urls = None
+            (map_urls, map_domains) = None
+            cybox_links = None
         
-        email_message_id = self.__create_cybox_id("object")
+        email_message_id = self.__get_email_obj_id()
         cybox_email_message_obj =   self.__create_cybox_email_message_object( attachments = cybox_attachments,
+                                                                              links = cybox_links,
                                                                               headers = cybox_headers,
                                                                               optional_headers = cybox_optional_headers,
                                                                               raw_body = cybox_raw_body,
                                                                               raw_headers = cybox_raw_headers )
         map_email_message = {email_message_id:cybox_email_message_obj}
  
-        return {'message':map_email_message, 'files':map_files, 'urls':map_urls }
+        return {'message':map_email_message, 'files':map_files, 'urls':map_urls, 'domains':map_domains }
  
  
     """ Returns a CybOX Email Message Object """ 
@@ -891,12 +1206,18 @@ class email_translator:
         xmlns:FileObj="http://cybox.mitre.org/objects#FileObject"\
         xmlns:URIObj="http://cybox.mitre.org/objects#URIObject"\
         xmlns:EmailMessageObj="http://cybox.mitre.org/objects#EmailMessageObject"\
-        xsi:schemaLocation="http://cybox.mitre.org/Common_v1 http://cybox.mitre.org/XMLSchema/cybox_common_types_v1.0(draft).xsd\
-        http://cybox.mitre.org/objects#AddressObject http://cybox.mitre.org/XMLSchema/objects/Address/Address_Object_1.1.xsd\
-        http://cybox.mitre.org/objects#FileObject http://cybox.mitre.org/XMLSchema/objects/File/File_Object_1.2.xsd\
-        http://cybox.mitre.org/objects#URIObject http://cybox.mitre.org/XMLSchema/objects/URI/URI_Object_1.1.xsd\
-        http://cybox.mitre.org/objects#EmailMessageObject http://cybox.mitre.org/XMLSchema/objects/Email_Message/Email_Message_Object_1.1.xsd\
-        http://cybox.mitre.org/cybox_v1 http://cybox.mitre.org/XMLSchema/cybox_core_v1.0(draft).xsd"')
+        xmlns:WhoisObj="http://cybox.mitre.org/objects#WhoisObject"\
+        xmlns:DNSRecordObj="http://cybox.mitre.org/objects#DNSRecordObject"\
+        xmlns:DNSQueryObj="http://cybox.mitre.org/objects#DNSQueryObject"\
+        xsi:schemaLocation="http://cybox.mitre.org/Common_v1 http://cybox.mitre.org/XMLSchema/cybox_common_types_v1.0.xsd\
+        http://cybox.mitre.org/objects#AddressObject http://cybox.mitre.org/XMLSchema/objects/Address/Address_Object_1.2.xsd\
+        http://cybox.mitre.org/objects#FileObject http://cybox.mitre.org/XMLSchema/objects/File/File_Object_1.3.xsd\
+        http://cybox.mitre.org/objects#URIObject http://cybox.mitre.org/XMLSchema/objects/URI/URI_Object_1.2.xsd\
+        http://cybox.mitre.org/objects#EmailMessageObject http://cybox.mitre.org/XMLSchema/objects/Email_Message/Email_Message_Object_1.2.xsd\
+        http://cybox.mitre.org/objects#WhoisObject http://cybox.mitre.org/XMLSchema/objects/Whois/Whois_Object_1.0.xsd\
+        http://cybox.mitre.org/objects#DNSQueryObject http://cybox.mitre.org/XMLSchema/objects/DNS_Query/DNS_Query_Object_1.0.xsd\
+        http://cybox.mitre.org/objects#DNSRecordObject http://cybox.mitre.org/XMLSchema/objects/DNS_Record/DNS_Record_Object_1.1.xsd\
+        http://cybox.mitre.org/cybox_v1 http://cybox.mitre.org/XMLSchema/cybox_core_v1.0.xsd"')
         
 
 # END CLASS
@@ -933,11 +1254,15 @@ def parse_optional_header_options(arg):
         
     return list_headers
 
-    
+'''Function to provide a default for a default dictionary'''
+def none_factory():
+    return None
+  
 def main():
     global VERBOSE_OUTPUT
     global ALLOWED_HEADER_FIELDS
     global ALLOWED_OPTIONAL_HEADER_FIELDS
+    global NAMESERVER
    
     output_filename = 'output.xml'
     args = sys.argv[1:]
@@ -949,8 +1274,10 @@ def main():
     
     (OPT_INLINE_FILES, OPT_RAW_BODY, 
      OPT_RAW_HEADERS, OPT_ATTACHMENTS, 
-     OPT_URLS, OPT_HEADERS, OPT_OPT_HEADERS) =  ('inline-files', 'include-raw-body', 'include-raw-headers', 
-                                                 'include-attachments', 'include-urls', 'include-headers', 'include-opt-headers')
+     OPT_URLS, OPT_HEADERS, 
+     OPT_OPT_HEADERS, OPT_HTTP_WHOIS) =  ( 'inline-files', 'include-raw-body', 'include-raw-headers', 
+                                           'include-attachments', 'include-urls', 'include-headers', 
+                                           'include-opt-headers', 'no-http-whois')
         
     for i in range(0,len(args)):
         if args[i] == '-o':
@@ -961,6 +1288,8 @@ def main():
             input_data = sys.stdin
         elif args[i] == '-i':
             input_data = open(args[i+1], 'r')
+        elif args[i] == '--use-dns-server':
+            NAMESERVER = args[i+1]
         elif args[i] == '--headers':
             header_options = parse_header_options(args[i+1])
         elif args[i] == '--opt-headers':
@@ -977,6 +1306,8 @@ def main():
             map_general_options[OPT_URLS] = False
         elif args[i] == '--exclude-opt-headers':
             map_general_options[OPT_OPT_HEADERS] = False
+        elif args[i] == '--no-http-whois':
+            map_general_options[OPT_HTTP_WHOIS] = False
         elif args[i] == '-h':
             usage()
             
@@ -1003,7 +1334,9 @@ def main():
         if(OPT_HEADERS in map_general_options):
             translator.set_include_headers(map_general_options[OPT_HEADERS])
         if(OPT_OPT_HEADERS in map_general_options):
-            translator.set_include_opt_headers(map_general_options[OPT_OPT_HEADERS])
+            translator.set_include_opt_headers(map_general_options[OPT_OPT_HEADERS])        
+        if(OPT_HTTP_WHOIS in map_general_options):
+            translator.set_use_http_whois(map_general_options[OPT_HTTP_WHOIS])
         
         cybox_objects = translator.generate_cybox_from_email_file(input_data)
         translator.write_cybox(cybox_objects, output_filename) 

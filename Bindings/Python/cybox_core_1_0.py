@@ -908,12 +908,12 @@ class ObservableType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Observable_Composition(obj_)
         elif nodeName_ == 'Noisiness':
-            obj_ = NoisinessEnum.factory()
-            obj_.build(child_)
+            obj_ = child_.text 
+            obj_ = self.gds_validate_string(obj_, node, 'Noisiness') 
             self.set_Noisiness(obj_)
         elif nodeName_ == 'Ease_of_Obfuscation':
-            obj_ = EaseOfObfuscationEnum.factory()
-            obj_.build(child_)
+            obj_ = child_.text 
+            obj_ = self.gds_validate_string(obj_, node, 'Ease_of_Obfuscation') 
             self.set_Ease_of_Obfuscation(obj_)
         elif nodeName_ == 'Obfuscation_Techniques':
             obj_ = ObfuscationTechniquesType.factory()
