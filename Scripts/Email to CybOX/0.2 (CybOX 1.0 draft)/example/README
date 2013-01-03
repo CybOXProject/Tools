@@ -1,1 +1,0 @@
-This is an example of the usage of the Email to CybOX script: the email_confidential.txt file, containing the email headers for a notional suspicious email, was used as input, and translated into its CybOX representation in the email_confidential_output.xml file.
