@@ -1,0 +1,179 @@
+<cybox:Observables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:openioc="http://schemas.mandiant.com/2010/ioc" xmlns:cybox="http://cybox.mitre.org/cybox_v1" xmlns:AccountObj="http://cybox.mitre.org/objects#AccountObject" xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject" xmlns:Common="http://cybox.mitre.org/Common_v1" xmlns:DiskObj="http://cybox.mitre.org/objects#DiskObject" xmlns:DiskPartitionObj="http://cybox.mitre.org/objects#DiskPartitionObject" xmlns:DNSRecordObj="http://cybox.mitre.org/objects#DNSRecordObject" xmlns:FileObj="http://cybox.mitre.org/objects#FileObject" xmlns:MemoryObj="http://cybox.mitre.org/objects#MemoryObject" xmlns:NetworkRouteEntryObj="http://cybox.mitre.org/objects#NetworkRouteEntryObject" xmlns:PortObj="http://cybox.mitre.org/objects#PortObject" xmlns:ProcessObj="http://cybox.mitre.org/objects#ProcessObject" xmlns:SystemObj="http://cybox.mitre.org/objects#SystemObject" xmlns:UnixFileObj="http://cybox.mitre.org/objects#UnixFileObject" xmlns:UserAccountObj="http://cybox.mitre.org/objects#UserAccountObject" xmlns:VolumeObj="http://cybox.mitre.org/objects#VolumeObject" xmlns:WinDriverObj="http://cybox.mitre.org/objects#WinDriverObject" xmlns:WinEventLogObj="http://cybox.mitre.org/objects#WinEventLogObject" xmlns:WinExecutableFileObj="http://cybox.mitre.org/objects#WinExecutableFileObject" xmlns:WinFileObj="http://cybox.mitre.org/objects#WinFileObject" xmlns:WinHandleObj="http://cybox.mitre.org/objects#WinHandleObject" xmlns:WinKernelHookObj="http://cybox.mitre.org/objects#WinKernelHookObject" xmlns:WinProcessObj="http://cybox.mitre.org/objects#WinProcessObject" xmlns:WinRegistryKeyObj="http://cybox.mitre.org/objects#WinRegistryKeyObject" xmlns:WinServiceObj="http://cybox.mitre.org/objects#WinServiceObject" xmlns:WinSystemObj="http://cybox.mitre.org/objects#WinSystemObject" xmlns:WinUserAccountObj="http://cybox.mitre.org/objects#WinUserAccountObject" xmlns:WinVolumeObj="http://cybox.mitre.org/objects#WinVolumeObject" xsi:schemaLocation="http://cybox.mitre.org/Common_v1 http://cybox.mitre.org/XMLSchema/cybox_common_types_v1.0(draft).xsd http://cybox.mitre.org/objects#AccountObject http://cybox.mitre.org/XMLSchema/objects/Account/Account_Object_1.1.xsd http://cybox.mitre.org/objects#AddressObject http://cybox.mitre.org/XMLSchema/objects/Address/Address_Object_1.1.xsd http://cybox.mitre.org/objects#DiskObject http://cybox.mitre.org/XMLSchema/objects/Disk/Disk_Object_1.2.xsd http://cybox.mitre.org/objects#DiskPartitionObject http://cybox.mitre.org/XMLSchema/objects/Disk_Partition/Disk_Partition_Object_1.2.xsd http://cybox.mitre.org/objects#DNSRecordObject http://cybox.mitre.org/XMLSchema/objects/DNS_Record/DNS_Record_Object_1.0.xsd http://cybox.mitre.org/objects#FileObject http://cybox.mitre.org/XMLSchema/objects/File/File_Object_1.2.xsd http://cybox.mitre.org/objects#MemoryObject http://cybox.mitre.org/XMLSchema/objects/Memory/Memory_Object_1.1.xsd http://cybox.mitre.org/objects#NetworkRouteEntryObject http://cybox.mitre.org/XMLSchema/objects/Network_Route_Entry/Network_Route_Entry_Object_1.0.xsd http://cybox.mitre.org/objects#PortObject http://cybox.mitre.org/XMLSchema/objects/Port/Port_Object_1.2.xsd http://cybox.mitre.org/objects#ProcessObject http://cybox.mitre.org/XMLSchema/objects/Process/Process_Object_1.2.xsd http://cybox.mitre.org/objects#SystemObject http://cybox.mitre.org/XMLSchema/objects/System/System_Object_1.2.xsd http://cybox.mitre.org/objects#UnixFileObject http://cybox.mitre.org/XMLSchema/objects/Unix_File/Unix_File_Object_1.2.xsd http://cybox.mitre.org/objects#UserAccountObject http://cybox.mitre.org/XMLSchema/objects/User_Account/User_Account_Object_1.1.xsd http://cybox.mitre.org/objects#VolumeObject http://cybox.mitre.org/XMLSchema/objects/Volume/Volume_Object_1.2.xsd http://cybox.mitre.org/objects#WinDriverObject http://cybox.mitre.org/XMLSchema/objects/Win_Driver/Win_Driver_Object_1.1.xsd http://cybox.mitre.org/objects#WinEventLogObject http://cybox.mitre.org/XMLSchema/objects/Win_Event_Log/Win_Event_Log_Object_1.1.xsd http://cybox.mitre.org/objects#WinExecutableFileObject http://cybox.mitre.org/XMLSchema/objects/Win_Executable_File/Win_Executable_File_Object_1.2.xsd http://cybox.mitre.org/objects#WinFileObject http://cybox.mitre.org/XMLSchema/objects/Win_File/Win_File_Object_1.2.xsd http://cybox.mitre.org/objects#WinHandleObject http://cybox.mitre.org/XMLSchema/objects/Win_Handle/Win_Handle_Object_1.2.xsd http://cybox.mitre.org/objects#WinKernelHookObject http://cybox.mitre.org/XMLSchema/objects/Win_Kernel_Hook/Win_Kernel_Hook_Object_1.2.xsd http://cybox.mitre.org/objects#WinProcessObject http://cybox.mitre.org/XMLSchema/objects/Win_Process/Win_Process_Object_1.2.xsd http://cybox.mitre.org/objects#WinRegistryKeyObject http://cybox.mitre.org/XMLSchema/objects/Win_Registry_Key/Win_Registry_Key_Object_1.2.xsd http://cybox.mitre.org/objects#WinServiceObject http://cybox.mitre.org/XMLSchema/objects/Win_Service/Win_Service_Object_1.2.xsd http://cybox.mitre.org/objects#WinServiceObject http://cybox.mitre.org/XMLSchema/objects/Win_System/Win_System_Object_1.1.xsd http://cybox.mitre.org/objects#WinUserAccountObject http://cybox.mitre.org/XMLSchema/objects/Win_User_Account/Win_User_Account_Object_1.2.xsd http://cybox.mitre.org/objects#WinVolumeObject http://cybox.mitre.org/XMLSchema/objects/Win_Volume/Win_Volume_Object_1.2.xsd http://cybox.mitre.org/cybox_v1 http://cybox.mitre.org/XMLSchema/cybox_core_v1.0(draft).xsd" cybox_major_version="1" cybox_minor_version="0">
+    <cybox:Observable id="openioc:indicator-item-08e029be-0648-438e-b9af-7916961efa2e">
+        <cybox:Stateful_Measure>
+            <cybox:Object id="cybox:object-1">
+                <cybox:Defined_Object xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
+                    <WinRegistryKeyObj:Key datatype="String" condition="Equals">SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings</WinRegistryKeyObj:Key>
+                    <WinRegistryKeyObj:Hive datatype="String" condition="Equals">HKEY_LOCAL_MACHINE</WinRegistryKeyObj:Hive>
+                    <WinRegistryKeyObj:Values>
+                        <WinRegistryKeyObj:Value>
+                            <WinRegistryKeyObj:Name datatype="String" condition="Equals">6</WinRegistryKeyObj:Name>
+                            <WinRegistryKeyObj:Data datatype="String" condition="Equals">asdfgh</WinRegistryKeyObj:Data>
+                        </WinRegistryKeyObj:Value>
+                    </WinRegistryKeyObj:Values>
+                </cybox:Defined_Object>
+            </cybox:Object>
+        </cybox:Stateful_Measure>
+    </cybox:Observable>
+    <cybox:Observable id="openioc:indicator-item-807f288a-b325-4ad5-b433-60eb26978a7f">
+        <cybox:Stateful_Measure>
+            <cybox:Object id="cybox:object-2">
+                <cybox:Defined_Object xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
+                    <WinRegistryKeyObj:Values>
+                        <WinRegistryKeyObj:Value>
+                            <WinRegistryKeyObj:Name datatype="String" condition="Equals">6</WinRegistryKeyObj:Name>
+                        </WinRegistryKeyObj:Value>
+                    </WinRegistryKeyObj:Values>
+                </cybox:Defined_Object>
+            </cybox:Object>
+        </cybox:Stateful_Measure>
+    </cybox:Observable>
+    <cybox:Observable id="openioc:indicator-item-73ebf54e-2f31-42c2-8bcf-dd2d98863e64">
+        <cybox:Stateful_Measure>
+            <cybox:Object id="cybox:object-3">
+                <cybox:Defined_Object xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
+                    <WinRegistryKeyObj:Values>
+                        <WinRegistryKeyObj:Value>
+                            <WinRegistryKeyObj:Name datatype="String" condition="Equals">9</WinRegistryKeyObj:Name>
+                        </WinRegistryKeyObj:Value>
+                    </WinRegistryKeyObj:Values>
+                </cybox:Defined_Object>
+            </cybox:Object>
+        </cybox:Stateful_Measure>
+    </cybox:Observable>
+    <cybox:Observable id="openioc:indicator-item-6e9e98ec-21f0-480c-9df1-2de561647ee4">
+        <cybox:Stateful_Measure>
+            <cybox:Object id="cybox:object-4">
+                <cybox:Defined_Object xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
+                    <WinRegistryKeyObj:Key datatype="String" condition="Equals">Software\Microsoft\Windows\CurrentVersion\Internet Settings</WinRegistryKeyObj:Key>
+                    <WinRegistryKeyObj:Hive datatype="String" condition="Equals">HKEY_CURRENT_USER</WinRegistryKeyObj:Hive>
+                </cybox:Defined_Object>
+            </cybox:Object>
+        </cybox:Stateful_Measure>
+    </cybox:Observable>
+    <cybox:Observable id="openioc:indicator-item-373d1664-87c4-465b-b970-28a7a52693ad">
+        <cybox:Stateful_Measure>
+            <cybox:Object id="cybox:object-5">
+                <cybox:Defined_Object xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
+                    <WinRegistryKeyObj:Values>
+                        <WinRegistryKeyObj:Value>
+                            <WinRegistryKeyObj:Name datatype="String" condition="Equals">6</WinRegistryKeyObj:Name>
+                        </WinRegistryKeyObj:Value>
+                    </WinRegistryKeyObj:Values>
+                </cybox:Defined_Object>
+            </cybox:Object>
+        </cybox:Stateful_Measure>
+    </cybox:Observable>
+    <cybox:Observable id="openioc:indicator-item-d7f9c12f-2919-48db-9703-edce92cd646e">
+        <cybox:Stateful_Measure>
+            <cybox:Object id="cybox:object-6">
+                <cybox:Defined_Object xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
+                    <WinRegistryKeyObj:Values>
+                        <WinRegistryKeyObj:Value>
+                            <WinRegistryKeyObj:Name datatype="String" condition="Equals">9</WinRegistryKeyObj:Name>
+                        </WinRegistryKeyObj:Value>
+                    </WinRegistryKeyObj:Values>
+                </cybox:Defined_Object>
+            </cybox:Object>
+        </cybox:Stateful_Measure>
+    </cybox:Observable>
+    <cybox:Observable id="openioc:indicator-item-406c8172-c871-4613-b6ad-43eebfc97de4">
+        <cybox:Stateful_Measure>
+            <cybox:Object id="cybox:object-7">
+                <cybox:Defined_Object xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
+                    <WinRegistryKeyObj:Key datatype="String" condition="Equals">*\Software\Microsoft\Windows\CurrentVersion\Internet Settings</WinRegistryKeyObj:Key>
+                    <WinRegistryKeyObj:Hive datatype="String" condition="Equals">HKEY_USERS</WinRegistryKeyObj:Hive>
+                </cybox:Defined_Object>
+            </cybox:Object>
+        </cybox:Stateful_Measure>
+    </cybox:Observable>
+    <cybox:Observable id="openioc:indicator-item-0d3e3586-f605-4038-a919-cb100c3d2f5a">
+        <cybox:Stateful_Measure>
+            <cybox:Object id="cybox:object-8">
+                <cybox:Defined_Object xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
+                    <WinRegistryKeyObj:Values>
+                        <WinRegistryKeyObj:Value>
+                            <WinRegistryKeyObj:Name datatype="String" condition="Equals">6</WinRegistryKeyObj:Name>
+                        </WinRegistryKeyObj:Value>
+                    </WinRegistryKeyObj:Values>
+                </cybox:Defined_Object>
+            </cybox:Object>
+        </cybox:Stateful_Measure>
+    </cybox:Observable>
+    <cybox:Observable id="openioc:indicator-item-74b20858-473d-4922-bd57-53caf3a4c06e">
+        <cybox:Stateful_Measure>
+            <cybox:Object id="cybox:object-9">
+                <cybox:Defined_Object xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
+                    <WinRegistryKeyObj:Values>
+                        <WinRegistryKeyObj:Value>
+                            <WinRegistryKeyObj:Name datatype="String" condition="Equals">9</WinRegistryKeyObj:Name>
+                        </WinRegistryKeyObj:Value>
+                    </WinRegistryKeyObj:Values>
+                </cybox:Defined_Object>
+            </cybox:Object>
+        </cybox:Stateful_Measure>
+    </cybox:Observable>
+    <cybox:Observable id="openioc:indicator-item-e6d10b51-1aba-40ba-aefc-d58e314107d2">
+        <cybox:Stateful_Measure>
+            <cybox:Object id="cybox:object-10">
+                <cybox:Defined_Object xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
+                    <WinRegistryKeyObj:Values>
+                        <WinRegistryKeyObj:Value>
+                            <WinRegistryKeyObj:Datatype datatype="String" condition="Equals">REG_BINARY</WinRegistryKeyObj:Datatype>
+                        </WinRegistryKeyObj:Value>
+                    </WinRegistryKeyObj:Values>
+                </cybox:Defined_Object>
+            </cybox:Object>
+        </cybox:Stateful_Measure>
+    </cybox:Observable>
+    <cybox:Observable id="openioc:indicator-1">
+        <cybox:Title>Detects an infected system from the ponmocup malware (with what I think is the most common basic indicator)
+References:
+http://c-apt-ure.blogspot.com/2012/02/not-apt-but-nasty-malware-ponmocup.html
+http://c-apt-ure.blogspot.com/2012/03/ponmocup-lots-changed-but-not-all.html
+http://www9.dyndns-server.com:8080/pub/botnet-links.html
+http://www.threatexpert.com/report.aspx?md5=1098b041b743fa06e276eca074042b3d
+http://www.sophos.com/en-us/threat-center/threat-analyses/viruses-and-spyware/Mal~Ponmocup-A/detailed-analysis.aspx
+</cybox:Title>
+        <cybox:Observable_Composition operator="OR">
+            <cybox:Observable id="openioc:indicator-ed75b15b-b009-47fb-ada9-d11c1d48d2fc">
+                <cybox:Observable_Composition operator="AND">
+                    <cybox:Observable idref="openioc:indicator-item-08e029be-0648-438e-b9af-7916961efa2e"/>
+                    <cybox:Observable id="openioc:indicator-20f9ed67-969a-4444-9b51-5f35f9f32b9b">
+                        <cybox:Observable_Composition operator="OR">
+                            <cybox:Observable idref="openioc:indicator-item-807f288a-b325-4ad5-b433-60eb26978a7f"/>
+                            <cybox:Observable idref="openioc:indicator-item-73ebf54e-2f31-42c2-8bcf-dd2d98863e64"/>
+                        </cybox:Observable_Composition>
+                    </cybox:Observable>
+                </cybox:Observable_Composition>
+            </cybox:Observable>
+            <cybox:Observable id="openioc:indicator-aceb4484-30c4-406c-9b89-28d36f8faf00">
+                <cybox:Observable_Composition operator="AND">
+                    <cybox:Observable idref="openioc:indicator-item-6e9e98ec-21f0-480c-9df1-2de561647ee4"/>
+                    <cybox:Observable id="openioc:indicator-08234076-3af7-400f-9312-9fcd10dfbab6">
+                        <cybox:Observable_Composition operator="OR">
+                            <cybox:Observable idref="openioc:indicator-item-373d1664-87c4-465b-b970-28a7a52693ad"/>
+                            <cybox:Observable idref="openioc:indicator-item-d7f9c12f-2919-48db-9703-edce92cd646e"/>
+                        </cybox:Observable_Composition>
+                    </cybox:Observable>
+                </cybox:Observable_Composition>
+            </cybox:Observable>
+            <cybox:Observable id="openioc:indicator-8019e434-6b65-4340-b6fb-1081acd264a5">
+                <cybox:Observable_Composition operator="AND">
+                    <cybox:Observable idref="openioc:indicator-item-406c8172-c871-4613-b6ad-43eebfc97de4"/>
+                    <cybox:Observable id="openioc:indicator-b428b3ae-c093-4baa-9950-afbf8f266a80">
+                        <cybox:Observable_Composition operator="OR">
+                            <cybox:Observable idref="openioc:indicator-item-0d3e3586-f605-4038-a919-cb100c3d2f5a"/>
+                            <cybox:Observable idref="openioc:indicator-item-74b20858-473d-4922-bd57-53caf3a4c06e"/>
+                        </cybox:Observable_Composition>
+                    </cybox:Observable>
+                    <cybox:Observable id="openioc:indicator-2bf769cd-0450-4161-845b-e31a02d3fed1">
+                        <cybox:Observable_Composition operator="AND">
+                            <cybox:Observable idref="openioc:indicator-item-e6d10b51-1aba-40ba-aefc-d58e314107d2"/>
+                        </cybox:Observable_Composition>
+                    </cybox:Observable>
+                </cybox:Observable_Composition>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+</cybox:Observables>

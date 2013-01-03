@@ -1,0 +1,556 @@
+<cybox:Observables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Common="http://cybox.mitre.org/Common_v1" xmlns:cybox="http://cybox.mitre.org/cybox_v1" xmlns:PacketObj="http://cybox.mitre.org/objects#PacketObject" xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject" xmlns:PortObj="http://cybox.mitre.org/objects#PortObject" xsi:schemaLocation="http://cybox.mitre.org/Common_v1 http://cybox.mitre.org/XMLSchema/cybox_common_types_v1.0(draft).xsd http://cybox.mitre.org/XMLSchema/objects#PacketObject http://cybox.mitre.org/XMLSchema/objects/Network_Packet/Network_Packet_Object_1.0.xsd http://cybox.mitre.org/cybox_v1 http://cybox.mitre.org/XMLSchema/cybox_core_v1.0(draft).xsd" cybox_major_version="1" cybox_minor_version="0">
+    <cybox:Observable id="cybox:observable-16693">
+        <cybox:Title>BOTNET-CNC Torpig bot sinkhole server DNS lookup attempt</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-1">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:UDP>
+                                    <PacketObj:UDP_Header>
+                                        <PacketObj:DestPort>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">53</PortObj:Port_Value>
+                                        </PacketObj:DestPort>
+                                    </PacketObj:UDP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[torpig-sinkhole|03|org]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:UDP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-18715">
+        <cybox:Title>BOTNET-CNC Ozdok botnet communication with C&amp;C server attempt</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-2">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:TCP_Header>
+                                        <PacketObj:Dest_Port>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">80</PortObj:Port_Value>
+                                        </PacketObj:Dest_Port>
+                                    </PacketObj:TCP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[DB FD 37 7F 11 01 B9 E5]]></Common:Data_Segment>
+                                        <Common:Offset datatype="Int">2</Common:Offset>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-10114">
+        <cybox:Title>BOTNET-CNC Trojan Peacomm command and control propagation detected</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-3">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:UDP>
+                                    <PacketObj:UDP_Header>
+                                        <PacketObj:SrcPort>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">7871</PortObj:Port_Value>
+                                        </PacketObj:SrcPort>
+                                    </PacketObj:UDP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[E3 0C]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:UDP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-4">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:UDP>
+                                    <PacketObj:UDP_Header>
+                                        <PacketObj:SrcPort>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">7871</PortObj:Port_Value>
+                                        </PacketObj:SrcPort>
+                                    </PacketObj:UDP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[00 00 00 00 A0 0F 00]]></Common:Data_Segment>
+                                        <Common:Offset datatype="Int">18</Common:Offset>
+                                    </PacketObj:Data>
+                                </PacketObj:UDP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-10113">
+        <cybox:Title>BOTNET-CNC Trojan Peacomm command and control propagation detected</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-5">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:UDP>
+                                    <PacketObj:UDP_Header>
+                                        <PacketObj:SrcPort>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">4000</PortObj:Port_Value>
+                                        </PacketObj:SrcPort>
+                                    </PacketObj:UDP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[E3 0C]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:UDP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-6">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:UDP>
+                                    <PacketObj:UDP_Header>
+                                        <PacketObj:SrcPort>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">4000</PortObj:Port_Value>
+                                        </PacketObj:SrcPort>
+                                    </PacketObj:UDP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[00 00 00 00 A0 0F 00]]></Common:Data_Segment>
+                                        <Common:Offset datatype="Int">18</Common:Offset>
+                                    </PacketObj:Data>
+                                </PacketObj:UDP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-15730">
+        <cybox:Title>BOTNET-CNC Delf Trojan POST attempt</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-7">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Text</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[tip]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-8">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Text</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[&cli]]></Common:Data_Segment>
+                                        <Common:Search_Distance datatype="Int">0</Common:Search_Distance>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-9">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Text</Common:Data_Format>
+                                        <Common:Data_Segment pattern_type="Regex" datatype="String" regex_syntax="PCRE" condition="FitsPattern"><![CDATA[/tip\x3D[a-zA-Z]+\x26cli\x3D[a-zA-Z]+\x26tipo\x3Dcli\x26inf\x3D/smi]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-16297">
+        <cybox:Title>BOTNET-CNC Palevo bot DNS request for C&amp;C attempt</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-10">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:UDP>
+                                    <PacketObj:UDP_Header>
+                                        <PacketObj:DestPort>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">53</PortObj:Port_Value>
+                                        </PacketObj:DestPort>
+                                    </PacketObj:UDP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[butterfly|05|sinip|02|es]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:UDP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-16299">
+        <cybox:Title>BOTNET-CNC Palevo bot DNS request attempt</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-11">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:UDP>
+                                    <PacketObj:UDP_Header>
+                                        <PacketObj:DestPort>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">53</PortObj:Port_Value>
+                                        </PacketObj:DestPort>
+                                    </PacketObj:UDP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[bfisback|05|no-ip|03|org]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:UDP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-16298">
+        <cybox:Title>BOTNET-CNC Palevo bot DNS request attempt</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-12">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:UDP>
+                                    <PacketObj:UDP_Header>
+                                        <PacketObj:DestPort>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">53</PortObj:Port_Value>
+                                        </PacketObj:DestPort>
+                                    </PacketObj:UDP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[qwertasdfg|05|sinip|02|es]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:UDP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-16302">
+        <cybox:Title>BOTNET-CNC Virut DNS request for C&amp;C attempt</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-13">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:UDP>
+                                    <PacketObj:UDP_Header>
+                                        <PacketObj:DestPort>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">53</PortObj:Port_Value>
+                                        </PacketObj:DestPort>
+                                    </PacketObj:UDP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[irc|04|zief|02|pl]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:UDP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-16303">
+        <cybox:Title>BOTNET-CNC Virut DNS request attempt</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-14">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:UDP>
+                                    <PacketObj:UDP_Header>
+                                        <PacketObj:DestPort>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">53</PortObj:Port_Value>
+                                        </PacketObj:DestPort>
+                                    </PacketObj:UDP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[put|05|ghura|02|pl]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:UDP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-16304">
+        <cybox:Title>BOTNET-CNC Virut DNS request attempt</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-15">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:UDP>
+                                    <PacketObj:UDP_Header>
+                                        <PacketObj:DestPort>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">53</PortObj:Port_Value>
+                                        </PacketObj:DestPort>
+                                    </PacketObj:UDP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[proxim|09|ircgalaxy|02|pl]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:UDP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-16368">
+        <cybox:Title>BOTNET-CNC Hydraq/Aurora connection to C&amp;C server attempt</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-16">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:TCP_Header>
+                                        <PacketObj:Dest_Port>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">443</PortObj:Port_Value>
+                                        </PacketObj:Dest_Port>
+                                    </PacketObj:TCP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[FF FF FF FF FF FF 00 00 FE FF FF FF FF FF FF FF FF FF 88 FF]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-16526">
+        <cybox:Title>BOTNET-CNC VanBot IRC communication attempt</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-17">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:TCP_Header>
+                                        <PacketObj:Dest_Port>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">7382</PortObj:Port_Value>
+                                        </PacketObj:Dest_Port>
+                                    </PacketObj:TCP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[JOIN |23|siwa]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-18458">
+        <cybox:Title>BOTNET-CNC Night Dragon initial beacon</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-18">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[68 57 24 13]]></Common:Data_Segment>
+                                        <Common:Offset datatype="Int">12</Common:Offset>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-19">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[01 50]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-18459">
+        <cybox:Title>BOTNET-CNC Night Dragon keepalive message</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-20">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[68 57 24 13]]></Common:Data_Segment>
+                                        <Common:Offset datatype="Int">12</Common:Offset>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-21">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[03 50]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-19732">
+        <cybox:Title>BOTNET-CNC Win32.Idicaf.B outbound connection</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-22">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Size datatype="String" condition="Equals" units="Bytes">732</Common:Data_Size>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[F335|00 00 00 00]]></Common:Data_Segment>
+                                        <Common:Offset datatype="Int">16</Common:Offset>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-23">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Size datatype="String" condition="Equals" units="Bytes">732</Common:Data_Size>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[Service|20|Pack]]></Common:Data_Segment>
+                                        <Common:Search_Distance datatype="Int">0</Common:Search_Distance>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable-20527">
+        <cybox:Title>BOTNET-CNC Sirefef initial C&amp;C connection outbound connection</cybox:Title>
+        <cybox:Observable_Composition operator="AND">
+            <cybox:Observable>
+                <cybox:Stateful_Measure>
+                    <cybox:Object id="cybox:object-24">
+                        <cybox:Defined_Object xsi:type="PacketObj:NetworkPacketType">
+                            <PacketObj:Transport_Layer>
+                                <PacketObj:TCP>
+                                    <PacketObj:TCP_Header>
+                                        <PacketObj:Dest_Port>
+                                            <PortObj:Port_Value datatype="PositiveInteger" condition="Equals">22292</PortObj:Port_Value>
+                                        </PacketObj:Dest_Port>
+                                    </PacketObj:TCP_Header>
+                                    <PacketObj:Data>
+                                        <Common:Data_Format>Binary</Common:Data_Format>
+                                        <Common:Data_Segment datatype="String" condition="Contains"><![CDATA[E5 AA C0 31 A9 BF DC CB 31 5B]]></Common:Data_Segment>
+                                    </PacketObj:Data>
+                                </PacketObj:TCP>
+                            </PacketObj:Transport_Layer>
+                        </cybox:Defined_Object>
+                    </cybox:Object>
+                </cybox:Stateful_Measure>
+            </cybox:Observable>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+</cybox:Observables>
