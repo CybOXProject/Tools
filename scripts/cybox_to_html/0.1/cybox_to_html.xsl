@@ -484,11 +484,11 @@ ikirillov@mitre.org
                 <table id="hor-minimalist-a">
                     <thead>
                         <tr>
-                            <xsl:if test="@condition != 'IsInRange'">
-                                <th scope="col">Value</th>
-                            </xsl:if>
                             <xsl:if test="@condition">
                                 <th scope="col">Condition</th>
+                            </xsl:if>
+                            <xsl:if test="@condition != 'IsInRange'">
+                                <th scope="col">Value</th>
                             </xsl:if>
                             <xsl:if test="@start_range">
                                 <th scope="col">Start Range</th>
@@ -508,11 +508,11 @@ ikirillov@mitre.org
                         </tr>
                     </thead>
                     <TR>
-                        <xsl:if test="@condition != 'IsInRange'">
-                            <TD><xsl:value-of select="."/></TD>
-                        </xsl:if>
                         <xsl:if test="@condition">
                             <TD><xsl:value-of select="@condition"/></TD>
+                        </xsl:if>
+                        <xsl:if test="@condition != 'IsInRange'">
+                            <TD><xsl:value-of select="."/></TD>
                         </xsl:if>
                         <xsl:if test="@start_range">
                             <TD><xsl:value-of select="@start_range"/></TD>

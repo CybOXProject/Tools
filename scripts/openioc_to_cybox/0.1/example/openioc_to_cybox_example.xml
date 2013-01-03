@@ -5,6 +5,12 @@
                 <cybox:Defined_Object xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
                     <WinRegistryKeyObj:Key datatype="String" condition="Equals">SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings</WinRegistryKeyObj:Key>
                     <WinRegistryKeyObj:Hive datatype="String" condition="Equals">HKEY_LOCAL_MACHINE</WinRegistryKeyObj:Hive>
+                    <WinRegistryKeyObj:Values>
+                        <WinRegistryKeyObj:Value>
+                            <WinRegistryKeyObj:Name datatype="String" condition="Equals">6</WinRegistryKeyObj:Name>
+                            <WinRegistryKeyObj:Data datatype="String" condition="Equals">asdfgh</WinRegistryKeyObj:Data>
+                        </WinRegistryKeyObj:Value>
+                    </WinRegistryKeyObj:Values>
                 </cybox:Defined_Object>
             </cybox:Object>
         </cybox:Stateful_Measure>
