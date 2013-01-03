@@ -1,0 +1,31 @@
+<cybox:Observables
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:cybox="http://cybox.mitre.org/cybox_v1" 
+    xmlns:common="http://cybox.mitre.org/Common_v1" 
+    xmlns:URIObj="http://cybox.mitre.org/objects#URIObject"
+    xsi:schemaLocation="http://cybox.mitre.org/cybox_v1 
+    http://cybox.mitre.org/XMLSchema/cybox_core_v1.0(draft).xsd
+    http://cybox.mitre.org/objects#URIObject
+    http://cybox.mitre.org/XMLSchema/objects/URI/URI_Object_1.1.xsd"
+    cybox_major_version="1" cybox_minor_version="0(draft)">
+    <cybox:Observable id="cybox:observable_1">
+        <!-- Observable for any single URL matching one of three URLs utilizing IsInSet-->
+        <cybox:Stateful_Measure>
+            <cybox:Object id="A1" type="URI">
+                <cybox:Defined_Object xsi:type="URIObj:URIObjectType">
+                    <URIObj:Value datatype="AnyURI">www.sample1.com/index.html</URIObj:Value>
+                </cybox:Defined_Object>
+            </cybox:Object>
+        </cybox:Stateful_Measure>
+    </cybox:Observable>
+    <cybox:Observable id="cybox:observable_2">
+        <!-- Observable for any single URL matching one of three URLs utilizing IsInSet-->
+        <cybox:Stateful_Measure>
+            <cybox:Object id="A2" type="URI">
+                <cybox:Defined_Object xsi:type="URIObj:URIObjectType">
+                    <URIObj:Value datatype="AnyURI">www.sample2.com/index.html</URIObj:Value>
+                </cybox:Defined_Object>
+            </cybox:Object>
+        </cybox:Stateful_Measure>
+    </cybox:Observable>
+</cybox:Observables>
