@@ -48,20 +48,19 @@ Flags:
     --exclude-raw-body    : exclude raw body from email message object 
     --exclude-raw-headers : exclude raw headers from email message object
     --exclude-urls        : do not attempt to parse urls from input
-    xx--whois :attempt to perform s WHOIS lookup of domains found within the email and create a WHOIS record object
-    xx--dns : attempt to perform a dns lookup for domains within the email and create a DNS record object
-    xx--http-whois : Use a HTTP WHOIS service that operates on port 80 (useful if port 43 is blocked by a firewall)
-    xx--exclude-domain-objs :do not create  URI objects for found domains
-    xx--exclude-url-objs :do not create URI objects for found URLs
-    --no-http-whois       : Use a standard WHOIS service over port 43 instead of default HTTP WHOIS over port 80
+    --exclude-domain-objs : do not create URI domain objects for found URLS
+    --exclude-url-objs    : do not create URI objects for found URLs
+    --whois               : attempt to perform s WHOIS lookup of domains found within the email and create a WHOIS record object
+    --http-whois          : Use a HTTP WHOIS service that operates on port 80 (useful if port 43 is blocked by a firewall)
+    --dns                  :attempt to perform a dns lookup for domains within the email and create a DNS record object
+    --use-dns-server <dns server> :  use this DNS server for DNS lookup of domains
+    
     --headers <one,two>   : comma separated list of header fields to be included
                             in the cybox email message object. SPACES NOT 
                             ALLOWED IN LIST OF FIELDS
                             fields('to', 'cc', 'bcc', 'from', 'subject', 'in-reply-to', 
                                    'date', 'message-id', 'sender', 'reply-to', 'errors-to')
 
-    --use-dns-server <dns server> :  use this DNS server for DNS lookup of domains
-    
     --opt-headers <one,two,...>      : comma separated list of optional header fields 
                                        to be included in the cybox email message object. 
                                        SPACES NOT ALLOWED IN LIST OF FIELDS.
