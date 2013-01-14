@@ -483,7 +483,7 @@ class ObservablesType(GeneratedsSuper):
     def __get_namespace_from_object(self, object):
         if object.get_Defined_Object() is not None:
             defined_object = object.get_Defined_Object()
-            if defined_object.get_anyAttributes_() is not None:
+            if ('get_anyAttributes_' in dir(defined_object)) and (defined_object.get_anyAttributes_() is not None):
                 any_attributes = defined_object.get_anyAttributes_()
                 self.__get_defined_object_namespace(any_attributes)
         if object.get_Discovery_Method() is not None:
