@@ -774,9 +774,11 @@ class ObservableType(GeneratedsSuper):
         if self.Observable_Composition is not None:
             self.Observable_Composition.export(outfile, level, 'cybox:', name_='Observable_Composition', pretty_print=pretty_print)
         if self.Noisiness is not None:
-            self.Noisiness.export(outfile, level, 'cybox:', name_='Noisiness', pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sNoisiness>%s</%sNoisiness>%s' % ('cybox:', self.gds_format_string(quote_xml(self.Noisiness).encode(ExternalEncoding), input_name='Noisiness'), 'cybox:', eol_))
         if self.Ease_of_Obfuscation is not None:
-            self.Ease_of_Obfuscation.export(outfile, level, 'cybox:', name_='Ease_of_Obfuscation', pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sEase_of_Obfuscation>%s</%sEase_of_Obfuscation>%s' % ('cybox:', self.gds_format_string(quote_xml(self.Ease_of_Obfuscation).encode(ExternalEncoding), input_name='Ease_of_Obfuscation'), 'cybox:', eol_))
         if self.Obfuscation_Techniques is not None:
             self.Obfuscation_Techniques.export(outfile, level, 'cybox:', name_='Obfuscation_Techniques', pretty_print=pretty_print)
     def hasContent_(self):
@@ -4872,7 +4874,7 @@ class ObjectPoolType(GeneratedsSuper):
         if nodeName_ == 'Object':
             obj_ = ObjectType.factory()
             obj_.build(child_)
-            self.set_Object(obj_)
+            self.Object.append(obj_)
 # end class ObjectPoolType
 
 class AttributePoolType(GeneratedsSuper):
