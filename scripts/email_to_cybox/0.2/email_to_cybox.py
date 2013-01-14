@@ -13,6 +13,7 @@ import datetime
 import urllib2
 import socket
 from collections import defaultdict
+#cybox bindings
 import cybox_common_types_1_0 as common
 import cybox_core_1_0 as cybox
 import email_message_object_1_2 as email_message_object
@@ -22,9 +23,13 @@ import address_object_1_2 as address_object
 import whois_object_1_0 as whois_object
 import dns_query_object_1_0 as dns_query_object
 import dns_record_object_1_1 as dns_record_object
-import pywhois
-import pywhois.parser
+
+#pip install dnspython
 import dns.resolver
+#pip install python-whois
+import whois
+import whois.parser
+
 
 # BEGIN GLOBAL VARIABLES
 
@@ -46,15 +51,19 @@ Flags:
     --exclude-raw-body    : exclude raw body from email message object 
     --exclude-raw-headers : exclude raw headers from email message object
     --exclude-urls        : do not attempt to parse urls from input
-    --no-http-whois       : Use a standard WHOIS service over port 43 instead of default HTTP WHOIS over port 80
+    --exclude-domain-objs : do not create URI domain objects for found URLS
+    --exclude-url-objs    : do not create URI objects for found URLs
+    --whois               : attempt to perform s WHOIS lookup of domains found within the email and create a WHOIS record object
+    --http-whois          : Use a HTTP WHOIS service that operates on port 80 (useful if port 43 is blocked by a firewall)
+    --dns                  :attempt to perform a dns lookup for domains within the email and create a DNS record object
+    --use-dns-server <dns server> :  use this DNS server for DNS lookup of domains
+    
     --headers <one,two>   : comma separated list of header fields to be included
                             in the cybox email message object. SPACES NOT 
                             ALLOWED IN LIST OF FIELDS
                             fields('to', 'cc', 'bcc', 'from', 'subject', 'in-reply-to', 
                                    'date', 'message-id', 'sender', 'reply-to', 'errors-to')
 
-    --use-dns-server <dns server> :  use this DNS server for DNS lookup of domains
-    
     --opt-headers <one,two,...>      : comma separated list of optional header fields 
                                        to be included in the cybox email message object. 
                                        SPACES NOT ALLOWED IN LIST OF FIELDS.
@@ -102,9 +111,14 @@ class email_translator:
      __OPT_INC_RAW_HEADERS, 
      __OPT_INC_HEADERS, 
      __OPT_INC_OPT_HEADERS,
+     __OPT_INC_URL_OBJECTS,
+     __OPT_INC_DOMAIN_OBJECTS,
+     __OPT_DNS,
+     __OPT_WHOIS,
      __OPT_HTTP_WHOIS ) = ('inline-files','include-urls', 'include-attachments', 
                             'include-raw-body', 'include-raw-headers', 'include-headers', 
-                            'include-opt-headers', 'no-http-whois')
+                            'include-opt-headers', 'include-url-objects','include-domain-objects',
+                            'dns', 'whois', 'http-whois')
     
     
     __map_general_options = {   'inline-files' : False,
@@ -114,7 +128,11 @@ class email_translator:
                                 'include-raw-headers' : True,
                                 'include-headers' : True,
                                 'include-opt-headers' : True,
-                                'no-http-whois' : True
+                                'include-url-objects' : True,
+                                'include-domain-objects' : True,
+                                'dns' : False,
+                                'whois' : False,
+                                'http-whois' : False
                             }
     
     __map_header_options =  ('to','cc','bcc','from','subject', 'in-reply-to',
@@ -164,8 +182,20 @@ class email_translator:
         
     def set_include_opt_headers(self, enable):
         self.__map_general_options[self.__OPT_INC_OPT_HEADERS] = enable
+                    
+    def set_include_url_objects(self, enable):
+        self.__map_general_options[self.__OPT_INC_URL_OBJECTS] = enable
+                    
+    def set_include_domain_objects(self, enable):
+        self.__map_general_options[self.__OPT_INC_DOMAIN_OBJECTS] = enable
                 
-    def set_use_http_whois(self, enable):
+    def set_dns(self, enable):
+        self.__map_general_options[self.__OPT_DNS] = enable
+                    
+    def set_whois(self, enable):
+        self.__map_general_options[self.__OPT_WHOIS] = enable
+                    
+    def set_http_whois(self, enable):
         self.__map_general_options[self.__OPT_HTTP_WHOIS] = enable
         
     def is_enabled_inline_files(self):
@@ -188,7 +218,19 @@ class email_translator:
     
     def is_enabled_include_opt_headers(self):
         return self.__map_general_options[self.__OPT_INC_OPT_HEADERS]
+            
+    def is_enabled_include_url_objects(self):
+        return self.__map_general_options[self.__OPT_INC_URL_OBJECTS]
+            
+    def is_enabled_include_domain_objects(self):
+        return self.__map_general_options[self.__OPT_INC_DOMAIN_OBJECTS]
         
+    def is_enabled_dns(self):
+        return self.__map_general_options[self.__OPT_DNS]     
+           
+    def is_enabled_whois(self):
+        return self.__map_general_options[self.__OPT_WHOIS]   
+             
     def is_enabled_http_whois(self):
         return self.__map_general_options[self.__OPT_HTTP_WHOIS]
     
@@ -341,26 +383,53 @@ class email_translator:
             return None
         
         formatted_response = response_text.replace('\\r','').replace('\\n','\n')
-        parsed = pywhois.WhoisEntry.load(domain, formatted_response)
-        record = defaultdict(none_factory, status=[], registrar_contacts=[], name_servers=[])
-        
-        if parsed.registrar:     record['registrar'] = parsed.registrar[0]
-        if parsed.whois_server:  record['whois_server']  = parsed.whois_server[0]
-        if parsed.domain_name:   record['domain_name']   = domain
-        if parsed.referral_url:  record['referral_url']  = parsed.referral_url[0]
-        if parsed.creation_date: record['creation_date'] = self.__get_xml_date_fmt(pywhois.parser.cast_date(parsed.creation_date[0]))
-        if parsed.updated_date:  record['updated_date']  = self.__get_xml_date_fmt(pywhois.parser.cast_date(parsed.updated_date[0]))
-        if parsed.expiration_date: record['expiration_date'] = self.__get_xml_date_fmt(pywhois.parser.cast_date(parsed.expiration_date[0]))
-        #These list comprehensions get rid of empty strings that the parser sometimes adds to the lists
-        if parsed.status: record['status'] = [x.replace(' ', '_') for x in parsed.status if len(x.strip())]
-        if parsed.emails: record['registrar_contacts'] = [x for x in parsed.emails if len(x.strip())]
-        if parsed.name_servers: record['name_servers'] = [x for x in parsed.name_servers if len(x.strip())]
-        
-        return record
+        record = whois.WhoisEntry.load(domain, formatted_response)
+        return self.__convert_whois_record(record)
 
     def __get_whois_record(self, domain):
-        return pywhois.whois(domain)
+        try:
+            record = whois.whois(domain)
+        except Exception, e:
+            print 'The whois lookup for the domain: '+ domain +' failed for the following reason:\n\n'
+            print e
+            return None
+        
+        return self.__convert_whois_record(record)
 
+    #take a whois response and convert it into a dict with better formatted info
+    def __convert_whois_record(self, response):
+        record = defaultdict(none_factory, status=[], registrar_contacts=[], name_servers=[])
+        
+        if response.registrar:     record['registrar'] = response.registrar[0]
+        if response.whois_server:  record['whois_server']  = response.whois_server[0]
+        if response.domain_name:   record['domain_name']   = response.domain_name
+        if response.referral_url:  record['referral_url']  = response.referral_url[0]
+        #These list comprehensions get rid of empty strings that the parser sometimes adds to the lists
+        if response.status: record['status'] = [x.replace(' ', '_') for x in response.status if len(x.strip())]
+        if response.emails: record['registrar_contacts'] = [x for x in response.emails if len(x.strip())]
+        if response.name_servers: record['name_servers'] = [x for x in response.name_servers if len(x.strip())]
+        
+        #these dates can be datetimes or arrays of datetimes, not sure why
+        if response.creation_date:
+            if response.creation_date is list:
+                record['creation_date'] = self.__get_xml_date_fmt(whois.parser.cast_date(response.creation_date[0]))
+            else:
+                record['creation_date'] = self.__get_xml_date_fmt(response.creation_date.timetuple())
+        
+        if response.updated_date:
+            if response.updated_date is list:  
+                record['updated_date'] = self.__get_xml_date_fmt(whois.parser.cast_date(response.updated_date[0]))
+            else:
+                record['updated_date'] = self.__get_xml_date_fmt(response.updated_date.timetuple())
+            
+        if response.expiration_date: 
+            if response.expiration_date is list:
+                record['expiration_date'] = self.__get_xml_date_fmt(whois.parser.cast_date(response.expiration_date[0]))
+            else:
+                record['expiration_date'] = self.__get_xml_date_fmt(response.expiration_date.timetuple())
+        
+        return record       
+        
     def __get_dns_record(self, domain, record_type, nameserver=None):
         record = None
         resolver = dns.resolver.Resolver()
@@ -696,8 +765,8 @@ class email_translator:
         if not record:
             return None
         
-        #A status of ACTIVE isn't valid, change it to OK if its there
         record['status'] = ['OK' if status=='ACTIVE' else status for status in record['status']]
+        
         
         #Only build registrar info objects if we have the relevant info
         registrar_info = None
@@ -884,6 +953,19 @@ class email_translator:
         
         return raw_body
 
+        
+    """ Given the results of __create_domain_objs, reorder them into a list so they are in the desired order in the final xml"""
+    def __reorder_domain_objs(self, domain_obj_map):
+        ordered_objs = [domain_obj_map['URI']]
+        if domain_obj_map['Whois']:       ordered_objs.append(domain_obj_map['Whois'])
+        if domain_obj_map['DNSQueryV4']:  ordered_objs.append(domain_obj_map['DNSQueryV4'])
+        if domain_obj_map['DNSResultV4']: ordered_objs.append(domain_obj_map['DNSResultV4'])
+        if domain_obj_map['ipv4']:        ordered_objs.append(domain_obj_map['ipv4'])
+        if domain_obj_map['DNSQueryV6']:  ordered_objs.append(domain_obj_map['DNSQueryV6'])
+        if domain_obj_map['DNSResultV6']: ordered_objs.append(domain_obj_map['DNSResultV6'])
+        if domain_obj_map['ipv6']:        ordered_objs.append(domain_obj_map['ipv6'])
+        
+        return ordered_objs
 
     """ Parses out URLs from the list_body_tups input and returns a map of URIObjectType objects keyed by 
         object id. Each URL in the map is unique. The input parameter, list_body_tups is a list of tuples: (encoding, body text).
@@ -911,30 +993,37 @@ class email_translator:
         
             for match in url_re.findall(body):
                 found_url = match[0]
-                found_domain = pywhois.extract_domain(found_url)
+                found_domain = whois.extract_domain(found_url)
                 
                 if found_url not in list_observed_urls:
-                    url_obj = self.__create_url_object(found_url)
-                    url_id  = self.__create_cybox_id()
                     list_observed_urls.append(found_url)
-                    url_obj_container = self._newObjContainer(url_id, url_obj)
-                    if found_domain in list_observed_domains:
-                        domain_id = list_observed_domains[found_domain]
+                    if self.is_enabled_include_url_objects():
+                        url_id  = self.__create_cybox_id()
+                        url_obj_container = self._newObjContainer(url_id, self.__create_url_object(found_url))
                     else:
-                        domain_related_objs = self.__create_domain_objs(found_domain)
-                        domain_id = domain_related_objs['URI'].idref
-                        list_observed_domains[found_domain] = domain_id
-                        for obj_container in domain_related_objs.values():
-                            map_domains[obj_container.idref] = obj_container
+                        (url_id, url_obj_container) = (None,None)                        
+                    if found_domain in list_observed_domains:
+                        domain_obj = list_observed_domains[found_domain]
+                    else:
+                        domain_objs = self.__create_domain_objs(found_domain)
+                        domain_obj = domain_objs['URI']
+                        list_observed_domains[found_domain] = domain_obj
+                        map_domains[found_domain] = self.__reorder_domain_objs(domain_objs)
+                        
+                        # for obj_container in domain_related_objs.values():
+                        #     if obj_container:
+                        #         map_domains[found_domain][] = obj_container
+                        #         map_domains[obj_container.idref] = obj_container
                     
-                    map_domains[domain_id].add_relationship(url_id, 'URL', 'Extracted_From')
-                    map_domains[domain_id].add_relationship(url_id, 'URL', 'FQDN_Of')
-                    
-                    url_obj_container.add_relationship(domain_id, 'URI', 'Contains')
-                    url_obj_container.add_relationship(self.__get_email_obj_id(), 'Email Message', 'Contained_Within')
-                    self.__add_email_obj_relationship(url_id, 'URL', 'Contains')
-                    map_urls[url_id] = url_obj_container
-                    
+                    if domain_obj and url_id:
+                        domain_obj.add_relationship(url_id, 'URL', 'Extracted_From')
+                        domain_obj.add_relationship(url_id, 'URL', 'FQDN_Of')
+                        url_obj_container.add_relationship(domain_obj.idref, 'URI', 'Contains')
+                    if url_id:
+                        url_obj_container.add_relationship(self.__get_email_obj_id(), 'Email Message', 'Contained_Within')
+                        self.__add_email_obj_relationship(url_id, 'URL', 'Contains')
+                        map_urls[found_url] = url_obj_container
+                                     
         return (map_urls, map_domains)
         
     """Given a dns query, the URI of the domain, a dns record for the domain, and an address class, 
@@ -964,36 +1053,47 @@ class email_translator:
     def __create_domain_objs(self, domain):
         global NAMESERVER
         
-        new_objs = {}
-        uri_container = self._newObjContainer(self.__create_cybox_id(), self.__create_domain_name_object(domain))
+        new_objs = {'URI':None,'Whois':None,
+                    'DNSQueryV4':None,'DNSResultV4':None,'ipv4':None,
+                    'DNSQueryV6':None,'DNSResultV6':None,'ipv6':None}
         
-        whois_obj = self.__create_whois_object(domain)
-        if whois_obj:
-            whois_container = self._newObjContainer(self.__create_cybox_id(), whois_obj)
-            whois_container.add_relationship(uri_container.idref, 'URI',  'Characterizes')
-            uri_container.add_relationship(whois_container.idref, 'WHOIS','Characterized_By')
-            new_objs['Whois'] = whois_container
-        
+        if self.is_enabled_include_domain_objects():
+            uri_container = self._newObjContainer(self.__create_cybox_id(), self.__create_domain_name_object(domain))
+        else:
+            uri_container = None
+            
+        if self.is_enabled_whois() or self.is_enabled_http_whois():
+            whois_obj = self.__create_whois_object(domain)
+            if whois_obj:
+                whois_container = self._newObjContainer(self.__create_cybox_id(), whois_obj)
+                new_objs['Whois'] = whois_container
+                if uri_container:
+                    whois_container.add_relationship(uri_container.idref, 'URI',  'Characterizes')
+                    uri_container.add_relationship(whois_container.idref, 'WHOIS','Characterized_By')
+                
         #get ipv4 dns record for domain
-        query_container = self._newObjContainer(self.__create_cybox_id(), self.__create_dns_query_object(domain,'A'))
-        query_container.add_relationship(uri_container.idref, 'URI', 'Searched_For')
-        uri_container.add_relationship(query_container.idref, 'DNS Query', 'Searched_For_By')
-        
-        new_objs['DNSQueryV4'] = query_container
-        dns_record_obj = self.__create_dns_record_object(domain,'A', NAMESERVER)
-        if dns_record_obj:
-            (new_objs['ipv4'], new_objs['DNSResultV4']) = self.__create_dns_objs(query_container, uri_container, dns_record_obj, 'ipv4-addr')
-        
-        
-        #get ipv6 dns record for domain
-        query_container = self._newObjContainer(self.__create_cybox_id(), self.__create_dns_query_object(domain,'AAAA'))
-        query_container.add_relationship(uri_container.idref, 'URI', 'Searched_For')
-        uri_container.add_relationship(query_container.idref, 'DNS Query', 'Searched_For_By')
-        
-        new_objs['DNSQueryV6'] = query_container
-        dns_record_obj = self.__create_dns_record_object(domain,'AAAA', NAMESERVER)
-        if dns_record_obj:
-            (new_objs['ipv6'], new_objs['DNSResultV6']) = self.__create_dns_objs(query_container, uri_container, dns_record_obj, 'ipv6-addr')
+        if self.is_enabled_dns():
+            query_container = self._newObjContainer(self.__create_cybox_id(), self.__create_dns_query_object(domain,'A'))
+            if uri_container:
+                query_container.add_relationship(uri_container.idref, 'URI', 'Searched_For')
+                uri_container.add_relationship(query_container.idref, 'DNS Query', 'Searched_For_By')
+            
+            new_objs['DNSQueryV4'] = query_container
+            dns_record_obj = self.__create_dns_record_object(domain,'A', NAMESERVER)
+            if dns_record_obj:
+                (new_objs['ipv4'], new_objs['DNSResultV4']) = self.__create_dns_objs(query_container, uri_container, dns_record_obj, 'ipv4-addr')
+            
+            
+            #get ipv6 dns record for domain
+            query_container = self._newObjContainer(self.__create_cybox_id(), self.__create_dns_query_object(domain,'AAAA'))
+            if uri_container:
+                query_container.add_relationship(uri_container.idref, 'URI', 'Searched_For')
+                uri_container.add_relationship(query_container.idref, 'DNS Query', 'Searched_For_By')
+            
+            new_objs['DNSQueryV6'] = query_container
+            dns_record_obj = self.__create_dns_record_object(domain,'AAAA', NAMESERVER)
+            if dns_record_obj:
+                (new_objs['ipv6'], new_objs['DNSResultV6']) = self.__create_dns_objs(query_container, uri_container, dns_record_obj, 'ipv6-addr')
         
         new_objs['URI'] = uri_container
         return new_objs
@@ -1070,19 +1170,22 @@ class email_translator:
 
         return email_message_obj
 
+    def __create_cybox_observable(self, obj_container):
+        observable   = cybox.ObservableType(id = self.__create_cybox_id("observable"))
+        cybox_object = cybox.ObjectType(id = obj_container.idref)
+        cybox_object.set_Defined_Object(obj_container.obj)
+        cybox_object.set_Related_Objects(obj_container.get_relationship_objects())
+        stateful_measure = cybox.StatefulMeasureType()    
+        stateful_measure.set_Object(cybox_object)
+        observable.set_Stateful_Measure(stateful_measure)
+        
+        return observable
+    
     """ Generates a list of cybox observables given a map of object containers """
     def __create_cybox_observable_list(self, object_map):
         list_observables = []
-        for obj_id, obj_cont in object_map.iteritems():
-            observable_id = self.__create_cybox_id("observable")
-            observable   = cybox.ObservableType(id = observable_id)
-            cybox_object = cybox.ObjectType(id = obj_id)
-            cybox_object.set_Defined_Object(obj_cont.obj)
-            cybox_object.set_Related_Objects(obj_cont.get_relationship_objects())
-            stateful_measure = cybox.StatefulMeasureType()    
-            stateful_measure.set_Object(cybox_object)
-            observable.set_Stateful_Measure(stateful_measure)
-            list_observables.append(observable)   
+        for obj_id, obj_container in object_map.iteritems():
+            list_observables.append(self.__create_cybox_observable(obj_container))
         
         return list_observables
     
@@ -1104,9 +1207,18 @@ class email_translator:
         if self.is_enabled_include_attachments() and (not self.is_enabled_inline_files()):
             list_observables.extend(self.__create_cybox_observable_list(map_objs['files']))
         
+        #this song and dance is so we can get the objects in the final xml in a particular order
+        #we append things to list_observables in the order we want
         if self.is_enabled_include_urls():
-            list_observables.extend(self.__create_cybox_observable_list(map_objs['urls']))
-            list_observables.extend(self.__create_cybox_observable_list(map_objs['domains']))
+            for domain_name, domain_objs in map_objs['domains'].iteritems():
+                #iterating over keys is necessary to modify the dict while looping over it
+                for url_id in map_objs['urls'].keys():
+                    url_obj = map_objs['urls'][url_id]
+                    if domain_name == whois.extract_domain(url_obj.obj.Value.valueOf_):
+                        list_observables.append(self.__create_cybox_observable(url_obj))
+                        del map_objs['urls'][url_id]
+                for obj in domain_objs:
+                    list_observables.append(self.__create_cybox_observable(obj))
         
         return root_observables
   
@@ -1158,7 +1270,7 @@ class email_translator:
             link_objs = [x.obj for x in map_urls.values()]
             cybox_links = email_message_object.LinksType(Link = link_objs)
         else:
-            (map_urls, map_domains) = None
+            (map_urls, map_domains) = (None,None)
             cybox_links = None
         
         email_message_id = self.__get_email_obj_id()
@@ -1275,9 +1387,12 @@ def main():
     (OPT_INLINE_FILES, OPT_RAW_BODY, 
      OPT_RAW_HEADERS, OPT_ATTACHMENTS, 
      OPT_URLS, OPT_HEADERS, 
-     OPT_OPT_HEADERS, OPT_HTTP_WHOIS) =  ( 'inline-files', 'include-raw-body', 'include-raw-headers', 
+     OPT_OPT_HEADERS,OPT_URL_OBJECTS, 
+     OPT_DOMAIN_OBJECTS, 
+     OPT_DNS, OPT_WHOIS, OPT_HTTP_WHOIS) =  ( 'inline-files', 'include-raw-body', 'include-raw-headers', 
                                            'include-attachments', 'include-urls', 'include-headers', 
-                                           'include-opt-headers', 'no-http-whois')
+                                           'include-opt-headers','include-url-objects','include-domain-objects',
+                                           'dns', 'whois', 'http-whois')
         
     for i in range(0,len(args)):
         if args[i] == '-o':
@@ -1306,8 +1421,18 @@ def main():
             map_general_options[OPT_URLS] = False
         elif args[i] == '--exclude-opt-headers':
             map_general_options[OPT_OPT_HEADERS] = False
-        elif args[i] == '--no-http-whois':
+        elif args[i] == '--exclude-url-objs':
+            map_general_options[OPT_URL_OBJECTS] = False
+        elif args[i] == '--exclude-domain-objs':
+            map_general_options[OPT_DOMAIN_OBJECTS] = False
+        elif args[i] == '--dns':
+            map_general_options[OPT_DNS] = True
+        elif args[i] == '--whois':
+            map_general_options[OPT_WHOIS] = True
             map_general_options[OPT_HTTP_WHOIS] = False
+        elif args[i] == '--http-whois':
+            map_general_options[OPT_HTTP_WHOIS] = True
+            map_general_options[OPT_WHOIS] = False
         elif args[i] == '-h':
             usage()
             
@@ -1335,8 +1460,16 @@ def main():
             translator.set_include_headers(map_general_options[OPT_HEADERS])
         if(OPT_OPT_HEADERS in map_general_options):
             translator.set_include_opt_headers(map_general_options[OPT_OPT_HEADERS])        
+        if(OPT_URL_OBJECTS in map_general_options):
+            translator.set_include_url_objects(map_general_options[OPT_URL_OBJECTS])          
+        if(OPT_DOMAIN_OBJECTS in map_general_options):
+            translator.set_include_domain_objects(map_general_options[OPT_DOMAIN_OBJECTS])            
+        if(OPT_DNS in map_general_options):
+            translator.set_dns(map_general_options[OPT_DNS])            
+        if(OPT_WHOIS in map_general_options):
+            translator.set_whois(map_general_options[OPT_WHOIS])        
         if(OPT_HTTP_WHOIS in map_general_options):
-            translator.set_use_http_whois(map_general_options[OPT_HTTP_WHOIS])
+            translator.set_http_whois(map_general_options[OPT_HTTP_WHOIS])
         
         cybox_objects = translator.generate_cybox_from_email_file(input_data)
         translator.write_cybox(cybox_objects, output_filename) 
