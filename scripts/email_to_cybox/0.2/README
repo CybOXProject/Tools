@@ -32,3 +32,13 @@ Flags:
 Example: `cat email.txt | python email_to_cybox.py -o output.xml - `
 Example: `python email_to_cybox.py -i foobar.txt -o output.xml`
 Example: `python email_to_cybox.pw -i foobar.txt -o output.xml --headers to,from,cc --exclude-urls`
+
+
+Requirements
+============
+The Email to CybOX script currently requires Python 2.6/2.7 and depends on the presence of the 
+CybOX v1.0 bindings (included) as well as the dnspython and python-whois modules (not included). 
+To install these modules, it is recommended to use pip (http://pypi.python.org/pypi/pip):
+
+$ pip install dnspython
+$ pip install python-whois
