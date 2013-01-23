@@ -2,13 +2,14 @@
 # -*- coding: utf-8 -*- 
 
 #
-# Generated Tue Apr 10 13:54:54 2012 by generateDS.py version 2.7b.
+# Generated Tue Nov 06 14:03:40 2012 by generateDS.py version 2.7c.
 #
 
 import sys
 import getopt
 import re as re_
-import common_types_1_0 as common
+
+import cybox_common_types_1_0
 
 etree_ = None
 Verbose_import_ = False
@@ -23,35 +24,8 @@ try:
     if Verbose_import_:
         print("running with lxml.etree")
 except ImportError:
-    try:
-        # cElementTree from Python 2.5+
-        import xml.etree.cElementTree as etree_
-        XMLParser_import_library = XMLParser_import_elementtree
-        if Verbose_import_:
-            print("running with cElementTree on Python 2.5+")
-    except ImportError:
-        try:
-            # ElementTree from Python 2.5+
-            import xml.etree.ElementTree as etree_
-            XMLParser_import_library = XMLParser_import_elementtree
-            if Verbose_import_:
-                print("running with ElementTree on Python 2.5+")
-        except ImportError:
-            try:
-                # normal cElementTree install
-                import cElementTree as etree_
-                XMLParser_import_library = XMLParser_import_elementtree
-                if Verbose_import_:
-                    print("running with cElementTree")
-            except ImportError:
-                try:
-                    # normal ElementTree install
-                    import elementtree.ElementTree as etree_
-                    XMLParser_import_library = XMLParser_import_elementtree
-                    if Verbose_import_:
-                        print("running with ElementTree")
-                except ImportError:
-                    raise ImportError("Failed to import ElementTree from any known place")
+    if Verbose_import_:
+        print 'Error: LXML version 2.3+ required for parsing files'
 
 def parsexml_(*args, **kwargs):
     if (XMLParser_import_library == XMLParser_import_lxml and
@@ -192,9 +166,10 @@ Namespace_extract_pat_ = re_.compile(r'{(.*)}(.*)')
 # Support/utility functions.
 #
 
-def showIndent(outfile, level):
-    for idx in range(level):
-        outfile.write('    ')
+def showIndent(outfile, level, pretty_print=True):
+    if pretty_print:
+        for idx in range(level):
+            outfile.write('    ')
 
 def quote_xml(inStr):
     if not inStr:
@@ -299,7 +274,7 @@ class MixedContainer:
         return self.value
     def getName(self):
         return self.name
-    def export(self, outfile, level, name, namespace):
+    def export(self, outfile, level, name, namespace, pretty_print=True):
         if self.category == MixedContainer.CategoryText:
             # Prevent exporting empty content as empty lines.
             if self.value.strip(): 
@@ -307,7 +282,7 @@ class MixedContainer:
         elif self.category == MixedContainer.CategorySimple:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
-            self.value.export(outfile, level, namespace,name)
+            self.value.export(outfile, level, namespace, name, pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
             outfile.write('<%s>%s</%s>' % (self.name, self.value, self.name))
@@ -366,14 +341,14 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class URIObjectType(common.DefinedObjectType):
+class URIObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The URIObjectType type is intended to characterize Uniform Resource
     Identifiers (URI's).The Type attribute specifies the type of URI
     that is being defined."""
     subclass = None
-    superclass = common.DefinedObjectType
-    def __init__(self, type_=None, Value=None):
-        super(URIObjectType, self).__init__(None)
+    superclass = cybox_common_types_1_0.DefinedObjectType
+    def __init__(self, object_reference=None, type_=None, Value=None):
+        super(URIObjectType, self).__init__(object_reference, )
         self.type_ = _cast(None, type_)
         self.Value = Value
     def factory(*args_, **kwargs_):
@@ -384,31 +359,44 @@ class URIObjectType(common.DefinedObjectType):
     factory = staticmethod(factory)
     def get_Value(self): return self.Value
     def set_Value(self, Value): self.Value = Value
+    def validate_AnyURIObjectAttributeType(self, value):
+        # Validate type cybox_common_types_1_0.AnyURIObjectAttributeType, a restriction on None.
+        pass
     def get_type(self): return self.type_
     def set_type(self, type_): self.type_ = type_
-    def export(self, outfile, level, namespace_='URIObj:', name_='URIObjectType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='URIObj:', name_='URIObjectType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='URIObjectType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='URIObj:', name_='URIObjectType'):
         super(URIObjectType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='URIObjectType')
         if self.type_ is not None and 'type_' not in already_processed:
             already_processed.append('type_')
             outfile.write(' type=%s' % (quote_attrib(self.type_), ))
-    def exportChildren(self, outfile, level, namespace_='URIObj:', name_='URIObjectType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='URIObj:', name_='URIObjectType', fromsubclass_=False, pretty_print=True):
+        super(URIObjectType, self).exportChildren(outfile, level, 'URIObj:', name_, True, pretty_print=pretty_print)
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Value is not None:
-            self.Value.export(outfile, level, 'URIObj:', name_='Value')
+            self.Value.export(outfile, level, 'URIObj:', name_='Value', pretty_print=pretty_print)
     def hasContent_(self):
         if (
-            self.Value is not None
+            self.Value is not None or
+            super(URIObjectType, self).hasContent_()
             ):
             return True
         else:
@@ -423,10 +411,15 @@ class URIObjectType(common.DefinedObjectType):
             already_processed.append('type_')
             showIndent(outfile, level)
             outfile.write('type_ = %s,\n' % (self.type_,))
+        super(URIObjectType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
     def exportLiteralChildren(self, outfile, level, name_):
+        super(URIObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Value is not None:
             showIndent(outfile, level)
-            outfile.write('Value=%s,\n' % quote_python(self.Value).encode(ExternalEncoding))
+            outfile.write('Value=model_.cybox_common_types_1_0.AnyURIObjectAttributeType(\n')
+            self.Value.exportLiteral(outfile, level, name_='Value')
+            showIndent(outfile, level)
+            outfile.write('),\n')
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
         for child in node:
@@ -437,14 +430,14 @@ class URIObjectType(common.DefinedObjectType):
         if value is not None and 'type' not in already_processed:
             already_processed.append('type')
             self.type_ = value
+        super(URIObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Value':
-            Value_ = common.StringObjectAttributeType.factory()
-            Value_.build(child_)
-            self.Value = Value_
+            obj_ = cybox_common_types_1_0.AnyURIObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Value(obj_)
         super(URIObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class URIObjectType
-
 
 USAGE_TEXT = """
 Usage: python <Parser>.py [ -s ] <in_xml_file>
@@ -454,12 +447,10 @@ def usage():
     print USAGE_TEXT
     sys.exit(1)
 
-
 def get_root_tag(node):
     tag = Tag_pattern_.match(node.tag).groups()[-1]
     rootClass = globals().get(tag)
     return tag, rootClass
-
 
 def parse(inFileName):
     doc = parsexml_(inFileName)
@@ -473,10 +464,10 @@ def parse(inFileName):
     # Enable Python to collect the space used by the DOM.
     doc = None
     sys.stdout.write('<?xml version="1.0" ?>\n')
-    rootObj.export(sys.stdout, 0, name_=rootTag, 
-        namespacedef_='')
+    rootObj.export(sys.stdout, 0, name_=rootTag,
+        namespacedef_='',
+        pretty_print=True)
     return rootObj
-
 
 def parseString(inString):
     from StringIO import StringIO
@@ -495,7 +486,6 @@ def parseString(inString):
         namespacedef_='')
     return rootObj
 
-
 def parseLiteral(inFileName):
     doc = parsexml_(inFileName)
     rootNode = doc.getroot()
@@ -507,13 +497,12 @@ def parseLiteral(inFileName):
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
-    sys.stdout.write('#from URI_Object import *\n\n')
-    sys.stdout.write('import URI_Object as model_\n\n')
+    sys.stdout.write('#from temp import *\n\n')
+    sys.stdout.write('import temp as model_\n\n')
     sys.stdout.write('rootObj = model_.rootTag(\n')
     rootObj.exportLiteral(sys.stdout, 0, name_=rootTag)
     sys.stdout.write(')\n')
     return rootObj
-
 
 def main():
     args = sys.argv[1:]
@@ -522,11 +511,9 @@ def main():
     else:
         usage()
 
-
 if __name__ == '__main__':
     #import pdb; pdb.set_trace()
     main()
-
 
 __all__ = [
     "URIObjectType"

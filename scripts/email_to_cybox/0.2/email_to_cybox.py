@@ -14,15 +14,15 @@ import urllib2
 import socket
 from collections import defaultdict
 #cybox bindings
-import cybox_common_types_1_0 as common
-import cybox_core_1_0 as cybox
-import email_message_object_1_2 as email_message_object
-import uri_object_1_2 as uri_object
-import file_object_1_3 as file_object
-import address_object_1_2 as address_object
-import whois_object_1_0 as whois_object
-import dns_query_object_1_0 as dns_query_object
-import dns_record_object_1_1 as dns_record_object
+import cybox.bindings.cybox_common_types_1_0 as common
+import cybox.bindings.cybox_core_1_0 as cybox
+import cybox.bindings.email_message_object_1_2 as email_message_object
+import cybox.bindings.uri_object_1_2 as uri_object
+import cybox.bindings.file_object_1_3 as file_object
+import cybox.bindings.address_object_1_2 as address_object
+import cybox.bindings.whois_object_1_0 as whois_object
+import cybox.bindings.dns_query_object_1_0 as dns_query_object
+import cybox.bindings.dns_record_object_1_1 as dns_record_object
 
 #pip install dnspython
 import dns.resolver

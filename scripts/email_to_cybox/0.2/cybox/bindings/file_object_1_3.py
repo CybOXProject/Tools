@@ -24,35 +24,8 @@ try:
     if Verbose_import_:
         print("running with lxml.etree")
 except ImportError:
-    try:
-        # cElementTree from Python 2.5+
-        import xml.etree.cElementTree as etree_
-        XMLParser_import_library = XMLParser_import_elementtree
-        if Verbose_import_:
-            print("running with cElementTree on Python 2.5+")
-    except ImportError:
-        try:
-            # ElementTree from Python 2.5+
-            import xml.etree.ElementTree as etree_
-            XMLParser_import_library = XMLParser_import_elementtree
-            if Verbose_import_:
-                print("running with ElementTree on Python 2.5+")
-        except ImportError:
-            try:
-                # normal cElementTree install
-                import cElementTree as etree_
-                XMLParser_import_library = XMLParser_import_elementtree
-                if Verbose_import_:
-                    print("running with cElementTree")
-            except ImportError:
-                try:
-                    # normal ElementTree install
-                    import elementtree.ElementTree as etree_
-                    XMLParser_import_library = XMLParser_import_elementtree
-                    if Verbose_import_:
-                        print("running with ElementTree")
-                except ImportError:
-                    raise ImportError("Failed to import ElementTree from any known place")
+    if Verbose_import_:
+        print 'Error: LXML version 2.3+ required for parsing files'
 
 def parsexml_(*args, **kwargs):
     if (XMLParser_import_library == XMLParser_import_lxml and
@@ -374,10 +347,11 @@ class FilePathType(cybox_common_types_1_0.StringObjectAttributeType):
     be specified via the 'type' attribute.The fully_qualified
     attribute specifies whether the path is fully qualified."""
     subclass = None
-    superclass = None
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, fully_qualified=None):
+    superclass = cybox_common_types_1_0.StringObjectAttributeType
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, fully_qualified=None, valueOf_=None):
+        super(FilePathType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_)
         self.fully_qualified = _cast(bool, fully_qualified)
-        pass
+        self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
         if FilePathType.subclass:
             return FilePathType.subclass(*args_, **kwargs_)
@@ -396,7 +370,8 @@ class FilePathType(cybox_common_types_1_0.StringObjectAttributeType):
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='FilePathType')
         if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
+            outfile.write('>')
+            outfile.write(str(self.valueOf_).encode(ExternalEncoding))
             self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
@@ -411,6 +386,7 @@ class FilePathType(cybox_common_types_1_0.StringObjectAttributeType):
         pass
     def hasContent_(self):
         if (
+            self.valueOf_ or
             super(FilePathType, self).hasContent_()
             ):
             return True
@@ -432,6 +408,7 @@ class FilePathType(cybox_common_types_1_0.StringObjectAttributeType):
         pass
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
+        self.valueOf_ = get_all_text_(node)
         for child in node:
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
@@ -448,7 +425,6 @@ class FilePathType(cybox_common_types_1_0.StringObjectAttributeType):
         super(FilePathType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         super(FilePathType, self).buildChildren(child_, node, nodeName_, True)
-        pass
 # end class FilePathType
 
 class FileAttributeType(GeneratedsSuper):

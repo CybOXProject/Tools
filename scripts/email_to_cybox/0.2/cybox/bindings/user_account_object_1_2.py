@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- 
 
 #
-# Generated Tue Nov 06 14:02:26 2012 by generateDS.py version 2.7c.
+# Generated Tue Nov 06 14:03:41 2012 by generateDS.py version 2.7c.
 #
 
 import sys
@@ -10,8 +10,7 @@ import getopt
 import re as re_
 
 import cybox_common_types_1_0
-import dns_record_object_1_1
-import uri_object_1_2
+import account_object_1_2
 
 etree_ = None
 Verbose_import_ = False
@@ -26,35 +25,8 @@ try:
     if Verbose_import_:
         print("running with lxml.etree")
 except ImportError:
-    try:
-        # cElementTree from Python 2.5+
-        import xml.etree.cElementTree as etree_
-        XMLParser_import_library = XMLParser_import_elementtree
-        if Verbose_import_:
-            print("running with cElementTree on Python 2.5+")
-    except ImportError:
-        try:
-            # ElementTree from Python 2.5+
-            import xml.etree.ElementTree as etree_
-            XMLParser_import_library = XMLParser_import_elementtree
-            if Verbose_import_:
-                print("running with ElementTree on Python 2.5+")
-        except ImportError:
-            try:
-                # normal cElementTree install
-                import cElementTree as etree_
-                XMLParser_import_library = XMLParser_import_elementtree
-                if Verbose_import_:
-                    print("running with cElementTree")
-            except ImportError:
-                try:
-                    # normal ElementTree install
-                    import elementtree.ElementTree as etree_
-                    XMLParser_import_library = XMLParser_import_elementtree
-                    if Verbose_import_:
-                        print("running with ElementTree")
-                except ImportError:
-                    raise ImportError("Failed to import ElementTree from any known place")
+    if Verbose_import_:
+        print 'Error: LXML version 2.3+ required for parsing files'
 
 def parsexml_(*args, **kwargs):
     if (XMLParser_import_library == XMLParser_import_lxml and
@@ -370,34 +342,27 @@ def _cast(typ, value):
 # Data representation classes.
 #
 
-class DNSQuestionType(GeneratedsSuper):
-    """The DNSQuestionType specifies the components of a DNS Question,
-    including the domain name queried, type, and class."""
+class PrivilegeListType(GeneratedsSuper):
+    """The PrivilegeListType type specifies the list of privileges that the
+    user account has."""
     subclass = None
     superclass = None
-    def __init__(self, QName=None, QType=None, QClass=None):
-        self.QName = QName
-        self.QType = QType
-        self.QClass = QClass
-    def factory(*args_, **kwargs_):
-        if DNSQuestionType.subclass:
-            return DNSQuestionType.subclass(*args_, **kwargs_)
+    def __init__(self, Privilege=None):
+        if Privilege is None:
+            self.Privilege = []
         else:
-            return DNSQuestionType(*args_, **kwargs_)
+            self.Privilege = Privilege
+    def factory(*args_, **kwargs_):
+        if PrivilegeListType.subclass:
+            return PrivilegeListType.subclass(*args_, **kwargs_)
+        else:
+            return PrivilegeListType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_QName(self): return self.QName
-    def set_QName(self, QName): self.QName = QName
-    def get_QType(self): return self.QType
-    def set_QType(self, QType): self.QType = QType
-    def validate_DNSRecordType(self, value):
-        # Validate type DNSRecordType, a restriction on None.
-        pass
-    def get_QClass(self): return self.QClass
-    def set_QClass(self, QClass): self.QClass = QClass
-    def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
-        pass
-    def export(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSQuestionType', namespacedef_='', pretty_print=True):
+    def get_Privilege(self): return self.Privilege
+    def set_Privilege(self, Privilege): self.Privilege = Privilege
+    def add_Privilege(self, value): self.Privilege.append(value)
+    def insert_Privilege(self, index, value): self.Privilege[index] = value
+    def export(self, outfile, level, namespace_='UserAccountObj:', name_='PrivilegeListType', namespacedef_='', pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -405,7 +370,7 @@ class DNSQuestionType(GeneratedsSuper):
         showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='DNSQuestionType')
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='PrivilegeListType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
             self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
@@ -413,129 +378,23 @@ class DNSQuestionType(GeneratedsSuper):
             outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='DNSQueryObj:', name_='DNSQuestionType'):
+    def exportAttributes(self, outfile, level, already_processed, namespace_='UserAccountObj:', name_='PrivilegeListType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSQuestionType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespace_='UserAccountObj:', name_='PrivilegeListType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
-        if self.QName is not None:
-            self.QName.export(outfile, level, 'DNSQueryObj:', name_='QName', pretty_print=pretty_print)
-        if self.QType is not None:
-            self.QType.export(outfile, level, 'DNSQueryObj:', name_='QType', pretty_print=pretty_print)
-        if self.QClass is not None:
-            self.QClass.export(outfile, level, 'DNSQueryObj:', name_='QClass', pretty_print=pretty_print)
+        for Privilege_ in self.get_Privilege():
+            Privilege_.export(outfile, level, 'UserAccountObj:', name_='Privilege', pretty_print=pretty_print)
     def hasContent_(self):
         if (
-            self.QName is not None or
-            self.QType is not None or
-            self.QClass is not None
+            self.Privilege
             ):
             return True
         else:
             return False
-    def exportLiteral(self, outfile, level, name_='DNSQuestionType'):
-        level += 1
-        self.exportLiteralAttributes(outfile, level, [], name_)
-        if self.hasContent_():
-            self.exportLiteralChildren(outfile, level, name_)
-    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        pass
-    def exportLiteralChildren(self, outfile, level, name_):
-        if self.QName is not None:
-            showIndent(outfile, level)
-            outfile.write('QName=model_.uri_object_1_2.URIObjectType(\n')
-            self.QName.exportLiteral(outfile, level, name_='QName')
-            showIndent(outfile, level)
-            outfile.write('),\n')
-        if self.QType is not None:
-            showIndent(outfile, level)
-            outfile.write('QType=model_.DNSRecordType(\n')
-            self.QType.exportLiteral(outfile, level, name_='QType')
-            showIndent(outfile, level)
-            outfile.write('),\n')
-        if self.QClass is not None:
-            showIndent(outfile, level)
-            outfile.write('QClass=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
-            self.QClass.exportLiteral(outfile, level, name_='QClass')
-            showIndent(outfile, level)
-            outfile.write('),\n')
-    def build(self, node):
-        self.buildAttributes(node, node.attrib, [])
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-    def buildAttributes(self, node, attrs, already_processed):
-        pass
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'QName':
-            obj_ = uri_object_1_2.URIObjectType.factory()
-            obj_.build(child_)
-            self.set_QName(obj_)
-        elif nodeName_ == 'QType':
-            obj_ = DNSRecordType.factory()
-            obj_.build(child_)
-            self.set_QType(obj_)
-        elif nodeName_ == 'QClass':
-            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
-            obj_.build(child_)
-            self.set_QClass(obj_)
-# end class DNSQuestionType
-
-class DNSResourceRecordsType(GeneratedsSuper):
-    """The DNSAnswersType encompasses one or more resource records returned
-    for a DNS query."""
-    subclass = None
-    superclass = None
-    def __init__(self, Resource_Record=None):
-        if Resource_Record is None:
-            self.Resource_Record = []
-        else:
-            self.Resource_Record = Resource_Record
-    def factory(*args_, **kwargs_):
-        if DNSResourceRecordsType.subclass:
-            return DNSResourceRecordsType.subclass(*args_, **kwargs_)
-        else:
-            return DNSResourceRecordsType(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def get_Resource_Record(self): return self.Resource_Record
-    def set_Resource_Record(self, Resource_Record): self.Resource_Record = Resource_Record
-    def add_Resource_Record(self, value): self.Resource_Record.append(value)
-    def insert_Resource_Record(self, index, value): self.Resource_Record[index] = value
-    def export(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSResourceRecordsType', namespacedef_='', pretty_print=True):
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='DNSResourceRecordsType')
-        if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
-            showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
-        else:
-            outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='DNSQueryObj:', name_='DNSResourceRecordsType'):
-        pass
-    def exportChildren(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSResourceRecordsType', fromsubclass_=False, pretty_print=True):
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        for Resource_Record_ in self.Resource_Record:
-            Resource_Record_.export(outfile, level, 'DNSQueryObj:', name_='Resource_Record', pretty_print=pretty_print)
-    def hasContent_(self):
-        if (
-            self.Resource_Record
-            ):
-            return True
-        else:
-            return False
-    def exportLiteral(self, outfile, level, name_='DNSResourceRecordsType'):
+    def exportLiteral(self, outfile, level, name_='PrivilegeListType'):
         level += 1
         self.exportLiteralAttributes(outfile, level, [], name_)
         if self.hasContent_():
@@ -544,12 +403,12 @@ class DNSResourceRecordsType(GeneratedsSuper):
         pass
     def exportLiteralChildren(self, outfile, level, name_):
         showIndent(outfile, level)
-        outfile.write('Resource_Record=[\n')
+        outfile.write('Privilege=[\n')
         level += 1
-        for Resource_Record_ in self.Resource_Record:
+        for Privilege_ in self.Privilege:
             showIndent(outfile, level)
-            outfile.write('model_.dns_record_object_1_1.DNSRecordObjectType(\n')
-            Resource_Record_.exportLiteral(outfile, level, name_='dns_record_object_1_1.DNSRecordObjectType')
+            outfile.write('model_.PrivilegeType(\n')
+            Privilege_.exportLiteral(outfile, level, name_='PrivilegeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -563,36 +422,41 @@ class DNSResourceRecordsType(GeneratedsSuper):
     def buildAttributes(self, node, attrs, already_processed):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'Resource_Record':
-            obj_ = dns_record_object_1_1.DNSRecordObjectType.factory()
-            obj_.build(child_)
-            self.Resource_Record.append(obj_)
-# end class DNSResourceRecordsType
+        if nodeName_ == 'Privilege':
+            type_name_ = child_.attrib.get('{http://www.w3.org/2001/XMLSchema-instance}type')
+            if type_name_ is None:
+                type_name_ = child_.attrib.get('type')
+            if type_name_ is not None:
+                type_names_ = type_name_.split(':')
+                if len(type_names_) == 1:
+                    type_name_ = type_names_[0]
+                else:
+                    type_name_ = type_names_[1]
+                class_ = globals()[type_name_]
+                obj_ = class_.factory()
+                obj_.build(child_)
+            else:
+                raise NotImplementedError(
+                    'Class not implemented for <Privilege> element')
+            self.Privilege.append(obj_)
+# end class PrivilegeListType
 
-class DNSRecordType(cybox_common_types_1_0.BaseObjectAttributeType):
-    """DNSRecordType specifies DNS record types, via a union of the
-    DNSRecordTypeEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
-    complex (i.e. regular-expression based) specifications.This
-    attribute is optional and specifies the expected type for the
-    value of the specified element."""
+class PrivilegeType(GeneratedsSuper):
+    """The PrivilegeType type specifies a specific privilege that a user
+    has. This is an abstract type since user privileges are
+    operating-system specific, and is extended as needed in the
+    derived CybOX object schemas."""
     subclass = None
-    superclass = cybox_common_types_1_0.BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
-        super(DNSRecordType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
-        self.datatype = _cast(None, datatype)
-        self.valueOf_ = valueOf_
+    superclass = None
+    def __init__(self):
+        pass
     def factory(*args_, **kwargs_):
-        if DNSRecordType.subclass:
-            return DNSRecordType.subclass(*args_, **kwargs_)
+        if PrivilegeType.subclass:
+            return PrivilegeType.subclass(*args_, **kwargs_)
         else:
-            return DNSRecordType(*args_, **kwargs_)
+            return PrivilegeType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_datatype(self): return self.datatype
-    def set_datatype(self, datatype): self.datatype = datatype
-    def get_valueOf_(self): return self.valueOf_
-    def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSRecordType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespace_='UserAccountObj:', name_='PrivilegeType', namespacedef_='', pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -600,92 +464,65 @@ class DNSRecordType(cybox_common_types_1_0.BaseObjectAttributeType):
         showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='DNSRecordType')
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='PrivilegeType')
         if self.hasContent_():
-            outfile.write('>')
-            outfile.write(str(self.valueOf_).encode(ExternalEncoding))
+            outfile.write('>%s' % (eol_, ))
             self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='DNSQueryObj:', name_='DNSRecordType'):
-        super(DNSRecordType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='DNSRecordType')
-        if self.datatype is not None and 'datatype' not in already_processed:
-            already_processed.append('datatype')
-            outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSRecordType', fromsubclass_=False, pretty_print=True):
-        super(DNSRecordType, self).exportChildren(outfile, level, 'DNSQueryObj:', name_, True, pretty_print=pretty_print)
+    def exportAttributes(self, outfile, level, already_processed, namespace_='UserAccountObj:', name_='PrivilegeType'):
+        pass
+    def exportChildren(self, outfile, level, namespace_='UserAccountObj:', name_='PrivilegeType', fromsubclass_=False, pretty_print=True):
         pass
     def hasContent_(self):
         if (
-            self.valueOf_ or
-            super(DNSRecordType, self).hasContent_()
+
             ):
             return True
         else:
             return False
-    def exportLiteral(self, outfile, level, name_='DNSRecordType'):
+    def exportLiteral(self, outfile, level, name_='PrivilegeType'):
         level += 1
         self.exportLiteralAttributes(outfile, level, [], name_)
         if self.hasContent_():
             self.exportLiteralChildren(outfile, level, name_)
-        showIndent(outfile, level)
-        outfile.write('valueOf_ = """%s""",\n' % (self.valueOf_,))
     def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        if self.datatype is not None and 'datatype' not in already_processed:
-            already_processed.append('datatype')
-            showIndent(outfile, level)
-            outfile.write('datatype = %s,\n' % (self.datatype,))
-        super(DNSRecordType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
+        pass
     def exportLiteralChildren(self, outfile, level, name_):
-        super(DNSRecordType, self).exportLiteralChildren(outfile, level, name_)
         pass
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
-        self.valueOf_ = get_all_text_(node)
         for child in node:
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
     def buildAttributes(self, node, attrs, already_processed):
-        value = find_attr_value_('datatype', node)
-        if value is not None and 'datatype' not in already_processed:
-            already_processed.append('datatype')
-            self.datatype = value
-        super(DNSRecordType, self).buildAttributes(node, attrs, already_processed)
+        pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         pass
-# end class DNSRecordType
+# end class PrivilegeType
 
-class DNSQueryObjectType(cybox_common_types_1_0.DefinedObjectType):
-    """The DNSQueryType is intended to characterize a single DNS query and
-    its components.The successful attribute specifies whether or not
-    the DNS Query was successful."""
+class GroupListType(GeneratedsSuper):
+    """The GroupListType type specifies the groups that the user account
+    belongs to."""
     subclass = None
-    superclass = cybox_common_types_1_0.DefinedObjectType
-    def __init__(self, object_reference=None, successful=None, Question=None, Answer_Resource_Records=None, Authority_Resource_Records=None, Additional_Records=None):
-        super(DNSQueryObjectType, self).__init__(object_reference, )
-        self.successful = _cast(bool, successful)
-        self.Question = Question
-        self.Answer_Resource_Records = Answer_Resource_Records
-        self.Authority_Resource_Records = Authority_Resource_Records
-        self.Additional_Records = Additional_Records
-    def factory(*args_, **kwargs_):
-        if DNSQueryObjectType.subclass:
-            return DNSQueryObjectType.subclass(*args_, **kwargs_)
+    superclass = None
+    def __init__(self, Group=None):
+        if Group is None:
+            self.Group = []
         else:
-            return DNSQueryObjectType(*args_, **kwargs_)
+            self.Group = Group
+    def factory(*args_, **kwargs_):
+        if GroupListType.subclass:
+            return GroupListType.subclass(*args_, **kwargs_)
+        else:
+            return GroupListType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_Question(self): return self.Question
-    def set_Question(self, Question): self.Question = Question
-    def get_Answer_Resource_Records(self): return self.Answer_Resource_Records
-    def set_Answer_Resource_Records(self, Answer_Resource_Records): self.Answer_Resource_Records = Answer_Resource_Records
-    def get_Authority_Resource_Records(self): return self.Authority_Resource_Records
-    def set_Authority_Resource_Records(self, Authority_Resource_Records): self.Authority_Resource_Records = Authority_Resource_Records
-    def get_Additional_Records(self): return self.Additional_Records
-    def set_Additional_Records(self, Additional_Records): self.Additional_Records = Additional_Records
-    def get_successful(self): return self.successful
-    def set_successful(self, successful): self.successful = successful
-    def export(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSQueryObjectType', namespacedef_='', pretty_print=True):
+    def get_Group(self): return self.Group
+    def set_Group(self, Group): self.Group = Group
+    def add_Group(self, value): self.Group.append(value)
+    def insert_Group(self, index, value): self.Group[index] = value
+    def export(self, outfile, level, namespace_='UserAccountObj:', name_='GroupListType', namespacedef_='', pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -693,7 +530,7 @@ class DNSQueryObjectType(cybox_common_types_1_0.DefinedObjectType):
         showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='DNSQueryObjectType')
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='GroupListType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
             self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
@@ -701,71 +538,297 @@ class DNSQueryObjectType(cybox_common_types_1_0.DefinedObjectType):
             outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='DNSQueryObj:', name_='DNSQueryObjectType'):
-        super(DNSQueryObjectType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='DNSQueryObjectType')
-        if self.successful is not None and 'successful' not in already_processed:
-            already_processed.append('successful')
-            outfile.write(' successful="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.successful)), input_name='successful'))
-    def exportChildren(self, outfile, level, namespace_='DNSQueryObj:', name_='DNSQueryObjectType', fromsubclass_=False, pretty_print=True):
-        super(DNSQueryObjectType, self).exportChildren(outfile, level, 'DNSQueryObj:', name_, True, pretty_print=pretty_print)
+    def exportAttributes(self, outfile, level, already_processed, namespace_='UserAccountObj:', name_='GroupListType'):
+        pass
+    def exportChildren(self, outfile, level, namespace_='UserAccountObj:', name_='GroupListType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
-        if self.Question is not None:
-            self.Question.export(outfile, level, 'DNSQueryObj:', name_='Question', pretty_print=pretty_print)
-        if self.Answer_Resource_Records is not None:
-            self.Answer_Resource_Records.export(outfile, level, 'DNSQueryObj:', name_='Answer_Resource_Records', pretty_print=pretty_print)
-        if self.Authority_Resource_Records is not None:
-            self.Authority_Resource_Records.export(outfile, level, 'DNSQueryObj:', name_='Authority_Resource_Records', pretty_print=pretty_print)
-        if self.Additional_Records is not None:
-            self.Additional_Records.export(outfile, level, 'DNSQueryObj:', name_='Additional_Records', pretty_print=pretty_print)
+        for Group_ in self.get_Group():
+            Group_.export(outfile, level, 'UserAccountObj:', name_='Group', pretty_print=pretty_print)
     def hasContent_(self):
         if (
-            self.Question is not None or
-            self.Answer_Resource_Records is not None or
-            self.Authority_Resource_Records is not None or
-            self.Additional_Records is not None or
-            super(DNSQueryObjectType, self).hasContent_()
+            self.Group
             ):
             return True
         else:
             return False
-    def exportLiteral(self, outfile, level, name_='DNSQueryObjectType'):
+    def exportLiteral(self, outfile, level, name_='GroupListType'):
         level += 1
         self.exportLiteralAttributes(outfile, level, [], name_)
         if self.hasContent_():
             self.exportLiteralChildren(outfile, level, name_)
     def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        if self.successful is not None and 'successful' not in already_processed:
-            already_processed.append('successful')
-            showIndent(outfile, level)
-            outfile.write('successful = %s,\n' % (self.successful,))
-        super(DNSQueryObjectType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
+        pass
     def exportLiteralChildren(self, outfile, level, name_):
-        super(DNSQueryObjectType, self).exportLiteralChildren(outfile, level, name_)
-        if self.Question is not None:
+        showIndent(outfile, level)
+        outfile.write('Group=[\n')
+        level += 1
+        for Group_ in self.Group:
             showIndent(outfile, level)
-            outfile.write('Question=model_.DNSQuestionType(\n')
-            self.Question.exportLiteral(outfile, level, name_='Question')
-            showIndent(outfile, level)
-            outfile.write('),\n')
-        if self.Answer_Resource_Records is not None:
-            showIndent(outfile, level)
-            outfile.write('Answer_Resource_Records=model_.DNSResourceRecordsType(\n')
-            self.Answer_Resource_Records.exportLiteral(outfile, level, name_='Answer_Resource_Records')
+            outfile.write('model_.GroupType(\n')
+            Group_.exportLiteral(outfile, level, name_='GroupType')
             showIndent(outfile, level)
             outfile.write('),\n')
-        if self.Authority_Resource_Records is not None:
+        level -= 1
+        showIndent(outfile, level)
+        outfile.write('],\n')
+    def build(self, node):
+        self.buildAttributes(node, node.attrib, [])
+        for child in node:
+            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
+            self.buildChildren(child, node, nodeName_)
+    def buildAttributes(self, node, attrs, already_processed):
+        pass
+    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+        if nodeName_ == 'Group':
+            type_name_ = child_.attrib.get('{http://www.w3.org/2001/XMLSchema-instance}type')
+            if type_name_ is None:
+                type_name_ = child_.attrib.get('type')
+            if type_name_ is not None:
+                type_names_ = type_name_.split(':')
+                if len(type_names_) == 1:
+                    type_name_ = type_names_[0]
+                else:
+                    type_name_ = type_names_[1]
+                class_ = globals()[type_name_]
+                obj_ = class_.factory()
+                obj_.build(child_)
+            else:
+                raise NotImplementedError(
+                    'Class not implemented for <Group> element')
+            self.Group.append(obj_)
+# end class GroupListType
+
+class GroupType(GeneratedsSuper):
+    """The GroupType type specifies a group that a user account belongs to.
+    This is an abstract type since group IDs are operating-system
+    specific, and is extended as needed in the derived CybOX object
+    schemas."""
+    subclass = None
+    superclass = None
+    def __init__(self):
+        pass
+    def factory(*args_, **kwargs_):
+        if GroupType.subclass:
+            return GroupType.subclass(*args_, **kwargs_)
+        else:
+            return GroupType(*args_, **kwargs_)
+    factory = staticmethod(factory)
+    def export(self, outfile, level, namespace_='UserAccountObj:', name_='GroupType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
+        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        already_processed = []
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='GroupType')
+        if self.hasContent_():
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+        else:
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='UserAccountObj:', name_='GroupType'):
+        pass
+    def exportChildren(self, outfile, level, namespace_='UserAccountObj:', name_='GroupType', fromsubclass_=False, pretty_print=True):
+        pass
+    def hasContent_(self):
+        if (
+
+            ):
+            return True
+        else:
+            return False
+    def exportLiteral(self, outfile, level, name_='GroupType'):
+        level += 1
+        self.exportLiteralAttributes(outfile, level, [], name_)
+        if self.hasContent_():
+            self.exportLiteralChildren(outfile, level, name_)
+    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
+        pass
+    def exportLiteralChildren(self, outfile, level, name_):
+        pass
+    def build(self, node):
+        self.buildAttributes(node, node.attrib, [])
+        for child in node:
+            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
+            self.buildChildren(child, node, nodeName_)
+    def buildAttributes(self, node, attrs, already_processed):
+        pass
+    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+        pass
+# end class GroupType
+
+class UserAccountObjectType(account_object_1_2.AccountObjectType):
+    """The UserAccountObjectType type is intended to characterize generic
+    user accounts.The passwordrequired attribute specifies whether a
+    password is required for this user account."""
+    subclass = None
+    superclass = account_object_1_2.AccountObjectType
+    def __init__(self, object_reference=None, disabled=None, locked_out=None, Description=None, Domain=None, password_required=None, Full_Name=None, Group_List=None, Home_Directory=None, Last_Login=None, Privilege_List=None, Script_Path=None, Username=None, User_Password_Age=None):
+        super(UserAccountObjectType, self).__init__(object_reference, disabled, locked_out, Description, Domain, )
+        self.password_required = _cast(bool, password_required)
+        self.Full_Name = Full_Name
+        self.Group_List = Group_List
+        self.Home_Directory = Home_Directory
+        self.Last_Login = Last_Login
+        self.Privilege_List = Privilege_List
+        self.Script_Path = Script_Path
+        self.Username = Username
+        self.User_Password_Age = User_Password_Age
+    def factory(*args_, **kwargs_):
+        if UserAccountObjectType.subclass:
+            return UserAccountObjectType.subclass(*args_, **kwargs_)
+        else:
+            return UserAccountObjectType(*args_, **kwargs_)
+    factory = staticmethod(factory)
+    def get_Full_Name(self): return self.Full_Name
+    def set_Full_Name(self, Full_Name): self.Full_Name = Full_Name
+    def validate_StringObjectAttributeType(self, value):
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
+        pass
+    def get_Group_List(self): return self.Group_List
+    def set_Group_List(self, Group_List): self.Group_List = Group_List
+    def get_Home_Directory(self): return self.Home_Directory
+    def set_Home_Directory(self, Home_Directory): self.Home_Directory = Home_Directory
+    def get_Last_Login(self): return self.Last_Login
+    def set_Last_Login(self, Last_Login): self.Last_Login = Last_Login
+    def validate_DateTimeObjectAttributeType(self, value):
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
+        pass
+    def get_Privilege_List(self): return self.Privilege_List
+    def set_Privilege_List(self, Privilege_List): self.Privilege_List = Privilege_List
+    def get_Script_Path(self): return self.Script_Path
+    def set_Script_Path(self, Script_Path): self.Script_Path = Script_Path
+    def get_Username(self): return self.Username
+    def set_Username(self, Username): self.Username = Username
+    def get_User_Password_Age(self): return self.User_Password_Age
+    def set_User_Password_Age(self, User_Password_Age): self.User_Password_Age = User_Password_Age
+    def validate_DurationObjectAttributeType(self, value):
+        # Validate type cybox_common_types_1_0.DurationObjectAttributeType, a restriction on None.
+        pass
+    def get_password_required(self): return self.password_required
+    def set_password_required(self, password_required): self.password_required = password_required
+    def export(self, outfile, level, namespace_='UserAccountObj:', name_='UserAccountObjectType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
+        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        already_processed = []
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='UserAccountObjectType')
+        if self.hasContent_():
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+        else:
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='UserAccountObj:', name_='UserAccountObjectType'):
+        super(UserAccountObjectType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='UserAccountObjectType')
+        if self.password_required is not None and 'password_required' not in already_processed:
+            already_processed.append('password_required')
+            outfile.write(' password_required="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.password_required)), input_name='password_required'))
+    def exportChildren(self, outfile, level, namespace_='UserAccountObj:', name_='UserAccountObjectType', fromsubclass_=False, pretty_print=True):
+        super(UserAccountObjectType, self).exportChildren(outfile, level, 'UserAccountObj:', name_, True, pretty_print=pretty_print)
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        if self.Full_Name is not None:
+            self.Full_Name.export(outfile, level, 'UserAccountObj:', name_='Full_Name', pretty_print=pretty_print)
+        if self.Group_List is not None:
+            self.Group_List.export(outfile, level, 'UserAccountObj:', name_='Group_List', pretty_print=pretty_print)
+        if self.Home_Directory is not None:
+            self.Home_Directory.export(outfile, level, 'UserAccountObj:', name_='Home_Directory', pretty_print=pretty_print)
+        if self.Last_Login is not None:
+            self.Last_Login.export(outfile, level, 'UserAccountObj:', name_='Last_Login', pretty_print=pretty_print)
+        if self.Privilege_List is not None:
+            self.Privilege_List.export(outfile, level, 'UserAccountObj:', name_='Privilege_List', pretty_print=pretty_print)
+        if self.Script_Path is not None:
+            self.Script_Path.export(outfile, level, 'UserAccountObj:', name_='Script_Path', pretty_print=pretty_print)
+        if self.Username is not None:
+            self.Username.export(outfile, level, 'UserAccountObj:', name_='Username', pretty_print=pretty_print)
+        if self.User_Password_Age is not None:
+            self.User_Password_Age.export(outfile, level, 'UserAccountObj:', name_='User_Password_Age', pretty_print=pretty_print)
+    def hasContent_(self):
+        if (
+            self.Full_Name is not None or
+            self.Group_List is not None or
+            self.Home_Directory is not None or
+            self.Last_Login is not None or
+            self.Privilege_List is not None or
+            self.Script_Path is not None or
+            self.Username is not None or
+            self.User_Password_Age is not None or
+            super(UserAccountObjectType, self).hasContent_()
+            ):
+            return True
+        else:
+            return False
+    def exportLiteral(self, outfile, level, name_='UserAccountObjectType'):
+        level += 1
+        self.exportLiteralAttributes(outfile, level, [], name_)
+        if self.hasContent_():
+            self.exportLiteralChildren(outfile, level, name_)
+    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
+        if self.password_required is not None and 'password_required' not in already_processed:
+            already_processed.append('password_required')
             showIndent(outfile, level)
-            outfile.write('Authority_Resource_Records=model_.DNSResourceRecordsType(\n')
-            self.Authority_Resource_Records.exportLiteral(outfile, level, name_='Authority_Resource_Records')
+            outfile.write('password_required = %s,\n' % (self.password_required,))
+        super(UserAccountObjectType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
+    def exportLiteralChildren(self, outfile, level, name_):
+        super(UserAccountObjectType, self).exportLiteralChildren(outfile, level, name_)
+        if self.Full_Name is not None:
+            showIndent(outfile, level)
+            outfile.write('Full_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Full_Name.exportLiteral(outfile, level, name_='Full_Name')
             showIndent(outfile, level)
             outfile.write('),\n')
-        if self.Additional_Records is not None:
+        if self.Group_List is not None:
             showIndent(outfile, level)
-            outfile.write('Additional_Records=model_.DNSResourceRecordsType(\n')
-            self.Additional_Records.exportLiteral(outfile, level, name_='Additional_Records')
+            outfile.write('Group_List=model_.GroupListType(\n')
+            self.Group_List.exportLiteral(outfile, level, name_='Group_List')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Home_Directory is not None:
+            showIndent(outfile, level)
+            outfile.write('Home_Directory=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Home_Directory.exportLiteral(outfile, level, name_='Home_Directory')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Last_Login is not None:
+            showIndent(outfile, level)
+            outfile.write('Last_Login=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
+            self.Last_Login.exportLiteral(outfile, level, name_='Last_Login')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Privilege_List is not None:
+            showIndent(outfile, level)
+            outfile.write('Privilege_List=model_.PrivilegeListType(\n')
+            self.Privilege_List.exportLiteral(outfile, level, name_='Privilege_List')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Script_Path is not None:
+            showIndent(outfile, level)
+            outfile.write('Script_Path=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Script_Path.exportLiteral(outfile, level, name_='Script_Path')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Username is not None:
+            showIndent(outfile, level)
+            outfile.write('Username=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Username.exportLiteral(outfile, level, name_='Username')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.User_Password_Age is not None:
+            showIndent(outfile, level)
+            outfile.write('User_Password_Age=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
+            self.User_Password_Age.exportLiteral(outfile, level, name_='User_Password_Age')
             showIndent(outfile, level)
             outfile.write('),\n')
     def build(self, node):
@@ -774,35 +837,51 @@ class DNSQueryObjectType(cybox_common_types_1_0.DefinedObjectType):
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
     def buildAttributes(self, node, attrs, already_processed):
-        value = find_attr_value_('successful', node)
-        if value is not None and 'successful' not in already_processed:
-            already_processed.append('successful')
+        value = find_attr_value_('password_required', node)
+        if value is not None and 'password_required' not in already_processed:
+            already_processed.append('password_required')
             if value in ('true', '1'):
-                self.successful = True
+                self.password_required = True
             elif value in ('false', '0'):
-                self.successful = False
+                self.password_required = False
             else:
                 raise_parse_error(node, 'Bad boolean attribute')
-        super(DNSQueryObjectType, self).buildAttributes(node, attrs, already_processed)
+        super(UserAccountObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'Question':
-            obj_ = DNSQuestionType.factory()
+        if nodeName_ == 'Full_Name':
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
-            self.set_Question(obj_)
-        elif nodeName_ == 'Answer_Resource_Records':
-            obj_ = DNSResourceRecordsType.factory()
+            self.set_Full_Name(obj_)
+        elif nodeName_ == 'Group_List':
+            obj_ = GroupListType.factory()
             obj_.build(child_)
-            self.set_Answer_Resource_Records(obj_)
-        elif nodeName_ == 'Authority_Resource_Records':
-            obj_ = DNSResourceRecordsType.factory()
+            self.set_Group_List(obj_)
+        elif nodeName_ == 'Home_Directory':
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
-            self.set_Authority_Resource_Records(obj_)
-        elif nodeName_ == 'Additional_Records':
-            obj_ = DNSResourceRecordsType.factory()
+            self.set_Home_Directory(obj_)
+        elif nodeName_ == 'Last_Login':
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
-            self.set_Additional_Records(obj_)
-        super(DNSQueryObjectType, self).buildChildren(child_, node, nodeName_, True)
-# end class DNSQueryObjectType
+            self.set_Last_Login(obj_)
+        elif nodeName_ == 'Privilege_List':
+            obj_ = PrivilegeListType.factory()
+            obj_.build(child_)
+            self.set_Privilege_List(obj_)
+        elif nodeName_ == 'Script_Path':
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Script_Path(obj_)
+        elif nodeName_ == 'Username':
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Username(obj_)
+        elif nodeName_ == 'User_Password_Age':
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_User_Password_Age(obj_)
+        super(UserAccountObjectType, self).buildChildren(child_, node, nodeName_, True)
+# end class UserAccountObjectType
 
 USAGE_TEXT = """
 Usage: python <Parser>.py [ -s ] <in_xml_file>
@@ -822,8 +901,8 @@ def parse(inFileName):
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'DNS_Query'
-        rootClass = DNSQueryObjectType
+        rootTag = 'User_Account'
+        rootClass = UserAccountObjectType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
@@ -840,14 +919,14 @@ def parseString(inString):
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'DNS_Query'
-        rootClass = DNSQueryObjectType
+        rootTag = 'User_Account'
+        rootClass = UserAccountObjectType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
     sys.stdout.write('<?xml version="1.0" ?>\n')
-    rootObj.export(sys.stdout, 0, name_="DNS_Query",
+    rootObj.export(sys.stdout, 0, name_="User_Account",
         namespacedef_='')
     return rootObj
 
@@ -856,8 +935,8 @@ def parseLiteral(inFileName):
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'DNS_Query'
-        rootClass = DNSQueryObjectType
+        rootTag = 'User_Account'
+        rootClass = UserAccountObjectType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
@@ -881,8 +960,9 @@ if __name__ == '__main__':
     main()
 
 __all__ = [
-    "DNSQueryObjectType",
-    "DNSQuestionType",
-    "DNSResourceRecordsType",
-    "DNSRecordType"
+    "UserAccountObjectType",
+    "PrivilegeListType",
+    "PrivilegeType",
+    "GroupListType",
+    "GroupType"
     ]

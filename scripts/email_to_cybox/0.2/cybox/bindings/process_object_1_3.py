@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*- 
 
 #
-# Generated Thu Nov 01 09:43:12 2012 by generateDS.py version 2.7c.
+# Generated Tue Nov 06 14:03:22 2012 by generateDS.py version 2.7c.
 #
 
 import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
+import cybox_common_types_1_0
 import address_object_1_2
 import port_object_1_3
 
@@ -26,35 +26,8 @@ try:
     if Verbose_import_:
         print("running with lxml.etree")
 except ImportError:
-    try:
-        # cElementTree from Python 2.5+
-        import xml.etree.cElementTree as etree_
-        XMLParser_import_library = XMLParser_import_elementtree
-        if Verbose_import_:
-            print("running with cElementTree on Python 2.5+")
-    except ImportError:
-        try:
-            # ElementTree from Python 2.5+
-            import xml.etree.ElementTree as etree_
-            XMLParser_import_library = XMLParser_import_elementtree
-            if Verbose_import_:
-                print("running with ElementTree on Python 2.5+")
-        except ImportError:
-            try:
-                # normal cElementTree install
-                import cElementTree as etree_
-                XMLParser_import_library = XMLParser_import_elementtree
-                if Verbose_import_:
-                    print("running with cElementTree")
-            except ImportError:
-                try:
-                    # normal ElementTree install
-                    import elementtree.ElementTree as etree_
-                    XMLParser_import_library = XMLParser_import_elementtree
-                    if Verbose_import_:
-                        print("running with ElementTree")
-                except ImportError:
-                    raise ImportError("Failed to import ElementTree from any known place")
+    if Verbose_import_:
+        print 'Error: LXML version 2.3+ required for parsing files'
 
 def parsexml_(*args, **kwargs):
     if (XMLParser_import_library == XMLParser_import_lxml and
@@ -391,7 +364,7 @@ class NetworkConnectionType(GeneratedsSuper):
     def get_Creation_Time(self): return self.Creation_Time
     def set_Creation_Time(self, Creation_Time): self.Creation_Time = Creation_Time
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Destination_IP_Address(self): return self.Destination_IP_Address
     def set_Destination_IP_Address(self, Destination_IP_Address): self.Destination_IP_Address = Destination_IP_Address
@@ -463,7 +436,7 @@ class NetworkConnectionType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Creation_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Creation_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Creation_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Creation_Time.exportLiteral(outfile, level, name_='Creation_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -506,7 +479,7 @@ class NetworkConnectionType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Creation_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Creation_Time(obj_)
         elif nodeName_ == 'Destination_IP_Address':
@@ -634,7 +607,7 @@ class ImageInfoType(GeneratedsSuper):
     def get_File_Name(self): return self.File_Name
     def set_File_Name(self, File_Name): self.File_Name = File_Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on xs:string.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Command_Line(self): return self.Command_Line
     def set_Command_Line(self, Command_Line): self.Command_Line = Command_Line
@@ -693,16 +666,28 @@ class ImageInfoType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.File_Name is not None:
             showIndent(outfile, level)
-            outfile.write('File_Name=%s,\n' % quote_python(self.File_Name).encode(ExternalEncoding))
+            outfile.write('File_Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.File_Name.exportLiteral(outfile, level, name_='File_Name')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.Command_Line is not None:
             showIndent(outfile, level)
-            outfile.write('Command_Line=%s,\n' % quote_python(self.Command_Line).encode(ExternalEncoding))
+            outfile.write('Command_Line=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Command_Line.exportLiteral(outfile, level, name_='Command_Line')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.Current_Directory is not None:
             showIndent(outfile, level)
-            outfile.write('Current_Directory=%s,\n' % quote_python(self.Current_Directory).encode(ExternalEncoding))
+            outfile.write('Current_Directory=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Current_Directory.exportLiteral(outfile, level, name_='Current_Directory')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.Path is not None:
             showIndent(outfile, level)
-            outfile.write('Path=%s,\n' % quote_python(self.Path).encode(ExternalEncoding))
+            outfile.write('Path=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Path.exportLiteral(outfile, level, name_='Path')
+            showIndent(outfile, level)
+            outfile.write('),\n')
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
         for child in node:
@@ -712,19 +697,19 @@ class ImageInfoType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'File_Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_File_Name(obj_)
         elif nodeName_ == 'Command_Line':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Command_Line(obj_)
         elif nodeName_ == 'Current_Directory':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Current_Directory(obj_)
         elif nodeName_ == 'Path':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Path(obj_)
 # end class ImageInfoType
@@ -811,7 +796,7 @@ class ChildPIDListType(GeneratedsSuper):
     def add_Child_PID(self, value): self.Child_PID.append(value)
     def insert_Child_PID(self, index, value): self.Child_PID[index] = value
     def validate_UnsignedIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='ProcessObj:', name_='ChildPIDListType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -858,8 +843,8 @@ class ChildPIDListType(GeneratedsSuper):
         level += 1
         for Child_PID_ in self.Child_PID:
             showIndent(outfile, level)
-            outfile.write('model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
-            Child_PID_.exportLiteral(outfile, level, name_='cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType')
+            outfile.write('model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
+            Child_PID_.exportLiteral(outfile, level, name_='cybox_common_types_1_0.UnsignedIntegerObjectAttributeType')
             showIndent(outfile, level)
             outfile.write('),\n')
         level -= 1
@@ -874,7 +859,7 @@ class ChildPIDListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Child_PID':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.Child_PID.append(obj_)
 # end class ChildPIDListType
@@ -895,7 +880,7 @@ class ArgumentListType(GeneratedsSuper):
     def get_Argument(self): return self.Argument
     def set_Argument(self, Argument): self.Argument = Argument
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on xs:string.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def export(self, outfile, level, namespace_='ProcessObj:', name_='ArgumentListType', namespacedef_='', pretty_print=True):
         if pretty_print:
@@ -939,7 +924,10 @@ class ArgumentListType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Argument is not None:
             showIndent(outfile, level)
-            outfile.write('Argument=%s,\n' % quote_python(self.Argument).encode(ExternalEncoding))
+            outfile.write('Argument=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Argument.exportLiteral(outfile, level, name_='Argument')
+            showIndent(outfile, level)
+            outfile.write('),\n')
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
         for child in node:
@@ -949,7 +937,7 @@ class ArgumentListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Argument':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Argument(obj_)
 # end class ArgumentListType
@@ -1039,12 +1027,12 @@ class PortListType(GeneratedsSuper):
             self.Port.append(obj_)
 # end class PortListType
 
-class ProcessObjectType(cybox_common_types_v1_0.DefinedObjectType):
+class ProcessObjectType(cybox_common_types_1_0.DefinedObjectType):
     """The ProcessObjectType type is intended to characterize system
     processes.The hidden attribute specifies whether the process is
     hidden or not."""
     subclass = None
-    superclass = cybox_common_types_v1_0.DefinedObjectType
+    superclass = cybox_common_types_1_0.DefinedObjectType
     def __init__(self, object_reference=None, is_hidden=None, PID=None, Name=None, Creation_Time=None, Parent_PID=None, Child_PID_List=None, Image_Info=None, Argument_List=None, Environment_Variable_List=None, Kernel_Time=None, Port_List=None, Network_Connection_List=None, Start_Time=None, Status=None, String_List=None, Username=None, User_Time=None):
         super(ProcessObjectType, self).__init__(object_reference, )
         self.is_hidden = _cast(bool, is_hidden)
@@ -1073,17 +1061,17 @@ class ProcessObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_PID(self): return self.PID
     def set_PID(self, PID): self.PID = PID
     def validate_UnsignedIntegerObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.UnsignedIntegerObjectAttributeType, a restriction on None.
         pass
     def get_Name(self): return self.Name
     def set_Name(self, Name): self.Name = Name
     def validate_StringObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.StringObjectAttributeType, a restriction on xs:string.
+        # Validate type cybox_common_types_1_0.StringObjectAttributeType, a restriction on None.
         pass
     def get_Creation_Time(self): return self.Creation_Time
     def set_Creation_Time(self, Creation_Time): self.Creation_Time = Creation_Time
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DateTimeObjectAttributeType, a restriction on None.
+        # Validate type cybox_common_types_1_0.DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_Parent_PID(self): return self.Parent_PID
     def set_Parent_PID(self, Parent_PID): self.Parent_PID = Parent_PID
@@ -1098,7 +1086,7 @@ class ProcessObjectType(cybox_common_types_v1_0.DefinedObjectType):
     def get_Kernel_Time(self): return self.Kernel_Time
     def set_Kernel_Time(self, Kernel_Time): self.Kernel_Time = Kernel_Time
     def validate_DurationObjectAttributeType(self, value):
-        # Validate type cybox_common_types_v1_0.DurationObjectAttributeType, a restriction on xs:duration.
+        # Validate type cybox_common_types_1_0.DurationObjectAttributeType, a restriction on None.
         pass
     def get_Port_List(self): return self.Port_List
     def set_Port_List(self, Port_List): self.Port_List = Port_List
@@ -1213,22 +1201,25 @@ class ProcessObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(ProcessObjectType, self).exportLiteralChildren(outfile, level, name_)
         if self.PID is not None:
             showIndent(outfile, level)
-            outfile.write('PID=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('PID=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.PID.exportLiteral(outfile, level, name_='PID')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Name is not None:
             showIndent(outfile, level)
-            outfile.write('Name=%s,\n' % quote_python(self.Name).encode(ExternalEncoding))
+            outfile.write('Name=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Name.exportLiteral(outfile, level, name_='Name')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.Creation_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Creation_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Creation_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Creation_Time.exportLiteral(outfile, level, name_='Creation_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Parent_PID is not None:
             showIndent(outfile, level)
-            outfile.write('Parent_PID=model_.cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType(\n')
+            outfile.write('Parent_PID=model_.cybox_common_types_1_0.UnsignedIntegerObjectAttributeType(\n')
             self.Parent_PID.exportLiteral(outfile, level, name_='Parent_PID')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1252,13 +1243,16 @@ class ProcessObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Environment_Variable_List is not None:
             showIndent(outfile, level)
-            outfile.write('Environment_Variable_List=model_.cybox_common_types_v1_0.EnvironmentVariableListType(\n')
+            outfile.write('Environment_Variable_List=model_.cybox_common_types_1_0.EnvironmentVariableListType(\n')
             self.Environment_Variable_List.exportLiteral(outfile, level, name_='Environment_Variable_List')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Kernel_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Kernel_Time=%s,\n' % quote_python(self.Kernel_Time).encode(ExternalEncoding))
+            outfile.write('Kernel_Time=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
+            self.Kernel_Time.exportLiteral(outfile, level, name_='Kernel_Time')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.Port_List is not None:
             showIndent(outfile, level)
             outfile.write('Port_List=model_.PortListType(\n')
@@ -1273,7 +1267,7 @@ class ProcessObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.Start_Time is not None:
             showIndent(outfile, level)
-            outfile.write('Start_Time=model_.cybox_common_types_v1_0.DateTimeObjectAttributeType(\n')
+            outfile.write('Start_Time=model_.cybox_common_types_1_0.DateTimeObjectAttributeType(\n')
             self.Start_Time.exportLiteral(outfile, level, name_='Start_Time')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1285,16 +1279,22 @@ class ProcessObjectType(cybox_common_types_v1_0.DefinedObjectType):
             outfile.write('),\n')
         if self.String_List is not None:
             showIndent(outfile, level)
-            outfile.write('String_List=model_.cybox_common_types_v1_0.ExtractedStringsType(\n')
+            outfile.write('String_List=model_.cybox_common_types_1_0.ExtractedStringsType(\n')
             self.String_List.exportLiteral(outfile, level, name_='String_List')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Username is not None:
             showIndent(outfile, level)
-            outfile.write('Username=%s,\n' % quote_python(self.Username).encode(ExternalEncoding))
+            outfile.write('Username=model_.cybox_common_types_1_0.StringObjectAttributeType(\n')
+            self.Username.exportLiteral(outfile, level, name_='Username')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.User_Time is not None:
             showIndent(outfile, level)
-            outfile.write('User_Time=%s,\n' % quote_python(self.User_Time).encode(ExternalEncoding))
+            outfile.write('User_Time=model_.cybox_common_types_1_0.DurationObjectAttributeType(\n')
+            self.User_Time.exportLiteral(outfile, level, name_='User_Time')
+            showIndent(outfile, level)
+            outfile.write('),\n')
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
         for child in node:
@@ -1313,19 +1313,19 @@ class ProcessObjectType(cybox_common_types_v1_0.DefinedObjectType):
         super(ProcessObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'PID':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_PID(obj_)
         elif nodeName_ == 'Name':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Creation_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Creation_Time(obj_)
         elif nodeName_ == 'Parent_PID':
-            obj_ = cybox_common_types_v1_0.UnsignedIntegerObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.UnsignedIntegerObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Parent_PID(obj_)
         elif nodeName_ == 'Child_PID_List':
@@ -1341,11 +1341,11 @@ class ProcessObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Argument_List(obj_)
         elif nodeName_ == 'Environment_Variable_List':
-            obj_ = cybox_common_types_v1_0.EnvironmentVariableListType.factory()
+            obj_ = cybox_common_types_1_0.EnvironmentVariableListType.factory()
             obj_.build(child_)
             self.set_Environment_Variable_List(obj_)
         elif nodeName_ == 'Kernel_Time':
-            obj_ = cybox_common_types_v1_0.DurationObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Kernel_Time(obj_)
         elif nodeName_ == 'Port_List':
@@ -1357,7 +1357,7 @@ class ProcessObjectType(cybox_common_types_v1_0.DefinedObjectType):
             obj_.build(child_)
             self.set_Network_Connection_List(obj_)
         elif nodeName_ == 'Start_Time':
-            obj_ = cybox_common_types_v1_0.DateTimeObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DateTimeObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Start_Time(obj_)
         elif nodeName_ == 'Status':
@@ -1378,29 +1378,29 @@ class ProcessObjectType(cybox_common_types_v1_0.DefinedObjectType):
                     'Class not implemented for <Status> element')
             self.set_Status(obj_)
         elif nodeName_ == 'String_List':
-            obj_ = cybox_common_types_v1_0.ExtractedStringsType.factory()
+            obj_ = cybox_common_types_1_0.ExtractedStringsType.factory()
             obj_.build(child_)
             self.set_String_List(obj_)
         elif nodeName_ == 'Username':
-            obj_ = cybox_common_types_v1_0.StringObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.StringObjectAttributeType.factory()
             obj_.build(child_)
             self.set_Username(obj_)
         elif nodeName_ == 'User_Time':
-            obj_ = cybox_common_types_v1_0.DurationObjectAttributeType.factory()
+            obj_ = cybox_common_types_1_0.DurationObjectAttributeType.factory()
             obj_.build(child_)
             self.set_User_Time(obj_)
         super(ProcessObjectType, self).buildChildren(child_, node, nodeName_, True)
 # end class ProcessObjectType
 
-class ConnectionStateType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class ConnectionStateType(cybox_common_types_1_0.BaseObjectAttributeType):
     """ConnectionStateType specifies connection states, via a union of the
     ConnectionStateEnum type and the atomic xs:string type. Its base
-    type is the CybOX Core cybox_common_types_v1_0.BaseObjectAttributeType, for permitting
+    type is the CybOX Core cybox_common_types_1_0.BaseObjectAttributeType, for permitting
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified element."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         super(ConnectionStateType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)

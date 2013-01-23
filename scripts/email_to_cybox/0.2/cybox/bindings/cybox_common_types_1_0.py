@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- 
 
 #
-# Generated Thu Mar 29 14:19:43 2012 by generateDS.py version 2.7b.
+# Generated Thu Nov 01 08:57:12 2012 by generateDS.py version 2.7c.
 #
 
 import sys
@@ -22,35 +22,8 @@ try:
     if Verbose_import_:
         print("running with lxml.etree")
 except ImportError:
-    try:
-        # cElementTree from Python 2.5+
-        import xml.etree.cElementTree as etree_
-        XMLParser_import_library = XMLParser_import_elementtree
-        if Verbose_import_:
-            print("running with cElementTree on Python 2.5+")
-    except ImportError:
-        try:
-            # ElementTree from Python 2.5+
-            import xml.etree.ElementTree as etree_
-            XMLParser_import_library = XMLParser_import_elementtree
-            if Verbose_import_:
-                print("running with ElementTree on Python 2.5+")
-        except ImportError:
-            try:
-                # normal cElementTree install
-                import cElementTree as etree_
-                XMLParser_import_library = XMLParser_import_elementtree
-                if Verbose_import_:
-                    print("running with cElementTree")
-            except ImportError:
-                try:
-                    # normal ElementTree install
-                    import elementtree.ElementTree as etree_
-                    XMLParser_import_library = XMLParser_import_elementtree
-                    if Verbose_import_:
-                        print("running with ElementTree")
-                except ImportError:
-                    raise ImportError("Failed to import ElementTree from any known place")
+    if Verbose_import_:
+        print 'Error: LXML version 2.3+ required for parsing files'
 
 def parsexml_(*args, **kwargs):
     if (XMLParser_import_library == XMLParser_import_lxml and
@@ -191,9 +164,10 @@ Namespace_extract_pat_ = re_.compile(r'{(.*)}(.*)')
 # Support/utility functions.
 #
 
-def showIndent(outfile, level):
-    for idx in range(level):
-        outfile.write('    ')
+def showIndent(outfile, level, pretty_print=True):
+    if pretty_print:
+        for idx in range(level):
+            outfile.write('    ')
 
 def quote_xml(inStr):
     if not inStr:
@@ -298,7 +272,7 @@ class MixedContainer:
         return self.value
     def getName(self):
         return self.name
-    def export(self, outfile, level, name, namespace):
+    def export(self, outfile, level, name, namespace, pretty_print=True):
         if self.category == MixedContainer.CategoryText:
             # Prevent exporting empty content as empty lines.
             if self.value.strip(): 
@@ -306,7 +280,7 @@ class MixedContainer:
         elif self.category == MixedContainer.CategorySimple:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
-            self.value.export(outfile, level, namespace,name)
+            self.value.export(outfile, level, namespace, name, pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
             outfile.write('<%s>%s</%s>' % (self.name, self.value, self.name))
@@ -374,31 +348,23 @@ class MeasureSourceType(GeneratedsSuper):
     cyber observation source.The tool_type attribute is optional and
     (when tools are used) enables identification of the type of tool
     leveraged as part of this cyber observation source.The
-    analysis_type attribute is optional and (when analysis is used)
-    enables identification of the type of analysis utilized as part
-    of this cyber observation source.The analysis_method attribute
-    is optional and (when analysis is used) enables identification
-    of the method of analysis utilized as part of this cyber
-    observation source.The information_sourceType attribute is
-    optional and enables identification of the type of information
-    source leveraged for this cyber observation source.The name
-    attribute is optional and enables the assignment of a relevant
-    name to a this Discovery Method."""
+    information_sourceType attribute is optional and enables
+    identification of the type of information source leveraged for
+    this cyber observation source.The name attribute is optional and
+    enables the assignment of a relevant name to a this Discovery
+    Method."""
     subclass = None
     superclass = None
-    def __init__(self, tool_type=None, analysis_method=None, source_type=None, information_source_type=None, analysis_type=None, classxx=None, name=None, Description=None, Contributors=None, Time=None, Tools=None, Indicators=None, Platform=None, System=None, Instance=None):
-        self.tool_type = _cast(None, tool_type)
-        self.analysis_method = _cast(None, analysis_method)
+    def __init__(self, source_type=None, tool_type=None, classxx=None, information_source_type=None, name=None, Description=None, Contributors=None, Time=None, Tools=None, Platform=None, System=None, Instance=None):
         self.source_type = _cast(None, source_type)
-        self.information_source_type = _cast(None, information_source_type)
-        self.analysis_type = _cast(None, analysis_type)
+        self.tool_type = _cast(None, tool_type)
         self.classxx = _cast(None, classxx)
+        self.information_source_type = _cast(None, information_source_type)
         self.name = _cast(None, name)
         self.Description = Description
         self.Contributors = Contributors
         self.Time = Time
         self.Tools = Tools
-        self.Indicators = Indicators
         self.Platform = Platform
         self.System = System
         self.Instance = Instance
@@ -416,86 +382,79 @@ class MeasureSourceType(GeneratedsSuper):
     def set_Time(self, Time): self.Time = Time
     def get_Tools(self): return self.Tools
     def set_Tools(self, Tools): self.Tools = Tools
-    def get_Indicators(self): return self.Indicators
-    def set_Indicators(self, Indicators): self.Indicators = Indicators
     def get_Platform(self): return self.Platform
     def set_Platform(self, Platform): self.Platform = Platform
     def get_System(self): return self.System
     def set_System(self, System): self.System = System
     def get_Instance(self): return self.Instance
     def set_Instance(self, Instance): self.Instance = Instance
-    def get_tool_type(self): return self.tool_type
-    def set_tool_type(self, tool_type): self.tool_type = tool_type
-    def get_analysis_method(self): return self.analysis_method
-    def set_analysis_method(self, analysis_method): self.analysis_method = analysis_method
     def get_source_type(self): return self.source_type
     def set_source_type(self, source_type): self.source_type = source_type
-    def get_information_source_type(self): return self.information_source_type
-    def set_information_source_type(self, information_source_type): self.information_source_type = information_source_type
-    def get_analysis_type(self): return self.analysis_type
-    def set_analysis_type(self, analysis_type): self.analysis_type = analysis_type
+    def get_tool_type(self): return self.tool_type
+    def set_tool_type(self, tool_type): self.tool_type = tool_type
     def get_class(self): return self.classxx
     def set_class(self, classxx): self.classxx = classxx
+    def get_information_source_type(self): return self.information_source_type
+    def set_information_source_type(self, information_source_type): self.information_source_type = information_source_type
     def get_name(self): return self.name
     def set_name(self, name): self.name = name
-    def export(self, outfile, level, namespace_='Common:', name_='MeasureSourceType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='MeasureSourceType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='MeasureSourceType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='MeasureSourceType'):
-        if self.tool_type is not None and 'tool_type' not in already_processed:
-            already_processed.append('tool_type')
-            outfile.write(' tool_type=%s' % (quote_attrib(self.tool_type), ))
-        if self.analysis_method is not None and 'analysis_method' not in already_processed:
-            already_processed.append('analysis_method')
-            outfile.write(' analysis_method=%s' % (quote_attrib(self.analysis_method), ))
         if self.source_type is not None and 'source_type' not in already_processed:
             already_processed.append('source_type')
             outfile.write(' source_type=%s' % (quote_attrib(self.source_type), ))
-        if self.information_source_type is not None and 'information_source_type' not in already_processed:
-            already_processed.append('information_source_type')
-            outfile.write(' information_source_type=%s' % (quote_attrib(self.information_source_type), ))
-        if self.analysis_type is not None and 'analysis_type' not in already_processed:
-            already_processed.append('analysis_type')
-            outfile.write(' analysis_type=%s' % (quote_attrib(self.analysis_type), ))
+        if self.tool_type is not None and 'tool_type' not in already_processed:
+            already_processed.append('tool_type')
+            outfile.write(' tool_type=%s' % (quote_attrib(self.tool_type), ))
         if self.classxx is not None and 'classxx' not in already_processed:
             already_processed.append('classxx')
             outfile.write(' class=%s' % (quote_attrib(self.classxx), ))
+        if self.information_source_type is not None and 'information_source_type' not in already_processed:
+            already_processed.append('information_source_type')
+            outfile.write(' information_source_type=%s' % (quote_attrib(self.information_source_type), ))
         if self.name is not None and 'name' not in already_processed:
             already_processed.append('name')
             outfile.write(' name=%s' % (self.gds_format_string(quote_attrib(self.name).encode(ExternalEncoding), input_name='name'), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='MeasureSourceType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='MeasureSourceType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Description is not None:
-            self.Description.export(outfile, level, 'Common:', name_='Description')
+            self.Description.export(outfile, level, 'Common:', name_='Description', pretty_print=pretty_print)
         if self.Contributors is not None:
-            self.Contributors.export(outfile, level, 'Common:', name_='Contributors')
+            self.Contributors.export(outfile, level, 'Common:', name_='Contributors', pretty_print=pretty_print)
         if self.Time is not None:
-            self.Time.export(outfile, level, 'Common:', name_='Time')
+            self.Time.export(outfile, level, 'Common:', name_='Time', pretty_print=pretty_print)
         if self.Tools is not None:
-            self.Tools.export(outfile, level, 'Common:', name_='Tools')
-        if self.Indicators is not None:
-            self.Indicators.export(outfile, level, 'Common:', name_='Indicators')
+            self.Tools.export(outfile, level, 'Common:', name_='Tools', pretty_print=pretty_print)
         if self.Platform is not None:
-            self.Platform.export(outfile, level, 'Common:', name_='Platform')
+            self.Platform.export(outfile, level, 'Common:', name_='Platform', pretty_print=pretty_print)
         if self.System is not None:
-            self.System.export(outfile, level, 'Common:', name_='System')
+            self.System.export(outfile, level, 'Common:', name_='System', pretty_print=pretty_print)
         if self.Instance is not None:
-            self.Instance.export(outfile, level, 'Common:', name_='Instance')
+            self.Instance.export(outfile, level, 'Common:', name_='Instance', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Description is not None or
             self.Contributors is not None or
             self.Time is not None or
             self.Tools is not None or
-            self.Indicators is not None or
             self.Platform is not None or
             self.System is not None or
             self.Instance is not None
@@ -509,30 +468,22 @@ class MeasureSourceType(GeneratedsSuper):
         if self.hasContent_():
             self.exportLiteralChildren(outfile, level, name_)
     def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        if self.tool_type is not None and 'tool_type' not in already_processed:
-            already_processed.append('tool_type')
-            showIndent(outfile, level)
-            outfile.write('tool_type = %s,\n' % (self.tool_type,))
-        if self.analysis_method is not None and 'analysis_method' not in already_processed:
-            already_processed.append('analysis_method')
-            showIndent(outfile, level)
-            outfile.write('analysis_method = %s,\n' % (self.analysis_method,))
         if self.source_type is not None and 'source_type' not in already_processed:
             already_processed.append('source_type')
             showIndent(outfile, level)
             outfile.write('source_type = %s,\n' % (self.source_type,))
-        if self.information_source_type is not None and 'information_source_type' not in already_processed:
-            already_processed.append('information_source_type')
+        if self.tool_type is not None and 'tool_type' not in already_processed:
+            already_processed.append('tool_type')
             showIndent(outfile, level)
-            outfile.write('information_source_type = %s,\n' % (self.information_source_type,))
-        if self.analysis_type is not None and 'analysis_type' not in already_processed:
-            already_processed.append('analysis_type')
-            showIndent(outfile, level)
-            outfile.write('analysis_type = %s,\n' % (self.analysis_type,))
+            outfile.write('tool_type = %s,\n' % (self.tool_type,))
         if self.classxx is not None and 'classxx' not in already_processed:
             already_processed.append('classxx')
             showIndent(outfile, level)
             outfile.write('classxx = %s,\n' % (self.classxx,))
+        if self.information_source_type is not None and 'information_source_type' not in already_processed:
+            already_processed.append('information_source_type')
+            showIndent(outfile, level)
+            outfile.write('information_source_type = %s,\n' % (self.information_source_type,))
         if self.name is not None and 'name' not in already_processed:
             already_processed.append('name')
             showIndent(outfile, level)
@@ -562,12 +513,6 @@ class MeasureSourceType(GeneratedsSuper):
             self.Tools.exportLiteral(outfile, level, name_='Tools')
             showIndent(outfile, level)
             outfile.write('),\n')
-        if self.Indicators is not None:
-            showIndent(outfile, level)
-            outfile.write('Indicators=model_.IndicatorsType(\n')
-            self.Indicators.exportLiteral(outfile, level, name_='Indicators')
-            showIndent(outfile, level)
-            outfile.write('),\n')
         if self.Platform is not None:
             showIndent(outfile, level)
             outfile.write('Platform=model_.CPESpecificationType(\n')
@@ -576,40 +521,38 @@ class MeasureSourceType(GeneratedsSuper):
             outfile.write('),\n')
         if self.System is not None:
             showIndent(outfile, level)
-            outfile.write('System=%s,\n' % quote_python(self.System).encode(ExternalEncoding))
+            outfile.write('System=model_.system_object_1_3.SystemObjectType(\n')
+            self.System.exportLiteral(outfile, level, name_='System')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.Instance is not None:
             showIndent(outfile, level)
-            outfile.write('Instance=%s,\n' % quote_python(self.Instance).encode(ExternalEncoding))
+            outfile.write('Instance=model_.process_object_1_3.ProcessObjectType(\n')
+            self.Instance.exportLiteral(outfile, level, name_='Instance')
+            showIndent(outfile, level)
+            outfile.write('),\n')
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
         for child in node:
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
     def buildAttributes(self, node, attrs, already_processed):
-        value = find_attr_value_('tool_type', node)
-        if value is not None and 'tool_type' not in already_processed:
-            already_processed.append('tool_type')
-            self.tool_type = value
-        value = find_attr_value_('analysis_method', node)
-        if value is not None and 'analysis_method' not in already_processed:
-            already_processed.append('analysis_method')
-            self.analysis_method = value
         value = find_attr_value_('source_type', node)
         if value is not None and 'source_type' not in already_processed:
             already_processed.append('source_type')
             self.source_type = value
-        value = find_attr_value_('information_source_type', node)
-        if value is not None and 'information_source_type' not in already_processed:
-            already_processed.append('information_source_type')
-            self.information_source_type = value
-        value = find_attr_value_('analysis_type', node)
-        if value is not None and 'analysis_type' not in already_processed:
-            already_processed.append('analysis_type')
-            self.analysis_type = value
+        value = find_attr_value_('tool_type', node)
+        if value is not None and 'tool_type' not in already_processed:
+            already_processed.append('tool_type')
+            self.tool_type = value
         value = find_attr_value_('class', node)
         if value is not None and 'class' not in already_processed:
             already_processed.append('class')
             self.classxx = value
+        value = find_attr_value_('information_source_type', node)
+        if value is not None and 'information_source_type' not in already_processed:
+            already_processed.append('information_source_type')
+            self.information_source_type = value
         value = find_attr_value_('name', node)
         if value is not None and 'name' not in already_processed:
             already_processed.append('name')
@@ -631,24 +574,19 @@ class MeasureSourceType(GeneratedsSuper):
             obj_ = ToolsInformationType.factory()
             obj_.build(child_)
             self.set_Tools(obj_)
-        elif nodeName_ == 'Indicators':
-            obj_ = IndicatorsType.factory()
-            obj_.build(child_)
-            self.set_Indicators(obj_)
         elif nodeName_ == 'Platform':
             obj_ = CPESpecificationType.factory()
             obj_.build(child_)
             self.set_Platform(obj_)
         elif nodeName_ == 'System':
-            System_ = child_.text
-            System_ = self.gds_validate_string(System_, node, 'System')
-            self.System = System_
+            obj_ = system_object_1_3.SystemObjectType.factory()
+            obj_.build(child_)
+            self.set_System(obj_)
         elif nodeName_ == 'Instance':
-            Instance_ = child_.text
-            Instance_ = self.gds_validate_string(Instance_, node, 'Instance')
-            self.Instance = Instance_
+            obj_ = process_object_1_3.ProcessObjectType.factory()
+            obj_.build(child_)
+            self.set_Instance(obj_)
 # end class MeasureSourceType
-
 
 class ContributorType(GeneratedsSuper):
     """The ContributorType represents a description of an individual who
@@ -683,41 +621,49 @@ class ContributorType(GeneratedsSuper):
     def set_Date(self, Date): self.Date = Date
     def get_Contribution_Location(self): return self.Contribution_Location
     def set_Contribution_Location(self, Contribution_Location): self.Contribution_Location = Contribution_Location
-    def export(self, outfile, level, namespace_='Common:', name_='ContributorType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ContributorType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ContributorType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ContributorType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ContributorType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ContributorType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Role is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sRole>%s</%sRole>\n' % ('Common:', self.gds_format_string(quote_xml(self.Role).encode(ExternalEncoding), input_name='Role'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sRole>%s</%sRole>%s' % ('Common:', self.gds_format_string(quote_xml(self.Role).encode(ExternalEncoding), input_name='Role'), 'Common:', eol_))
         if self.Name is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sName>%s</%sName>\n' % ('Common:', self.gds_format_string(quote_xml(self.Name).encode(ExternalEncoding), input_name='Name'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sName>%s</%sName>%s' % ('Common:', self.gds_format_string(quote_xml(self.Name).encode(ExternalEncoding), input_name='Name'), 'Common:', eol_))
         if self.Email is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sEmail>%s</%sEmail>\n' % ('Common:', self.gds_format_string(quote_xml(self.Email).encode(ExternalEncoding), input_name='Email'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sEmail>%s</%sEmail>%s' % ('Common:', self.gds_format_string(quote_xml(self.Email).encode(ExternalEncoding), input_name='Email'), 'Common:', eol_))
         if self.Phone is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sPhone>%s</%sPhone>\n' % ('Common:', self.gds_format_string(quote_xml(self.Phone).encode(ExternalEncoding), input_name='Phone'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sPhone>%s</%sPhone>%s' % ('Common:', self.gds_format_string(quote_xml(self.Phone).encode(ExternalEncoding), input_name='Phone'), 'Common:', eol_))
         if self.Organization is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sOrganization>%s</%sOrganization>\n' % ('Common:', self.gds_format_string(quote_xml(self.Organization).encode(ExternalEncoding), input_name='Organization'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sOrganization>%s</%sOrganization>%s' % ('Common:', self.gds_format_string(quote_xml(self.Organization).encode(ExternalEncoding), input_name='Organization'), 'Common:', eol_))
         if self.Date is not None:
-            self.Date.export(outfile, level, 'Common:', name_='Date')
+            self.Date.export(outfile, level, 'Common:', name_='Date', pretty_print=pretty_print)
         if self.Contribution_Location is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sContribution_Location>%s</%sContribution_Location>\n' % ('Common:', self.gds_format_string(quote_xml(self.Contribution_Location).encode(ExternalEncoding), input_name='Contribution_Location'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sContribution_Location>%s</%sContribution_Location>%s' % ('Common:', self.gds_format_string(quote_xml(self.Contribution_Location).encode(ExternalEncoding), input_name='Contribution_Location'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.Role is not None or
@@ -801,7 +747,6 @@ class ContributorType(GeneratedsSuper):
             self.Contribution_Location = Contribution_Location_
 # end class ContributorType
 
-
 class DateRangeType(GeneratedsSuper):
     """The DateRangeType specifies a range of dates."""
     subclass = None
@@ -819,27 +764,35 @@ class DateRangeType(GeneratedsSuper):
     def set_Start_Date(self, Start_Date): self.Start_Date = Start_Date
     def get_End_Date(self): return self.End_Date
     def set_End_Date(self, End_Date): self.End_Date = End_Date
-    def export(self, outfile, level, namespace_='Common:', name_='DateRangeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='DateRangeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='DateRangeType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='DateRangeType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='DateRangeType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='DateRangeType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Start_Date is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sStart_Date>%s</%sStart_Date>\n' % ('Common:', self.gds_format_string(quote_xml(self.Start_Date).encode(ExternalEncoding), input_name='Start_Date'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sStart_Date>%s</%sStart_Date>%s' % ('Common:', self.gds_format_string(quote_xml(self.Start_Date).encode(ExternalEncoding), input_name='Start_Date'), 'Common:', eol_))
         if self.End_Date is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sEnd_Date>%s</%sEnd_Date>\n' % ('Common:', self.gds_format_string(quote_xml(self.End_Date).encode(ExternalEncoding), input_name='End_Date'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sEnd_Date>%s</%sEnd_Date>%s' % ('Common:', self.gds_format_string(quote_xml(self.End_Date).encode(ExternalEncoding), input_name='End_Date'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.Start_Date is not None or
@@ -880,7 +833,6 @@ class DateRangeType(GeneratedsSuper):
             self.End_Date = End_Date_
 # end class DateRangeType
 
-
 class PersonnelType(GeneratedsSuper):
     """The PersonnelType is an abstracted data type to standardize the
     description of sets of personnel."""
@@ -901,23 +853,31 @@ class PersonnelType(GeneratedsSuper):
     def set_Contributor(self, Contributor): self.Contributor = Contributor
     def add_Contributor(self, value): self.Contributor.append(value)
     def insert_Contributor(self, index, value): self.Contributor[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='PersonnelType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='PersonnelType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='PersonnelType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='PersonnelType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='PersonnelType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='PersonnelType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Contributor_ in self.Contributor:
-            Contributor_.export(outfile, level, 'Common:', name_='Contributor')
+            Contributor_.export(outfile, level, 'Common:', name_='Contributor', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Contributor
@@ -959,7 +919,6 @@ class PersonnelType(GeneratedsSuper):
             self.Contributor.append(obj_)
 # end class PersonnelType
 
-
 class TimeType(GeneratedsSuper):
     """The TimeType specifies various time properties for a cyber
     observation source."""
@@ -984,33 +943,41 @@ class TimeType(GeneratedsSuper):
     def set_Produced_Time(self, Produced_Time): self.Produced_Time = Produced_Time
     def get_Received_Time(self): return self.Received_Time
     def set_Received_Time(self, Received_Time): self.Received_Time = Received_Time
-    def export(self, outfile, level, namespace_='Common:', name_='TimeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='TimeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='TimeType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='TimeType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='TimeType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='TimeType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Start_Time is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sStart_Time>%s</%sStart_Time>\n' % ('Common:', self.gds_format_string(quote_xml(self.Start_Time).encode(ExternalEncoding), input_name='Start_Time'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sStart_Time>%s</%sStart_Time>%s' % ('Common:', self.gds_format_string(quote_xml(self.Start_Time).encode(ExternalEncoding), input_name='Start_Time'), 'Common:', eol_))
         if self.End_Time is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sEnd_Time>%s</%sEnd_Time>\n' % ('Common:', self.gds_format_string(quote_xml(self.End_Time).encode(ExternalEncoding), input_name='End_Time'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sEnd_Time>%s</%sEnd_Time>%s' % ('Common:', self.gds_format_string(quote_xml(self.End_Time).encode(ExternalEncoding), input_name='End_Time'), 'Common:', eol_))
         if self.Produced_Time is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sProduced_Time>%s</%sProduced_Time>\n' % ('Common:', self.gds_format_string(quote_xml(self.Produced_Time).encode(ExternalEncoding), input_name='Produced_Time'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sProduced_Time>%s</%sProduced_Time>%s' % ('Common:', self.gds_format_string(quote_xml(self.Produced_Time).encode(ExternalEncoding), input_name='Produced_Time'), 'Common:', eol_))
         if self.Received_Time is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sReceived_Time>%s</%sReceived_Time>\n' % ('Common:', self.gds_format_string(quote_xml(self.Received_Time).encode(ExternalEncoding), input_name='Received_Time'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sReceived_Time>%s</%sReceived_Time>%s' % ('Common:', self.gds_format_string(quote_xml(self.Received_Time).encode(ExternalEncoding), input_name='Received_Time'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.Start_Time is not None or
@@ -1067,7 +1034,6 @@ class TimeType(GeneratedsSuper):
             self.Received_Time = Received_Time_
 # end class TimeType
 
-
 class ToolSpecificDataType(GeneratedsSuper):
     """The ToolSpecificDataType is an Abstract type placeholder within the
     CybOX schema enabling the inclusion of metadata for a specific
@@ -1083,20 +1049,24 @@ class ToolSpecificDataType(GeneratedsSuper):
         else:
             return ToolSpecificDataType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def export(self, outfile, level, namespace_='Common:', name_='ToolSpecificDataType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ToolSpecificDataType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ToolSpecificDataType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ToolSpecificDataType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ToolSpecificDataType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ToolSpecificDataType', fromsubclass_=False, pretty_print=True):
         pass
     def hasContent_(self):
         if (
@@ -1125,7 +1095,6 @@ class ToolSpecificDataType(GeneratedsSuper):
         pass
 # end class ToolSpecificDataType
 
-
 class ToolsInformationType(GeneratedsSuper):
     """The ToolsInformationType represents a description of a set of
     automated tools."""
@@ -1146,23 +1115,31 @@ class ToolsInformationType(GeneratedsSuper):
     def set_Tool(self, Tool): self.Tool = Tool
     def add_Tool(self, value): self.Tool.append(value)
     def insert_Tool(self, index, value): self.Tool[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='ToolsInformationType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ToolsInformationType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ToolsInformationType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ToolsInformationType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ToolsInformationType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ToolsInformationType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Tool_ in self.Tool:
-            Tool_.export(outfile, level, 'Common:', name_='Tool')
+            Tool_.export(outfile, level, 'Common:', name_='Tool', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Tool
@@ -1204,7 +1181,6 @@ class ToolsInformationType(GeneratedsSuper):
             self.Tool.append(obj_)
 # end class ToolsInformationType
 
-
 class ToolInformationType(GeneratedsSuper):
     """The ToolInformationType represens a description of a single
     automated tool.The id attribute specifies a unique ID for this
@@ -1212,9 +1188,10 @@ class ToolInformationType(GeneratedsSuper):
     this Tool."""
     subclass = None
     superclass = None
-    def __init__(self, idref=None, id=None, Vendor=None, Name=None, Version=None, Service_Pack=None, Tool_specific_Data=None, Tool_Hashes=None, Tool_Configuration=None, Execution_Environment=None, Errors=None, Metadata=None):
+    def __init__(self, idref=None, id=None, Description=None, Vendor=None, Name=None, Version=None, Service_Pack=None, Tool_specific_Data=None, Tool_Hashes=None, Tool_Configuration=None, Execution_Environment=None, Errors=None, Metadata=None):
         self.idref = _cast(None, idref)
         self.id = _cast(None, id)
+        self.Description = Description
         self.Vendor = Vendor
         self.Name = Name
         self.Version = Version
@@ -1234,6 +1211,8 @@ class ToolInformationType(GeneratedsSuper):
         else:
             return ToolInformationType(*args_, **kwargs_)
     factory = staticmethod(factory)
+    def get_Description(self): return self.Description
+    def set_Description(self, Description): self.Description = Description
     def get_Vendor(self): return self.Vendor
     def set_Vendor(self, Vendor): self.Vendor = Vendor
     def get_Name(self): return self.Name
@@ -1260,18 +1239,22 @@ class ToolInformationType(GeneratedsSuper):
     def set_idref(self, idref): self.idref = idref
     def get_id(self): return self.id
     def set_id(self, id): self.id = id
-    def export(self, outfile, level, namespace_='Common:', name_='ToolInformationType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ToolInformationType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ToolInformationType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ToolInformationType'):
         if self.idref is not None and 'idref' not in already_processed:
             already_processed.append('idref')
@@ -1279,33 +1262,40 @@ class ToolInformationType(GeneratedsSuper):
         if self.id is not None and 'id' not in already_processed:
             already_processed.append('id')
             outfile.write(' id=%s' % (quote_attrib(self.id), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ToolInformationType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ToolInformationType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        if self.Description is not None:
+            self.Description.export(outfile, level, 'Common:', name_='Description', pretty_print=pretty_print)
         if self.Vendor is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sVendor>%s</%sVendor>\n' % ('Common:', self.gds_format_string(quote_xml(self.Vendor).encode(ExternalEncoding), input_name='Vendor'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sVendor>%s</%sVendor>%s' % ('Common:', self.gds_format_string(quote_xml(self.Vendor).encode(ExternalEncoding), input_name='Vendor'), 'Common:', eol_))
         if self.Name is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sName>%s</%sName>\n' % ('Common:', self.gds_format_string(quote_xml(self.Name).encode(ExternalEncoding), input_name='Name'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sName>%s</%sName>%s' % ('Common:', self.gds_format_string(quote_xml(self.Vendor).encode(ExternalEncoding), input_name='Name'), 'Common:', eol_))
         if self.Version is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sVersion>%s</%sVersion>\n' % ('Common:', self.gds_format_string(quote_xml(self.Version).encode(ExternalEncoding), input_name='Version'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sVersion>%s</%sVersion>%s' % ('Common:', self.gds_format_string(quote_xml(self.Version).encode(ExternalEncoding), input_name='Version'), 'Common:', eol_))
         if self.Service_Pack is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sService_Pack>%s</%sService_Pack>\n' % ('Common:', self.gds_format_string(quote_xml(self.Service_Pack).encode(ExternalEncoding), input_name='Service_Pack'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sService_Pack>%s</%sService_Pack>%s' % ('Common:', self.gds_format_string(quote_xml(self.Service_Pack).encode(ExternalEncoding), input_name='Service_Pack'), 'Common:', eol_))
         if self.Tool_specific_Data is not None:
-            self.Tool_specific_Data.export(outfile, level, 'Common:', name_='Tool_specific_Data')
+            self.Tool_specific_Data.export(outfile, level, 'Common:', name_='Tool_specific_Data', pretty_print=pretty_print)
         if self.Tool_Hashes is not None:
-            self.Tool_Hashes.export(outfile, level, 'Common:', name_='Tool_Hashes')
+            self.Tool_Hashes.export(outfile, level, 'Common:', name_='Tool_Hashes', pretty_print=pretty_print)
         if self.Tool_Configuration is not None:
-            self.Tool_Configuration.export(outfile, level, 'Common:', name_='Tool_Configuration')
+            self.Tool_Configuration.export(outfile, level, 'Common:', name_='Tool_Configuration', pretty_print=pretty_print)
         if self.Execution_Environment is not None:
-            self.Execution_Environment.export(outfile, level, 'Common:', name_='Execution_Environment')
+            self.Execution_Environment.export(outfile, level, 'Common:', name_='Execution_Environment', pretty_print=pretty_print)
         if self.Errors is not None:
-            self.Errors.export(outfile, level, 'Common:', name_='Errors')
+            self.Errors.export(outfile, level, 'Common:', name_='Errors', pretty_print=pretty_print)
         for Metadata_ in self.Metadata:
-            Metadata_.export(outfile, level, 'Common:', name_='Metadata')
+            Metadata_.export(outfile, level, 'Common:', name_='Metadata', pretty_print=pretty_print)
     def hasContent_(self):
         if (
+            self.Description is not None or
             self.Vendor is not None or
             self.Name is not None or
             self.Version is not None or
@@ -1335,6 +1325,12 @@ class ToolInformationType(GeneratedsSuper):
             showIndent(outfile, level)
             outfile.write('id = %s,\n' % (self.id,))
     def exportLiteralChildren(self, outfile, level, name_):
+        if self.Description is not None:
+            showIndent(outfile, level)
+            outfile.write('Description=model_.StructuredTextType(\n')
+            self.Description.exportLiteral(outfile, level, name_='Description')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.Vendor is not None:
             showIndent(outfile, level)
             outfile.write('Vendor=%s,\n' % quote_python(self.Vendor).encode(ExternalEncoding))
@@ -1404,7 +1400,11 @@ class ToolInformationType(GeneratedsSuper):
             already_processed.append('id')
             self.id = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'Vendor':
+        if nodeName_ == 'Description':
+            obj_ = StructuredTextType.factory()
+            obj_.build(child_)
+            self.set_Description(obj_)
+        elif nodeName_ == 'Vendor':
             Vendor_ = child_.text
             Vendor_ = self.gds_validate_string(Vendor_, node, 'Vendor')
             self.Vendor = Vendor_
@@ -1459,7 +1459,6 @@ class ToolInformationType(GeneratedsSuper):
             self.Metadata.append(obj_)
 # end class ToolInformationType
 
-
 class ToolConfigurationType(GeneratedsSuper):
     """The ToolConfigurationType characterizes the configuration for a tool
     used as a cyber observation source."""
@@ -1487,31 +1486,39 @@ class ToolConfigurationType(GeneratedsSuper):
     def set_Internationalization_Settings(self, Internationalization_Settings): self.Internationalization_Settings = Internationalization_Settings
     def get_Build_Information(self): return self.Build_Information
     def set_Build_Information(self, Build_Information): self.Build_Information = Build_Information
-    def export(self, outfile, level, namespace_='Common:', name_='ToolConfigurationType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ToolConfigurationType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ToolConfigurationType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ToolConfigurationType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ToolConfigurationType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ToolConfigurationType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Configuration_Settings is not None:
-            self.Configuration_Settings.export(outfile, level, 'Common:', name_='Configuration_Settings', )
+            self.Configuration_Settings.export(outfile, level, 'Common:', name_='Configuration_Settings', pretty_print=pretty_print)
         if self.Dependencies is not None:
-            self.Dependencies.export(outfile, level, 'Common:', name_='Dependencies')
+            self.Dependencies.export(outfile, level, 'Common:', name_='Dependencies', pretty_print=pretty_print)
         if self.Usage_Context_Assumptions is not None:
-            self.Usage_Context_Assumptions.export(outfile, level, 'Common:', name_='Usage_Context_Assumptions')
+            self.Usage_Context_Assumptions.export(outfile, level, 'Common:', name_='Usage_Context_Assumptions', pretty_print=pretty_print)
         if self.Internationalization_Settings is not None:
-            self.Internationalization_Settings.export(outfile, level, 'Common:', name_='Internationalization_Settings')
+            self.Internationalization_Settings.export(outfile, level, 'Common:', name_='Internationalization_Settings', pretty_print=pretty_print)
         if self.Build_Information is not None:
-            self.Build_Information.export(outfile, level, 'Common:', name_='Build_Information')
+            self.Build_Information.export(outfile, level, 'Common:', name_='Build_Information', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Configuration_Settings is not None or
@@ -1591,7 +1598,6 @@ class ToolConfigurationType(GeneratedsSuper):
             self.set_Build_Information(obj_)
 # end class ToolConfigurationType
 
-
 class ConfigurationSettingsType(GeneratedsSuper):
     """The ConfigurationSettingsType is a modularized data type used to
     provide a consistent approach to describing configuration
@@ -1613,23 +1619,31 @@ class ConfigurationSettingsType(GeneratedsSuper):
     def set_Configuration_Setting(self, Configuration_Setting): self.Configuration_Setting = Configuration_Setting
     def add_Configuration_Setting(self, value): self.Configuration_Setting.append(value)
     def insert_Configuration_Setting(self, index, value): self.Configuration_Setting[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='ConfigurationSettingsType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ConfigurationSettingsType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ConfigurationSettingsType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ConfigurationSettingsType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ConfigurationSettingsType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ConfigurationSettingsType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Configuration_Setting_ in self.Configuration_Setting:
-            Configuration_Setting_.export(outfile, level, 'Common:', name_='Configuration_Setting')
+            Configuration_Setting_.export(outfile, level, 'Common:', name_='Configuration_Setting', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Configuration_Setting
@@ -1671,7 +1685,6 @@ class ConfigurationSettingsType(GeneratedsSuper):
             self.Configuration_Setting.append(obj_)
 # end class ConfigurationSettingsType
 
-
 class ConfigurationSettingType(GeneratedsSuper):
     """The ConfigurationSettingType is a modularized data type used to
     provide a consistent approach to describing a particular
@@ -1698,33 +1711,41 @@ class ConfigurationSettingType(GeneratedsSuper):
     def set_Item_Type(self, Item_Type): self.Item_Type = Item_Type
     def get_Item_Description(self): return self.Item_Description
     def set_Item_Description(self, Item_Description): self.Item_Description = Item_Description
-    def export(self, outfile, level, namespace_='Common:', name_='ConfigurationSettingType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ConfigurationSettingType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ConfigurationSettingType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ConfigurationSettingType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ConfigurationSettingType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ConfigurationSettingType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Item_Name is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sItem_Name>%s</%sItem_Name>\n' % ('Common:', self.gds_format_string(quote_xml(self.Item_Name).encode(ExternalEncoding), input_name='Item_Name'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sItem_Name>%s</%sItem_Name>%s' % ('Common:', self.gds_format_string(quote_xml(self.Item_Name).encode(ExternalEncoding), input_name='Item_Name'), 'Common:', eol_))
         if self.Item_Value is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sItem_Value>%s</%sItem_Value>\n' % ('Common:', self.gds_format_string(quote_xml(self.Item_Value).encode(ExternalEncoding), input_name='Item_Value'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sItem_Value>%s</%sItem_Value>%s' % ('Common:', self.gds_format_string(quote_xml(self.Item_Value).encode(ExternalEncoding), input_name='Item_Value'), 'Common:', eol_))
         if self.Item_Type is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sItem_Type>%s</%sItem_Type>\n' % ('Common:', self.gds_format_string(quote_xml(self.Item_Type).encode(ExternalEncoding), input_name='Item_Type'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sItem_Type>%s</%sItem_Type>%s' % ('Common:', self.gds_format_string(quote_xml(self.Item_Type).encode(ExternalEncoding), input_name='Item_Type'), 'Common:', eol_))
         if self.Item_Description is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sItem_Description>%s</%sItem_Description>\n' % ('Common:', self.gds_format_string(quote_xml(self.Item_Description).encode(ExternalEncoding), input_name='Item_Description'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sItem_Description>%s</%sItem_Description>%s' % ('Common:', self.gds_format_string(quote_xml(self.Item_Description).encode(ExternalEncoding), input_name='Item_Description'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.Item_Name is not None or
@@ -1781,7 +1802,6 @@ class ConfigurationSettingType(GeneratedsSuper):
             self.Item_Description = Item_Description_
 # end class ConfigurationSettingType
 
-
 class DependenciesType(GeneratedsSuper):
     """The DependenciesType contains information describing a set of
     dependencies for this tool."""
@@ -1802,23 +1822,31 @@ class DependenciesType(GeneratedsSuper):
     def set_Dependency(self, Dependency): self.Dependency = Dependency
     def add_Dependency(self, value): self.Dependency.append(value)
     def insert_Dependency(self, index, value): self.Dependency[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='DependenciesType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='DependenciesType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='DependenciesType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='DependenciesType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='DependenciesType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='DependenciesType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Dependency_ in self.Dependency:
-            Dependency_.export(outfile, level, 'Common:', name_='Dependency')
+            Dependency_.export(outfile, level, 'Common:', name_='Dependency', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Dependency
@@ -1860,7 +1888,6 @@ class DependenciesType(GeneratedsSuper):
             self.Dependency.append(obj_)
 # end class DependenciesType
 
-
 class DependencyType(GeneratedsSuper):
     """The DependencyType contains information describing a single
     dependency for this tool."""
@@ -1879,26 +1906,34 @@ class DependencyType(GeneratedsSuper):
     def set_Dependency_Type(self, Dependency_Type): self.Dependency_Type = Dependency_Type
     def get_Dependency_Description(self): return self.Dependency_Description
     def set_Dependency_Description(self, Dependency_Description): self.Dependency_Description = Dependency_Description
-    def export(self, outfile, level, namespace_='Common:', name_='DependencyType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='DependencyType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='DependencyType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='DependencyType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='DependencyType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='DependencyType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Dependency_Type is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sDependency_Type>%s</%sDependency_Type>\n' % ('Common:', self.gds_format_string(quote_xml(self.Dependency_Type).encode(ExternalEncoding), input_name='Dependency_Type'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sDependency_Type>%s</%sDependency_Type>%s' % ('Common:', self.gds_format_string(quote_xml(self.Dependency_Type).encode(ExternalEncoding), input_name='Dependency_Type'), 'Common:', eol_))
         if self.Dependency_Description is not None:
-            self.Dependency_Description.export(outfile, level, 'Common:', name_='Dependency_Description', )
+            self.Dependency_Description.export(outfile, level, 'Common:', name_='Dependency_Description', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Dependency_Type is not None or
@@ -1942,7 +1977,6 @@ class DependencyType(GeneratedsSuper):
             self.set_Dependency_Description(obj_)
 # end class DependencyType
 
-
 class UsageContextAssumptionsType(GeneratedsSuper):
     """The UsageContextAssumptionsType contains descriptions of the various
     relevant usage context assumptions for this tool"""
@@ -1963,23 +1997,31 @@ class UsageContextAssumptionsType(GeneratedsSuper):
     def set_Usage_Context_Assumption(self, Usage_Context_Assumption): self.Usage_Context_Assumption = Usage_Context_Assumption
     def add_Usage_Context_Assumption(self, value): self.Usage_Context_Assumption.append(value)
     def insert_Usage_Context_Assumption(self, index, value): self.Usage_Context_Assumption[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='UsageContextAssumptionsType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='UsageContextAssumptionsType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='UsageContextAssumptionsType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='UsageContextAssumptionsType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='UsageContextAssumptionsType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='UsageContextAssumptionsType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Usage_Context_Assumption_ in self.Usage_Context_Assumption:
-            Usage_Context_Assumption_.export(outfile, level, 'Common:', name_='Usage_Context_Assumption')
+            Usage_Context_Assumption_.export(outfile, level, 'Common:', name_='Usage_Context_Assumption', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Usage_Context_Assumption
@@ -2021,7 +2063,6 @@ class UsageContextAssumptionsType(GeneratedsSuper):
             self.Usage_Context_Assumption.append(obj_)
 # end class UsageContextAssumptionsType
 
-
 class InternationalizationSettingsType(GeneratedsSuper):
     """The InternationalizationSettingsType contains information describing
     relevant internationalization setting for this tool"""
@@ -2042,23 +2083,31 @@ class InternationalizationSettingsType(GeneratedsSuper):
     def set_Internal_Strings(self, Internal_Strings): self.Internal_Strings = Internal_Strings
     def add_Internal_Strings(self, value): self.Internal_Strings.append(value)
     def insert_Internal_Strings(self, index, value): self.Internal_Strings[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='InternationalizationSettingsType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='InternationalizationSettingsType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='InternationalizationSettingsType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='InternationalizationSettingsType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='InternationalizationSettingsType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='InternationalizationSettingsType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Internal_Strings_ in self.Internal_Strings:
-            Internal_Strings_.export(outfile, level, 'Common:', name_='Internal_Strings')
+            Internal_Strings_.export(outfile, level, 'Common:', name_='Internal_Strings', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Internal_Strings
@@ -2100,7 +2149,6 @@ class InternationalizationSettingsType(GeneratedsSuper):
             self.Internal_Strings.append(obj_)
 # end class InternationalizationSettingsType
 
-
 class InternalStringsType(GeneratedsSuper):
     """The InternalStringsType contains a single internal string instance
     for this internationalization setting instance."""
@@ -2119,27 +2167,35 @@ class InternalStringsType(GeneratedsSuper):
     def set_Key(self, Key): self.Key = Key
     def get_Content(self): return self.Content
     def set_Content(self, Content): self.Content = Content
-    def export(self, outfile, level, namespace_='Common:', name_='InternalStringsType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='InternalStringsType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='InternalStringsType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='InternalStringsType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='InternalStringsType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='InternalStringsType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Key is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sKey>%s</%sKey>\n' % ('Common:', self.gds_format_string(quote_xml(self.Key).encode(ExternalEncoding), input_name='Key'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sKey>%s</%sKey>%s' % ('Common:', self.gds_format_string(quote_xml(self.Key).encode(ExternalEncoding), input_name='Key'), 'Common:', eol_))
         if self.Content is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sContent>%s</%sContent>\n' % ('Common:', self.gds_format_string(quote_xml(self.Content).encode(ExternalEncoding), input_name='Content'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sContent>%s</%sContent>%s' % ('Common:', self.gds_format_string(quote_xml(self.Content).encode(ExternalEncoding), input_name='Content'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.Key is not None or
@@ -2179,7 +2235,6 @@ class InternalStringsType(GeneratedsSuper):
             Content_ = self.gds_validate_string(Content_, node, 'Content')
             self.Content = Content_
 # end class InternalStringsType
-
 
 class BuildInformationType(GeneratedsSuper):
     """The BuildInformationType contains information describing how this
@@ -2226,50 +2281,58 @@ class BuildInformationType(GeneratedsSuper):
     def set_Libraries(self, Libraries): self.Libraries = Libraries
     def get_Build_Output_Log(self): return self.Build_Output_Log
     def set_Build_Output_Log(self, Build_Output_Log): self.Build_Output_Log = Build_Output_Log
-    def export(self, outfile, level, namespace_='Common:', name_='BuildInformationType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='BuildInformationType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='BuildInformationType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='BuildInformationType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='BuildInformationType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='BuildInformationType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Build_ID is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sBuild_ID>%s</%sBuild_ID>\n' % ('Common:', self.gds_format_string(quote_xml(self.Build_ID).encode(ExternalEncoding), input_name='Build_ID'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sBuild_ID>%s</%sBuild_ID>%s' % ('Common:', self.gds_format_string(quote_xml(self.Build_ID).encode(ExternalEncoding), input_name='Build_ID'), 'Common:', eol_))
         if self.Build_Project is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sBuild_Project>%s</%sBuild_Project>\n' % ('Common:', self.gds_format_string(quote_xml(self.Build_Project).encode(ExternalEncoding), input_name='Build_Project'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sBuild_Project>%s</%sBuild_Project>%s' % ('Common:', self.gds_format_string(quote_xml(self.Build_Project).encode(ExternalEncoding), input_name='Build_Project'), 'Common:', eol_))
         if self.Build_Utility is not None:
-            self.Build_Utility.export(outfile, level, 'Common:', name_='Build_Utility')
+            self.Build_Utility.export(outfile, level, 'Common:', name_='Build_Utility', pretty_print=pretty_print)
         if self.Build_Version is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sBuild_Version>%s</%sBuild_Version>\n' % ('Common:', self.gds_format_string(quote_xml(self.Build_Version).encode(ExternalEncoding), input_name='Build_Version'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sBuild_Version>%s</%sBuild_Version>%s' % ('Common:', self.gds_format_string(quote_xml(self.Build_Version).encode(ExternalEncoding), input_name='Build_Version'), 'Common:', eol_))
         if self.Build_Label is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sBuild_Label>%s</%sBuild_Label>\n' % ('Common:', self.gds_format_string(quote_xml(self.Build_Label).encode(ExternalEncoding), input_name='Build_Label'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sBuild_Label>%s</%sBuild_Label>%s' % ('Common:', self.gds_format_string(quote_xml(self.Build_Label).encode(ExternalEncoding), input_name='Build_Label'), 'Common:', eol_))
         if self.Compilers is not None:
-            self.Compilers.export(outfile, level, 'Common:', name_='Compilers')
+            self.Compilers.export(outfile, level, 'Common:', name_='Compilers', pretty_print=pretty_print)
         if self.Compilation_Date is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sCompilation_Date>%s</%sCompilation_Date>\n' % ('Common:', self.gds_format_string(quote_xml(self.Compilation_Date).encode(ExternalEncoding), input_name='Compilation_Date'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sCompilation_Date>%s</%sCompilation_Date>%s' % ('Common:', self.gds_format_string(quote_xml(self.Compilation_Date).encode(ExternalEncoding), input_name='Compilation_Date'), 'Common:', eol_))
         if self.Build_Configuration is not None:
-            self.Build_Configuration.export(outfile, level, 'Common:', name_='Build_Configuration')
+            self.Build_Configuration.export(outfile, level, 'Common:', name_='Build_Configuration', pretty_print=pretty_print)
         if self.Build_Script is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sBuild_Script>%s</%sBuild_Script>\n' % ('Common:', self.gds_format_string(quote_xml(self.Build_Script).encode(ExternalEncoding), input_name='Build_Script'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sBuild_Script>%s</%sBuild_Script>%s' % ('Common:', self.gds_format_string(quote_xml(self.Build_Script).encode(ExternalEncoding), input_name='Build_Script'), 'Common:', eol_))
         if self.Libraries is not None:
-            self.Libraries.export(outfile, level, 'Common:', name_='Libraries')
+            self.Libraries.export(outfile, level, 'Common:', name_='Libraries', pretty_print=pretty_print)
         if self.Build_Output_Log is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sBuild_Output_Log>%s</%sBuild_Output_Log>\n' % ('Common:', self.gds_format_string(quote_xml(self.Build_Output_Log).encode(ExternalEncoding), input_name='Build_Output_Log'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sBuild_Output_Log>%s</%sBuild_Output_Log>%s' % ('Common:', self.gds_format_string(quote_xml(self.Build_Output_Log).encode(ExternalEncoding), input_name='Build_Output_Log'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.Build_ID is not None or
@@ -2394,7 +2457,6 @@ class BuildInformationType(GeneratedsSuper):
             self.Build_Output_Log = Build_Output_Log_
 # end class BuildInformationType
 
-
 class BuildUtilityType(GeneratedsSuper):
     """The BuildUtilityType contains information identifying the utility
     used to build this application."""
@@ -2413,26 +2475,34 @@ class BuildUtilityType(GeneratedsSuper):
     def set_Build_Utility_Name(self, Build_Utility_Name): self.Build_Utility_Name = Build_Utility_Name
     def get_Build_Utility_CPE_Specification(self): return self.Build_Utility_CPE_Specification
     def set_Build_Utility_CPE_Specification(self, Build_Utility_CPE_Specification): self.Build_Utility_CPE_Specification = Build_Utility_CPE_Specification
-    def export(self, outfile, level, namespace_='Common:', name_='BuildUtilityType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='BuildUtilityType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='BuildUtilityType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='BuildUtilityType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='BuildUtilityType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='BuildUtilityType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Build_Utility_Name is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sBuild_Utility_Name>%s</%sBuild_Utility_Name>\n' % ('Common:', self.gds_format_string(quote_xml(self.Build_Utility_Name).encode(ExternalEncoding), input_name='Build_Utility_Name'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sBuild_Utility_Name>%s</%sBuild_Utility_Name>%s' % ('Common:', self.gds_format_string(quote_xml(self.Build_Utility_Name).encode(ExternalEncoding), input_name='Build_Utility_Name'), 'Common:', eol_))
         if self.Build_Utility_CPE_Specification is not None:
-            self.Build_Utility_CPE_Specification.export(outfile, level, 'Common:', name_='Build_Utility_CPE_Specification', )
+            self.Build_Utility_CPE_Specification.export(outfile, level, 'Common:', name_='Build_Utility_CPE_Specification', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Build_Utility_Name is not None or
@@ -2476,7 +2546,6 @@ class BuildUtilityType(GeneratedsSuper):
             self.set_Build_Utility_CPE_Specification(obj_)
 # end class BuildUtilityType
 
-
 class CompilersType(GeneratedsSuper):
     """The CompilersType describes the compilers utilized during this build
     of this application."""
@@ -2497,23 +2566,31 @@ class CompilersType(GeneratedsSuper):
     def set_Compiler(self, Compiler): self.Compiler = Compiler
     def add_Compiler(self, value): self.Compiler.append(value)
     def insert_Compiler(self, index, value): self.Compiler[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='CompilersType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='CompilersType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='CompilersType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='CompilersType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='CompilersType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='CompilersType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Compiler_ in self.Compiler:
-            Compiler_.export(outfile, level, 'Common:', name_='Compiler')
+            Compiler_.export(outfile, level, 'Common:', name_='Compiler', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Compiler
@@ -2555,7 +2632,6 @@ class CompilersType(GeneratedsSuper):
             self.Compiler.append(obj_)
 # end class CompilersType
 
-
 class CompilerType(GeneratedsSuper):
     """The CompilerType describes a single compiler utilized during this
     build of this application."""
@@ -2574,25 +2650,33 @@ class CompilerType(GeneratedsSuper):
     def set_Compiler_Informal_Description(self, Compiler_Informal_Description): self.Compiler_Informal_Description = Compiler_Informal_Description
     def get_Compiler_CPE_Specification(self): return self.Compiler_CPE_Specification
     def set_Compiler_CPE_Specification(self, Compiler_CPE_Specification): self.Compiler_CPE_Specification = Compiler_CPE_Specification
-    def export(self, outfile, level, namespace_='Common:', name_='CompilerType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='CompilerType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='CompilerType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='CompilerType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='CompilerType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='CompilerType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Compiler_Informal_Description is not None:
-            self.Compiler_Informal_Description.export(outfile, level, 'Common:', name_='Compiler_Informal_Description')
+            self.Compiler_Informal_Description.export(outfile, level, 'Common:', name_='Compiler_Informal_Description', pretty_print=pretty_print)
         if self.Compiler_CPE_Specification is not None:
-            self.Compiler_CPE_Specification.export(outfile, level, 'Common:', name_='Compiler_CPE_Specification')
+            self.Compiler_CPE_Specification.export(outfile, level, 'Common:', name_='Compiler_CPE_Specification', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Compiler_Informal_Description is not None or
@@ -2639,7 +2723,6 @@ class CompilerType(GeneratedsSuper):
             self.set_Compiler_CPE_Specification(obj_)
 # end class CompilerType
 
-
 class CompilerInformalDescriptionType(GeneratedsSuper):
     """The CompilerInformalDescriptionType contains the informal
     description of this compiler instance."""
@@ -2658,27 +2741,35 @@ class CompilerInformalDescriptionType(GeneratedsSuper):
     def set_Compiler_Name(self, Compiler_Name): self.Compiler_Name = Compiler_Name
     def get_Compiler_Version(self): return self.Compiler_Version
     def set_Compiler_Version(self, Compiler_Version): self.Compiler_Version = Compiler_Version
-    def export(self, outfile, level, namespace_='Common:', name_='CompilerInformalDescriptionType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='CompilerInformalDescriptionType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='CompilerInformalDescriptionType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='CompilerInformalDescriptionType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='CompilerInformalDescriptionType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='CompilerInformalDescriptionType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Compiler_Name is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sCompiler_Name>%s</%sCompiler_Name>\n' % ('Common:', self.gds_format_string(quote_xml(self.Compiler_Name).encode(ExternalEncoding), input_name='Compiler_Name'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sCompiler_Name>%s</%sCompiler_Name>%s' % ('Common:', self.gds_format_string(quote_xml(self.Compiler_Name).encode(ExternalEncoding), input_name='Compiler_Name'), 'Common:', eol_))
         if self.Compiler_Version is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sCompiler_Version>%s</%sCompiler_Version>\n' % ('Common:', self.gds_format_string(quote_xml(self.Compiler_Version).encode(ExternalEncoding), input_name='Compiler_Version'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sCompiler_Version>%s</%sCompiler_Version>%s' % ('Common:', self.gds_format_string(quote_xml(self.Compiler_Version).encode(ExternalEncoding), input_name='Compiler_Version'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.Compiler_Name is not None or
@@ -2719,7 +2810,6 @@ class CompilerInformalDescriptionType(GeneratedsSuper):
             self.Compiler_Version = Compiler_Version_
 # end class CompilerInformalDescriptionType
 
-
 class BuildConfigurationType(GeneratedsSuper):
     """The BuildConfigurationType describes how the build utility was
     configured for this build of this application."""
@@ -2738,26 +2828,34 @@ class BuildConfigurationType(GeneratedsSuper):
     def set_Configuration_Setting_Description(self, Configuration_Setting_Description): self.Configuration_Setting_Description = Configuration_Setting_Description
     def get_Configuration_Settings(self): return self.Configuration_Settings
     def set_Configuration_Settings(self, Configuration_Settings): self.Configuration_Settings = Configuration_Settings
-    def export(self, outfile, level, namespace_='Common:', name_='BuildConfigurationType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='BuildConfigurationType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='BuildConfigurationType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='BuildConfigurationType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='BuildConfigurationType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='BuildConfigurationType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Configuration_Setting_Description is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sConfiguration_Setting_Description>%s</%sConfiguration_Setting_Description>\n' % ('Common:', self.gds_format_string(quote_xml(self.Configuration_Setting_Description).encode(ExternalEncoding), input_name='Configuration_Setting_Description'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sConfiguration_Setting_Description>%s</%sConfiguration_Setting_Description>%s' % ('Common:', self.gds_format_string(quote_xml(self.Configuration_Setting_Description).encode(ExternalEncoding), input_name='Configuration_Setting_Description'), 'Common:', eol_))
         if self.Configuration_Settings is not None:
-            self.Configuration_Settings.export(outfile, level, 'Common:', name_='Configuration_Settings', )
+            self.Configuration_Settings.export(outfile, level, 'Common:', name_='Configuration_Settings', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Configuration_Setting_Description is not None or
@@ -2801,7 +2899,6 @@ class BuildConfigurationType(GeneratedsSuper):
             self.set_Configuration_Settings(obj_)
 # end class BuildConfigurationType
 
-
 class LibrariesType(GeneratedsSuper):
     """The LibrariesType identifies the libraries incorporated into the
     build of the tool."""
@@ -2817,23 +2914,31 @@ class LibrariesType(GeneratedsSuper):
     factory = staticmethod(factory)
     def get_Library(self): return self.Library
     def set_Library(self, Library): self.Library = Library
-    def export(self, outfile, level, namespace_='Common:', name_='LibrariesType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='LibrariesType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='LibrariesType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='LibrariesType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='LibrariesType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='LibrariesType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Library is not None:
-            self.Library.export(outfile, level, 'Common:', name_='Library')
+            self.Library.export(outfile, level, 'Common:', name_='Library', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Library is not None
@@ -2869,7 +2974,6 @@ class LibrariesType(GeneratedsSuper):
             self.set_Library(obj_)
 # end class LibrariesType
 
-
 class LibraryType(GeneratedsSuper):
     """The LibraryType identifies a single library incorporated into the
     build of the tool.This field identifies the name of the
@@ -2890,17 +2994,21 @@ class LibraryType(GeneratedsSuper):
     def set_version(self, version): self.version = version
     def get_name(self): return self.name
     def set_name(self, name): self.name = name
-    def export(self, outfile, level, namespace_='Common:', name_='LibraryType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='LibraryType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='LibraryType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='LibraryType'):
         if self.version is not None and 'version' not in already_processed:
             already_processed.append('version')
@@ -2908,7 +3016,7 @@ class LibraryType(GeneratedsSuper):
         if self.name is not None and 'name' not in already_processed:
             already_processed.append('name')
             outfile.write(' name=%s' % (self.gds_format_string(quote_attrib(self.name).encode(ExternalEncoding), input_name='name'), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='LibraryType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='LibraryType', fromsubclass_=False, pretty_print=True):
         pass
     def hasContent_(self):
         if (
@@ -2951,7 +3059,6 @@ class LibraryType(GeneratedsSuper):
         pass
 # end class LibraryType
 
-
 class ExecutionEnvironmentType(GeneratedsSuper):
     """The ExecutionEnvironmentType contains information describing the
     execution environment of the tool."""
@@ -2976,31 +3083,39 @@ class ExecutionEnvironmentType(GeneratedsSuper):
     def set_Command_Line(self, Command_Line): self.Command_Line = Command_Line
     def get_Start_Time(self): return self.Start_Time
     def set_Start_Time(self, Start_Time): self.Start_Time = Start_Time
-    def export(self, outfile, level, namespace_='Common:', name_='ExecutionEnvironmentType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ExecutionEnvironmentType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ExecutionEnvironmentType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ExecutionEnvironmentType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ExecutionEnvironmentType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ExecutionEnvironmentType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.System is not None:
-            self.System.export(outfile, level, 'Common:', name_='System')
+            self.System.export(outfile, level, 'Common:', name_='System', pretty_print=pretty_print)
         if self.User_Account_Info is not None:
-            self.User_Account_Info.export(outfile, level, 'Common:', name_='User_Account_Info')
+            self.User_Account_Info.export(outfile, level, 'Common:', name_='User_Account_Info', pretty_print=pretty_print)
         if self.Command_Line is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sCommand_Line>%s</%sCommand_Line>\n' % ('Common:', self.gds_format_string(quote_xml(self.Command_Line).encode(ExternalEncoding), input_name='Command_Line'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sCommand_Line>%s</%sCommand_Line>%s' % ('Common:', self.gds_format_string(quote_xml(self.Command_Line).encode(ExternalEncoding), input_name='Command_Line'), 'Common:', eol_))
         if self.Start_Time is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sStart_Time>%s</%sStart_Time>\n' % ('Common:', self.gds_format_string(quote_xml(self.Start_Time).encode(ExternalEncoding), input_name='Start_Time'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sStart_Time>%s</%sStart_Time>%s' % ('Common:', self.gds_format_string(quote_xml(self.Start_Time).encode(ExternalEncoding), input_name='Start_Time'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.System is not None or
@@ -3021,10 +3136,16 @@ class ExecutionEnvironmentType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.System is not None:
             showIndent(outfile, level)
-            outfile.write('System=%s,\n' % quote_python(self.System).encode(ExternalEncoding))
+            outfile.write('System=model_.system_object_1_3.SystemObjectType(\n')
+            self.System.exportLiteral(outfile, level, name_='System')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.User_Account_Info is not None:
             showIndent(outfile, level)
-            outfile.write('User_Account_Info=%s,\n' % quote_python(self.User_Account_Info).encode(ExternalEncoding))
+            outfile.write('User_Account_Info=model_.user_account_object_1_2.UserAccountObjectType(\n')
+            self.User_Account_Info.exportLiteral(outfile, level, name_='User_Account_Info')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.Command_Line is not None:
             showIndent(outfile, level)
             outfile.write('Command_Line=%s,\n' % quote_python(self.Command_Line).encode(ExternalEncoding))
@@ -3040,13 +3161,13 @@ class ExecutionEnvironmentType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'System':
-            System_ = child_.text
-            System_ = self.gds_validate_string(System_, node, 'System')
-            self.System = System_
+            obj_ = system_object_1_3.SystemObjectType.factory()
+            obj_.build(child_)
+            self.set_System(obj_)
         elif nodeName_ == 'User_Account_Info':
-            User_Account_Info_ = child_.text
-            User_Account_Info_ = self.gds_validate_string(User_Account_Info_, node, 'User_Account_Info')
-            self.User_Account_Info = User_Account_Info_
+            obj_ = user_account_object_1_2.UserAccountObjectType.factory()
+            obj_.build(child_)
+            self.set_User_Account_Info(obj_)
         elif nodeName_ == 'Command_Line':
             Command_Line_ = child_.text
             Command_Line_ = self.gds_validate_string(Command_Line_, node, 'Command_Line')
@@ -3056,7 +3177,6 @@ class ExecutionEnvironmentType(GeneratedsSuper):
             Start_Time_ = self.gds_validate_string(Start_Time_, node, 'Start_Time')
             self.Start_Time = Start_Time_
 # end class ExecutionEnvironmentType
-
 
 class ErrorsType(GeneratedsSuper):
     """The ErrorsType captures any errors generated during the run of the
@@ -3078,23 +3198,31 @@ class ErrorsType(GeneratedsSuper):
     def set_Error(self, Error): self.Error = Error
     def add_Error(self, value): self.Error.append(value)
     def insert_Error(self, index, value): self.Error[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='ErrorsType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ErrorsType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ErrorsType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ErrorsType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ErrorsType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ErrorsType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Error_ in self.Error:
-            Error_.export(outfile, level, 'Common:', name_='Error')
+            Error_.export(outfile, level, 'Common:', name_='Error', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Error
@@ -3136,7 +3264,6 @@ class ErrorsType(GeneratedsSuper):
             self.Error.append(obj_)
 # end class ErrorsType
 
-
 class ErrorType(GeneratedsSuper):
     """The ErrorType captures a single error generated during the run of
     the tool."""
@@ -3158,29 +3285,37 @@ class ErrorType(GeneratedsSuper):
     def set_Error_Count(self, Error_Count): self.Error_Count = Error_Count
     def get_Error_Instances(self): return self.Error_Instances
     def set_Error_Instances(self, Error_Instances): self.Error_Instances = Error_Instances
-    def export(self, outfile, level, namespace_='Common:', name_='ErrorType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ErrorType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ErrorType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ErrorType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ErrorType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ErrorType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Error_Type is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sError_Type>%s</%sError_Type>\n' % ('Common:', self.gds_format_string(quote_xml(self.Error_Type).encode(ExternalEncoding), input_name='Error_Type'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sError_Type>%s</%sError_Type>%s' % ('Common:', self.gds_format_string(quote_xml(self.Error_Type).encode(ExternalEncoding), input_name='Error_Type'), 'Common:', eol_))
         if self.Error_Count is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sError_Count>%s</%sError_Count>\n' % (namespace_, self.gds_format_integer(self.Error_Count, input_name='Error_Count'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sError_Count>%s</%sError_Count>%s' % ('Common:', self.gds_format_integer(self.Error_Count, input_name='Error_Count'), 'Common:', eol_))
         if self.Error_Instances is not None:
-            self.Error_Instances.export(outfile, level, 'Common:', name_='Error_Instances')
+            self.Error_Instances.export(outfile, level, 'Common:', name_='Error_Instances', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Error_Type is not None or
@@ -3236,7 +3371,6 @@ class ErrorType(GeneratedsSuper):
             self.set_Error_Instances(obj_)
 # end class ErrorType
 
-
 class ErrorInstancesType(GeneratedsSuper):
     """The ErrorInstancesType captures the actual error output for each
     instance of this type of error."""
@@ -3257,24 +3391,32 @@ class ErrorInstancesType(GeneratedsSuper):
     def set_Error_Instance(self, Error_Instance): self.Error_Instance = Error_Instance
     def add_Error_Instance(self, value): self.Error_Instance.append(value)
     def insert_Error_Instance(self, index, value): self.Error_Instance[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='ErrorInstancesType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ErrorInstancesType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ErrorInstancesType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ErrorInstancesType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ErrorInstancesType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ErrorInstancesType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Error_Instance_ in self.Error_Instance:
-            showIndent(outfile, level)
-            outfile.write('<%sError_Instance>%s</%sError_Instance>\n' % ('Common:', self.gds_format_string(quote_xml(Error_Instance_).encode(ExternalEncoding), input_name='Error_Instance'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sError_Instance>%s</%sError_Instance>%s' % ('Common:', self.gds_format_string(quote_xml(Error_Instance_).encode(ExternalEncoding), input_name='Error_Instance'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.Error_Instance
@@ -3313,158 +3455,6 @@ class ErrorInstancesType(GeneratedsSuper):
             self.Error_Instance.append(Error_Instance_)
 # end class ErrorInstancesType
 
-
-class IndicatorsType(GeneratedsSuper):
-    """The IndicatorsType identifies any indicators that contributed to
-    this cyber observation source."""
-    subclass = None
-    superclass = None
-    def __init__(self, Indicator=None):
-        if Indicator is None:
-            self.Indicator = []
-        else:
-            self.Indicator = Indicator
-    def factory(*args_, **kwargs_):
-        if IndicatorsType.subclass:
-            return IndicatorsType.subclass(*args_, **kwargs_)
-        else:
-            return IndicatorsType(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def get_Indicator(self): return self.Indicator
-    def set_Indicator(self, Indicator): self.Indicator = Indicator
-    def add_Indicator(self, value): self.Indicator.append(value)
-    def insert_Indicator(self, index, value): self.Indicator[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='IndicatorsType', namespacedef_=''):
-        showIndent(outfile, level)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='IndicatorsType')
-        if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
-        else:
-            outfile.write('/>\n')
-    def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='IndicatorsType'):
-        pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='IndicatorsType', fromsubclass_=False):
-        for Indicator_ in self.get_Indicator():
-            Indicator_.export(outfile, level, 'Common:', name_='Indicator')
-    def hasContent_(self):
-        if (
-            self.Indicator
-            ):
-            return True
-        else:
-            return False
-    def exportLiteral(self, outfile, level, name_='IndicatorsType'):
-        level += 1
-        self.exportLiteralAttributes(outfile, level, [], name_)
-        if self.hasContent_():
-            self.exportLiteralChildren(outfile, level, name_)
-    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        pass
-    def exportLiteralChildren(self, outfile, level, name_):
-        showIndent(outfile, level)
-        outfile.write('Indicator=[\n')
-        level += 1
-        for Indicator_ in self.Indicator:
-            showIndent(outfile, level)
-            outfile.write('model_.IndicatorType(\n')
-            Indicator_.exportLiteral(outfile, level, name_='IndicatorType')
-            showIndent(outfile, level)
-            outfile.write('),\n')
-        level -= 1
-        showIndent(outfile, level)
-        outfile.write('],\n')
-    def build(self, node):
-        self.buildAttributes(node, node.attrib, [])
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-    def buildAttributes(self, node, attrs, already_processed):
-        pass
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'Indicator':
-            type_name_ = child_.attrib.get('{http://www.w3.org/2001/XMLSchema-instance}type')
-            if type_name_ is None:
-                type_name_ = child_.attrib.get('type')
-            if type_name_ is not None:
-                type_names_ = type_name_.split(':')
-                if len(type_names_) == 1:
-                    type_name_ = type_names_[0]
-                else:
-                    type_name_ = type_names_[1]
-                class_ = globals()[type_name_]
-                obj_ = class_.factory()
-                obj_.build(child_)
-            else:
-                raise NotImplementedError(
-                    'Class not implemented for <Indicator> element')
-            self.Indicator.append(obj_)
-# end class IndicatorsType
-
-
-class IndicatorType(GeneratedsSuper):
-    """The IndicatorType is an Abstract type placeholder within the CybOX
-    schema enabling the inclusion of varying specifications for
-    indicators contributing to this cyber observation. Externally
-    defined indicator structures can be defined through the use of a
-    custom type defined as an extension of this base Abstract type."""
-    subclass = None
-    superclass = None
-    def __init__(self):
-        pass
-    def factory(*args_, **kwargs_):
-        if IndicatorType.subclass:
-            return IndicatorType.subclass(*args_, **kwargs_)
-        else:
-            return IndicatorType(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def export(self, outfile, level, namespace_='Common:', name_='IndicatorType', namespacedef_=''):
-        showIndent(outfile, level)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='IndicatorType')
-        if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
-        else:
-            outfile.write('/>\n')
-    def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='IndicatorType'):
-        pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='IndicatorType', fromsubclass_=False):
-        pass
-    def hasContent_(self):
-        if (
-
-            ):
-            return True
-        else:
-            return False
-    def exportLiteral(self, outfile, level, name_='IndicatorType'):
-        level += 1
-        self.exportLiteralAttributes(outfile, level, [], name_)
-        if self.hasContent_():
-            self.exportLiteralChildren(outfile, level, name_)
-    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        pass
-    def exportLiteralChildren(self, outfile, level, name_):
-        pass
-    def build(self, node):
-        self.buildAttributes(node, node.attrib, [])
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-    def buildAttributes(self, node, attrs, already_processed):
-        pass
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        pass
-# end class IndicatorType
-
-
 class DefinedObjectType(GeneratedsSuper):
     """The DefinedObjectType is an Abstract type placeholder within the
     CybOX schema enabling the inclusion of contextually varying
@@ -3499,17 +3489,21 @@ class DefinedObjectType(GeneratedsSuper):
     def set_object_reference(self, object_reference): self.object_reference = object_reference
     def get_anyAttributes_(self): return self.anyAttributes_
     def set_anyAttributes_(self, anyAttributes_): self.anyAttributes_ = anyAttributes_
-    def export(self, outfile, level, namespace_='Common:', name_='DefinedObjectType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='DefinedObjectType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='DefinedObjectType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='DefinedObjectType'):
         unique_counter = 0
         for name, value in self.anyAttributes_.items():
@@ -3540,8 +3534,8 @@ class DefinedObjectType(GeneratedsSuper):
                         outfile.write(' %s=%s' % (name, quote_attrib(value), ))
         if self.object_reference is not None and 'object_reference' not in already_processed:
             already_processed.append('object_reference')
-            outfile.write(' object_reference=%s' % (self.gds_format_string(quote_attrib(self.object_reference).encode(ExternalEncoding), input_name='object_reference'), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='DefinedObjectType', fromsubclass_=False):
+            outfile.write(' object_reference=%s' % (quote_attrib(self.object_reference), ))
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='DefinedObjectType', fromsubclass_=False, pretty_print=True):
         pass
     def hasContent_(self):
         if (
@@ -3559,7 +3553,7 @@ class DefinedObjectType(GeneratedsSuper):
         if self.object_reference is not None and 'object_reference' not in already_processed:
             already_processed.append('object_reference')
             showIndent(outfile, level)
-            outfile.write('object_reference = "%s",\n' % (self.object_reference,))
+            outfile.write('object_reference = %s,\n' % (self.object_reference,))
         for name, value in self.anyAttributes_.items():
             showIndent(outfile, level)
             outfile.write('%s = "%s",\n' % (name, value,))
@@ -3583,28 +3577,32 @@ class DefinedObjectType(GeneratedsSuper):
         pass
 # end class DefinedObjectType
 
-
 class BaseObjectAttributeType(GeneratedsSuper):
     """The BaseObjectAttibuteType is a complex type representing a common
     typing foundation for the specification of a single Object
     Attribute."""
     subclass = None
     superclass = None
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None, extensiontype_=None):
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
         self.end_range = _cast(None, end_range)
         self.pattern_type = _cast(None, pattern_type)
         self.has_changed = _cast(bool, has_changed)
         self.value_set = _cast(None, value_set)
         self.datatype = _cast(None, datatype)
-        self.trend = _cast(bool, trend)
+        self.refanging_transform = _cast(None, refanging_transform)
+        self.refanging_transform_type = _cast(None, refanging_transform_type)
         self.appears_random = _cast(bool, appears_random)
+        self.trend = _cast(bool, trend)
+        self.defanging_algorithm_ref = _cast(None, defanging_algorithm_ref)
+        self.is_obfuscated = _cast(bool, is_obfuscated)
         self.regex_syntax = _cast(None, regex_syntax)
+        self.obfuscation_algorithm_ref = _cast(None, obfuscation_algorithm_ref)
         self.start_range = _cast(None, start_range)
         self.idref = _cast(None, idref)
+        self.is_defanged = _cast(bool, is_defanged)
         self.id = _cast(None, id)
         self.condition = _cast(None, condition)
         self.valueOf_ = valueOf_
-        self.extensiontype_ = extensiontype_
     def factory(*args_, **kwargs_):
         if BaseObjectAttributeType.subclass:
             return BaseObjectAttributeType.subclass(*args_, **kwargs_)
@@ -3621,36 +3619,50 @@ class BaseObjectAttributeType(GeneratedsSuper):
     def set_value_set(self, value_set): self.value_set = value_set
     def get_datatype(self): return self.datatype
     def set_datatype(self, datatype): self.datatype = datatype
-    def get_trend(self): return self.trend
-    def set_trend(self, trend): self.trend = trend
+    def get_refanging_transform(self): return self.refanging_transform
+    def set_refanging_transform(self, refanging_transform): self.refanging_transform = refanging_transform
+    def get_refanging_transform_type(self): return self.refanging_transform_type
+    def set_refanging_transform_type(self, refanging_transform_type): self.refanging_transform_type = refanging_transform_type
     def get_appears_random(self): return self.appears_random
     def set_appears_random(self, appears_random): self.appears_random = appears_random
+    def get_trend(self): return self.trend
+    def set_trend(self, trend): self.trend = trend
+    def get_defanging_algorithm_ref(self): return self.defanging_algorithm_ref
+    def set_defanging_algorithm_ref(self, defanging_algorithm_ref): self.defanging_algorithm_ref = defanging_algorithm_ref
+    def get_is_obfuscated(self): return self.is_obfuscated
+    def set_is_obfuscated(self, is_obfuscated): self.is_obfuscated = is_obfuscated
     def get_regex_syntax(self): return self.regex_syntax
     def set_regex_syntax(self, regex_syntax): self.regex_syntax = regex_syntax
+    def get_obfuscation_algorithm_ref(self): return self.obfuscation_algorithm_ref
+    def set_obfuscation_algorithm_ref(self, obfuscation_algorithm_ref): self.obfuscation_algorithm_ref = obfuscation_algorithm_ref
     def get_start_range(self): return self.start_range
     def set_start_range(self, start_range): self.start_range = start_range
     def get_idref(self): return self.idref
     def set_idref(self, idref): self.idref = idref
+    def get_is_defanged(self): return self.is_defanged
+    def set_is_defanged(self, is_defanged): self.is_defanged = is_defanged
     def get_id(self): return self.id
     def set_id(self, id): self.id = id
     def get_condition(self): return self.condition
     def set_condition(self, condition): self.condition = condition
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def get_extensiontype_(self): return self.extensiontype_
-    def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
-    def export(self, outfile, level, namespace_='Common:', name_='BaseObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='BaseObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='BaseObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='BaseObjectAttributeType'):
         if self.end_range is not None and 'end_range' not in already_processed:
             already_processed.append('end_range')
@@ -3667,32 +3679,46 @@ class BaseObjectAttributeType(GeneratedsSuper):
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-        if self.trend is not None and 'trend' not in already_processed:
-            already_processed.append('trend')
-            outfile.write(' trend="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.trend)), input_name='trend'))
+        if self.refanging_transform is not None and 'refanging_transform' not in already_processed:
+            already_processed.append('refanging_transform')
+            outfile.write(' refanging_transform=%s' % (self.gds_format_string(quote_attrib(self.refanging_transform).encode(ExternalEncoding), input_name='refanging_transform'), ))
+        if self.refanging_transform_type is not None and 'refanging_transform_type' not in already_processed:
+            already_processed.append('refanging_transform_type')
+            outfile.write(' refanging_transform_type=%s' % (self.gds_format_string(quote_attrib(self.refanging_transform_type).encode(ExternalEncoding), input_name='refanging_transform_type'), ))
         if self.appears_random is not None and 'appears_random' not in already_processed:
             already_processed.append('appears_random')
             outfile.write(' appears_random="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.appears_random)), input_name='appears_random'))
+        if self.trend is not None and 'trend' not in already_processed:
+            already_processed.append('trend')
+            outfile.write(' trend="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.trend)), input_name='trend'))
+        if self.defanging_algorithm_ref is not None and 'defanging_algorithm_ref' not in already_processed:
+            already_processed.append('defanging_algorithm_ref')
+            outfile.write(' defanging_algorithm_ref=%s' % (self.gds_format_string(quote_attrib(self.defanging_algorithm_ref).encode(ExternalEncoding), input_name='defanging_algorithm_ref'), ))
+        if self.is_obfuscated is not None and 'is_obfuscated' not in already_processed:
+            already_processed.append('is_obfuscated')
+            outfile.write(' is_obfuscated="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.is_obfuscated)), input_name='is_obfuscated'))
         if self.regex_syntax is not None and 'regex_syntax' not in already_processed:
             already_processed.append('regex_syntax')
             outfile.write(' regex_syntax=%s' % (quote_attrib(self.regex_syntax), ))
+        if self.obfuscation_algorithm_ref is not None and 'obfuscation_algorithm_ref' not in already_processed:
+            already_processed.append('obfuscation_algorithm_ref')
+            outfile.write(' obfuscation_algorithm_ref=%s' % (self.gds_format_string(quote_attrib(self.obfuscation_algorithm_ref).encode(ExternalEncoding), input_name='obfuscation_algorithm_ref'), ))
         if self.start_range is not None and 'start_range' not in already_processed:
             already_processed.append('start_range')
             outfile.write(' start_range=%s' % (quote_attrib(self.start_range), ))
         if self.idref is not None and 'idref' not in already_processed:
             already_processed.append('idref')
             outfile.write(' idref=%s' % (quote_attrib(self.idref), ))
+        if self.is_defanged is not None and 'is_defanged' not in already_processed:
+            already_processed.append('is_defanged')
+            outfile.write(' is_defanged="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.is_defanged)), input_name='is_defanged'))
         if self.id is not None and 'id' not in already_processed:
             already_processed.append('id')
             outfile.write(' id=%s' % (quote_attrib(self.id), ))
         if self.condition is not None and 'condition' not in already_processed:
             already_processed.append('condition')
             outfile.write(' condition=%s' % (quote_attrib(self.condition), ))
-        if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
-            already_processed.append('xsi:type')
-            outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='BaseObjectAttributeType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='BaseObjectAttributeType', fromsubclass_=False, pretty_print=True):
         pass
     def hasContent_(self):
         if (
@@ -3729,18 +3755,38 @@ class BaseObjectAttributeType(GeneratedsSuper):
             already_processed.append('datatype')
             showIndent(outfile, level)
             outfile.write('datatype = %s,\n' % (self.datatype,))
-        if self.trend is not None and 'trend' not in already_processed:
-            already_processed.append('trend')
+        if self.refanging_transform is not None and 'refanging_transform' not in already_processed:
+            already_processed.append('refanging_transform')
             showIndent(outfile, level)
-            outfile.write('trend = %s,\n' % (self.trend,))
+            outfile.write('refanging_transform = "%s",\n' % (self.refanging_transform,))
+        if self.refanging_transform_type is not None and 'refanging_transform_type' not in already_processed:
+            already_processed.append('refanging_transform_type')
+            showIndent(outfile, level)
+            outfile.write('refanging_transform_type = "%s",\n' % (self.refanging_transform_type,))
         if self.appears_random is not None and 'appears_random' not in already_processed:
             already_processed.append('appears_random')
             showIndent(outfile, level)
             outfile.write('appears_random = %s,\n' % (self.appears_random,))
+        if self.trend is not None and 'trend' not in already_processed:
+            already_processed.append('trend')
+            showIndent(outfile, level)
+            outfile.write('trend = %s,\n' % (self.trend,))
+        if self.defanging_algorithm_ref is not None and 'defanging_algorithm_ref' not in already_processed:
+            already_processed.append('defanging_algorithm_ref')
+            showIndent(outfile, level)
+            outfile.write('defanging_algorithm_ref = "%s",\n' % (self.defanging_algorithm_ref,))
+        if self.is_obfuscated is not None and 'is_obfuscated' not in already_processed:
+            already_processed.append('is_obfuscated')
+            showIndent(outfile, level)
+            outfile.write('is_obfuscated = %s,\n' % (self.is_obfuscated,))
         if self.regex_syntax is not None and 'regex_syntax' not in already_processed:
             already_processed.append('regex_syntax')
             showIndent(outfile, level)
             outfile.write('regex_syntax = %s,\n' % (self.regex_syntax,))
+        if self.obfuscation_algorithm_ref is not None and 'obfuscation_algorithm_ref' not in already_processed:
+            already_processed.append('obfuscation_algorithm_ref')
+            showIndent(outfile, level)
+            outfile.write('obfuscation_algorithm_ref = "%s",\n' % (self.obfuscation_algorithm_ref,))
         if self.start_range is not None and 'start_range' not in already_processed:
             already_processed.append('start_range')
             showIndent(outfile, level)
@@ -3749,6 +3795,10 @@ class BaseObjectAttributeType(GeneratedsSuper):
             already_processed.append('idref')
             showIndent(outfile, level)
             outfile.write('idref = %s,\n' % (self.idref,))
+        if self.is_defanged is not None and 'is_defanged' not in already_processed:
+            already_processed.append('is_defanged')
+            showIndent(outfile, level)
+            outfile.write('is_defanged = %s,\n' % (self.is_defanged,))
         if self.id is not None and 'id' not in already_processed:
             already_processed.append('id')
             showIndent(outfile, level)
@@ -3791,15 +3841,14 @@ class BaseObjectAttributeType(GeneratedsSuper):
         if value is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             self.datatype = value
-        value = find_attr_value_('trend', node)
-        if value is not None and 'trend' not in already_processed:
-            already_processed.append('trend')
-            if value in ('true', '1'):
-                self.trend = True
-            elif value in ('false', '0'):
-                self.trend = False
-            else:
-                raise_parse_error(node, 'Bad boolean attribute')
+        value = find_attr_value_('refanging_transform', node)
+        if value is not None and 'refanging_transform' not in already_processed:
+            already_processed.append('refanging_transform')
+            self.refanging_transform = value
+        value = find_attr_value_('refanging_transform_type', node)
+        if value is not None and 'refanging_transform_type' not in already_processed:
+            already_processed.append('refanging_transform_type')
+            self.refanging_transform_type = value
         value = find_attr_value_('appears_random', node)
         if value is not None and 'appears_random' not in already_processed:
             already_processed.append('appears_random')
@@ -3809,10 +3858,36 @@ class BaseObjectAttributeType(GeneratedsSuper):
                 self.appears_random = False
             else:
                 raise_parse_error(node, 'Bad boolean attribute')
+        value = find_attr_value_('trend', node)
+        if value is not None and 'trend' not in already_processed:
+            already_processed.append('trend')
+            if value in ('true', '1'):
+                self.trend = True
+            elif value in ('false', '0'):
+                self.trend = False
+            else:
+                raise_parse_error(node, 'Bad boolean attribute')
+        value = find_attr_value_('defanging_algorithm_ref', node)
+        if value is not None and 'defanging_algorithm_ref' not in already_processed:
+            already_processed.append('defanging_algorithm_ref')
+            self.defanging_algorithm_ref = value
+        value = find_attr_value_('is_obfuscated', node)
+        if value is not None and 'is_obfuscated' not in already_processed:
+            already_processed.append('is_obfuscated')
+            if value in ('true', '1'):
+                self.is_obfuscated = True
+            elif value in ('false', '0'):
+                self.is_obfuscated = False
+            else:
+                raise_parse_error(node, 'Bad boolean attribute')
         value = find_attr_value_('regex_syntax', node)
         if value is not None and 'regex_syntax' not in already_processed:
             already_processed.append('regex_syntax')
             self.regex_syntax = value
+        value = find_attr_value_('obfuscation_algorithm_ref', node)
+        if value is not None and 'obfuscation_algorithm_ref' not in already_processed:
+            already_processed.append('obfuscation_algorithm_ref')
+            self.obfuscation_algorithm_ref = value
         value = find_attr_value_('start_range', node)
         if value is not None and 'start_range' not in already_processed:
             already_processed.append('start_range')
@@ -3821,6 +3896,15 @@ class BaseObjectAttributeType(GeneratedsSuper):
         if value is not None and 'idref' not in already_processed:
             already_processed.append('idref')
             self.idref = value
+        value = find_attr_value_('is_defanged', node)
+        if value is not None and 'is_defanged' not in already_processed:
+            already_processed.append('is_defanged')
+            if value in ('true', '1'):
+                self.is_defanged = True
+            elif value in ('false', '0'):
+                self.is_defanged = False
+            else:
+                raise_parse_error(node, 'Bad boolean attribute')
         value = find_attr_value_('id', node)
         if value is not None and 'id' not in already_processed:
             already_processed.append('id')
@@ -3829,14 +3913,9 @@ class BaseObjectAttributeType(GeneratedsSuper):
         if value is not None and 'condition' not in already_processed:
             already_processed.append('condition')
             self.condition = value
-        value = find_attr_value_('xsi:type', node)
-        if value is not None and 'xsi:type' not in already_processed:
-            already_processed.append('xsi:type')
-            self.extensiontype_ = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         pass
 # end class BaseObjectAttributeType
-
 
 class IntegerObjectAttributeType(BaseObjectAttributeType):
     """The IntegerObjectAttributeType is a complex type (extended from
@@ -3849,8 +3928,8 @@ class IntegerObjectAttributeType(BaseObjectAttributeType):
     element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Int', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(IntegerObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Integer', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(IntegerObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -3863,25 +3942,29 @@ class IntegerObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='IntegerObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='IntegerObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='IntegerObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='IntegerObjectAttributeType'):
         super(IntegerObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='IntegerObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='IntegerObjectAttributeType', fromsubclass_=False):
-        super(IntegerObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='IntegerObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(IntegerObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -3923,7 +4006,6 @@ class IntegerObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class IntegerObjectAttributeType
 
-
 class StringObjectAttributeType(BaseObjectAttributeType):
     """The StringObjectAttributeType is a complex type (extended from
     BaseObjectAttributeType) representing the specification of a
@@ -3935,11 +4017,10 @@ class StringObjectAttributeType(BaseObjectAttributeType):
     element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None, extensiontype_=None):
-        super(StringObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, extensiontype_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(StringObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
-        self.extensiontype_ = extensiontype_
     def factory(*args_, **kwargs_):
         if StringObjectAttributeType.subclass:
             return StringObjectAttributeType.subclass(*args_, **kwargs_)
@@ -3950,31 +4031,29 @@ class StringObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def get_extensiontype_(self): return self.extensiontype_
-    def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
-    def export(self, outfile, level, namespace_='Common:', name_='StringObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='StringObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='StringObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
-            outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write(str(quote_xml(self.valueOf_)).encode(ExternalEncoding))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='StringObjectAttributeType'):
         super(StringObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='StringObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-        if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
-            already_processed.append('xsi:type')
-            outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='StringObjectAttributeType', fromsubclass_=False):
-        super(StringObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='StringObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(StringObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -4011,15 +4090,10 @@ class StringObjectAttributeType(BaseObjectAttributeType):
         if value is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             self.datatype = value
-        value = find_attr_value_('xsi:type', node)
-        if value is not None and 'xsi:type' not in already_processed:
-            already_processed.append('xsi:type')
-            self.extensiontype_ = value
         super(StringObjectAttributeType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         pass
 # end class StringObjectAttributeType
-
 
 class NameObjectAttributeType(BaseObjectAttributeType):
     """The NameObjectAttributeType is a complex type (extended from
@@ -4032,8 +4106,8 @@ class NameObjectAttributeType(BaseObjectAttributeType):
     element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Name', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(NameObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Name', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(NameObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -4046,25 +4120,29 @@ class NameObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='NameObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='NameObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='NameObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='NameObjectAttributeType'):
         super(NameObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='NameObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='NameObjectAttributeType', fromsubclass_=False):
-        super(NameObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='NameObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(NameObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -4106,7 +4184,6 @@ class NameObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class NameObjectAttributeType
 
-
 class DateObjectAttributeType(BaseObjectAttributeType):
     """The DateObjectAttributeType is a complex type (extended from
     BaseObjectAttributeType) representing the specification of a
@@ -4118,8 +4195,8 @@ class DateObjectAttributeType(BaseObjectAttributeType):
     element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Date', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(DateObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Date', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(DateObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -4132,25 +4209,29 @@ class DateObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='DateObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='DateObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='DateObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='DateObjectAttributeType'):
         super(DateObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='DateObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='DateObjectAttributeType', fromsubclass_=False):
-        super(DateObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='DateObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(DateObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -4192,7 +4273,6 @@ class DateObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class DateObjectAttributeType
 
-
 class DateTimeObjectAttributeType(BaseObjectAttributeType):
     """The DateTimeObjectAttributeType is a complex type (extended from
     BaseObjectAttributeType) representing the specification of a
@@ -4204,8 +4284,8 @@ class DateTimeObjectAttributeType(BaseObjectAttributeType):
     specified element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='DateTime', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(DateTimeObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='DateTime', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(DateTimeObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -4218,25 +4298,29 @@ class DateTimeObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='DateTimeObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='DateTimeObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='DateTimeObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='DateTimeObjectAttributeType'):
         super(DateTimeObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='DateTimeObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='DateTimeObjectAttributeType', fromsubclass_=False):
-        super(DateTimeObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='DateTimeObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(DateTimeObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -4278,7 +4362,6 @@ class DateTimeObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class DateTimeObjectAttributeType
 
-
 class FloatObjectAttributeType(BaseObjectAttributeType):
     """The FloatObjectAttributeType is a complex type (extended from
     BaseObjectAttributeType) representing the specification of a
@@ -4290,8 +4373,8 @@ class FloatObjectAttributeType(BaseObjectAttributeType):
     element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Float', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(FloatObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Float', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(FloatObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -4304,25 +4387,29 @@ class FloatObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='FloatObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='FloatObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='FloatObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='FloatObjectAttributeType'):
         super(FloatObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='FloatObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='FloatObjectAttributeType', fromsubclass_=False):
-        super(FloatObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='FloatObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(FloatObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -4364,7 +4451,6 @@ class FloatObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class FloatObjectAttributeType
 
-
 class DoubleObjectAttributeType(BaseObjectAttributeType):
     """The DoubleObjectAttributeType is a complex type (extended from
     BaseObjectAttributeType) representing the specification of a
@@ -4376,8 +4462,8 @@ class DoubleObjectAttributeType(BaseObjectAttributeType):
     element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Double', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(DoubleObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Double', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(DoubleObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -4390,25 +4476,29 @@ class DoubleObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='DoubleObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='DoubleObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='DoubleObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='DoubleObjectAttributeType'):
         super(DoubleObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='DoubleObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='DoubleObjectAttributeType', fromsubclass_=False):
-        super(DoubleObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='DoubleObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(DoubleObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -4450,7 +4540,6 @@ class DoubleObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class DoubleObjectAttributeType
 
-
 class UnsignedLongObjectAttributeType(BaseObjectAttributeType):
     """The UnsignedLongObjectAttributeType is a complex type (extended from
     BaseObjectAttributeType) representing the specification of a
@@ -4462,8 +4551,8 @@ class UnsignedLongObjectAttributeType(BaseObjectAttributeType):
     value of the specified element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='UnsignedLong', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(UnsignedLongObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='UnsignedLong', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(UnsignedLongObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -4476,25 +4565,29 @@ class UnsignedLongObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='UnsignedLongObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='UnsignedLongObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='UnsignedLongObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='UnsignedLongObjectAttributeType'):
         super(UnsignedLongObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='UnsignedLongObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='UnsignedLongObjectAttributeType', fromsubclass_=False):
-        super(UnsignedLongObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='UnsignedLongObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(UnsignedLongObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -4536,7 +4629,6 @@ class UnsignedLongObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class UnsignedLongObjectAttributeType
 
-
 class UnsignedIntegerObjectAttributeType(BaseObjectAttributeType):
     """The UnsignedIntegerObjectAttributeType is a complex type (extended
     from BaseObjectAttributeType) representing the specification of
@@ -4548,8 +4640,8 @@ class UnsignedIntegerObjectAttributeType(BaseObjectAttributeType):
     value of the specified element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='UnsignedInt', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(UnsignedIntegerObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='UnsignedInteger', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(UnsignedIntegerObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -4562,25 +4654,29 @@ class UnsignedIntegerObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='UnsignedIntegerObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='UnsignedIntegerObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='UnsignedIntegerObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='UnsignedIntegerObjectAttributeType'):
         super(UnsignedIntegerObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='UnsignedIntegerObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='UnsignedIntegerObjectAttributeType', fromsubclass_=False):
-        super(UnsignedIntegerObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='UnsignedIntegerObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(UnsignedIntegerObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -4622,7 +4718,6 @@ class UnsignedIntegerObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class UnsignedIntegerObjectAttributeType
 
-
 class PositiveIntegerObjectAttributeType(BaseObjectAttributeType):
     """The PositiveIntegerObjectAttributeType is a complex type (extended
     from BaseObjectAttributeType) representing the specification of
@@ -4634,8 +4729,8 @@ class PositiveIntegerObjectAttributeType(BaseObjectAttributeType):
     value of the specified element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='PositiveInteger', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(PositiveIntegerObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='PositiveInteger', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(PositiveIntegerObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -4648,25 +4743,29 @@ class PositiveIntegerObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='PositiveIntegerObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='PositiveIntegerObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='PositiveIntegerObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='PositiveIntegerObjectAttributeType'):
         super(PositiveIntegerObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='PositiveIntegerObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='PositiveIntegerObjectAttributeType', fromsubclass_=False):
-        super(PositiveIntegerObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='PositiveIntegerObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(PositiveIntegerObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -4708,7 +4807,6 @@ class PositiveIntegerObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class PositiveIntegerObjectAttributeType
 
-
 class HexBinaryObjectAttributeType(BaseObjectAttributeType):
     """The HexBinaryObjectAttributeType is a complex type (extended from
     BaseObjectAttributeType) representing the specification of a
@@ -4720,11 +4818,10 @@ class HexBinaryObjectAttributeType(BaseObjectAttributeType):
     specified element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='hexBinary', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None, extensiontype_=None):
-        super(HexBinaryObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, extensiontype_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='hexBinary', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(HexBinaryObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
-        self.extensiontype_ = extensiontype_
     def factory(*args_, **kwargs_):
         if HexBinaryObjectAttributeType.subclass:
             return HexBinaryObjectAttributeType.subclass(*args_, **kwargs_)
@@ -4735,31 +4832,29 @@ class HexBinaryObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def get_extensiontype_(self): return self.extensiontype_
-    def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
-    def export(self, outfile, level, namespace_='Common:', name_='HexBinaryObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='HexBinaryObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='HexBinaryObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='HexBinaryObjectAttributeType'):
         super(HexBinaryObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='HexBinaryObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-        if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
-            already_processed.append('xsi:type')
-            outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='HexBinaryObjectAttributeType', fromsubclass_=False):
-        super(HexBinaryObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='HexBinaryObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(HexBinaryObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -4796,15 +4891,10 @@ class HexBinaryObjectAttributeType(BaseObjectAttributeType):
         if value is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             self.datatype = value
-        value = find_attr_value_('xsi:type', node)
-        if value is not None and 'xsi:type' not in already_processed:
-            already_processed.append('xsi:type')
-            self.extensiontype_ = value
         super(HexBinaryObjectAttributeType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         pass
 # end class HexBinaryObjectAttributeType
-
 
 class LongObjectAttributeType(BaseObjectAttributeType):
     """The LongObjectAttributeType is a complex type (extended from
@@ -4817,8 +4907,8 @@ class LongObjectAttributeType(BaseObjectAttributeType):
     element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Long', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(LongObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Long', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(LongObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -4831,25 +4921,29 @@ class LongObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='LongObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='LongObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='LongObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='LongObjectAttributeType'):
         super(LongObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='LongObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='LongObjectAttributeType', fromsubclass_=False):
-        super(LongObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='LongObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(LongObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -4891,7 +4985,6 @@ class LongObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class LongObjectAttributeType
 
-
 class NonNegativeIntegerObjectAttributeType(BaseObjectAttributeType):
     """The NonNegativeIntegerObjectAttributeType is a complex type
     (extended from BaseObjectAttributeType) representing the
@@ -4903,8 +4996,8 @@ class NonNegativeIntegerObjectAttributeType(BaseObjectAttributeType):
     expected type for the value of the specified element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='NonNegativeInteger', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(NonNegativeIntegerObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='NonNegativeInteger', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(NonNegativeIntegerObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -4917,25 +5010,29 @@ class NonNegativeIntegerObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='NonNegativeIntegerObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='NonNegativeIntegerObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='NonNegativeIntegerObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='NonNegativeIntegerObjectAttributeType'):
         super(NonNegativeIntegerObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='NonNegativeIntegerObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='NonNegativeIntegerObjectAttributeType', fromsubclass_=False):
-        super(NonNegativeIntegerObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='NonNegativeIntegerObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(NonNegativeIntegerObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -4977,7 +5074,6 @@ class NonNegativeIntegerObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class NonNegativeIntegerObjectAttributeType
 
-
 class AnyURIObjectAttributeType(BaseObjectAttributeType):
     """The AnyURIObjectAttributeType is a complex type (extended from
     BaseObjectAttributeType) representing the specification of a
@@ -4989,8 +5085,8 @@ class AnyURIObjectAttributeType(BaseObjectAttributeType):
     element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='AnyURI', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(AnyURIObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='AnyURI', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(AnyURIObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -5003,25 +5099,29 @@ class AnyURIObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='AnyURIObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='AnyURIObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='AnyURIObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='AnyURIObjectAttributeType'):
         super(AnyURIObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='AnyURIObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='AnyURIObjectAttributeType', fromsubclass_=False):
-        super(AnyURIObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='AnyURIObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(AnyURIObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -5063,7 +5163,6 @@ class AnyURIObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class AnyURIObjectAttributeType
 
-
 class DurationObjectAttributeType(BaseObjectAttributeType):
     """The DurationObjectAttributeType is a complex type (extended from
     BaseObjectAttributeType) representing the specification of a
@@ -5075,8 +5174,8 @@ class DurationObjectAttributeType(BaseObjectAttributeType):
     specified element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Duration', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(DurationObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Duration', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(DurationObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -5089,25 +5188,29 @@ class DurationObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='DurationObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='DurationObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='DurationObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='DurationObjectAttributeType'):
         super(DurationObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='DurationObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='DurationObjectAttributeType', fromsubclass_=False):
-        super(DurationObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='DurationObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(DurationObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -5149,7 +5252,6 @@ class DurationObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class DurationObjectAttributeType
 
-
 class TimeObjectAttributeType(BaseObjectAttributeType):
     """The TimeObjectAttributeType is a complex type (extended from
     BaseObjectAttributeType) representing the specification of a
@@ -5161,8 +5263,8 @@ class TimeObjectAttributeType(BaseObjectAttributeType):
     element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Time', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(TimeObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Time', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(TimeObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -5175,25 +5277,29 @@ class TimeObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='TimeObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='TimeObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='TimeObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='TimeObjectAttributeType'):
         super(TimeObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='TimeObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='TimeObjectAttributeType', fromsubclass_=False):
-        super(TimeObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='TimeObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(TimeObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -5235,7 +5341,6 @@ class TimeObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class TimeObjectAttributeType
 
-
 class Base64BinaryObjectAttributeType(BaseObjectAttributeType):
     """The Base64BinaryObjectAttributeType is a complex type (extended from
     BaseObjectAttributeType) representing the specification of a
@@ -5247,8 +5352,8 @@ class Base64BinaryObjectAttributeType(BaseObjectAttributeType):
     value of the specified element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Base64Binary', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(Base64BinaryObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='Base64Binary', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(Base64BinaryObjectAttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -5261,25 +5366,29 @@ class Base64BinaryObjectAttributeType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='Base64BinaryObjectAttributeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='Base64BinaryObjectAttributeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='Base64BinaryObjectAttributeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='Base64BinaryObjectAttributeType'):
         super(Base64BinaryObjectAttributeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='Base64BinaryObjectAttributeType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='Base64BinaryObjectAttributeType', fromsubclass_=False):
-        super(Base64BinaryObjectAttributeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='Base64BinaryObjectAttributeType', fromsubclass_=False, pretty_print=True):
+        super(Base64BinaryObjectAttributeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -5321,7 +5430,6 @@ class Base64BinaryObjectAttributeType(BaseObjectAttributeType):
         pass
 # end class Base64BinaryObjectAttributeType
 
-
 class ExtractedFeaturesType(GeneratedsSuper):
     """The ExtractedFeaturesType is a complex type representing a
     description of features extracted from an object such as a file."""
@@ -5346,29 +5454,37 @@ class ExtractedFeaturesType(GeneratedsSuper):
     def set_Functions(self, Functions): self.Functions = Functions
     def get_Code_Snippets(self): return self.Code_Snippets
     def set_Code_Snippets(self, Code_Snippets): self.Code_Snippets = Code_Snippets
-    def export(self, outfile, level, namespace_='Common:', name_='ExtractedFeaturesType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ExtractedFeaturesType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ExtractedFeaturesType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ExtractedFeaturesType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ExtractedFeaturesType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ExtractedFeaturesType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Strings is not None:
-            self.Strings.export(outfile, level, 'Common:', name_='Strings')
+            self.Strings.export(outfile, level, 'Common:', name_='Strings', pretty_print=pretty_print)
         if self.Imports is not None:
-            self.Imports.export(outfile, level, 'Common:', name_='Imports')
+            self.Imports.export(outfile, level, 'Common:', name_='Imports', pretty_print=pretty_print)
         if self.Functions is not None:
-            self.Functions.export(outfile, level, 'Common:', name_='Functions')
+            self.Functions.export(outfile, level, 'Common:', name_='Functions', pretty_print=pretty_print)
         if self.Code_Snippets is not None:
-            self.Code_Snippets.export(outfile, level, 'Common:', name_='Code_Snippets')
+            self.Code_Snippets.export(outfile, level, 'Common:', name_='Code_Snippets', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Strings is not None or
@@ -5437,7 +5553,6 @@ class ExtractedFeaturesType(GeneratedsSuper):
             self.set_Code_Snippets(obj_)
 # end class ExtractedFeaturesType
 
-
 class ExtractedStringsType(GeneratedsSuper):
     """The ExtractedStringsType type is intended as container for strings
     extracted from CybOX objects."""
@@ -5458,23 +5573,31 @@ class ExtractedStringsType(GeneratedsSuper):
     def set_String(self, String): self.String = String
     def add_String(self, value): self.String.append(value)
     def insert_String(self, index, value): self.String[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='ExtractedStringsType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ExtractedStringsType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ExtractedStringsType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ExtractedStringsType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ExtractedStringsType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ExtractedStringsType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for String_ in self.String:
-            String_.export(outfile, level, 'Common:', name_='String')
+            String_.export(outfile, level, 'Common:', name_='String', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.String
@@ -5515,7 +5638,6 @@ class ExtractedStringsType(GeneratedsSuper):
             obj_.build(child_)
             self.String.append(obj_)
 # end class ExtractedStringsType
-
 
 class ExtractedStringType(GeneratedsSuper):
     """The ExtractedStringType type is intended as container a single
@@ -5561,35 +5683,43 @@ class ExtractedStringType(GeneratedsSuper):
     def set_English_Translation(self, English_Translation): self.English_Translation = English_Translation
     def get_encoding(self): return self.encoding
     def set_encoding(self, encoding): self.encoding = encoding
-    def export(self, outfile, level, namespace_='Common:', name_='ExtractedStringType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ExtractedStringType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ExtractedStringType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ExtractedStringType'):
         if self.encoding is not None and 'encoding' not in already_processed:
             already_processed.append('encoding')
             outfile.write(' encoding=%s' % (quote_attrib(self.encoding), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ExtractedStringType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ExtractedStringType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.String_Value is not None:
-            self.String_Value.export(outfile, level, 'Common:', name_='String_Value')
+            self.String_Value.export(outfile, level, 'Common:', name_='String_Value', pretty_print=pretty_print)
         if self.Hashes is not None:
-            self.Hashes.export(outfile, level, 'Common:', name_='Hashes')
+            self.Hashes.export(outfile, level, 'Common:', name_='Hashes', pretty_print=pretty_print)
         if self.Address is not None:
-            self.Address.export(outfile, level, 'Common:', name_='Address')
+            self.Address.export(outfile, level, 'Common:', name_='Address', pretty_print=pretty_print)
         if self.Length is not None:
-            self.Length.export(outfile, level, 'Common:', name_='Length')
+            self.Length.export(outfile, level, 'Common:', name_='Length', pretty_print=pretty_print)
         if self.Language is not None:
-            self.Language.export(outfile, level, 'Common:', name_='Language')
+            self.Language.export(outfile, level, 'Common:', name_='Language', pretty_print=pretty_print)
         if self.English_Translation is not None:
-            self.Language.export(outfile, level, 'Common:', name_='Language')
+            self.English_Translation.export(outfile, level, 'Common:', name_='English_Translation', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.String_Value is not None or
@@ -5624,10 +5754,7 @@ class ExtractedStringType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Address is not None:
             showIndent(outfile, level)
-            outfile.write('Address=model_.xs_hexBinary(\n')
-            self.Address.exportLiteral(outfile, level, name_='Address')
-            showIndent(outfile, level)
-            outfile.write('),\n')
+            outfile.write('Address=%s,\n' % quote_python(self.Address).encode(ExternalEncoding))
         if self.Length is not None:
             showIndent(outfile, level)
             outfile.write('Length=model_.PositiveIntegerObjectAttributeType(\n')
@@ -5652,9 +5779,9 @@ class ExtractedStringType(GeneratedsSuper):
             self.encoding = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'String_Value':
-            String_Value_ = StringObjectAttributeType.factory()
-            String_Value_.build(child_)
-            self.String_Value = String_Value_
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_String_Value(obj_)
         elif nodeName_ == 'Hashes':
             obj_ = HashListType.factory()
             obj_.build(child_)
@@ -5668,15 +5795,14 @@ class ExtractedStringType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Length(obj_)
         elif nodeName_ == 'Language':
-            Language_ = StringObjectAttributeType.factory()
-            Language_.build(child_)
-            self.Language = Language_
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Language(obj_)
         elif nodeName_ == 'English_Translation':
-            English_Translation_ = StringObjectAttributeType.factory()
-            English_Translation_.build(child_)
-            self.English_Translation = English_Translation_
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_English_Translation(obj_)
 # end class ExtractedStringType
-
 
 class ImportsType(GeneratedsSuper):
     """The ImportsType is intended to represent an extracted list of
@@ -5701,23 +5827,31 @@ class ImportsType(GeneratedsSuper):
     def validate_StringObjectAttributeType(self, value):
         # Validate type StringObjectAttributeType, a restriction on xs:string.
         pass
-    def export(self, outfile, level, namespace_='Common:', name_='ImportsType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ImportsType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ImportsType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ImportsType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ImportsType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ImportsType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Import_ in self.Import:
-            Import_.export(outfile, level, 'Common:', name_='Import')
+            self.Import.export(outfile, level, 'Common:', name_='Import', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Import
@@ -5751,12 +5885,10 @@ class ImportsType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Import':
-            Import_ = child_.text
-            Import_ = self.gds_validate_string(Import_, node, 'Import')
-            self.Import.append(Import_)
-            self.validate_StringObjectAttributeType(self.Import)    # validate type StringObjectAttributeType
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.Import.append(obj_)
 # end class ImportsType
-
 
 class FunctionsType(GeneratedsSuper):
     """The FunctionsType is intended to represent an extracted list of
@@ -5781,23 +5913,31 @@ class FunctionsType(GeneratedsSuper):
     def validate_StringObjectAttributeType(self, value):
         # Validate type StringObjectAttributeType, a restriction on xs:string.
         pass
-    def export(self, outfile, level, namespace_='Common:', name_='FunctionsType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='FunctionsType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='FunctionsType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='FunctionsType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='FunctionsType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='FunctionsType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Function_ in self.Function:
-            Function_.export(outfile, level, 'Common:', name_='Function')
+            self.Function.export(outfile, level, 'Common:', name_='Function', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Function
@@ -5831,12 +5971,10 @@ class FunctionsType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Function':
-            Function_ = child_.text
-            Function_ = self.gds_validate_string(Function_, node, 'Function')
-            self.Function.append(Function_)
-            self.validate_StringObjectAttributeType(self.Function)    # validate type StringObjectAttributeType
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.Function.append(obj_)
 # end class FunctionsType
-
 
 class CodeSnippetsType(GeneratedsSuper):
     """The CodeSnippetsType is intended to represent an set of code
@@ -5858,23 +5996,31 @@ class CodeSnippetsType(GeneratedsSuper):
     def set_Code_Snippet(self, Code_Snippet): self.Code_Snippet = Code_Snippet
     def add_Code_Snippet(self, value): self.Code_Snippet.append(value)
     def insert_Code_Snippet(self, index, value): self.Code_Snippet[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='CodeSnippetsType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='CodeSnippetsType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='CodeSnippetsType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='CodeSnippetsType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='CodeSnippetsType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='CodeSnippetsType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Code_Snippet_ in self.Code_Snippet:
-            Code_Snippet_.export(outfile, level, 'Common:', name_='Code_Snippet')
+            Code_Snippet_.export(outfile, level, 'Common:', name_='Code_Snippet', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Code_Snippet
@@ -5895,7 +6041,10 @@ class CodeSnippetsType(GeneratedsSuper):
         level += 1
         for Code_Snippet_ in self.Code_Snippet:
             showIndent(outfile, level)
-            outfile.write('%s,\n' % quote_python(Code_Snippet_).encode(ExternalEncoding))
+            outfile.write('model_.code_object_1_1.CodeObjectType(\n')
+            Code_Snippet_.exportLiteral(outfile, level, name_='code_object_1_1.CodeObjectType')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         level -= 1
         showIndent(outfile, level)
         outfile.write('],\n')
@@ -5908,11 +6057,10 @@ class CodeSnippetsType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Code_Snippet':
-            Code_Snippet_ = child_.text
-            Code_Snippet_ = self.gds_validate_string(Code_Snippet_, node, 'Code_Snippet')
-            self.Code_Snippet.append(Code_Snippet_)
+            obj_ = code_object_1_1.CodeObjectType.factory()
+            obj_.build(child_)
+            self.Code_Snippet.append(obj_)
 # end class CodeSnippetsType
-
 
 class ByteRunsType(GeneratedsSuper):
     """The ByteRunsType is used for representing a list of byte runs from
@@ -5934,23 +6082,31 @@ class ByteRunsType(GeneratedsSuper):
     def set_Byte_Run(self, Byte_Run): self.Byte_Run = Byte_Run
     def add_Byte_Run(self, value): self.Byte_Run.append(value)
     def insert_Byte_Run(self, index, value): self.Byte_Run[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='ByteRunsType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ByteRunsType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ByteRunsType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ByteRunsType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ByteRunsType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ByteRunsType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Byte_Run_ in self.Byte_Run:
-            Byte_Run_.export(outfile, level, 'Common:', name_='Byte_Run')
+            Byte_Run_.export(outfile, level, 'Common:', name_='Byte_Run', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Byte_Run
@@ -5992,7 +6148,6 @@ class ByteRunsType(GeneratedsSuper):
             self.Byte_Run.append(obj_)
 # end class ByteRunsType
 
-
 class ByteRunType(GeneratedsSuper):
     """The ByteRunType is used for representing a single byte run from
     within a raw object."""
@@ -6026,34 +6181,42 @@ class ByteRunType(GeneratedsSuper):
     def set_Hashes(self, Hashes): self.Hashes = Hashes
     def get_Byte_Run_Data(self): return self.Byte_Run_Data
     def set_Byte_Run_Data(self, Byte_Run_Data): self.Byte_Run_Data = Byte_Run_Data
-    def export(self, outfile, level, namespace_='Common:', name_='ByteRunType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ByteRunType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ByteRunType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ByteRunType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ByteRunType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ByteRunType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Offset is not None:
-            self.Offset.export(outfile, level, 'Common:', name_='Offset')
+            self.Offset.export(outfile, level, 'Common:', name_='Offset', pretty_print=pretty_print)
         if self.File_System_Offset is not None:
-            self.File_System_Offset.export(outfile, level, 'Common:', name_='File_System_Offset')
+            self.File_System_Offset.export(outfile, level, 'Common:', name_='File_System_Offset', pretty_print=pretty_print)
         if self.Image_Offset is not None:
-            self.Image_Offset.export(outfile, level, 'Common:', name_='Image_Offset')
+            self.Image_Offset.export(outfile, level, 'Common:', name_='Image_Offset', pretty_print=pretty_print)
         if self.Length is not None:
-            self.Length.export(outfile, level, 'Common:', name_='Length')
+            self.Length.export(outfile, level, 'Common:', name_='Length', pretty_print=pretty_print)
         if self.Hashes is not None:
-            self.Hashes.export(outfile, level, 'Common:', name_='Hashes')
+            self.Hashes.export(outfile, level, 'Common:', name_='Hashes', pretty_print=pretty_print)
         if self.Byte_Run_Data is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sByte_Run_Data>%s</%sByte_Run_Data>\n' % ('Common:', self.gds_format_string(quote_xml(self.Byte_Run_Data).encode(ExternalEncoding), input_name='Byte_Run_Data'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sByte_Run_Data>%s</%sByte_Run_Data>%s' % ('Common:', self.gds_format_string(quote_xml(self.Byte_Run_Data).encode(ExternalEncoding), input_name='Byte_Run_Data'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.Offset is not None or
@@ -6116,21 +6279,21 @@ class ByteRunType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Offset':
-            obj_ = None
+            obj_ = IntegerObjectAttributeType.factory()
+            obj_.build(child_)
             self.set_Offset(obj_)
-            self.validate_IntegerObjectAttributeType(self.Offset)    # validate type IntegerObjectAttributeType
         elif nodeName_ == 'File_System_Offset':
-            obj_ = None
+            obj_ = IntegerObjectAttributeType.factory()
+            obj_.build(child_)
             self.set_File_System_Offset(obj_)
-            self.validate_IntegerObjectAttributeType(self.File_System_Offset)    # validate type IntegerObjectAttributeType
         elif nodeName_ == 'Image_Offset':
-            obj_ = None
+            obj_ = IntegerObjectAttributeType.factory()
+            obj_.build(child_)
             self.set_Image_Offset(obj_)
-            self.validate_IntegerObjectAttributeType(self.Image_Offset)    # validate type IntegerObjectAttributeType
         elif nodeName_ == 'Length':
-            obj_ = None
+            obj_ = PositiveIntegerObjectAttributeType.factory()
+            obj_.build(child_)
             self.set_Length(obj_)
-            self.validate_IntegerObjectAttributeType(self.Length)    # validate type IntegerObjectAttributeType
         elif nodeName_ == 'Hashes':
             obj_ = HashListType.factory()
             obj_.build(child_)
@@ -6140,7 +6303,6 @@ class ByteRunType(GeneratedsSuper):
             Byte_Run_Data_ = self.gds_validate_string(Byte_Run_Data_, node, 'Byte_Run_Data')
             self.Byte_Run_Data = Byte_Run_Data_
 # end class ByteRunType
-
 
 class HashListType(GeneratedsSuper):
     """The HashListType type is used for representing a list of hash
@@ -6162,23 +6324,31 @@ class HashListType(GeneratedsSuper):
     def set_Hash(self, Hash): self.Hash = Hash
     def add_Hash(self, value): self.Hash.append(value)
     def insert_Hash(self, index, value): self.Hash[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='HashListType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='HashListType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='HashListType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, 'Common:', name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='HashListType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='HashListType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='HashListType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Hash_ in self.Hash:
-            Hash_.export(outfile, level, 'Common:', name_='Hash')
+            Hash_.export(outfile, level, 'Common:', name_='Hash', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Hash
@@ -6220,7 +6390,6 @@ class HashListType(GeneratedsSuper):
             self.Hash.append(obj_)
 # end class HashListType
 
-
 class HashValueType(GeneratedsSuper):
     """The HashValueType is used for specifying the resulting value from a
     hash calculation."""
@@ -6239,25 +6408,33 @@ class HashValueType(GeneratedsSuper):
     def set_Simple_Hash_Value(self, Simple_Hash_Value): self.Simple_Hash_Value = Simple_Hash_Value
     def get_Fuzzy_Hash_Value(self): return self.Fuzzy_Hash_Value
     def set_Fuzzy_Hash_Value(self, Fuzzy_Hash_Value): self.Fuzzy_Hash_Value = Fuzzy_Hash_Value
-    def export(self, outfile, level, namespace_='Common:', name_='HashValueType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='HashValueType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='HashValueType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='HashValueType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='HashValueType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='HashValueType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Simple_Hash_Value is not None:
-            self.Simple_Hash_Value.export(outfile, level, 'Common:', name_='Simple_Hash_Value')
+            self.Simple_Hash_Value.export(outfile, level, 'Common:', name_='Simple_Hash_Value', pretty_print=pretty_print)
         if self.Fuzzy_Hash_Value is not None:
-            self.Fuzzy_Hash_Value.export(outfile, level, 'Common:', name_='Fuzzy_Hash_Value')
+            self.Fuzzy_Hash_Value.export(outfile, level, 'Common:', name_='Fuzzy_Hash_Value', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Simple_Hash_Value is not None or
@@ -6304,44 +6481,50 @@ class HashValueType(GeneratedsSuper):
             self.set_Fuzzy_Hash_Value(obj_)
 # end class HashValueType
 
-
 class SimpleHashValueType(HexBinaryObjectAttributeType):
     """The SimpleHashValueType is used for characterizing the output of
     basic cryptograhic hash functions outputing a single hexbinary
     hash value."""
     subclass = None
     superclass = HexBinaryObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='hexBinary', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(SimpleHashValueType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_)
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='hexBinary', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(SimpleHashValueType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, )
         self.valueOf_ = valueOf_
-        
+        pass
     def factory(*args_, **kwargs_):
         if SimpleHashValueType.subclass:
             return SimpleHashValueType.subclass(*args_, **kwargs_)
         else:
             return SimpleHashValueType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_valueOf_(self):
-        return super(SimpleHashValueType, self).get_valueOf_()
-    def export(self, outfile, level, namespace_='Common:', name_='SimpleHashValueType', namespacedef_=''):
-        showIndent(outfile, level)
+    def get_valueOf_(self): return self.valueOf_
+    def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
+    def export(self, outfile, level, namespace_='Common:', name_='SimpleHashValueType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='SimpleHashValueType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='SimpleHashValueType'):
         super(SimpleHashValueType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='SimpleHashValueType')
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='SimpleHashValueType', fromsubclass_=False):
-        super(SimpleHashValueType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='SimpleHashValueType', fromsubclass_=False, pretty_print=True):
+        super(SimpleHashValueType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
-        if ( self.valueOf_ or super(SimpleHashValueType, self).hasContent_() ):
+        if (
+            self.valueOf_ or
+            super(SimpleHashValueType, self).hasContent_()
+            ):
             return True
         else:
             return False
@@ -6350,6 +6533,9 @@ class SimpleHashValueType(HexBinaryObjectAttributeType):
         self.exportLiteralAttributes(outfile, level, [], name_)
         if self.hasContent_():
             self.exportLiteralChildren(outfile, level, name_)
+        showIndent(outfile, level)
+        outfile.write('valueOf_ = """%s""",\n' % (self.valueOf_,))
+        
     def exportLiteralAttributes(self, outfile, level, already_processed, name_):
         super(SimpleHashValueType, self).exportLiteralAttributes(outfile, level, already_processed, name_)
     def exportLiteralChildren(self, outfile, level, name_):
@@ -6368,45 +6554,45 @@ class SimpleHashValueType(HexBinaryObjectAttributeType):
         pass
 # end class SimpleHashValueType
 
-
 class FuzzyHashValueType(StringObjectAttributeType):
     """The FuzzyHashValueType is used for characterizing the output of
     cryptograhic fuzzy hash functions outputing a single complex
     string based hash value."""
     subclass = None
     superclass = StringObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(FuzzyHashValueType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_ )
-        self.valueOf_ = valueOf_
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None):
+        super(FuzzyHashValueType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, )
+        pass
     def factory(*args_, **kwargs_):
         if FuzzyHashValueType.subclass:
             return FuzzyHashValueType.subclass(*args_, **kwargs_)
         else:
             return FuzzyHashValueType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    
-    def get_valueOf_(self):
-        return super(SimpleHashValueType, self).get_valueOf_()
-    
-    def export(self, outfile, level, namespace_='Common:', name_='FuzzyHashValueType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='FuzzyHashValueType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='FuzzyHashValueType')
         if self.hasContent_():
-            outfile.write('>')
-            outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='FuzzyHashValueType'):
         super(FuzzyHashValueType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='FuzzyHashValueType')
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='FuzzyHashValueType', fromsubclass_=False):
-        super(FuzzyHashValueType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='FuzzyHashValueType', fromsubclass_=False, pretty_print=True):
+        super(FuzzyHashValueType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
-        if ( self.valueOf_ or super(FuzzyHashValueType, self).hasContent_() ):
+        if (
+            super(FuzzyHashValueType, self).hasContent_()
+            ):
             return True
         else:
             return False
@@ -6422,7 +6608,6 @@ class FuzzyHashValueType(StringObjectAttributeType):
         pass
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
-        self.valueOf_ = get_all_text_(node)
         for child in node:
             nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
             self.buildChildren(child, node, nodeName_)
@@ -6432,7 +6617,6 @@ class FuzzyHashValueType(StringObjectAttributeType):
         super(FuzzyHashValueType, self).buildChildren(child_, node, nodeName_, True)
         pass
 # end class FuzzyHashValueType
-
 
 class FuzzyHashStructureType(GeneratedsSuper):
     """The FuzzyHashStructureType is used for characterizing the internal
@@ -6455,25 +6639,33 @@ class FuzzyHashStructureType(GeneratedsSuper):
         pass
     def get_Block_Hash(self): return self.Block_Hash
     def set_Block_Hash(self, Block_Hash): self.Block_Hash = Block_Hash
-    def export(self, outfile, level, namespace_='Common:', name_='FuzzyHashStructureType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='FuzzyHashStructureType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='FuzzyHashStructureType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='FuzzyHashStructureType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='FuzzyHashStructureType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='FuzzyHashStructureType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Block_Size is not None:
-            self.Block_Size.export(outfile, level, 'Common:', name_='Block_Size')
+            self.Block_Size.export(outfile, level, 'Common:', name_='Block_Size', pretty_print=pretty_print)
         if self.Block_Hash is not None:
-            self.Block_Hash.export(outfile, level, 'Common:', name_='Block_Hash')
+            self.Block_Hash.export(outfile, level, 'Common:', name_='Block_Hash', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Block_Size is not None or
@@ -6511,15 +6703,14 @@ class FuzzyHashStructureType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Block_Size':
-            obj_ = None
+            obj_ = IntegerObjectAttributeType.factory()
+            obj_.build(child_)
             self.set_Block_Size(obj_)
-            self.validate_IntegerObjectAttributeType(self.Block_Size)    # validate type IntegerObjectAttributeType
         elif nodeName_ == 'Block_Hash':
             obj_ = FuzzyHashBlockType.factory()
             obj_.build(child_)
             self.set_Block_Hash(obj_)
 # end class FuzzyHashStructureType
-
 
 class FuzzyHashBlockType(GeneratedsSuper):
     """The FuzzyHashBlockType is used for characterizing the internal
@@ -6546,27 +6737,35 @@ class FuzzyHashBlockType(GeneratedsSuper):
         pass
     def get_Segments(self): return self.Segments
     def set_Segments(self, Segments): self.Segments = Segments
-    def export(self, outfile, level, namespace_='Common:', name_='FuzzyHashBlockType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='FuzzyHashBlockType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='FuzzyHashBlockType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='FuzzyHashBlockType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='FuzzyHashBlockType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='FuzzyHashBlockType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Block_Hash_Value is not None:
-            self.Block_Hash_Value.export(outfile, level, 'Common:', name_='Block_Hash_Value')
+            self.Block_Hash_Value.export(outfile, level, 'Common:', name_='Block_Hash_Value', pretty_print=pretty_print)
         if self.Segment_Count is not None:
-            self.Segment_Count.export(outfile, level, 'Common:', name_='Segment_Count')
+            self.Segment_Count.export(outfile, level, 'Common:', name_='Segment_Count', pretty_print=pretty_print)
         if self.Segments is not None:
-            self.Segments.export(outfile, level, 'Common:', name_='Segments')
+            self.Segments.export(outfile, level, 'Common:', name_='Segments', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Block_Hash_Value is not None or
@@ -6615,15 +6814,14 @@ class FuzzyHashBlockType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Block_Hash_Value(obj_)
         elif nodeName_ == 'Segment_Count':
-            obj_ = None
+            obj_ = IntegerObjectAttributeType.factory()
+            obj_.build(child_)
             self.set_Segment_Count(obj_)
-            self.validate_IntegerObjectAttributeType(self.Segment_Count)    # validate type IntegerObjectAttributeType
         elif nodeName_ == 'Segments':
             obj_ = HashSegmentsType.factory()
             obj_.build(child_)
             self.set_Segments(obj_)
 # end class FuzzyHashBlockType
-
 
 class HashSegmentsType(GeneratedsSuper):
     """The HashSegmentsType is used for characterizing the internal
@@ -6646,23 +6844,31 @@ class HashSegmentsType(GeneratedsSuper):
     def set_Segment(self, Segment): self.Segment = Segment
     def add_Segment(self, value): self.Segment.append(value)
     def insert_Segment(self, index, value): self.Segment[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='HashSegmentsType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='HashSegmentsType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='HashSegmentsType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='HashSegmentsType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='HashSegmentsType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='HashSegmentsType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Segment_ in self.Segment:
-            Segment_.export(outfile, level, 'Common:', name_='Segment')
+            Segment_.export(outfile, level, 'Common:', name_='Segment', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Segment
@@ -6704,7 +6910,6 @@ class HashSegmentsType(GeneratedsSuper):
             self.Segment.append(obj_)
 # end class HashSegmentsType
 
-
 class HashSegmentType(GeneratedsSuper):
     """The HashSegmentType is used for characterizing the internal
     components of a single trigger point-delimited segment in a
@@ -6730,28 +6935,36 @@ class HashSegmentType(GeneratedsSuper):
     def set_Segment_Hash(self, Segment_Hash): self.Segment_Hash = Segment_Hash
     def get_Raw_Segment_Content(self): return self.Raw_Segment_Content
     def set_Raw_Segment_Content(self, Raw_Segment_Content): self.Raw_Segment_Content = Raw_Segment_Content
-    def export(self, outfile, level, namespace_='Common:', name_='HashSegmentType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='HashSegmentType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='HashSegmentType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='HashSegmentType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='HashSegmentType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='HashSegmentType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Trigger_Point is not None:
-            self.Trigger_Point.export(outfile, level, 'Common:', name_='Trigger_Point')
+            self.Trigger_Point.export(outfile, level, 'Common:', name_='Trigger_Point', pretty_print=pretty_print)
         if self.Segment_Hash is not None:
-            self.Segment_Hash.export(outfile, level, 'Common:', name_='Segment_Hash')
+            self.Segment_Hash.export(outfile, level, 'Common:', name_='Segment_Hash', pretty_print=pretty_print)
         if self.Raw_Segment_Content is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sRaw_Segment_Content>%s</%sRaw_Segment_Content>\n' % ('Common:', self.gds_format_string(quote_xml(self.Raw_Segment_Content).encode(ExternalEncoding), input_name='Raw_Segment_Content'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sRaw_Segment_Content>%s</%sRaw_Segment_Content>%s' % ('Common:', self.gds_format_string(quote_xml(self.Raw_Segment_Content).encode(ExternalEncoding), input_name='Raw_Segment_Content'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.Trigger_Point is not None or
@@ -6771,10 +6984,7 @@ class HashSegmentType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Trigger_Point is not None:
             showIndent(outfile, level)
-            outfile.write('Trigger_Point=model_.xs_hexBinary(\n')
-            self.Trigger_Point.exportLiteral(outfile, level, name_='Trigger_Point')
-            showIndent(outfile, level)
-            outfile.write('),\n')
+            outfile.write('Trigger_Point=%s,\n' % quote_python(self.Trigger_Point).encode(ExternalEncoding))
         if self.Segment_Hash is not None:
             showIndent(outfile, level)
             outfile.write('Segment_Hash=model_.HashValueType(\n')
@@ -6793,9 +7003,9 @@ class HashSegmentType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Trigger_Point':
-            obj_ = None
+            obj_ = HexBinaryObjectAttributeType.factory()
+            obj_.build(child_)
             self.set_Trigger_Point(obj_)
-            self.validate_HexBinaryObjectAttributeType(self.Trigger_Point)    # validate type HexBinaryObjectAttributeType
         elif nodeName_ == 'Segment_Hash':
             obj_ = HashValueType.factory()
             obj_.build(child_)
@@ -6805,7 +7015,6 @@ class HashSegmentType(GeneratedsSuper):
             Raw_Segment_Content_ = self.gds_validate_string(Raw_Segment_Content_, node, 'Raw_Segment_Content')
             self.Raw_Segment_Content = Raw_Segment_Content_
 # end class HashSegmentType
-
 
 class HashType(GeneratedsSuper):
     """The HashType type is intended to characterize hash values."""
@@ -6844,31 +7053,39 @@ class HashType(GeneratedsSuper):
     def set_Fuzzy_Hash_Structure(self, Fuzzy_Hash_Structure): self.Fuzzy_Hash_Structure = Fuzzy_Hash_Structure
     def add_Fuzzy_Hash_Structure(self, value): self.Fuzzy_Hash_Structure.append(value)
     def insert_Fuzzy_Hash_Structure(self, index, value): self.Fuzzy_Hash_Structure[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='HashType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='HashType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='HashType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='HashType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='HashType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='HashType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Type is not None:
-            self.Type.export(outfile, level, 'Common:', name_='Type')
+            self.Type.export(outfile, level, 'Common:', name_='Type', pretty_print=pretty_print)
         if self.Other_Type is not None:
-            self.Other_Type.export(outfile, level, 'Common:', name_='Other_Type')
+            self.Other_Type.export(outfile, level, 'Common:', name_='Other_Type', pretty_print=pretty_print)
         if self.Simple_Hash_Value is not None:
-            self.Simple_Hash_Value.export(outfile, level, 'Common:', name_='Simple_Hash_Value')
+            self.Simple_Hash_Value.export(outfile, level, 'Common:', name_='Simple_Hash_Value', pretty_print=pretty_print)
         if self.Fuzzy_Hash_Value is not None:
-            self.Fuzzy_Hash_Value.export(outfile, level, 'Common:', name_='Fuzzy_Hash_Value')
+            self.Fuzzy_Hash_Value.export(outfile, level, 'Common:', name_='Fuzzy_Hash_Value', pretty_print=pretty_print)
         for Fuzzy_Hash_Structure_ in self.Fuzzy_Hash_Structure:
-            Fuzzy_Hash_Structure_.export(outfile, level, 'Common:', name_='Fuzzy_Hash_Structure')
+            Fuzzy_Hash_Structure_.export(outfile, level, 'Common:', name_='Fuzzy_Hash_Structure', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Type is not None or
@@ -6930,15 +7147,13 @@ class HashType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Type':
-            obj_ = StringObjectAttributeType.factory()
+            obj_ = HashNameType.factory()
             obj_.build(child_)
             self.set_Type(obj_)
-            self.validate_HashNameType(self.Type)    # validate type HashNameType
         elif nodeName_ == 'Other_Type':
-            Other_Type_ = child_.text
-            Other_Type_ = self.gds_validate_string(Other_Type_, node, 'Other_Type')
-            self.Other_Type = Other_Type_
-            self.validate_StringObjectAttributeType(self.Other_Type)    # validate type StringObjectAttributeType
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Other_Type(obj_)
         elif nodeName_ == 'Simple_Hash_Value':
             obj_ = SimpleHashValueType.factory()
             obj_.build(child_)
@@ -6953,7 +7168,6 @@ class HashType(GeneratedsSuper):
             self.Fuzzy_Hash_Structure.append(obj_)
 # end class HashType
 
-
 class HashNameType(BaseObjectAttributeType):
     """HashNameType specifies the name of hashing algorithms, via a union
     of the HashNameEnum type and the atomic xs:string type. Its base
@@ -6963,8 +7177,8 @@ class HashNameType(BaseObjectAttributeType):
     value of the specified element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(HashNameType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(HashNameType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -6977,25 +7191,29 @@ class HashNameType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='HashNameType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='HashNameType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='HashNameType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='HashNameType'):
         super(HashNameType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='HashNameType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='HashNameType', fromsubclass_=False):
-        super(HashNameType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='HashNameType', fromsubclass_=False, pretty_print=True):
+        super(HashNameType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -7037,7 +7255,6 @@ class HashNameType(BaseObjectAttributeType):
         pass
 # end class HashNameType
 
-
 class StructuredTextType(GeneratedsSuper):
     """The StructuredTextType is a complex type representing a generalized
     structure for capturing structured textual information such as
@@ -7066,10 +7283,7 @@ class StructuredTextType(GeneratedsSuper):
         else:
             self.Comment = Comment
         self.Images = Images
-        if Block is None:
-            self.Block = []
-        else:
-            self.Block = Block
+        self.Block = Block
     def factory(*args_, **kwargs_):
         if StructuredTextType.subclass:
             return StructuredTextType.subclass(*args_, **kwargs_)
@@ -7088,8 +7302,8 @@ class StructuredTextType(GeneratedsSuper):
     def set_Code_Example_Language(self, Code_Example_Language): self.Code_Example_Language = Code_Example_Language
     def add_Code_Example_Language(self, value): self.Code_Example_Language.append(value)
     def insert_Code_Example_Language(self, index, value): self.Code_Example_Language[index] = value
-    def validate_LanguageType(self, value):
-        # Validate type LanguageType, a restriction on xs:string.
+    def validate_LanguageTypeEnum(self, value):
+        # Validate type LanguageTypeEnum, a restriction on xs:string.
         pass
     def get_Code(self): return self.Code
     def set_Code(self, Code): self.Code = Code
@@ -7103,42 +7317,48 @@ class StructuredTextType(GeneratedsSuper):
     def set_Images(self, Images): self.Images = Images
     def get_Block(self): return self.Block
     def set_Block(self, Block): self.Block = Block
-    def add_Block(self, value): self.Block.append(value)
-    def insert_Block(self, index, value): self.Block[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='StructuredTextType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='StructuredTextType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='StructuredTextType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='StructuredTextType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='StructuredTextType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='StructuredTextType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Text_Title_ in self.Text_Title:
-            showIndent(outfile, level)
-            outfile.write('<%sText_Title>%s</%sText_Title>\n' % ('Common:', self.gds_format_string(quote_xml(Text_Title_).encode(ExternalEncoding), input_name='Text_Title'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sText_Title>%s</%sText_Title>%s' % ('Common:', self.gds_format_string(quote_xml(Text_Title_).encode(ExternalEncoding), input_name='Text_Title'), 'Common:', eol_))
         for Text_ in self.Text:
-            showIndent(outfile, level)
-            outfile.write('<%sText>%s</%sText>\n' % ('Common:', self.gds_format_string(quote_xml(Text_).encode(ExternalEncoding), input_name='Text'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sText>%s</%sText>%s' % ('Common:', self.gds_format_string(quote_xml(Text_).encode(ExternalEncoding), input_name='Text'), 'Common:', eol_))
         for Code_Example_Language_ in self.Code_Example_Language:
-            showIndent(outfile, level)
-            outfile.write('<%sCode_Example_Language>%s</%sCode_Example_Language>\n' % ('Common:', self.gds_format_string(quote_xml(Code_Example_Language_).encode(ExternalEncoding), input_name='Code_Example_Language'), 'Common:'))
+            #self.Code_Example_Language.export(outfile, level, 'Common:', name_='Code_Example_Language', pretty_print=pretty_print)
+            outfile.write('<%sCode_Example_Language>%s</%sCode_Example_Language>%s' % ('Common:', self.gds_format_string(quote_xml(Code_Example_Language_).encode(ExternalEncoding), input_name='Code_Example_Language'), 'Common:', eol_))
         for Code_ in self.Code:
-            showIndent(outfile, level)
-            outfile.write('<%sCode>%s</%sCode>\n' % ('Common:', self.gds_format_string(quote_xml(Code_).encode(ExternalEncoding), input_name='Code'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sCode>%s</%sCode>%s' % ('Common:', self.gds_format_string(quote_xml(Code_).encode(ExternalEncoding), input_name='Code'), 'Common:', eol_))
         for Comment_ in self.Comment:
-            showIndent(outfile, level)
-            outfile.write('<%sComment>%s</%sComment>\n' % ('Common:', self.gds_format_string(quote_xml(Comment_).encode(ExternalEncoding), input_name='Comment'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sComment>%s</%sComment>%s' % ('Common:', self.gds_format_string(quote_xml(Comment_).encode(ExternalEncoding), input_name='Comment'), 'Common:', eol_))
         if self.Images is not None:
-            self.Images.export(outfile, level, 'Common:', name_='Images')
-        for Block_ in self.Block:
-            Block_.export(outfile, level, 'Common:', name_='Block')
+            self.Images.export(outfile, level, 'Common:', name_='Images', pretty_print=pretty_print)
+        if self.Block is not None:
+            self.Block.export(outfile, level, 'Common:', name_='Block', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Text_Title or
@@ -7147,7 +7367,7 @@ class StructuredTextType(GeneratedsSuper):
             self.Code or
             self.Comment or
             self.Images is not None or
-            self.Block
+            self.Block is not None
             ):
             return True
         else:
@@ -7211,18 +7431,12 @@ class StructuredTextType(GeneratedsSuper):
             self.Images.exportLiteral(outfile, level, name_='Images')
             showIndent(outfile, level)
             outfile.write('),\n')
-        showIndent(outfile, level)
-        outfile.write('Block=[\n')
-        level += 1
-        for Block_ in self.Block:
+        if self.Block is not None:
             showIndent(outfile, level)
-            outfile.write('model_.Block(\n')
-            Block_.exportLiteral(outfile, level)
+            outfile.write('Block=model_.Block(\n')
+            self.Block.exportLiteral(outfile, level)
             showIndent(outfile, level)
             outfile.write('),\n')
-        level -= 1
-        showIndent(outfile, level)
-        outfile.write('],\n')
     def build(self, node):
         self.buildAttributes(node, node.attrib, [])
         for child in node:
@@ -7243,7 +7457,7 @@ class StructuredTextType(GeneratedsSuper):
             Code_Example_Language_ = child_.text
             Code_Example_Language_ = self.gds_validate_string(Code_Example_Language_, node, 'Code_Example_Language')
             self.Code_Example_Language.append(Code_Example_Language_)
-            self.validate_LanguageType(self.Code_Example_Language)    # validate type LanguageType
+
         elif nodeName_ == 'Code':
             Code_ = child_.text
             Code_ = self.gds_validate_string(Code_, node, 'Code')
@@ -7259,8 +7473,244 @@ class StructuredTextType(GeneratedsSuper):
         elif nodeName_ == 'Block':
             obj_ = Block.factory()
             obj_.build(child_)
-            self.Block.append(obj_)
+            self.set_Block(obj_)
 # end class StructuredTextType
+
+
+
+class Block(GeneratedsSuper):
+    """Block is a Structured_Text element consisting of one of Text_Title,
+    Text, Code_Example_Language, or Code followed by another Block
+    element. Structured_Text elements help define whitespace and
+    text segments. This attribute identifies the nature of the
+    content contained within the Block."""
+    subclass = None
+    superclass = None
+    def __init__(self, block_nature=None, Text_Title=None, Text=None, Code_Example_Language=None, Code=None, Comment=None, Images=None, Block=None):
+        self.block_nature = _cast(None, block_nature)
+        if Text_Title is None:
+            self.Text_Title = []
+        else:
+            self.Text_Title = Text_Title
+        if Text is None:
+            self.Text = []
+        else:
+            self.Text = Text
+        if Code_Example_Language is None:
+            self.Code_Example_Language = []
+        else:
+            self.Code_Example_Language = Code_Example_Language
+        if Code is None:
+            self.Code = []
+        else:
+            self.Code = Code
+        if Comment is None:
+            self.Comment = []
+        else:
+            self.Comment = Comment
+        self.Images = Images
+        self.Block = Block
+    def factory(*args_, **kwargs_):
+        if Block.subclass:
+            return Block.subclass(*args_, **kwargs_)
+        else:
+            return Block(*args_, **kwargs_)
+    factory = staticmethod(factory)
+    def get_Text_Title(self): return self.Text_Title
+    def set_Text_Title(self, Text_Title): self.Text_Title = Text_Title
+    def add_Text_Title(self, value): self.Text_Title.append(value)
+    def insert_Text_Title(self, index, value): self.Text_Title[index] = value
+    def get_Text(self): return self.Text
+    def set_Text(self, Text): self.Text = Text
+    def add_Text(self, value): self.Text.append(value)
+    def insert_Text(self, index, value): self.Text[index] = value
+    def get_Code_Example_Language(self): return self.Code_Example_Language
+    def set_Code_Example_Language(self, Code_Example_Language): self.Code_Example_Language = Code_Example_Language
+    def add_Code_Example_Language(self, value): self.Code_Example_Language.append(value)
+    def insert_Code_Example_Language(self, index, value): self.Code_Example_Language[index] = value
+    def validate_LanguageTypeEnum(self, value):
+        # Validate type LanguageTypeEnum, a restriction on xs:string.
+        pass
+    def get_Code(self): return self.Code
+    def set_Code(self, Code): self.Code = Code
+    def add_Code(self, value): self.Code.append(value)
+    def insert_Code(self, index, value): self.Code[index] = value
+    def get_Comment(self): return self.Comment
+    def set_Comment(self, Comment): self.Comment = Comment
+    def add_Comment(self, value): self.Comment.append(value)
+    def insert_Comment(self, index, value): self.Comment[index] = value
+    def get_Images(self): return self.Images
+    def set_Images(self, Images): self.Images = Images
+    def get_Block(self): return self.Block
+    def set_Block(self, Block): self.Block = Block
+    def get_block_nature(self): return self.block_nature
+    def set_block_nature(self, block_nature): self.block_nature = block_nature
+    def export(self, outfile, level, namespace_='Common:', name_='Block', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
+        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        already_processed = []
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='Block')
+        if self.hasContent_():
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+        else:
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='Block'):
+        if self.block_nature is not None and 'block_nature' not in already_processed:
+            already_processed.append('block_nature')
+            outfile.write(' block_nature=%s' % (quote_attrib(self.block_nature), ))
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='Block', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        for Text_Title_ in self.Text_Title:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sText_Title>%s</%sText_Title>%s' % (namespace_, self.gds_format_string(quote_xml(Text_Title_).encode(ExternalEncoding), input_name='Text_Title'), namespace_, eol_))
+        for Text_ in self.Text:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sText>%s</%sText>%s' % (namespace_, self.gds_format_string(quote_xml(Text_).encode(ExternalEncoding), input_name='Text'), namespace_, eol_))
+        for Code_Example_Language_ in self.Code_Example_Language:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sCode_Example_Language>%s</%sCode_Example_Language>%s' % (namespace_, self.gds_format_string(quote_xml(Code_Example_Language_).encode(ExternalEncoding), input_name='Code_Example_Language'), namespace_, eol_))
+        for Code_ in self.Code:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sCode>%s</%sCode>%s' % (namespace_, self.gds_format_string(quote_xml(Code_).encode(ExternalEncoding), input_name='Code'), namespace_, eol_))
+        for Comment_ in self.Comment:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sComment>%s</%sComment>%s' % (namespace_, self.gds_format_string(quote_xml(Comment_).encode(ExternalEncoding), input_name='Comment'), namespace_, eol_))
+        if self.Images is not None:
+            self.Images.export(outfile, level, namespace_, name_='Images', pretty_print=pretty_print)
+        if self.Block is not None:
+            self.Block.export(outfile, level, namespace_, name_='Block', pretty_print=pretty_print)
+    def hasContent_(self):
+        if (
+            self.Text_Title or
+            self.Text or
+            self.Code_Example_Language or
+            self.Code or
+            self.Comment or
+            self.Images is not None or
+            self.Block is not None
+            ):
+            return True
+        else:
+            return False
+    def exportLiteral(self, outfile, level, name_='Block'):
+        level += 1
+        self.exportLiteralAttributes(outfile, level, [], name_)
+        if self.hasContent_():
+            self.exportLiteralChildren(outfile, level, name_)
+    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
+        if self.block_nature is not None and 'block_nature' not in already_processed:
+            already_processed.append('block_nature')
+            showIndent(outfile, level)
+            outfile.write('block_nature = %s,\n' % (self.block_nature,))
+    def exportLiteralChildren(self, outfile, level, name_):
+        showIndent(outfile, level)
+        outfile.write('Text_Title=[\n')
+        level += 1
+        for Text_Title_ in self.Text_Title:
+            showIndent(outfile, level)
+            outfile.write('%s,\n' % quote_python(Text_Title_).encode(ExternalEncoding))
+        level -= 1
+        showIndent(outfile, level)
+        outfile.write('],\n')
+        showIndent(outfile, level)
+        outfile.write('Text=[\n')
+        level += 1
+        for Text_ in self.Text:
+            showIndent(outfile, level)
+            outfile.write('%s,\n' % quote_python(Text_).encode(ExternalEncoding))
+        level -= 1
+        showIndent(outfile, level)
+        outfile.write('],\n')
+        showIndent(outfile, level)
+        outfile.write('Code_Example_Language=[\n')
+        level += 1
+        for Code_Example_Language_ in self.Code_Example_Language:
+            showIndent(outfile, level)
+            outfile.write('%s,\n' % quote_python(Code_Example_Language_).encode(ExternalEncoding))
+        level -= 1
+        showIndent(outfile, level)
+        outfile.write('],\n')
+        showIndent(outfile, level)
+        outfile.write('Code=[\n')
+        level += 1
+        for Code_ in self.Code:
+            showIndent(outfile, level)
+            outfile.write('%s,\n' % quote_python(Code_).encode(ExternalEncoding))
+        level -= 1
+        showIndent(outfile, level)
+        outfile.write('],\n')
+        showIndent(outfile, level)
+        outfile.write('Comment=[\n')
+        level += 1
+        for Comment_ in self.Comment:
+            showIndent(outfile, level)
+            outfile.write('%s,\n' % quote_python(Comment_).encode(ExternalEncoding))
+        level -= 1
+        showIndent(outfile, level)
+        outfile.write('],\n')
+        if self.Images is not None:
+            showIndent(outfile, level)
+            outfile.write('Images=model_.ImagesType(\n')
+            self.Images.exportLiteral(outfile, level, name_='Images')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        if self.Block is not None:
+            showIndent(outfile, level)
+            outfile.write('Block=model_.Block(\n')
+            self.Block.exportLiteral(outfile, level)
+            showIndent(outfile, level)
+            outfile.write('),\n')
+    def build(self, node):
+        self.buildAttributes(node, node.attrib, [])
+        for child in node:
+            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
+            self.buildChildren(child, node, nodeName_)
+    def buildAttributes(self, node, attrs, already_processed):
+        value = find_attr_value_('block_nature', node)
+        if value is not None and 'block_nature' not in already_processed:
+            already_processed.append('block_nature')
+            self.block_nature = value
+    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+        if nodeName_ == 'Text_Title':
+            Text_Title_ = child_.text
+            Text_Title_ = self.gds_validate_string(Text_Title_, node, 'Text_Title')
+            self.Text_Title.append(Text_Title_)
+        elif nodeName_ == 'Text':
+            Text_ = child_.text
+            Text_ = self.gds_validate_string(Text_, node, 'Text')
+            self.Text.append(Text_)
+        elif nodeName_ == 'Code_Example_Language':
+            Code_Example_Language_ = child_.text
+            Code_Example_Language_ = self.gds_validate_string(Code_Example_Language_, node, 'Code_Example_Language')
+            self.Code_Example_Language.append(Code_Example_Language_)
+            self.validate_LanguageTypeEnum(self.Code_Example_Language)    # validate type LanguageTypeEnum
+        elif nodeName_ == 'Code':
+            Code_ = child_.text
+            Code_ = self.gds_validate_string(Code_, node, 'Code')
+            self.Code.append(Code_)
+        elif nodeName_ == 'Comment':
+            Comment_ = child_.text
+            Comment_ = self.gds_validate_string(Comment_, node, 'Comment')
+            self.Comment.append(Comment_)
+        elif nodeName_ == 'Images':
+            obj_ = ImagesType.factory()
+            obj_.build(child_)
+            self.set_Images(obj_)
+        elif nodeName_ == 'Block':
+            obj_ = Block.factory()
+            obj_.build(child_)
+            self.set_Block(obj_)
+# end class Block
 
 
 class ImagesType(GeneratedsSuper):
@@ -7282,23 +7732,31 @@ class ImagesType(GeneratedsSuper):
     def set_Image(self, Image): self.Image = Image
     def add_Image(self, value): self.Image.append(value)
     def insert_Image(self, index, value): self.Image[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='ImagesType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ImagesType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ImagesType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ImagesType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ImagesType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ImagesType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Image_ in self.Image:
-            Image_.export(outfile, level, 'Common:', name_='Image')
+            Image_.export(outfile, level, 'Common:', name_='Image', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Image
@@ -7340,7 +7798,6 @@ class ImagesType(GeneratedsSuper):
             self.Image.append(obj_)
 # end class ImagesType
 
-
 class ImageType(GeneratedsSuper):
     """The ImageType specifies an image."""
     subclass = None
@@ -7358,27 +7815,35 @@ class ImageType(GeneratedsSuper):
     def set_Image_Location(self, Image_Location): self.Image_Location = Image_Location
     def get_Image_Title(self): return self.Image_Title
     def set_Image_Title(self, Image_Title): self.Image_Title = Image_Title
-    def export(self, outfile, level, namespace_='Common:', name_='ImageType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ImageType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ImageType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ImageType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ImageType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ImageType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Image_Location is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sImage_Location>%s</%sImage_Location>\n' % ('Common:', self.gds_format_string(quote_xml(self.Image_Location).encode(ExternalEncoding), input_name='Image_Location'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sImage_Location>%s</%sImage_Location>%s' % ('Common:', self.gds_format_string(quote_xml(self.Image_Location).encode(ExternalEncoding), input_name='Image_Location'), 'Common:', eol_))
         if self.Image_Title is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sImage_Title>%s</%sImage_Title>\n' % ('Common:', self.gds_format_string(quote_xml(self.Image_Title).encode(ExternalEncoding), input_name='Image_Title'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sImage_Title>%s</%sImage_Title>%s' % ('Common:', self.gds_format_string(quote_xml(self.Image_Title).encode(ExternalEncoding), input_name='Image_Title'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.Image_Location is not None or
@@ -7419,114 +7884,6 @@ class ImageType(GeneratedsSuper):
             self.Image_Title = Image_Title_
 # end class ImageType
 
-
-class Block(GeneratedsSuper):
-    """Block is a Structured_Text element consisting of one of Text_Title,
-    Text, Code_Example_Language, or Code followed by another Block
-    element. Structured_Text elements help define whitespace and
-    text segments. This attribute identifies the nature of the
-    content contained within the Block."""
-    subclass = None
-    superclass = None
-    def __init__(self, block_nature=None, StructuredTextGroup=None, Block=None):
-        self.block_nature = _cast(None, block_nature)
-        self.StructuredTextGroup = StructuredTextGroup
-        if Block is None:
-            self.Block = []
-        else:
-            self.Block = Block
-    def factory(*args_, **kwargs_):
-        if Block.subclass:
-            return Block.subclass(*args_, **kwargs_)
-        else:
-            return Block(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def get_StructuredTextGroup(self): return self.StructuredTextGroup
-    def set_StructuredTextGroup(self, StructuredTextGroup): self.StructuredTextGroup = StructuredTextGroup
-    def get_Block(self): return self.Block
-    def set_Block(self, Block): self.Block = Block
-    def add_Block(self, value): self.Block.append(value)
-    def insert_Block(self, index, value): self.Block[index] = value
-    def get_block_nature(self): return self.block_nature
-    def set_block_nature(self, block_nature): self.block_nature = block_nature
-    def export(self, outfile, level, namespace_='Common:', name_='Block', namespacedef_=''):
-        showIndent(outfile, level)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='Block')
-        if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
-        else:
-            outfile.write('/>\n')
-    def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='Block'):
-        if self.block_nature is not None and 'block_nature' not in already_processed:
-            already_processed.append('block_nature')
-            outfile.write(' block_nature=%s' % (quote_attrib(self.block_nature), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='Block', fromsubclass_=False):
-        if self.StructuredTextGroup is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sStructuredTextGroup>%s</%sStructuredTextGroup>\n' % ('Common:', self.gds_format_string(quote_xml(self.StructuredTextGroup).encode(ExternalEncoding), input_name='StructuredTextGroup'), 'Common:'))
-        for Block_ in self.Block:
-            Block_.export(outfile, level, 'Common:', name_='Block')
-    def hasContent_(self):
-        if (
-            self.StructuredTextGroup is not None or
-            self.Block
-            ):
-            return True
-        else:
-            return False
-    def exportLiteral(self, outfile, level, name_='Block'):
-        level += 1
-        self.exportLiteralAttributes(outfile, level, [], name_)
-        if self.hasContent_():
-            self.exportLiteralChildren(outfile, level, name_)
-    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
-        if self.block_nature is not None and 'block_nature' not in already_processed:
-            already_processed.append('block_nature')
-            showIndent(outfile, level)
-            outfile.write('block_nature = %s,\n' % (self.block_nature,))
-    def exportLiteralChildren(self, outfile, level, name_):
-        if self.StructuredTextGroup is not None:
-            showIndent(outfile, level)
-            outfile.write('StructuredTextGroup=%s,\n' % quote_python(self.StructuredTextGroup).encode(ExternalEncoding))
-        showIndent(outfile, level)
-        outfile.write('Block=[\n')
-        level += 1
-        for Block_ in self.Block:
-            showIndent(outfile, level)
-            outfile.write('model_.Block(\n')
-            Block_.exportLiteral(outfile, level)
-            showIndent(outfile, level)
-            outfile.write('),\n')
-        level -= 1
-        showIndent(outfile, level)
-        outfile.write('],\n')
-    def build(self, node):
-        self.buildAttributes(node, node.attrib, [])
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-    def buildAttributes(self, node, attrs, already_processed):
-        value = find_attr_value_('block_nature', node)
-        if value is not None and 'block_nature' not in already_processed:
-            already_processed.append('block_nature')
-            self.block_nature = value
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'StructuredTextGroup':
-            StructuredTextGroup_ = child_.text
-            StructuredTextGroup_ = self.gds_validate_string(StructuredTextGroup_, node, 'StructuredTextGroup')
-            self.StructuredTextGroup = StructuredTextGroup_
-        elif nodeName_ == 'Block':
-            obj_ = Block.factory()
-            obj_.build(child_)
-            self.Block.append(obj_)
-# end class Block
-
-
 class ReferenceListType(GeneratedsSuper):
     """The ReferencesListType contains one or more Reference elements, each
     of which provide further reading and insight into the item. This
@@ -7548,23 +7905,31 @@ class ReferenceListType(GeneratedsSuper):
     def set_Reference(self, Reference): self.Reference = Reference
     def add_Reference(self, value): self.Reference.append(value)
     def insert_Reference(self, index, value): self.Reference[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='ReferenceListType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ReferenceListType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ReferenceListType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ReferenceListType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ReferenceListType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ReferenceListType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Reference_ in self.Reference:
-            Reference_.export(outfile, level, 'Common:', name_='Reference')
+            Reference_.export(outfile, level, 'Common:', name_='Reference', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Reference
@@ -7606,16 +7971,14 @@ class ReferenceListType(GeneratedsSuper):
             self.Reference.append(obj_)
 # end class ReferenceListType
 
-
 class ReferenceType(GeneratedsSuper):
     """The ReferenceType is a complex type representing a single reference
     to a source of information. The id attribute is optional and is
-    used as a mechanism forciting text in the entry. If an id is
+    used as a mechanism for citing text in the entry. If an id is
     provided, it is placed between brackets and precedes this
     reference and the matching id should be used inside of the text
-    for the attack pattern itself where this reference is
-    applicable. All reference ids assigned within an entry must be
-    unique."""
+    for the entry itself where this reference is applicable. All
+    reference ids assigned within an entry must be unique."""
     subclass = None
     superclass = None
     def __init__(self, reference_id=None, Reference_Description=None, Reference_Author=None, Reference_Title=None, Reference_Section=None, Reference_Edition=None, Reference_Publication=None, Reference_Publisher=None, Reference_Date=None, Reference_PubDate=None, Reference_Link=None):
@@ -7663,52 +8026,60 @@ class ReferenceType(GeneratedsSuper):
     def set_Reference_Link(self, Reference_Link): self.Reference_Link = Reference_Link
     def get_reference_id(self): return self.reference_id
     def set_reference_id(self, reference_id): self.reference_id = reference_id
-    def export(self, outfile, level, namespace_='Common:', name_='ReferenceType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='ReferenceType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ReferenceType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='ReferenceType'):
         if self.reference_id is not None and 'reference_id' not in already_processed:
             already_processed.append('reference_id')
             outfile.write(' reference_id=%s' % (self.gds_format_string(quote_attrib(self.reference_id).encode(ExternalEncoding), input_name='reference_id'), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='ReferenceType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='ReferenceType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Reference_Description is not None:
-            self.Reference_Description.export(outfile, level, 'Common:', name_='Reference_Description')
+            self.Reference_Description.export(outfile, level, 'Common:', name_='Reference_Description', pretty_print=pretty_print)
         for Reference_Author_ in self.Reference_Author:
-            showIndent(outfile, level)
-            outfile.write('<%sReference_Author>%s</%sReference_Author>\n' % ('Common:', self.gds_format_string(quote_xml(Reference_Author_).encode(ExternalEncoding), input_name='Reference_Author'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sReference_Author>%s</%sReference_Author>%s' % ('Common:', self.gds_format_string(quote_xml(Reference_Author_).encode(ExternalEncoding), input_name='Reference_Author'), 'Common:', eol_))
         if self.Reference_Title is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sReference_Title>%s</%sReference_Title>\n' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Title).encode(ExternalEncoding), input_name='Reference_Title'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sReference_Title>%s</%sReference_Title>%s' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Title).encode(ExternalEncoding), input_name='Reference_Title'), 'Common:', eol_))
         if self.Reference_Section is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sReference_Section>%s</%sReference_Section>\n' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Section).encode(ExternalEncoding), input_name='Reference_Section'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sReference_Section>%s</%sReference_Section>%s' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Section).encode(ExternalEncoding), input_name='Reference_Section'), 'Common:', eol_))
         if self.Reference_Edition is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sReference_Edition>%s</%sReference_Edition>\n' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Edition).encode(ExternalEncoding), input_name='Reference_Edition'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sReference_Edition>%s</%sReference_Edition>%s' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Edition).encode(ExternalEncoding), input_name='Reference_Edition'), 'Common:', eol_))
         if self.Reference_Publication is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sReference_Publication>%s</%sReference_Publication>\n' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Publication).encode(ExternalEncoding), input_name='Reference_Publication'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sReference_Publication>%s</%sReference_Publication>%s' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Publication).encode(ExternalEncoding), input_name='Reference_Publication'), 'Common:', eol_))
         if self.Reference_Publisher is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sReference_Publisher>%s</%sReference_Publisher>\n' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Publisher).encode(ExternalEncoding), input_name='Reference_Publisher'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sReference_Publisher>%s</%sReference_Publisher>%s' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Publisher).encode(ExternalEncoding), input_name='Reference_Publisher'), 'Common:', eol_))
         if self.Reference_Date is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sReference_Date>%s</%sReference_Date>\n' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Date).encode(ExternalEncoding), input_name='Reference_Date'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sReference_Date>%s</%sReference_Date>%s' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Date).encode(ExternalEncoding), input_name='Reference_Date'), 'Common:', eol_))
         if self.Reference_PubDate is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sReference_PubDate>%s</%sReference_PubDate>\n' % ('Common:', self.gds_format_string(quote_xml(self.Reference_PubDate).encode(ExternalEncoding), input_name='Reference_PubDate'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sReference_PubDate>%s</%sReference_PubDate>%s' % ('Common:', self.gds_format_string(quote_xml(self.Reference_PubDate).encode(ExternalEncoding), input_name='Reference_PubDate'), 'Common:', eol_))
         if self.Reference_Link is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sReference_Link>%s</%sReference_Link>\n' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Link).encode(ExternalEncoding), input_name='Reference_Link'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sReference_Link>%s</%sReference_Link>%s' % ('Common:', self.gds_format_string(quote_xml(self.Reference_Link).encode(ExternalEncoding), input_name='Reference_Link'), 'Common:', eol_))
     def hasContent_(self):
         if (
             self.Reference_Description is not None or
@@ -7828,7 +8199,6 @@ class ReferenceType(GeneratedsSuper):
             self.Reference_Link = Reference_Link_
 # end class ReferenceType
 
-
 class DataSegmentType(GeneratedsSuper):
     """The DataSegmentType is intended to provide a relatively abstract way
     of characterizing data segments that may be
@@ -7874,36 +8244,43 @@ class DataSegmentType(GeneratedsSuper):
     def set_Search_Within(self, Search_Within): self.Search_Within = Search_Within
     def get_id(self): return self.id
     def set_id(self, id): self.id = id
-    def export(self, outfile, level, namespace_='Common:', name_='DataSegmentType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='DataSegmentType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='DataSegmentType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='DataSegmentType'):
         if self.id is not None and 'id' not in already_processed:
             already_processed.append('id')
             outfile.write(' id=%s' % (quote_attrib(self.id), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='DataSegmentType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='DataSegmentType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Data_Format is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sData_Format>%s</%sData_Format>\n' % ('Common:', self.gds_format_string(quote_xml(self.Data_Format).encode(ExternalEncoding), input_name='Data_Format'), 'Common:'))
+            self.Data_Format.export(outfile, level, 'Common:', name_='Data_Format', pretty_print=pretty_print)
         if self.Data_Size is not None:
-            self.Data_Size.export(outfile, level, 'Common:', name_='Data_Size')
+            self.Data_Size.export(outfile, level, 'Common:', name_='Data_Size', pretty_print=pretty_print)
         if self.Data_Segment is not None:
-            self.Data_Segment.export(outfile, level, 'Common:', name_='Data_Segment')
+            self.Data_Segment.export(outfile, level, 'Common:', name_='Data_Segment', pretty_print=pretty_print)
         if self.Offset is not None:
-            self.Offset.export(outfile, level, 'Common:', name_='Offset')
+            self.Offset.export(outfile, level, 'Common:', name_='Offset', pretty_print=pretty_print)
         if self.Search_Distance is not None:
-            self.Search_Distance.export(outfile, level, 'Common:', name_='Search_Distance')
+            self.Search_Distance.export(outfile, level, 'Common:', name_='Search_Distance', pretty_print=pretty_print)
         if self.Search_Within is not None:
-            self.Search_Within.export(outfile, level, 'Common:', name_='Search_Within')
+            self.Search_Within.export(outfile, level, 'Common:', name_='Search_Within', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Data_Format is not None or
@@ -7969,33 +8346,30 @@ class DataSegmentType(GeneratedsSuper):
             self.id = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Data_Format':
-            Data_Format_ = child_.text
-            Data_Format_ = self.gds_validate_string(Data_Format_, node, 'Data_Format')
-            self.Data_Format = Data_Format_
-            self.validate_DataFormatEnum(self.Data_Format)    # validate type DataFormatEnum
+            obj_ = DataFormatEnum.factory()
+            obj_.build(child_)
+            self.set_Data_Format(obj_)
         elif nodeName_ == 'Data_Size':
             obj_ = DataSizeType.factory()
             obj_.build(child_)
             self.set_Data_Size(obj_)
         elif nodeName_ == 'Data_Segment':
-            Data_Segment_ = child_.text
-            Data_Segment_ = self.gds_validate_string(Data_Segment_, node, 'Data_Segment')
-            self.Data_Segment = Data_Segment_
-            self.validate_StringObjectAttributeType(self.Data_Segment)    # validate type StringObjectAttributeType
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Data_Segment(obj_)
         elif nodeName_ == 'Offset':
-            obj_ = None
+            obj_ = IntegerObjectAttributeType.factory()
+            obj_.build(child_)
             self.set_Offset(obj_)
-            self.validate_IntegerObjectAttributeType(self.Offset)    # validate type IntegerObjectAttributeType
         elif nodeName_ == 'Search_Distance':
-            obj_ = None
+            obj_ = IntegerObjectAttributeType.factory()
+            obj_.build(child_)
             self.set_Search_Distance(obj_)
-            self.validate_IntegerObjectAttributeType(self.Search_Distance)    # validate type IntegerObjectAttributeType
         elif nodeName_ == 'Search_Within':
-            obj_ = None
+            obj_ = IntegerObjectAttributeType.factory()
+            obj_.build(child_)
             self.set_Search_Within(obj_)
-            self.validate_IntegerObjectAttributeType(self.Search_Within)    # validate type IntegerObjectAttributeType
 # end class DataSegmentType
-
 
 class DataSizeType(StringObjectAttributeType):
     """The DataSizeType specifies the size of the data segment.This
@@ -8003,8 +8377,8 @@ class DataSizeType(StringObjectAttributeType):
     Possible values are: Bytes, Kilobytes, Megabytes."""
     subclass = None
     superclass = StringObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, units=None, valueOf_=None):
-        super(DataSizeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, units=None, valueOf_=None):
+        super(DataSizeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.units = _cast(None, units)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -8017,25 +8391,29 @@ class DataSizeType(StringObjectAttributeType):
     def set_units(self, units): self.units = units
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='DataSizeType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='DataSizeType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='DataSizeType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='DataSizeType'):
         super(DataSizeType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='DataSizeType')
         if self.units is not None and 'units' not in already_processed:
             already_processed.append('units')
             outfile.write(' units=%s' % (quote_attrib(self.units), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='DataSizeType', fromsubclass_=False):
-        super(DataSizeType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='DataSizeType', fromsubclass_=False, pretty_print=True):
+        super(DataSizeType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -8077,7 +8455,6 @@ class DataSizeType(StringObjectAttributeType):
         pass
 # end class DataSizeType
 
-
 class CPESpecificationType(GeneratedsSuper):
     """CPESpecificationType is a modularized data type intended for
     providing a consistent approach to uniquely specifying the
@@ -8101,27 +8478,35 @@ class CPESpecificationType(GeneratedsSuper):
     def set_Title(self, Title): self.Title = Title
     def get_Meta_Item_Metadata(self): return self.Meta_Item_Metadata
     def set_Meta_Item_Metadata(self, Meta_Item_Metadata): self.Meta_Item_Metadata = Meta_Item_Metadata
-    def export(self, outfile, level, namespace_='Common:', name_='CPESpecificationType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='CPESpecificationType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='CPESpecificationType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='CPESpecificationType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='CPESpecificationType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='CPESpecificationType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.CPE_Name is not None:
-            self.CPE_Name.export(outfile, level, 'Common:', name_='CPE_Name', )
+            self.CPE_Name.export(outfile, level, 'Common:', name_='CPE_Name', pretty_print=pretty_print)
         if self.Title is not None:
-            self.Title.export(outfile, level, 'Common:', name_='Title')
+            self.Title.export(outfile, level, 'Common:', name_='Title', pretty_print=pretty_print)
         if self.Meta_Item_Metadata is not None:
-            self.Meta_Item_Metadata.export(outfile, level, 'Common:', name_='Meta_Item_Metadata')
+            self.Meta_Item_Metadata.export(outfile, level, 'Common:', name_='Meta_Item_Metadata', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.CPE_Name is not None or
@@ -8179,15 +8564,14 @@ class CPESpecificationType(GeneratedsSuper):
             self.set_Meta_Item_Metadata(obj_)
 # end class CPESpecificationType
 
-
 class CPENameType(StringObjectAttributeType):
     """The CPENameType contains the CPE Name value for the relevant
     platform.The xmlns_value attribute contains the XML namespace
     descriptor for the CPE namespace relevant to this CPE Name use."""
     subclass = None
     superclass = StringObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, xmlns_value=None):
-        super(CPENameType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, xmlns_value=None):
+        super(CPENameType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, )
         self.xmlns_value = _cast(None, xmlns_value)
         pass
     def factory(*args_, **kwargs_):
@@ -8198,24 +8582,28 @@ class CPENameType(StringObjectAttributeType):
     factory = staticmethod(factory)
     def get_xmlns_value(self): return self.xmlns_value
     def set_xmlns_value(self, xmlns_value): self.xmlns_value = xmlns_value
-    def export(self, outfile, level, namespace_='Common:', name_='CPENameType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='CPENameType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='CPENameType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='CPENameType'):
         super(CPENameType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='CPENameType')
         if self.xmlns_value is not None and 'xmlns_value' not in already_processed:
             already_processed.append('xmlns_value')
             outfile.write(' xmlns_value=%s' % (self.gds_format_string(quote_attrib(self.xmlns_value).encode(ExternalEncoding), input_name='xmlns_value'), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='CPENameType', fromsubclass_=False):
-        super(CPENameType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='CPENameType', fromsubclass_=False, pretty_print=True):
+        super(CPENameType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -8254,7 +8642,6 @@ class CPENameType(StringObjectAttributeType):
         pass
 # end class CPENameType
 
-
 class MetaItemMetadataType(GeneratedsSuper):
     """The MetaItemMetadataType element aggregates the descriptive metadata
     for a CPE Name instance."""
@@ -8274,7 +8661,7 @@ class MetaItemMetadataType(GeneratedsSuper):
     def get_Modification_Date(self): return self.Modification_Date
     def set_Modification_Date(self, Modification_Date): self.Modification_Date = Modification_Date
     def validate_DateTimeObjectAttributeType(self, value):
-        # Validate type DateTimeObjectAttributeType, a restriction on xs:dateTime.
+        # Validate type DateTimeObjectAttributeType, a restriction on None.
         pass
     def get_NVD_ID(self): return self.NVD_ID
     def set_NVD_ID(self, NVD_ID): self.NVD_ID = NVD_ID
@@ -8288,29 +8675,37 @@ class MetaItemMetadataType(GeneratedsSuper):
         pass
     def get_XMLNS_Meta(self): return self.XMLNS_Meta
     def set_XMLNS_Meta(self, XMLNS_Meta): self.XMLNS_Meta = XMLNS_Meta
-    def export(self, outfile, level, namespace_='Common:', name_='MetaItemMetadataType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='MetaItemMetadataType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='MetaItemMetadataType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='MetaItemMetadataType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='MetaItemMetadataType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='MetaItemMetadataType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Modification_Date is not None:
-            self.Modification_Date.export(outfile, level, 'Common:', name_='Modification_Date')
+            self.Modification_Date.export(outfile, level, 'Common:', name_='Modification_Date', pretty_print=pretty_print)
         if self.NVD_ID is not None:
-            self.NVD_ID.export(outfile, level, 'Common:', name_='NVD_ID')
+            self.NVD_ID.export(outfile, level, 'Common:', name_='NVD_ID', pretty_print=pretty_print)
         if self.Status is not None:
-            self.Status.export(outfile, level, 'Common:', name_='Status')
+            self.Status.export(outfile, level, 'Common:', name_='Status', pretty_print=pretty_print)
         if self.XMLNS_Meta is not None:
-            self.XMLNS_Meta.export(outfile, level, 'Common:', name_='XMLNS_Meta')
+            self.XMLNS_Meta.export(outfile, level, 'Common:', name_='XMLNS_Meta', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Modification_Date is not None or
@@ -8331,7 +8726,10 @@ class MetaItemMetadataType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Modification_Date is not None:
             showIndent(outfile, level)
-            outfile.write('Modification_Date=%s,\n' % quote_python(self.Modification_Date).encode(ExternalEncoding))
+            outfile.write('Modification_Date=model_.DateTimeObjectAttributeType(\n')
+            self.Modification_Date.exportLiteral(outfile, level, name_='Modification_Date')
+            showIndent(outfile, level)
+            outfile.write('),\n')
         if self.NVD_ID is not None:
             showIndent(outfile, level)
             outfile.write('NVD_ID=model_.UnsignedIntegerObjectAttributeType(\n')
@@ -8353,26 +8751,22 @@ class MetaItemMetadataType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Modification_Date':
-            Modification_Date_ = child_.text
-            Modification_Date_ = self.gds_validate_string(Modification_Date_, node, 'Modification_Date')
-            self.Modification_Date = Modification_Date_
-            self.validate_DateTimeObjectAttributeType(self.Modification_Date)    # validate type DateTimeObjectAttributeType
+            obj_ = DateTimeObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Modification_Date(obj_)
         elif nodeName_ == 'NVD_ID':
-            obj_ = None
+            obj_ = UnsignedIntegerObjectAttributeType.factory()
+            obj_.build(child_)
             self.set_NVD_ID(obj_)
-            self.validate_UnsignedIntegerObjectAttributeType(self.NVD_ID)    # validate type UnsignedIntegerObjectAttributeType
         elif nodeName_ == 'Status':
-            Status_ = child_.text
-            Status_ = self.gds_validate_string(Status_, node, 'Status')
-            self.Status = Status_
-            self.validate_StringObjectAttributeType(self.Status)    # validate type StringObjectAttributeType
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Status(obj_)
         elif nodeName_ == 'XMLNS_Meta':
-            XMLNS_Meta_ = child_.text
-            XMLNS_Meta_ = self.gds_validate_string(XMLNS_Meta_, node, 'XMLNS_Meta')
-            self.XMLNS_Meta = XMLNS_Meta_
-            self.validate_StringObjectAttributeType(self.XMLNS_Meta)    # validate type StringObjectAttributeType
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_XMLNS_Meta(obj_)
 # end class MetaItemMetadataType
-
 
 class CPETitleType(StringObjectAttributeType):
     """The CPETitleType contains the plain language descriptive title of
@@ -8387,8 +8781,8 @@ class CPETitleType(StringObjectAttributeType):
     xml:lang with the empty string."""
     subclass = None
     superclass = StringObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, lang=None):
-        super(CPETitleType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, lang=None):
+        super(CPETitleType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, )
         self.lang = _cast(None, lang)
         pass
     def factory(*args_, **kwargs_):
@@ -8399,24 +8793,28 @@ class CPETitleType(StringObjectAttributeType):
     factory = staticmethod(factory)
     def get_lang(self): return self.lang
     def set_lang(self, lang): self.lang = lang
-    def export(self, outfile, level, namespace_='Common:', name_='CPETitleType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='CPETitleType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='CPETitleType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='CPETitleType'):
         super(CPETitleType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='CPETitleType')
         if self.lang is not None and 'lang' not in already_processed:
             already_processed.append('lang')
             outfile.write(' lang=%s' % (self.gds_format_string(quote_attrib(self.lang).encode(ExternalEncoding), input_name='lang'), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='CPETitleType', fromsubclass_=False):
-        super(CPETitleType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='CPETitleType', fromsubclass_=False, pretty_print=True):
+        super(CPETitleType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -8455,7 +8853,6 @@ class CPETitleType(StringObjectAttributeType):
         pass
 # end class CPETitleType
 
-
 class MetadataType(GeneratedsSuper):
     """The MetadataType is intended as mechanism to capture any non-
     context-specific metadataThis field specifies the type of name
@@ -8483,28 +8880,37 @@ class MetadataType(GeneratedsSuper):
     def insert_SubDatum(self, index, value): self.SubDatum[index] = value
     def get_type(self): return self.type_
     def set_type(self, type_): self.type_ = type_
-    def export(self, outfile, level, namespace_='Common:', name_='MetadataType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='MetadataType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='MetadataType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='MetadataType'):
         if self.type_ is not None and 'type_' not in already_processed:
             already_processed.append('type_')
             outfile.write(' type=%s' % (self.gds_format_string(quote_attrib(self.type_).encode(ExternalEncoding), input_name='type'), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='MetadataType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='MetadataType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Value is not None:
-            showIndent(outfile, level)
-            outfile.write('<%sValue>%s</%sValue>\n' % ('Common:', self.gds_format_string(quote_xml(self.Value).encode(ExternalEncoding), input_name='Value'), 'Common:'))
+            showIndent(outfile, level, pretty_print)
+            #self.Value.export(outfile, level, 'Common:', name_='Value', pretty_print=pretty_print)
+            outfile.write('<%sValue>%s</%sValue>%s' % ('Common:', self.gds_format_string(quote_xml(self.Value).encode(ExternalEncoding), input_name='Value'), 'Common:', eol_))
         for SubDatum_ in self.SubDatum:
-            SubDatum_.export(outfile, level, 'Common:', name_='SubDatum')
+            SubDatum_.export(outfile, level, 'Common:', name_='SubDatum', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Value is not None or
@@ -8560,7 +8966,6 @@ class MetadataType(GeneratedsSuper):
             self.SubDatum.append(obj_)
 # end class MetadataType
 
-
 class EnvironmentVariableListType(GeneratedsSuper):
     """The EnvironmentVariableListType type is used for representing a list
     of environment variables."""
@@ -8581,23 +8986,31 @@ class EnvironmentVariableListType(GeneratedsSuper):
     def set_Environment_Variable(self, Environment_Variable): self.Environment_Variable = Environment_Variable
     def add_Environment_Variable(self, value): self.Environment_Variable.append(value)
     def insert_Environment_Variable(self, index, value): self.Environment_Variable[index] = value
-    def export(self, outfile, level, namespace_='Common:', name_='EnvironmentVariableListType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='EnvironmentVariableListType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='EnvironmentVariableListType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='EnvironmentVariableListType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='EnvironmentVariableListType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='EnvironmentVariableListType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         for Environment_Variable_ in self.Environment_Variable:
-            Environment_Variable_.export(outfile, level, 'Common:', name_='Environment_Variable')
+            Environment_Variable_.export(outfile, level, 'Common:', name_='Environment_Variable', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Environment_Variable
@@ -8639,7 +9052,6 @@ class EnvironmentVariableListType(GeneratedsSuper):
             self.Environment_Variable.append(obj_)
 # end class EnvironmentVariableListType
 
-
 class EnvironmentVariableType(GeneratedsSuper):
     """The EnvironmentVariableType type is used for representing
     environment variables using a name/value pair."""
@@ -8661,25 +9073,33 @@ class EnvironmentVariableType(GeneratedsSuper):
         pass
     def get_Value(self): return self.Value
     def set_Value(self, Value): self.Value = Value
-    def export(self, outfile, level, namespace_='Common:', name_='EnvironmentVariableType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='EnvironmentVariableType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='EnvironmentVariableType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='EnvironmentVariableType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='EnvironmentVariableType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='EnvironmentVariableType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Name is not None:
-            self.Name.export(outfile, level, 'Common:', name_='Name')
+            self.Name.export(outfile, level, 'Common:', name_='Name', pretty_print=pretty_print)
         if self.Value is not None:
-            self.Value.export(outfile, level, 'Common:', name_='Value')
+            self.Value.export(outfile, level, 'Common:', name_='Value', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Name is not None or
@@ -8711,17 +9131,100 @@ class EnvironmentVariableType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Name':
-            Name_ = child_.text
-            Name_ = self.gds_validate_string(Name_, node, 'Name')
-            self.Name = Name_
-            self.validate_StringObjectAttributeType(self.Name)    # validate type StringObjectAttributeType
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Name(obj_)
         elif nodeName_ == 'Value':
-            Value_ = child_.text
-            Value_ = self.gds_validate_string(Value_, node, 'Value')
-            self.Value = Value_
-            self.validate_StringObjectAttributeType(self.Value)    # validate type StringObjectAttributeType
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Value(obj_)
 # end class EnvironmentVariableType
 
+class DigitalSignaturesType(GeneratedsSuper):
+    """The DigitalSignaturesType is used for representing a list of digital
+    signatures."""
+    subclass = None
+    superclass = None
+    def __init__(self, Digital_Signature=None):
+        if Digital_Signature is None:
+            self.Digital_Signature = []
+        else:
+            self.Digital_Signature = Digital_Signature
+    def factory(*args_, **kwargs_):
+        if DigitalSignaturesType.subclass:
+            return DigitalSignaturesType.subclass(*args_, **kwargs_)
+        else:
+            return DigitalSignaturesType(*args_, **kwargs_)
+    factory = staticmethod(factory)
+    def get_Digital_Signature(self): return self.Digital_Signature
+    def set_Digital_Signature(self, Digital_Signature): self.Digital_Signature = Digital_Signature
+    def add_Digital_Signature(self, value): self.Digital_Signature.append(value)
+    def insert_Digital_Signature(self, index, value): self.Digital_Signature[index] = value
+    def export(self, outfile, level, namespace_='Common:', name_='DigitalSignaturesType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
+        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        already_processed = []
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='DigitalSignaturesType')
+        if self.hasContent_():
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+        else:
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='DigitalSignaturesType'):
+        pass
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='DigitalSignaturesType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        for Digital_Signature_ in self.Digital_Signature:
+            Digital_Signature_.export(outfile, level, 'Common:', name_='Digital_Signature', pretty_print=pretty_print)
+    def hasContent_(self):
+        if (
+            self.Digital_Signature
+            ):
+            return True
+        else:
+            return False
+    def exportLiteral(self, outfile, level, name_='DigitalSignaturesType'):
+        level += 1
+        self.exportLiteralAttributes(outfile, level, [], name_)
+        if self.hasContent_():
+            self.exportLiteralChildren(outfile, level, name_)
+    def exportLiteralAttributes(self, outfile, level, already_processed, name_):
+        pass
+    def exportLiteralChildren(self, outfile, level, name_):
+        showIndent(outfile, level)
+        outfile.write('Digital_Signature=[\n')
+        level += 1
+        for Digital_Signature_ in self.Digital_Signature:
+            showIndent(outfile, level)
+            outfile.write('model_.DigitalSignatureInfoType(\n')
+            Digital_Signature_.exportLiteral(outfile, level, name_='DigitalSignatureInfoType')
+            showIndent(outfile, level)
+            outfile.write('),\n')
+        level -= 1
+        showIndent(outfile, level)
+        outfile.write('],\n')
+    def build(self, node):
+        self.buildAttributes(node, node.attrib, [])
+        for child in node:
+            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
+            self.buildChildren(child, node, nodeName_)
+    def buildAttributes(self, node, attrs, already_processed):
+        pass
+    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+        if nodeName_ == 'Digital_Signature':
+            obj_ = DigitalSignatureInfoType.factory()
+            obj_.build(child_)
+            self.Digital_Signature.append(obj_)
+# end class DigitalSignaturesType
 
 class DigitalSignatureInfoType(GeneratedsSuper):
     """The DigitalSignatureInfoType type is used as a way to represent some
@@ -8755,18 +9258,22 @@ class DigitalSignatureInfoType(GeneratedsSuper):
     def set_signature_verified(self, signature_verified): self.signature_verified = signature_verified
     def get_signature_exists(self): return self.signature_exists
     def set_signature_exists(self, signature_exists): self.signature_exists = signature_exists
-    def export(self, outfile, level, namespace_='Common:', name_='DigitalSignatureInfoType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='DigitalSignatureInfoType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='DigitalSignatureInfoType')
         if self.hasContent_():
-            outfile.write('>\n')
-            self.exportChildren(outfile, level + 1, 'Common:', name_)
-            showIndent(outfile, level)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='DigitalSignatureInfoType'):
         if self.signature_verified is not None and 'signature_verified' not in already_processed:
             already_processed.append('signature_verified')
@@ -8774,13 +9281,17 @@ class DigitalSignatureInfoType(GeneratedsSuper):
         if self.signature_exists is not None and 'signature_exists' not in already_processed:
             already_processed.append('signature_exists')
             outfile.write(' signature_exists="%s"' % self.gds_format_boolean(self.gds_str_lower(str(self.signature_exists)), input_name='signature_exists'))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='DigitalSignatureInfoType', fromsubclass_=False):
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='DigitalSignatureInfoType', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
         if self.Certificate_Issuer is not None:
-            self.Certificate_Issuer.export(outfile, level, 'Common:', name_='Certificate_Issuer')
+            self.Certificate_Issuer.export(outfile, level, 'Common:', name_='Certificate_Issuer', pretty_print=pretty_print)
         if self.Certificate_Subject is not None:
-            self.Certificate_Subject.export(outfile, level, 'Common:', name_='Certificate_Subject')
+            self.Certificate_Subject.export(outfile, level, 'Common:', name_='Certificate_Subject', pretty_print=pretty_print)
         if self.Signature_Description is not None:
-            self.Signature_Description.export(outfile, level, 'Common:', name_='Signature_Description')
+            self.Signature_Description.export(outfile, level, 'Common:', name_='Signature_Description', pretty_print=pretty_print)
     def hasContent_(self):
         if (
             self.Certificate_Issuer is not None or
@@ -8840,21 +9351,18 @@ class DigitalSignatureInfoType(GeneratedsSuper):
                 raise_parse_error(node, 'Bad boolean attribute')
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Certificate_Issuer':
-            Certificate_Issuer_ = child_.text
-            Certificate_Issuer_ = self.gds_validate_string(Certificate_Issuer_, node, 'Certificate_Issuer')
-            self.Certificate_Issuer = Certificate_Issuer_
-            self.validate_StringObjectAttributeType(self.Certificate_Issuer)    # validate type StringObjectAttributeType
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Certificate_Issuer(obj_)
         elif nodeName_ == 'Certificate_Subject':
-            Certificate_Subject_ = StringObjectAttributeType.factory()
-            Certificate_Subject_.build(child_)
-            self.set_Certificate_Subject(Certificate_Subject_)
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Certificate_Subject(obj_)
         elif nodeName_ == 'Signature_Description':
-            Signature_Description_ = child_.text
-            Signature_Description_ = self.gds_validate_string(Signature_Description_, node, 'Signature_Description')
-            self.Signature_Description = Signature_Description_
-            self.validate_StringObjectAttributeType(self.Signature_Description)    # validate type StringObjectAttributeType
+            obj_ = StringObjectAttributeType.factory()
+            obj_.build(child_)
+            self.set_Signature_Description(obj_)
 # end class DigitalSignatureInfoType
-
 
 class SIDType(BaseObjectAttributeType):
     """SIDType specifies Windows Security ID (SID) types via a union of the
@@ -8865,8 +9373,8 @@ class SIDType(BaseObjectAttributeType):
     specified element."""
     subclass = None
     superclass = BaseObjectAttributeType
-    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', trend=None, appears_random=None, regex_syntax=None, start_range=None, idref=None, id=None, condition=None, valueOf_=None):
-        super(SIDType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, trend, appears_random, regex_syntax, start_range, idref, id, condition, valueOf_, )
+    def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(SIDType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -8879,25 +9387,29 @@ class SIDType(BaseObjectAttributeType):
     def set_datatype(self, datatype): self.datatype = datatype
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
-    def export(self, outfile, level, namespace_='Common:', name_='SIDType', namespacedef_=''):
-        showIndent(outfile, level)
+    def export(self, outfile, level, namespace_='Common:', name_='SIDType', namespacedef_='', pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='SIDType')
         if self.hasContent_():
             outfile.write('>')
             outfile.write(str(self.valueOf_).encode(ExternalEncoding))
-            self.exportChildren(outfile, level + 1, namespace_, name_)
-            outfile.write('</%s%s>\n' % (namespace_, name_))
+            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
-            outfile.write('/>\n')
+            outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='Common:', name_='SIDType'):
         super(SIDType, self).exportAttributes(outfile, level, already_processed, namespace_, name_='SIDType')
         if self.datatype is not None and 'datatype' not in already_processed:
             already_processed.append('datatype')
             outfile.write(' datatype=%s' % (quote_attrib(self.datatype), ))
-    def exportChildren(self, outfile, level, namespace_='Common:', name_='SIDType', fromsubclass_=False):
-        super(SIDType, self).exportChildren(outfile, level, namespace_, name_, True)
+    def exportChildren(self, outfile, level, namespace_='Common:', name_='SIDType', fromsubclass_=False, pretty_print=True):
+        super(SIDType, self).exportChildren(outfile, level, 'Common:', name_, True, pretty_print=pretty_print)
         pass
     def hasContent_(self):
         if (
@@ -8939,7 +9451,6 @@ class SIDType(BaseObjectAttributeType):
         pass
 # end class SIDType
 
-
 USAGE_TEXT = """
 Usage: python <Parser>.py [ -s ] <in_xml_file>
 """
@@ -8948,12 +9459,10 @@ def usage():
     print USAGE_TEXT
     sys.exit(1)
 
-
 def get_root_tag(node):
     tag = Tag_pattern_.match(node.tag).groups()[-1]
     rootClass = globals().get(tag)
     return tag, rootClass
-
 
 def parse(inFileName):
     doc = parsexml_(inFileName)
@@ -8967,10 +9476,10 @@ def parse(inFileName):
     # Enable Python to collect the space used by the DOM.
     doc = None
     sys.stdout.write('<?xml version="1.0" ?>\n')
-    rootObj.export(sys.stdout, 0, name_=rootTag, 
-        namespacedef_='')
+    rootObj.export(sys.stdout, 0, name_=rootTag,
+        namespacedef_='',
+        pretty_print=True)
     return rootObj
-
 
 def parseString(inString):
     from StringIO import StringIO
@@ -8989,7 +9498,6 @@ def parseString(inString):
         namespacedef_='')
     return rootObj
 
-
 def parseLiteral(inFileName):
     doc = parsexml_(inFileName)
     rootNode = doc.getroot()
@@ -9001,13 +9509,12 @@ def parseLiteral(inFileName):
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
-    sys.stdout.write('#from commontypes12 import *\n\n')
-    sys.stdout.write('import commontypes12 as model_\n\n')
+    sys.stdout.write('#from common_types import *\n\n')
+    sys.stdout.write('import common_types as model_\n\n')
     sys.stdout.write('rootObj = model_.rootTag(\n')
     rootObj.exportLiteral(sys.stdout, 0, name_=rootTag)
     sys.stdout.write(')\n')
     return rootObj
-
 
 def main():
     args = sys.argv[1:]
@@ -9016,95 +9523,97 @@ def main():
     else:
         usage()
 
-
 if __name__ == '__main__':
     #import pdb; pdb.set_trace()
     main()
 
-
 __all__ = [
-    "AnyURIObjectAttributeType",
-    "Base64BinaryObjectAttributeType",
-    "BaseObjectAttributeType",
-    "Block",
-    "BuildConfigurationType",
-    "BuildInformationType",
-    "BuildUtilityType",
-    "ByteRunType",
-    "ByteRunsType",
-    "CPENameType",
-    "CPESpecificationType",
-    "CPETitleType",
-    "CodeSnippetsType",
-    "CompilerInformalDescriptionType",
-    "CompilerType",
-    "CompilersType",
-    "ConfigurationSettingType",
-    "ConfigurationSettingsType",
-    "ContributorType",
-    "DataSegmentType",
-    "DataSizeType",
-    "DateObjectAttributeType",
-    "DateRangeType",
-    "DateTimeObjectAttributeType",
-    "DefinedObjectType",
-    "DependenciesType",
-    "DependencyType",
-    "DigitalSignatureInfoType",
-    "DoubleObjectAttributeType",
-    "DurationObjectAttributeType",
-    "EnvironmentVariableListType",
-    "EnvironmentVariableType",
-    "ErrorInstancesType",
-    "ErrorType",
-    "ErrorsType",
-    "ExecutionEnvironmentType",
-    "ExtractedFeaturesType",
-    "ExtractedStringType",
-    "ExtractedStringsType",
-    "FloatObjectAttributeType",
-    "FunctionsType",
-    "FuzzyHashBlockType",
-    "FuzzyHashStructureType",
-    "FuzzyHashValueType",
-    "HashListType",
-    "HashNameType",
-    "HashSegmentType",
-    "HashSegmentsType",
-    "HashType",
-    "HashValueType",
-    "HexBinaryObjectAttributeType",
-    "ImageType",
-    "ImagesType",
-    "ImportsType",
-    "IndicatorType",
-    "IndicatorsType",
-    "IntegerObjectAttributeType",
-    "InternalStringsType",
-    "InternationalizationSettingsType",
-    "LibrariesType",
-    "LibraryType",
-    "LongObjectAttributeType",
+    "Block"
     "MeasureSourceType",
-    "MetaItemMetadataType",
-    "MetadataType",
-    "NameObjectAttributeType",
-    "NonNegativeIntegerObjectAttributeType",
+    "ContributorType",
+    "DateRangeType",
     "PersonnelType",
-    "PositiveIntegerObjectAttributeType",
-    "ReferenceListType",
-    "ReferenceType",
-    "SIDType",
-    "SimpleHashValueType",
-    "StringObjectAttributeType",
-    "StructuredTextType",
-    "TimeObjectAttributeType",
     "TimeType",
-    "ToolConfigurationType",
-    "ToolInformationType",
     "ToolSpecificDataType",
     "ToolsInformationType",
-    "UnsignedIntegerObjectAttributeType",
+    "ToolInformationType",
+    "ToolConfigurationType",
+    "ConfigurationSettingsType",
+    "ConfigurationSettingType",
+    "DependenciesType",
+    "DependencyType",
+    "UsageContextAssumptionsType",
+    "InternationalizationSettingsType",
+    "InternalStringsType",
+    "BuildInformationType",
+    "BuildUtilityType",
+    "CompilersType",
+    "CompilerType",
+    "CompilerInformalDescriptionType",
+    "BuildConfigurationType",
+    "LibrariesType",
+    "LibraryType",
+    "ExecutionEnvironmentType",
+    "ErrorsType",
+    "ErrorType",
+    "ErrorInstancesType",
+    "DefinedObjectType",
+    "BaseObjectAttributeType",
+    "IntegerObjectAttributeType",
+    "StringObjectAttributeType",
+    "NameObjectAttributeType",
+    "DateObjectAttributeType",
+    "DateTimeObjectAttributeType",
+    "FloatObjectAttributeType",
+    "DoubleObjectAttributeType",
     "UnsignedLongObjectAttributeType",
-    "UsageContextAssumptionsType"
+    "UnsignedIntegerObjectAttributeType",
+    "PositiveIntegerObjectAttributeType",
+    "HexBinaryObjectAttributeType",
+    "LongObjectAttributeType",
+    "NonNegativeIntegerObjectAttributeType",
+    "AnyURIObjectAttributeType",
+    "DurationObjectAttributeType",
+    "TimeObjectAttributeType",
+    "Base64BinaryObjectAttributeType",
+    "ExtractedFeaturesType",
+    "ExtractedStringsType",
+    "ExtractedStringType",
+    "ImportsType",
+    "FunctionsType",
+    "CodeSnippetsType",
+    "ByteRunsType",
+    "ByteRunType",
+    "HashListType",
+    "HashValueType",
+    "SimpleHashValueType",
+    "FuzzyHashValueType",
+    "FuzzyHashStructureType",
+    "FuzzyHashBlockType",
+    "HashSegmentsType",
+    "HashSegmentType",
+    "HashType",
+    "HashNameType",
+    "StructuredTextType",
+    "ImagesType",
+    "ImageType",
+    "ReferenceListType",
+    "ReferenceType",
+    "DataSegmentType",
+    "DataSizeType",
+    "CPESpecificationType",
+    "CPENameType",
+    "MetaItemMetadataType",
+    "CPETitleType",
+    "MetadataType",
+    "EnvironmentVariableListType",
+    "EnvironmentVariableType",
+    "DigitalSignaturesType",
+    "DigitalSignatureInfoType",
+    "SIDType"
     ]
+
+import system_object_1_3
+import process_object_1_3
+import code_object_1_1
+import user_account_object_1_2

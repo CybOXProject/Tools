@@ -9,8 +9,83 @@ import sys
 import getopt
 import re as re_
 
-import cybox_common_types_v1_0
-from email_message_object_1_2 import EmailMessageObjectType
+import cybox_common_types_1_0
+
+#Objects path - set to point to the CybOX Objects Bindings folder
+objects_path = ''
+#Dictionary for storing Defined Objects, their main types, namespaces, and schemalocations
+defined_objects = {'AccountObjectType' : {'binding_name' : 'account_object_1_2', 'namespace_prefix' : 'AccountObj', 'namespace' : 'http://cybox.mitre.org/objects#AccountObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Account/Account_Object_1.2.xsd'},
+                   'AddressObjectType' : {'binding_name' : 'address_object_1_2', 'namespace_prefix' : 'AddressObj', 'namespace' : 'http://cybox.mitre.org/objects#AddressObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Address/Address_Object_1.2.xsd'},
+                   'APIObjectType' : {'binding_name' : 'api_object_1_1', 'namespace_prefix' : 'APIObj', 'namespace' : 'http://cybox.mitre.org/objects#APIObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/API/API_Object_1.1.xsd'},
+                   'ArtifactType' : {'binding_name' : 'artifact_object_1_0', 'namespace_prefix' : 'ArtifactObj', 'namespace' : 'http://cybox.mitre.org/objects#ArtifactObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Artifact/Artifact_Object_1.0.xsd'},
+                   'CodeObjectType' : {'binding_name' : 'code_object_1_1', 'namespace_prefix' : 'CodeObj', 'namespace' : 'http://cybox.mitre.org/objects#CodeObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Code/Code_Object_1.1.xsd'},
+                   'DeviceObjectType' : {'binding_name' : 'device_object_1_1', 'namespace_prefix' : 'DeviceObj', 'namespace' : 'http://cybox.mitre.org/objects#DeviceObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Device/Device_Object_1.1.xsd'},
+                   'DiskObjectType' : {'binding_name' : 'disk_object_1_3', 'namespace_prefix' : 'DiskObj', 'namespace' : 'http://cybox.mitre.org/objects#DiskObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Disk/Disk_Object_1.3.xsd', 'dependencies' : 'DiskPartitionObjectType'},
+                   'DiskPartitionObjectType' : {'binding_name' : 'disk_partition_object_1_3', 'namespace_prefix' : 'DiskPartitionObj', 'namespace' : 'http://cybox.mitre.org/objects#DiskPartitionObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Disk_Partition/Disk_Partition_Object_1.3.xsd'},
+                   'DNSCacheEntryType' : {'binding_name' : 'dns_cache_object_1_3', 'namespace_prefix' : 'DNSCacheObj', 'namespace' : 'http://cybox.mitre.org/objects#DNSCacheObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/DNS_Cache/DNS_Cache_Object_1.3.xsd', 'dependencies' : 'DNSRecordObjectType,AddressObjectType,URIObjectType'},
+                   'DNSQueryObjectType' : {'binding_name' : 'dns_query_object_1_0', 'namespace_prefix' : 'DNSQueryObj', 'namespace' : 'http://cybox.mitre.org/objects#DNSQueryObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/DNS_Query/DNS_Query_Object_1.0.xsd', 'dependencies' : 'DNSRecordObjectType,URIObjectType,AddressObjectType'},
+                   'DNSRecordObjectType' : {'binding_name' : 'dns_record_object_1_1', 'namespace_prefix' : 'DNSRecordObj', 'namespace' : 'http://cybox.mitre.org/objects#DNSRecordObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/DNS_Record/DNS_Record_Object_1.1.xsd', 'dependencies' : 'URIObjectType,AddressObjectType'},
+                   'EmailMessageObjectType' : {'binding_name' : 'email_message_object_1_2', 'namespace_prefix' : 'EmailMessageObj', 'namespace' : 'http://cybox.mitre.org/objects#EmailMessageObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Email_Message/Email_Message_Object_1.2.xsd', 'dependencies' : 'FileObjectType,AddressObjectType,URIObjectType'},
+                   'FileObjectType' : {'binding_name' : 'file_object_1_3', 'namespace_prefix' : 'FileObj', 'namespace' : 'http://cybox.mitre.org/objects#FileObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/File/File_Object_1.3.xsd'},
+                   'GUIDialogboxObjectType' : {'binding_name' : 'gui_dialogbox_object_1_2', 'namespace_prefix' : 'GUIDialogboxObj', 'namespace' : 'http://cybox.mitre.org/objects#GUIDialogboxObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/GUI_Dialogbox/GUI_Dialogbox_Object_1.2.xsd', 'dependencies' : 'GUIObjectType'},
+                   'GUIObjectType' : {'binding_name' : 'gui_object_1_2', 'namespace_prefix' : 'GUIObj', 'namespace' : 'http://cybox.mitre.org/objects#GUIObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/GUI/GUI_Object_1.2.xsd'},
+                   'GUIWindowObjectType' : {'binding_name' : 'gui_window_object_1_2', 'namespace_prefix' : 'GUIWindowOb', 'namespace' : 'http://cybox.mitre.org/objects#GUIWindowObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/GUI_Window/GUI_Window_Object_1.2.xsd', 'dependencies' : 'GUIObjectType'},
+                   'HTTPSessionObjectType' : {'binding_name' : 'http_session_object_1_0', 'namespace_prefix' : 'HTTPSessionObj', 'namespace' : 'http://cybox.mitre.org/objects#HTTPSessionObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/HTTP_Session/HTTP_Session_Object_1.0.xsd', 'dependencies' : 'AddressObjectType,PortObjectType,URIObjectType'},
+                   'LibraryObjectType' : {'binding_name' : 'library_object_1_3', 'namespace_prefix' : 'LibraryObj', 'namespace' : 'http://cybox.mitre.org/objects#LibraryObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Library/Library_Object_1.3.xsd'},
+                   'LinuxPackageObjectType' : {'binding_name' : 'linux_package_object_1_3', 'namespace_prefix' : 'LinuxPackageObj', 'namespace' : 'http://cybox.mitre.org/objects#LinuxPackageObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Linux_Package/Linux_Package_Object_1.3.xsd'},
+                   'MemoryObjectType' : {'binding_name' : 'memory_object_1_2', 'namespace_prefix' : 'MemoryObj', 'namespace' : 'http://cybox.mitre.org/objects#MemoryObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Memory/Memory_Object_1.2.xsd'},
+                   'MutexObjectType' : {'binding_name' : 'mutex_object_1_3', 'namespace_prefix' : 'MutexObj', 'namespace' : 'http://cybox.mitre.org/objects#MutexObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Mutex/Mutex_Object_1.3.xsd'},
+                   'NetworkConnectionType' : {'binding_name' : 'network_connection_object_1_0', 'namespace_prefix' : 'NetworkConnectionObj', 'namespace' : 'http://cybox.mitre.org/objects#NetworkConnectionObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Network_Connection/Network_Connection_Object_1.0.xsd', 'dependencies' : 'AddressObjectType,PortObjectType,HTTPSessionObjectType,DNSQueryObjectType,DNSRecordObjectType,URIObjectType'},
+                   'NetworkFlowObjectType' : {'binding_name' : 'network_flow_object_1_1', 'namespace_prefix' : 'NetFlowObj', 'namespace' : 'http://cybox.mitre.org/objects#NetworkFlowObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Network_Flow/Network_Flow_Object_1.1.xsd', 'dependencies' : 'NetworkPacketType,AddressObjectType,PortObjectType'},
+                   'NetworkPacketType' : {'binding_name' : 'network_packet_object_1_1', 'namespace_prefix' : 'PacketObj', 'namespace' : 'http://cybox.mitre.org/objects#PacketObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Network_Packet/Network_Packet_Object_1.1.xsd', 'dependencies' : 'AddressObjectType,PortObjectType'},
+                   'NetworkRouteEntryObjectType' : {'binding_name' : 'network_route_entry_object_1_1', 'namespace_prefix' : 'NetworkRouteEntryObj', 'namespace' : 'http://cybox.mitre.org/objects#NetworkRouteEntryObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Network_Route_Entry/Network_Route_Entry_Object_1.1.xsd', 'dependencies' : 'AddressObjectType'},
+                   'NetRouteObjectType' : {'binding_name' : 'network_route_object_1_2', 'namespace_prefix' : 'NetworkRouteObj', 'namespace' : 'http://cybox.mitre.org/objects#NetworkRouteObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Network_Route/Network_Route_Object_1.2.xsd', 'dependencies' : 'NetworkRouteEntryObjectType,AddressObjectType'},
+                   'NetworkSubnetObjectType' : {'binding_name' : 'network_subnet_object_1_1', 'namespace_prefix' : 'NetworkSubnetObj', 'namespace' : 'http://cybox.mitre.org/objects#NetworkSubnetObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Network_Subnet/Network_Subnet_Object_1.1.xsd', 'dependencies' : 'NetworkRouteEntryObjectType,AddressObjectType'},
+                   'PipeObjectType' : {'binding_name' : 'pipe_object_1_3', 'namespace_prefix' : 'PipeObj', 'namespace' : 'http://cybox.mitre.org/objects#PipeObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Pipe/Pipe_Object_1.3.xsd'},
+                   'PortObjectType' : {'binding_name' : 'port_object_1_3', 'namespace_prefix' : 'PortObj', 'namespace' : 'http://cybox.mitre.org/objects#PortObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Port/Port_Object_1.3.xsd'},
+                   'ProcessObjectType' : {'binding_name' : 'process_object_1_3', 'namespace_prefix' : 'ProcessObj', 'namespace' : 'http://cybox.mitre.org/objects#ProcessObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Process/Process_Object_1.3.xsd', 'dependencies' : 'AddressObjectType,PortObjectType'},
+                   'SemaphoreObjectType' : {'binding_name' : 'semaphore_object_1_3', 'namespace_prefix' : 'SemaphoreObj', 'namespace' : 'http://cybox.mitre.org/objects#SemaphoreObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Semaphore/Semaphore_Object_1.3.xsd'},
+                   'SocketObjectType' : {'binding_name' : 'socket_object_1_4', 'namespace_prefix' : 'SocketObj', 'namespace' : 'http://cybox.mitre.org/objects#SocketObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Socket/Socket_Object_1.4.xsd', 'dependencies' : 'AddressObjectType,PortObjectType'},
+                   'SystemObjectType' : {'binding_name' : 'system_object_1_3', 'namespace_prefix' : 'SystemObj', 'namespace' : 'http://cybox.mitre.org/objects#SystemObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/System/System_Object_1.3.xsd', 'dependencies' : 'AddressObjectType'},
+                   'UnixFileObjectType' : {'binding_name' : 'unix_file_object_1_3', 'namespace_prefix' : 'UnixFileObj', 'namespace' : 'http://cybox.mitre.org/objects#UnixFileObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Unix_File/Unix_File_Object_1.3.xsd', 'dependencies' : 'FileObjectType'},
+                   'UnixNetworkRouteEntryObjectType' : {'binding_name' : 'unix_network_route_entry_object_1_1', 'namespace_prefix' : 'UnixNetworkRouteEntryObj', 'namespace' : 'http://cybox.mitre.org/objects#UnixNetworkRouteEntryObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Unix_Network_Route_Entry/Unix_Network_Route_Entry_Object_1.1.xsd', 'dependencies' : 'NetworkRouteEntryObjectType,AddressObjectType'},
+                   'UnixPipeObjectType' : {'binding_name' : 'unix_pipe_object_1_2', 'namespace_prefix' : 'UnixPipeObj', 'namespace' : 'http://cybox.mitre.org/objects#UnixPipeObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Unix_Pipe/Unix_Pipe_Object_1.2.xsd', 'dependencies' : 'PipeObjectType'},
+                   'UnixProcessObjectType' : {'binding_name' : 'unix_process_object_1_3', 'namespace_prefix' : 'UnixProcessObj', 'namespace' : 'http://cybox.mitre.org/objects#UnixProcessObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Unix_Process/Unix_Process_Object_1.3.xsd', 'dependencies' : 'ProcessObjectType,AddressObjectType,PortObjectType'},
+                   'UnixUserAccountObjectType' : {'binding_name' : 'unix_user_account_object_1_2', 'namespace_prefix' : 'UnixUserAccountObj', 'namespace' : 'http://cybox.mitre.org/objects#UnixUserAccountObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Unix_User_Account/Unix_User_Account_Object_1.2.xsd', 'dependencies' : 'UserAccountObjectType,AccountObjectType'},
+                   'UnixVolumeObjectType' : {'binding_name' : 'unix_volume_object_1_2', 'namespace_prefix' : 'UnixVolumeObj', 'namespace' : 'http://cybox.mitre.org/objects#UnixVolumeObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Unix_Volume/Unix_Volume_Object_1.2.xsd', 'dependencies' : 'VolumeObjectType'},
+                   'URIObjectType' : {'binding_name' : 'uri_object_1_2', 'namespace_prefix' : 'URIObj', 'namespace' : 'http://cybox.mitre.org/objects#URIObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/URI/URI_Object_1.2.xsd'},
+                   'UserAccountObjectType' : {'binding_name' : 'user_account_object_1_2', 'namespace_prefix' : 'UserAccountObj', 'namespace' : 'http://cybox.mitre.org/objects#UserAccountObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/User_Account/User_Account_Object_1.2.xsd', 'dependencies' : 'AccountObjectType'},
+                   'VolumeObjectType' : {'binding_name' : 'volume_object_1_3', 'namespace_prefix' : 'VolumeObj', 'namespace' : 'http://cybox.mitre.org/objects#VolumeObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Volume/Volume_Object_1.3.xsd'},
+                   'WhoisObjectType' : {'binding_name' : 'whois_object_1_0', 'namespace_prefix' : 'WhoisObj', 'namespace' : 'http://cybox.mitre.org/objects#WhoisObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Whois/Whois_Object_1.0.xsd', 'dependencies' : 'URIObjectType,AddressObjectType'},
+                   'WinComputerAccountObjectType' : {'binding_name' : 'win_computer_account_object_1_3', 'namespace_prefix' : 'WinComputerAccountObj', 'namespace' : 'http://cybox.mitre.org/objects#WinComputerAccountObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Computer_Account/Win_Computer_Account_Object_1.3.xsd', 'dependencies' : 'AccountObjectType,PortObjectType'},
+                   'WinCriticalSectionObjectType' : {'binding_name' : 'win_critical_section_object_1_2', 'namespace_prefix' : 'WinCriticalSectionObj', 'namespace' : 'http://cybox.mitre.org/objects#WinCriticalSectionObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Critical_Section/Win_Critical_Section_Object_1.2.xsd'},
+                   'WindowsDriverObjectType' : {'binding_name' : 'win_driver_object_1_2', 'namespace_prefix' : 'WinDriverObj', 'namespace' : 'http://cybox.mitre.org/objects#WinDriverObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Driver/Win_Driver_Object_1.2.xsd'},
+                   'WindowsEventLogObjectType' : {'binding_name' : 'win_event_log_object_1_2', 'namespace_prefix' : 'WinEventLogObj', 'namespace' : 'http://cybox.mitre.org/objects#WinEventLogObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Event_Log/Win_Event_Log_Object_1.2.xsd'},
+                   'WindowsEventObjectType' : {'binding_name' : 'win_event_object_1_3', 'namespace_prefix' : 'WinEventObj', 'namespace' : 'http://cybox.mitre.org/objects#WinEventObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Event/Win_Event_Object_1.3.xsd', 'dependencies' : 'WindowsHandleObjectType'},
+                   'WindowsExecutableFileObjectType' : {'binding_name' : 'win_executable_file_object_1_3', 'namespace_prefix' : 'WinExecutableFileObj', 'namespace' : 'http://cybox.mitre.org/objects#WinExecutableFileObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Executable_File/Win_Executable_File_Object_1.3.xsd', 'dependencies' : 'WindowsFileObjectType,FileObjectType,WinComputerAccountObjectType,AccountObjectType,PortObjectType'},
+                   'WindowsFileObjectType' : {'binding_name' : 'win_file_object_1_3', 'namespace_prefix' : 'WinFileObj', 'namespace' : 'http://cybox.mitre.org/objects#WinFileObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_File/Win_File_Object_1.3.xsd', 'dependencies' : 'FileObjectType,WinComputerAccountObjectType,AccountObjectType,PortObjectType'},
+                   'WindowsHandleObjectType' : {'binding_name' : 'win_handle_object_1_3', 'namespace_prefix' : 'WinHandleObj', 'namespace' : 'http://cybox.mitre.org/objects#WinHandleObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Handle/Win_Handle_Object_1.3.xsd'},
+                   'WindowsKernelHookObjectType' : {'binding_name' : 'win_kernel_hook_object_1_3', 'namespace_prefix' : 'WinKernelHookObj', 'namespace' : 'http://cybox.mitre.org/objects#WinKernelHookObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Kernel_Hook/Win_Kernel_Hook_Object_1.3.xsd'},
+                   'WindowsKernelObjectType' : {'binding_name' : 'win_kernel_object_1_2', 'namespace_prefix' : 'WinKernelObj', 'namespace' : 'http://cybox.mitre.org/objects#WinKernelObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Kernel/Win_Kernel_Object_1.2.xsd'},
+                   'WindowsMailslotObjectType' : {'binding_name' : 'win_mailslot_object_1_2', 'namespace_prefix' : 'WinMailslotObj', 'namespace' : 'http://cybox.mitre.org/objects#WinMailslotObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Mailslot/Win_Mailslot_Object_1.2.xsd', 'dependencies' : 'WindowsHandleObjectType'},
+                   'WindowsMemoryPageRegionObjectType' : {'binding_name' : 'win_memory_page_region_object_1_0', 'namespace_prefix' : 'WinMemoryPageRegionObj', 'namespace' : 'http://cybox.mitre.org/objects#WinMemoryPageRegionObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Memory_Page_Region/Win_Memory_Page_Region_Object_1.0.xsd', 'dependencies' : 'MemoryObjectType'},
+                   'WindowsMutexObjectType' : {'binding_name' : 'win_mutex_object_1_2', 'namespace_prefix' : 'WinMutexObj', 'namespace' : 'http://cybox.mitre.org/objects#WinMutexObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Mutex/Win_Mutex_Object_1.2.xsd', 'dependencies' : 'WindowsHandleObjectType,MutexObjectType'},
+                   'WindowsNetworkRouteEntryObjectType' : {'binding_name' : 'win_network_route_entry_object_1_3', 'namespace_prefix' : 'WinNetworkRouteEntryObj', 'namespace' : 'http://cybox.mitre.org/objects#WinNetworkRouteEntryObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Network_Route_Entry/Win_Network_Route_Entry_Object_1.3.xsd', 'dependencies' : 'NetworkRouteEntryObjectType,AddressObjectType'},
+                   'WindowsNetworkShareObjectType' : {'binding_name' : 'win_network_share_object_1_3', 'namespace_prefix' : 'WinNetworkShareObj', 'namespace' : 'http://cybox.mitre.org/objects#WinNetworkShareObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Network_Share/Win_Network_Share_Object_1.3.xsd'},
+                   'WindowsPipeObjectType' : {'binding_name' : 'win_pipe_object_1_2', 'namespace_prefix' : 'WinPipeObj', 'namespace' : 'http://cybox.mitre.org/objects#WinPipeObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Pipe/Win_Pipe_Object_1.2.xsd', 'dependencies' : 'PipeObjectType'},
+                   'WindowsPrefetchObjectType' : {'binding_name' : 'win_prefetch_object_1_2', 'namespace_prefix' : 'WinPrefetchObj', 'namespace' : 'http://cybox.mitre.org/objects#WinPrefetchObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Prefetch/Win_Prefetch_Object_1.2.xsd', 'dependencies' : 'WindowsVolumeObjectType,VolumeObjectType,DeviceObjectType'},
+                   'WindowsProcessObjectType' : {'binding_name' : 'win_process_object_1_3', 'namespace_prefix' : 'WinProcessObj', 'namespace' : 'http://cybox.mitre.org/objects#WinProcessObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Process/Win_Process_Object_1.3.xsd', 'dependencies' : 'ProcessObjectType,WindowsHandleObjectType,MemoryObjectType,AddressObjectType,PortObjectType'},
+                   'WindowsRegistryKeyObjectType' : {'binding_name' : 'win_registry_key_object_1_3', 'namespace_prefix' : 'WinRegistryKeyObj', 'namespace' : 'http://cybox.mitre.org/objects#WinRegistryKeyObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Registry_Key/Win_Registry_Key_Object_1.3.xsd', 'dependencies' : 'WindowsHandleObjectType'},
+                   'WindowsSemaphoreObjectType' : {'binding_name' : 'win_semaphore_object_1_2', 'namespace_prefix' : 'WinSemaphoreObj', 'namespace' : 'http://cybox.mitre.org/objects#WinSemaphoreObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Semaphore/Win_Semaphore_Object_1.2.xsd', 'dependencies' : 'WindowsHandleObjectType,SemaphoreObjectType'},
+                   'WindowsServiceObjectType' : {'binding_name' : 'win_service_object_1_3', 'namespace_prefix' : 'WinServiceObj', 'namespace' : 'http://cybox.mitre.org/objects#WinServiceObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Service/Win_Service_Object_1.3.xsd', 'dependencies' : 'WindowsProcessObjectType,WindowsHandleObjectType,MemoryObjectType,AddressObjectType,PortObjectType'},
+                   'WindowsSystemObjectType' : {'binding_name' : 'win_system_object_1_2', 'namespace_prefix' : 'WinSystemObj', 'namespace' : 'http://cybox.mitre.org/objects#WinSystemObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_System/Win_System_Object_1.2.xsd', 'dependencies' : 'WindowsHandleObjectType,SystemObjectType,AddressObjectType'},
+                   'WindowsSystemRestoreObjectType' : {'binding_name' : 'win_system_restore_object_1_2', 'namespace_prefix' : 'WinSystemRestoreObj', 'namespace' : 'http://cybox.mitre.org/objects#WinSystemRestoreObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_System_Restore/Win_System_Restore_Object_1.2.xsd'},
+                   'WindowsTaskObjectType' : {'binding_name' : 'win_task_object_1_3', 'namespace_prefix' : 'WinTaskObj', 'namespace' : 'http://cybox.mitre.org/objects#WinTaskObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Task/Win_Task_Object_1.3.xsd', 'dependencies' : 'EmailMessageObjectType,FileObjectType,AddressObjectType,URIObjectType'},
+                   'WindowsThreadObjectType' : {'binding_name' : 'win_thread_object_1_3', 'namespace_prefix' : 'WinThreadObj', 'namespace' : 'http://cybox.mitre.org/objects#WinThreadObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Thread/Win_Thread_Object_1.3.xsd', 'dependencies' : 'WindowsHandleObjectType'},
+                   'WindowsUserAccountObjectType' : {'binding_name' : 'win_user_account_object_1_3', 'namespace_prefix' : 'WinUserAccountObj', 'namespace' : 'http://cybox.mitre.org/objects#WinUserAccountObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_User_Account/Win_User_Account_Object_1.3.xsd', 'dependencies' : 'UserAccountObjectType,AccountObjectType'},
+                   'WindowsVolumeObjectType' : {'binding_name' : 'win_volume_object_1_3', 'namespace_prefix' : 'WinVolumeObj', 'namespace' : 'http://cybox.mitre.org/objects#WinVolumeObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Volume/Win_Volume_Object_1.3.xsd', 'dependencies' : 'VolumeObjectType'},
+                   'WindowsWaitableTimerObjectType' : {'binding_name' : 'win_waitable_timer_object_1_3', 'namespace_prefix' : 'WinWaitableTimerObj', 'namespace' : 'http://cybox.mitre.org/objects#WinWaitableTimerObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/Win_Waitable_Timer/Win_Waitable_Timer_Object_1.3.xsd', 'dependencies' : 'WindowsHandleObjectType'},
+                   'X509CertificateObjectType' : {'binding_name' : 'x509_certificate_object_1_2', 'namespace_prefix' : 'X509CertificateObj', 'namespace' : 'http://cybox.mitre.org/objects#X509CertificateObject', 'schemalocation' : 'http://cybox.mitre.org/XMLSchema/objects/X509_Certificate/X509_Certificate_Object_1.2.xsd'} }
 
 etree_ = None
 Verbose_import_ = False
@@ -25,35 +100,8 @@ try:
     if Verbose_import_:
         print("running with lxml.etree")
 except ImportError:
-    try:
-        # cElementTree from Python 2.5+
-        import xml.etree.cElementTree as etree_
-        XMLParser_import_library = XMLParser_import_elementtree
-        if Verbose_import_:
-            print("running with cElementTree on Python 2.5+")
-    except ImportError:
-        try:
-            # ElementTree from Python 2.5+
-            import xml.etree.ElementTree as etree_
-            XMLParser_import_library = XMLParser_import_elementtree
-            if Verbose_import_:
-                print("running with ElementTree on Python 2.5+")
-        except ImportError:
-            try:
-                # normal cElementTree install
-                import cElementTree as etree_
-                XMLParser_import_library = XMLParser_import_elementtree
-                if Verbose_import_:
-                    print("running with cElementTree")
-            except ImportError:
-                try:
-                    # normal ElementTree install
-                    import elementtree.ElementTree as etree_
-                    XMLParser_import_library = XMLParser_import_elementtree
-                    if Verbose_import_:
-                        print("running with ElementTree")
-                except ImportError:
-                    raise ImportError("Failed to import ElementTree from any known place")
+    if Verbose_import_:
+        print 'Error: LXML version 2.3+ required for parsing files'
 
 def parsexml_(*args, **kwargs):
     if (XMLParser_import_library == XMLParser_import_lxml and
@@ -388,6 +436,9 @@ class ObservablesType(GeneratedsSuper):
             self.Observable = Observable
         self.Pools = Pools
         self.extensiontype_ = extensiontype_
+        #A list of the types of objects in the Observables
+        self.__object_types = []
+        self.__object_type_dependencies = []
     def factory(*args_, **kwargs_):
         if ObservablesType.subclass:
             return ObservablesType.subclass(*args_, **kwargs_)
@@ -408,12 +459,102 @@ class ObservablesType(GeneratedsSuper):
     def set_cybox_major_version(self, cybox_major_version): self.cybox_major_version = cybox_major_version
     def get_extensiontype_(self): return self.extensiontype_
     def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
-    def export(self, outfile, level, namespace_='cybox:', name_='ObservablesType', namespacedef_='', pretty_print=True):
+    #Functions for grabbing the namespaces of all objects in the current Observables instance
+    def __get_object_namespaces(self):
+        for observable in self.get_Observable():
+            self.__process_observable_namespace(observable)
+    def __process_event_namespace(self, event):
+        if event.get_Actions() is not None:
+            for action in event.get_Actions().get_Action():
+                for associated_object in action.get_Associated_Objects().get_Associated_Object():
+                    self.__get_namespace_from_object(associated_object)
+        if event.get_Event() is not None:
+            for embedded_event in event.get_Event():
+                self.__process_event_namespace(embedded_event)
+    def __process_observable_namespace(self, observable):
+        if observable.get_Stateful_Measure() is not None:
+            object = observable.get_Stateful_Measure().get_Object()
+            self.__get_namespace_from_object(object)
+        elif observable.get_Event() is not None:
+            self.__process_event_namespace(observable.get_Event())
+        elif observable.get_Observable_Composition() is not None:
+            for embedded_observable in observable.get_Observable_Composition().get_Observable():
+                self.__process_observable_namespace(embedded_observable)
+    def __get_namespace_from_object(self, object):
+        if object.get_Defined_Object() is not None:
+            defined_object = object.get_Defined_Object()
+            if ('get_anyAttributes_' in dir(defined_object)) and (defined_object.get_anyAttributes_() is not None):
+                any_attributes = defined_object.get_anyAttributes_()
+                self.__get_defined_object_namespace(any_attributes)
+        if object.get_Discovery_Method() is not None:
+            discovery_method = object.get_Discovery_Method()
+            if discovery_method.get_System() is not None:
+                self.__add_object_namespace('SystemObjectType')
+            if discovery_method.get_Tools() is not None:
+                for tool in discovery_method.get_Tools().get_Tool():
+                    if tool.get_Execution_Environment() is not None:
+                        execution_environment = tool.get_Execution_Environment()
+                        if execution_environment.get_System() is not None:
+                            self.__add_object_namespace('SystemObjectType')
+                        if execution_environment.get_User_Account_Info() is not None:
+                            self.__add_object_namespace('UserAccountObjectType')
+            if discovery_method.get_Instance() is not None:
+                self.__add_object_namespace('ProcessObjectType')
+    def __get_defined_object_namespace(self, any_attributes):
+        for key, value in any_attributes.items():
+            if (key == '{http://www.w3.org/2001/XMLSchema-instance}type' or key == 'xsi:type') and value.split(':')[1] in defined_objects.keys():
+                self.__add_object_namespace(value.split(':')[1])
+    def __add_object_namespace(self, object_type):
+        if object_type not in self.__object_types:
+            #Add the object type
+            self.__object_types.append(object_type)
+            #Add any dependencies
+            if defined_objects.get(object_type).get('dependencies') is not None:
+                dependencies = defined_objects.get(object_type).get('dependencies').split(',')
+                for dependency in dependencies:
+                    if dependency not in self.__object_types:
+                        self.__object_type_dependencies.append(dependency)
+    #Build the namespace/schemalocation declaration string
+    def __build_namespaces_schemalocations(self):
+        output_string = '\n '
+        schemalocs = []
+        #Add the XSI and CybOX Core/Common namespaces and schemalocation
+        output_string += 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" \n '
+        output_string += 'xmlns:cybox="http://cybox.mitre.org/cybox_v1" \n '
+        output_string += 'xmlns:Common="http://cybox.mitre.org/Common_v1" \n '
+        schemalocs.append('http://cybox.mitre.org/cybox_v1 http://cybox.mitre.org/XMLSchema/cybox_core_v1.0.xsd')
+        for object_type in self.__object_types:
+            namespace_prefix = defined_objects.get(object_type).get('namespace_prefix')
+            namespace = defined_objects.get(object_type).get('namespace')
+            output_string += ('xmlns:' + namespace_prefix + '=' + '"' + namespace + '"' + ' \n ')
+        for object_type_dependency in self.__object_type_dependencies:
+            if object_type_dependency not in self.__object_types:
+                namespace_prefix = defined_objects.get(object_type_dependency).get('namespace_prefix')
+                namespace = defined_objects.get(object_type_dependency).get('namespace')
+                output_string += ('xmlns:' + namespace_prefix + '=' + '"' + namespace + '"' + ' \n ')
+        output_string += 'xsi:schemaLocation="'
+        for object_type in self.__object_types:
+            namespace = defined_objects.get(object_type).get('namespace')
+            schemalocation = defined_objects.get(object_type).get('schemalocation')
+            schemalocs.append(' ' + namespace + ' ' + schemalocation)
+        for schemalocation_string in schemalocs:
+            if schemalocs.index(schemalocation_string) == (len(schemalocs) - 1):
+                output_string += (schemalocation_string + '"')
+            else:
+                output_string += (schemalocation_string + '\n')
+        return output_string
+    def export(self, outfile, level, namespace_='cybox:', name_='Observables', namespacedef_='', pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
         showIndent(outfile, level, pretty_print)
+        #Build and set the namespace declarations so that we generate valid CybOX XML
+        if namespacedef_ == None or namespacedef_ == '':
+            #First, find all of the objects used and get their namespaces
+            self.__get_object_namespaces()
+            #Create the namespace string and set the namespacedef to it
+            namespacedef_ = self.__build_namespaces_schemalocations()
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = []
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='ObservablesType')
@@ -424,7 +565,7 @@ class ObservablesType(GeneratedsSuper):
             outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='cybox:', name_='ObservablesType'):
+    def exportAttributes(self, outfile, level, already_processed, namespace_='cybox:', name_='Observables'):
         if self.cybox_minor_version is not None and 'cybox_minor_version' not in already_processed:
             already_processed.append('cybox_minor_version')
             outfile.write(' cybox_minor_version=%s' % (self.gds_format_string(quote_attrib(self.cybox_minor_version).encode(ExternalEncoding), input_name='cybox_minor_version'), ))
@@ -435,7 +576,7 @@ class ObservablesType(GeneratedsSuper):
             already_processed.append('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
             outfile.write(' xsi:type="%s"' % self.extensiontype_)
-    def exportChildren(self, outfile, level, namespace_='cybox:', name_='ObservablesType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespace_='cybox:', name_='Observables', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -455,7 +596,7 @@ class ObservablesType(GeneratedsSuper):
             return True
         else:
             return False
-    def exportLiteral(self, outfile, level, name_='ObservablesType'):
+    def exportLiteral(self, outfile, level, name_='Observables'):
         level += 1
         self.exportLiteralAttributes(outfile, level, [], name_)
         if self.hasContent_():
@@ -472,7 +613,7 @@ class ObservablesType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Observable_Package_Source is not None:
             showIndent(outfile, level)
-            outfile.write('Observable_Package_Source=model_.cybox_common_types_v1_0.MeasureSourceType(\n')
+            outfile.write('Observable_Package_Source=model_.cybox_common_types_1_0.MeasureSourceType(\n')
             self.Observable_Package_Source.exportLiteral(outfile, level, name_='Observable_Package_Source')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -514,7 +655,7 @@ class ObservablesType(GeneratedsSuper):
             self.extensiontype_ = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Observable_Package_Source':
-            obj_ = cybox_common_types_v1_0.MeasureSourceType.factory()
+            obj_ = cybox_common_types_1_0.MeasureSourceType.factory()
             obj_.build(child_)
             self.set_Observable_Package_Source(obj_)
         elif nodeName_ == 'Observable':
@@ -633,9 +774,11 @@ class ObservableType(GeneratedsSuper):
         if self.Observable_Composition is not None:
             self.Observable_Composition.export(outfile, level, 'cybox:', name_='Observable_Composition', pretty_print=pretty_print)
         if self.Noisiness is not None:
-            self.Noisiness.export(outfile, level, 'cybox:', name_='Noisiness', pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sNoisiness>%s</%sNoisiness>%s' % ('cybox:', self.gds_format_string(quote_xml(self.Noisiness).encode(ExternalEncoding), input_name='Noisiness'), 'cybox:', eol_))
         if self.Ease_of_Obfuscation is not None:
-            self.Ease_of_Obfuscation.export(outfile, level, 'cybox:', name_='Ease_of_Obfuscation', pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%sEase_of_Obfuscation>%s</%sEase_of_Obfuscation>%s' % ('cybox:', self.gds_format_string(quote_xml(self.Ease_of_Obfuscation).encode(ExternalEncoding), input_name='Ease_of_Obfuscation'), 'cybox:', eol_))
         if self.Obfuscation_Techniques is not None:
             self.Obfuscation_Techniques.export(outfile, level, 'cybox:', name_='Obfuscation_Techniques', pretty_print=pretty_print)
     def hasContent_(self):
@@ -674,7 +817,7 @@ class ObservableType(GeneratedsSuper):
             outfile.write('Title=%s,\n' % quote_python(self.Title).encode(ExternalEncoding))
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -689,7 +832,7 @@ class ObservableType(GeneratedsSuper):
         outfile.write('],\n')
         if self.Observable_Source is not None:
             showIndent(outfile, level)
-            outfile.write('Observable_Source=model_.cybox_common_types_v1_0.MeasureSourceType(\n')
+            outfile.write('Observable_Source=model_.cybox_common_types_1_0.MeasureSourceType(\n')
             self.Observable_Source.exportLiteral(outfile, level, name_='Observable_Source')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -743,7 +886,7 @@ class ObservableType(GeneratedsSuper):
             Title_ = self.gds_validate_string(Title_, node, 'Title')
             self.Title = Title_
         elif nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Keywords':
@@ -751,7 +894,7 @@ class ObservableType(GeneratedsSuper):
             Keywords_ = self.gds_validate_string(Keywords_, node, 'Keywords')
             self.Keywords.append(Keywords_)
         elif nodeName_ == 'Observable_Source':
-            obj_ = cybox_common_types_v1_0.MeasureSourceType.factory()
+            obj_ = cybox_common_types_1_0.MeasureSourceType.factory()
             obj_.build(child_)
             self.set_Observable_Source(obj_)
         elif nodeName_ == 'Stateful_Measure':
@@ -767,12 +910,12 @@ class ObservableType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Observable_Composition(obj_)
         elif nodeName_ == 'Noisiness':
-            obj_ = NoisinessEnum.factory()
-            obj_.build(child_)
+            obj_ = child_.text 
+            obj_ = self.gds_validate_string(obj_, node, 'Noisiness') 
             self.set_Noisiness(obj_)
         elif nodeName_ == 'Ease_of_Obfuscation':
-            obj_ = EaseOfObfuscationEnum.factory()
-            obj_.build(child_)
+            obj_ = child_.text 
+            obj_ = self.gds_validate_string(obj_, node, 'Ease_of_Obfuscation') 
             self.set_Ease_of_Obfuscation(obj_)
         elif nodeName_ == 'Obfuscation_Techniques':
             obj_ = ObfuscationTechniquesType.factory()
@@ -870,7 +1013,7 @@ class StatefulMeasureType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -901,7 +1044,7 @@ class StatefulMeasureType(GeneratedsSuper):
             self.name = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Object':
@@ -1025,13 +1168,13 @@ class EventType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Producer_Observer is not None:
             showIndent(outfile, level)
-            outfile.write('Producer_Observer=model_.cybox_common_types_v1_0.MeasureSourceType(\n')
+            outfile.write('Producer_Observer=model_.cybox_common_types_1_0.MeasureSourceType(\n')
             self.Producer_Observer.exportLiteral(outfile, level, name_='Producer_Observer')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1073,11 +1216,11 @@ class EventType(GeneratedsSuper):
             self.id = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Producer-Observer':
-            obj_ = cybox_common_types_v1_0.MeasureSourceType.factory()
+            obj_ = cybox_common_types_1_0.MeasureSourceType.factory()
             obj_.build(child_)
             self.set_Producer_Observer(obj_)
         elif nodeName_ == 'Actions':
@@ -1547,7 +1690,7 @@ class ActionType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1565,7 +1708,7 @@ class ActionType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Discovery_Method is not None:
             showIndent(outfile, level)
-            outfile.write('Discovery_Method=model_.cybox_common_types_v1_0.MeasureSourceType(\n')
+            outfile.write('Discovery_Method=model_.cybox_common_types_1_0.MeasureSourceType(\n')
             self.Discovery_Method.exportLiteral(outfile, level, name_='Discovery_Method')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -1644,7 +1787,7 @@ class ActionType(GeneratedsSuper):
                 self.anyAttributes_[name] = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Action_Aliases':
@@ -1656,7 +1799,7 @@ class ActionType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Action_Arguments(obj_)
         elif nodeName_ == 'Discovery_Method':
-            obj_ = cybox_common_types_v1_0.MeasureSourceType.factory()
+            obj_ = cybox_common_types_1_0.MeasureSourceType.factory()
             obj_.build(child_)
             self.set_Discovery_Method(obj_)
         elif nodeName_ == 'Associated_Objects':
@@ -1878,15 +2021,11 @@ class ActionArgumentType(GeneratedsSuper):
             eol_ = '\n'
         else:
             eol_ = ''
-        showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = []
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='ActionArgumentType')
         if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_, name_, pretty_print=pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
-        else:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+            already_processed = []
+            self.exportAttributes(outfile, level, already_processed, namespace_, name_='ActionArgumentType')
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='cybox:', name_='ActionArgumentType'):
         if self.undefined_argument_name is not None and 'undefined_argument_name' not in already_processed:
@@ -1902,7 +2041,9 @@ class ActionArgumentType(GeneratedsSuper):
         pass
     def hasContent_(self):
         if (
-
+            self.defined_argument_name is not None or
+            self.undefined_argument_name is not None or
+            self.argument_value is not None
             ):
             return True
         else:
@@ -2644,14 +2785,14 @@ class ObjectType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
-        if self.cybox_common_types_v1_0.DefinedObjectType is not None:
+        if self.cybox_common_types_1_0.DefinedObjectType is not None:
             showIndent(outfile, level)
-            outfile.write('cybox_common_types_v1_0.DefinedObjectType=model_.cybox_common_types_v1_0.DefinedObjectType(\n')
-            self.cybox_common_types_v1_0.DefinedObjectType.exportLiteral(outfile, level)
+            outfile.write('cybox_common_types_1_0.DefinedObjectType=model_.cybox_common_types_1_0.DefinedObjectType(\n')
+            self.cybox_common_types_1_0.DefinedObjectType.exportLiteral(outfile, level)
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.DomainSpecificObjectAttributesType is not None:
@@ -2680,7 +2821,7 @@ class ObjectType(GeneratedsSuper):
             outfile.write('),\n')
         if self.Discovery_Method is not None:
             showIndent(outfile, level)
-            outfile.write('Discovery_Method=model_.cybox_common_types_v1_0.MeasureSourceType(\n')
+            outfile.write('Discovery_Method=model_.cybox_common_types_1_0.MeasureSourceType(\n')
             self.Discovery_Method.exportLiteral(outfile, level, name_='Discovery_Method')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -2716,7 +2857,7 @@ class ObjectType(GeneratedsSuper):
             self.extensiontype_ = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Defined_Object':
@@ -2729,7 +2870,7 @@ class ObjectType(GeneratedsSuper):
                     type_name_ = type_names_[0]
                 else:
                     type_name_ = type_names_[1]
-                class_ = globals()[type_name_]
+                class_ = getattr(__import__(objects_path + defined_objects.get(type_name_).get('binding_name'), globals(), fromlist=[type_name_]),type_name_)
                 obj_ = class_.factory()
                 obj_.build(child_)
             else:
@@ -2746,6 +2887,8 @@ class ObjectType(GeneratedsSuper):
                     type_name_ = type_names_[0]
                 else:
                     type_name_ = type_names_[1]
+                if type_name_ == 'AVClassificationsType':
+                    exec("from maec_bundle_3_0 import AVClassificationsType") in globals()
                 class_ = globals()[type_name_]
                 obj_ = class_.factory()
                 obj_.build(child_)
@@ -2779,7 +2922,7 @@ class ObjectType(GeneratedsSuper):
                     'Class not implemented for <Defined_Effect> element')
             self.set_Defined_Effect(obj_)
         elif nodeName_ == 'Discovery_Method':
-            obj_ = cybox_common_types_v1_0.MeasureSourceType.factory()
+            obj_ = cybox_common_types_1_0.MeasureSourceType.factory()
             obj_.build(child_)
             self.set_Discovery_Method(obj_)
 # end class ObjectType
@@ -3358,10 +3501,10 @@ class StateType(GeneratedsSuper):
             self.Object.exportLiteral(outfile, level, name_='Object')
             showIndent(outfile, level)
             outfile.write('),\n')
-        if self.cybox_common_types_v1_0.DefinedObjectType is not None:
+        if self.cybox_common_types_1_0.DefinedObjectType is not None:
             showIndent(outfile, level)
-            outfile.write('cybox_common_types_v1_0.DefinedObjectType=model_.cybox_common_types_v1_0.DefinedObjectType(\n')
-            self.cybox_common_types_v1_0.DefinedObjectType.exportLiteral(outfile, level)
+            outfile.write('cybox_common_types_1_0.DefinedObjectType=model_.cybox_common_types_1_0.DefinedObjectType(\n')
+            self.cybox_common_types_1_0.DefinedObjectType.exportLiteral(outfile, level)
             showIndent(outfile, level)
             outfile.write('),\n')
         if self.Object_IDRef is not None:
@@ -3467,7 +3610,7 @@ class DataReadEffectType(DefinedEffectType):
         super(DataReadEffectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.DataSegmentType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.DataSegmentType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3480,7 +3623,7 @@ class DataReadEffectType(DefinedEffectType):
         super(DataReadEffectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.DataSegmentType.factory()
+            obj_ = cybox_common_types_1_0.DataSegmentType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
         super(DataReadEffectType, self).buildChildren(child_, node, nodeName_, True)
@@ -3548,7 +3691,7 @@ class DataWrittenEffectType(DefinedEffectType):
         super(DataWrittenEffectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.DataSegmentType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.DataSegmentType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3561,7 +3704,7 @@ class DataWrittenEffectType(DefinedEffectType):
         super(DataWrittenEffectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.DataSegmentType.factory()
+            obj_ = cybox_common_types_1_0.DataSegmentType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
         super(DataWrittenEffectType, self).buildChildren(child_, node, nodeName_, True)
@@ -3629,7 +3772,7 @@ class DataSentEffectType(DefinedEffectType):
         super(DataSentEffectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.DataSegmentType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.DataSegmentType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3642,7 +3785,7 @@ class DataSentEffectType(DefinedEffectType):
         super(DataSentEffectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.DataSegmentType.factory()
+            obj_ = cybox_common_types_1_0.DataSegmentType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
         super(DataSentEffectType, self).buildChildren(child_, node, nodeName_, True)
@@ -3710,7 +3853,7 @@ class DataReceivedEffectType(DefinedEffectType):
         super(DataReceivedEffectType, self).exportLiteralChildren(outfile, level, name_)
         if self.Data is not None:
             showIndent(outfile, level)
-            outfile.write('Data=model_.cybox_common_types_v1_0.DataSegmentType(\n')
+            outfile.write('Data=model_.cybox_common_types_1_0.DataSegmentType(\n')
             self.Data.exportLiteral(outfile, level, name_='Data')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -3723,7 +3866,7 @@ class DataReceivedEffectType(DefinedEffectType):
         super(DataReceivedEffectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Data':
-            obj_ = cybox_common_types_v1_0.DataSegmentType.factory()
+            obj_ = cybox_common_types_1_0.DataSegmentType.factory()
             obj_.build(child_)
             self.set_Data(obj_)
         super(DataReceivedEffectType, self).buildChildren(child_, node, nodeName_, True)
@@ -4731,7 +4874,7 @@ class ObjectPoolType(GeneratedsSuper):
         if nodeName_ == 'Object':
             obj_ = ObjectType.factory()
             obj_.build(child_)
-            self.set_Object(obj_)
+            self.Object.append(obj_)
 # end class ObjectPoolType
 
 class AttributePoolType(GeneratedsSuper):
@@ -4975,7 +5118,7 @@ class ObfuscationTechniqueType(GeneratedsSuper):
     def exportLiteralChildren(self, outfile, level, name_):
         if self.Description is not None:
             showIndent(outfile, level)
-            outfile.write('Description=model_.cybox_common_types_v1_0.StructuredTextType(\n')
+            outfile.write('Description=model_.cybox_common_types_1_0.StructuredTextType(\n')
             self.Description.exportLiteral(outfile, level, name_='Description')
             showIndent(outfile, level)
             outfile.write('),\n')
@@ -4994,7 +5137,7 @@ class ObfuscationTechniqueType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Description':
-            obj_ = cybox_common_types_v1_0.StructuredTextType.factory()
+            obj_ = cybox_common_types_1_0.StructuredTextType.factory()
             obj_.build(child_)
             self.set_Description(obj_)
         elif nodeName_ == 'Observables':
@@ -5003,12 +5146,12 @@ class ObfuscationTechniqueType(GeneratedsSuper):
             self.set_Observables(obj_)
 # end class ObfuscationTechniqueType
 
-class AttributeType(cybox_common_types_v1_0.BaseObjectAttributeType):
+class AttributeType(cybox_common_types_1_0.BaseObjectAttributeType):
     """The AttibuteType is a complex type representing the specification of
     a single Object Attribute.The name attribute specifies a name
     for this attribute."""
     subclass = None
-    superclass = cybox_common_types_v1_0.BaseObjectAttributeType
+    superclass = cybox_common_types_1_0.BaseObjectAttributeType
     def __init__(self, end_range=None, pattern_type=None, has_changed=None, value_set=None, datatype='String', refanging_transform=None, refanging_transform_type=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, obfuscation_algorithm_ref=None, start_range=None, idref=None, is_defanged=None, id=None, condition=None, name=None, valueOf_=None):
         super(AttributeType, self).__init__(end_range, pattern_type, has_changed, value_set, datatype, refanging_transform, refanging_transform_type, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, obfuscation_algorithm_ref, start_range, idref, is_defanged, id, condition, valueOf_, )
         self.name = _cast(None, name)
@@ -5203,15 +5346,15 @@ def parse(inFileName):
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
         rootTag = 'Observables'
-        rootClass = Observables
+        rootClass = ObservablesType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
-    doc = None
-    sys.stdout.write('<?xml version="1.0" ?>\n')
-    rootObj.export(sys.stdout, 0, name_=rootTag,
-        namespacedef_='',
-        pretty_print=True)
+    #doc = None
+    #sys.stdout.write('<?xml version="1.0" ?>\n')
+    #rootObj.export(sys.stdout, 0, name_=rootTag,
+    #    namespacedef_='',
+    #    pretty_print=True)
     return rootObj
 
 def parseString(inString):
@@ -5237,7 +5380,7 @@ def parseLiteral(inFileName):
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
         rootTag = 'Observables'
-        rootClass = Observables
+        rootClass = ObservablesType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
