@@ -35,7 +35,8 @@ Flags:
                                        to be included in the cybox email message object.
                                        SPACES NOT ALLOWED IN LIST OF FIELDS.
                                        fields('boundary', 'content-type', 'mime-version',
-                                      'precedence', 'x-mailer', 'x-originating-ip','x-priority')
+                                      'precedence', 'x-mailer', 'x-originating-ip',
+                                      'x-priority')
     -h: Print help
     -v: Verbose error output
 
