@@ -22,55 +22,58 @@ ATTR_ID = 'id'
 ATTR_OBJECT_REFERENCE = 'idref'
 ATTR_CONDITION = 'condition'
 
-TAG_STATEFUL_MEASURE = 'StateFul_Measure'
-TAG_OBSERVABLE_COMPOSITION = 'Observable_Composition'
+TAG_STATEFUL_MEASURE        = '{http://cybox.mitre.org/cybox_v1}Stateful_Measure'
+TAG_OBSERVABLE_COMPOSITION  = '{http://cybox.mitre.org/cybox_v1}Observable_Composition'
+TAG_DEFINED_OBJECT          = '{http://cybox.mitre.org/cybox_v1}Defined_Object'
 
-XPATH_OBS_COMPOSITION = "./cybox:Observable_Composition"
-XPATH_OBS_STATEFUL_MEASURE = "./cybox:Stateful_Measure"
-XPATH_OBS_OBJECT = "./cybox:Stateful_Measure/cybox:Object"
-XPATH_OBJ_DEFINED_OBJECT = "./cybox:Defined_Object"
-XPATH_OBJ_CONDITION = ".//node()[@condition]"
-XPATH_OBJ_LOCAL_NAME = "local-name(.)"
-
+# XPaths
+XPATH_OBS_COMPOSITION       = "./cybox:Observable_Composition"
+XPATH_OBS_STATEFUL_MEASURE  = "./cybox:Stateful_Measure"
+XPATH_OBS_OBJECT            = "./cybox:Stateful_Measure/cybox:Object"
+XPATH_OBJ_DEFINED_OBJECT    = "./cybox:Defined_Object"
+XPATH_OBJ_CONDITION         = ".//node()[@condition]"
+XPATH_OBJ_LOCAL_NAME        = "local-name(.)"
 
 
 class PatternComposition():
     '''
-        Compositions are logical structures representing patterns described by tests and/or other
-        compositions.
+    Compositions are logical structures representing patterns described by tests and/or other
+    compositions.
     '''
     
-    (OPERATOR_AND, OPERATOR_OR) = ('AND', 'OR')    
-    
-   
+    (OPERATOR_AND, OPERATOR_OR) = ('AND', 'OR')
     
     def __init__(self):
-        self.__object_type = None
-        self.__list_tests = []
-        self.__list_compositions = []
-        self.__operator = 'AND'
-        self.__verbose_output = False
-    
+        self.__object_type          = None
+        self.__list_tests           = []
+        self.__list_compositions    = []
+        self.__operator             = PatternComposition.OPERATOR_AND
+        self.__verbose_output       = False
+        self.__negate               = False
     
     def set_verbose_output(self, verbose):
         self.__verbose_output = verbose
     
     
-    
     def set_operator(self, op):
+        '''Sets the operator for the pattern composition'''
         if op in (self.OPERATOR_AND, self.OPERATOR_OR):
             self.__operator = op
         else:
-            raise Exception, 'operator ' + op + " not recognized"
+            raise Exception, ("operator %s not recognized" % op)
     
+    
+    def set_negate(self, negate):
+        '''TODO: Pattern compositions can be negated'''
+        self.__negate = negate
     
 
     def __evaluate_tests(self, doc_root, observable_root, include_match_scores = False):
-        """
+        '''
         Tests are always going to be evaluated against a single instance of 
         observable and object, and as such, the operator will always be 'AND'.
         Because of this, we can stop evaluating the moment a test returns False.
-        """
+        '''
                 
         is_measure = observable_root.xpath(XPATH_OBS_STATEFUL_MEASURE, namespaces=NSMAP)
         if is_measure:
@@ -79,7 +82,7 @@ class PatternComposition():
             xpath_observables = ".//cybox:Observable[cybox:Stateful_Measure/cybox:Object/cybox:Defined_Object/@xsi:type='%s']" % (self.__object_type)
             list_observables = observable_root.xpath(xpath_observables, namespaces=NSMAP)
         
-        if list_observables is not None and len(list_observables) > 0:
+        if list_observables:
             for observable in list_observables:
                 for test in self.__list_tests:
                     result = test.evaluate(doc_root, observable)
@@ -98,7 +101,7 @@ class PatternComposition():
         if not self.__list_compositions and not self.__list_tests:
             return True
         
-        if len(self.__list_tests) > 0:
+        if self.__list_tests:
             test_result = self.__evaluate_tests(doc_root, observable_root)
             results.append(test_result)
             
@@ -138,7 +141,7 @@ class PatternComposition():
                     condition_value = conditional_object.get(ATTR_CONDITION)
                     
                     node = conditional_object
-                    while node.tag != '{http://cybox.mitre.org/cybox_v1}Defined_Object':
+                    while node.tag != TAG_DEFINED_OBJECT:
                         #node.tag contains namespace info, so we'll use the 
                         #xpath local-name() function
                         qname = etree.QName(node.tag)
@@ -155,12 +158,12 @@ class PatternComposition():
                     
     
     
-    '''
+    def __get_object(self, root, observable):
+        '''
         Returns the object found within the stateful_measure of the
         given observable. If the object returned from the stateful
         measure contains an idref, return the dereferenced object
-    '''
-    def __get_object(self, root, observable):
+        '''
         rtn_val = None
         
         _object = observable.xpath(XPATH_OBS_OBJECT, namespaces=NSMAP)
@@ -180,12 +183,13 @@ class PatternComposition():
         return rtn_val
 
 
-    '''
+
+    def __parse_tests(self, root, observable):
+        '''
         Given an observable that contains a stateful_measure,
         this returns a Test object representing the condition
         of the defined_object contained within the observable.
-    '''
-    def __parse_tests(self, root, observable):
+        '''
         list_tests = []
         _object = self.__get_object(root, observable)
         
