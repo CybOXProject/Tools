@@ -42,7 +42,7 @@ Flags:
 
 Example: `cat email.txt | python email_to_cybox.py -o output.xml - `
 Example: `python email_to_cybox.py -i foobar.txt -o output.xml`
-Example: `python email_to_cybox.pw -i foobar.txt -o output.xml --headers to,from,cc --exclude-urls`
+Example: `python email_to_cybox.py -i foobar.txt -o output.xml --headers to,from,cc --exclude-urls`
 
 
 Requirements
