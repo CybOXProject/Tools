@@ -1,5 +1,5 @@
 import re
-
+import dateutil.parser as dateparser # parses ISO 8601 dates
 
 
 # BEGIN CYBOX v1.0 Conditions
@@ -28,6 +28,9 @@ DATA_TYPES_NUMERIC = ('Int', 'Float', 'PositiveInteger', 'UnsignedInt',
                       'UnsignedLong', 'Double', 'Long', 'NonNegativeInteger')
 
 DATA_TYPES_STRING = ('String')
+
+DATA_TYPES_DATE  = ('DateTime')
+
 
 
 
@@ -109,27 +112,27 @@ class TestFactory:
     def __check_type(datatype, condition):
         if condition == CONDITION_GREATER_THAN:
             if datatype not in DATA_TYPES_NUMERIC:
-                print "!! warning: attempting to use condition: %s on non-numeric datatype: %s" % (condition, datatype)
+                raise Exception("!! warning: attempting to use condition: %s on non-numeric datatype: %s" % (condition, datatype) )
      
         elif condition == CONDITION_GREATER_THAN_OR_EQUAL:
             if datatype not in DATA_TYPES_NUMERIC:
-                print "!! warning: attempting to use condition: %s on non-numeric datatype: %s" % (condition, datatype)
+                raise Exception("!! warning: attempting to use condition: %s on non-numeric datatype: %s" % (condition, datatype) )
 
         elif condition == CONDITION_LESS_THAN:
             if datatype not in DATA_TYPES_NUMERIC:
-                print "!! warning: attempting to use condition: %s on non-numeric datatype: %s" % (condition, datatype)
+                raise Exception("!! warning: attempting to use condition: %s on non-numeric datatype: %s" % (condition, datatype) )
         
         elif condition == CONDITION_LESS_THAN_OR_EQUAL:
             if datatype not in DATA_TYPES_NUMERIC:
-                print "!! warning: attempting to use condition: %s on non-numeric datatype: %s" % (condition, datatype)
+                raise Exception("!! warning: attempting to use condition: %s on non-numeric datatype: %s" % (condition, datatype) )
         
         elif condition == CONDITION_IS_IN_RANGE:
             if datatype not in DATA_TYPES_NUMERIC:
-                print "!! warning: attempting to use condition: %s on non-numeric datatype: %s" % (condition, datatype)
+                raise Exception("!! warning: attempting to use condition: %s on non-numeric datatype: %s" % (condition, datatype) )
 
         elif condition == CONDITION_IS_NOT_IN_RANGE:
             if datatype not in DATA_TYPES_NUMERIC:
-                print "!! warning: attempting to use condition: %s on non-numeric datatype: %s" % (condition, datatype)
+                raise Exception("!! warning: attempting to use condition: %s on non-numeric datatype: %s" % (condition, datatype) )
         
         elif condition == CONDITION_FITS_PATTERN:
             if datatype not in DATA_TYPES_STRING:
@@ -239,9 +242,10 @@ class TestEquals(Test):
     def evaluate(self, doc_root, observable):
         list_observable_values = self._get_values(doc_root, observable)
         
-        #if datatype == 
-        
-        return (self._expected_value in list_observable_values)
+        if datatype in DATA_TYPES_DATE:
+            datetime = dateparser.
+        else: 
+            return (self._expected_value in list_observable_values)
         
 
 
