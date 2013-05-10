@@ -43,14 +43,10 @@ import whois
 import whois.parser
 
 
-__all__ = ["email_translator"]
+__all__ = ["EmailParser"]
 
 # BEGIN GLOBAL VARIABLES
-
 VERBOSE_OUTPUT = False
-
-EXIT_SUCCESS = 0
-EXIT_FAILURE = 1
 
 ALLOWED_HEADER_FIELDS = ('to', 'cc', 'bcc', 'from',
                          'subject', 'in-reply-to', 'date'
@@ -63,23 +59,18 @@ ALLOWED_OPTIONAL_HEADER_FIELDS = ('boundary', 'content-type', 'mime-version',
 
 HTTP_WHOIS_URL = 'http://whoiz.herokuapp.com/lookup.json?url='
 NAMESERVER = None
-
 # END GLOBAL VARIABLES
 
 
-
-
-# BEGIN CLASS
-
-class email_translator:
+class EmailParser:
     """Translates raw email into a CybOX Email Message Object"""
 
-    (__OPT_INLINE_FILES, 
-     __OPT_INC_URLS, 
-     __OPT_INC_ATTACHMENTS, 
-     __OPT_INC_RAW_BODY, 
-     __OPT_INC_RAW_HEADERS, 
-     __OPT_INC_HEADERS, 
+    (__OPT_INLINE_FILES,
+     __OPT_INC_URLS,
+     __OPT_INC_ATTACHMENTS,
+     __OPT_INC_RAW_BODY,
+     __OPT_INC_RAW_HEADERS,
+     __OPT_INC_HEADERS,
      __OPT_INC_OPT_HEADERS,
      __OPT_INC_URL_OBJECTS,
      __OPT_INC_DOMAIN_OBJECTS,
@@ -89,41 +80,36 @@ class email_translator:
                             'include-raw-body', 'include-raw-headers', 'include-headers', 
                             'include-opt-headers', 'include-url-objects','include-domain-objects',
                             'dns', 'whois', 'http-whois')
-    
-    
-    __map_general_options = {   'inline-files' : False,
-                                'include-urls' : True,
-                                'include-attachments' : True,
-                                'include-raw-body' : True,
-                                'include-raw-headers' : True,
-                                'include-headers' : True,
-                                'include-opt-headers' : True,
-                                'include-url-objects' : True,
-                                'include-domain-objects' : True,
-                                'dns' : False,
-                                'whois' : False,
-                                'http-whois' : False
-                            }
-    
+
     __map_header_options =  ('to','cc','bcc','from','subject', 'in-reply-to',
                              'date','message-id','sender', 'reply-to', 'errors-to')
-    
-    
+
     __map_optional_headers_options = ('boundary','content-type','mime-version',
                                       'precedence','x-mailer','x-originating-ip',
                                       'x-priority')
 
     __verbose_output = False
-    
     __email_obj_container = None
 
-    
-    
     """ Constructor """ 
     def __init__(self, verbose = False):
         self.__verbose_output = verbose
         self.__email_obj_container = self._newObjContainer(self.__create_cybox_id("object"), None)
-        
+
+        self.inline_files = False
+
+        self.include_urls = True
+        self.include_attachments = True
+        self.include_raw_body = True
+        self.include_raw_headers = True
+        self.include_opt_headers = True
+        self.include_url_objects = True
+        self.include_domain_objects = True
+
+        self.dns = False
+        self.whois = False
+        self.http_whois = False
+
     def set_header_options(self, tuple_options):
         # The FROM field is required by the schema in v1.1
         tuple_options.append('from')
@@ -131,79 +117,6 @@ class email_translator:
    
     def set_opt_header_options(self, tuple_options):
         self.__map_optional_headers_options = tuple_options
-        
-    def set_inline_files(self, enable):
-        self.__map_general_options[self.__OPT_INLINE_FILES] = enable
-        
-    def set_include_urls(self, enable):
-        self.__map_general_options[self.__OPT_INC_URLS] = enable
-        
-    def set_include_attachments(self, enable):
-        self.__map_general_options[self.__OPT_INC_ATTACHMENTS] = enable
-    
-    def set_include_raw_body(self, enable):
-        self.__map_general_options[self.__OPT_INC_RAW_BODY] = enable
-           
-    def set_include_raw_headers(self, enable):
-        self.__map_general_options[self.__OPT_INC_RAW_HEADERS] = enable
-        
-    def set_include_headers(self, enable):
-        self.__map_general_options[self.__OPT_INC_HEADERS] = enable
-        
-    def set_include_opt_headers(self, enable):
-        self.__map_general_options[self.__OPT_INC_OPT_HEADERS] = enable
-                    
-    def set_include_url_objects(self, enable):
-        self.__map_general_options[self.__OPT_INC_URL_OBJECTS] = enable
-                    
-    def set_include_domain_objects(self, enable):
-        self.__map_general_options[self.__OPT_INC_DOMAIN_OBJECTS] = enable
-                
-    def set_dns(self, enable):
-        self.__map_general_options[self.__OPT_DNS] = enable
-                    
-    def set_whois(self, enable):
-        self.__map_general_options[self.__OPT_WHOIS] = enable
-                    
-    def set_http_whois(self, enable):
-        self.__map_general_options[self.__OPT_HTTP_WHOIS] = enable
-        
-    def is_enabled_inline_files(self):
-        return self.__map_general_options[self.__OPT_INLINE_FILES]
-    
-    def is_enabled_include_attachments(self):
-        return self.__map_general_options[self.__OPT_INC_ATTACHMENTS]
-        
-    def is_enabled_include_urls(self):
-        return self.__map_general_options[self.__OPT_INC_URLS]
-    
-    def is_enabled_include_raw_body(self):
-        return self.__map_general_options[self.__OPT_INC_RAW_BODY]
-    
-    def is_enabled_include_raw_headers(self):
-        return self.__map_general_options[self.__OPT_INC_RAW_HEADERS]
-    
-    def is_enabled_include_headers(self):
-        return self.__map_general_options[self.__OPT_INC_HEADERS]
-    
-    def is_enabled_include_opt_headers(self):
-        return self.__map_general_options[self.__OPT_INC_OPT_HEADERS]
-            
-    def is_enabled_include_url_objects(self):
-        return self.__map_general_options[self.__OPT_INC_URL_OBJECTS]
-            
-    def is_enabled_include_domain_objects(self):
-        return self.__map_general_options[self.__OPT_INC_DOMAIN_OBJECTS]
-        
-    def is_enabled_dns(self):
-        return self.__map_general_options[self.__OPT_DNS]     
-           
-    def is_enabled_whois(self):
-        return self.__map_general_options[self.__OPT_WHOIS]   
-             
-    def is_enabled_http_whois(self):
-        return self.__map_general_options[self.__OPT_HTTP_WHOIS]
-    
 
 
     """Private class for storing new objects and their relationships"""
@@ -727,7 +640,7 @@ class email_translator:
         if(self.__verbose_output):
             print "** creating Whois object for: " + domain
         
-        if self.is_enabled_http_whois():
+        if self.http_whois:
             record = self.__get_whois_record_http(domain)
         else:
             record = self.__get_whois_record(domain)
@@ -967,7 +880,7 @@ class email_translator:
                 
                 if found_url not in list_observed_urls:
                     list_observed_urls.append(found_url)
-                    if self.is_enabled_include_url_objects():
+                    if self.include_url_objects:
                         url_id  = self.__create_cybox_id()
                         url_obj_container = self._newObjContainer(url_id, self.__create_url_object(found_url))
                     else:
@@ -1027,12 +940,12 @@ class email_translator:
                     'DNSQueryV4':None,'DNSResultV4':None,'ipv4':None,
                     'DNSQueryV6':None,'DNSResultV6':None,'ipv6':None}
         
-        if self.is_enabled_include_domain_objects():
+        if self.include_domain_objects:
             uri_container = self._newObjContainer(self.__create_cybox_id(), self.__create_domain_name_object(domain))
         else:
             uri_container = None
             
-        if self.is_enabled_whois() or self.is_enabled_http_whois():
+        if self.whois or self.http_whois:
             whois_obj = self.__create_whois_object(domain)
             if whois_obj:
                 whois_container = self._newObjContainer(self.__create_cybox_id(), whois_obj)
@@ -1042,7 +955,7 @@ class email_translator:
                     uri_container.add_relationship(whois_container.idref, 'WHOIS','Characterized_By')
                 
         #get ipv4 dns record for domain
-        if self.is_enabled_dns():
+        if self.dns:
             query_container = self._newObjContainer(self.__create_cybox_id(), self.__create_dns_query_object(domain,'A'))
             if uri_container:
                 query_container.add_relationship(uri_container.idref, 'URI', 'Searched_For')
@@ -1077,7 +990,7 @@ class email_translator:
             attachments = email_message_object.AttachmentsType()
             
             for file_id, f in map_files.iteritems():
-                if(self.is_enabled_inline_files()):
+                if self.inline_files:
                     attachments.add_File(f.obj)
                 else:    
                     file_obj = file_object.FileObjectType()
@@ -1174,12 +1087,12 @@ class email_translator:
         list_observables = [email_observable]
         root_observables = cybox.ObservablesType(cybox_major_version = "1", cybox_minor_version= "0", Observable = list_observables)
         
-        if self.is_enabled_include_attachments() and (not self.is_enabled_inline_files()):
+        if self.include_attachments and not self.inline_files:
             list_observables.extend(self.__create_cybox_observable_list(map_objs['files']))
         
         #this song and dance is so we can get the objects in the final xml in a particular order
         #we append things to list_observables in the order we want
-        if self.is_enabled_include_urls():
+        if self.include_urls:
             for domain_name, domain_objs in map_objs['domains'].iteritems():
                 #iterating over keys is necessary to modify the dict while looping over it
                 for url_id in map_objs['urls'].keys():
@@ -1199,25 +1112,23 @@ class email_translator:
         Keys: 'message', 'files', 'urls' 
     """    
     def __parse_email_message(self, msg):
-        
-        if(self.is_enabled_include_headers()):
-            cybox_headers = self.__create_cybox_headers(msg)
-        else: 
-            cybox_headers = None
-        
-        if(self.is_enabled_include_opt_headers()):
+
+        # Headers are required (for now)
+        cybox_headers = self.__create_cybox_headers(msg)
+
+        if self.include_opt_headers:
             cybox_optional_headers = self.__create_cybox_optional_headers(msg)
         else:
             cybox_optional_headers = None
         
-        if(self.is_enabled_include_attachments()):
+        if self.include_attachments:
             map_files = self.__create_cybox_files(msg)
             cybox_attachments = self.__create_cybox_attachments(map_files)
         else:
             map_files = None
             cybox_attachments = None
             
-        if(self.is_enabled_include_raw_headers()):
+        if self.include_raw_headers:
             raw_headers_str = self.__get_raw_headers(msg)
             cybox_raw_headers = self.__create_string_object_attr_type("<![CDATA[ " + raw_headers_str + " ]]>")
         else: 
@@ -1226,7 +1137,7 @@ class email_translator:
         # need this for parsing urls AND raw body text
         list_raw_body = self.__get_raw_body_text(msg)
         
-        if(self.is_enabled_include_raw_body()):
+        if self.include_raw_body:
             raw_body_str = ""
             for raw_body_segment_tup in list_raw_body:
                 raw_body_str += raw_body_segment_tup[1] + "\n"
@@ -1235,7 +1146,7 @@ class email_translator:
         else:
             cybox_raw_body = None
         
-        if(self.is_enabled_include_urls()):
+        if self.include_urls:
             (map_urls, map_domains) = self.__parse_urls(list_raw_body)
             link_objs = [x.obj for x in map_urls.values()]
             cybox_links = email_message_object.LinksType(Link = link_objs)
@@ -1350,8 +1261,11 @@ def main():
 
     parser.add_argument('-i', '--input', help="input file")
     parser.add_argument('-o', '--output', help="output file", default="output.xml")
+
     parser.add_argument('--inline-files', action='store_true',
             help="embed file object details in the attachment section")
+
+    # TODO: convert these from negative to positive
     parser.add_argument('--exclude-opt-headers', action="store_true",
             help='exclude optional header fields from cybox email message object')
     parser.add_argument('--exclude-attachments', action="store_true",
@@ -1366,6 +1280,7 @@ def main():
             help='do not create URI domain objects for found URLS')
     parser.add_argument('--exclude-url-objs', action="store_true",
             help='do not create URI objects for found URLs')
+
     parser.add_argument('--whois', action="store_true",
             help="attempt to perform s WHOIS lookup of domains found within "
                 "the email and create a WHOIS record object")
@@ -1375,6 +1290,7 @@ def main():
     parser.add_argument('--dns', action="store_true",
             help="attempt to perform a dns lookup for domains within the "
                 "email and create a DNS record object")
+
     parser.add_argument('--use-dns-server', metavar="DNS-SERVER",
             help=' use this DNS server for DNS lookup of domains')
     parser.add_argument('--headers', default="",
@@ -1404,22 +1320,24 @@ def main():
 
 
     try:
-        translator = email_translator(VERBOSE_OUTPUT)
+        translator = EmailParser(VERBOSE_OUTPUT)
 
         translator.set_header_options(parse_header_options(args.headers))
         translator.set_opt_header_options(parse_optional_header_options(args.opt_headers))
-        translator.set_inline_files(args.inline_files)
-        translator.set_include_raw_body(not args.exclude_raw_body)
-        translator.set_include_raw_headers(not args.exclude_raw_headers)
-        translator.set_include_attachments(not args.exclude_attachments)
-        translator.set_include_urls(not args.exclude_urls)
-        translator.set_include_headers(args.headers)
-        translator.set_include_opt_headers(args.opt_headers)
-        translator.set_include_url_objects(not args.exclude_opt_headers)
-        translator.set_include_domain_objects(not args.exclude_domain_objs)
-        translator.set_dns(args.dns)
-        translator.set_whois(args.whois)
-        translator.set_http_whois(args.http_whois)
+
+        translator.inline_files = args.inline_files
+
+        translator.include_raw_body = not args.exclude_raw_body
+        translator.include_raw_headers = not args.exclude_raw_headers
+        translator.include_attachments = not args.exclude_attachments
+        translator.include_urls = not args.exclude_urls
+        translator.include_opt_headers = not args.exclude_opt_headers
+        translator.include_url_objects = not args.exclude_opt_headers
+        translator.include_domain_objects = not args.exclude_domain_objs
+
+        translator.dns = args.dns
+        translator.whois = args.whois
+        translator.http_whois = args.http_whois
 
         cybox_objects = translator.generate_cybox_from_email_file(input_data)
         translator.write_cybox(cybox_objects, args.output)
