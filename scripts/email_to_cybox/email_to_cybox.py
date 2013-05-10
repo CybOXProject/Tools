@@ -1,4 +1,16 @@
-""" 2012 - Bryan Worrell -The MITRE Corporation """
+#!\usr\bin\env python
+
+"""
+Converts raw email to CybOX representation
+"""
+
+"""
+Email to CybOX v1.0 Translator
+v0.2 BETA // Compatible with CybOX v1.0
+2012 - Bryan Worrell - The MITRE Corporation
+"""
+
+import argparse
 
 import hashlib
 import base64
@@ -31,51 +43,9 @@ import whois
 import whois.parser
 
 
+__all__ = ["email_translator"]
+
 # BEGIN GLOBAL VARIABLES
-
-USAGE_TEXT = """
-Email to CybOX v1.0 Translator
-v0.2 BETA // Compatible with CybOX v1.0
-
-Reads raw email text on stdin and converts the message to a cybox object
-
-Usage: python email_to_cybox.py <flags>
-Flags:
-    -i <input_file>       : input from file
-    -                     : input from stdin
-    -o                    : <output file> (DEFAULT: 'output.xml')
-    
-    --inline-files        : embed file object details in the attachment section
-    --exclude-opt-headers : exclude optional header fields from cybox email message object
-    --exclude-attachments : exclude attachments from cybox email message object
-    --exclude-raw-body    : exclude raw body from email message object 
-    --exclude-raw-headers : exclude raw headers from email message object
-    --exclude-urls        : do not attempt to parse urls from input
-    --exclude-domain-objs : do not create URI domain objects for found URLS
-    --exclude-url-objs    : do not create URI objects for found URLs
-    --whois               : attempt to perform s WHOIS lookup of domains found within the email and create a WHOIS record object
-    --http-whois          : Use a HTTP WHOIS service that operates on port 80 (useful if port 43 is blocked by a firewall)
-    --dns                  :attempt to perform a dns lookup for domains within the email and create a DNS record object
-    --use-dns-server <dns server> :  use this DNS server for DNS lookup of domains
-    
-    --headers <one,two>   : comma separated list of header fields to be included
-                            in the cybox email message object. SPACES NOT 
-                            ALLOWED IN LIST OF FIELDS
-                            fields('to', 'cc', 'bcc', 'from', 'subject', 'in-reply-to', 
-                                   'date', 'message-id', 'sender', 'reply-to', 'errors-to')
-
-    --opt-headers <one,two,...>      : comma separated list of optional header fields 
-                                       to be included in the cybox email message object. 
-                                       SPACES NOT ALLOWED IN LIST OF FIELDS.
-                                       fields('boundary', 'content-type', 'mime-version',
-                                      'precedence', 'x-mailer', 'x-originating-ip','x-priority')
-    -h: Print help
-    -v: Verbose error output
-    
-Example: `cat email.txt | python email_to_cybox.py -o output.xml - `
-Example: `python email_to_cybox.py -i foobar.txt -o output.xml`
-Example: `python email_to_cybox.pw -i foobar.txt -o output.xml --headers to,from,cc --exclude-urls`
-"""
 
 VERBOSE_OUTPUT = False
 
@@ -1330,164 +1300,137 @@ class email_translator:
         http://cybox.mitre.org/objects#DNSQueryObject http://cybox.mitre.org/XMLSchema/objects/DNS_Query/DNS_Query_Object_1.0.xsd\
         http://cybox.mitre.org/objects#DNSRecordObject http://cybox.mitre.org/XMLSchema/objects/DNS_Record/DNS_Record_Object_1.1.xsd\
         http://cybox.mitre.org/cybox_v1 http://cybox.mitre.org/XMLSchema/cybox_core_v1.0.xsd"')
-        
-
 # END CLASS
-
-
-
-
-def usage():
-    print USAGE_TEXT
-    sys.exit(EXIT_FAILURE)
-
 
 
 def parse_header_options(arg):
     global ALLOWED_HEADER_FIELDS
     list_headers = arg.split(',')
-    
+
     # validation
     for header in list_headers:
-        if(header not in ALLOWED_HEADER_FIELDS):
+        if header and (header not in ALLOWED_HEADER_FIELDS):
             print "!! unrecoginized header field: " + header
-    
+
     return list_headers
-        
 
 
 def parse_optional_header_options(arg):
     global ALLOWED_OPTIONAL_HEADER_FIELDS
     list_headers = arg.split(',')
-    
+
     for header in list_headers:
-        if(header not in ALLOWED_OPTIONAL_HEADER_FIELDS):
+        if header and (header not in ALLOWED_OPTIONAL_HEADER_FIELDS):
             print "!! unrecoginized optional header field: " + header
-        
+
     return list_headers
+
 
 '''Function to provide a default for a default dictionary'''
 def none_factory():
     return None
-  
+
+
 def main():
     global VERBOSE_OUTPUT
     global ALLOWED_HEADER_FIELDS
     global ALLOWED_OPTIONAL_HEADER_FIELDS
     global NAMESERVER
-   
-    output_filename = 'output.xml'
-    args = sys.argv[1:]
-    input_data = None
-        
-    map_general_options = {}
-    header_options = None
-    optional_header_options = None
-    
-    (OPT_INLINE_FILES, OPT_RAW_BODY, 
-     OPT_RAW_HEADERS, OPT_ATTACHMENTS, 
-     OPT_URLS, OPT_HEADERS, 
-     OPT_OPT_HEADERS,OPT_URL_OBJECTS, 
-     OPT_DOMAIN_OBJECTS, 
-     OPT_DNS, OPT_WHOIS, OPT_HTTP_WHOIS) =  ( 'inline-files', 'include-raw-body', 'include-raw-headers', 
-                                           'include-attachments', 'include-urls', 'include-headers', 
-                                           'include-opt-headers','include-url-objects','include-domain-objects',
-                                           'dns', 'whois', 'http-whois')
-        
-    for i in range(0,len(args)):
-        if args[i] == '-o':
-            output_filename = args[i+1]
-        elif args[i] == '-v':
-            VERBOSE_OUTPUT = True
-        elif args[i] == '-':
-            input_data = sys.stdin
-        elif args[i] == '-i':
-            input_data = open(args[i+1], 'r')
-        elif args[i] == '--use-dns-server':
-            NAMESERVER = args[i+1]
-        elif args[i] == '--headers':
-            header_options = parse_header_options(args[i+1])
-        elif args[i] == '--opt-headers':
-            optional_header_options = parse_optional_header_options(args[i+1])
-        elif args[i] == '--inline-files':
-            map_general_options[OPT_INLINE_FILES] = True
-        elif args[i] == '--exclude-raw-body':
-            map_general_options[OPT_RAW_BODY] = False
-        elif args[i] == '--exclude-raw-headers':
-            map_general_options[OPT_RAW_HEADERS] = False
-        elif args[i] == '--exclude-attachments':
-            map_general_options[OPT_ATTACHMENTS] = False
-        elif args[i] == '--exclude-urls':
-            map_general_options[OPT_URLS] = False
-        elif args[i] == '--exclude-opt-headers':
-            map_general_options[OPT_OPT_HEADERS] = False
-        elif args[i] == '--exclude-url-objs':
-            map_general_options[OPT_URL_OBJECTS] = False
-        elif args[i] == '--exclude-domain-objs':
-            map_general_options[OPT_DOMAIN_OBJECTS] = False
-        elif args[i] == '--dns':
-            map_general_options[OPT_DNS] = True
-        elif args[i] == '--whois':
-            map_general_options[OPT_WHOIS] = True
-            map_general_options[OPT_HTTP_WHOIS] = False
-        elif args[i] == '--http-whois':
-            map_general_options[OPT_HTTP_WHOIS] = True
-            map_general_options[OPT_WHOIS] = False
-        elif args[i] == '-h':
-            usage()
-            
-    if input_data is None:
-        usage()
-            
+
+    #TODO: make this look cleaner
+    epilog = """
+        Example: `cat email.txt | python email_to_cybox.py -o output.xml - ` \n
+        Example: `python email_to_cybox.py -i foobar.txt -o output.xml` \n
+        Example: `python email_to_cybox.pw -i foobar.txt -o output.xml --headers to,from,cc --exclude-urls` \n
+        """
+
+    parser = argparse.ArgumentParser(description="Converts raw email to CybOX representation",
+            epilog=epilog)
+    parser.add_argument('-v', '--verbose', action='store_true', help="verbose output")
+
+    parser.add_argument('-i', '--input', help="input file")
+    parser.add_argument('-o', '--output', help="output file", default="output.xml")
+    parser.add_argument('--inline-files', action='store_true',
+            help="embed file object details in the attachment section")
+    parser.add_argument('--exclude-opt-headers', action="store_true",
+            help='exclude optional header fields from cybox email message object')
+    parser.add_argument('--exclude-attachments', action="store_true",
+            help='exclude attachments from cybox email message object')
+    parser.add_argument('--exclude-raw-body', action="store_true",
+            help='exclude raw body from email message object')
+    parser.add_argument('--exclude-raw-headers', action="store_true",
+            help='exclude raw headers from email message object')
+    parser.add_argument('--exclude-urls', action="store_true",
+            help='do not attempt to parse urls from input')
+    parser.add_argument('--exclude-domain-objs', action="store_true",
+            help='do not create URI domain objects for found URLS')
+    parser.add_argument('--exclude-url-objs', action="store_true",
+            help='do not create URI objects for found URLs')
+    parser.add_argument('--whois', action="store_true",
+            help="attempt to perform s WHOIS lookup of domains found within "
+                "the email and create a WHOIS record object")
+    parser.add_argument('--http-whois', action="store_true",
+            help="Use a HTTP WHOIS service that operates on port 80 (useful "
+                "if port 43 is blocked by a firewall)")
+    parser.add_argument('--dns', action="store_true",
+            help="attempt to perform a dns lookup for domains within the "
+                "email and create a DNS record object")
+    parser.add_argument('--use-dns-server', metavar="DNS-SERVER",
+            help=' use this DNS server for DNS lookup of domains')
+    parser.add_argument('--headers', default="",
+            help="comma separated list of header fields to be included "
+                "in the cybox email message object. SPACES NOT "
+                "ALLOWED IN LIST OF FIELDS "
+                "fields('to', 'cc', 'bcc', 'from', 'subject', 'in-reply-to', "
+                "'date', 'message-id', 'sender', 'reply-to', 'errors-to')")
+    parser.add_argument('--opt-headers', default="",
+            help="comma separated list of optional header fields "
+                "to be included in the cybox email message object. "
+                "SPACES NOT ALLOWED IN LIST OF FIELDS. "
+                "fields('boundary', 'content-type', 'mime-version', "
+                "'precedence', 'x-mailer', 'x-originating-ip','x-priority'")
+
+
+    args = parser.parse_args()
+
+    if args.input:
+        #TODO: make sure this gets closed
+        input_data = open(args.input, 'r')
+    else:
+        input_data = sys.stdin
+
+    NAMESERVER = args.use_dns_server
+    VERBOSE_OUTPUT = args.verbose
+
+
     try:
         translator = email_translator(VERBOSE_OUTPUT)
-        
-        if header_options:
-            translator.set_header_options(header_options)
-        if optional_header_options:
-            translator.set_opt_header_options(optional_header_options)
-        if(OPT_INLINE_FILES in map_general_options):
-            translator.set_inline_files( map_general_options[OPT_INLINE_FILES])
-        if(OPT_RAW_BODY in map_general_options):
-            translator.set_include_raw_body( map_general_options[OPT_RAW_BODY])
-        if(OPT_RAW_HEADERS in map_general_options):
-            translator.set_include_raw_headers(map_general_options[OPT_RAW_HEADERS])
-        if(OPT_ATTACHMENTS in map_general_options):
-            translator.set_include_attachments(map_general_options[OPT_ATTACHMENTS])
-        if(OPT_URLS in map_general_options):
-            translator.set_include_urls(map_general_options[OPT_URLS])
-        if(OPT_HEADERS in map_general_options):
-            translator.set_include_headers(map_general_options[OPT_HEADERS])
-        if(OPT_OPT_HEADERS in map_general_options):
-            translator.set_include_opt_headers(map_general_options[OPT_OPT_HEADERS])        
-        if(OPT_URL_OBJECTS in map_general_options):
-            translator.set_include_url_objects(map_general_options[OPT_URL_OBJECTS])          
-        if(OPT_DOMAIN_OBJECTS in map_general_options):
-            translator.set_include_domain_objects(map_general_options[OPT_DOMAIN_OBJECTS])            
-        if(OPT_DNS in map_general_options):
-            translator.set_dns(map_general_options[OPT_DNS])            
-        if(OPT_WHOIS in map_general_options):
-            translator.set_whois(map_general_options[OPT_WHOIS])        
-        if(OPT_HTTP_WHOIS in map_general_options):
-            translator.set_http_whois(map_general_options[OPT_HTTP_WHOIS])
-        
+
+        translator.set_header_options(parse_header_options(args.headers))
+        translator.set_opt_header_options(parse_optional_header_options(args.opt_headers))
+        translator.set_inline_files(args.inline_files)
+        translator.set_include_raw_body(not args.exclude_raw_body)
+        translator.set_include_raw_headers(not args.exclude_raw_headers)
+        translator.set_include_attachments(not args.exclude_attachments)
+        translator.set_include_urls(not args.exclude_urls)
+        translator.set_include_headers(args.headers)
+        translator.set_include_opt_headers(args.opt_headers)
+        translator.set_include_url_objects(not args.exclude_opt_headers)
+        translator.set_include_domain_objects(not args.exclude_domain_objs)
+        translator.set_dns(args.dns)
+        translator.set_whois(args.whois)
+        translator.set_http_whois(args.http_whois)
+
         cybox_objects = translator.generate_cybox_from_email_file(input_data)
-        translator.write_cybox(cybox_objects, output_filename) 
+        translator.write_cybox(cybox_objects, args.output)
 
     except Exception, err:
         print('\n!! error: %s\n' % str(err))
         traceback.print_exc()
 
-       
     if(VERBOSE_OUTPUT):
         print "** processing completed" 
-    
-    
+
 # entry point
 if __name__ == '__main__':
     main()
-    
-    
-__all__ = [
-    "email_translator"       
-    ]
