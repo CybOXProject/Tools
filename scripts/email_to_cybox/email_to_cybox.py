@@ -2,9 +2,7 @@
 
 """
 Converts raw email to CybOX representation
-"""
 
-"""
 Email to CybOX v1.0 Translator
 v0.2 BETA // Compatible with CybOX v1.0
 2012 - Bryan Worrell - The MITRE Corporation
@@ -96,20 +94,20 @@ class EmailParser:
             headers.append('from')
         self.headers = headers
 
-    """Private class for storing new objects and their relationships"""
     class _newObjContainer:
+        """Private class for storing new objects and their relationships"""
         def __init__(self, idref, obj):
             self.idref = idref
             self.obj = obj
             self.relationships = []
 
         def add_relationship(self, idref, type_, relationship):
-            self.relationships.append({'idref':idref, 'type':type_, 'relationship':relationship})
+            self.relationships.append({'idref': idref, 'type': type_, 'relationship': relationship})
 
         def get_relationship_objects(self):
             related_objects = cybox.RelatedObjectsType()
             for r in self.relationships:
-                related_object = cybox.RelatedObjectType(idref = r['idref'], type_ = r['type'], relationship = r['relationship'])
+                related_object = cybox.RelatedObjectType(idref=r['idref'], type_=r['type'], relationship=r['relationship'])
                 related_objects.add_Related_Object(related_object)
             return related_objects
 
@@ -122,96 +120,88 @@ class EmailParser:
     def __add_email_obj_relationship(self, idref, type_, relationship):
         self.__email_obj_container.add_relationship(idref, type_, relationship)
 
-    """ Returns an email.Message object """
     def __parse_email_string(self, data):
+        """ Returns an email.Message object """
         if self.__verbose_output:
             print "** parsing email input string"
 
         msg = email.message_from_string(data)
         return msg
 
-
-    """ Returns an email.Message object
-        @data can be sys.stdin or a file-like object """
     def __parse_email_file(self, data):
+        """ Returns an email.Message object
+
+        @data can be sys.stdin or a file-like object """
         if self.__verbose_output:
             print "** parsing email input file"
 
         msg = email.message_from_file(data)
         return msg
 
-    """ Returns a unique cybox id """
-    def __create_cybox_id(self, item_type = "guid"):
+    def __create_cybox_id(self, item_type="guid"):
+        """ Returns a unique cybox id """
         return "cybox:" + item_type + "-" + str(uuid.uuid1())
 
-    """ Returns a unique cybox id for the Email message Object"""
-    def __get_email_id(self, item_type = "guid"):
+    def __get_email_id(self, item_type="guid"):
+        """ Returns a unique cybox id for the Email message Object"""
         if self._EMAIL_OBJECT_ID:
             return EMAIL_OBJECT_ID
         else:
             EMAIL_OBJECT_ID = self.__create_cybox_id()
             return EMAIL_OBJECT_ID
 
-    """ Returns file size of base64 decompressed attachment """
-
     def __get_file_size(self, base64_enc_data):
+        """ Returns file size of base64 decompressed attachment """
         num_bytes = len(base64.b64decode(base64_enc_data))
         return num_bytes
 
-
-    """ Returns the MD5 hash for the given attachment.
+    def __get_attachment_md5(self, base64_enc_data):
+        """ Returns the MD5 hash for the given attachment.
         Because the attachments are base64 encoded,
         we need to decode the data and then run the
         digest algorithm """
-    def __get_attachment_md5(self, base64_enc_data):
         decoded = base64.b64decode(base64_enc_data)
         m = hashlib.md5()
         m.update(decoded)
         digest = m.hexdigest()
         return digest
 
-
-
-
-    """ Returns the extension of the email attachment if it
-        has one"""
     def __get_attachment_extension(self, msg):
+        """ Returns the extension of the email attachment if it
+        has one"""
         extension = None
         filename = msg.get_filename()
         dot_idx = filename.rfind('.')
 
         if(dot_idx != -1):
-            extension = filename[dot_idx+1:]
+            extension = filename[dot_idx + 1:]
 
         return extension
 
-
-
-    """ Returns the creation date of the attachment if provided
-        by the content-disposition header """
     def __get_attachment_created_date(self, msg):
+        """ Returns the creation date of the attachment if provided
+        by the content-disposition header """
         content_disposition = msg.get('content-disposition').lower()
         create_pattern = re.compile('creation-date="([\w\s\:\-\+\,]+)"')
         match = create_pattern.search(content_disposition)
 
         xml_created_date = None
-        if( match ):
+        if match:
             create_date = match.group(1)
             create_date_tup = email.utils.parsedate_tz(create_date)
             xml_created_date = self.__get_xml_datetime_fmt(create_date_tup)
 
         return xml_created_date
 
-
-    """ Returns the modified date of the attachment if provided
-        by the content-disposition header """
     def __get_attachment_modified_date(self, msg):
+        """ Returns the modified date of the attachment if provided
+        by the content-disposition header """
         content_disposition = msg.get('content-disposition')
         mod_pattern = re.compile('modification-date="([\w\s\:\-\+\,]+)"')
         match = mod_pattern.search(content_disposition)
 
         xml_mod_date = None
-        if( match  ):
+        if match:
             mod_date = match.group(1)
             mod_date_tup = email.utils.parsedate_tz(mod_date)
             xml_mod_date = self.__get_xml_datetime_fmt(mod_date_tup)
@@ -229,11 +219,11 @@ class EmailParser:
         except urllib2.HTTPError, e:
             print 'The WHOIS http service failed to fulfill the request because:'
             print 'Error code: ', e.code
-            print 'No Whois information for domain: '+domain+' will be captured.\n'
+            print 'No Whois information for domain: ' + domain + ' will be captured.\n'
             return None
         except urllib2.URLError, e:
             print 'Cannot reach the WHOIS http service because:' + e.reason
-            print 'No Whois information for domain: '+domain+' will be captured.\n'
+            print 'No Whois information for domain: ' + domain + ' will be captured.\n'
             return None
         else:
             response_text = response.read()
@@ -242,7 +232,7 @@ class EmailParser:
         if '"error"' in response_lower or 'not found' in response_lower or 'no match' in response_lower:
             return None
 
-        formatted_response = response_text.replace('\\r','').replace('\\n','\n')
+        formatted_response = response_text.replace('\\r', '').replace('\\n', '\n')
         record = whois.WhoisEntry.load(domain, formatted_response)
         return self.__convert_whois_record(record)
 
@@ -250,24 +240,31 @@ class EmailParser:
         try:
             record = whois.whois(domain)
         except Exception, e:
-            print 'The whois lookup for the domain: '+ domain +' failed for the following reason:\n\n'
+            print 'The whois lookup for the domain: ' + domain + ' failed for the following reason:\n\n'
             print e
             return None
 
         return self.__convert_whois_record(record)
 
-    #take a whois response and convert it into a dict with better formatted info
     def __convert_whois_record(self, response):
+        """take a whois response and convert it into a dict with better formatted info"""
         record = defaultdict(lambda: None, status=[], registrar_contacts=[], name_servers=[])
 
-        if response.registrar:     record['registrar'] = response.registrar[0]
-        if response.whois_server:  record['whois_server']  = response.whois_server[0]
-        if response.domain_name:   record['domain_name']   = response.domain_name
-        if response.referral_url:  record['referral_url']  = response.referral_url[0]
+        if response.registrar:
+            record['registrar'] = response.registrar[0]
+        if response.whois_server:
+            record['whois_server'] = response.whois_server[0]
+        if response.domain_name:
+            record['domain_name'] = response.domain_name
+        if response.referral_url:
+            record['referral_url'] = response.referral_url[0]
         #These list comprehensions get rid of empty strings that the parser sometimes adds to the lists
-        if response.status: record['status'] = [x.replace(' ', '_') for x in response.status if len(x.strip())]
-        if response.emails: record['registrar_contacts'] = [x for x in response.emails if len(x.strip())]
-        if response.name_servers: record['name_servers'] = [x for x in response.name_servers if len(x.strip())]
+        if response.status:
+            record['status'] = [x.replace(' ', '_') for x in response.status if len(x.strip())]
+        if response.emails:
+            record['registrar_contacts'] = [x for x in response.emails if len(x.strip())]
+        if response.name_servers:
+            record['name_servers'] = [x for x in response.name_servers if len(x.strip())]
 
         #these dates can be datetimes or arrays of datetimes, not sure why
         if response.creation_date:
@@ -298,21 +295,21 @@ class EmailParser:
 
         try:
             dns_response = resolver.query(domain, record_type)
-            record = {'Entry_Type':record_type, 'Domain_Name':domain, 'IP_Address':dns_response[0]}
+            record = {'Entry_Type': record_type, 'Domain_Name': domain, 'IP_Address': dns_response[0]}
             record['Record_Data'] = dns_response.response.to_text()
             #The spec for hex values seems to be no leading 0x, all upper case
-            record['Flags'] = hex(dns_response.response.flags).replace('0x','').upper()
+            record['Flags'] = hex(dns_response.response.flags).replace('0x', '').upper()
         except Exception, e:
             return None
 
         return record
 
-    """ Returns a map of file objects, keyed by a cybox uuid
+    def __create_cybox_files(self, msg):
+        """ Returns a map of file objects, keyed by a cybox uuid
         Attachments can be identified within multipart messages
         by their Content-Disposition header.
         Ex: Content-Disposition: attachment; filename="foobar.jpg"
-    """
-    def __create_cybox_files(self, msg):
+        """
         map_file_objs = {}
 
         if self.__verbose_output:
@@ -321,14 +318,14 @@ class EmailParser:
         # extract the email attachments into their own FileObjectType objects
         if msg.is_multipart():
             for part in msg.get_payload():
-                if part.has_key('content-disposition'):
+                if 'content-disposition' in part:
                     # if it's an attachment-type, pull out the filename
                     # and calculate the size in bytes
                     filename = part.get_filename()
                     file_size = self.__get_file_size(part.get_payload())
                     md5_hash = self.__get_attachment_md5(part.get_payload())
                     size_in_bytes = common.UnsignedLongObjectAttributeType(
-                                    valueOf_ = str(file_size))
+                                    valueOf_=str(file_size))
                     modified_date = self.__get_attachment_modified_date(part)
                     created_date = self.__get_attachment_created_date(part)
                     extension = self.__get_attachment_extension(part)
@@ -341,46 +338,46 @@ class EmailParser:
                     hash_type_obj = self.__create_hash_object(md5_hash)
 
                     file_obj = file_object.FileObjectType(
-                               File_Name = self.__create_string_object_attr_type(filename),
-                               File_Extension = self.__create_string_object_attr_type(extension),
-                               Size_In_Bytes = size_in_bytes,
-                               Hashes = self.__create_hash_list_object([hash_type_obj]),
-                               Modified_Time = self.__create_string_object_attr_type(modified_date),
-                               Created_Time = self.__create_date_time_object_attr_type(created_date))
+                               File_Name=self.__create_string_object_attr_type(filename),
+                               File_Extension=self.__create_string_object_attr_type(extension),
+                               Size_In_Bytes=size_in_bytes,
+                               Hashes=self.__create_hash_list_object([hash_type_obj]),
+                               Modified_Time=self.__create_string_object_attr_type(modified_date),
+                               Created_Time=self.__create_date_time_object_attr_type(created_date))
 
-                    file_obj.set_anyAttributes_({'xsi:type' : 'FileObj:FileObjectType'})
-                    file_obj_container = self._newObjContainer(cybox_id,file_obj)
-                    file_obj_container.add_relationship(self.__get_email_obj_id(),'Email Message','Contained_Within')
+                    file_obj.set_anyAttributes_({'xsi:type': 'FileObj:FileObjectType'})
+                    file_obj_container = self._newObjContainer(cybox_id, file_obj)
+                    file_obj_container.add_relationship(self.__get_email_obj_id(), 'Email Message', 'Contained_Within')
                     self.__add_email_obj_relationship(cybox_id, 'File', 'Contains')
                     map_file_objs[cybox_id] = file_obj_container
-                #end if
-            # end for
-        # end if
 
         return map_file_objs
 
-
-    """ Takes a tuple returned from email.util.parsedate_tz and converts it to an xs:dateTime formatted string with offset """
     def __get_xml_datetime_fmt(self, datetime_tup):
+        """ Takes a tuple returned from email.util.parsedate_tz and converts it to an xs:dateTime formatted string with offset """
         year = datetime_tup[0]
         month = datetime_tup[1]
         day = datetime_tup[2]
         hours = datetime_tup[3]
         minutes = datetime_tup[4]
         seconds = datetime_tup[5]
-        utc_offset = datetime_tup[-1] # in seconds
+        utc_offset = datetime_tup[-1]  # in seconds
 
-        if( utc_offset  ):
+        if utc_offset:
             # convert utc_offset to +/- 00:00 format
-            if( int(utc_offset) < 0 ): tzsign = -1
-            else: tzsign = 1
+            if int(utc_offset) < 0:
+                tzsign = -1
+            else:
+                tzsign = 1
 
-            utc_offset_hours =  int((tzsign * utc_offset) / 3600.0)
+            utc_offset_hours = int((tzsign * utc_offset) / 3600.0)
             utc_offset_minutes = ((tzsign * utc_offset) % 3600) / 60
 
-        if( utc_offset ):
-            if tzsign == -1 : sign = "-"
-            else: sign = "+"
+        if utc_offset:
+            if tzsign == -1:
+                sign = "-"
+            else:
+                sign = "+"
 
             xml_datetime = "%02d-%02d-%02dT%02d:%02d:%02d%s%02d:%02d" % (year, month, day, hours, minutes, seconds, sign, utc_offset_hours, utc_offset_minutes)
         else:
@@ -388,15 +385,15 @@ class EmailParser:
 
         return xml_datetime
 
-    """ Takes a time tuple and converts it to an xs:date formatted string """
     def __get_xml_date_fmt(self, datetime_tup):
-        year  = datetime_tup[0]
+        """ Takes a time tuple and converts it to an xs:date formatted string """
+        year = datetime_tup[0]
         month = datetime_tup[1]
-        day   = datetime_tup[2]
+        day = datetime_tup[2]
         return "%02d-%02d-%02d" % (year, month, day)
 
-    """ Returns a CybOX EmailHeaderType object """
     def __create_cybox_headers(self, msg):
+        """ Returns a CybOX EmailHeaderType object """
         email_pattern = re.compile('([\w\-\.+]+@(\w[\w\-]+\.)+[\w\-]+)')
 
         (TO, CC, BCC, FROM, SUBJECT, IN_REPLY_TO, DATE, MESSAGE_ID, SENDER, REPLY_TO, ERRORS_TO) = ('to', 'cc', 'bcc', 'from', 'subject', 'in_reply_to', 'date', 'message-id', 'sender', 'reply-to', 'errors-to')
@@ -426,7 +423,7 @@ class EmailParser:
 
         cc_addrs = None
         if msg_cc and (CC in self.headers):
-            cc_addrs =  email_message_object.EmailRecipientsType()
+            cc_addrs = email_message_object.EmailRecipientsType()
             for match in email_pattern.findall(msg_cc):
                 email_addr_str = match[0]
                 addr_obj = self.__create_email_address_object(email_addr_str)
@@ -443,7 +440,7 @@ class EmailParser:
         from_addr = None
         if msg_from and (FROM in self.headers):
             from_addr_match = email_pattern.search(msg_from)
-            if( from_addr_match ):
+            if from_addr_match:
                 from_addr_str = from_addr_match.group(1)
                 from_addr = self.__create_email_address_object(from_addr_str)
         else:
@@ -453,14 +450,14 @@ class EmailParser:
         sender_addr = None
         if msg_sender and (SENDER in self.headers):
             sender_addr_match = email_pattern.search(msg_sender)
-            if( sender_addr_match  ):
+            if sender_addr_match:
                 sender_addr_str = sender_addr_match.group(1)
                 sender_addr = self.__create_email_address_object(sender_addr_str)
 
         reply_to_addr = None
         if msg_reply_to and (REPLY_TO in self.headers):
             reply_to_addr_match = email_pattern.search(msg_reply_to)
-            if( reply_to_addr_match  ):
+            if reply_to_addr_match:
                 reply_to_addr_str = reply_to_addr_match.group(1)
                 reply_to_addr = self.__create_email_address_object(reply_to_addr_str)
 
@@ -483,13 +480,15 @@ class EmailParser:
         if msg_date and (DATE in self.headers):
             parsedtime = email.utils.parsedate_tz(msg_date)
             xml_date_time = common.DateTimeObjectAttributeType(
-                            valueOf_ = self.__get_xml_datetime_fmt(parsedtime))
+                            valueOf_=self.__get_xml_datetime_fmt(parsedtime))
 
         # formatting to prevent xml invalidation
         message_id = None
         if msg_message_id and (MESSAGE_ID in self.headers):
-            if(msg_message_id[0] == '<'): msg_message_id = msg_message_id[1:-1]
-            if(msg_message_id[-1] == '>'): msg_message_id = msg_message_id[0:-2]
+            if msg_message_id[0] == '<':
+                msg_message_id = msg_message_id[1:-1]
+            if msg_message_id[-1] == '>':
+                msg_message_id = msg_message_id[0:-2]
             message_id = self.__create_string_object_attr_type(msg_message_id)
 
         header_obj = email_message_object.EmailHeaderType(
@@ -543,14 +542,14 @@ class EmailParser:
         x_priority = None
         if msg_x_priority and (X_PRIORITY in self.optional_headers):
             x_priority = common.PositiveIntegerObjectAttributeType(
-                               valueOf_ = int(msg_x_priority))
+                               valueOf_=int(msg_x_priority))
 
         x_originating_ip_addr = None
         if msg_x_originating_ip and (X_ORIGINATING_IP in self.optional_headers):
             x_originating_ip_addr = self.__create_ip_address_object(msg_x_originating_ip)
 
         optional_header_obj = email_message_object.EmailOptionalHeaderType(
-                              boundary,content_type,mime_version,
+                              boundary, content_type, mime_version,
                               precedence, x_mailer, x_originating_ip_addr,
                               x_priority)
 
@@ -563,10 +562,10 @@ class EmailParser:
 
         if self.__verbose_output:
             print "** creating uri object for: " + url
-        uri_obj = uri_object.URIObjectType(type_ = "URL",
-                                           Value = common.AnyURIObjectAttributeType(valueOf_ = url))
+        uri_obj = uri_object.URIObjectType(type_="URL",
+                                           Value=common.AnyURIObjectAttributeType(valueOf_=url))
 
-        uri_obj.set_anyAttributes_({'xsi:type' : 'URIObj:URIObjectType'})
+        uri_obj.set_anyAttributes_({'xsi:type': 'URIObj:URIObjectType'})
         return uri_obj
 
     def __create_domain_name_object(self, domain):
@@ -577,10 +576,10 @@ class EmailParser:
         if self.__verbose_output:
             print "** creating domain name object for: " + domain
 
-        uri_obj = uri_object.URIObjectType(type_ = "Domain Name",
-                                           Value = common.AnyURIObjectAttributeType(valueOf_ = domain))
+        uri_obj = uri_object.URIObjectType(type_="Domain Name",
+                                           Value=common.AnyURIObjectAttributeType(valueOf_=domain))
 
-        uri_obj.set_anyAttributes_({'xsi:type' : 'URIObj:URIObjectType'})
+        uri_obj.set_anyAttributes_({'xsi:type': 'URIObj:URIObjectType'})
 
         return uri_obj
 
@@ -600,46 +599,46 @@ class EmailParser:
         if not record:
             return None
 
-        record['status'] = ['OK' if status=='ACTIVE' else status for status in record['status']]
+        record['status'] = ['OK' if status == 'ACTIVE' else status for status in record['status']]
 
         #Only build registrar info objects if we have the relevant info
         registrar_info = None
         if record['registrar'] or record['whois_server'] or record['registrar_address'] or record['referral_url']:
-            registrar_info = whois_object.RegistrarInfoType( Name    = self.__create_string_object_attr_type(record['registrar']),
-                                                             Address = self.__create_string_object_attr_type(record['registrar_address']),
-                                                             Email_Address = None,
-                                                             Phone_Number  = None,
-                                                             Whois_Server  = self.__create_url_object(record['whois_server']),
-                                                             Referral_URL  = self.__create_url_object(record['referral_url']))
+            registrar_info = whois_object.RegistrarInfoType(Name=self.__create_string_object_attr_type(record['registrar']),
+                                                            Address=self.__create_string_object_attr_type(record['registrar_address']),
+                                                            Email_Address=None,
+                                                            Phone_Number=None,
+                                                            Whois_Server=self.__create_url_object(record['whois_server']),
+                                                            Referral_URL=self.__create_url_object(record['referral_url']))
 
         registrar_contacts = []
         for email in record['registrar_contacts']:
-            registrar_contacts.append(whois_object.RegistrarContactType(contact_type  = 'ADMIN',
-                                                                        Name = self.__create_string_object_attr_type(record['registrar']),
-                                                                        Email_Address = self.__create_email_address_object(email),
-                                                                        Phone_Number  = None))
+            registrar_contacts.append(whois_object.RegistrarContactType(contact_type='ADMIN',
+                                                                        Name=self.__create_string_object_attr_type(record['registrar']),
+                                                                        Email_Address=self.__create_email_address_object(email),
+                                                                        Phone_Number=None))
 
-        whois_obj = whois_object.WhoisObjectType( Domain_Name = self.__create_domain_name_object(record['domain_name']),
-                                                  Server_Name = None,
-                                                  Nameserver  = [self.__create_url_object(url) for url in record['name_servers']],
-                                                  Status      = [whois_object.WhoisStatusType(valueOf_= status) for status in record['status']],
-                                                  Updated_Date    = self.__create_date_object_attr_type(record['updated_date']),
-                                                  Creation_Date   = self.__create_date_object_attr_type(record['creation_date']),
-                                                  Expiration_Date = self.__create_date_object_attr_type(record['expiration_date']),
-                                                  Registrar_Info  = registrar_info,
-                                                  Registrar_Contact = registrar_contacts)
+        whois_obj = whois_object.WhoisObjectType(Domain_Name=self.__create_domain_name_object(record['domain_name']),
+                                                 Server_Name=None,
+                                                 Nameserver=[self.__create_url_object(url) for url in record['name_servers']],
+                                                 Status=[whois_object.WhoisStatusType(valueOf_=status) for status in record['status']],
+                                                 Updated_Date=self.__create_date_object_attr_type(record['updated_date']),
+                                                 Creation_Date=self.__create_date_object_attr_type(record['creation_date']),
+                                                 Expiration_Date=self.__create_date_object_attr_type(record['expiration_date']),
+                                                 Registrar_Info=registrar_info,
+                                                 Registrar_Contact=registrar_contacts)
 
-        whois_obj.set_anyAttributes_({'xsi:type' : 'WhoisObj:WhoisObjectType'})
+        whois_obj.set_anyAttributes_({'xsi:type': 'WhoisObj:WhoisObjectType'})
         return whois_obj
 
     def __create_dns_query_object(self, domain, record_type, nameserver=None):
         """Creates a CybOX DNSQueryType Object"""
-        dns_question_obj = dns_query_object.DNSQuestionType( QName = self.__create_domain_name_object(domain),
-                                                             QType = dns_query_object.DNSRecordType(valueOf_= record_type),
-                                                             QClass= self.__create_string_object_attr_type('IN'))
+        dns_question_obj = dns_query_object.DNSQuestionType(QName=self.__create_domain_name_object(domain),
+                                                            QType=dns_query_object.DNSRecordType(valueOf_=record_type),
+                                                            QClass=self.__create_string_object_attr_type('IN'))
 
-        dns_query_obj = dns_query_object.DNSQueryObjectType(successful = False, Question = dns_question_obj)
-        dns_query_obj.set_anyAttributes_({'xsi:type' : 'DNSQueryObj:DNSQueryObjectType'})
+        dns_query_obj = dns_query_object.DNSQueryObjectType(successful=False, Question=dns_question_obj)
+        dns_query_obj.set_anyAttributes_({'xsi:type': 'DNSQueryObj:DNSQueryObjectType'})
 
         return dns_query_obj
 
@@ -649,13 +648,13 @@ class EmailParser:
         if not record:
             return None
 
-        dns_record_obj = dns_record_object.DNSRecordObjectType( Domain_Name = self.__create_domain_name_object(record['Domain_Name']),
-                                                                IP_Address  = self.__create_ip_address_object(record['IP_Address']),
-                                                                Entry_Type  = self.__create_string_object_attr_type(record['Entry_Type']),
-                                                                Flags = self.__create_hex_binary_object_attr_type(record['Flags']),
-                                                                Record_Data = record['Record_Data']
+        dns_record_obj = dns_record_object.DNSRecordObjectType(Domain_Name=self.__create_domain_name_object(record['Domain_Name']),
+                                                               IP_Address=self.__create_ip_address_object(record['IP_Address']),
+                                                               Entry_Type=self.__create_string_object_attr_type(record['Entry_Type']),
+                                                               Flags=self.__create_hex_binary_object_attr_type(record['Flags']),
+                                                               Record_Data=record['Record_Data']
                                                               )
-        dns_record_obj.set_anyAttributes_({'xsi:type' : 'DNSRecordObj:DNSRecordObjectType'})
+        dns_record_obj.set_anyAttributes_({'xsi:type': 'DNSRecordObj:DNSRecordObjectType'})
         return dns_record_obj
 
     def __create_email_address_object(self, email_addr):
@@ -667,15 +666,15 @@ class EmailParser:
             print "** creating email address object for: " + email_addr
 
         addr_obj = address_object.AddressObjectType(
-                   category = 'e-mail',
-                   Address_Value = self.__create_string_object_attr_type(email_addr))
+                   category='e-mail',
+                   Address_Value=self.__create_string_object_attr_type(email_addr))
 
         return addr_obj
 
     def __create_hash_object(self, md5_hash):
         """ Returns a CybOX HashType object for the given md5 hash """
-        hash_name_type = common.HashNameType(valueOf_= "MD5")
-        hash_value_type = common.SimpleHashValueType(valueOf_ = md5_hash)
+        hash_name_type = common.HashNameType(valueOf_="MD5")
+        hash_value_type = common.SimpleHashValueType(valueOf_=md5_hash)
         hash_type = common.HashType(Type=hash_name_type, Simple_Hash_Value=hash_value_type)
 
         return hash_type
@@ -701,9 +700,9 @@ class EmailParser:
             category = 'ipv4-addr'
 
         addr_obj = address_object.AddressObjectType(
-                   Address_Value = self.__create_string_object_attr_type(ip_addr),
-                   category = category)
-        addr_obj.set_anyAttributes_({'xsi:type' : 'AddressObj:AddressObjectType'})
+                   Address_Value=self.__create_string_object_attr_type(ip_addr),
+                   category=category)
+        addr_obj.set_anyAttributes_({'xsi:type': 'AddressObj:AddressObjectType'})
         return addr_obj
 
     def __create_string_object_attr_type(self, value):
@@ -712,7 +711,7 @@ class EmailParser:
         if not value:
             return None
 
-        str_obj = common.StringObjectAttributeType(valueOf_ = value)
+        str_obj = common.StringObjectAttributeType(valueOf_=value)
         return str_obj
 
     def __create_date_time_object_attr_type(self, value):
@@ -720,7 +719,7 @@ class EmailParser:
         of @value """
         if not value:
             return None
-        datetime_obj = common.DateTimeObjectAttributeType(valueOf_= value)
+        datetime_obj = common.DateTimeObjectAttributeType(valueOf_=value)
 
         return datetime_obj
 
@@ -730,7 +729,7 @@ class EmailParser:
         if not value:
             return None
 
-        date_obj = common.DateObjectAttributeType(valueOf_= value)
+        date_obj = common.DateObjectAttributeType(valueOf_=value)
 
         return date_obj
 
@@ -740,7 +739,7 @@ class EmailParser:
         if not value:
             return None
 
-        hex_obj = common.HexBinaryObjectAttributeType(valueOf_= value)
+        hex_obj = common.HexBinaryObjectAttributeType(valueOf_=value)
 
         return hex_obj
 
@@ -755,28 +754,35 @@ class EmailParser:
 
         raw_body = []
 
-        if( msg.is_multipart() == False ):
+        if msg.is_multipart() == False:
             # text document attachments have a content type of text, so we have to filter them out
-            if( (msg.has_key('content-disposition') == False) and (msg.get_content_maintype() == 'text')):
+            if ('content-disposition' not in msg) and (msg.get_content_maintype() == 'text'):
                 encoding = msg['content-transfer-encoding']
                 raw_body_str = msg.get_payload()
                 raw_body.append((encoding, raw_body_str))
         else:
             for part in msg.get_payload():
-                raw_body.extend(self.__get_raw_body_text( part ))
+                raw_body.extend(self.__get_raw_body_text(part))
 
         return raw_body
 
     def __reorder_domain_objs(self, domain_obj_map):
         """ Given the results of __create_domain_objs, reorder them into a list so they are in the desired order in the final xml"""
         ordered_objs = [domain_obj_map['URI']]
-        if domain_obj_map['Whois']:       ordered_objs.append(domain_obj_map['Whois'])
-        if domain_obj_map['DNSQueryV4']:  ordered_objs.append(domain_obj_map['DNSQueryV4'])
-        if domain_obj_map['DNSResultV4']: ordered_objs.append(domain_obj_map['DNSResultV4'])
-        if domain_obj_map['ipv4']:        ordered_objs.append(domain_obj_map['ipv4'])
-        if domain_obj_map['DNSQueryV6']:  ordered_objs.append(domain_obj_map['DNSQueryV6'])
-        if domain_obj_map['DNSResultV6']: ordered_objs.append(domain_obj_map['DNSResultV6'])
-        if domain_obj_map['ipv6']:        ordered_objs.append(domain_obj_map['ipv6'])
+        if domain_obj_map['Whois']:
+            ordered_objs.append(domain_obj_map['Whois'])
+        if domain_obj_map['DNSQueryV4']:
+            ordered_objs.append(domain_obj_map['DNSQueryV4'])
+        if domain_obj_map['DNSResultV4']:
+            ordered_objs.append(domain_obj_map['DNSResultV4'])
+        if domain_obj_map['ipv4']:
+            ordered_objs.append(domain_obj_map['ipv4'])
+        if domain_obj_map['DNSQueryV6']:
+            ordered_objs.append(domain_obj_map['DNSQueryV6'])
+        if domain_obj_map['DNSResultV6']:
+            ordered_objs.append(domain_obj_map['DNSResultV6'])
+        if domain_obj_map['ipv6']:
+            ordered_objs.append(domain_obj_map['ipv6'])
 
         return ordered_objs
 
@@ -801,7 +807,7 @@ class EmailParser:
             encoding = body_tup[0]
             body = body_tup[1]
 
-            if( (encoding) and encoding.lower() == "quoted-printable"):
+            if encoding and encoding.lower() == "quoted-printable":
                 body = quopri.decodestring(body)
 
             for match in url_re.findall(body):
@@ -811,10 +817,10 @@ class EmailParser:
                 if found_url not in list_observed_urls:
                     list_observed_urls.append(found_url)
                     if self.include_url_objects:
-                        url_id  = self.__create_cybox_id()
+                        url_id = self.__create_cybox_id()
                         url_obj_container = self._newObjContainer(url_id, self.__create_url_object(found_url))
                     else:
-                        (url_id, url_obj_container) = (None,None)
+                        (url_id, url_obj_container) = (None, None)
                     if found_domain in list_observed_domains:
                         domain_obj = list_observed_domains[found_domain]
                     else:
@@ -846,8 +852,8 @@ class EmailParser:
         record_container = self._newObjContainer(self.__create_cybox_id(), dns_record_obj)
 
         #add dns record reference to dns query
-        dns_record_ref = dns_record_object.DNSRecordObjectType(object_reference = record_container.idref)
-        dns_record_ref.set_anyAttributes_({'xsi:type' : 'DNSRecordObj:DNSRecordObjectType'})
+        dns_record_ref = dns_record_object.DNSRecordObjectType(object_reference=record_container.idref)
+        dns_record_ref.set_anyAttributes_({'xsi:type': 'DNSRecordObj:DNSRecordObjectType'})
         query_container.obj.set_Answer_Resource_Records(dns_query_object.DNSResourceRecordsType(Resource_Record=[dns_record_ref]))
         query_container.obj.set_successful(True)
 
@@ -858,17 +864,17 @@ class EmailParser:
         uri_container.add_relationship(addr_container.idref, 'IP Address', 'Resolved_To')
         addr_container.add_relationship(uri_container.idref, 'URI', 'Resolved_To')
         addr_container.add_relationship(query_container.idref, 'DNS Query', 'Contained_Within')
-        addr_container.add_relationship(record_container.idref,'DNS Record','Contained_Within')
+        addr_container.add_relationship(record_container.idref, 'DNS Record', 'Contained_Within')
 
         return (addr_container, record_container)
 
-    """Creates new object containers for new domains and objects related to domains (whois, dns, addresses)"""
     def __create_domain_objs(self, domain):
+        """Creates new object containers for new domains and objects related to domains (whois, dns, addresses)"""
         global NAMESERVER
 
-        new_objs = {'URI':None,'Whois':None,
-                    'DNSQueryV4':None,'DNSResultV4':None,'ipv4':None,
-                    'DNSQueryV6':None,'DNSResultV6':None,'ipv6':None}
+        new_objs = {'URI': None, 'Whois': None,
+                    'DNSQueryV4': None, 'DNSResultV4': None, 'ipv4': None,
+                    'DNSQueryV6': None, 'DNSResultV6': None, 'ipv6': None}
 
         if self.include_domain_objects:
             uri_container = self._newObjContainer(self.__create_cybox_id(), self.__create_domain_name_object(domain))
@@ -881,42 +887,41 @@ class EmailParser:
                 whois_container = self._newObjContainer(self.__create_cybox_id(), whois_obj)
                 new_objs['Whois'] = whois_container
                 if uri_container:
-                    whois_container.add_relationship(uri_container.idref, 'URI',  'Characterizes')
-                    uri_container.add_relationship(whois_container.idref, 'WHOIS','Characterized_By')
+                    whois_container.add_relationship(uri_container.idref, 'URI', 'Characterizes')
+                    uri_container.add_relationship(whois_container.idref, 'WHOIS', 'Characterized_By')
 
         #get ipv4 dns record for domain
         if self.dns:
-            query_container = self._newObjContainer(self.__create_cybox_id(), self.__create_dns_query_object(domain,'A'))
+            query_container = self._newObjContainer(self.__create_cybox_id(), self.__create_dns_query_object(domain, 'A'))
             if uri_container:
                 query_container.add_relationship(uri_container.idref, 'URI', 'Searched_For')
                 uri_container.add_relationship(query_container.idref, 'DNS Query', 'Searched_For_By')
 
             new_objs['DNSQueryV4'] = query_container
-            dns_record_obj = self.__create_dns_record_object(domain,'A', NAMESERVER)
+            dns_record_obj = self.__create_dns_record_object(domain, 'A', NAMESERVER)
             if dns_record_obj:
                 (new_objs['ipv4'], new_objs['DNSResultV4']) = self.__create_dns_objs(query_container, uri_container, dns_record_obj, 'ipv4-addr')
 
-
             #get ipv6 dns record for domain
-            query_container = self._newObjContainer(self.__create_cybox_id(), self.__create_dns_query_object(domain,'AAAA'))
+            query_container = self._newObjContainer(self.__create_cybox_id(), self.__create_dns_query_object(domain, 'AAAA'))
             if uri_container:
                 query_container.add_relationship(uri_container.idref, 'URI', 'Searched_For')
                 uri_container.add_relationship(query_container.idref, 'DNS Query', 'Searched_For_By')
 
             new_objs['DNSQueryV6'] = query_container
-            dns_record_obj = self.__create_dns_record_object(domain,'AAAA', NAMESERVER)
+            dns_record_obj = self.__create_dns_record_object(domain, 'AAAA', NAMESERVER)
             if dns_record_obj:
                 (new_objs['ipv6'], new_objs['DNSResultV6']) = self.__create_dns_objs(query_container, uri_container, dns_record_obj, 'ipv6-addr')
 
         new_objs['URI'] = uri_container
         return new_objs
 
-    """ Creates a CybOX AttachmentsType object from the map_files input.
-        The input map should be of the form {object_id:cybox_file_object}"""
     def __create_cybox_attachments(self, map_files):
+        """ Creates a CybOX AttachmentsType object from the map_files input.
+        The input map should be of the form {object_id:cybox_file_object}"""
         attachments = None
 
-        if( map_files ):
+        if map_files:
             attachments = email_message_object.AttachmentsType()
 
             for file_id, f in map_files.iteritems():
@@ -924,16 +929,15 @@ class EmailParser:
                     attachments.add_File(f.obj)
                 else:
                     file_obj = file_object.FileObjectType()
-                    file_obj.set_anyAttributes_({'xsi:type' : 'FileObj:FileObjectType'})
+                    file_obj.set_anyAttributes_({'xsi:type': 'FileObj:FileObjectType'})
                     file_obj.set_object_reference(file_id)
                     attachments.add_File(file_obj)
 
         return attachments
 
-
-    """ Returns a string representation of the raw email headers found within the
-        input Message msg"""
     def __get_raw_headers(self, msg):
+        """ Returns a string representation of the raw email headers found within the
+        input Message msg"""
         raw_headers_str = ""
 
         for header_key_val in msg.items():
@@ -941,8 +945,8 @@ class EmailParser:
 
         return raw_headers_str
 
-
-    """ Adds a RelatedObjectsType object to the input CybOX Object.
+    def __add_related_objects(self, obj, idref, type_, relationship="Contained Within"):
+        """ Adds a RelatedObjectsType object to the input CybOX Object.
         In the context of an EmailMessageObjectType, each child object
         (objects representing attachments or urls) are related to the
         EmailMessageObject in that they are Contained_Within it.
@@ -950,9 +954,8 @@ class EmailParser:
         Later versions of CybOX will be amended to support the inverse
         relationship (An EmailMessageObject can point to its related
         child objects).
-    """
-    def __add_related_objects(self, obj, idref, type_, relationship="Contained Within"):
-        related_object = cybox.RelatedObjectType(idref = idref, type_ = type_, relationship = relationship)
+        """
+        related_object = cybox.RelatedObjectType(idref=idref, type_=type_, relationship=relationship)
         related_objects = obj.get_Related_Objects()
         if not related_objects:
             related_objects = cybox.RelatedObjectsType()
@@ -960,32 +963,30 @@ class EmailParser:
 
         related_objects.add_Related_Object(related_object)
 
-
-
-    """ Creates/returns a CybOX EmailMessageType from the given input params
+    def __create_cybox_email_message_object(self, attachments=None, links=None, headers=None, optional_headers=None, email_server=None, raw_body=None, raw_headers=None):
+        """ Creates/returns a CybOX EmailMessageType from the given input params
 
         + The Email_Server element is ambiguous and ignored. I'm not
           sure how to discover the server type/name without developing
           some home-brew signature method
-    """
-    def __create_cybox_email_message_object(self, attachments = None, links = None, headers = None, optional_headers = None, email_server = None, raw_body = None, raw_headers = None):
+        """
 
         email_message_obj = email_message_object.EmailMessageObjectType(
-                            Attachments = attachments,
-                            Links = links,
-                            Header = headers,
-                            Optional_Header = optional_headers,
-                            Email_Server = email_server,
-                            Raw_Body = raw_body,
-                            Raw_Header = raw_headers)
+                                    Attachments=attachments,
+                                    Links=links,
+                                    Header=headers,
+                                    Optional_Header=optional_headers,
+                                    Email_Server=email_server,
+                                    Raw_Body=raw_body,
+                                    Raw_Header=raw_headers)
 
-        email_message_obj.set_anyAttributes_({'xsi:type' : 'EmailMessageObj:EmailMessageObjectType'})
+        email_message_obj.set_anyAttributes_({'xsi:type': 'EmailMessageObj:EmailMessageObjectType'})
 
         return email_message_obj
 
     def __create_cybox_observable(self, obj_container):
-        observable   = cybox.ObservableType(id = self.__create_cybox_id("observable"))
-        cybox_object = cybox.ObjectType(id = obj_container.idref)
+        observable = cybox.ObservableType(id=self.__create_cybox_id("observable"))
+        cybox_object = cybox.ObjectType(id=obj_container.idref)
         cybox_object.set_Defined_Object(obj_container.obj)
         cybox_object.set_Related_Objects(obj_container.get_relationship_objects())
         stateful_measure = cybox.StatefulMeasureType()
@@ -994,28 +995,28 @@ class EmailParser:
 
         return observable
 
-    """ Generates a list of cybox observables given a map of object containers """
     def __create_cybox_observable_list(self, object_map):
+        """ Generates a list of cybox observables given a map of object containers """
         list_observables = []
         for obj_id, obj_container in object_map.iteritems():
             list_observables.append(self.__create_cybox_observable(obj_container))
 
         return list_observables
 
-    """ Generates a CybOX Observable Document from the input map of CybOX Objects."""
     def __create_cybox_observables(self, map_objs):
+        """ Generates a CybOX Observable Document from the input map of CybOX Objects."""
         # set up the email observable
-        email_observable = cybox.ObservableType(id = self.__create_cybox_id("observable"))
-        email_obj_map =  map_objs['message']
+        email_observable = cybox.ObservableType(id=self.__create_cybox_id("observable"))
+        email_obj_map = map_objs['message']
         (email_id, email_obj) = email_obj_map.iteritems().next()
         email_stateful_measure = cybox.StatefulMeasureType()
-        cybox_email_obj = cybox.ObjectType(id = email_id)
+        cybox_email_obj = cybox.ObjectType(id=email_id)
         cybox_email_obj.set_Defined_Object(email_obj)
         cybox_email_obj.set_Related_Objects(self.__get_email_obj_container().get_relationship_objects())
         email_stateful_measure.set_Object(cybox_email_obj)
         email_observable.set_Stateful_Measure(email_stateful_measure)
         list_observables = [email_observable]
-        root_observables = cybox.ObservablesType(cybox_major_version = "1", cybox_minor_version= "0", Observable = list_observables)
+        root_observables = cybox.ObservablesType(cybox_major_version="1", cybox_minor_version="0", Observable=list_observables)
 
         if self.include_attachments and not self.inline_files:
             list_observables.extend(self.__create_cybox_observable_list(map_objs['files']))
@@ -1035,13 +1036,12 @@ class EmailParser:
 
         return root_observables
 
-
-    """ Parses the supplied message
+    def __parse_email_message(self, msg):
+        """ Parses the supplied message
         Returns a map of message parts expressed as cybox objects.
 
         Keys: 'message', 'files', 'urls'
-    """
-    def __parse_email_message(self, msg):
+        """
 
         # Headers are required (for now)
         cybox_headers = self.__create_cybox_headers(msg)
@@ -1072,28 +1072,28 @@ class EmailParser:
             for raw_body_segment_tup in list_raw_body:
                 raw_body_str += raw_body_segment_tup[1] + "\n"
 
-            cybox_raw_body = self.__create_string_object_attr_type("<![CDATA[ " + raw_body_str.rstrip() + " ]]>" )
+            cybox_raw_body = self.__create_string_object_attr_type("<![CDATA[ " + raw_body_str.rstrip() + " ]]>")
         else:
             cybox_raw_body = None
 
         if self.include_urls:
             (map_urls, map_domains) = self.__parse_urls(list_raw_body)
             link_objs = [x.obj for x in map_urls.values()]
-            cybox_links = email_message_object.LinksType(Link = link_objs)
+            cybox_links = email_message_object.LinksType(Link=link_objs)
         else:
-            (map_urls, map_domains) = (None,None)
+            (map_urls, map_domains) = (None, None)
             cybox_links = None
 
         email_message_id = self.__get_email_obj_id()
-        cybox_email_message_obj =   self.__create_cybox_email_message_object( attachments = cybox_attachments,
-                                                                              links = cybox_links,
-                                                                              headers = cybox_headers,
-                                                                              optional_headers = cybox_optional_headers,
-                                                                              raw_body = cybox_raw_body,
-                                                                              raw_headers = cybox_raw_headers )
-        map_email_message = {email_message_id:cybox_email_message_obj}
+        cybox_email_message_obj = self.__create_cybox_email_message_object(attachments=cybox_attachments,
+                                                                           links=cybox_links,
+                                                                           headers=cybox_headers,
+                                                                           optional_headers=cybox_optional_headers,
+                                                                           raw_body=cybox_raw_body,
+                                                                           raw_headers=cybox_raw_headers)
+        map_email_message = {email_message_id: cybox_email_message_obj}
 
-        return {'message':map_email_message, 'files':map_files, 'urls':map_urls, 'domains':map_domains }
+        return {'message': map_email_message, 'files': map_files, 'urls': map_urls, 'domains': map_domains}
 
     def generate_cybox_from_email_file(self, data):
         """ Returns a CybOX Email Message Object """
