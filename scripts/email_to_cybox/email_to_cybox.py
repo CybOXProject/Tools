@@ -23,16 +23,17 @@ import datetime
 import urllib2
 import socket
 from collections import defaultdict
+
 #cybox bindings
-import cybox.bindings.cybox_common_types_1_0 as common
-import cybox.bindings.cybox_core_1_0 as cybox
-import cybox.bindings.email_message_object_1_2 as email_message_object
-import cybox.bindings.uri_object_1_2 as uri_object
-import cybox.bindings.file_object_1_3 as file_object
-import cybox.bindings.address_object_1_2 as address_object
-import cybox.bindings.whois_object_1_0 as whois_object
-import cybox.bindings.dns_query_object_1_0 as dns_query_object
-import cybox.bindings.dns_record_object_1_1 as dns_record_object
+#import cybox.bindings.cybox_common_types_1_0 as common
+#import cybox.bindings.cybox_core_1_0 as cybox
+#import cybox.bindings.email_message_object_1_2 as email_message_object
+#import cybox.bindings.uri_object_1_2 as uri_object
+#import cybox.bindings.file_object_1_3 as file_object
+#import cybox.bindings.address_object_1_2 as address_object
+#import cybox.bindings.whois_object_1_0 as whois_object
+#import cybox.bindings.dns_query_object_1_0 as dns_query_object
+#import cybox.bindings.dns_record_object_1_1 as dns_record_object
 
 #pip install dnspython
 import dns.resolver
@@ -40,24 +41,28 @@ import dns.resolver
 import whois
 import whois.parser
 
+from cybox.common import DateTime, PositiveInteger, String
+from cybox.objects.address_object import Address
+from cybox.objects.email_message_object import EmailHeader, EmailRecipients
+
 
 __all__ = ["EmailParser"]
 
 # BEGIN GLOBAL VARIABLES
 VERBOSE_OUTPUT = False
 
-ALLOWED_HEADER_FIELDS = ('to', 'cc', 'bcc', 'from',
-                         'subject', 'in-reply-to', 'date'
-                         'message-id', 'sender', 'reply-to',
-                         'errors-to')
-
-ALLOWED_OPTIONAL_HEADER_FIELDS = ('boundary', 'content-type', 'mime-version',
-                                  'precedence', 'x-mailer', 'x-originating-ip',
-                                  'x-priority')
+#TODO: Add Received Header support
+ALLOWED_HEADER_FIELDS = ('to', 'cc', 'bcc', 'from', 'subject',
+                         'in-reply-to', 'date', 'message-id', 'sender',
+                         'reply-to', 'errors-to', 'boundary', 'content-type',
+                         'mime-version', 'precedence', 'user-agent',
+                         'x-mailer', 'x-originating-ip', 'x-priority')
 
 HTTP_WHOIS_URL = 'http://whoiz.herokuapp.com/lookup.json?url='
 NAMESERVER = None
 # END GLOBAL VARIABLES
+
+EMAIL_PATTERN = re.compile('([\w\-\.+]+@(\w[\w\-]+\.)+[\w\-]+)')
 
 
 class EmailParser:
@@ -76,7 +81,6 @@ class EmailParser:
         self.include_attachments = True
         self.include_raw_body = True
         self.include_raw_headers = True
-        self.include_opt_headers = True
         self.include_url_objects = True
         self.include_domain_objects = True
 
@@ -86,13 +90,6 @@ class EmailParser:
 
         # by default, include all headers. This should be modified by the caller.
         self.headers = ALLOWED_HEADER_FIELDS
-        self.optional_headers = ALLOWED_OPTIONAL_HEADER_FIELDS
-
-    def set_header_options(self, headers):
-        # The FROM field is required by the schema in v1.1
-        if 'from' not in headers:
-            headers.append('from')
-        self.headers = headers
 
     class _newObjContainer:
         """Private class for storing new objects and their relationships"""
@@ -392,168 +389,79 @@ class EmailParser:
         day = datetime_tup[2]
         return "%02d-%02d-%02d" % (year, month, day)
 
+    #TODO: make static method
+    def _get_email_recipients(self, header):
+        """Parse a string into an EmailRecipients list"""
+        if not header:
+            return None
+
+        recips = EmailRecipients()
+        for match in EMAIL_PATTERN.findall(header):
+            recips.append(match[0])
+        return recips
+
+    #TODO: make static method
+    def _get_single_email_address(self, header):
+        """Extract a single email address from a header"""
+        if not header:
+            return None
+
+        match = EMAIL_PATTERN.search(header)
+        if match:
+            return Address(match.group(1), Address.CAT_EMAIL)
+        return None
+
     def __create_cybox_headers(self, msg):
         """ Returns a CybOX EmailHeaderType object """
-        email_pattern = re.compile('([\w\-\.+]+@(\w[\w\-]+\.)+[\w\-]+)')
-
-        (TO, CC, BCC, FROM, SUBJECT, IN_REPLY_TO, DATE, MESSAGE_ID, SENDER, REPLY_TO, ERRORS_TO) = ('to', 'cc', 'bcc', 'from', 'subject', 'in_reply_to', 'date', 'message-id', 'sender', 'reply-to', 'errors-to')
-
         if self.__verbose_output:
             print "** parsing headers"
 
-        msg_to = msg[TO]
-        msg_cc = msg[CC]
-        msg_bcc = msg[BCC]
-        msg_from = msg[FROM]
-        msg_subject = msg[SUBJECT]
-        msg_in_reply_to = msg[IN_REPLY_TO]
-        msg_date = msg[DATE]
-        msg_message_id = msg[MESSAGE_ID]
-        msg_sender = msg[SENDER]
-        msg_reply_to = msg[REPLY_TO]
-        msg_errors_to = msg[ERRORS_TO]
+        print self.headers
+        headers = EmailHeader()
 
-        to_addrs = None
-        if msg_to and (TO in self.headers):
-            to_addrs = email_message_object.EmailRecipientsType()
-            for match in email_pattern.findall(msg_to):
-                email_addr_str = match[0]
-                addr_obj = self.__create_email_address_object(email_addr_str)
-                to_addrs.add_Recipient(addr_obj)
+        #TODO: Add Received lines
+        if 'to' in self.headers:
+            headers.to = self._get_email_recipients(msg['to'])
+        if 'cc' in self.headers:
+            headers.cc = self._get_email_recipients(msg['cc'])
+        if 'bcc' in self.headers:
+            headers.bcc = self._get_email_recipients(msg['bcc'])
+        if 'from' in self.headers:
+            headers.from_ = self._get_single_email_address(msg['from'])
+        if 'sender' in self.headers:
+            headers.sender = self._get_single_email_address(msg['sender'])
+        if 'reply-to' in self.headers:
+            headers.reply_to = self._get_single_email_address(msg['reply-to'])
+        if 'subject' in self.headers:
+            headers.subject = String(msg['subject'])
+        if 'in-reply-to' in self.headers:
+            headers.in_reply_to = String(msg['in-reply-to'])
+        if 'errors-to' in self.headers:
+            headers.errors_to = String(msg['errors-to'])
+        if 'date' in self.headers:
+            headers.date = DateTime(msg['date'])
+        if 'message-id' in self.headers:
+            headers.message_id = String(msg['message-id'])
+        if 'boundary' in self.headers:
+            headers.boundary = String(msg['boundary'])
+        if 'content-type' in self.headers:
+            headers.content_type = String(msg['content-type'])
+        if 'mime-version' in self.headers:
+            headers.mime_version = String(msg['mime-version'])
+        if 'precedence' in self.headers:
+            headers.precedence = String(msg['precedence'])
+        if 'user-agent' in self.headers:
+            headers.user_agent = String(msg['user-agent'])
+        if 'x-mailer' in self.headers:
+            headers.x_mailer = String(msg['x-mailer'])
+        if 'x-originating-ip' in self.headers:
+            headers.x_originating_ip = Address(msg['x-originating-ip'],
+                                               Address.CAT_IPV4)
+        if 'x-priority' in self.headers:
+            headers.x_priority = String(msg['x-priority'])
 
-        cc_addrs = None
-        if msg_cc and (CC in self.headers):
-            cc_addrs = email_message_object.EmailRecipientsType()
-            for match in email_pattern.findall(msg_cc):
-                email_addr_str = match[0]
-                addr_obj = self.__create_email_address_object(email_addr_str)
-                cc_addrs.add_Recipient(addr_obj)
-
-        bcc_addrs = None
-        if msg_bcc and (BCC in self.headers):
-            bcc_addrs = email_message_object.EmailRecipientsType()
-            for match in email_pattern.findall(msg_bcc):
-                email_addr_str = match[0]
-                addr_obj = self.__create_email_address_object(email_addr_str)
-                bcc_addrs.add_Recipient(addr_obj)
-
-        from_addr = None
-        if msg_from and (FROM in self.headers):
-            from_addr_match = email_pattern.search(msg_from)
-            if from_addr_match:
-                from_addr_str = from_addr_match.group(1)
-                from_addr = self.__create_email_address_object(from_addr_str)
-        else:
-            # a From entry is required by the schema
-            from_addr = self.__create_email_address_object("")
-
-        sender_addr = None
-        if msg_sender and (SENDER in self.headers):
-            sender_addr_match = email_pattern.search(msg_sender)
-            if sender_addr_match:
-                sender_addr_str = sender_addr_match.group(1)
-                sender_addr = self.__create_email_address_object(sender_addr_str)
-
-        reply_to_addr = None
-        if msg_reply_to and (REPLY_TO in self.headers):
-            reply_to_addr_match = email_pattern.search(msg_reply_to)
-            if reply_to_addr_match:
-                reply_to_addr_str = reply_to_addr_match.group(1)
-                reply_to_addr = self.__create_email_address_object(reply_to_addr_str)
-
-        if SUBJECT in self.headers:
-            subject = self.__create_string_object_attr_type(msg_subject)
-        else:
-            subject = None
-
-        if IN_REPLY_TO in self.headers:
-            in_reply_to = self.__create_string_object_attr_type(msg_in_reply_to)
-        else:
-            in_reply_to = None
-
-        if ERRORS_TO in self.headers:
-            errors_to = self.__create_string_object_attr_type(msg_errors_to)
-        else:
-            errors_to = None
-
-        xml_date_time = None
-        if msg_date and (DATE in self.headers):
-            parsedtime = email.utils.parsedate_tz(msg_date)
-            xml_date_time = common.DateTimeObjectAttributeType(
-                            valueOf_=self.__get_xml_datetime_fmt(parsedtime))
-
-        # formatting to prevent xml invalidation
-        message_id = None
-        if msg_message_id and (MESSAGE_ID in self.headers):
-            if msg_message_id[0] == '<':
-                msg_message_id = msg_message_id[1:-1]
-            if msg_message_id[-1] == '>':
-                msg_message_id = msg_message_id[0:-2]
-            message_id = self.__create_string_object_attr_type(msg_message_id)
-
-        header_obj = email_message_object.EmailHeaderType(
-                     to_addrs, cc_addrs, bcc_addrs, from_addr, subject,
-                     in_reply_to, xml_date_time, message_id, sender_addr,
-                     reply_to_addr, errors_to)
-
-        return header_obj
-
-    def __create_cybox_optional_headers(self, msg):
-        """ Returns a CybOX EmailOptionalHeadersType object """
-
-        (BOUNDARY, CONTENT_TYPE, MIME_VERSION, PRECEDENCE, X_MAILER, X_ORIGINATING_IP, X_PRIORITY) = ('boundary', 'content-type', 'mime-version', 'precedence', 'x-mailer', 'x-originating-ip', 'x-priority')
-
-        if self.__verbose_output:
-            print "** parsing optional headers"
-
-        msg_boundary = msg[BOUNDARY]
-        msg_content_type = msg[CONTENT_TYPE]
-        msg_mime_version = msg[MIME_VERSION]
-        msg_precedence = msg[PRECEDENCE]
-        msg_x_mailer = msg[X_MAILER]
-        msg_x_originating_ip = msg[X_ORIGINATING_IP]
-        msg_x_priority = msg[X_PRIORITY]
-
-        if BOUNDARY in self.optional_headers:
-            boundary = self.__create_string_object_attr_type(msg_boundary)
-        else:
-            boundary = None
-
-        if CONTENT_TYPE in self.optional_headers:
-            content_type = self.__create_string_object_attr_type(msg_content_type)
-        else:
-            content_type = None
-
-        if MIME_VERSION in self.optional_headers:
-            mime_version = self.__create_string_object_attr_type(msg_mime_version)
-        else:
-            mime_version = None
-
-        if PRECEDENCE in self.optional_headers:
-            precedence = self.__create_string_object_attr_type(msg_precedence)
-        else:
-            precedence = None
-
-        if X_MAILER in self.optional_headers:
-            x_mailer = self.__create_string_object_attr_type(msg_x_mailer)
-        else:
-            x_mailer = None
-
-        x_priority = None
-        if msg_x_priority and (X_PRIORITY in self.optional_headers):
-            x_priority = common.PositiveIntegerObjectAttributeType(
-                               valueOf_=int(msg_x_priority))
-
-        x_originating_ip_addr = None
-        if msg_x_originating_ip and (X_ORIGINATING_IP in self.optional_headers):
-            x_originating_ip_addr = self.__create_ip_address_object(msg_x_originating_ip)
-
-        optional_header_obj = email_message_object.EmailOptionalHeaderType(
-                              boundary, content_type, mime_version,
-                              precedence, x_mailer, x_originating_ip_addr,
-                              x_priority)
-
-        return optional_header_obj
+        print headers.to_xml()
+        return headers.to_obj()
 
     def __create_url_object(self, url):
         """ Creates a CybOX URIObjectType object """
@@ -705,6 +613,7 @@ class EmailParser:
         addr_obj.set_anyAttributes_({'xsi:type': 'AddressObj:AddressObjectType'})
         return addr_obj
 
+    #TODO: delete
     def __create_string_object_attr_type(self, value):
         """ Returns a CybOX StringObjectAttributeType object with a value
         of @value """
@@ -963,7 +872,7 @@ class EmailParser:
 
         related_objects.add_Related_Object(related_object)
 
-    def __create_cybox_email_message_object(self, attachments=None, links=None, headers=None, optional_headers=None, email_server=None, raw_body=None, raw_headers=None):
+    def __create_cybox_email_message_object(self, attachments=None, links=None, headers=None, email_server=None, raw_body=None, raw_headers=None):
         """ Creates/returns a CybOX EmailMessageType from the given input params
 
         + The Email_Server element is ambiguous and ignored. I'm not
@@ -975,7 +884,6 @@ class EmailParser:
                                     Attachments=attachments,
                                     Links=links,
                                     Header=headers,
-                                    Optional_Header=optional_headers,
                                     Email_Server=email_server,
                                     Raw_Body=raw_body,
                                     Raw_Header=raw_headers)
@@ -1046,11 +954,6 @@ class EmailParser:
         # Headers are required (for now)
         cybox_headers = self.__create_cybox_headers(msg)
 
-        if self.include_opt_headers:
-            cybox_optional_headers = self.__create_cybox_optional_headers(msg)
-        else:
-            cybox_optional_headers = None
-
         if self.include_attachments:
             map_files = self.__create_cybox_files(msg)
             cybox_attachments = self.__create_cybox_attachments(map_files)
@@ -1088,7 +991,6 @@ class EmailParser:
         cybox_email_message_obj = self.__create_cybox_email_message_object(attachments=cybox_attachments,
                                                                            links=cybox_links,
                                                                            headers=cybox_headers,
-                                                                           optional_headers=cybox_optional_headers,
                                                                            raw_body=cybox_raw_body,
                                                                            raw_headers=cybox_raw_headers)
         map_email_message = {email_message_id: cybox_email_message_obj}
@@ -1149,23 +1051,12 @@ def parse_header_options(arg):
     return list_headers
 
 
-def parse_optional_header_options(arg):
-    global ALLOWED_OPTIONAL_HEADER_FIELDS
-    list_headers = arg.split(',')
-
-    for header in list_headers:
-        if header and (header not in ALLOWED_OPTIONAL_HEADER_FIELDS):
-            print "!! unrecoginized optional header field: " + header
-
-    return list_headers
-
-
 def main():
     global VERBOSE_OUTPUT
     global ALLOWED_HEADER_FIELDS
-    global ALLOWED_OPTIONAL_HEADER_FIELDS
     global NAMESERVER
 
+    description = "Converts raw email to CybOX representation"
     #TODO: make this look cleaner
     epilog = """
         Example: `cat email.txt | python email_to_cybox.py -o output.xml - ` \n
@@ -1173,19 +1064,18 @@ def main():
         Example: `python email_to_cybox.pw -i foobar.txt -o output.xml --headers to,from,cc --exclude-urls` \n
         """
 
-    parser = argparse.ArgumentParser(description="Converts raw email to CybOX representation",
-            epilog=epilog)
-    parser.add_argument('-v', '--verbose', action='store_true', help="verbose output")
+    parser = argparse.ArgumentParser(description=description, epilog=epilog)
+    parser.add_argument('-v', '--verbose', action='store_true',
+            help="verbose output")
 
     parser.add_argument('-i', '--input', help="input file")
-    parser.add_argument('-o', '--output', help="output file", default="output.xml")
+    parser.add_argument('-o', '--output', help="output file",
+            default="output.xml")
 
     parser.add_argument('--inline-files', action='store_true',
             help="embed file object details in the attachment section")
 
     # TODO: convert these from negative to positive
-    parser.add_argument('--exclude-opt-headers', action="store_true",
-            help='exclude optional header fields from cybox email message object')
     parser.add_argument('--exclude-attachments', action="store_true",
             help='exclude attachments from cybox email message object')
     parser.add_argument('--exclude-raw-body', action="store_true",
@@ -1211,18 +1101,12 @@ def main():
 
     parser.add_argument('--use-dns-server', metavar="DNS-SERVER",
             help=' use this DNS server for DNS lookup of domains')
-    parser.add_argument('--headers', default="",
-            help="comma separated list of header fields to be included "
-                "in the cybox email message object. SPACES NOT "
-                "ALLOWED IN LIST OF FIELDS "
-                "fields('to', 'cc', 'bcc', 'from', 'subject', 'in-reply-to', "
-                "'date', 'message-id', 'sender', 'reply-to', 'errors-to')")
-    parser.add_argument('--opt-headers', default="",
-            help="comma separated list of optional header fields "
-                "to be included in the cybox email message object. "
-                "SPACES NOT ALLOWED IN LIST OF FIELDS. "
-                "fields('boundary', 'content-type', 'mime-version', "
-                "'precedence', 'x-mailer', 'x-originating-ip','x-priority'")
+    parser.add_argument('--headers',
+            help="comma-separated list of header fields to be included in the "
+                 "in the CybOX EmailMessage output. DO NOT INCLUDE SPACES. "
+                 "Allowed fields: " + ", ".join(ALLOWED_HEADER_FIELDS) + ". "
+                 "If not specified, all of these headers will be included if "
+                 "present.")
 
     args = parser.parse_args()
 
@@ -1237,17 +1121,15 @@ def main():
 
     translator = EmailParser(VERBOSE_OUTPUT)
 
-    translator.headers = args.headers.split(',')
-    translator.optional_headers = args.opt_headers.split(',')
-
+    if args.headers:
+        translator.headers = args.headers.split(',')
     translator.inline_files = args.inline_files
 
     translator.include_raw_body = not args.exclude_raw_body
     translator.include_raw_headers = not args.exclude_raw_headers
     translator.include_attachments = not args.exclude_attachments
     translator.include_urls = not args.exclude_urls
-    translator.include_opt_headers = not args.exclude_opt_headers
-    translator.include_url_objects = not args.exclude_opt_headers
+    translator.include_url_objects = not args.exclude_url_objs
     translator.include_domain_objects = not args.exclude_domain_objs
 
     translator.dns = args.dns
