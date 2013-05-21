@@ -88,7 +88,7 @@ class EmailParser:
         self.whois = False
         self.http_whois = False
 
-        # by default, include all headers. This should be modified by the caller.
+        # By default, include all headers. This can be modified by the caller.
         self.headers = ALLOWED_HEADER_FIELDS
 
     class _newObjContainer:
@@ -416,7 +416,6 @@ class EmailParser:
         if self.__verbose_output:
             print "** parsing headers"
 
-        print self.headers
         headers = EmailHeader()
 
         #TODO: Add Received lines
@@ -460,7 +459,6 @@ class EmailParser:
         if 'x-priority' in self.headers:
             headers.x_priority = String(msg['x-priority'])
 
-        print headers.to_xml()
         return headers.to_obj()
 
     def __create_url_object(self, url):
@@ -1039,21 +1037,8 @@ class EmailParser:
 # END CLASS
 
 
-def parse_header_options(arg):
-    global ALLOWED_HEADER_FIELDS
-    list_headers = arg.split(',')
-
-    # validation
-    for header in list_headers:
-        if header and (header not in ALLOWED_HEADER_FIELDS):
-            print "!! unrecoginized header field: " + header
-
-    return list_headers
-
-
 def main():
     global VERBOSE_OUTPUT
-    global ALLOWED_HEADER_FIELDS
     global NAMESERVER
 
     description = "Converts raw email to CybOX representation"
@@ -1122,7 +1107,12 @@ def main():
     translator = EmailParser(VERBOSE_OUTPUT)
 
     if args.headers:
-        translator.headers = args.headers.split(',')
+        header_list = args.headers.split(',')
+        for header in header_list:
+            if header and (header not in ALLOWED_HEADER_FIELDS):
+                parser.error("Unrecognized header field: %s" % header)
+        translator.headers = header_list
+
     translator.inline_files = args.inline_files
 
     translator.include_raw_body = not args.exclude_raw_body
