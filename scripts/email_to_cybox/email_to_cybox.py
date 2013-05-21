@@ -9,20 +9,21 @@ v0.2 BETA // Compatible with CybOX v1.0
 """
 
 import argparse
-
-import hashlib
 import base64
-import uuid
-import quopri
-import sys
-import traceback
-import email
-import re
-import time
-import datetime
-import urllib2
-import socket
 from collections import defaultdict
+import datetime
+import email
+import hashlib
+import os
+import quopri
+import re
+import socket
+import sys
+import time
+import traceback
+import urllib2
+import uuid
+
 
 #cybox bindings
 #import cybox.bindings.cybox_common_types_1_0 as common
@@ -41,9 +42,12 @@ import dns.resolver
 import whois
 import whois.parser
 
-from cybox.common import DateTime, PositiveInteger, String
+import cybox.core
+from cybox.common import DateTime, Hash, PositiveInteger, String
 from cybox.objects.address_object import Address
-from cybox.objects.email_message_object import EmailHeader, EmailRecipients
+from cybox.objects.email_message_object import (Attachments, EmailHeader,
+        EmailMessage, EmailRecipients)
+from cybox.objects.file_object import File
 
 
 __all__ = ["EmailParser"]
@@ -63,6 +67,13 @@ NAMESERVER = None
 # END GLOBAL VARIABLES
 
 EMAIL_PATTERN = re.compile('([\w\-\.+]+@(\w[\w\-]+\.)+[\w\-]+)')
+
+# Regex taken from Daring Fireball and modified:
+#   http://daringfireball.net/2010/07/improved_regex_for_matching_urls
+# The original is considered under public domain.
+
+URL_RE = r"""(?i)\b((?:(https?|ftp)://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?]))"""
+URL_PATTERN = re.compile(URL_RE, re.VERBOSE | re.MULTILINE)
 
 
 class EmailParser:
@@ -146,34 +157,6 @@ class EmailParser:
         else:
             EMAIL_OBJECT_ID = self.__create_cybox_id()
             return EMAIL_OBJECT_ID
-
-    def __get_file_size(self, base64_enc_data):
-        """ Returns file size of base64 decompressed attachment """
-        num_bytes = len(base64.b64decode(base64_enc_data))
-        return num_bytes
-
-    def __get_attachment_md5(self, base64_enc_data):
-        """ Returns the MD5 hash for the given attachment.
-        Because the attachments are base64 encoded,
-        we need to decode the data and then run the
-        digest algorithm """
-        decoded = base64.b64decode(base64_enc_data)
-        m = hashlib.md5()
-        m.update(decoded)
-        digest = m.hexdigest()
-        return digest
-
-    def __get_attachment_extension(self, msg):
-        """ Returns the extension of the email attachment if it
-        has one"""
-        extension = None
-        filename = msg.get_filename()
-        dot_idx = filename.rfind('.')
-
-        if(dot_idx != -1):
-            extension = filename[dot_idx + 1:]
-
-        return extension
 
     def __get_attachment_created_date(self, msg):
         """ Returns the creation date of the attachment if provided
@@ -302,12 +285,14 @@ class EmailParser:
         return record
 
     def __create_cybox_files(self, msg):
-        """ Returns a map of file objects, keyed by a cybox uuid
-        Attachments can be identified within multipart messages
-        by their Content-Disposition header.
+        """Returns a list of CybOX File objects from the message.
+
+        Attachments can be identified within multipart messages by their
+        Content-Disposition header.
         Ex: Content-Disposition: attachment; filename="foobar.jpg"
         """
-        map_file_objs = {}
+
+        files = []
 
         if self.__verbose_output:
             print "** parsing attachments"
@@ -318,37 +303,32 @@ class EmailParser:
                 if 'content-disposition' in part:
                     # if it's an attachment-type, pull out the filename
                     # and calculate the size in bytes
-                    filename = part.get_filename()
-                    file_size = self.__get_file_size(part.get_payload())
-                    md5_hash = self.__get_attachment_md5(part.get_payload())
-                    size_in_bytes = common.UnsignedLongObjectAttributeType(
-                                    valueOf_=str(file_size))
-                    modified_date = self.__get_attachment_modified_date(part)
-                    created_date = self.__get_attachment_created_date(part)
-                    extension = self.__get_attachment_extension(part)
 
-                    if(self.__verbose_output):
-                        print "** creating file object for: " + filename + " size: " + str(file_size) + " bytes"
+                    file_name = part.get_filename()
+                    file_data = part.get_payload(decode=True)
 
-                    cybox_id = self.__create_cybox_id("object")
+                    f = File()
+                    f.file_name = file_name
+                    f.size = len(file_data)
+                    f.file_extension = os.path.splitext(file_name)[1]
 
-                    hash_type_obj = self.__create_hash_object(md5_hash)
+                    #TODO: add support for created and modified dates
+                    #modified_date = self.__get_attachment_modified_date(part)
+                    #created_date = self.__get_attachment_created_date(part)
 
-                    file_obj = file_object.FileObjectType(
-                               File_Name=self.__create_string_object_attr_type(filename),
-                               File_Extension=self.__create_string_object_attr_type(extension),
-                               Size_In_Bytes=size_in_bytes,
-                               Hashes=self.__create_hash_list_object([hash_type_obj]),
-                               Modified_Time=self.__create_string_object_attr_type(modified_date),
-                               Created_Time=self.__create_date_time_object_attr_type(created_date))
+                    if self.__verbose_output:
+                        print "** creating file object for: %s, size: %d bytes" % (f.file_name, f.size)
 
-                    file_obj.set_anyAttributes_({'xsi:type': 'FileObj:FileObjectType'})
-                    file_obj_container = self._newObjContainer(cybox_id, file_obj)
-                    file_obj_container.add_relationship(self.__get_email_obj_id(), 'Email Message', 'Contained_Within')
-                    self.__add_email_obj_relationship(cybox_id, 'File', 'Contains')
-                    map_file_objs[cybox_id] = file_obj_container
+                    md5_hash = hashlib.md5(file_data).hexdigest()
+                    f.add_hash(md5_hash)
 
-        return map_file_objs
+                    #TODO: create relationships between File and EmailMessage objects
+                    #file_obj_container.add_relationship(self.__get_email_obj_id(), 'Email Message', 'Contained_Within')
+                    #self.__add_email_obj_relationship(cybox_id, 'File', 'Contains')
+
+                    files.append(f)
+
+        return files
 
     def __get_xml_datetime_fmt(self, datetime_tup):
         """ Takes a tuple returned from email.util.parsedate_tz and converts it to an xs:dateTime formatted string with offset """
@@ -657,16 +637,15 @@ class EmailParser:
         finding the body segments.
 
         Each textual MIME segment which is not an attachment or header
-        is appended to a list of tuples of the form (encoding, body_text)"""
-
+        is appended to a list of body parts."""
         raw_body = []
 
-        if msg.is_multipart() == False:
+        #TODO: clean this up with message.walk
+        if not msg.is_multipart():
             # text document attachments have a content type of text, so we have to filter them out
             if ('content-disposition' not in msg) and (msg.get_content_maintype() == 'text'):
-                encoding = msg['content-transfer-encoding']
-                raw_body_str = msg.get_payload()
-                raw_body.append((encoding, raw_body_str))
+                raw_body_str = msg.get_payload(decode=True)
+                raw_body.append(raw_body_str)
         else:
             for part in msg.get_payload():
                 raw_body.extend(self.__get_raw_body_text(part))
@@ -823,24 +802,6 @@ class EmailParser:
         new_objs['URI'] = uri_container
         return new_objs
 
-    def __create_cybox_attachments(self, map_files):
-        """ Creates a CybOX AttachmentsType object from the map_files input.
-        The input map should be of the form {object_id:cybox_file_object}"""
-        attachments = None
-
-        if map_files:
-            attachments = email_message_object.AttachmentsType()
-
-            for file_id, f in map_files.iteritems():
-                if self.inline_files:
-                    attachments.add_File(f.obj)
-                else:
-                    file_obj = file_object.FileObjectType()
-                    file_obj.set_anyAttributes_({'xsi:type': 'FileObj:FileObjectType'})
-                    file_obj.set_object_reference(file_id)
-                    attachments.add_File(file_obj)
-
-        return attachments
 
     def __get_raw_headers(self, msg):
         """ Returns a string representation of the raw email headers found within the
@@ -949,36 +910,31 @@ class EmailParser:
         Keys: 'message', 'files', 'urls'
         """
 
+        message = EmailMessage()
+
         # Headers are required (for now)
-        cybox_headers = self.__create_cybox_headers(msg)
+        message.header = self.__create_cybox_headers(msg)
+
 
         if self.include_attachments:
-            map_files = self.__create_cybox_files(msg)
-            cybox_attachments = self.__create_cybox_attachments(map_files)
-        else:
-            map_files = None
-            cybox_attachments = None
+            files = self.__create_cybox_files(msg)
+            message.attachments = Attachments()
+            for f in files:
+                message.attachments.append(f.parent.id_)
 
         if self.include_raw_headers:
             raw_headers_str = self.__get_raw_headers(msg)
-            cybox_raw_headers = self.__create_string_object_attr_type("<![CDATA[ " + raw_headers_str + " ]]>")
-        else:
-            cybox_raw_headers = None
+            message.raw_header = String("<![CDATA[ " + raw_headers_str + " ]]>")
 
         # need this for parsing urls AND raw body text
-        list_raw_body = self.__get_raw_body_text(msg)
+        raw_body = "\n".join(self.__get_raw_body_text(msg)).strip()
+        print raw_body
 
         if self.include_raw_body:
-            raw_body_str = ""
-            for raw_body_segment_tup in list_raw_body:
-                raw_body_str += raw_body_segment_tup[1] + "\n"
-
-            cybox_raw_body = self.__create_string_object_attr_type("<![CDATA[ " + raw_body_str.rstrip() + " ]]>")
-        else:
-            cybox_raw_body = None
+            message.raw_body = String("<![CDATA[ " + raw_body + " ]]>")
 
         if self.include_urls:
-            (map_urls, map_domains) = self.__parse_urls(list_raw_body)
+            (map_urls, map_domains) = self.__parse_urls(raw_body)
             link_objs = [x.obj for x in map_urls.values()]
             cybox_links = email_message_object.LinksType(Link=link_objs)
         else:
@@ -986,6 +942,8 @@ class EmailParser:
             cybox_links = None
 
         email_message_id = self.__get_email_obj_id()
+
+
         cybox_email_message_obj = self.__create_cybox_email_message_object(attachments=cybox_attachments,
                                                                            links=cybox_links,
                                                                            headers=cybox_headers,
@@ -993,7 +951,7 @@ class EmailParser:
                                                                            raw_headers=cybox_raw_headers)
         map_email_message = {email_message_id: cybox_email_message_obj}
 
-        return {'message': map_email_message, 'files': map_files, 'urls': map_urls, 'domains': map_domains}
+        return {'message': map_email_message, 'files': files, 'urls': map_urls, 'domains': map_domains}
 
     def generate_cybox_from_email_file(self, data):
         """ Returns a CybOX Email Message Object """
