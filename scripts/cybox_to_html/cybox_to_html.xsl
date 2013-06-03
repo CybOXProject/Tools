@@ -9,10 +9,13 @@ ikirillov@mitre.org
 
 
 <xsl:stylesheet 
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"
+    version="3.0"
+    xmlns:cybox="http://cybox.mitre.org/cybox-2"
+    xmlns:Common="http://cybox.mitre.org/common-2"
+    xmlns:ArtifactObj="http://cybox.mitre.org/objects#ArtifactObject-2"
+    
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:cybox="http://cybox.mitre.org/cybox_v1"
-    xmlns:Common="http://cybox.mitre.org/Common_v1"
     xmlns:SystemObj="http://cybox.mitre.org/objects#SystemObject"
     xmlns:FileObj="http://cybox.mitre.org/objects#FileObject"
     xmlns:ProcessObj="http://cybox.mitre.org/objects#ProcessObject"
@@ -35,13 +38,14 @@ ikirillov@mitre.org
     xmlns:WinExecutableFileObj="http://cybox.mitre.org/objects#WinExecutableFileObject"
     xmlns:WinProcessObj="http://cybox.mitre.org/objects#WinProcessObject">
     
-<xsl:output method="html" omit-xml-declaration="yes" indent="no" media-type="text/html"/>
+<xsl:output method="html" omit-xml-declaration="yes" indent="no" media-type="text/html" version="4.0" />
    <xsl:key name="observableID" match="cybox:Observable" use="@id"/>
     
     <xsl:template match="/">
             <html>
+               <head>
                 <title>CybOX Output</title>
-                <STYLE type="text/css">
+                <style type="text/css">
                     /* define table skin */
                     table.grid {
                     margin: 0px;
@@ -236,25 +240,31 @@ ikirillov@mitre.org
                     font-size: 12px;
                     margin-bottom: 2px;
                     }
-                </STYLE>
+                </style>
                 
-                <SCRIPT type="text/javascript">
+                <script type="text/javascript">
                     //Collapse functionality
-                    function toggleDiv(divid, spanID){
-                    if(document.getElementById(divid).style.display == 'none'){
-                    document.getElementById(divid).style.display = 'block';
-                    if(spanID){
-                    document.getElementById(spanID).innerText = "-";
-                    }
-                    }else{
-                    document.getElementById(divid).style.display = 'none';
-                    if(spanID){
-                    document.getElementById(spanID).innerText = "+";
-                    }
-                    }
-                    }
-                </SCRIPT>
-                <head/>
+                    function toggleDiv(divid, spanID)
+                    {
+                      if(document.getElementById(divid).style.display == 'none')
+                      {
+                        document.getElementById(divid).style.display = 'block';
+                        if(spanID)
+                        {
+                          document.getElementById(spanID).innerText = "-";
+                        }
+                      } // end of if-then
+                      else
+                      {
+                        document.getElementById(divid).style.display = 'none';
+                        if(spanID)
+                        {
+                          document.getElementById(spanID).innerText = "+";
+                        }
+                      } // end of else
+                    } // end of function toggleDiv()
+                </script>
+                </head>
                 <body>
                     <div id="wrapper">
                         <div id="header"> 
@@ -351,6 +361,26 @@ ikirillov@mitre.org
                         </table> 
                     </div>
                 </xsl:if>              
+              <!-- <xsl:if test="cybox:Observable"> -->
+                  <br/>
+                  <div id="section">
+                      <table id="one-column-emphasis">
+                          <colgroup>
+                              <col class="oce-first-obs" />
+                          </colgroup>
+                          <tbody>
+                              <tr>
+                                  <td>Observable</td>
+                                  <td>
+                                      <!-- <xsl:for-each select="cybox:Observable"> -->
+                                          <xsl:call-template name="processPlainObservable"/>
+                                      <!-- </xsl:for-each> -->
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table> 
+                  </div>
+              <!-- </xsl:if> -->
               <xsl:if test="cybox:Observable_Composition">
                   <br/>
                   <div id="section">
@@ -465,6 +495,33 @@ ikirillov@mitre.org
         </xsl:if>
     </xsl:template>
     
+    <xsl:template name="processPlainObservable">
+        <xsl:param name="span_var" select="generate-id()"/>
+        <xsl:param name="div_var" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
+        <xsl:if test="@id">
+            <xsl:if test="cybox:Object">
+                <xsl:for-each select="cybox:Object">
+                    <xsl:call-template name="processObject">
+                        <xsl:with-param name="div_var" select="$div_var"/>
+                        <xsl:with-param name="span_var" select="$span_var"/>
+                    </xsl:call-template>
+                </xsl:for-each>
+            </xsl:if>
+        </xsl:if>
+        <xsl:if test="@idref">
+            <xsl:for-each select="key('observableID',@idref)">
+                <xsl:if test="cybox:Stateful_Measure">
+                    <xsl:for-each select="cybox:Stateful_Measure">
+                        <xsl:call-template name="processStatefulMeasure">
+                            <xsl:with-param name="div_var" select="$div_var"/>
+                            <xsl:with-param name="span_var" select="$span_var"/>
+                        </xsl:call-template>
+                    </xsl:for-each>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:if>
+    </xsl:template>
+
     <xsl:template name="processStatefulMeasure">
         <xsl:param name="span_var"/>
         <xsl:param name="div_var"/>
@@ -1548,6 +1605,10 @@ ikirillov@mitre.org
             <xsl:if test="cybox:Defined_Object/@xsi:type">
                 <div id="defined_object_type_label"><xsl:value-of select="cybox:Defined_Object/@xsi:type"/></div>
             </xsl:if>
+            
+            <xsl:for-each select="cybox:Properties">
+                <xsl:call-template name="processProperties"/>
+            </xsl:for-each>
         </div>
         <div id="container">
             <xsl:if test="cybox:Defined_Object">
@@ -1563,7 +1624,18 @@ ikirillov@mitre.org
                     <xsl:call-template name="processDefinedEffect"/>
                 </xsl:for-each>
             </xsl:if>
+            <!--
+            <xsl:if test="cybox:Properties">
+                <xsl:for-each select="cybox:Properties">
+                    <xsl:call-template name="processProperties"/>
+                </xsl:for-each>
+            </xsl:if>
+            -->
         </div>
+    </xsl:template>
+    
+    <xsl:template name="processProperties">
+        <xsl:apply-templates select="." />
     </xsl:template>
 
     <xsl:template name="processWinExecutableFileObject">
@@ -6478,4 +6550,34 @@ ikirillov@mitre.org
             </tbody>
         </table> 
     </xsl:template>
+    
+    
+    <xsl:template match="cybox:Properties">
+        <fieldset>
+            <legend>cybox properties (type: <xsl:value-of select="@xsi:type"/>)</legend>
+            <dl>
+                <xsl:for-each select="*">
+                    <dt><xsl:value-of select="local-name()" /></dt>
+                    <dd><xsl:apply-templates select="." /> <xsl:if test="@condition"> (condition: <xsl:value-of select="@condition"/>)</xsl:if></dd>
+                </xsl:for-each>
+            </dl>
+            
+            <div>
+                <xsl:apply-templates select="EmailMessageObj:Header"/>
+            </div>
+        </fieldset>
+    </xsl:template>
+    
+    <xsl:template match="ArtifactObj:Raw_Artifact">
+        raw data omitted [length: <xsl:value-of select="string-length()"/>]
+    </xsl:template>
+    
+    <xsl:template match="ArtifactObj:Packaging">
+        <!--packaging:--> <xsl:apply-templates />
+    </xsl:template>
+    
+    <xsl:template match="ArtifactObj:Encoding">
+        encoding algorithm is <xsl:value-of select="@algorithm"/>
+    </xsl:template>
+    
 </xsl:stylesheet>
