@@ -1,9 +1,10 @@
 #OpenIOC to CybOX Translator
-#v0.1 BETA
-#Generates valid CybOX v1.0 XML output from OpenIOCs
+#v0.2 BETA
+#Generates valid CybOX v2.0 XML output from OpenIOCs
 import openioc
-import cybox.cybox_1_0 as cybox
-import cybox.common_types_1_0 as common
+import cybox.bindings.cybox_core as cybox_binding
+import cybox.bindings.cybox_common as cybox_common_binding
+import cybox.bindings.file_object as file_binding
 import ioc_observable
 import sys
 import os
@@ -62,8 +63,8 @@ def process_indicator_item(indicator_item, observables = None, indicatoritem_dic
     content_string = content.get_valueOf_().rstrip()
     condition = indicator_item.get_condition()
 
-    defined_object = ioc_observable.createObj(search_string, content_string, map_condition_keywords(condition))
-    if defined_object != None:
+    properties = ioc_observable.createObj(search_string, content_string, map_condition_keywords(condition))
+    if properties != None:
         if observables != None:
             id_string = ''
             if indicator_item.get_id() is not None:
@@ -71,12 +72,8 @@ def process_indicator_item(indicator_item, observables = None, indicatoritem_dic
             else:
                 id_string = 'openioc:indicator-item-' + generate_observable_id()
                 indicatoritem_dict[get_indicatoritem_string(indicator_item)] = id_string
-            observable = cybox.ObservableType(id=id_string)
-            stateful_measure = cybox.StatefulMeasureType()
-            cybox_object = cybox.ObjectType(id='cybox:object-' + generate_object_id())
-            cybox_object.set_Defined_Object(defined_object)
-            stateful_measure.set_Object(cybox_object)
-            observable.set_Stateful_Measure(stateful_measure)
+            observable = cybox_binding.ObservableType(id=id_string)
+            observable.set_Object(cybox_binding.ObjectType(Properties=properties))
             observables.add_Observable(observable)
         return True
     else:
@@ -98,8 +95,9 @@ def test_compatible_indicator(indicator):
             return True
     #Recurse as needed to handle embedded indicators
     for embedded_indicator in indicator.get_Indicator():
-        return test_compatible_indicator(embedded_indicator)
-    
+        if test_compatible_indicator(embedded_indicator):
+            return True
+        
     return False
 
 #Process a single indicator and create the associated observable structure
@@ -109,8 +107,8 @@ def process_indicator(indicator, observables, observable_composition, top_level=
         indicatoritem_dict = {}
         current_composition = None
         if top_level == False:
-            observable = cybox.ObservableType(id='openioc:indicator-' + normalize_id(indicator.get_id()))
-            nested_observable_composition = cybox.ObservableCompositionType(operator=indicator.get_operator())
+            observable = cybox_binding.ObservableType(id='openioc:indicator-' + normalize_id(indicator.get_id()))
+            nested_observable_composition = cybox_binding.ObservableCompositionType(operator=indicator.get_operator())
             observable.set_Observable_Composition(nested_observable_composition)
             observable_composition.add_Observable(observable)
             current_composition = nested_observable_composition
@@ -120,9 +118,9 @@ def process_indicator(indicator, observables, observable_composition, top_level=
         for indicator_item in indicator.get_IndicatorItem():
             if process_indicator_item(indicator_item, observables, indicatoritem_dict):
                 if indicator_item.get_id() is not None:
-                    observable = cybox.ObservableType(idref='openioc:indicator-item-' + normalize_id(indicator_item.get_id()))
+                    observable = cybox_binding.ObservableType(idref='openioc:indicator-item-' + normalize_id(indicator_item.get_id()))
                 else:
-                    observable = cybox.ObservableType(idref=indicatoritem_dict.get(get_indicatoritem_string(indicator_item)))
+                    observable = cybox_binding.ObservableType(idref=indicatoritem_dict.get(get_indicatoritem_string(indicator_item)))
                 current_composition.add_Observable(observable)
                 
         #Recurse as needed to handle embedded indicators
@@ -133,7 +131,8 @@ def process_indicator(indicator, observables, observable_composition, top_level=
 #Generate CybOX output from the OpenIOC indicators
 def generate_cybox(indicators):
     #Create the core CybOX structure
-    observables = cybox.ObservablesType()
+    observables = cybox_binding.ObservablesType()
+
     #Set the description if it exists
     description = None
     if indicators.get_description() != None:
@@ -149,11 +148,11 @@ def generate_cybox(indicators):
             id_string = 'openioc:indicator-' + normalize_id(indicator.get_id())
         else:
             id_string = 'openioc:indicator-' + generate_observable_id()
-        indicator_observable = cybox.ObservableType(id=id_string)
+        indicator_observable = cybox_binding.ObservableType(id=id_string)
         #Set the title as appropriate
         if description != None:
             indicator_observable.set_Title(description)
-        composition = cybox.ObservableCompositionType(operator=indicator.get_operator())
+        composition = cybox_binding.ObservableCompositionType(operator=indicator.get_operator())
         #Process the indicator, including any embedded indicators
         process_indicator(indicator, observables, composition, True)
         indicator_observable.set_Observable_Composition(composition)
@@ -178,7 +177,7 @@ def usage():
     
 USAGE_TEXT = """
 OpenIOC --> CybOX XML Converter Utility
-v0.1 BETA // Compatible with CybOX v1.0
+v0.2 BETA // Compatible with CybOX v2.0
 
 Usage: python openioc_to_cybox.py <flags> -i <openioc xml file> -o <cybox xml file>
 
@@ -218,66 +217,11 @@ def main():
         try:
             print 'Generating ' + outfilename + ' from ' + infilename + '...'
             observables = generate_cybox(indicators)
-            observables.set_cybox_major_version('1')
+            observables.set_cybox_major_version('2')
             observables.set_cybox_minor_version('0')
-            observables.export(open(outfilename, 'w'), 0, namespacedef_='xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\
- xmlns:openioc="http://schemas.mandiant.com/2010/ioc"\
- xmlns:cybox="http://cybox.mitre.org/cybox_v1"\
- xmlns:AccountObj="http://cybox.mitre.org/objects#AccountObject"\
- xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject"\
- xmlns:Common="http://cybox.mitre.org/Common_v1"\
- xmlns:DiskObj="http://cybox.mitre.org/objects#DiskObject"\
- xmlns:DiskPartitionObj="http://cybox.mitre.org/objects#DiskPartitionObject"\
- xmlns:DNSRecordObj="http://cybox.mitre.org/objects#DNSRecordObject"\
- xmlns:FileObj="http://cybox.mitre.org/objects#FileObject"\
- xmlns:MemoryObj="http://cybox.mitre.org/objects#MemoryObject"\
- xmlns:NetworkRouteEntryObj="http://cybox.mitre.org/objects#NetworkRouteEntryObject"\
- xmlns:PortObj="http://cybox.mitre.org/objects#PortObject"\
- xmlns:ProcessObj="http://cybox.mitre.org/objects#ProcessObject"\
- xmlns:SystemObj="http://cybox.mitre.org/objects#SystemObject"\
- xmlns:UnixFileObj="http://cybox.mitre.org/objects#UnixFileObject"\
- xmlns:UserAccountObj="http://cybox.mitre.org/objects#UserAccountObject"\
- xmlns:VolumeObj="http://cybox.mitre.org/objects#VolumeObject"\
- xmlns:WinDriverObj="http://cybox.mitre.org/objects#WinDriverObject"\
- xmlns:WinEventLogObj="http://cybox.mitre.org/objects#WinEventLogObject"\
- xmlns:WinExecutableFileObj="http://cybox.mitre.org/objects#WinExecutableFileObject"\
- xmlns:WinFileObj="http://cybox.mitre.org/objects#WinFileObject"\
- xmlns:WinHandleObj="http://cybox.mitre.org/objects#WinHandleObject"\
- xmlns:WinKernelHookObj="http://cybox.mitre.org/objects#WinKernelHookObject"\
- xmlns:WinProcessObj="http://cybox.mitre.org/objects#WinProcessObject"\
- xmlns:WinRegistryKeyObj="http://cybox.mitre.org/objects#WinRegistryKeyObject"\
- xmlns:WinServiceObj="http://cybox.mitre.org/objects#WinServiceObject"\
- xmlns:WinSystemObj="http://cybox.mitre.org/objects#WinSystemObject"\
- xmlns:WinUserAccountObj="http://cybox.mitre.org/objects#WinUserAccountObject"\
- xmlns:WinVolumeObj="http://cybox.mitre.org/objects#WinVolumeObject"\
- xsi:schemaLocation="http://cybox.mitre.org/Common_v1 http://cybox.mitre.org/XMLSchema/cybox_common_types_v1.0(draft).xsd\
- http://cybox.mitre.org/objects#AccountObject http://cybox.mitre.org/XMLSchema/objects/Account/Account_Object_1.1.xsd\
- http://cybox.mitre.org/objects#AddressObject http://cybox.mitre.org/XMLSchema/objects/Address/Address_Object_1.1.xsd\
- http://cybox.mitre.org/objects#DiskObject http://cybox.mitre.org/XMLSchema/objects/Disk/Disk_Object_1.2.xsd\
- http://cybox.mitre.org/objects#DiskPartitionObject http://cybox.mitre.org/XMLSchema/objects/Disk_Partition/Disk_Partition_Object_1.2.xsd\
- http://cybox.mitre.org/objects#DNSRecordObject http://cybox.mitre.org/XMLSchema/objects/DNS_Record/DNS_Record_Object_1.0.xsd\
- http://cybox.mitre.org/objects#FileObject http://cybox.mitre.org/XMLSchema/objects/File/File_Object_1.2.xsd\
- http://cybox.mitre.org/objects#MemoryObject http://cybox.mitre.org/XMLSchema/objects/Memory/Memory_Object_1.1.xsd\
- http://cybox.mitre.org/objects#NetworkRouteEntryObject http://cybox.mitre.org/XMLSchema/objects/Network_Route_Entry/Network_Route_Entry_Object_1.0.xsd\
- http://cybox.mitre.org/objects#PortObject http://cybox.mitre.org/XMLSchema/objects/Port/Port_Object_1.2.xsd\
- http://cybox.mitre.org/objects#ProcessObject http://cybox.mitre.org/XMLSchema/objects/Process/Process_Object_1.2.xsd\
- http://cybox.mitre.org/objects#SystemObject http://cybox.mitre.org/XMLSchema/objects/System/System_Object_1.2.xsd\
- http://cybox.mitre.org/objects#UnixFileObject http://cybox.mitre.org/XMLSchema/objects/Unix_File/Unix_File_Object_1.2.xsd\
- http://cybox.mitre.org/objects#UserAccountObject http://cybox.mitre.org/XMLSchema/objects/User_Account/User_Account_Object_1.1.xsd\
- http://cybox.mitre.org/objects#VolumeObject http://cybox.mitre.org/XMLSchema/objects/Volume/Volume_Object_1.2.xsd\
- http://cybox.mitre.org/objects#WinDriverObject http://cybox.mitre.org/XMLSchema/objects/Win_Driver/Win_Driver_Object_1.1.xsd\
- http://cybox.mitre.org/objects#WinEventLogObject http://cybox.mitre.org/XMLSchema/objects/Win_Event_Log/Win_Event_Log_Object_1.1.xsd\
- http://cybox.mitre.org/objects#WinExecutableFileObject http://cybox.mitre.org/XMLSchema/objects/Win_Executable_File/Win_Executable_File_Object_1.2.xsd\
- http://cybox.mitre.org/objects#WinFileObject http://cybox.mitre.org/XMLSchema/objects/Win_File/Win_File_Object_1.2.xsd\
- http://cybox.mitre.org/objects#WinHandleObject http://cybox.mitre.org/XMLSchema/objects/Win_Handle/Win_Handle_Object_1.2.xsd\
- http://cybox.mitre.org/objects#WinKernelHookObject http://cybox.mitre.org/XMLSchema/objects/Win_Kernel_Hook/Win_Kernel_Hook_Object_1.2.xsd\
- http://cybox.mitre.org/objects#WinProcessObject http://cybox.mitre.org/XMLSchema/objects/Win_Process/Win_Process_Object_1.2.xsd\
- http://cybox.mitre.org/objects#WinRegistryKeyObject http://cybox.mitre.org/XMLSchema/objects/Win_Registry_Key/Win_Registry_Key_Object_1.2.xsd\
- http://cybox.mitre.org/objects#WinServiceObject http://cybox.mitre.org/XMLSchema/objects/Win_Service/Win_Service_Object_1.2.xsd\
- http://cybox.mitre.org/objects#WinServiceObject http://cybox.mitre.org/XMLSchema/objects/Win_System/Win_System_Object_1.1.xsd\
- http://cybox.mitre.org/objects#WinUserAccountObject http://cybox.mitre.org/XMLSchema/objects/Win_User_Account/Win_User_Account_Object_1.2.xsd\
- http://cybox.mitre.org/objects#WinVolumeObject http://cybox.mitre.org/XMLSchema/objects/Win_Volume/Win_Volume_Object_1.2.xsd\
- http://cybox.mitre.org/cybox_v1 http://cybox.mitre.org/XMLSchema/cybox_core_v1.0(draft).xsd"')
+            
+            observables.export(open(outfilename, 'w'), 0)
+
             if verbose_mode:
                 for indicator_id in skipped_indicators:
                     print "Indicator Item " + indicator_id + " Skipped; indicator type currently not supported"
