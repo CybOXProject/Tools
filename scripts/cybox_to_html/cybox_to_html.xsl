@@ -249,6 +249,9 @@ ikirillov@mitre.org
                     {
                     animation: targetHighlightAnimation 0.2s 10;
                     animation-direction: alternate;
+                    -webkit-animation: targetHighlightAnimation 0.2s;
+                    -webkit-animation-direction: alternate;
+                    -webkit-animation-iteration-count infinite;
                     /*
                     border-style: solid;
                     border-witdh: thin;
@@ -256,6 +259,11 @@ ikirillov@mitre.org
                     */
                     }
                     @keyframes targetHighlightAnimation
+                    {
+                    0% {background: hsla(360, 100%, 50%, .3); }
+                    100% {background: hsla(360, 100%, 50%, .7); }
+                    }
+                    @-webkit-keyframes targetHighlightAnimation
                     {
                     0% {background: hsla(360, 100%, 50%, .3); }
                     100% {background: hsla(360, 100%, 50%, .7); }
@@ -299,8 +307,26 @@ function highlightTarget(targetId)
     var targetElement = document.getElementById(targetId);
     targetElement.setAttribute("class", "");
     targetElement.addEventListener("animationend", listener, false);
+    findAndExpandTarget(targetElement);
     targetElement.scrollIntoView(false);
     targetElement.setAttribute("class", "relatedTarget");
+}
+
+function findAndExpandTarget(targetElement)
+{
+    var currentAncestor = targetElement.parentNode;
+    var isFound = false;
+    while (currentAncestor != null &amp;&amp; !isFound)
+    {
+        isFound = currentAncestor.classList.contains("collapsibleContent");
+        if (!isFound) { currentAncestor = currentAncestor.parentNode; }
+    }
+    
+    if (isFound)
+    {
+        //var collapsibleLabel = currentAncestor.previousSibling;
+        currentAncestor.style.display = 'block';
+    }
 }
 
 function animationEndUnlight(e)
@@ -6630,9 +6656,11 @@ function listener(e)
                 </xsl:for-each>
             </dl>
             
+            <!--
             <div>
                 <xsl:apply-templates select="EmailMessageObj:Header"/>
             </div>
+            -->
         </fieldset>
     </xsl:template>
     
