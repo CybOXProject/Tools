@@ -16,27 +16,28 @@ ikirillov@mitre.org
     
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:SystemObj="http://cybox.mitre.org/objects#SystemObject"
-    xmlns:FileObj="http://cybox.mitre.org/objects#FileObject"
-    xmlns:ProcessObj="http://cybox.mitre.org/objects#ProcessObject"
-    xmlns:PipeObj="http://cybox.mitre.org/objects#PipeObject" 
-    xmlns:PortObj="http://cybox.mitre.org/objects#PortObject" 
-    xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject"
-    xmlns:SocketObj="http://cybox.mitre.org/objects#SocketObject"
-    xmlns:MutexObj="http://cybox.mitre.org/objects#MutexObject"
-    xmlns:MemoryObj="http://cybox.mitre.org/objects#MemoryObject"
-    xmlns:URIObj="http://cybox.mitre.org/objects#URIObject"
-    xmlns:LibraryObj="http://cybox.mitre.org/objects#LibraryObject"
-    xmlns:EmailMessageObj="http://cybox.mitre.org/objects#EmailMessageObject"
-    xmlns:WinHandleObj="http://cybox.mitre.org/objects#WinHandleObject"
-    xmlns:WinMutexObj="http://cybox.mitre.org/objects#WinMutexObject"
-    xmlns:WinServiceObj="http://cybox.mitre.org/objects#WinServiceObject"
-    xmlns:WinRegistryKeyObj="http://cybox.mitre.org/objects#WinRegistryKeyObject"
-    xmlns:WinPipeObj="http://cybox.mitre.org/objects#WinPipeObject"
-    xmlns:WinDriverObj="http://cybox.mitre.org/objects#WinDriverObject"
-    xmlns:WinFileObj="http://cybox.mitre.org/objects#WinFileObject"
-    xmlns:WinExecutableFileObj="http://cybox.mitre.org/objects#WinExecutableFileObject"
-    xmlns:WinProcessObj="http://cybox.mitre.org/objects#WinProcessObject">
+
+    xmlns:SystemObj="http://cybox.mitre.org/objects#SystemObject-2"
+    xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
+    xmlns:ProcessObj="http://cybox.mitre.org/objects#ProcessObject-2"
+    xmlns:PipeObj="http://cybox.mitre.org/objects#PipeObject-2" 
+    xmlns:PortObj="http://cybox.mitre.org/objects#PortObject-2" 
+    xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject-2"
+    xmlns:SocketObj="http://cybox.mitre.org/objects#SocketObject-2"
+    xmlns:MutexObj="http://cybox.mitre.org/objects#MutexObject-2"
+    xmlns:MemoryObj="http://cybox.mitre.org/objects#MemoryObject-2"
+    xmlns:URIObj="http://cybox.mitre.org/objects#URIObject-2"
+    xmlns:LibraryObj="http://cybox.mitre.org/objects#LibraryObject-2"
+    xmlns:EmailMessageObj="http://cybox.mitre.org/objects#EmailMessageObject-2"
+    xmlns:WinHandleObj="http://cybox.mitre.org/objects#WinHandleObject-2"
+    xmlns:WinMutexObj="http://cybox.mitre.org/objects#WinMutexObject-2"
+    xmlns:WinServiceObj="http://cybox.mitre.org/objects#WinServiceObject-2"
+    xmlns:WinRegistryKeyObj="http://cybox.mitre.org/objects#WinRegistryKeyObject-2"
+    xmlns:WinPipeObj="http://cybox.mitre.org/objects#WinPipeObject-2"
+    xmlns:WinDriverObj="http://cybox.mitre.org/objects#WinDriverObject-2"
+    xmlns:WinFileObj="http://cybox.mitre.org/objects#WinFileObject-2"
+    xmlns:WinExecutableFileObj="http://cybox.mitre.org/objects#WinExecutableFileObject-2"
+    xmlns:WinProcessObj="http://cybox.mitre.org/objects#WinProcessObject-2">
     
 <xsl:output method="html" omit-xml-declaration="yes" indent="no" media-type="text/html" version="4.0" />
    <xsl:key name="observableID" match="cybox:Observable" use="@id"/>
@@ -240,6 +241,31 @@ ikirillov@mitre.org
                     font-size: 12px;
                     margin-bottom: 2px;
                     }
+                    .emailDiv
+                    {
+                      display: block!important;
+                    }
+                    .relatedTarget
+                    {
+                    animation: targetHighlightAnimation 0.2s 10;
+                    animation-direction: alternate;
+                    /*
+                    border-style: solid;
+                    border-witdh: thin;
+                    border=color: hsla(360, 100%, 50%, 1);
+                    */
+                    }
+                    @keyframes targetHighlightAnimation
+                    {
+                    0% {background: hsla(360, 100%, 50%, .3); }
+                    100% {background: hsla(360, 100%, 50%, .7); }
+                    }
+                    
+                    .highlightTargetLink
+                    {
+                    color: blue;
+                    text-decoration: underline;
+                    }
                 </style>
                 
                 <script type="text/javascript">
@@ -264,7 +290,46 @@ ikirillov@mitre.org
                       } // end of else
                     } // end of function toggleDiv()
                 </script>
-                </head>
+<script type="text/javascript">
+var currentTarget = null;
+var previousTarget = null;
+
+function highlightTarget(targetId)
+{
+    var targetElement = document.getElementById(targetId);
+    targetElement.setAttribute("class", "");
+    targetElement.addEventListener("animationend", listener, false);
+    targetElement.scrollIntoView(false);
+    targetElement.setAttribute("class", "relatedTarget");
+}
+
+function animationEndUnlight(e)
+{
+    console.log("animation has ended. unhighlight me.");
+    console.dir(e);
+}
+
+function listener(e)
+{
+    console.log("animation listener fired off...");
+    console.dir(e);
+    switch(e.type)
+    {
+        case "animationstart":
+          console.log("Started: elapsed time is " + e.elapsedTime);
+          break;
+        case "animationend":
+            console.log("Ended: elapsed time is " + e.elapsedTime);
+            break;
+        case "animationiteration":
+          console.log("New loop started at time " + e.elapsedTime);
+          break;
+    }
+    
+    e.currentTarget.setAttribute("class", "");
+}
+</script>
+               </head>
                 <body>
                     <div id="wrapper">
                         <div id="header"> 
@@ -337,10 +402,10 @@ ikirillov@mitre.org
         <TD>
             <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
             <xsl:variable name="imgVar" select="generate-id()"/>
-            <div id="fileObjAtt" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
+            <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
                 <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span><xsl:value-of select="@id"/>
             </div>
-          <div id="{$contentVar}" style="overflow:hidden; display:none; padding:0px 7px;">
+          <div id="{$contentVar}"  class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
                 <xsl:if test="cybox:Title">
                     <br/>
                     <div id="section">
@@ -1597,6 +1662,8 @@ ikirillov@mitre.org
     <xsl:template name="processObject">
         <xsl:param name="span_var"/>
         <xsl:param name="div_var"/>
+        <div id="" class="objectContainer">
+            <xsl:attribute name="id" select="@id"/>
         <div id="object_label_div">
             <xsl:if test="@type"><div id="object_type_label">
                 <xsl:value-of select="@type"/> Object </div>
@@ -1631,6 +1698,7 @@ ikirillov@mitre.org
                 </xsl:for-each>
             </xsl:if>
             -->
+        </div>
         </div>
     </xsl:template>
     
@@ -6569,7 +6637,7 @@ ikirillov@mitre.org
     </xsl:template>
     
     <xsl:template match="ArtifactObj:Raw_Artifact">
-        raw data omitted [length: <xsl:value-of select="string-length()"/>]
+        raw data omitted ["<xsl:value-of select='substring(text(), 1, 10)'/> ... <xsl:value-of select='substring(text(), string-length(text())-10, 10)'/>"; length: <xsl:value-of select="string-length()"/>]
     </xsl:template>
     
     <xsl:template match="ArtifactObj:Packaging">
@@ -6578,6 +6646,43 @@ ikirillov@mitre.org
     
     <xsl:template match="ArtifactObj:Encoding">
         encoding algorithm is <xsl:value-of select="@algorithm"/>
+    </xsl:template>
+    
+    <xsl:template match="AddressObj:Address_Value">
+        <xsl:apply-templates />
+        <xsl:if test="@pattern_type or @apply_condition">
+            (pattern type: <xsl:value-of select="@pattern_type"/>; apply condition: <xsl:value-of select="@apply_condition"/>)
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="EmailMessageObj:Header">
+        ### BEFORE LIST ###
+        <ul>
+            <xsl:apply-templates/>
+        </ul>
+        ### AFTER LIST ###
+    </xsl:template>
+    
+    <xsl:template match="EmailMessageObj:Header/*">
+        <li><xsl:value-of select="local-name()" />: <xsl:apply-templates/></li>
+    </xsl:template>
+    
+    <xsl:template match="EmailMessageObj:Recipient">
+        <xsl:apply-templates/> (category: <xsl:value-of select="@category"/>)
+    </xsl:template>
+    
+    <xsl:template match="EmailMessageObj:File|EmailMessageObj:Link">
+        <div class="emailDiv">
+          <xsl:apply-templates/>
+          [<xsl:value-of select="local-name()"/>]
+          (object reference:
+            <xsl:element name="span">
+                <xsl:attribute name="class">highlightTargetLink</xsl:attribute>
+                <xsl:attribute name="onclick"><xsl:value-of select='"highlightTarget(&apos;" || @object_reference || "&apos;)"'/></xsl:attribute>
+                <xsl:value-of select="@object_reference"/>
+            </xsl:element>
+            )
+        </div>
     </xsl:template>
     
 </xsl:stylesheet>
