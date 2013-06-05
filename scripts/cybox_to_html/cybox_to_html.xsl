@@ -251,7 +251,7 @@ ikirillov@mitre.org
                     animation-direction: alternate;
                     -webkit-animation: targetHighlightAnimation 0.2s;
                     -webkit-animation-direction: alternate;
-                    -webkit-animation-iteration-count infinite;
+                    -webkit-animation-iteration-count: 10;
                     /*
                     border-style: solid;
                     border-witdh: thin;
@@ -306,7 +306,7 @@ function highlightTarget(targetId)
 {
     var targetElement = document.getElementById(targetId);
     targetElement.setAttribute("class", "");
-    targetElement.addEventListener("animationend", listener, false);
+    //targetElement.addEventListener("animationend", listener, false);
     findAndExpandTarget(targetElement);
     targetElement.scrollIntoView(false);
     targetElement.setAttribute("class", "relatedTarget");
