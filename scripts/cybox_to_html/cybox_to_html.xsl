@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-CybOX XML to HTML transform v0.1
-Compatible with CybOX v1.0 draft
+CybOX XML to HTML transform v1.1
+Compatible with CybOX v2.0 draft
+
+Updated 2013-06-01
+mcoarr@mitre.org
 
 Updated 9/11/2012
 ikirillov@mitre.org
@@ -39,7 +42,7 @@ ikirillov@mitre.org
     xmlns:WinExecutableFileObj="http://cybox.mitre.org/objects#WinExecutableFileObject-2"
     xmlns:WinProcessObj="http://cybox.mitre.org/objects#WinProcessObject-2">
     
-<xsl:output method="html" omit-xml-declaration="yes" indent="no" media-type="text/html" version="4.0" />
+<xsl:output method="html" omit-xml-declaration="yes" indent="yes" media-type="text/html" version="4.0" />
    <xsl:key name="observableID" match="cybox:Observable" use="@id"/>
     
     <xsl:template match="/">
@@ -60,7 +63,9 @@ ikirillov@mitre.org
                     }
                     
                     table.grid * {
-                    font: 11px Arial, Helvetica, sans-serif;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 11px;
+                    font-style: inherit;
                     vertical-align: top;
                     text-align: left;
                     }
@@ -137,15 +142,16 @@ ikirillov@mitre.org
                     {
                     color: #009;
                     }
-                    #one-column-emphasis
+                    .one-column-emphasis
                     {
                     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
                     font-size: 12px;
                     margin: 0px;
                     text-align: left;
                     border-collapse: collapse;
+                    width: 100%;
                     }
-                    #one-column-emphasis td
+                    .one-column-emphasis td
                     {
                     padding: 5px 10px;
                     color: #200;
@@ -217,8 +223,8 @@ ikirillov@mitre.org
                     margin: 0px 0px 5px 0px;
                     }
                     #object_label_div div {
-                    display: inline;
-                    width: 30%;
+                    /*display: inline;*/
+                    /*width: 30%;*/
                     }
                     #object_type_label {
                     width:200px;
@@ -240,6 +246,27 @@ ikirillov@mitre.org
                     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
                     font-size: 12px;
                     margin-bottom: 2px;
+                    }
+                    .heading,
+                    .eventTypeHeading
+                    {
+                      margin-bottom: 0.5em;
+                      font-weight: bold;
+                    }
+                    .contents,
+                    .eventDescription
+                    {
+                      margin-top: 0.5em;
+                      margin-bottom: 0.5em;
+                    }
+                    .container
+                    {
+                      margin-left: 1em;
+                      padding-left: 0.5em;
+                    }
+                    .eventDescription
+                    {
+                      font-style: italic;
                     }
                     .emailDiv
                     {
@@ -274,6 +301,36 @@ ikirillov@mitre.org
                     color: blue;
                     text-decoration: underline;
                     }
+                    
+                    table.compositionTableOperator > tbody > tr > td
+                    {
+                      padding: 0.5em;
+                    }
+                    table.compositionTableOperand > tbody > tr > td
+                    {
+                      padding: 0;
+                    }
+                    table.compositionTableOperator > tbody > tr > td,
+                    table.compositionTableOperand > tbody > tr > td
+                    {
+                      border: solid black thin;
+                      border-collapse: collapse;
+                    }
+                    .compositionTable,
+                    .compositionTableOperator,
+                    .compositionTableOperand
+                    {
+                      border-collapse: collapse;
+                      padding: 0!important;
+                      border: none;
+                    }
+                    td.compositionTable,
+                    td.compositionTableOperator,
+                    td.compositionTableOperand
+                    {
+                      padding: 0!important;
+                      border: none;
+                    }
                 </style>
                 
                 <script type="text/javascript">
@@ -305,6 +362,11 @@ var previousTarget = null;
 function highlightTarget(targetId)
 {
     var targetElement = document.getElementById(targetId);
+    if (targetElement == null)
+    {
+      alert("target not found");
+      return;
+    }
     targetElement.setAttribute("class", "");
     //targetElement.addEventListener("animationend", listener, false);
     findAndExpandTarget(targetElement);
@@ -432,10 +494,11 @@ function listener(e)
                 <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span><xsl:value-of select="@id"/>
             </div>
           <div id="{$contentVar}"  class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
-                <xsl:if test="cybox:Title">
+              <div><xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
+                  <xsl:if test="cybox:Title">
                     <br/>
                     <div id="section">
-                        <table id="one-column-emphasis">
+                        <table class="one-column-emphasis">
                             <colgroup>
                                 <col class="oce-first-obs" />
                             </colgroup>
@@ -455,7 +518,7 @@ function listener(e)
               <!-- <xsl:if test="cybox:Observable"> -->
                   <br/>
                   <div id="section">
-                      <table id="one-column-emphasis">
+                      <table class="one-column-emphasis">
                           <colgroup>
                               <col class="oce-first-obs" />
                           </colgroup>
@@ -475,7 +538,7 @@ function listener(e)
               <xsl:if test="cybox:Observable_Composition">
                   <br/>
                   <div id="section">
-                      <table id="one-column-emphasis">
+                      <table class="one-column-emphasis">
                           <colgroup>
                               <col class="oce-first-obs" />
                           </colgroup>
@@ -484,7 +547,7 @@ function listener(e)
                                   <td>Observable Composition</td>
                                   <td>
                                       <xsl:for-each select="cybox:Observable_Composition">
-                                          <xsl:call-template name="processObservableComposition"/>
+                                          <xsl:call-template name="processObservableCompositionSimple"/>
                                       </xsl:for-each>
                                   </td>
                               </tr>
@@ -495,7 +558,7 @@ function listener(e)
              <xsl:if test="cybox:Stateful_Measure">
                     <br/>
                     <div id="section">
-                        <table id="one-column-emphasis">
+                        <table class="one-column-emphasis">
                             <colgroup>
                                 <col class="oce-first-obs" />
                             </colgroup>
@@ -516,6 +579,7 @@ function listener(e)
                     </div>
                 </xsl:if>
             </div>
+            </div>
         </TD>
         <TD>                    
             <xsl:choose>
@@ -529,8 +593,109 @@ function listener(e)
         </TD>
     </xsl:template>
     
+    <xsl:template name="processObservableCompositionSimple">
+        <table class="compositionTableOperator">
+            <colgroup>
+                <xsl:choose>
+                    <xsl:when test="@operator='AND'">
+                        <col class="oce-first-obscomp-and"/>
+                    </xsl:when>
+                    <xsl:when test="@operator='OR'">
+                        <col class="oce-first-obscomp-or"/>
+                    </xsl:when>
+                </xsl:choose>
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>
+                        <xsl:attribute name="rowspan"><xsl:value-of select="count(cybox:Observable)"/></xsl:attribute>
+                        <span><xsl:value-of select="@operator"/></span>
+                    </th>
+                    <td>
+                        <table class="compositionTableOperand">
+                            <xsl:for-each select="cybox:Observable">
+                                <tr>
+                                    <td>
+                                        <!-- [insert observable here] -->
+                                        <xsl:call-template name="processObservableInObservableCompositionSimple"/>
+                                    </td>
+                                </tr>
+                                
+                            </xsl:for-each>
+                            <tr>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                
+                <!--
+                <tr>
+                    <td><span style="font-weight:bold; margin:5px; color:#BD9C8C;"><xsl:value-of select="@operator"/></span></td>
+                    <td>
+                        <xsl:for-each select="cybox:Observable">
+                            <xsl:call-template name="processObscompObservable"/>
+                        </xsl:for-each>
+                    </td>
+                </tr>
+                -->
+            </tbody>
+        </table> 
+    </xsl:template>
+
+    <xsl:template name="processObservableInObservableCompositionSimple">
+        <xsl:if test="@idref">
+            <div class="foreignObservablePointer">
+                <!-- <span><xsl:value-of select="@idref"/></span> -->
+                (object reference:
+                <xsl:element name="span">
+                    <xsl:attribute name="class">highlightTargetLink</xsl:attribute>
+                    <xsl:attribute name="onclick"><xsl:value-of select='"highlightTarget(&apos;" || @idref || "&apos;)"'/></xsl:attribute>
+                    <xsl:value-of select="@idref"/>
+                </xsl:element>
+                )
+                
+            </div>
+        </xsl:if>
+        
+        <xsl:for-each select="cybox:Observable_Composition">
+            <xsl:call-template name="processObservableCompositionSimple" />
+        </xsl:for-each>
+        
+        <!--
+        <xsl:param name="span_var" select="generate-id()"/>
+        <xsl:param name="div_var" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
+        <xsl:if test="@id">
+            <xsl:if test="cybox:Stateful_Measure">
+                <xsl:for-each select="cybox:Stateful_Measure">
+                    <xsl:call-template name="processStatefulMeasure">
+                        <xsl:with-param name="div_var" select="$div_var"/>
+                        <xsl:with-param name="span_var" select="$span_var"/>
+                    </xsl:call-template>
+                </xsl:for-each>
+            </xsl:if>
+            <xsl:if test="cybox:Observable_Composition">
+                <xsl:for-each select="cybox:Observable_Composition">
+                    <xsl:call-template name="processObservableComposition"/>
+                </xsl:for-each>
+            </xsl:if>
+        </xsl:if>
+        <xsl:if test="@idref">
+            <xsl:for-each select="key('observableID',@idref)">
+                <xsl:if test="cybox:Stateful_Measure">
+                    <xsl:for-each select="cybox:Stateful_Measure">
+                        <xsl:call-template name="processStatefulMeasure">
+                            <xsl:with-param name="div_var" select="$div_var"/>
+                            <xsl:with-param name="span_var" select="$span_var"/>
+                        </xsl:call-template>
+                    </xsl:for-each>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:if>
+        -->
+    </xsl:template>
+    
     <xsl:template name="processObservableComposition">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <xsl:choose>
                     <xsl:when test="@operator='AND'">
@@ -590,14 +755,18 @@ function listener(e)
         <xsl:param name="span_var" select="generate-id()"/>
         <xsl:param name="div_var" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
         <xsl:if test="@id">
-            <xsl:if test="cybox:Object">
-                <xsl:for-each select="cybox:Object">
-                    <xsl:call-template name="processObject">
-                        <xsl:with-param name="div_var" select="$div_var"/>
-                        <xsl:with-param name="span_var" select="$span_var"/>
-                    </xsl:call-template>
-                </xsl:for-each>
-            </xsl:if>
+            <xsl:for-each select="cybox:Object">
+                <xsl:call-template name="processObject">
+                    <xsl:with-param name="div_var" select="$div_var"/>
+                    <xsl:with-param name="span_var" select="$span_var"/>
+                </xsl:call-template>
+            </xsl:for-each>
+            <xsl:for-each select="cybox:Event">
+                <xsl:call-template name="processEvent">
+                    <xsl:with-param name="div_var" select="$div_var"/>
+                    <xsl:with-param name="span_var" select="$span_var"/>
+                </xsl:call-template>
+            </xsl:for-each>
         </xsl:if>
         <xsl:if test="@idref">
             <xsl:for-each select="key('observableID',@idref)">
@@ -764,7 +933,7 @@ function listener(e)
             <tr>
                 <td>Tool Hashes</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner" />
                         </colgroup>
@@ -781,7 +950,7 @@ function listener(e)
             <tr>
                 <td>Tool Configuration</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner" />
                         </colgroup>
@@ -805,7 +974,7 @@ function listener(e)
             <tr>
                 <td>Configuration Settings</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner" />
                         </colgroup>
@@ -822,7 +991,7 @@ function listener(e)
             <tr>
                 <td>Dependencies</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner" />
                         </colgroup>
@@ -839,7 +1008,7 @@ function listener(e)
             <tr>
                 <td>Usage Context Assumptions</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner" />
                         </colgroup>
@@ -856,7 +1025,7 @@ function listener(e)
             <tr>
                 <td>Internationalization Settings</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner" />
                         </colgroup>
@@ -873,7 +1042,7 @@ function listener(e)
             <tr>
                 <td>Build Information</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner" />
                         </colgroup>
@@ -924,7 +1093,7 @@ function listener(e)
             <tr>
                 <td>Build Utility</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner" />
                         </colgroup>
@@ -959,7 +1128,7 @@ function listener(e)
             <tr>
                 <td>Compilers</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner" />
                         </colgroup>
@@ -976,7 +1145,7 @@ function listener(e)
             <tr>
                 <td>Build Configuration</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner" />
                         </colgroup>
@@ -999,7 +1168,7 @@ function listener(e)
             <tr>
                 <td>Libraries</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner" />
                         </colgroup>
@@ -1050,7 +1219,7 @@ function listener(e)
             <tr>
                 <td>Configuration Settings</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner" />
                         </colgroup>
@@ -1080,7 +1249,7 @@ function listener(e)
             <tr>
                 <td>Compiler CPE Specification</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner" />
                         </colgroup>
@@ -1110,7 +1279,7 @@ function listener(e)
             <tr>
                 <td>Build Utility</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner" />
                         </colgroup>
@@ -1142,7 +1311,7 @@ function listener(e)
             <tr>
                 <td>Meta Item Metadata</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner" />
                         </colgroup>
@@ -1433,7 +1602,7 @@ function listener(e)
                     <span id="{$span_var}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span> Data Read (effect)
                 </div>
                 <div id="{$div_var}" style="overflow:hidden; display:none; padding:0px 7px;">
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner" />
                         </colgroup>
@@ -1450,7 +1619,7 @@ function listener(e)
                     <span id="{$span_var}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span> Data Received (effect)
                 </div>
                 <div id="{$div_var}" style="overflow:hidden; display:none; padding:0px 7px;">
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner" />
                         </colgroup>
@@ -1467,7 +1636,7 @@ function listener(e)
                     <span id="{$span_var}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span> Data Sent (effect)
                 </div>
                 <div id="{$div_var}" style="overflow:hidden; display:none; padding:0px 7px;">
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner" />
                         </colgroup>
@@ -1484,7 +1653,7 @@ function listener(e)
                     <span id="{$span_var}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span> Data Written (effect)
                 </div>
                 <div id="{$div_var}" style="overflow:hidden; display:none; padding:0px 7px;">
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner" />
                         </colgroup>
@@ -1501,7 +1670,7 @@ function listener(e)
                     <span id="{$span_var}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span> Property Read (effect)
                 </div>
                 <div id="{$div_var}" style="overflow:hidden; display:none; padding:0px 7px;">
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner" />
                         </colgroup>
@@ -1527,7 +1696,7 @@ function listener(e)
                     <span id="{$span_var}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span> Control Code Sent (effect)
                 </div>
                 <div id="{$div_var}" style="overflow:hidden; display:none; padding:0px 7px;">
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner" />
                         </colgroup>
@@ -1547,7 +1716,7 @@ function listener(e)
                     <span id="{$span_var}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span> Values Enumerated (effect)
                 </div>
                 <div id="{$div_var}" style="overflow:hidden; display:none; padding:0px 7px;">
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner" />
                         </colgroup>
@@ -1627,6 +1796,17 @@ function listener(e)
                 </td>
             </tr>
         </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="processAssociatedObjectSimple">
+        <div class="container associatedObject">
+            <div class="heading associatedObject">ASSOCIATED OBJECT <xsl:value-of select="@id" /> (xsi type: <xsl:value-of select="cybox:Type/@xsi:type" />)</div>
+            <div class="contents associatedObject">
+                <xsl:for-each select="cybox:Properties">
+                    <xsl:call-template name="processProperties" />
+                </xsl:for-each>
+            </div>
+        </div>
     </xsl:template>
 
     <xsl:template name="processAssociatedObject">
@@ -1728,12 +1908,83 @@ function listener(e)
         </div>
     </xsl:template>
     
+    <xsl:template name="processEvent">
+        <xsl:param name="span_var"/>
+        <xsl:param name="div_var"/>
+        <div id="" class="eventContainer">
+            <xsl:attribute name="id" select="@id"/>
+            <div id="object_label_div">
+                <xsl:if test="cybox:Type"><div class="eventTypeHeading" id="event_type_label">
+                    <xsl:value-of select="cybox:Type/text()"/> Event (<xsl:value-of select="cybox:Type/@xsi:type"/>)</div>
+                </xsl:if>
+                
+                <xsl:if test="cybox:Description">
+                    <div class="eventDescription">
+                        description: <xsl:value-of select="cybox:Description"/>
+                    </div>
+                </xsl:if>
+                
+                <xsl:if test="cybox:Actions/cybox:Action">
+                    <div class="container">
+                        <div class="heading actions">Actions</div>
+                        <div class="contents actions">
+                            <xsl:for-each select="cybox:Actions/cybox:Action">
+                                <xsl:call-template name="processAction" />
+                            </xsl:for-each>
+                        </div>
+                    </div>
+                </xsl:if>
+                
+                <xsl:if test="cybox:Defined_Object/@xsi:type">
+                    <div id="defined_object_type_label"><xsl:value-of select="cybox:Defined_Object/@xsi:type"/></div>
+                </xsl:if>
+                
+                <xsl:for-each select="cybox:Properties">
+                    <xsl:call-template name="processProperties"/>
+                </xsl:for-each>
+            </div>
+            <div id="container">
+                <xsl:if test="cybox:Defined_Object">
+                    <xsl:for-each select="cybox:Defined_Object">
+                        <xsl:call-template name="processDefinedObject">
+                            <xsl:with-param name="div_var" select="$div_var"/>
+                            <xsl:with-param name="span_var" select="$span_var"/>
+                        </xsl:call-template>
+                    </xsl:for-each>
+                </xsl:if>
+                <xsl:if test="cybox:Defined_Effect">
+                    <xsl:for-each select="cybox:Defined_Effect">
+                        <xsl:call-template name="processDefinedEffect"/>
+                    </xsl:for-each>
+                </xsl:if>
+                <!--
+            <xsl:if test="cybox:Properties">
+                <xsl:for-each select="cybox:Properties">
+                    <xsl:call-template name="processProperties"/>
+                </xsl:for-each>
+            </xsl:if>
+            -->
+            </div>
+        </div>
+    </xsl:template>
+    
+    <xsl:template name="processAction">
+        <div class="container action">
+            <div class="heading action">ACTION <xsl:value-of select="cybox:Type/text()" /> (xsi type: <xsl:value-of select="cybox:Type/@xsi:type" />)</div>
+            <div class="contents action">
+                <xsl:for-each select="cybox:Associated_Objects/cybox:Associated_Object">
+                    <xsl:call-template name="processAssociatedObjectSimple" />
+                </xsl:for-each>
+            </div>
+        </div>
+    </xsl:template>
+    
     <xsl:template name="processProperties">
         <xsl:apply-templates select="." />
     </xsl:template>
 
     <xsl:template name="processWinExecutableFileObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -1742,7 +1993,7 @@ function listener(e)
                     <tr>
                         <td>Peak Code Entropy</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -1757,7 +2008,7 @@ function listener(e)
                     <tr>
                         <td>PE Attributes</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -1775,7 +2026,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processWinHandleObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -1845,7 +2096,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processPipeObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -1871,7 +2122,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processMutexObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -1897,7 +2148,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processWinMutexObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -1927,7 +2178,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processMemoryObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -1954,7 +2205,7 @@ function listener(e)
                     <tr>
                         <td>Hashes</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner-inner" />
                                 </colgroup>
@@ -2002,7 +2253,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processPortObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -2032,7 +2283,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processURIObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -2058,7 +2309,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processEmailMessageObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -2067,7 +2318,7 @@ function listener(e)
                     <tr>
                         <td>Attachments</td>
                         <td>                    
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                             <colgroup>
                                 <col class="oce-first-inner" />
                             </colgroup>
@@ -2087,7 +2338,7 @@ function listener(e)
                     <tr>
                         <td>Header</td>
                         <td>                    
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -2104,7 +2355,7 @@ function listener(e)
                     <tr>
                         <td>Optional Header</td>
                         <td>   
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -2230,7 +2481,7 @@ function listener(e)
             <tr>
                 <td>To</td>
                 <td>            
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                     <colgroup>
                         <col class="oce-first" />
                     </colgroup>
@@ -2254,7 +2505,7 @@ function listener(e)
             <tr>
                 <td>CC</td>
                 <td>            
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first" />
                         </colgroup>
@@ -2278,7 +2529,7 @@ function listener(e)
             <tr>
                 <td>BCC</td>
                 <td>            
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first" />
                         </colgroup>
@@ -2381,7 +2632,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processSocketObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -2422,7 +2673,7 @@ function listener(e)
                     <tr>
                         <td>Local Address</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -2439,7 +2690,7 @@ function listener(e)
                     <tr>
                         <td>Remote Address</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -2471,7 +2722,7 @@ function listener(e)
                     <tr>
                         <td>Socket Options</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -2740,7 +2991,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processAddressObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -2808,7 +3059,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processWinServiceObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -2829,7 +3080,7 @@ function listener(e)
                     <tr>
                         <td>Descriptions</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -2901,7 +3152,7 @@ function listener(e)
                     <tr>
                         <td>Service DLL Hashes</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -2979,7 +3230,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processWinPipeObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -3069,7 +3320,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processLibraryObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -3139,7 +3390,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processFileObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -3258,7 +3509,7 @@ function listener(e)
                     <tr>
                         <td>Hashes</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -3275,7 +3526,7 @@ function listener(e)
                     <tr>
                         <td>Digital Signatures</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -3292,7 +3543,7 @@ function listener(e)
                     <tr>
                         <td>Symbolic Links</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -3312,7 +3563,7 @@ function listener(e)
                     <tr>
                         <td>Packed With</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -3339,7 +3590,7 @@ function listener(e)
                     <tr>
                         <td>Byte Runs</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -3358,7 +3609,7 @@ function listener(e)
     
     <xsl:template name="processExtractedFeatures">
         <xsl:if test="Common:Strings">
-            <table id="one-column-emphasis">
+            <table class="one-column-emphasis">
                 <colgroup>
                     <col class="oce-first-inner" />
                 </colgroup>
@@ -3370,7 +3621,7 @@ function listener(e)
             </table> 
         </xsl:if>
         <xsl:if test="Common:Imports">
-            <table id="one-column-emphasis">
+            <table class="one-column-emphasis">
                 <colgroup>
                     <col class="oce-first-inner-inner" />
                 </colgroup>
@@ -3389,7 +3640,7 @@ function listener(e)
             </table> 
         </xsl:if>
         <xsl:if test="Common:Functions">
-            <table id="one-column-emphasis">
+            <table class="one-column-emphasis">
                 <colgroup>
                     <col class="oce-first-inner-inner" />
                 </colgroup>
@@ -3411,7 +3662,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processWinDriverObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -3430,7 +3681,7 @@ function listener(e)
                     <tr>
                         <td>Devices List</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -3865,7 +4116,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processWinProcessObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -3886,7 +4137,7 @@ function listener(e)
                     <tr>
                         <td>Open Handles</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -3916,7 +4167,7 @@ function listener(e)
                     <tr>
                         <td>Memory Sections</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -3946,7 +4197,7 @@ function listener(e)
                     <tr>
                         <td>Startup Info</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -3984,7 +4235,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processProcessObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -4059,7 +4310,7 @@ function listener(e)
                     <tr>
                         <td>Children (PIDs)</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -4079,7 +4330,7 @@ function listener(e)
                     <tr>
                         <td>Argument List</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -4099,7 +4350,7 @@ function listener(e)
                     <tr>
                         <td>Environment Variables</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -4116,7 +4367,7 @@ function listener(e)
                     <tr>
                         <td>Image Information</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -4143,7 +4394,7 @@ function listener(e)
                     <tr>
                         <td>Open Ports</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -4163,7 +4414,7 @@ function listener(e)
                     <tr>
                         <td>Open Network Connections</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -4200,7 +4451,7 @@ function listener(e)
                     <tr>
                         <td>Strings</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -4238,7 +4489,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processWinFileObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -4307,7 +4558,7 @@ function listener(e)
                     <tr>
                         <td>Stream List</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -4325,7 +4576,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processWinRegistryKeyObject">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
@@ -4394,7 +4645,7 @@ function listener(e)
                     <tr>
                         <td>Values</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -4411,7 +4662,7 @@ function listener(e)
                     <tr>
                         <td>Handle List</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -4441,7 +4692,7 @@ function listener(e)
                     <tr>
                         <td>Byte Runs</td>
                         <td>
-                            <table id="one-column-emphasis">
+                            <table class="one-column-emphasis">
                                 <colgroup>
                                     <col class="oce-first-inner" />
                                 </colgroup>
@@ -4483,7 +4734,7 @@ function listener(e)
             <tr>
                 <td>Hashes</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner" />
                         </colgroup>
@@ -4579,7 +4830,7 @@ function listener(e)
             <tr>
                 <td>Hashes</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner" />
                         </colgroup>
@@ -5018,7 +5269,7 @@ function listener(e)
             <tr>
                 <td>Hashes</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner" />
                         </colgroup>
@@ -5119,7 +5370,7 @@ function listener(e)
             <tr>
                 <td>Byte Runs</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner" />
                         </colgroup>
@@ -5186,7 +5437,7 @@ function listener(e)
             <tr>
                 <td>Digital Signature</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner" />
                         </colgroup>
@@ -5203,7 +5454,7 @@ function listener(e)
             <tr>
                 <td>EP Jump Codes</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner" />
                         </colgroup>
@@ -5250,7 +5501,7 @@ function listener(e)
             <tr>
                 <td>Imports</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner" />
                         </colgroup>
@@ -5267,7 +5518,7 @@ function listener(e)
             <tr>
                 <td>Exports</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner" />
                         </colgroup>
@@ -5284,7 +5535,7 @@ function listener(e)
             <tr>
                 <td>PE Headers</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner" />
                         </colgroup>
@@ -5314,7 +5565,7 @@ function listener(e)
             <tr>
                 <td>DOS Header</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner" />
                         </colgroup>
@@ -5331,7 +5582,7 @@ function listener(e)
             <tr>
                 <td>File Header</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner" />
                         </colgroup>
@@ -5348,7 +5599,7 @@ function listener(e)
             <tr>
                 <td>Optional Header</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner" />
                         </colgroup>
@@ -5365,7 +5616,7 @@ function listener(e)
             <tr>
                 <td>Entropy</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner" />
                         </colgroup>
@@ -5382,7 +5633,7 @@ function listener(e)
             <tr>
                 <td>Hashes</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner" />
                         </colgroup>
@@ -5623,7 +5874,7 @@ function listener(e)
             <tr>
                 <td>Hashes</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner" />
                         </colgroup>
@@ -5713,7 +5964,7 @@ function listener(e)
             <tr>
                 <td>Hashes</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner" />
                         </colgroup>
@@ -6033,7 +6284,7 @@ function listener(e)
             <tr>
                 <td>Data Directory</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner" />
                         </colgroup>
@@ -6050,7 +6301,7 @@ function listener(e)
             <tr>
                 <td>Hashes</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner" />
                         </colgroup>
@@ -6070,7 +6321,7 @@ function listener(e)
             <tr>
                 <td>Export Table</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6090,7 +6341,7 @@ function listener(e)
             <tr>
                 <td>Import Table</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6110,7 +6361,7 @@ function listener(e)
             <tr>
                 <td>Resource Table</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6130,7 +6381,7 @@ function listener(e)
             <tr>
                 <td>Exception Table</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6150,7 +6401,7 @@ function listener(e)
             <tr>
                 <td>Certificate Table</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6170,7 +6421,7 @@ function listener(e)
             <tr>
                 <td>Base Relocation Table</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6190,7 +6441,7 @@ function listener(e)
             <tr>
                 <td>Debug</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6210,7 +6461,7 @@ function listener(e)
             <tr>
                 <td>Architecture</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6230,7 +6481,7 @@ function listener(e)
             <tr>
                 <td>Global Pointer</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6250,7 +6501,7 @@ function listener(e)
             <tr>
                 <td>TLS Table</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6270,7 +6521,7 @@ function listener(e)
             <tr>
                 <td>Load Config Table</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6290,7 +6541,7 @@ function listener(e)
             <tr>
                 <td>Bound Import Table</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6310,7 +6561,7 @@ function listener(e)
             <tr>
                 <td>Import Address Table</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6330,7 +6581,7 @@ function listener(e)
             <tr>
                 <td>Delay Import Descriptor</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6350,7 +6601,7 @@ function listener(e)
             <tr>
                 <td>CLR Runtime Header</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6370,7 +6621,7 @@ function listener(e)
             <tr>
                 <td>Reserved</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner-inner-inner" />
                         </colgroup>
@@ -6448,7 +6699,7 @@ function listener(e)
             <tr>
                 <td>Imported Functions</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner" />
                         </colgroup>
@@ -6502,7 +6753,7 @@ function listener(e)
             <tr>
                 <td>Exported Functions</td>
                 <td>
-                    <table id="one-column-emphasis">
+                    <table class="one-column-emphasis">
                         <colgroup>
                             <col class="oce-first-inner-inner-inner" />
                         </colgroup>
@@ -6612,7 +6863,7 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processStructuredTextGroup">
-        <table id="one-column-emphasis">
+        <table class="one-column-emphasis">
             <colgroup>
                 <col class="oce-first" />
             </colgroup>
