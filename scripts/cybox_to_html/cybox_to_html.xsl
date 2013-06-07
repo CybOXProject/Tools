@@ -19,6 +19,7 @@ ikirillov@mitre.org
     
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:fn="http://www.w3.org/2005/xpath-functions"
 
     xmlns:SystemObj="http://cybox.mitre.org/objects#SystemObject-2"
     xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
@@ -460,13 +461,13 @@ function listener(e)
                             ID
                         </TH>
                         <TH class="header">
-                            Has Composition
+                            Type
                         </TH>
                     </TR>
                 </THEAD>
                 <TBODY>
                     <xsl:for-each select="cybox:Observable">
-                        <xsl:sort select="cybox:Observable_Composition" order="descending"/>
+                        <!-- <xsl:sort select="cybox:Observable_Composition" order="descending"/> -->
                         <xsl:choose>
                             <xsl:when test="position() mod 2">
                                 <TR class="odd">
@@ -524,7 +525,7 @@ function listener(e)
                           </colgroup>
                           <tbody>
                               <tr>
-                                  <td>Observable</td>
+                                  <!-- <td>Observable</td> -->
                                   <td>
                                       <!-- <xsl:for-each select="cybox:Observable"> -->
                                           <xsl:call-template name="processPlainObservable"/>
@@ -584,10 +585,20 @@ function listener(e)
         <TD>                    
             <xsl:choose>
                 <xsl:when test="cybox:Observable_Composition">
-                    Yes
+                    Composition
+                </xsl:when>
+                <xsl:when test="cybox:Event">
+                    Event
+                </xsl:when>
+                <xsl:when test="cybox:Object/cybox:Properties/@xsi:type">
+                    <xsl:value-of select="fn:local-name-from-QName(fn:resolve-QName(cybox:Object/cybox:Properties/@xsi:type, cybox:Object/cybox:Properties))" />
+                    <!-- <xsl:value-of select="fn:replace('Matthew E. Coarr', 'Matthew', 'Matt')" /> -->
+                </xsl:when>
+                <xsl:when test="cybox:Object/cybox:Properties/@xsi:type and not(cybox:Object/cybox:Properties/@xsi:type)">
+                    Object (no properties set)
                 </xsl:when>
                 <xsl:otherwise>
-                    No
+                    Other
                 </xsl:otherwise>
             </xsl:choose>
         </TD>
@@ -1883,6 +1894,7 @@ function listener(e)
                 <xsl:call-template name="processProperties"/>
             </xsl:for-each>
         </div>
+        <!--
         <div id="container">
             <xsl:if test="cybox:Defined_Object">
                 <xsl:for-each select="cybox:Defined_Object">
@@ -1897,14 +1909,15 @@ function listener(e)
                     <xsl:call-template name="processDefinedEffect"/>
                 </xsl:for-each>
             </xsl:if>
-            <!--
+            <!- -
             <xsl:if test="cybox:Properties">
                 <xsl:for-each select="cybox:Properties">
                     <xsl:call-template name="processProperties"/>
                 </xsl:for-each>
             </xsl:if>
-            -->
+            - ->
         </div>
+        -->
         </div>
     </xsl:template>
     
