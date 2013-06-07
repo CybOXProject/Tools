@@ -554,6 +554,7 @@ function listener(e)
                     </div>
                 </xsl:if>              
               <!-- <xsl:if test="cybox:Observable"> -->
+                  <xsl:if test="not(cybox:Observable_Composition)">
                   <br/>
                   <div id="section">
                       <table class="one-column-emphasis">
@@ -572,6 +573,7 @@ function listener(e)
                           </tbody>
                       </table> 
                   </div>
+                  </xsl:if>
               <!-- </xsl:if> -->
               <xsl:if test="cybox:Observable_Composition">
                   <br/>
@@ -1974,6 +1976,7 @@ function listener(e)
                     <xsl:call-template name="processProperties"/>
                 </xsl:for-each>
             </div>
+            <!--
             <div id="container">
                 <xsl:if test="cybox:Defined_Object">
                     <xsl:for-each select="cybox:Defined_Object">
@@ -1988,14 +1991,15 @@ function listener(e)
                         <xsl:call-template name="processDefinedEffect"/>
                     </xsl:for-each>
                 </xsl:if>
-                <!--
+                <!- -
             <xsl:if test="cybox:Properties">
                 <xsl:for-each select="cybox:Properties">
                     <xsl:call-template name="processProperties"/>
                 </xsl:for-each>
             </xsl:if>
-            -->
+            - ->
             </div>
+            -->
         </div>
     </xsl:template>
     
