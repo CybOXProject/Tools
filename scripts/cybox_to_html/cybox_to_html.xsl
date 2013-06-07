@@ -470,14 +470,14 @@ function listener(e)
                         <!-- <xsl:sort select="cybox:Observable_Composition" order="descending"/> -->
                         <xsl:choose>
                             <xsl:when test="position() mod 2">
-                                <TR class="odd">
-                                    <xsl:call-template name="processObservable"/>
-                                </TR>
+                                <!-- <TR class="odd"> -->
+                                    <xsl:call-template name="processObservable"><xsl:with-param name="evenOrOdd">odd</xsl:with-param></xsl:call-template>
+                                <!-- </TR> -->
                             </xsl:when>
                             <xsl:otherwise>
-                                <TR class="even">
-                                    <xsl:call-template name="processObservable"/>
-                                </TR>
+                                <!-- <TR class="even"> -->
+                                    <xsl:call-template name="processObservable"><xsl:with-param name="evenOrOdd">even</xsl:with-param></xsl:call-template>
+                                <!-- </TR> -->
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:for-each>
@@ -488,12 +488,38 @@ function listener(e)
     </xsl:template>
     
     <xsl:template name="processObservable">
+        <xsl:param name="evenOrOdd" />
+        <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
+        <xsl:variable name="imgVar" select="generate-id()"/>
+        <TR><xsl:attribute name="class"><xsl:value-of select="$evenOrOdd" /></xsl:attribute>
         <TD>
-            <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
-            <xsl:variable name="imgVar" select="generate-id()"/>
             <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('{$contentVar}','{$imgVar}')">
                 <span id="{$imgVar}" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span><xsl:value-of select="@id"/>
             </div>
+        </TD>
+        <TD>                    
+            <xsl:choose>
+                <xsl:when test="cybox:Observable_Composition">
+                    Composition
+                </xsl:when>
+                <xsl:when test="cybox:Event">
+                    Event
+                </xsl:when>
+                <xsl:when test="cybox:Object/cybox:Properties/@xsi:type">
+                    <xsl:value-of select="fn:local-name-from-QName(fn:resolve-QName(cybox:Object/cybox:Properties/@xsi:type, cybox:Object/cybox:Properties))" />
+                    <!-- <xsl:value-of select="fn:replace('Matthew E. Coarr', 'Matthew', 'Matt')" /> -->
+                </xsl:when>
+                <xsl:when test="cybox:Object/cybox:Properties/@xsi:type and not(cybox:Object/cybox:Properties/@xsi:type)">
+                    Object (no properties set)
+                </xsl:when>
+                <xsl:otherwise>
+                    Other
+                </xsl:otherwise>
+            </xsl:choose>
+        </TD>
+        </TR>
+        <TR><xsl:attribute name="class"><xsl:value-of select="$evenOrOdd" /></xsl:attribute>
+        <TD colspan="2">
           <div id="{$contentVar}"  class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
               <div><xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
                   <xsl:if test="cybox:Title">
@@ -582,26 +608,7 @@ function listener(e)
             </div>
             </div>
         </TD>
-        <TD>                    
-            <xsl:choose>
-                <xsl:when test="cybox:Observable_Composition">
-                    Composition
-                </xsl:when>
-                <xsl:when test="cybox:Event">
-                    Event
-                </xsl:when>
-                <xsl:when test="cybox:Object/cybox:Properties/@xsi:type">
-                    <xsl:value-of select="fn:local-name-from-QName(fn:resolve-QName(cybox:Object/cybox:Properties/@xsi:type, cybox:Object/cybox:Properties))" />
-                    <!-- <xsl:value-of select="fn:replace('Matthew E. Coarr', 'Matthew', 'Matt')" /> -->
-                </xsl:when>
-                <xsl:when test="cybox:Object/cybox:Properties/@xsi:type and not(cybox:Object/cybox:Properties/@xsi:type)">
-                    Object (no properties set)
-                </xsl:when>
-                <xsl:otherwise>
-                    Other
-                </xsl:otherwise>
-            </xsl:choose>
-        </TD>
+        </TR>
     </xsl:template>
     
     <xsl:template name="processObservableCompositionSimple">
