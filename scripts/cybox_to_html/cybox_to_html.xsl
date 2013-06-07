@@ -314,8 +314,10 @@ ikirillov@mitre.org
                     table.compositionTableOperator > tbody > tr > td,
                     table.compositionTableOperand > tbody > tr > td
                     {
-                      border: solid black thin;
-                      border-collapse: collapse;
+                      /* border: solid gray thin; */
+                      /* border-collapse: collapse; */
+                      border: none;
+                      padding: 0.5em;
                     }
                     .compositionTable,
                     .compositionTableOperator,
@@ -331,6 +333,15 @@ ikirillov@mitre.org
                     {
                       padding: 0!important;
                       border: none;
+                    }
+                    .compositionTableOperand
+                    {
+                      padding: 0.5em;
+                    }
+                    .compositionTableOperand > tbody > tr > td > div 
+                    {
+                      background-color: lightcyan;
+                      padding: 0.7em;
                     }
                 </style>
                 
