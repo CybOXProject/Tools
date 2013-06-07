@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cybox:Observables 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:cybox="http://cybox.mitre.org/cybox-2" 
+    xmlns:cyboxCommon="http://cybox.mitre.org/common-2" 
+    xmlns:AddrObj="http://cybox.mitre.org/objects#AddressObject-2" 
+    xmlns:URIObj="http://cybox.mitre.org/objects#URIObject-2" 
+    xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2" 
+    xmlns:EmailMessageObj="http://cybox.mitre.org/objects#EmailMessageObject-2" 
+    xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2" 
+    xmlns:example="http://example.com/" 
+    xsi:schemaLocation="
+    http://cybox.mitre.org/cybox-2 ../cybox_core.xsd
+    http://cybox.mitre.org/objects#URIObject-2 ../objects/URI_Object.xsd
+    http://cybox.mitre.org/objects#FileObject-2 ../objects/File_Object.xsd
+    http://cybox.mitre.org/objects#EmailMessageObject-2 ../objects/Email_Message_Object.xsd
+    http://cybox.mitre.org/default_vocabularies-2 ../cybox_default_vocabularies.xsd" cybox_major_version="2" cybox_minor_version="0">
+    <!-- This collection of observables were observed as part of the widespread "Iran-Oil" (among many other names used) attack campaign in March 2012 -->
+    <cybox:Observable id="example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e">
+        <!-- Receive "Iran-Oil" attack campaign email message -->
+        <cybox:Event>
+            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0">Email Ops</cybox:Type>
+            <cybox:Description>Receive "Iran-Oil" attack campaign email message.</cybox:Description>
+            <cybox:Actions>
+                <cybox:Action>
+                    <cybox:Type xsi:type="cyboxVocabs:ActionTypeVocab-1.0">Receive</cybox:Type>
+                    <cybox:Associated_Objects>
+                        <cybox:Associated_Object id="example:Object-51359587-f201-4383-b032-5a64522fcd7d">
+                            <cybox:Properties xsi:type="EmailMessageObj:EmailMessageObjectType">
+                                <EmailMessageObj:Header>
+                                    <EmailMessageObj:To>
+                                        <EmailMessageObj:Recipient category="e-mail">
+                                            <AddrObj:Address_Value>william.abnett@gmail.com</AddrObj:Address_Value>
+                                        </EmailMessageObj:Recipient>
+                                    </EmailMessageObj:To>
+                                    <EmailMessageObj:From category="e-mail">
+                                        <AddrObj:Address_Value>wmorrison89@gmail.com</AddrObj:Address_Value>
+                                    </EmailMessageObj:From>
+                                    <EmailMessageObj:Subject>Iran's Oil and Nuclear Situation</EmailMessageObj:Subject>
+                                    <EmailMessageObj:Date datatype="dateTime">2012-03-02T07:42:24Z</EmailMessageObj:Date>
+                                </EmailMessageObj:Header>
+                                <EmailMessageObj:Raw_Header datatype="string"><![CDATA[
+						Return-Path: <wmorrison89@gmail.com>
+Received-SPF: pass (google.com: domain of wmorrison89@gmail.com designates
+10.236.185.4 as permitted sender) client-ip=10.236.185.4;
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+wmorrison89@gmail.com designates 10.236.185.4 as permitted sender)
+smtp.mail=wmorrison89@gmail.com; dkim=pass header.i=wmorrison89@gmail.com
+Received: from mr.google.com ([10.236.185.4]) by 10.236.185.4 with SMTP
+id t4mr5301660yhm.129.1330692273662 (num_hops = 1); Fri, 02 Mar 2012
+04:44:33 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.236.185.4 with SMTP id t4mr4236541yhm.129.1330692265380;
+Fri,
+02 Mar 2012 04:44:25 -0800 (PST)
+Received: by 10.147.35.14 with HTTP; Fri, 2 Mar 2012 04:44:24 -0800 (PST)
+In-Reply-To:
+<CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com>
+References:
+<CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com>
+Date: Fri, 2 Mar 2012 07:44:24 -0500
+Message-ID:
+<CADY6HTZ6oopY5v6WkYU81YcSQw3X124CK_Fx4jhnhUiU3Y9z6A@mail.gmail.com>
+Subject: Iran's Oil and Nuclear Situation
+From: william abnett <wmorrison89@gmail.com>
+To: william.abnett <william.abnett@gmail.com>
+Content-Type: multipart/mixed; boundary="20cf303f67fac8928804ba41efd5"
+					]]></EmailMessageObj:Raw_Header>
+                                <EmailMessageObj:Attachments>
+                                    <EmailMessageObj:File object_reference="cybox:guid-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7"/>
+                                </EmailMessageObj:Attachments>
+                            </cybox:Properties>
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Returned</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                    </cybox:Associated_Objects>
+                </cybox:Action>
+            </cybox:Actions>
+        </cybox:Event>
+    </cybox:Observable>
+    <cybox:Observable id="example:Obervable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f">
+        <!-- Open Iran-Oil corrupted .doc file-->
+        <cybox:Event>
+            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0">File Ops (CRUD)</cybox:Type>
+            <cybox:Description>Open Iran-Oil corrupted .doc file.</cybox:Description>
+            <cybox:Actions>
+                <cybox:Action>
+                    <cybox:Type xsi:type="cyboxVocabs:ActionTypeVocab-1.0">Open</cybox:Type>
+                    <cybox:Associated_Objects>
+                        <cybox:Associated_Object id="example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7">
+                            <cybox:Description>
+                                The word document contains flash, which downloads a
+                                corrupted mp4 file. The mp4 file itself is not anything special
+                                but an 0C filled (22kb) mp4 file with a valid mp4
+                                header.
+                            </cybox:Description>
+                            <cybox:Properties xsi:type="FileObj:FileObjectType">
+                                <FileObj:File_Name>Iran's Oil and Nuclear Situation.doc</FileObj:File_Name>
+                                <FileObj:Size_In_Bytes>106604</FileObj:Size_In_Bytes>
+                                <FileObj:Hashes>
+                                    <cyboxCommon:Hash>
+                                        <cyboxCommon:Type>MD5</cyboxCommon:Type>
+                                        <cyboxCommon:Simple_Hash_Value condition="Equals">E92A4FC283EB2802AD6D0E24C7FCC857</cyboxCommon:Simple_Hash_Value>
+                                    </cyboxCommon:Hash>
+                                </FileObj:Hashes>
+                            </cybox:Properties>
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Affected</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                    </cybox:Associated_Objects>
+                </cybox:Action>
+            </cybox:Actions>
+        </cybox:Event>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b">
+        <!-- Download Iran-Oil invalid .mp4 downloader file-->
+        <cybox:Event>
+            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0">File Ops (CRUD)</cybox:Type>
+            <cybox:Description>Download Iran-Oil invalid .mp4 downloader file.</cybox:Description>
+            <cybox:Actions>
+                <cybox:Action>
+                    <cybox:Type xsi:type="cyboxVocabs:ActionTypeVocab-1.0">Download</cybox:Type>
+                    <cybox:Associated_Objects>
+                        <cybox:Associated_Object idref="example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7">
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Initiating</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                        <cybox:Associated_Object id="example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa">
+                            <!-- Iran-Oil invalid .mp4 downloader file-->
+                            <cybox:Description>
+                                This mp4 file causes memory corruption and code
+                                execution via heap-spraying code injection.
+                            </cybox:Description>
+                            <cybox:Properties xsi:type="FileObj:FileObjectType">
+                                <FileObj:File_Name>test.mp4</FileObj:File_Name>
+                                <FileObj:Size_In_Bytes>22384</FileObj:Size_In_Bytes>
+                                <FileObj:Hashes>
+                                    <cyboxCommon:Hash>
+                                        <cyboxCommon:Type>MD5</cyboxCommon:Type>
+                                        <cyboxCommon:Simple_Hash_Value condition="Equals">8933598C8B1FA5E493497B11C48DA4F2</cyboxCommon:Simple_Hash_Value>
+                                    </cyboxCommon:Hash>
+                                </FileObj:Hashes>
+                            </cybox:Properties>
+                            <cybox:Related_Objects>
+                                <cybox:Related_Object idref="example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7">
+                                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Downloaded_By</cybox:Relationship>
+                                </cybox:Related_Object>
+                                <cybox:Related_Object idref="example:Object-61041b8b-0c15-48a0-ac5f-b49488788010">
+                                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Downloaded_From</cybox:Relationship>
+                                </cybox:Related_Object>
+                            </cybox:Related_Objects>
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Affected</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                        <cybox:Associated_Object id="example:Object-61041b8b-0c15-48a0-ac5f-b49488788010">
+                            <!-- URL from which malicious .mp4 file was downloaded-->
+                            <cybox:Properties xsi:type="URIObj:URIObjectType" type="URL">
+                                <URIObj:Value condition="Equals">http://208.115.230.76/test.mp4</URIObj:Value>
+                            </cybox:Properties>
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Utilized</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                    </cybox:Associated_Objects>
+                </cybox:Action>
+            </cybox:Actions>
+        </cybox:Event>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6">
+        <!-- Create Iran-Oil .exe Trojan file-->
+        <cybox:Event>
+            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0">File Ops (CRUD)</cybox:Type>
+            <cybox:Description>Create Iran-Oil .exe Trojan file.</cybox:Description>
+            <cybox:Actions>
+                <cybox:Action>
+                    <cybox:Type xsi:type="cyboxVocabs:ActionTypeVocab-1.0">Create</cybox:Type>
+                    <cybox:Associated_Objects>
+                        <cybox:Associated_Object idref="example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa">
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Initiating</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                        <cybox:Associated_Object id="example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c">
+                            <cybox:Description>
+                                The file (us.exe MD5: FD1BE09E499E8E380424B3835FC973A8
+                                4861440 bytes) is created in the logged in user %Temp%
+                                directory. The size of the embedded file is 22.5 KB (23040
+                                bytes) and the size of the created us.exe is 4.63MB. It is an
+                                odd discrepancy until you look at the file and it looks like the
+                                code is repeated over and over - 211 times. The file resource
+                                section indicates the file is meant to look like a java updater,
+                                which is always larger than 22.5KB and that would explain all
+                                this padding, which is done at the time when the file is being
+                                written to the disk.
+                            </cybox:Description>
+                            <cybox:Properties xsi:type="FileObj:FileObjectType">
+                                <FileObj:File_Name>us.exe</FileObj:File_Name>
+                                <FileObj:File_Path>%Temp%</FileObj:File_Path>
+                                <FileObj:Size_In_Bytes>4861440</FileObj:Size_In_Bytes>
+                                <FileObj:Hashes>
+                                    <cyboxCommon:Hash>
+                                        <cyboxCommon:Type>MD5</cyboxCommon:Type>
+                                        <cyboxCommon:Simple_Hash_Value condition="Equals">FD1BE09E499E8E380424B3835FC973A8</cyboxCommon:Simple_Hash_Value>
+                                    </cyboxCommon:Hash>
+                                </FileObj:Hashes>
+                            </cybox:Properties>
+                            <cybox:Related_Objects>
+                                <cybox:Related_Object idref="example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa">
+                                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Created_By</cybox:Relationship>
+                                </cybox:Related_Object>
+                                <!-- The trojan connects to the following set of URLs/IPs for C&C -->
+                                <cybox:Related_Object idref="example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e">
+                                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Connected_To</cybox:Relationship>
+                                </cybox:Related_Object>
+                                <cybox:Related_Object idref="example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9">
+                                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Connected_To</cybox:Relationship>
+                                </cybox:Related_Object>
+                                <cybox:Related_Object idref="example:Object-568db11e-39ee-43d7-83d8-032bdec3801a">
+                                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Connected_To</cybox:Relationship>
+                                </cybox:Related_Object>
+                                <cybox:Related_Object idref="example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1">
+                                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Connected_To</cybox:Relationship>
+                                </cybox:Related_Object>
+                                <cybox:Related_Object idref="example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f">
+                                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Connected_To</cybox:Relationship>
+                                </cybox:Related_Object>
+                                <cybox:Related_Object idref="example:guid-5ceb9d54-24e2-4627-948d-6b92ac81962a">
+                                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Connected_To</cybox:Relationship>
+                                </cybox:Related_Object>
+                            </cybox:Related_Objects>
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Affected</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                    </cybox:Associated_Objects>
+                </cybox:Action>
+            </cybox:Actions>
+        </cybox:Event>
+    </cybox:Observable>
+
+    <cybox:Observable id="example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161">
+        <!-- Execute Iran-Oil .exe Trojan file-->
+        <cybox:Event>
+            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0">File Ops (CRUD)</cybox:Type>
+            <cybox:Description>Execute Iran-Oil .exe Trojan file.</cybox:Description>
+            <cybox:Actions>
+                <cybox:Action>
+                    <cybox:Type xsi:type="cyboxVocabs:ActionTypeVocab-1.0">Execute</cybox:Type>
+                    <cybox:Associated_Objects>
+                        <cybox:Associated_Object idref="example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa">
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Initiating</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                        <cybox:Associated_Object idref="example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c">
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Affected</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                    </cybox:Associated_Objects>
+                </cybox:Action>
+            </cybox:Actions>
+        </cybox:Event>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-dee72b3e-82fb-4319-bfcc-007e3cf930e8">
+        <!-- Iran-Oil core embedded .exe Trojan file-->
+        <cybox:Object id="example:Object-bed1ff22-08e8-4e04-b7ac-908b5271176f">
+            <cybox:Properties xsi:type="FileObj:FileObjectType">
+                <FileObj:File_Name>us-embedded.exe</FileObj:File_Name>
+                <FileObj:Size_In_Bytes>23040</FileObj:Size_In_Bytes>
+                <FileObj:Hashes>
+                    <cyboxCommon:Hash>
+                        <cyboxCommon:Type>MD5</cyboxCommon:Type>
+                        <cyboxCommon:Simple_Hash_Value condition="Equals">CB3DCDE34FD9FF0E19381D99B02F9692</cyboxCommon:Simple_Hash_Value>
+                    </cyboxCommon:Hash>
+                </FileObj:Hashes>
+            </cybox:Properties>
+            <cybox:Related_Objects>
+                <cybox:Related_Object idref="example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c">
+                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Contained_Within</cybox:Relationship>
+                </cybox:Related_Object>
+            </cybox:Related_Objects>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f">
+        <!-- Trojan .exe file connects out to C&C URLs/IPs-->
+        <cybox:Event>
+            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0">App Layer Traffic</cybox:Type>
+            <cybox:Description>Trojan .exe file connects out to C2 URLs/IPs.</cybox:Description>
+            <cybox:Actions>
+                <cybox:Action>
+                    <cybox:Type xsi:type="cyboxVocabs:ActionTypeVocab-1.0">Connect</cybox:Type>
+                    <cybox:Associated_Objects>
+                        <cybox:Associated_Object idref="example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c">
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Initiating</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                        <cybox:Associated_Object idref="example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e">
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Utilized</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                        <cybox:Associated_Object idref="example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9">
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Utilized</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                        <cybox:Associated_Object idref="example:Object-568db11e-39ee-43d7-83d8-032bdec3801a">
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Utilized</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                        <cybox:Associated_Object idref="example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1">
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Utilized</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                        <cybox:Associated_Object idref="example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f">
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Utilized</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                        <cybox:Associated_Object idref="example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a">
+                            <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Utilized</cybox:Association_Type>
+                        </cybox:Associated_Object>
+                    </cybox:Associated_Objects>
+                </cybox:Action>
+            </cybox:Actions>
+        </cybox:Event>
+    </cybox:Observable>
+    <!-- The next six Observables represent the 3 different URL/IP pairs of C&C servers that the trojan communicates with-->
+    <cybox:Observable id="example:Observable-066cef51-c886-432e-9a22-a17f57f3f3f2">
+        <!-- One of three Command and Control URLs-->
+        <cybox:Object id="example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e">
+            <cybox:Properties xsi:type="URIObj:URIObjectType">
+                <URIObj:Value condition="Equals">www.documents.myPicture.info</URIObj:Value>
+            </cybox:Properties>
+            <cybox:Related_Objects>
+                <cybox:Related_Object idref="example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9">
+                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Resolved_To</cybox:Relationship>
+                </cybox:Related_Object>
+            </cybox:Related_Objects>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-4e05804c-f552-44e1-9793-ff4bb7f88f9c">
+        <!-- One of three Command and Control IPs-->
+        <cybox:Object id="example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9">
+            <cybox:Properties xsi:type="AddrObj:AddressObjectType" category="ipv4-addr">
+                <AddrObj:Address_Value condition="Equals">199.192.156.134</AddrObj:Address_Value>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-75ce59ad-1f01-4eae-9ecc-0b22c4c24ce7">
+        <!-- One of three Command and Control URLs-->
+        <cybox:Object id="example:Object-568db11e-39ee-43d7-83d8-032bdec3801a">
+            <cybox:Properties xsi:type="URIObj:URIObjectType" type="URL">
+                <URIObj:Value condition="Equals">documents.myPicture.info</URIObj:Value>
+            </cybox:Properties>
+            <cybox:Related_Objects>
+                <cybox:Related_Object idref="example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1">
+                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Resolved_To</cybox:Relationship>
+                </cybox:Related_Object>
+            </cybox:Related_Objects>
+        </cybox:Object>
+
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-1ea53b14-8fe9-467b-a298-62d9684e797d">
+        <!-- One of three Command and Control IPs-->
+        <cybox:Object id="example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1">
+            <cybox:Properties xsi:type="AddrObj:AddressObjectType" category="ipv4-addr">
+                <AddrObj:Address_Value condition="Equals">199.192.156.134</AddrObj:Address_Value>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-f6c8ee75-ee7e-4490-bd5d-0661d0db7264">
+        <!-- One of three Command and Control URLs-->
+        <cybox:Object id="example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f">
+            <cybox:Properties xsi:type="URIObj:URIObjectType" type="URL">
+                <URIObj:Value condition="Equals">ftp.documents.myPicture.info</URIObj:Value>
+            </cybox:Properties>
+            <cybox:Related_Objects>
+                <cybox:Related_Object idref="example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a">
+                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Resolved_To</cybox:Relationship>
+                </cybox:Related_Object>
+            </cybox:Related_Objects>
+        </cybox:Object>
+    </cybox:Observable>
+    
+    
+    <cybox:Observable id="example:Observable-c78c0a83-6d14-45f8-827f-f758f0cd11ea">
+        <!-- One of three Command and Control IPs-->
+        <cybox:Object id="example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a">
+            <cybox:Properties xsi:type="AddrObj:AddressObjectType" category="ipv4-addr">
+                <AddrObj:Address_Value condition="Equals">199.192.156.134</AddrObj:Address_Value>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+
+
+    <cybox:Observable id="example:Observable-47d6a950-884d-46b5-9938-ac5555065a81">
+        <!-- This composed observable defines a pattern that is true if the receive email event occurs AND the create malicious .doc file event occurs AND the download the downloader .mp4 file event occurs AND the create trojan .exe file event occurs AND the execute trojan .exe file event occurs AND the connect to all three of the C&C URLs/IPs event occurs-->
+        <!-- This yields a very tight filter that will have very low false positives but could miss almost any variation of the attack elements-->
+        <cybox:Observable_Composition operator="AND">
+            <!-- Receive "Iran-Oil" attack campaign email message -->
+            <cybox:Observable idref="example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e"/>
+            <!-- Open Iran-Oil corrupted .doc file-->
+            <cybox:Observable idref="example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f"/>
+            <!-- Download Iran-Oil invalid .mp4 downloader file-->
+            <cybox:Observable idref="example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b"/>
+            <!-- Create Iran-Oil .exe Trojan file-->
+            <cybox:Observable idref="example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6"/>
+            <!-- Execute Iran-Oil .exe Trojan file-->
+            <cybox:Observable idref="example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161"/>
+            <!-- Trojan .exe file connects out to C&C URLs/IPs-->
+            <cybox:Observable idref="example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f"/>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+
+    <cybox:Observable id="example:Observable-80594430-7567-4402-88a4-05d556b21884">
+        <!-- This composed observable defines a pattern that is true if the receive email event occurs OR the create malicious .doc file event occurs OR the download the downloader .mp4 file event occurs OR the create trojan .exe file event occurs OR the execute trojan .exe file event occurs OR the connect to all three of the C&C URLs/IPs event occurs-->
+        <!-- This yields a very loose filter that could have false positives but could catch numerous potential variations of the attack elements-->
+        <cybox:Observable_Composition operator="OR">
+            <!-- Receive "Iran-Oil" attack campaign email message -->
+            <cybox:Observable idref="example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e"/>
+            <!-- Open Iran-Oil corrupted .doc file-->
+            <cybox:Observable idref="example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f"/>
+            <!-- Download Iran-Oil invalid .mp4 downloader file-->
+            <cybox:Observable idref="example:guid-f005fbc6-7427-43ea-8e1e-9a341836f76b"/>
+            <!-- Create Iran-Oil .exe Trojan file-->
+            <cybox:Observable idref="example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6"/>
+            <!-- Execute Iran-Oil .exe Trojan file-->
+            <cybox:Observable idref="example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161"/>
+            <!-- Trojan .exe file connects out to C&C URLs/IPs-->
+            <cybox:Observable idref="example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f"/>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+
+    <cybox:Observable id="example:Observable-7d932074-fded-4056-870e-dd51980501d4">
+        <!-- This composed observable defines a pattern that is true if (the receive email event occurs AND the create malicious .doc file event occurs) OR (the download the downloader .mp4 file event occurs AND the create trojan .exe file event occurs AND the execute trojan .exe file event occurs) OR the connect to all three of the C&C URLs/IPs event occurs-->
+        <cybox:Observable_Composition operator="OR">
+            <cybox:Observable>
+                <cybox:Observable_Composition operator="AND">
+                    <!-- Receive "Iran-Oil" attack campaign email message -->
+                    <cybox:Observable idref="example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e"/>
+                    <!-- Open Iran-Oil corrupted .doc file-->
+                    <cybox:Observable idref="example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f"/>
+                </cybox:Observable_Composition>
+            </cybox:Observable>
+            <cybox:Observable>
+                <cybox:Observable_Composition operator="AND">
+                    <!-- Download Iran-Oil invalid .mp4 downloader file-->
+                    <cybox:Observable idref="example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b"/>
+                    <!-- Create Iran-Oil .exe Trojan file-->
+                    <cybox:Observable idref="example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6"/>
+                    <!-- Execute Iran-Oil .exe Trojan file-->
+                    <cybox:Observable idref="example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161"/>
+                </cybox:Observable_Composition>
+            </cybox:Observable>
+            <!-- Trojan .exe file connects out to C&C URLs/IPs-->
+            <cybox:Observable idref="example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f"/>
+        </cybox:Observable_Composition>
+    </cybox:Observable>
+
+    <!-- CybOX enables a wide myriad of other potential observable pattern variations at the logical composition level or utilizing patterns at the Object attribute level including Regex all of which allow the user to define an almost infinitely variable set of patterns and filters -->
+</cybox:Observables>

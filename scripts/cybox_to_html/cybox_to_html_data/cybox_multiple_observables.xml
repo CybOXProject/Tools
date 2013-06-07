@@ -1,0 +1,129 @@
+<cybox:Observables 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xmlns:cybox="http://cybox.mitre.org/cybox-2" 
+ xmlns:cyboxCommon="http://cybox.mitre.org/common-2" 
+ xmlns:URIObj="http://cybox.mitre.org/objects#URIObject-2" 
+ xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject-2" 
+ xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2" 
+ xmlns:ProcessObj="http://cybox.mitre.org/objects#ProcessObject-2" 
+ xmlns:WinServiceObj="http://cybox.mitre.org/objects#WinServiceObject-2" 
+ xmlns:MutexObj="http://cybox.mitre.org/objects#MutexObject-2" 
+ xmlns:NetworkConnectionObj="http://cybox.mitre.org/objects#NetworkConnectionObject-2" 
+ xmlns:PortObj="http://cybox.mitre.org/objects#PortObject-2" 
+ xmlns:WinProcessObj="http://cybox.mitre.org/objects#WinProcessObject-2" 
+ xmlns:WinHandleObj="http://cybox.mitre.org/objects#WinHandleObject-2" 
+ xmlns:MemoryObj="http://cybox.mitre.org/objects#MemoryObject-2" 
+ xmlns:example="http://example.com"
+ xsi:schemaLocation="http://cybox.mitre.org/cybox-2 http://cybox.mitre.org/XMLSchema/core/2.0/cybox_core.xsd
+ http://cybox.mitre.org/objects#URIObject-2 http://cybox.mitre.org/XMLSchema/objects/URI/2.0/URI_Object.xsd
+ http://cybox.mitre.org/objects#AddressObject-2 http://cybox.mitre.org/XMLSchema/objects/Address/2.0/Address_Object.xsd
+ http://cybox.mitre.org/objects#FileObject-2 http://cybox.mitre.org/XMLSchema/objects/File/2.0/File_Object.xsd
+ http://cybox.mitre.org/objects#ProcessObject-2 http://cybox.mitre.org/XMLSchema/objects/Process/2.0/Process_Object.xsd
+ http://cybox.mitre.org/objects#WinServiceObject-2 http://cybox.mitre.org/XMLSchema/objects/Win_Service/2.0/Win_Service_Object.xsd
+ http://cybox.mitre.org/objects#MutexObject-2 http://cybox.mitre.org/XMLSchema/objects/Mutex/2.0/Mutex_Object.xsd" cybox_major_version="2" cybox_minor_version="0">
+    <cybox:Observable id="example:Observable-415b7e40-b97a-11e2-90cf-5c260a6db690">
+        <cybox:Object id="example:URI-415cb6c0-b97a-11e2-bc44-5c260a6db690">
+            <cybox:Properties xsi:type="URIObj:URIObjectType" type="URL">
+                <URIObj:Value>http://www.mypremierfutbol.com</URIObj:Value>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-415cb6c1-b97a-11e2-a7e2-5c260a6db690">
+        <cybox:Object id="example:URI-415cddcf-b97a-11e2-ac5e-5c260a6db690">
+            <cybox:Properties xsi:type="URIObj:URIObjectType" type="URL">
+                <URIObj:Value>http://www.todaysfutbol.com</URIObj:Value>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-415cddd0-b97a-11e2-925d-5c260a6db690">
+        <cybox:Object id="example:Address-415cddd1-b97a-11e2-bf9f-5c260a6db690">
+            <cybox:Properties xsi:type="AddressObj:AddressObjectType" category="ipv4-addr">
+                <AddressObj:Address_Value>72.167.202.5</AddressObj:Address_Value>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-415cddd2-b97a-11e2-bddf-5c260a6db690">
+        <cybox:Object id="example:File-415cddd3-b97a-11e2-9959-5c260a6db690">
+            <cybox:Properties xsi:type="FileObj:FileObjectType">
+                <FileObj:File_Name>\WINDOWS\inf\oem7A.PNF</FileObj:File_Name>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-415cddd4-b97a-11e2-8b8b-5c260a6db690">
+        <cybox:Object id="example:File-415cddd5-b97a-11e2-bb22-5c260a6db690">
+            <cybox:Properties xsi:type="FileObj:FileObjectType">
+                <FileObj:File_Name>\WINDOWS\inf\mdmeric3.PNF</FileObj:File_Name>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-415cddd6-b97a-11e2-b8bf-5c260a6db690">
+        <cybox:Object id="example:File-415cddd7-b97a-11e2-8698-5c260a6db690">
+            <cybox:Properties xsi:type="FileObj:FileObjectType">
+                <FileObj:File_Name>\WINDOWS\inf\mdmcpq3.PNF</FileObj:File_Name>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-415cddd8-b97a-11e2-8820-5c260a6db690">
+        <cybox:Object id="example:Process-415cddd9-b97a-11e2-af15-5c260a6db690">
+            <cybox:Properties xsi:type="ProcessObj:ProcessObjectType">
+                <ProcessObj:PID>1928</ProcessObj:PID>
+                <ProcessObj:Name>lsass.exe</ProcessObj:Name>
+                <ProcessObj:Creation_Time>2011-06-03T04:26:55</ProcessObj:Creation_Time>
+                <ProcessObj:Parent_PID>668</ProcessObj:Parent_PID>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-415cddda-b97a-11e2-a32e-5c260a6db690">
+        <cybox:Object id="example:Process-415cdddb-b97a-11e2-9ddf-5c260a6db690">
+            <cybox:Properties xsi:type="ProcessObj:ProcessObjectType">
+                <ProcessObj:PID>858</ProcessObj:PID>
+                <ProcessObj:Name>lsass.exe</ProcessObj:Name>
+                <ProcessObj:Creation_Time>2011-06-03T04:26:55</ProcessObj:Creation_Time>
+                <ProcessObj:Parent_PID>668</ProcessObj:Parent_PID>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-415cdddc-b97a-11e2-a67d-5c260a6db690">
+        <cybox:Object id="example:WinService-415cdddd-b97a-11e2-ab8c-5c260a6db690">
+            <cybox:Properties xsi:type="WinServiceObj:WindowsServiceObjectType">
+                <WinServiceObj:Display_Name>WebDav Client Redirector</WinServiceObj:Display_Name>
+                <WinServiceObj:Service_Name>MRxDAV</WinServiceObj:Service_Name>
+                <WinServiceObj:Startup_Command_Line>\FileSystem\MRxDAV</WinServiceObj:Startup_Command_Line>
+                <WinServiceObj:Startup_Type>SERVICE_FILE_SYSTEM_DRIVER</WinServiceObj:Startup_Type>
+                <WinServiceObj:Service_Status>SERVICE_RUNNING</WinServiceObj:Service_Status>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-415cddde-b97a-11e2-87a7-5c260a6db690">
+        <cybox:Object id="example:WinService-415cdddf-b97a-11e2-a5e0-5c260a6db690">
+            <cybox:Properties xsi:type="WinServiceObj:WindowsServiceObjectType">
+                <WinServiceObj:Display_Name>MRxSmb</WinServiceObj:Display_Name>
+                <WinServiceObj:Service_Name>MRxSmb</WinServiceObj:Service_Name>
+                <WinServiceObj:Startup_Command_Line>\FileSystem\MRxSmb</WinServiceObj:Startup_Command_Line>
+                <WinServiceObj:Startup_Type>SERVICE_FILE_SYSTEM_DRIVER</WinServiceObj:Startup_Type>
+                <WinServiceObj:Service_Status>SERVICE_RUNNING</WinServiceObj:Service_Status>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-415cdde0-b97a-11e2-824f-5c260a6db690">
+        <cybox:Object id="example:Mutex-415cdde1-b97a-11e2-a0b0-5c260a6db690">
+            <cybox:Properties xsi:type="MutexObj:MutexObjectType">
+                <MutexObj:Name>{5EC171BB-F130-4a19-B782-B6E655E091B2}</MutexObj:Name>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-415cdde2-b97a-11e2-b2f7-5c260a6db690">
+        <cybox:Object id="example:Mutex-415cdde3-b97a-11e2-8b3b-5c260a6db690">
+            <cybox:Properties xsi:type="MutexObj:MutexObjectType">
+                <MutexObj:Name>{E41362C3-F75C-4ec2-AF49-3CB6BCA591CA}</MutexObj:Name>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="example:Observable-415cdde4-b97a-11e2-bc73-5c260a6db690">
+        <cybox:Object id="example:Mutex-415cdde5-b97a-11e2-b2b2-5c260a6db690">
+            <cybox:Properties xsi:type="MutexObj:MutexObjectType">
+                <MutexObj:Name>PrefetchFileCacheOwner</MutexObj:Name>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+</cybox:Observables>
