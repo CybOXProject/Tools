@@ -12,7 +12,7 @@ ikirillov@mitre.org
 
 
 <xsl:stylesheet 
-    version="3.0"
+    version="2.0"
     xmlns:cybox="http://cybox.mitre.org/cybox-2"
     xmlns:Common="http://cybox.mitre.org/common-2"
     xmlns:ArtifactObj="http://cybox.mitre.org/objects#ArtifactObject-2"
@@ -649,7 +649,7 @@ function listener(e)
                 (object reference:
                 <xsl:element name="span">
                     <xsl:attribute name="class">highlightTargetLink</xsl:attribute>
-                    <xsl:attribute name="onclick"><xsl:value-of select='"highlightTarget(&apos;" || @idref || "&apos;)"'/></xsl:attribute>
+                    <xsl:attribute name="onclick"><xsl:value-of select='concat("highlightTarget(&apos;", @idref, "&apos;)")'/></xsl:attribute>
                     <xsl:value-of select="@idref"/>
                 </xsl:element>
                 )
@@ -6935,11 +6935,9 @@ function listener(e)
     </xsl:template>
     
     <xsl:template match="EmailMessageObj:Header">
-        ### BEFORE LIST ###
         <ul>
             <xsl:apply-templates/>
         </ul>
-        ### AFTER LIST ###
     </xsl:template>
     
     <xsl:template match="EmailMessageObj:Header/*">
@@ -6957,7 +6955,7 @@ function listener(e)
           (object reference:
             <xsl:element name="span">
                 <xsl:attribute name="class">highlightTargetLink</xsl:attribute>
-                <xsl:attribute name="onclick"><xsl:value-of select='"highlightTarget(&apos;" || @object_reference || "&apos;)"'/></xsl:attribute>
+                <xsl:attribute name="onclick"><xsl:value-of select='concat("highlightTarget(&apos;", @object_reference, "&apos;)")'/></xsl:attribute>
                 <xsl:value-of select="@object_reference"/>
             </xsl:element>
             )
