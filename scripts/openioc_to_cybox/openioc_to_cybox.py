@@ -4,7 +4,6 @@
 import openioc
 import cybox.bindings.cybox_core as cybox_binding
 import cybox.bindings.cybox_common as cybox_common_binding
-import cybox.bindings.file_object as file_binding
 import ioc_observable
 import sys
 import os
@@ -126,10 +125,13 @@ def process_indicator(indicator, observables, observable_composition, top_level=
         #Recurse as needed to handle embedded indicators
         for embedded_indicator in indicator.get_Indicator():
             process_indicator(embedded_indicator, observables, current_composition, False)
-    return
+    else:
+        return False
+    
+    return True
 
 #Generate CybOX output from the OpenIOC indicators
-def generate_cybox(indicators):
+def generate_cybox(indicators, infilename):
     #Create the core CybOX structure
     observables = cybox_binding.ObservablesType()
 
@@ -152,11 +154,22 @@ def generate_cybox(indicators):
         #Set the title as appropriate
         if description != None:
             indicator_observable.set_Title(description)
+        #Set observable source to IOC
+        observable_source = cybox_common_binding.MeasureSourceType()
+        observable_source_description = cybox_common_binding.StructuredTextType()
+        observable_source_description.set_valueOf_('OpenIOC File: ' + os.path.basename(infilename))
+        observable_source.set_Description(observable_source_description)
+        indicator_observable.set_Observable_Source(observable_source)
+
         composition = cybox_binding.ObservableCompositionType(operator=indicator.get_operator())
         #Process the indicator, including any embedded indicators
-        process_indicator(indicator, observables, composition, True)
-        indicator_observable.set_Observable_Composition(composition)
-        observables.add_Observable(indicator_observable)
+        if process_indicator(indicator, observables, composition, True):
+            indicator_observable.set_Observable_Composition(composition)
+            observables.add_Observable(indicator_observable)
+        else:
+            #IOC had no indicator items compatible with CybOX
+            return None
+    
     return observables 
 
 #Helper methods
@@ -170,7 +183,7 @@ def generate_object_id():
     obj_id_base += 1
     return str(obj_id_base)
     
-#Print the usage text    
+#Print the usage text
 def usage():
     print USAGE_TEXT
     sys.exit(1)
@@ -216,20 +229,24 @@ def main():
         indicators = openioc.parse(infilename)
         try:
             print 'Generating ' + outfilename + ' from ' + infilename + '...'
-            observables = generate_cybox(indicators)
-            observables.set_cybox_major_version('2')
-            observables.set_cybox_minor_version('0')
+            observables = generate_cybox(indicators, infilename)
             
-            observables.export(open(outfilename, 'w'), 0)
+            if observables != None:
+                observables.set_cybox_major_version('2')
+                observables.set_cybox_minor_version('0')
+            
+                observables.export(open(outfilename, 'w'), 0, namespacedef_='\n xmlns:openioc="http://openioc.org/"')
 
-            if verbose_mode:
-                for indicator_id in skipped_indicators:
-                    print "Indicator Item " + indicator_id + " Skipped; indicator type currently not supported"
+                if verbose_mode:
+                    for indicator_id in skipped_indicators:
+                        print "Indicator Item " + indicator_id + " Skipped; indicator type currently not supported"
+            else:
+                print('\nInput file %s contained no indicator items compatible with CybOX\n' % infilename)
             
         except Exception, err:
-           print('\nError: %s\n' % str(err))
-           if verbose_mode:
-            traceback.print_exc()
+            print('\nError: %s\n' % str(err))
+            if verbose_mode:
+                traceback.print_exc()
            
     else:
         print('\nError: Input file not found or inaccessible.')
