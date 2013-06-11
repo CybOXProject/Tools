@@ -266,9 +266,16 @@ ikirillov@mitre.org
                       margin-left: 1em;
                       padding-left: 0.5em;
                     }
-                    .eventDescription
+                    .eventDescription,
+                    .description
                     {
-                      font-style: italic;
+                      font-style: italic!important;
+                      margin-top: 0.5em;
+                      margin-bottom: 0.5em;
+                    }
+                    .description::before
+                    {
+                      content: "description: "
                     }
                     .emailDiv
                     {
@@ -643,19 +650,27 @@ function findAndExpandTarget(targetElement)
             </tbody>
         </table> 
     </xsl:template>
+    
+    <xsl:template name="clickableIdref">
+        <xsl:param name="type"/>
+        <xsl:param name="idref"/>
+        (<xsl:value-of select="$type"/> reference:
+        <xsl:element name="span">
+            <xsl:attribute name="class">highlightTargetLink</xsl:attribute>
+            <xsl:attribute name="onclick"><xsl:value-of select='concat("highlightTarget(&apos;", $idref, "&apos;)")'/></xsl:attribute>
+            <xsl:value-of select="$idref"/>
+        </xsl:element>
+        )
+    </xsl:template>
 
     <xsl:template name="processObservableInObservableCompositionSimple">
         <xsl:if test="@idref">
             <div class="foreignObservablePointer">
                 <!-- <span><xsl:value-of select="@idref"/></span> -->
-                (object reference:
-                <xsl:element name="span">
-                    <xsl:attribute name="class">highlightTargetLink</xsl:attribute>
-                    <xsl:attribute name="onclick"><xsl:value-of select='concat("highlightTarget(&apos;", @idref, "&apos;)")'/></xsl:attribute>
-                    <xsl:value-of select="@idref"/>
-                </xsl:element>
-                )
-                
+                <xsl:call-template name="clickableIdref">
+                    <xsl:with-param name="type" select="'object'"/>
+                    <xsl:with-param name="idref" select="@idref"/>
+                </xsl:call-template>
             </div>
         </xsl:if>
         
@@ -690,27 +705,71 @@ function findAndExpandTarget(targetElement)
 
     
     <xsl:template name="processAssociatedObjectSimple">
-        <div class="container associatedObject">
+        <div class="container associatedObject associatedObjectContainer">
+            <xsl:if test="@id">
+                <xsl:attribute name="id" select="@id"/>
+            </xsl:if>
             <div class="heading associatedObject">
                 ASSOCIATED OBJECT <xsl:value-of select="@id" />
                 <xsl:if test="cybox:Type/@xsi:type"> (xsi type: <xsl:value-of select="cybox:Type/@xsi:type" />)</xsl:if>
             </div>
             <div class="contents associatedObject">
+                <div class="associatedObjectType">
+                    <xsl:value-of select="cybox:Association_Type/text()"/><xsl:apply-templates select="cybox:Association_Type/@xsi:type"/>
+                </div>
+                
+                <div class="associatedObjectDescription description">
+                    <xsl:apply-templates select="cybox:Description"/>
+                </div>
+                
                 <xsl:for-each select="cybox:Properties">
                     <xsl:call-template name="processProperties" />
                 </xsl:for-each>
+                
+                <xsl:apply-templates select="cybox:Related_Objects" />
+                
+            </div>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="@xsi:type"> (<xsl:value-of select="."/>)</xsl:template>
+    
+    <xsl:template match="cybox:Related_Objects">
+        <div class="container relatedObjects">
+            <div class="heading relatedObjects">
+                Related Objects
+            </div>
+            <div class="contents relatedObjects">
+                <xsl:apply-templates select="cybox:Related_Object"/>
             </div>
         </div>
     </xsl:template>
 
-    
-    
+    <xsl:template match="cybox:Related_Object">
+        <div class="container relatedObject">
+            <div class="heading relatedObject">
+                Related Object
+            </div>
+            <div class="contents relatedObject">
+                <div>
+                    <xsl:call-template name="clickableIdref">
+                        <xsl:with-param name="type" select="'related object'"/>
+                        <xsl:with-param name="idref" select="@idref"/>
+                    </xsl:call-template>
+                </div>
+                <div>
+                    via relationship: <xsl:value-of select="cybox:Relationship/text()"/>
+                </div>
+                <!-- <xsl:value-of select="@idref"/> via relationship: <xsl:value-of select="cybox:Relationship/text()"/> -->
+            </div>
+        </div>
+    </xsl:template>
     
     
     <xsl:template name="processObject">
         <xsl:param name="span_var"/>
         <xsl:param name="div_var"/>
-        <div id="" class="objectContainer">
+        <div class="objectContainer observableChildItemContainer">
             <xsl:attribute name="id" select="@id"/>
         <div id="object_label_div">
             <xsl:if test="@type"><div id="object_type_label">
@@ -724,6 +783,8 @@ function findAndExpandTarget(targetElement)
             <xsl:for-each select="cybox:Properties">
                 <xsl:call-template name="processProperties"/>
             </xsl:for-each>
+            
+            <xsl:apply-templates select="cybox:Related_Objects"/>
         </div>
         
         </div>
@@ -732,7 +793,7 @@ function findAndExpandTarget(targetElement)
     <xsl:template name="processEvent">
         <xsl:param name="span_var"/>
         <xsl:param name="div_var"/>
-        <div id="" class="eventContainer">
+        <div class="eventContainer observableChildItemContainer">
             <xsl:attribute name="id" select="@id"/>
             <div id="object_label_div">
                 <xsl:if test="cybox:Type"><div class="eventTypeHeading" id="event_type_label">
