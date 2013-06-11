@@ -1017,7 +1017,7 @@ def createNetConnectionObj(search_string, content_string, condition):
         address.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         socketaddr.set_IP_Address(address)
         netconn.set_Destination_Socket_Address(socketaddr)
-    elif search_string == "Network/DNS":
+    elif search_string == "Network/DNS" or search_string == "PortItem/remotePort":
         l7conn = networkconnectionobj.Layer7ConnectionsType()
         httpsession = httpsessionobj.HTTPSessionObjectType()
         httpreqrep = httpsessionobj.HTTPRequestResponseType()
@@ -1032,16 +1032,54 @@ def createNetConnectionObj(search_string, content_string, condition):
         httphdr.set_Parsed_Header(httphdrfields)
         httpreq.set_HTTP_Request_Header(httphdr)
         httpreqrep.set_HTTP_Client_Request(httpreq)
-        httpsession.set_HTTP_Request_Response(httpreqrep)
+        httpsession.add_HTTP_Request_Response(httpreqrep)
         l7conn.set_HTTP_Session(httpsession)
+        netconn.set_Layer7_Connections(l7conn)
     elif search_string == "Network/HTTP_Referr":
-        pass
-    elif search_string == "PortItem/remoteIP":
-        pass
+        l7conn = networkconnectionobj.Layer7ConnectionsType()
+        httpsession = httpsessionobj.HTTPSessionObjectType()
+        httpreqrep = httpsessionobj.HTTPRequestResponseType()
+        httpreq = httpsessionobj.HTTPClientRequestType()
+        httphdr = httpsessionobj.HTTPRequestHeaderType()
+        httphdrfields = httpsessionobj.HTTPRequestHeaderFieldsType()
+        refuri = uriobj.URIObjectType()
+        refuri.set_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        httphdrfields.set_Referer(refuri)
+        httphdr.set_Parsed_Header(httphdrfields)
+        httpreq.set_HTTP_Request_Header(httphdr)
+        httpreqrep.set_HTTP_Client_Request(httpreq)
+        httpsession.add_HTTP_Request_Response(httpreqrep)
+        l7conn.set_HTTP_Session(httpsession)
+        netconn.set_Layer7_Connections(l7conn)
+    elif search_string == "Network/String":
+        l7conn = networkconnectionobj.Layer7ConnectionsType()
+        httpsession = httpsessionobj.HTTPSessionObjectType()
+        httpreqrep = httpsessionobj.HTTPRequestResponseType()
+        httpreq = httpsessionobj.HTTPClientRequestType()
+        httphdr = httpsessionobj.HTTPRequestHeaderType()
+        httphdr.set_Raw_Header(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        httpreq.set_HTTP_Request_Header(httphdr)
+        httpreqrep.set_HTTP_Client_Request(httpreq)
+        httpsession.add_HTTP_Request_Response(httpreqrep)
+        l7conn.set_HTTP_Session(httpsession)
+        netconn.set_Layer7_Connections(l7conn)
     elif search_string == "Network/URI":
-        pass
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
     elif search_string == "Network/UserAgent":
-        pass
+        l7conn = networkconnectionobj.Layer7ConnectionsType()
+        httpsession = httpsessionobj.HTTPSessionObjectType()
+        httpreqrep = httpsessionobj.HTTPRequestResponseType()
+        httpreq = httpsessionobj.HTTPClientRequestType()
+        httphdr = httpsessionobj.HTTPRequestHeaderType()
+        httphdrfields = httpsessionobj.HTTPRequestHeaderFieldsType()
+        httphdrfields.set_User_Agent(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        httphdr.set_Parsed_Header(httphdrfields)
+        httpreq.set_HTTP_Request_Header(httphdr)
+        httpreqrep.set_HTTP_Client_Request(httpreq)
+        httpsession.add_HTTP_Request_Response(httpreqrep)
+        l7conn.set_HTTP_Session(httpsession)
+        netconn.set_Layer7_Connections(l7conn)
 
     if valueset:
         netconn.set_xsi_type('NetworkConnectionObj:NetworkConnectionObjectType')
