@@ -1861,7 +1861,10 @@ function listener(e)
     
     <xsl:template name="processAssociatedObjectSimple">
         <div class="container associatedObject">
-            <div class="heading associatedObject">ASSOCIATED OBJECT <xsl:value-of select="@id" /> (xsi type: <xsl:value-of select="cybox:Type/@xsi:type" />)</div>
+            <div class="heading associatedObject">
+                ASSOCIATED OBJECT <xsl:value-of select="@id" />
+                <xsl:if test="cybox:Type/@xsi:type"> (xsi type: <xsl:value-of select="cybox:Type/@xsi:type" />)</xsl:if>
+            </div>
             <div class="contents associatedObject">
                 <xsl:for-each select="cybox:Properties">
                     <xsl:call-template name="processProperties" />
@@ -1875,8 +1878,11 @@ function listener(e)
         <xsl:param name="div_var" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
         <xsl:choose>
             <xsl:when test="@idref">
-                <xsl:if test="@association_type">
-                    <div id="associated_object_label"><xsl:value-of select="@association_type"/> Object</div>
+                <xsl:if test="Association_Type">
+                    <div id="associated_object_label">
+                        <xsl:value-of select="Association_Type/text()"/> Object
+                        <xsl:if test="Association_Type/@xsi:type"> (<xsl:value-of select="Association_Type/@xsi:type"/>)</xsl:if>
+                    </div>
                 </xsl:if>
                 <xsl:for-each select="key('objectID',@idref)">
                     <xsl:call-template name="processObject">
