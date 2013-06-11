@@ -125,6 +125,7 @@ ikirillov@mitre.org
                     margin: 0px;
                     border-collapse: collapse;
                     text-align: left;
+                    width: 90%;
                     }
                     #hor-minimalist-a th
                     {
@@ -343,6 +344,45 @@ ikirillov@mitre.org
                       background-color: lightcyan;
                       padding: 0.7em;
                     }
+                    
+                    /* make DL look like a table */
+                    dl.table-display
+                    {
+                    float: left;
+                    width: 520px;
+                    margin: 1em 0;
+                    padding: 0;
+                    border-bottom: 1px solid #999;
+                    }
+                    
+                    .table-display dt
+                    {
+                    clear: left;
+                    float: left;
+                    width: 200px;
+                    margin: 0;
+                    padding: 5px;
+                    border-top: 1px solid #999;
+                    font-weight: bold;
+                    }
+                    
+                    .table-display dd
+                    {
+                    float: left;
+                    width: 300px;
+                    margin: 0;
+                    padding: 5px;
+                    border-top: 1px solid #999;
+                    }
+                    
+                    .verbatim
+                    {
+                      white-space: pre-line;
+                    }
+                    table
+                    {
+                      empty-cells: show;
+                    }
                 </style>
                 
                 <script type="text/javascript">
@@ -447,7 +487,7 @@ function listener(e)
                                     <TD><xsl:value-of select="//cybox:Observables/@cybox_major_version"/></TD>
                                     <TD><xsl:value-of select="//cybox:Observables/@cybox_minor_version"/></TD>
                                     <TD><xsl:value-of select="tokenize(document-uri(.), '/')[last()]"/></TD>
-                                    <TD><xsl:value-of select="current-date()"/></TD>
+                                    <TD><xsl:value-of select="current-dateTime()"/></TD>
                                 </TR>   
                             </table>
                         </div>
@@ -461,7 +501,7 @@ function listener(e)
     <xsl:template name="processObservables">
       <xsl:for-each select="cybox:Observables">        
           <div id="observablesspandiv" style="font-weight:bold; margin:5px; color:#BD9C8C;">
-            <TABLE class="grid tablesorter" cellspacing="0" style="width: auto;">
+            <TABLE class="grid tablesorter" cellspacing="0">
                 <COLGROUP>
                     <COL width="90%"/>
                     <COL width="10%"/>
@@ -479,18 +519,8 @@ function listener(e)
                 <TBODY>
                     <xsl:for-each select="cybox:Observable">
                         <!-- <xsl:sort select="cybox:Observable_Composition" order="descending"/> -->
-                        <xsl:choose>
-                            <xsl:when test="position() mod 2">
-                                <!-- <TR class="odd"> -->
-                                    <xsl:call-template name="processObservable"><xsl:with-param name="evenOrOdd">odd</xsl:with-param></xsl:call-template>
-                                <!-- </TR> -->
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <!-- <TR class="even"> -->
-                                    <xsl:call-template name="processObservable"><xsl:with-param name="evenOrOdd">even</xsl:with-param></xsl:call-template>
-                                <!-- </TR> -->
-                            </xsl:otherwise>
-                        </xsl:choose>
+                        <xsl:variable name="evenOrOdd" select="if(position() mod 2 = 0) then 'even' else 'odd'" />
+                        <xsl:call-template name="processObservable"><xsl:with-param name="evenOrOdd" select="$evenOrOdd"/></xsl:call-template>
                     </xsl:for-each>
                 </TBODY>
             </TABLE>    
@@ -6935,12 +6965,30 @@ function listener(e)
     <xsl:template match="cybox:Properties">
         <fieldset>
             <legend>cybox properties (type: <xsl:value-of select="@xsi:type"/>)</legend>
-            <dl>
+            <table>
+                <thead><th>Name</th><th>Value</th><th>Constraints</th></thead>
+                <xsl:for-each select="*">
+                    <tr>
+                        <td><xsl:value-of select="local-name()" /></td>
+                        <td><xsl:apply-templates select="." /></td>
+                        <td>
+                            <xsl:for-each select="@*">
+                                <div class="constraintItem"><xsl:value-of select="local-name()"/>: <xsl:value-of select="string(.)"/></div>
+                            </xsl:for-each>
+                            <!-- <xsl:if test="@condition"> (condition: <xsl:value-of select="@condition"/>)</xsl:if> -->
+                        </td>
+                    </tr>
+                </xsl:for-each>
+            </table>
+            
+            <!--
+            <dl class="table-display">
                 <xsl:for-each select="*">
                     <dt><xsl:value-of select="local-name()" /></dt>
                     <dd><xsl:apply-templates select="." /> <xsl:if test="@condition"> (condition: <xsl:value-of select="@condition"/>)</xsl:if></dd>
                 </xsl:for-each>
             </dl>
+            -->
             
             <!--
             <div>
@@ -6994,6 +7042,12 @@ function listener(e)
                 <xsl:value-of select="@object_reference"/>
             </xsl:element>
             )
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="EmailMessageObj:Raw_Header">
+        <div class="verbatim">
+            <xsl:value-of select="text()" />
         </div>
     </xsl:template>
     
