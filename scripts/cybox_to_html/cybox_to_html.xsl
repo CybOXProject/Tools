@@ -576,8 +576,9 @@ function findAndExpandTarget(targetElement)
                               <tr>
                                   <!-- <td>Observable</td> -->
                                   <td>
+                                      <xsl:apply-templates select="cybox:Object|cybox:Event"/>
                                       <!-- <xsl:for-each select="cybox:Observable"> -->
-                                          <xsl:call-template name="processPlainObservable"/>
+                                      <!--    <xsl:call-template name="processPlainObservable"/> -->
                                       <!-- </xsl:for-each> -->
                                   </td>
                               </tr>
@@ -682,6 +683,7 @@ function findAndExpandTarget(targetElement)
     
     
     
+    <!--
     <xsl:template name="processPlainObservable">
         <xsl:param name="span_var" select="generate-id()"/>
         <xsl:param name="div_var" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
@@ -701,9 +703,10 @@ function findAndExpandTarget(targetElement)
         </xsl:if>
         
     </xsl:template>
+    -->
 
 
-    
+    <!--
     <xsl:template name="processAssociatedObjectSimple">
         <div class="container associatedObject associatedObjectContainer">
             <xsl:if test="@id">
@@ -741,6 +744,7 @@ function findAndExpandTarget(targetElement)
             </div>
         </div>
     </xsl:template>
+    -->
     
     <xsl:template match="@xsi:type"> (<xsl:value-of select="."/>)</xsl:template>
     
@@ -755,6 +759,7 @@ function findAndExpandTarget(targetElement)
         </div>
     </xsl:template>
 
+    <!--
     <xsl:template match="cybox:Related_Object">
         <div class="container relatedObject">
             <div class="heading relatedObject">
@@ -770,12 +775,12 @@ function findAndExpandTarget(targetElement)
                 <div>
                     via relationship: <xsl:value-of select="cybox:Relationship/text()"/>
                 </div>
-                <!-- <xsl:value-of select="@idref"/> via relationship: <xsl:value-of select="cybox:Relationship/text()"/> -->
             </div>
         </div>
     </xsl:template>
+    -->
     
-    
+    <!--
     <xsl:template name="processObject">
         <xsl:param name="span_var"/>
         <xsl:param name="div_var"/>
@@ -838,14 +843,80 @@ function findAndExpandTarget(targetElement)
             
         </div>
     </xsl:template>
+    -->
+    
+    <xsl:template match="cybox:Object|cybox:Event|cybox:Related_Object|cybox:Associated_Object">
+        <xsl:param name="isObservableDirectChild" select="fn:true()" />
+        <xsl:variable name="localName" select="local-name()"/>
+        <xsl:variable name="identifierName" select="if ($localName = 'Object') then 'object' else if ($localName = 'Event') then 'event' else if ($localName = 'Related_Object') then 'relatedObject' else if ($localName = 'Associated_Object') then 'associatedObject' else ''" />
+        <xsl:variable name="friendlyName" select="fn:replace($localName, '_', ' ')" />
+        <xsl:variable name="headingName" select="fn:upper-case($friendlyName)" />
+        
+
+        <div class="container {$identifierName}Container {$identifierName}">
+            <xsl:if test="@id"><xsl:attribute name="id" select="@id"/></xsl:if>
+            <div class="heading {$identifierName}Heading {$identifierName}">
+                <xsl:value-of select="$headingName"/>
+                <xsl:apply-templates select="@xsi:type"/>
+            </div>
+            <div class="contents {$identifierName}Contents {$identifierName}">
+                <xsl:if test="@type">
+                    <div id="object_type_label"><xsl:value-of select="@type"/> Object </div>
+                </xsl:if>
+                <xsl:if test="@idref">
+                    <div>
+                        <xsl:call-template name="clickableIdref">
+                            <xsl:with-param name="type" select="'related object'"/>
+                            <xsl:with-param name="idref" select="@idref"/>
+                        </xsl:call-template>
+                    </div>
+                </xsl:if>
+                <xsl:if test="cybox:Relationship">
+                    <div>
+                        via relationship: <xsl:value-of select="cybox:Relationship/text()"/>
+                    </div>
+                </xsl:if>
+                <xsl:if test="cybox:Description">
+                    <div class="{$identifierName}Description description">
+                        description: <xsl:value-of select="cybox:Description"/>
+                    </div>
+                </xsl:if>
+                
+                <xsl:if test="cybox:Actions/cybox:Action">
+                    <div class="container">
+                        <div class="heading actions">Actions</div>
+                        <div class="contents actions">
+                            <xsl:for-each select="cybox:Actions/cybox:Action">
+                                <xsl:call-template name="processAction" />
+                            </xsl:for-each>
+                        </div>
+                    </div>
+                </xsl:if>
+
+                <xsl:if test="cybox:Defined_Object/@xsi:type">
+                    <div id="defined_object_type_label">defined object type: <xsl:value-of select="cybox:Defined_Object/@xsi:type"/></div>
+                </xsl:if>
+
+                <div>
+                    <xsl:for-each select="cybox:Properties">
+                        <xsl:call-template name="processProperties"/>
+                    </xsl:for-each>
+                </div>
+                <xsl:apply-templates select="cybox:Related_Objects"/>
+            </div>
+        </div>
+    </xsl:template>
     
     <xsl:template name="processAction">
         <div class="container action">
             <div class="heading action">ACTION <xsl:value-of select="cybox:Type/text()" /> (xsi type: <xsl:value-of select="cybox:Type/@xsi:type" />)</div>
             <div class="contents action">
+                <xsl:apply-templates select="cybox:Associated_Objects/cybox:Associated_Object" />
+                <!--
                 <xsl:for-each select="cybox:Associated_Objects/cybox:Associated_Object">
                     <xsl:call-template name="processAssociatedObjectSimple" />
                 </xsl:for-each>
+                -->
             </div>
         </div>
     </xsl:template>
