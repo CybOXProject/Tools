@@ -397,8 +397,36 @@ function findAndExpandTarget(targetElement)
     }
 }
 
+function initialize()
+{
+  validate();
+}
+
+function validate()
+{
+  console.log("validating BEGIN...");
+  var listOfLinks = document.getElementsByClassName("highlightTargetLink");
+  for (var i = 0; i < listOfLinks.length; i++)
+  {
+    var currentLink = listOfLinks.item(i);
+    var currentId = currentLink.textContent;
+    var target = document.getElementById(currentId);
+    if (target == null)
+    {
+      console.log("[" + i + "] id " + currentId + " is NOT found in current document (WARNING)");
+      var warningTextNode = document.createTextNode(" [external]");
+      currentLink.appendChild(warningTextNode);
+      
+    } else
+    {
+      console.log("[" + i + "] id " + currentId + " IS not found in current document -- " + target);
+    }
+  }
+  console.log("validating END...");
+}
+
 </script></head>
-   <body>
+   <body onload="initialize()">
       <div id="wrapper">
          <div id="header">
             <H1>CybOX Output</H1>
@@ -415,7 +443,7 @@ function findAndExpandTarget(targetElement)
                   <TD>2</TD>
                   <TD>0</TD>
                   <TD>CybOX_Iran-Oil_Dynamic.xml</TD>
-                  <TD>2013-06-12T09:33:52.959-04:00</TD>
+                  <TD>2013-06-12T10:37:44.193-04:00</TD>
                </TR>
             </table>
          </div>

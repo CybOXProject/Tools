@@ -414,6 +414,7 @@ ikirillov@mitre.org
                       } // end of else
                     } // end of function toggleDiv()
                 </script>
+                   
 <script type="text/javascript">
 var currentTarget = null;
 var previousTarget = null;
@@ -449,9 +450,37 @@ function findAndExpandTarget(targetElement)
     }
 }
 
+function initialize()
+{
+  validate();
+}
+
+function validate()
+{
+  console.log("validating BEGIN...");
+  var listOfLinks = document.getElementsByClassName("highlightTargetLink");
+  for (var i = 0; i &lt; listOfLinks.length; i++)
+  {
+    var currentLink = listOfLinks.item(i);
+    var currentId = currentLink.textContent;
+    var target = document.getElementById(currentId);
+    if (target == null)
+    {
+      console.log("[" + i + "] id " + currentId + " is NOT found in current document (WARNING)");
+      var warningTextNode = document.createTextNode(" [external]");
+      currentLink.appendChild(warningTextNode);
+      
+    } else
+    {
+      console.log("[" + i + "] id " + currentId + " IS not found in current document -- " + target);
+    }
+  }
+  console.log("validating END...");
+}
+
 </script>
                </head>
-                <body>
+                <body onload="initialize()">
                     <div id="wrapper">
                         <div id="header"> 
                             <H1>CybOX Output</H1>
