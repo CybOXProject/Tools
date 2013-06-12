@@ -11,6 +11,7 @@ import cybox.bindings.dns_record_object as dnsrecordobj
 import cybox.bindings.email_message_object as emailmessageobj
 import cybox.bindings.file_object as fileobj
 import cybox.bindings.http_session_object as httpsessionobj
+import cybox.bindings.library_object as libraryobj
 import cybox.bindings.memory_object as memoryobj
 import cybox.bindings.network_route_entry_object as networkreouteentryobj
 import cybox.bindings.network_connection_object as networkconnectionobj
@@ -28,12 +29,14 @@ import cybox.bindings.win_executable_file_object as winexecutablefileobj
 import cybox.bindings.win_file_object as winfileobj
 import cybox.bindings.win_handle_object as winhandleobj
 import cybox.bindings.win_kernel_hook_object as winkernelhookobj
+import cybox.bindings.win_memory_page_region_object as winmemorypageregionobj
 import cybox.bindings.win_prefetch_object as winprefetchobj
 import cybox.bindings.win_process_object as winprocessobj
 import cybox.bindings.win_registry_key_object as winregistrykeyobj
 import cybox.bindings.win_service_object as winserviceobj
 import cybox.bindings.win_system_object as winsystemobj
 import cybox.bindings.win_system_restore_object as winsystemrestoreobj
+import cybox.bindings.win_task_object as wintaskobj
 import cybox.bindings.win_user_account_object as winuseraccountobj
 import cybox.bindings.win_volume_object as winvolumeobj
 
@@ -71,8 +74,7 @@ def createObj(search_string, content_string, condition):
     elif split_search_string[0] == 'HookItem':
         defined_object = createHookObj(search_string, content_string, condition)
     elif split_search_string[0] == 'ModuleItem':
-        # no relevant CybOX equivalent
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(split_search_string[0])
+        defined_object = createLibraryObj(search_string, content_string, condition)
     elif split_search_string[0] == 'Network':
         defined_object = createNetConnectionObj(search_string, content_string, condition)
     elif split_search_string[0] == 'PortItem':
@@ -95,8 +97,7 @@ def createObj(search_string, content_string, condition):
     elif split_search_string[0] == 'SystemRestoreItem':
         defined_object = createSystemRestoreObj(search_string, content_string, condition)
     elif split_search_string[0] == 'TaskItem':
-        # no relevant CybOX equivalent
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(split_search_string[0])
+        defined_object = createWinTaskObject(search_string, content_string, condition)
     elif split_search_string[0] == 'UrlHistoryItem':
         # no relevant CybOX equivalent
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(split_search_string[0])
@@ -146,7 +147,7 @@ def createDiskObj(search_string, content_string, condition):
     elif search_string == "DiskItem/PartitionList/Partition/PartitionType":
         partition_list = diskobj.PartitionListType()
         partition = diskpartitionobj.DiskPartitionObjectType()
-        partition.set_Type(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        partition.set_Type(common.StringObjectPropertyType(datatype='string', condition=condition, valueOf_=process_string_value(content_string)))
         partition_list.add_Partition(partition)
         dskobj.set_Partition_List(partition_list)
 
@@ -415,22 +416,36 @@ def createEmailObj(search_string, content_string, condition):
 
     #Attachment is a special case which references a RelatedObject
     if search_string == "Email/Attachment/Content":
+        #FileObjectType content field?
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
     elif search_string == "Email/Attachment/MIMEType":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
     elif search_string == "Email/Attachment/Name":
+        #??? related_object?
         email_attachments = emailmessageobj.AttachmentsType()
         attachment = emailmessageobj.AttachmentReferenceType()
-        attachment.set_object_reference(process_string_value(content_string)) # ???
+        fleobj = fileobj.FileObjectType()
+        fleobj.set_xsi_type('FileObj:FileObjectType')
+        fleobj.set_File_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        refid = fleobj.get_object_reference()
+        attachment.set_object_reference(refid)
         email_attachments.add_File(attachment)
+        custom = common.CustomPropertiesType()
+        custom.add_Property(fleobj)
+        emailobj.set_Custom_Properties(custom)
         emailobj.set_Attachments(email_attachments)
     elif search_string == "Email/Attachment/SizeInBytes":
+        #??? related_object?
         email_attachments = emailmessageobj.AttachmentsType()
-        attachment = fileobj.FileObjectType()
-        attachment.set_Size_In_Bytes(common.IntegerObjectPropertyType(datatype=None, condition=condition, valueOf_=process_numerical_value(content_string)))
-        email_attachments.add_File(file)
+        attachment = emailmessageobj.AttachmentReferenceType()
+        fleobj = fileobj.FileObjectType()
+        fleobj.set_xsi_type('FileObj:FileObjectType')
+        fleobj.set_Size_In_Bytes(common.UnsignedLongObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        refid = fleobj.get_object_reference()
+        attachment.set_object_reference(refid)
+        email_attachments.add_File(attachment)
         emailobj.set_Attachments(email_attachments)
     elif search_string == "Email/AttachmentCount":
         valueset = False
@@ -463,7 +478,9 @@ def createEmailObj(search_string, content_string, condition):
         emailobj.set_Header(email_header)
     elif search_string == "Email/From":
         email_header = emailmessageobj.EmailHeaderType()
-        email_header.set_From(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        email_from = addressobj.AddressObjectType()
+        email_from.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        email_header.set_From(email_from)
         emailobj.set_Header(email_header)
     elif search_string == "Email/In-Reply-To":
         email_header = emailmessageobj.EmailHeaderType()
@@ -509,9 +526,11 @@ def createEmailObj(search_string, content_string, condition):
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
     elif search_string == "Email/To":
         email_header = emailmessageobj.EmailHeaderType()
-        email_to = emailmessageobj.EmailRecipientsType()
-        email_to.add_Recipient(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-        email_header.set_To(email_to)
+        email_recipients = emailmessageobj.EmailRecipientsType()
+        email_to = addressobj.AddressObjectType()
+        email_to.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        email_recipients.add_Recipient(email_to)
+        email_header.set_To(email_recipients)
         emailobj.set_Header(email_header)
     elif search_string == "Email/X-MS-Has-Attach":
         valueset = False
@@ -599,6 +618,7 @@ def createFileObj(search_string, content_string, condition):
         fleobj.set_Accessed_Time(common.DateTimeObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
     elif search_string == "FileItem/Changed":
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+        valueset = False
     elif search_string == "FileItem/Created":
         fleobj.set_Created_Time(common.DateTimeObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
     elif search_string == "FileItem/DevicePath":
@@ -628,7 +648,7 @@ def createFileObj(search_string, content_string, condition):
     elif search_string == "FileItem/Md5sum":
         hashes = common.HashListType()
         md5hash = common.HashType()
-        md5hash.set_Type(common.StringObjectPropertyType(datatype=None, valueOf_='MD5'))
+        md5hash.set_Type(common.ControlledVocabularyStringType(valueOf_='MD5', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         md5hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         hashes.add_Hash(md5hash)
         fleobj.set_Hashes(hashes)
@@ -638,7 +658,6 @@ def createFileObj(search_string, content_string, condition):
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
     elif search_string.count('PEInfo') > 0:
-        valueset = False
         return createWinExecObj(search_string, content_string, condition)
     elif search_string == "FileItem/PeakCodeEntropy":
         valueset = False
@@ -652,14 +671,14 @@ def createFileObj(search_string, content_string, condition):
     elif search_string == "FileItem/Sha1sum":
         hashes = common.HashListType()
         sha1hash = common.HashType()
-        sha1hash.set_Type(common.StringObjectPropertyType(datatype=None, valueOf_='SHA1'))
+        sha1hash.set_Type(common.ControlledVocabularyStringType(valueOf_='SHA1', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         sha1hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         hashes.add_Hash(sha1hash)
         fleobj.set_Hashes(hashes)
     elif search_string == "FileItem/Sha256sum":
         hashes = common.HashListType()
         sha256hash = common.HashType()
-        sha256hash.set_Type(common.StringObjectPropertyType(datatype=None, valueOf_='SHA256'))
+        sha256hash.set_Type(common.ControlledVocabularyStringType(valueOf_='SHA256', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         sha256hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         hashes.add_Hash(sha256hash)
         fleobj.set_Hashes(hashes)
@@ -760,6 +779,176 @@ def createHookObj(search_string, content_string, condition):
     
     return hookobject
 
+def createLibraryObj(search_string, content_string, condition):  
+    #Create the library object
+    libobj = libraryobj.LibraryObjectType()
+
+    #Assume the IOC indicator value can be mapped to a CybOx type
+    valueset = True
+
+    if search_string == "ModuleItem/ModuleAddress":
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+        valueset = False
+    elif search_string == "ModuleItem/ModuleBase":
+        libobj.set_Base_Address(common.HexBinaryObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "ModuleItem/ModuleInit":
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+        valueset = False
+    elif search_string == "ModuleItem/ModuleName":
+        libobj.set_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "ModuleItem/ModulePath":
+        libobj.set_Path(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "ModuleItem/ModuleSize":
+        libobj.set_Size(common.UnsignedLongObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+
+    if valueset:
+        libobj.set_xsi_type('LibraryObj:LibraryObjectType')
+    elif not valueset:
+        libobj = None
+
+    return libobj
+
+def createNetConnectionObj(search_string, content_string, condition):
+    #Create the network connection object
+    netconn = networkconnectionobj.NetworkConnectionObjectType()
+
+    #Assume the IOC indicator value can be mapped to a CybOx type
+    valueset = True
+
+    if search_string == "PortItem/localIP" or search_string == "ProcessItem/PortList/PortItem/localIP":
+        socketaddr = socketaddressobj.SocketAddressObjectType()
+        address = addressobj.AddressObjectType() 
+        address.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        socketaddr.set_IP_Address(address)
+        netconn.set_Source_Socket_Address(socketaddr)
+    elif search_string == "PortItem/remoteIP" or search_string == "ProcessItem/PortList/PortItem/remoteIP":
+        socketaddr = socketaddressobj.SocketAddressObjectType()
+        address = addressobj.AddressObjectType() 
+        address.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        socketaddr.set_IP_Address(address)
+        netconn.set_Destination_Socket_Address(socketaddr)
+    elif search_string == "Network/DNS" or search_string == "PortItem/remotePort":
+        l7conn = networkconnectionobj.Layer7ConnectionsType()
+        httpsession = httpsessionobj.HTTPSessionObjectType()
+        httpreqrep = httpsessionobj.HTTPRequestResponseType()
+        httpreq = httpsessionobj.HTTPClientRequestType()
+        httphdr = httpsessionobj.HTTPRequestHeaderType()
+        httphdrfields = httpsessionobj.HTTPRequestHeaderFieldsType()
+        httphost = httpsessionobj.HostFieldType()
+        hosturi = uriobj.URIObjectType()
+        hosturi.set_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        httphost.set_Domain_Name(hosturi)
+        httphdrfields.set_Host(httphost)
+        httphdr.set_Parsed_Header(httphdrfields)
+        httpreq.set_HTTP_Request_Header(httphdr)
+        httpreqrep.set_HTTP_Client_Request(httpreq)
+        httpsession.add_HTTP_Request_Response(httpreqrep)
+        l7conn.set_HTTP_Session(httpsession)
+        netconn.set_Layer7_Connections(l7conn)
+    elif search_string == "Network/HTTP_Referr":
+        l7conn = networkconnectionobj.Layer7ConnectionsType()
+        httpsession = httpsessionobj.HTTPSessionObjectType()
+        httpreqrep = httpsessionobj.HTTPRequestResponseType()
+        httpreq = httpsessionobj.HTTPClientRequestType()
+        httphdr = httpsessionobj.HTTPRequestHeaderType()
+        httphdrfields = httpsessionobj.HTTPRequestHeaderFieldsType()
+        refuri = uriobj.URIObjectType()
+        refuri.set_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        httphdrfields.set_Referer(refuri)
+        httphdr.set_Parsed_Header(httphdrfields)
+        httpreq.set_HTTP_Request_Header(httphdr)
+        httpreqrep.set_HTTP_Client_Request(httpreq)
+        httpsession.add_HTTP_Request_Response(httpreqrep)
+        l7conn.set_HTTP_Session(httpsession)
+        netconn.set_Layer7_Connections(l7conn)
+    elif search_string == "Network/String":
+        l7conn = networkconnectionobj.Layer7ConnectionsType()
+        httpsession = httpsessionobj.HTTPSessionObjectType()
+        httpreqrep = httpsessionobj.HTTPRequestResponseType()
+        httpreq = httpsessionobj.HTTPClientRequestType()
+        httphdr = httpsessionobj.HTTPRequestHeaderType()
+        httphdr.set_Raw_Header(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        httpreq.set_HTTP_Request_Header(httphdr)
+        httpreqrep.set_HTTP_Client_Request(httpreq)
+        httpsession.add_HTTP_Request_Response(httpreqrep)
+        l7conn.set_HTTP_Session(httpsession)
+        netconn.set_Layer7_Connections(l7conn)
+    elif search_string == "Network/URI":
+        l7conn = networkconnectionobj.Layer7ConnectionsType()
+        httpsession = httpsessionobj.HTTPSessionObjectType()
+        httpreqrep = httpsessionobj.HTTPRequestResponseType()
+        httpreq = httpsessionobj.HTTPClientRequestType()
+        reqline = httpsessionobj.HTTPRequestLineType()
+        reqline.set_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        httpreq.set_HTTP_Request_Line(reqline)
+        httpreqrep.set_HTTP_Client_Request(httpreq)
+        httpsession.add_HTTP_Request_Response(httpreqrep)
+        l7conn.set_HTTP_Session(httpsession)
+        netconn.set_Layer7_Connections(l7conn)
+    elif search_string == "Network/UserAgent":
+        l7conn = networkconnectionobj.Layer7ConnectionsType()
+        httpsession = httpsessionobj.HTTPSessionObjectType()
+        httpreqrep = httpsessionobj.HTTPRequestResponseType()
+        httpreq = httpsessionobj.HTTPClientRequestType()
+        httphdr = httpsessionobj.HTTPRequestHeaderType()
+        httphdrfields = httpsessionobj.HTTPRequestHeaderFieldsType()
+        httphdrfields.set_User_Agent(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        httphdr.set_Parsed_Header(httphdrfields)
+        httpreq.set_HTTP_Request_Header(httphdr)
+        httpreqrep.set_HTTP_Client_Request(httpreq)
+        httpsession.add_HTTP_Request_Response(httpreqrep)
+        l7conn.set_HTTP_Session(httpsession)
+        netconn.set_Layer7_Connections(l7conn)
+    elif search_string == "PortItem/CreationTime" or search_string == "ProcessItem/PortList/PortItem/CreationTime":
+        netconn.set_Creation_Time(common.DateTimeObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+
+
+    if valueset:
+        netconn.set_xsi_type('NetworkConnectionObj:NetworkConnectionObjectType')
+    elif not valueset:
+        netconn = None
+
+    return netconn
+    
+def createNetRouteObj(search_string, content_string, condition):  
+    #Create the network route entry object
+    netrtobj = networkreouteentryobj.NetworkRouteEntryObjectType()
+
+    #Assume the IOC indicator value can be mapped to a CybOx type
+    valueset = True
+
+    if search_string == "RouteEntryItem/Destination":
+        destination_address = addressobj.AddressObjectType(category='ipv4-addr')
+        destination_address.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        netrtobj.set_Destination_Address(destination_address)
+    elif search_string == "RouteEntryItem/Gateway":
+        gateway_address = addressobj.AddressObjectType(category='ipv4-addr')
+        gateway_address.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        netrtobj.set_Gateway_Address(gateway_address)
+    elif search_string == "RouteEntryItem/Interface":
+        netrtobj.set_Interface(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "RouteEntryItem/IsIPv6":
+        netrtobj.set_is_ipv6(content_string)
+    elif search_string == "RouteEntryItem/Metric":
+        netrtobj.set_Metric(process_numerical_value(common.UnsignedLongObjectPropertyType(datatype=None), content_string, condition))
+    elif search_string == "RouteEntryItem/Netmask":
+        netmask = addressobj.AddressObjectType(category='ipv4-addr')
+        netmask.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        netrtobj.set_Netmask(netmask)
+    elif search_string == "RouteEntryItem/Protocol":
+        netrtobj.set_Protocol(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "RouteEntryItem/RouteAge":
+        netrtobj.set_Route_Age(common.DurationObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
+    elif search_string == "RouteEntryItem/RouteType":
+        netrtobj.set_Type(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+
+    if valueset:
+        netrtobj.set_xsi_type('NetworkRouteEntryObj:NetworkRouteEntryObjectType')
+    elif not valueset:
+        netrtobj = None
+
+    return netrtobj
+
 def createPortObj(search_string, content_string, condition):
     #Create the port object
     portobject = portobj.PortObjectType()
@@ -768,8 +957,7 @@ def createPortObj(search_string, content_string, condition):
     valueset = True
 
     if search_string == "PortItem/CreationTime":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+        return createNetConnectionObj(search_string, content_string, condition)
     elif search_string == "PortItem/localIP":
         return createNetConnectionObj(search_string, content_string, condition)
     elif search_string == "PortItem/localPort" or search_string == "PortItem/remotePort":
@@ -785,6 +973,7 @@ def createPortObj(search_string, content_string, condition):
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
     elif search_string ==  "PortItem/protocol":
         protocol = portobj.Layer4ProtocolType()
+        protocol.set_datatype('string')
         protocol.set_valueOf_(process_string_value(content_string))
         portobject.set_Layer4_Protocol(protocol)
     elif search_string == "PortItem/remoteIP":
@@ -864,11 +1053,9 @@ def createProcessObj(search_string, content_string, condition):
     if search_string.count("HandleList") > 0:
         return createWinProcessObj(search_string, content_string, condition)
     elif search_string == "ProcessItem/PortList/PortItem/CreationTime":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+        return createNetConnectionObj(search_string, content_string, condition)
     elif search_string == "ProcessItem/PortList/PortItem/localIP":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+        return createNetConnectionObj(search_string, content_string, condition)
     elif search_string == "ProcessItem/PortList/PortItem/localPort" or search_string == "ProcessItem/PortList/PortItem/remotePort":
         portlist = processobj.PortListType()
         port = portobj.PortObjectType()
@@ -891,8 +1078,7 @@ def createProcessObj(search_string, content_string, condition):
         portlist.add_Port(port)
         procobj.set_Port_List(portlist)
     elif search_string == "ProcessItem/PortList/PortItem/remoteIP":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+        return createNetConnectionObj(search_string, content_string, condition)
     elif search_string == "ProcessItem/PortList/PortItem/state":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
@@ -928,7 +1114,7 @@ def createProcessObj(search_string, content_string, condition):
         procobj.set_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
     elif search_string == "ProcessItem/parentpid":
         procobj.set_Parent_PID(process_numerical_value(common.UnsignedIntegerObjectPropertyType(datatype=None), content_string, condition))
-    elif search_string == "ProcessItem/path":
+    elif search_string == "ProcessItem/path" or search_string == "ServiceItem/path":
         image_info = processobj.ImageInfoType()
         image_info.set_Path(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         procobj.set_Image_Info(image_info)
@@ -965,8 +1151,12 @@ def createRegObj(search_string, content_string, condition):
         regobj.set_Number_Values(process_numerical_value(common.UnsignedIntegerObjectPropertyType(datatype=None), content_string, condition))
     elif search_string ==  "RegistryItem/Path":
         split_path = content_string.split('\\', 1)
-        regobj.set_Hive(common.StringObjectPropertyType(datatype=None, condition='Equals', valueOf_=split_path[0]))
-        regobj.set_Key(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=split_path[1]))
+        if any("HKEY_" in s for s in split_path):
+            regobj.set_Hive(common.StringObjectPropertyType(datatype=None, condition='Equals', valueOf_=split_path[0]))
+            regobj.set_Key(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=split_path[1]))
+        else:
+            regobj.set_Key(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
+        
     elif search_string ==  "RegistryItem/ReportedLengthInBytes":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
@@ -979,7 +1169,7 @@ def createRegObj(search_string, content_string, condition):
     elif search_string ==  "RegistryItem/Type":
         values = winregistrykeyobj.RegistryValuesType()
         value = winregistrykeyobj.RegistryValueType()
-        value.set_Datatype(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        value.set_Datatype(common.StringObjectPropertyType(datatype='string', condition=condition, valueOf_=process_string_value(content_string)))
         values.add_Value(value)
         regobj.set_Values(values)
     elif search_string ==  "RegistryItem/Username":
@@ -997,136 +1187,6 @@ def createRegObj(search_string, content_string, condition):
         regobj = None
     
     return regobj
-
-def createNetConnectionObj(search_string, content_string, condition):
-    #Create the network connection object
-    netconn = networkconnectionobj.NetworkConnectionObjectType()
-
-    #Assume the IOC indicator value can be mapped to a CybOx type
-    valueset = True
-
-    if search_string == "PortItem/localIP":
-        socketaddr = socketaddressobj.SocketAddressObjectType()
-        address = addressobj.AddressObjectType() 
-        address.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-        socketaddr.set_IP_Address(address)
-        netconn.set_Source_Socket_Address(socketaddr)
-    elif search_string == "PortItem/remoteIP":
-        socketaddr = socketaddressobj.SocketAddressObjectType()
-        address = addressobj.AddressObjectType() 
-        address.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-        socketaddr.set_IP_Address(address)
-        netconn.set_Destination_Socket_Address(socketaddr)
-    elif search_string == "Network/DNS" or search_string == "PortItem/remotePort":
-        l7conn = networkconnectionobj.Layer7ConnectionsType()
-        httpsession = httpsessionobj.HTTPSessionObjectType()
-        httpreqrep = httpsessionobj.HTTPRequestResponseType()
-        httpreq = httpsessionobj.HTTPClientRequestType()
-        httphdr = httpsessionobj.HTTPRequestHeaderType()
-        httphdrfields = httpsessionobj.HTTPRequestHeaderFieldsType()
-        httphost = httpsessionobj.HostFieldType()
-        hosturi = uriobj.URIObjectType()
-        hosturi.set_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-        httphost.set_Domain_Name(hosturi)
-        httphdrfields.set_Host(httphost)
-        httphdr.set_Parsed_Header(httphdrfields)
-        httpreq.set_HTTP_Request_Header(httphdr)
-        httpreqrep.set_HTTP_Client_Request(httpreq)
-        httpsession.add_HTTP_Request_Response(httpreqrep)
-        l7conn.set_HTTP_Session(httpsession)
-        netconn.set_Layer7_Connections(l7conn)
-    elif search_string == "Network/HTTP_Referr":
-        l7conn = networkconnectionobj.Layer7ConnectionsType()
-        httpsession = httpsessionobj.HTTPSessionObjectType()
-        httpreqrep = httpsessionobj.HTTPRequestResponseType()
-        httpreq = httpsessionobj.HTTPClientRequestType()
-        httphdr = httpsessionobj.HTTPRequestHeaderType()
-        httphdrfields = httpsessionobj.HTTPRequestHeaderFieldsType()
-        refuri = uriobj.URIObjectType()
-        refuri.set_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-        httphdrfields.set_Referer(refuri)
-        httphdr.set_Parsed_Header(httphdrfields)
-        httpreq.set_HTTP_Request_Header(httphdr)
-        httpreqrep.set_HTTP_Client_Request(httpreq)
-        httpsession.add_HTTP_Request_Response(httpreqrep)
-        l7conn.set_HTTP_Session(httpsession)
-        netconn.set_Layer7_Connections(l7conn)
-    elif search_string == "Network/String":
-        l7conn = networkconnectionobj.Layer7ConnectionsType()
-        httpsession = httpsessionobj.HTTPSessionObjectType()
-        httpreqrep = httpsessionobj.HTTPRequestResponseType()
-        httpreq = httpsessionobj.HTTPClientRequestType()
-        httphdr = httpsessionobj.HTTPRequestHeaderType()
-        httphdr.set_Raw_Header(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-        httpreq.set_HTTP_Request_Header(httphdr)
-        httpreqrep.set_HTTP_Client_Request(httpreq)
-        httpsession.add_HTTP_Request_Response(httpreqrep)
-        l7conn.set_HTTP_Session(httpsession)
-        netconn.set_Layer7_Connections(l7conn)
-    elif search_string == "Network/URI":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string == "Network/UserAgent":
-        l7conn = networkconnectionobj.Layer7ConnectionsType()
-        httpsession = httpsessionobj.HTTPSessionObjectType()
-        httpreqrep = httpsessionobj.HTTPRequestResponseType()
-        httpreq = httpsessionobj.HTTPClientRequestType()
-        httphdr = httpsessionobj.HTTPRequestHeaderType()
-        httphdrfields = httpsessionobj.HTTPRequestHeaderFieldsType()
-        httphdrfields.set_User_Agent(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-        httphdr.set_Parsed_Header(httphdrfields)
-        httpreq.set_HTTP_Request_Header(httphdr)
-        httpreqrep.set_HTTP_Client_Request(httpreq)
-        httpsession.add_HTTP_Request_Response(httpreqrep)
-        l7conn.set_HTTP_Session(httpsession)
-        netconn.set_Layer7_Connections(l7conn)
-
-    if valueset:
-        netconn.set_xsi_type('NetworkConnectionObj:NetworkConnectionObjectType')
-    elif not valueset:
-        netconn = None
-
-    return netconn
-    
-
-def createNetRouteObj(search_string, content_string, condition):  
-    #Create the network route entry object
-    netrtobj = networkreouteentryobj.NetworkRouteEntryObjectType()
-
-    #Assume the IOC indicator value can be mapped to a CybOx type
-    valueset = True
-
-    if search_string == "RouteEntryItem/Destination":
-        destination_address = addressobj.AddressObjectType(category='ipv4-addr')
-        destination_address.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-        netrtobj.set_Destination_Address(destination_address)
-    elif search_string == "RouteEntryItem/Gateway":
-        gateway_address = addressobj.AddressObjectType(category='ipv4-addr')
-        gateway_address.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-        netrtobj.set_Gateway_Address(gateway_address)
-    elif search_string == "RouteEntryItem/Interface":
-        netrtobj.set_Interface(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string == "RouteEntryItem/IsIPv6":
-        netrtobj.set_is_ipv6(content_string)
-    elif search_string == "RouteEntryItem/Metric":
-        netrtobj.set_Metric(process_numerical_value(common.UnsignedLongObjectPropertyType(datatype=None), content_string, condition))
-    elif search_string == "RouteEntryItem/Netmask":
-        netmask = addressobj.AddressObjectType(category='ipv4-addr')
-        netmask.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-        netrtobj.set_Netmask(netmask)
-    elif search_string == "RouteEntryItem/Protocol":
-        netrtobj.set_Protocol(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string == "RouteEntryItem/RouteAge":
-        netrtobj.set_Route_Age(common.DurationObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
-    elif search_string == "RouteEntryItem/RouteType":
-        netrtobj.set_Type(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-
-    if valueset:
-        netrtobj.set_xsi_type('NetworkRouteEntryObj:NetworkRouteEntryObjectType')
-    elif not valueset:
-        netrtobj = None
-
-    return netrtobj
 
 def createServiceObj(search_string, content_string, condition):
     #Create the service object
@@ -1181,21 +1241,21 @@ def createServiceObj(search_string, content_string, condition):
     elif search_string == "ServiceItem/serviceDLLmd5sum":
         service_dll_hashes = common.HashListType()
         md5hash = common.HashType()
-        md5hash.set_Type(common.StringObjectPropertyType(datatype=None, valueOf_='MD5'))
+        md5hash.set_Type(common.ControlledVocabularyStringType(valueOf_='MD5', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         md5hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         service_dll_hashes.add_Hash(md5hash)
         serviceobj.set_Service_DLL_Hashes(service_dll_hashes)
     elif search_string == "ServiceItem/serviceDLLsha1sum":
         service_dll_hashes = common.HashListType()
         sha1hash = common.HashType()
-        sha1hash.set_Type(common.StringObjectPropertyType(datatype=None, valueOf_='SHA1'))
+        sha1hash.set_Type(common.ControlledVocabularyStringType(valueOf_='SHA1', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         sha1hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         service_dll_hashes.add_Hash(sha1hash)
         serviceobj.set_Service_DLL_Hashes(service_dll_hashes)
     elif search_string == "ServiceItem/serviceDLLsha256sum":
         service_dll_hashes = common.HashListType()
         sha256hash = common.HashType()
-        sha256hash.set_Type(common.StringObjectPropertyType(datatype=None, valueOf_='SHA256'))
+        sha256hash.set_Type(common.ControlledVocabularyStringType(valueOf_='SHA256', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         sha256hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         service_dll_hashes.add_Hash(sha256hash)
         serviceobj.set_Service_DLL_Hashes(service_dll_hashes)
@@ -1214,7 +1274,7 @@ def createServiceObj(search_string, content_string, condition):
     elif search_string == "ServiceItem/status":
         serviceobj.set_Service_Status(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
     elif search_string == "ServiceItem/type":
-        serviceobj.set_Service_Type(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        serviceobj.set_Service_Type(common.StringObjectPropertyType(datatype='string', condition=condition, valueOf_=process_string_value(content_string)))
 
     if valueset:
         serviceobj.set_xsi_type('WinServiceObj:WindowsServiceObjectType')
@@ -1398,7 +1458,7 @@ def createSystemRestoreObj(search_string, content_string, condition):
         restoreobject.set_Change_Log_File_Name(common.LongObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
     elif content_string == "SystemRestoreItem/ChangeLogEntryType":
         logentrytype = winsystemrestoreobj.ChangeLogEntryTypeType()
-        logentrytype.set_datatype(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        logentrytype.set_datatype(common.StringObjectPropertyType(datatype='string', condition=condition, valueOf_=process_string_value(content_string)))
         restoreobject.set_ChangeLog_Entry_Type(logentrytype)
     elif content_string == "SystemRestoreItem/ChangeLogEntryFlags":
         restoreobject.set_ChangeLog_Entry_Flags(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
@@ -1546,6 +1606,284 @@ def createWinSystemObj(search_string, content_string, condition):
         winsysobj = None
 
     return winsysobj
+
+def createWinTaskObject(search_string, content_string, condition):
+    #Create the user account object
+    taskobj = wintaskobj.WindowsTaskObjectType()
+
+    #Assume the IOC indicator value can be mapped to a CybOx type
+    valueset = True
+
+    if search_string == "TaskItem/AccountLogonType":
+        taskobj.set_Account_Logon_Type(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/AccountName":
+        taskobj.set_Account_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/AccountRunLevel":
+        taskobj.set_Account_Run_Level(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/ActionList/Action/ActionType":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        actiontype = wintaskobj.TaskActionTypeType()
+        actiontype.set_valueOf_(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        action.set_Action_Type(actiontype)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/COMClassId":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        icomhandler = wintaskobj.IComHandlerActionType()
+        icomhandler.set_COM_Class_ID(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        action.set_IComHandlerAction(icomhandler)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/COMData":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        icomhandler = wintaskobj.IComHandlerActionType()
+        icomhandler.set_COM_Data(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        action.set_IComHandlerAction(icomhandler)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string.count("DigitalSignature") > 0: 
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/ActionList/Action/EmailAttachments":
+        #unlike the Email indicator, this TaskItem does not break EmailAttachments into component parts
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/ActionList/Action/EmailBCC":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        emailmsg = createEmailObj("Email/BCC", content_string, condition)
+        action.set_IEmailAction(emailmsg)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/EmailBody":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        emailmsg = createEmailObj("Email/Body", content_string, condition)
+        action.set_IEmailAction(emailmsg)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/EmailCC":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        emailmsg = createEmailObj("Email/CC", content_string, condition)
+        action.set_IEmailAction(emailmsg)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/EmailFrom":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        emailmsg = createEmailObj("Email/From", content_string, condition)
+        action.set_IEmailAction(emailmsg)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/EmailReplyTo":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        #no known base email reply-to indicator, so create the object here
+        emailobj = emailmessageobj.EmailMessageObjectType()
+        email_header = emailmessageobj.EmailHeaderType()
+        email_replyto = addressobj.AddressObjectType()
+        email_replyto.set_Address_Value(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        email_header.set_Reply_To(email_replyto)
+        emailobj.set_Header(email_header)
+        action.set_IEmailAction(emailobj)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/EmailServer":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        #no known base email server indicator, so create the object here
+        emailobj = emailmessageobj.EmailMessageObjectType()
+        emailobj.set_Email_Server(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        action.set_IEmailAction(emailobj)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/EmailSubject":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        emailmsg = createEmailObj("Email/Subject", content_string, condition)
+        action.set_IEmailAction(emailmsg)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/EmailTo":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        emailmsg = createEmailObj("Email/To", content_string, condition)
+        action.set_IEmailAction(emailmsg)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/ExecArguments":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        execactiontype = wintaskobj.IExecActionType()
+        execactiontype.set_Exec_Arguments(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        action.set_IExecAction(execactiontype)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/ExecProgramMd5sum":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/ActionList/Action/ExecProgramPath":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        execactiontype = wintaskobj.IExecActionType()
+        execactiontype.set_Exec_Program_Path(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        action.set_IExecAction(execactiontype)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/ExecProgramSha1sum":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/ActionList/Action/ExecProgramSha256sum":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/ActionList/Action/ExecWorkingDirectory":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        execactiontype = wintaskobj.IExecActionType()
+        execactiontype.set_Exec_Working_Directory(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        action.set_IExecAction(execactiontype)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/ShowMessageBody":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        showmsgaction = wintaskobj.IShowMessageActionType()
+        showmsgaction.set_Show_Message_Body(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        action.set_IExecAction(showmsgaction)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ActionList/Action/ShowMessageTitle":
+        actionlist = wintaskobj.TaskActionListType()
+        action = wintaskobj.TaskActionType()
+        showmsgaction = wintaskobj.IShowMessageActionType()
+        showmsgaction.set_Show_Message_Title(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        action.set_IExecAction(showmsgaction)
+        actionlist.add_Action(action)
+        taskobj.set_Action_List(actionlist)
+    elif search_string == "TaskItem/ApplicationName":
+        taskobj.set_Application_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/CertificateIssuer":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/CertificateSubject":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/Comment":
+        taskobj.set_Comment(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/CreationDate":
+        taskobj.set_Creation_Date(common.DateTimeObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/Creator":
+        taskobj.set_Creator(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/ExitCode":
+        taskobj.set_Exit_Code(common.LongObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/Flag":
+        flags = wintaskobj.TaskFlagType()
+        flags.set_valueOf_(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        taskobj.set_Flags(flags)
+    elif search_string == "TaskItem/MaxRunTime":
+        taskobj.set_Max_Run_Time(common.UnsignedLongObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/MostRecentRunTime":
+        taskobj.set_Most_Recent_Run_Time(common.DateTimeObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/Name":
+        taskobj.set_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/NextRunTime":
+        taskobj.set_Next_Run_Time(common.DateTimeObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/Parameters":
+        taskobj.set_Parameters(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/Priority":
+        priority = wintaskobj.TaskPriorityType()
+        priority.set_valueOf_(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        taskobj.set_Priority(priority)
+    elif search_string == "TaskItem/SignatureDescription":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/SignatureExists":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/SignatureVerified":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/Status":
+        status = wintaskobj.TaskStatusType()
+        status.set_valueOf_(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        taskobj.set_Status(status)
+    elif search_string == "TaskItem/TriggerList/Trigger/TriggerBegin":
+        triggerlist = wintaskobj.TriggerListType()
+        trigger = wintaskobj.TriggerType()
+        trigger.set_Trigger_Begin(common.DateTimeObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        triggerlist.add_Trigger(trigger)
+        taskobj.set_Trigger_List(triggerlist)
+    elif search_string == "TaskItem/TriggerList/Trigger/TriggerDelay":
+        triggerlist = wintaskobj.TriggerListType()
+        trigger = wintaskobj.TriggerType()
+        trigger.set_Trigger_Delay(common.DurationObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        triggerlist.add_Trigger(trigger)
+        taskobj.set_Trigger_List(triggerlist)
+    elif search_string == "TaskItem/TriggerList/Trigger/TriggerEnabled":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/TriggerList/Trigger/TriggerEnd":
+        triggerlist = wintaskobj.TriggerListType()
+        trigger = wintaskobj.TriggerType()
+        trigger.set_Trigger_End(common.DateTimeObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        triggerlist.add_Trigger(trigger)
+        taskobj.set_Trigger_List(triggerlist)
+    elif search_string == "TaskItem/TriggerList/Trigger/TriggerFrequency":
+        triggerlist = wintaskobj.TriggerListType()
+        trigger = wintaskobj.TriggerType()
+        triggerfreq = wintaskobj.TaskTriggerFrequencyType()
+        triggerfreq.set_valueOf_(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        trigger.set_Trigger_Frequency(triggerfreq)
+        triggerlist.add_Trigger(trigger)
+        taskobj.set_Trigger_List(triggerlist)
+    elif search_string == "TaskItem/TriggerList/Trigger/TriggerMaxRunTime":
+        triggerlist = wintaskobj.TriggerListType()
+        trigger = wintaskobj.TriggerType()
+        trigger.set_Trigger_Max_Run_Time(common.DurationObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        triggerlist.add_Trigger(trigger)
+        taskobj.set_Trigger_List(triggerlist)
+    elif search_string == "TaskItem/TriggerList/Trigger/TriggerSessionChangeType":
+        triggerlist = wintaskobj.TriggerListType()
+        trigger = wintaskobj.TriggerType()
+        trigger.set_Trigger_Session_Change_Type(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        triggerlist.add_Trigger(trigger)
+        taskobj.set_Trigger_List(triggerlist)
+    elif search_string == "TaskItem/TriggerList/Trigger/TriggerSubscription":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/TriggerList/Trigger/TriggerUsername":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/TriggerList/Trigger/TriggerValueQueries":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/VirtualPath":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/WorkItemData":
+        taskobj.set_Work_Item_Data(common.Base64BinaryObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/WorkingDirectory":
+        taskobj.set_Working_Directory(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+    elif search_string == "TaskItem/md5sum":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/sha1sum":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "TaskItem/sha256sum":
+        valueset = False
+        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+
+    if valueset:
+        taskobj.set_xsi_type('WinTaskObj:WindowsTaskObjectType')
+    elif not valueset:
+        taskobj = None
+            
+    return taskobj
    
 def createWinVolumeObj(search_string, content_string, condition):
     #Create the volume object
@@ -1610,7 +1948,7 @@ def createWinFileObj(search_string, content_string, condition):
         stream_list = winfileobj.StreamListType()
         stream = winfileobj.StreamObjectType()
         md5hash = common.HashType()
-        md5hash.set_Type(common.StringObjectPropertyType(datatype=None, valueOf_='MD5'))
+        md5hash.set_Type(common.ControlledVocabularyStringType(valueOf_='MD5', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         md5hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         stream.add_Hash(md5hash)
         stream_list.add_Stream(stream)
@@ -1625,7 +1963,7 @@ def createWinFileObj(search_string, content_string, condition):
         stream_list = winfileobj.StreamListType()
         stream = winfileobj.StreamObjectType()
         sha1hash = common.HashType()
-        sha1hash.set_Type(common.StringObjectPropertyType(datatype=None, valueOf_='SHA1'))
+        sha1hash.set_Type(common.ControlledVocabularyStringType(valueOf_='SHA1', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         sha1hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         stream.add_Hash(sha1hash)
         stream_list.add_Stream(stream)
@@ -1634,7 +1972,7 @@ def createWinFileObj(search_string, content_string, condition):
         stream_list = winfileobj.StreamListType()
         stream = winfileobj.StreamObjectType()
         sha256hash = common.HashType()
-        sha256hash.set_Type(common.StringObjectPropertyType(datatype=None, valueOf_='SHA256'))
+        sha256hash.set_Type(common.ControlledVocabularyStringType(valueOf_='SHA256', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         sha256hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         stream.add_Hash(sha256hash)
         stream_list.add_Stream(stream)
@@ -1853,6 +2191,7 @@ def createWinExecObj(search_string, content_string, condition):
     elif search_string == "FileItem/PEInfo/Type":
         petype = winexecutablefileobj.PEType()
         petype.set_valueOf_(process_string_value(content_string))
+        petype.set_datatype('string')
         winexecobj.set_Type(petype)
     elif search_string == "FileItem/PEInfo/VersionInfoList/VersionInfoItem/Comments":
         reslist = winexecutablefileobj.PEResourceListType()
@@ -1950,7 +2289,7 @@ def createWinUserObj(search_string, content_string, condition):
     if search_string ==  "UserItem/SecurityID":
         accountobj.set_Security_ID(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
     elif search_string ==  "UserItem/SecurityType":
-        accountobj.set_Security_Type(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        accountobj.set_Security_Type(common.StringObjectPropertyType(datatype='string', condition=condition, valueOf_=process_string_value(content_string)))
 
     if valueset:
         accountobj.set_xsi_type('WinUserAccountObj:WindowsUserAccountObjectType')
@@ -1979,6 +2318,23 @@ def createAccountObj(search_string, content_string, condition):
         acctobj = None
     
     return acctobj
+ 
+def createWinMemoryPageObj(search_string, content_string, condition):
+    #Create the windows memory page region object
+    wmpobj = winmemorypageregionobj.WindowsMemoryPageRegionObjectType()
+
+    #Assume the IOC indicator value can be mapped to a CybOx type
+    valueset = True
+
+    if search_string ==  "ProcessItem/SectionList/MemorySection/Protection":
+        wmpobj.set_Protect(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+
+    if valueset:
+        wmpobj.set_xsi_type('WinMemoryPageRegionObj:WindowsMemoryPageRegionObjectType')
+    elif not valueset:
+        wmpobj = None
+    
+    return wmpobj
     
 def createWinProcessObj(search_string, content_string, condition):
     #Create the Win process object
@@ -2023,7 +2379,7 @@ def createWinProcessObj(search_string, content_string, condition):
     elif search_string == "ProcessItem/HandleList/Handle/Type":
         handle_list = winhandleobj.WindowsHandleListType()
         handle = winhandleobj.WindowsHandleObjectType()
-        handle.set_Type(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        handle.set_Type(common.StringObjectPropertyType(datatype='string', condition=condition, valueOf_=process_string_value(content_string)))
         handle_list.add_Handle(handle)
         winprocobj.set_Handle_List(handle_list)
     elif search_string.count("DigitalSignature") > 0:
@@ -2044,7 +2400,7 @@ def createWinProcessObj(search_string, content_string, condition):
     elif search_string == "ProcessItem/SectionList/MemorySection/Md5sum":
         hashes = common.HashListType()
         md5hash = common.HashType()
-        md5hash.set_Type(common.StringObjectPropertyType(datatype=None, valueOf_='MD5'))
+        md5hash.set_Type(common.ControlledVocabularyStringType(valueOf_='MD5', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         md5hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         hashes.add_Hash(md5hash)
         memory_section_list = winprocessobj.MemorySectionListType()
@@ -2059,11 +2415,9 @@ def createWinProcessObj(search_string, content_string, condition):
         memory_section_list.add_Memory_Section(memory_section)
         winprocobj.set_Section_List(memory_section_list)
     elif search_string.count("PEInfo") > 0:
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+        return createWinExecObj(search_string, content_string, condition)
     elif search_string == "ProcessItem/SectionList/MemorySection/Protection":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+        createWinMemoryPageObj(search_string, content_string, condition)
     elif search_string == "ProcessItem/SectionList/MemorySection/RawFlags":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
@@ -2082,7 +2436,7 @@ def createWinProcessObj(search_string, content_string, condition):
     elif search_string == "ProcessItem/SectionList/MemorySection/Sha1Sum":
         hashes = common.HashListType()
         sha1hash = common.HashType()
-        sha1hash.set_Type(common.StringObjectPropertyType(datatype=None, valueOf_='SHA1'))
+        sha1hash.set_Type(common.ControlledVocabularyStringType(valueOf_='SHA1', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         sha1hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         hashes.add_Hash(sha1hash)
         memory_section_list = winprocessobj.MemorySectionListType()
@@ -2093,7 +2447,7 @@ def createWinProcessObj(search_string, content_string, condition):
     elif search_string == "ProcessItem/SectionList/MemorySection/Sha256Sum":
         hashes = common.HashListType()
         sha256hash = common.HashType()
-        sha256hash.set_Type(common.StringObjectPropertyType(datatype=None, valueOf_='SHA256'))
+        sha256hash.set_Type(common.ControlledVocabularyStringType(valueOf_='SHA256', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         sha256hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         hashes.add_Hash(sha256hash)
         memory_section_list = winprocessobj.MemorySectionListType()
