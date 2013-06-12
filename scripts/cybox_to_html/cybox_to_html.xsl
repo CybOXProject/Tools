@@ -718,9 +718,19 @@ function findAndExpandTarget(targetElement)
                     <xsl:value-of select="cybox:Association_Type/text()"/><xsl:apply-templates select="cybox:Association_Type/@xsi:type"/>
                 </div>
                 
+                <xsl:if test="@idref">
+                <xsl:call-template name="clickableIdref">
+                    <xsl:with-param name="type" select="'associated object'"/>
+                    <xsl:with-param name="idref" select="@idref"/>
+                </xsl:call-template>
+                </xsl:if>
+                
+                
+                <xsl:if test="cybox:Description">
                 <div class="associatedObjectDescription description">
                     <xsl:apply-templates select="cybox:Description"/>
                 </div>
+                </xsl:if>
                 
                 <xsl:for-each select="cybox:Properties">
                     <xsl:call-template name="processProperties" />
