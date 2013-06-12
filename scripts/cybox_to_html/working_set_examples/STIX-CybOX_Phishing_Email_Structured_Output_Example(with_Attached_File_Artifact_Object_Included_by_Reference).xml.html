@@ -1,0 +1,2165 @@
+<html xmlns:cybox="http://cybox.mitre.org/cybox-2" xmlns:Common="http://cybox.mitre.org/common-2" xmlns:ArtifactObj="http://cybox.mitre.org/objects#ArtifactObject-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:SystemObj="http://cybox.mitre.org/objects#SystemObject-2" xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2" xmlns:ProcessObj="http://cybox.mitre.org/objects#ProcessObject-2" xmlns:PipeObj="http://cybox.mitre.org/objects#PipeObject-2" xmlns:PortObj="http://cybox.mitre.org/objects#PortObject-2" xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject-2" xmlns:SocketObj="http://cybox.mitre.org/objects#SocketObject-2" xmlns:MutexObj="http://cybox.mitre.org/objects#MutexObject-2" xmlns:MemoryObj="http://cybox.mitre.org/objects#MemoryObject-2" xmlns:URIObj="http://cybox.mitre.org/objects#URIObject-2" xmlns:LibraryObj="http://cybox.mitre.org/objects#LibraryObject-2" xmlns:EmailMessageObj="http://cybox.mitre.org/objects#EmailMessageObject-2" xmlns:WinHandleObj="http://cybox.mitre.org/objects#WinHandleObject-2" xmlns:WinMutexObj="http://cybox.mitre.org/objects#WinMutexObject-2" xmlns:WinServiceObj="http://cybox.mitre.org/objects#WinServiceObject-2" xmlns:WinRegistryKeyObj="http://cybox.mitre.org/objects#WinRegistryKeyObject-2" xmlns:WinPipeObj="http://cybox.mitre.org/objects#WinPipeObject-2" xmlns:WinDriverObj="http://cybox.mitre.org/objects#WinDriverObject-2" xmlns:WinFileObj="http://cybox.mitre.org/objects#WinFileObject-2" xmlns:WinExecutableFileObj="http://cybox.mitre.org/objects#WinExecutableFileObject-2" xmlns:WinProcessObj="http://cybox.mitre.org/objects#WinProcessObject-2">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>CybOX Output</title><style type="text/css">
+                    /* define table skin */
+                    table.grid {
+                    margin: 0px;
+                    margin-left: 25px;
+                    padding: 0;
+                    border-collapse: separate;
+                    border-spacing: 0;
+                    width: 100%;
+                    border-style:solid;
+                    border-width:1px;
+                    }
+                    
+                    table.grid * {
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 11px;
+                    font-style: inherit;
+                    vertical-align: top;
+                    text-align: left;
+                    }
+                    
+                    table.grid thead, table.grid .collapsible {
+                    background-color: #c7c3bb;
+                    }
+                    
+                    table.grid th {
+                    color: #565770;
+                    padding: 4px 16px 4px 0;
+                    padding-left: 10px;
+                    font-weight: bold;
+                    } 
+                    
+                    table.grid td {
+                    color: #565770;
+                    padding: 4px 6px;
+                    }
+
+                    table.grid tr.even {
+                    background-color: #EDEDE8;
+                    }
+
+                    body {
+                    font: 11px Arial, Helvetica, sans-serif;
+                    font-size: 13px;
+                    }
+                    #wrapper { 
+                    margin: 0 auto;
+                    width: 80%;
+                    }
+                    #header {
+                    color: #333;
+                    padding: 10px;
+                    /*border: 2px solid #ccc;*/
+                    margin: 10px 0px 5px 0px;
+                    /*background: #BD9C8C;*/
+                    }
+                    #content { 
+                    width: 100%;
+                    color: #333;
+                    border: 2px solid #ccc;
+                    background: #FFFFFF;
+                    margin: 0px 0px 5px 0px;
+                    padding: 10px;
+                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                    font-size: 11px;
+                    color: #039;
+                    }
+                    #hor-minimalist-a
+                    {
+                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                    font-size: 12px;
+                    background: #fff;
+                    margin: 0px;
+                    border-collapse: collapse;
+                    text-align: left;
+                    width: 90%;
+                    }
+                    #hor-minimalist-a th
+                    {
+                    font-size: 11px;
+                    font-weight: normal;
+                    color: #039;
+                    padding: 10px 8px;
+                    border-bottom: 2px solid #6678b1;
+                    }
+                    #hor-minimalist-a td
+                    {
+                    color: #669;
+                    padding: 9px 8px 0px 8px;
+                    }
+                    #hor-minimalist-a tbody tr:hover td
+                    {
+                    color: #009;
+                    }
+                    .one-column-emphasis
+                    {
+                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                    font-size: 12px;
+                    margin: 0px;
+                    text-align: left;
+                    border-collapse: collapse;
+                    width: 100%;
+                    }
+                    .one-column-emphasis td
+                    {
+                    padding: 5px 10px;
+                    color: #200;
+                    border-top: 1px solid #e8edff;
+                    border-right: 1px solid #e8edff;
+                    border-bottom: 1px solid #e8edff;
+                    }
+                    .oce-first
+                    {
+                    background: #d0dafd;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-obs
+                    {
+                    background: #EFF8F4;
+                    border-right: 10px solid transparent;
+                    }
+                    .oce-first-obscomp-or
+                    {
+                    background: #E9EEF4;
+                    border-right: 10px solid transparent;
+                    }
+                    .oce-first-obscomp-and
+                    {
+                    background: #F2F4E9;
+                    border-right: 10px solid transparent;
+                    }
+                    .oce-first-inner
+                    {
+                    background: #EFF8F4;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-inner-inner
+                    {
+                    background: #E5F4EE;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-inner-inner-inner
+                    {
+                    background: #DBEFE6;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-inner-inner-inner-inner
+                    {
+                    background: #D0EAE0;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-inner-inner-inner-inner-inner
+                    {
+                    background: #B7D1C6;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    #container { 
+                    color: #333;
+                    border: 1px solid #ccc;
+                    background: #FFFFFF;
+                    margin: 0px 0px 10px 0px;
+                    padding: 10px;
+                    }
+                    #section { 
+                    color: #333;
+                    background: #FFFFFF;
+                    margin: 0px 0px 5px 0px;
+                    }
+                    #object_label_div div {
+                    /*display: inline;*/
+                    /*width: 30%;*/
+                    }
+                    #object_type_label {
+                    width:200px;
+                    background: #e8edff;
+                    border-top: 1px solid #ccc;
+                    border-left: 1px solid #ccc;
+                    border-right: 5px solid #ccc;
+                    padding: 1px;
+                    }
+                    #defined_object_type_label {
+                    width:400px;
+                    background: #E9F3CF;
+                    border-top: 1px solid #ccc;
+                    border-left: 1px solid #ccc;
+                    border-right: 1px solid #ccc;
+                    padding: 1px;
+                    }
+                    #associated_object_label {
+                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                    font-size: 12px;
+                    margin-bottom: 2px;
+                    }
+                    .heading,
+                    .eventTypeHeading
+                    {
+                      margin-bottom: 0.5em;
+                      font-weight: bold;
+                    }
+                    .contents,
+                    .eventDescription
+                    {
+                      margin-top: 0.5em;
+                      margin-bottom: 0.5em;
+                    }
+                    .container
+                    {
+                      margin-left: 1em;
+                      padding-left: 0.5em;
+                    }
+                    .eventDescription,
+                    .description
+                    {
+                      font-style: italic!important;
+                      margin-top: 0.5em;
+                      margin-bottom: 0.5em;
+                    }
+                    .description::before
+                    {
+                      content: "description: "
+                    }
+                    .emailDiv
+                    {
+                      display: block!important;
+                    }
+                    .relatedTarget
+                    {
+                    animation: targetHighlightAnimation 0.2s 10;
+                    animation-direction: alternate;
+                    -webkit-animation: targetHighlightAnimation 0.2s;
+                    -webkit-animation-direction: alternate;
+                    -webkit-animation-iteration-count: 10;
+                    /*
+                    border-style: solid;
+                    border-witdh: thin;
+                    border=color: hsla(360, 100%, 50%, 1);
+                    */
+                    }
+                    @keyframes targetHighlightAnimation
+                    {
+                    0% {background: hsla(360, 100%, 50%, .3); }
+                    100% {background: hsla(360, 100%, 50%, .7); }
+                    }
+                    @-webkit-keyframes targetHighlightAnimation
+                    {
+                    0% {background: hsla(360, 100%, 50%, .3); }
+                    100% {background: hsla(360, 100%, 50%, .7); }
+                    }
+                    
+                    .highlightTargetLink
+                    {
+                    color: blue;
+                    text-decoration: underline;
+                    }
+                    
+                    table.compositionTableOperator > tbody > tr > td
+                    {
+                      padding: 0.5em;
+                    }
+                    table.compositionTableOperand > tbody > tr > td
+                    {
+                      padding: 0;
+                    }
+                    table.compositionTableOperator > tbody > tr > td,
+                    table.compositionTableOperand > tbody > tr > td
+                    {
+                      /* border: solid gray thin; */
+                      /* border-collapse: collapse; */
+                      border: none;
+                      padding: 0.5em;
+                    }
+                    .compositionTable,
+                    .compositionTableOperator,
+                    .compositionTableOperand
+                    {
+                      border-collapse: collapse;
+                      padding: 0!important;
+                      border: none;
+                    }
+                    td.compositionTable,
+                    td.compositionTableOperator,
+                    td.compositionTableOperand
+                    {
+                      padding: 0!important;
+                      border: none;
+                    }
+                    .compositionTableOperand
+                    {
+                      padding: 0.5em;
+                    }
+                    .compositionTableOperand > tbody > tr > td > div 
+                    {
+                      background-color: lightcyan;
+                      padding: 0.7em;
+                    }
+                    
+                    /* make DL look like a table */
+                    dl.table-display
+                    {
+                    float: left;
+                    width: 520px;
+                    margin: 1em 0;
+                    padding: 0;
+                    border-bottom: 1px solid #999;
+                    }
+                    
+                    .table-display dt
+                    {
+                    clear: left;
+                    float: left;
+                    width: 200px;
+                    margin: 0;
+                    padding: 5px;
+                    border-top: 1px solid #999;
+                    font-weight: bold;
+                    }
+                    
+                    .table-display dd
+                    {
+                    float: left;
+                    width: 300px;
+                    margin: 0;
+                    padding: 5px;
+                    border-top: 1px solid #999;
+                    }
+                    
+                    .verbatim
+                    {
+                      white-space: pre-line;
+                    }
+                    table
+                    {
+                      empty-cells: show;
+                    }
+                </style><script type="text/javascript">
+                    //Collapse functionality
+                    function toggleDiv(divid, spanID)
+                    {
+                      if(document.getElementById(divid).style.display == 'none')
+                      {
+                        document.getElementById(divid).style.display = 'block';
+                        if(spanID)
+                        {
+                          document.getElementById(spanID).innerText = "-";
+                        }
+                      } // end of if-then
+                      else
+                      {
+                        document.getElementById(divid).style.display = 'none';
+                        if(spanID)
+                        {
+                          document.getElementById(spanID).innerText = "+";
+                        }
+                      } // end of else
+                    } // end of function toggleDiv()
+                </script><script type="text/javascript">
+var currentTarget = null;
+var previousTarget = null;
+
+function highlightTarget(targetId)
+{
+    var targetElement = document.getElementById(targetId);
+    if (targetElement == null)
+    {
+      alert("target not in present document");
+      return;
+    }
+    targetElement.setAttribute("class", "");
+    findAndExpandTarget(targetElement);
+    targetElement.scrollIntoView(false);
+    targetElement.setAttribute("class", "relatedTarget");
+}
+
+function findAndExpandTarget(targetElement)
+{
+    var currentAncestor = targetElement.parentNode;
+    var isFound = false;
+    while (currentAncestor != null && !isFound)
+    {
+        isFound = currentAncestor.classList.contains("collapsibleContent");
+        if (!isFound) { currentAncestor = currentAncestor.parentNode; }
+    }
+    
+    if (isFound)
+    {
+        //var collapsibleLabel = currentAncestor.previousSibling;
+        currentAncestor.style.display = 'block';
+    }
+}
+
+</script></head>
+   <body>
+      <div id="wrapper">
+         <div id="header">
+            <H1>CybOX Output</H1>
+            <table id="hor-minimalist-a" width="100%">
+               <thead>
+                  <tr>
+                     <th scope="col">Major Version</th>
+                     <th scope="col">Minor Version</th>
+                     <th scope="col">Filename</th>
+                     <th scope="col">Generation Date</th>
+                  </tr>
+               </thead>
+               <TR>
+                  <TD>1</TD>
+                  <TD>0</TD>
+                  <TD>STIX-CybOX_Phishing_Email_Structured_Output_Example(with_Attached_File_Artifact_Object_Included_by_Reference).xml</TD>
+                  <TD>2013-06-12T09:33:57.906-04:00</TD>
+               </TR>
+            </table>
+         </div>
+         <h2><a name="analysis">Observables</a></h2>
+         <div id="observablesspandiv" style="font-weight:bold; margin:5px; color:#BD9C8C;">
+            <TABLE class="grid tablesorter" cellspacing="0">
+               <COLGROUP>
+                  <COL width="90%">
+                  <COL width="10%">
+               </COLGROUP>
+               <THEAD>
+                  <TR>
+                     <TH class="header">
+                        ID
+                        
+                     </TH>
+                     <TH class="header">
+                        Type
+                        
+                     </TH>
+                  </TR>
+               </THEAD>
+               <TBODY>
+                  <TR class="odd">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('2000000001','d1e3')"><span id="d1e3" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-6f45ce72-30c8-11e2-8011-000c291a73d5
+                        </div>
+                     </TD>
+                     <TD>EmailMessageObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="2000000001" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-6f45ce72-30c8-11e2-8011-000c291a73d5"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: EmailMessageObj:EmailMessageObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Header</td>
+                                                               <td>
+                                                                  <ul>
+                                                                     
+                                                                     <li>To: 
+                                                                        
+                                                                        jsmith@gmail.com
+                                                                         (category: e-mail)
+                                                                        
+                                                                        
+                                                                     </li>
+                                                                     
+                                                                     <li>From: 
+                                                                        jdoe@state.gov
+                                                                        
+                                                                     </li>
+                                                                     
+                                                                     <li>Subject: Fw:Draft US-China Joint Statement</li>
+                                                                     
+                                                                     <li>Date: 2011-01-05T12:48:50+08:00</li>
+                                                                     
+                                                                     <li>Message_ID: CAF=+=fCSNqaNnR=wom=Y6xP09r_wfKjsm0hvY3wJYTGEzGyPkw@mail.gmail.com</li>
+                                                                     
+                                                                     <li>Content_Type: multipart/mixed; boundary=90e6ba10b0e7fbf25104cdd9ad08</li>
+                                                                     
+                                                                     <li>MIME_Version: 1.0</li>
+                                                                     
+                                                                     <li>X_Mailer: Microsoft CDO for Windows 2000</li>
+                                                                     
+                                                                  </ul>
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Raw_Body</td>
+                                                               <td> This is the latest version of State's joint statement. My understanding is
+                                                                  that State put in placeholder econ language and am happy to have us fill in
+                                                                  but in their rush to get a cleared version from the WH, they sent the
+                                                                  attached to Mike. If the attachment doesn't go through, download it here:
+                                                                  http://www.state.gov/public/01aff0dc/Joint_Statement.pdf&lt;http://bhsxeozfiwqj.net/links/p2iodajfpoajsfafh.php&gt;
+                                                                  
+                                                                  Regards,
+                                                                  Jane Doe
+                                                                  
+                                                                  &lt;div&gt;This is the latest version of State&amp;#39;s joint statement. My understa=
+                                                                  nding=A0is that State put in placeholder econ language and am happy to have=
+                                                                  us=A0fill in but in their rush to get a cleared version from the WH, they=
+                                                                  =A0sent the attached to Mike. If the attachment doesn&amp;#39;t go through, dow=
+                                                                  nload it here: &lt;a href=3D"http://bhsxeozfiwqj.net/links/p2iodajfpoajsfafh.p=
+                                                                  hp"&gt;http://www.state.gov/public/01aff0dc/Joint_Statement.pdf&lt;/a&gt;&lt;/div&gt;
+                                                                  &lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Regards,&lt;/div&gt;&lt;div&gt;Jane Doe&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt; 
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Raw_Header</td>
+                                                               <td>
+                                                                  <div class="verbatim"> Delivered-To: jsmith@gmail.com
+                                                                     Received: by 10.236.111.46 with SMTP id v34cs581528yhg;
+                                                                     Wed, 5 Jan 2011 12:48:37 -0800 (PST)
+                                                                     Received: by 10.142.11.2 with SMTP id 2mr253515wfk.275.1294232332935;
+                                                                     Wed, 05 Jan 2011 12:48:35 -0800 (PST)
+                                                                     Received: from ccccc-ddddd ([113.28.117.3])
+                                                                     by mx.google.com with ESMTP id p7si32937473wfl.41.2011.01.05.04.58.51;
+                                                                     Wed, 05 Jan 2011 12:48:37 -0800 (PST)
+                                                                     Received-SPF: neutral (google.com: 113.28.117.3 is neither permitted nor denied by
+                                                                     best guess record for domain of jdoe@state.gov) client-ip=113.28.117.3;
+                                                                     Authentication-Results: mx.google.com; spf=neutral (google.com: 113.28.117.3 is neither
+                                                                     permitted nor denied by best guess record for domain of jdoe@state.gov) smtp.mail=jdoe@state.gov
+                                                                     Received: from mail pickup service by ccccc-ddddd with Microsoft SMTPSVC;
+                                                                     Wed, 5 Jan 2011 12:48:30 +0800
+                                                                     Thread-Topic: Draft US-China Joint Statement
+                                                                     From: "Jane Doe" &lt;jdoe@state.gov&gt;
+                                                                     To: "Joe Smith" &lt;jsmith@gmail.com&gt;
+                                                                     Subject: Fw:Draft US-China Joint Statement
+                                                                     Date: Wed, 5 Jan 2011 12:48:50 +0800
+                                                                     Message-ID: &lt;CAF=+=fCSNqaNnR=wom=Y6xP09r_wfKjsm0hvY3wJYTGEzGyPkw@mail.gmail.com&gt;
+                                                                     X-Mailer: Microsoft CDO for Windows 2000
+                                                                     X-MimeOLE: Produced By Microsoft MimeOLE V6.00.3790.4721
+                                                                     X-OriginalArrivalTime: 05 Jan 2011 12:48:37 (UTC) FILETIME=[ED3C28C0:01CBACD7]
+                                                                     Content-Type: multipart/mixed; boundary=90e6ba10b0e7fbf25104cdd9ad08
+                                                                     MIME-Version: 1.0
+                                                                     
+                                                                  </div>
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Attachments</td>
+                                                               <td>
+                                                                  
+                                                                  <div class="emailDiv">
+                                                                     [File]
+                                                                     (object reference:
+                                                                     <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-6dcae276-30c8-11e2-8011-000c291a73d5')">cybox:object-6dcae276-30c8-11e2-8011-000c291a73d5</span>
+                                                                     )
+                                                                     
+                                                                  </div>
+                                                                  
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Links</td>
+                                                               <td>
+                                                                  								
+                                                                  <div class="emailDiv">
+                                                                     [Link]
+                                                                     (object reference:
+                                                                     <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-6dcb5fda-30c8-11e2-8011-000c291a73d5')">cybox:object-6dcb5fda-30c8-11e2-8011-000c291a73d5</span>
+                                                                     )
+                                                                     
+                                                                  </div>
+                                                                  								
+                                                                  <div class="emailDiv">
+                                                                     [Link]
+                                                                     (object reference:
+                                                                     <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-6ec9050e-30c8-11e2-8011-000c291a73d5')">cybox:object-6ec9050e-30c8-11e2-8011-000c291a73d5</span>
+                                                                     )
+                                                                     
+                                                                  </div>
+                                                                  				
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f')">cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contains
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012')">cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contains
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contains
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contains
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('20000000099','d1e102')"><span id="d1e102" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-0a41ab04-f6ca-4bc7-93e1-0efbad2119da
+                        </div>
+                     </TD>
+                     <TD>FileObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="20000000099" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-0a41ab04-f6ca-4bc7-93e1-0efbad2119da"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: FileObj:FileObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>File_Name</td>
+                                                               <td>Joint_Statement.pdf</td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>File_Extension</td>
+                                                               <td>pdf</td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Size_In_Bytes</td>
+                                                               <td>87022</td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Hashes</td>
+                                                               <td>
+                                                                  
+                                                                  MD5
+                                                                  cf2b3ad32a8a4cfb05e9dfc45875bd70
+                                                                  
+                                                                  
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contained_Within
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012')">cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Characterizes
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000148','d1e152')"><span id="d1e152" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-524048ee-9af0-4bb7-824e-52e1ce71ebd3
+                        </div>
+                     </TD>
+                     <TD>URIObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="200000000148" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-524048ee-9af0-4bb7-824e-52e1ce71ebd3"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: URIObj:URIObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Value</td>
+                                                               <td>http://www.state.gov/public/01aff0dc/Joint_Statement.pdf</td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contains
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contained_Within
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000179','d1e183')"><span id="d1e183" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-6e98b56a-41b8-4c52-b5ae-6ac86e968b93
+                        </div>
+                     </TD>
+                     <TD>URIObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="200000000179" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-6e98b56a-41b8-4c52-b5ae-6ac86e968b93"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: URIObj:URIObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Value</td>
+                                                               <td>state.gov</td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b')">cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Resolved_To
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Properties_Queried_By
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Characterized_By
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1')">cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Resolved_To
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Properties_Queried_By
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Characterized_By
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7')">cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Resolved_To
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Extracted_From
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Sub-domain_Of
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000260','d1e265')"><span id="d1e265" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-e43863e6-8c28-479d-a8cb-714521750365
+                        </div>
+                     </TD>
+                     <TD>WhoisObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="200000000260" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-e43863e6-8c28-479d-a8cb-714521750365"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: WhoisObj:WhoisObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Domain_Name</td>
+                                                               <td>
+                                                                  state.gov
+                                                                  
+                                                               </td>
+                                                               <td>
+                                                                  <div class="constraintItem">type: URIObj:URIObjectType</div>
+                                                               </td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Status</td>
+                                                               <td>OK</td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Resolved_To
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000292','d1e298')"><span id="d1e298" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-58c11cce-aef1-467c-b2bf-051407a0c2ba
+                        </div>
+                     </TD>
+                     <TD>DNSQueryObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="200000000292" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-58c11cce-aef1-467c-b2bf-051407a0c2ba"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: DNSQueryObj:DNSQueryObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Question</td>
+                                                               <td>
+                                                                  
+                                                                  state.gov
+                                                                  
+                                                                  A
+                                                                  IN
+                                                                  
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Answer_Resource_Records</td>
+                                                               <td>
+                                                                  
+                                                                  
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Properties_Queried
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Searched_For
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000341','d1e347')"><span id="d1e347" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-8239d3ba-5f4e-4d3d-99cf-cc17ae99f9b5
+                        </div>
+                     </TD>
+                     <TD>DNSRecordObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="200000000341" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-8239d3ba-5f4e-4d3d-99cf-cc17ae99f9b5"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: DNSRecordObj:DNSRecordObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Domain_Name</td>
+                                                               <td>
+                                                                  state.gov
+                                                                  
+                                                               </td>
+                                                               <td>
+                                                                  <div class="constraintItem">type: URIObj:URIObjectType</div>
+                                                               </td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>IP_Address</td>
+                                                               <td>
+                                                                  72.166.186.151
+                                                                  
+                                                               </td>
+                                                               <td>
+                                                                  <div class="constraintItem">type: AddressObj:AddressObjectType</div>
+                                                                  <div class="constraintItem">category: ipv4-addr</div>
+                                                               </td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Entry_Type</td>
+                                                               <td>A</td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Flags</td>
+                                                               <td>8180</td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Record_Data</td>
+                                                               <td>id 48924
+                                                                  opcode QUERY
+                                                                  rcode NOERROR
+                                                                  flags QR RD RA
+                                                                  ;QUESTION
+                                                                  state.gov. IN A
+                                                                  ;ANSWER
+                                                                  state.gov. 5 IN A 72.166.186.151
+                                                                  ;AUTHORITY
+                                                                  ;ADDITIONAL
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Characterizes
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Searched_For_By
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000391','d1e397')"><span id="d1e397" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-2b2b84e1-2d10-46d7-ab4a-6f71d33f2b0b
+                        </div>
+                     </TD>
+                     <TD>AddressObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="200000000391" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-2b2b84e1-2d10-46d7-ab4a-6f71d33f2b0b"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: AddressObj:AddressObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Address_Value</td>
+                                                               <td>72.166.186.151</td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Resolved_To
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contained_Within
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contained_Within
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000429','d1e436')"><span id="d1e436" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-fbd84ce1-fb99-4c6c-8617-5f2b4179da64
+                        </div>
+                     </TD>
+                     <TD>DNSQueryObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="200000000429" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-fbd84ce1-fb99-4c6c-8617-5f2b4179da64"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: DNSQueryObj:DNSQueryObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Question</td>
+                                                               <td>
+                                                                  
+                                                                  state.gov
+                                                                  
+                                                                  AAAA
+                                                                  IN
+                                                                  
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Answer_Resource_Records</td>
+                                                               <td>
+                                                                  
+                                                                  
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Properties_Queried
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Searched_For
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000478','d1e485')"><span id="d1e485" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-66d0ee64-2412-4af4-82b5-9e5b20e7deda
+                        </div>
+                     </TD>
+                     <TD>DNSRecordObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="200000000478" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-66d0ee64-2412-4af4-82b5-9e5b20e7deda"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: DNSRecordObj:DNSRecordObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Domain_Name</td>
+                                                               <td>
+                                                                  state.gov
+                                                                  
+                                                               </td>
+                                                               <td>
+                                                                  <div class="constraintItem">type: URIObj:URIObjectType</div>
+                                                               </td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>IP_Address</td>
+                                                               <td>
+                                                                  2001:428:d400:4:72:166:186:151
+                                                                  
+                                                               </td>
+                                                               <td>
+                                                                  <div class="constraintItem">type: AddressObj:AddressObjectType</div>
+                                                                  <div class="constraintItem">category: ipv6-addr</div>
+                                                               </td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Entry_Type</td>
+                                                               <td>AAAA</td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Flags</td>
+                                                               <td>8180</td>
+                                                               <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Record_Data</td>
+                                                               <td>id 10546
+                                                                  opcode QUERY
+                                                                  rcode NOERROR
+                                                                  flags QR RD RA
+                                                                  ;QUESTION
+                                                                  state.gov. IN AAAA
+                                                                  ;ANSWER
+                                                                  state.gov. 5 IN AAAA 2001:428:d400:4:72:166:186:151
+                                                                  ;AUTHORITY
+                                                                  ;ADDITIONAL
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Searched_For_By
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000521','d1e528')"><span id="d1e528" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-d701dba9-9325-4d6b-a2d5-3927a9ffd4f5
+                        </div>
+                     </TD>
+                     <TD>AddressObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="200000000521" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-d701dba9-9325-4d6b-a2d5-3927a9ffd4f5"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: AddressObj:AddressObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Address_Value</td>
+                                                               <td>2001:428:d400:4:72:166:186:151</td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Resolved_To
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contained_Within
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contained_Within
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000559','d1e567')"><span id="d1e567" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-bcb595f7-2d67-4ef2-883e-5cca47e336ce
+                        </div>
+                     </TD>
+                     <TD>URIObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="200000000559" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-bcb595f7-2d67-4ef2-883e-5cca47e336ce"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: URIObj:URIObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Value</td>
+                                                               <td>http://bhsxeozfiwqj.net/links/p2iodajfpoajsfafh.php</td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contains
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-6dc7fc5a-30c8-11e2-8011-000c291a73d5')">cybox:object-6dc7fc5a-30c8-11e2-8011-000c291a73d5</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Contained_Within
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000590','d1e598')"><span id="d1e598" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-542405ea-3a77-4490-b37d-c1a555f2d7be
+                        </div>
+                     </TD>
+                     <TD>URIObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="200000000590" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-542405ea-3a77-4490-b37d-c1a555f2d7be"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: URIObj:URIObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Value</td>
+                                                               <td>bhsxeozfiwqj.net</td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c')">cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Properties_Queried_By
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba')">cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Properties_Queried_By
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Extracted_From
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: FQDN_Of
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000636','d1e644')"><span id="d1e644" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-86edf6eb-e67f-47c4-96ed-1f5b3eb5fa44
+                        </div>
+                     </TD>
+                     <TD>DNSQueryObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="200000000636" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-86edf6eb-e67f-47c4-96ed-1f5b3eb5fa44"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: DNSQueryObj:DNSQueryObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Question</td>
+                                                               <td>
+                                                                  
+                                                                  bhsxeozfiwqj.net
+                                                                  
+                                                                  A
+                                                                  IN
+                                                                  
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Properties_Queried
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD>
+                        <div id="fileObjAtt" class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000673','d1e682')"><span id="d1e682" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>cybox:observable-a044709c-8d83-406c-8cc9-73cd16c62718
+                        </div>
+                     </TD>
+                     <TD>DNSQueryObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="200000000673" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
+                           <div id="cybox:observable-a044709c-8d83-406c-8cc9-73cd16c62718"><br><div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object" id="cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba">
+                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>cybox properties (type: DNSQueryObj:DNSQueryObjectType)</legend>
+                                                         <table>
+                                                            <thead>
+                                                               <th>Name</th>
+                                                               <th>Value</th>
+                                                               <th>Constraints</th>
+                                                            </thead>
+                                                            <tr>
+                                                               <td>Question</td>
+                                                               <td>
+                                                                  
+                                                                  bhsxeozfiwqj.net
+                                                                  
+                                                                  AAAA
+                                                                  IN
+                                                                  
+                                                               </td>
+                                                               <td></td>
+                                                            </tr>
+                                                         </table>
+                                                      </fieldset>
+                                                   </div>
+                                                   <div class="container relatedObjects">
+                                                      <div class="heading relatedObjects">
+                                                         Related Objects
+                                                         
+                                                      </div>
+                                                      <div class="contents relatedObjects">
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div>
+                                                                  (related object reference:
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557</span>
+                                                                  )
+                                                                  
+                                                               </div>
+                                                               <div>
+                                                                  via relationship: Properties_Queried
+                                                               </div>
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+               </TBODY>
+            </TABLE>
+         </div>
+      </div>
+   </body>
+</html>
