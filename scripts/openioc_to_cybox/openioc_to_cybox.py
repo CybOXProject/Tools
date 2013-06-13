@@ -90,13 +90,8 @@ def process_indicator_item(indicator_item, observables = None, indicatoritem_dic
         return True
     else:
         if verbose_mode:
-            skipped_indicatoritem = ''
-            if indicator_item.get_id() is not None:
-                skipped_indicatoritem = indicator_item.get_id()
-            else:
-                skipped_indicatoritem = get_indicatoritem_string(indicator_item, '_')
-            if skipped_indicatoritem not in skipped_indicators:
-                    skipped_indicators.append(skipped_indicatoritem)
+            if indicator_item not in skipped_indicators:
+                    skipped_indicators.append(indicator_item)
         return False
     return
 
@@ -251,8 +246,16 @@ def main():
                 observables.export(open(outfilename, 'w'), 0, namespacedef_='\n xmlns:openioc="http://openioc.org/"')
 
                 if verbose_mode:
-                    for indicator_id in skipped_indicators:
-                        print "Indicator Item " + indicator_id + " Skipped; indicator type currently not supported"
+                    for indicator in skipped_indicators:
+                        skipped_id = ''
+                        skipped_term = ''
+                        if indicator.get_id() is not None:
+                            skipped_id = indicator.get_id()
+                            skipped_term = string_test(indicator.get_Context().get_search())
+                        else:
+                            skipped_id = get_indicatoritem_string(indicator, '_')
+
+                        print "IndicatorItem " + skipped_id + " not translated. Encountered IOC term " + skipped_term + ", which does not currently map to CybOX"
             else:
                 print('\nInput file %s contained no indicator items compatible with CybOX\n' % infilename)
             
