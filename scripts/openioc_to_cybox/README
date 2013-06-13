@@ -2,7 +2,7 @@
 
       OpenIOC XML -> CybOX XML Converter Script
 
- Copyright (c) 2012 - The MITRE Corporation
+ Copyright (c) 2013 - The MITRE Corporation
 
 ****************************************************
 
@@ -13,20 +13,22 @@ For more information, please refer to the terms.txt file.
 
 #################################################################
 #Generates CybOX Output from an OpenIOC XML File                #
-#Compatible with CybOX v1.0 and corresponding objects           #
+#Compatible with CybOX v2.0 and corresponding objects           #
 #                                                               #
-#v0.1 - BETA                                                    #
-#04/13/2012                                                     #
+#v0.2 - BETA                                                    #
+#06/13/2013                                                     #
 #                                                               #
 #                                                               #
 #################################################################
-# CybOX - http://cybox.mitre.org                                 #
+# CybOX - http://cybox.mitre.org                                #
 # OpenIOC - http://www.openioc.org                              #
 #################################################################
 --------------------------------------------------------------------------------
 --Installation Notes------------------------------------------------------------
 
-Simply extract all files from the archive into your directory of choice. No external modules should be required. This script was created using Python 2.6.x, and so may not be compatible with 3.0.x.
+Extract included files into your directory of choice. The python-cybox CybOX 2.0 
+libraries and lxml are required dependencies. This script was created using Python 
+2.6.x, and so may not be compatible with 3.0.x.
 --------------------------------------------------------------------------------
 --Included Files----------------------------------------------------------------
 
@@ -34,25 +36,19 @@ README: this file.
 openioc_to_cybox.py: the OpenIOC XML to CybOX XML Python converter script.
 ioc_observable.py: the helper methods for the script.
 openioc.py: the OpenIOC Python bindings which the script imports.
-\cybox: the CybOX Python bindings which the script imports.
 terms.txt: the terms of use for this script.
 sample_ioc.xml: a sample OpenIOC file.
 --------------------------------------------------------------------------------
 --Usage Notes-------------------------------------------------------------------
 
 There are two main command line parameters for this script:
-
 -i: the path to the input OpenIOC XML file
-
 -o: the path to the output CybOX XML file
 
 There is one optional parameter that may be specified before the main parameters:
-
 -v: print verbose error output (tracebacks)
 
 To use the script, run the following command:
-
 python openioc_to_cybox.py -i <OpenIOC xml> -o <cybox xml>
-
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
