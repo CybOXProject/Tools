@@ -1,6 +1,7 @@
 #OpenIOC -> CybOX Translator
 #v0.2 BETA
 #Creates CybOX 2.0 objects from IOC indicator item components 
+import uuid
 import cybox.bindings.cybox_core as core
 import cybox.bindings.cybox_common as common
 
@@ -109,7 +110,6 @@ def createObj(search_string, content_string, condition):
     
     if defined_object != None: 
         if type(defined_object) is list:
-            print 'a list'
             return defined_object
 
         if defined_object.hasContent_():
@@ -411,8 +411,8 @@ def createEmailObj(search_string, content_string, condition):
         fileattachobj.set_xsi_type('FileObj:FileObjectType')
         fileattachobj.set_File_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         relobj.set_Properties(fileattachobj)
-        relobj.set_Relationship(common.ControlledVocabularyStringType(valueOf_='Received', xsi_type='cyboxVocabs:ObjectRelationshipVocab-1.0')) 
-        attachment.set_object_reference('FileObj')
+        relobj.set_id('cybox:related-object-' + str(uuid.uuid1())) 
+        attachment.set_object_reference(relobj.get_id())
         email_attachments.add_File(attachment)
         emailobj.set_Attachments(email_attachments)
         retVal.append(emailobj)
