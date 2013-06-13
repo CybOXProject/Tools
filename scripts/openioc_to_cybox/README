@@ -25,13 +25,15 @@ CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE SCRIPT.
 --------------------------------------------------------------------------------
 --Installation Notes------------------------------------------------------------
 
-Extract included files into your directory of choice. This script is dependent on the following libraries:
-* python-cybox v2.0.1.x
+Extract included files into your directory of choice. There are two dependencies:
+1) The python-cybox CybOX 2.0 library. It can be found at:
+https://github.com/CybOXProject/python-cybox
+2) lxml, v3.2.x or greater. It can found at: http://lxml.de/index.html#download
 
-Install dependencies with pip: 
-$ pip install cybox
+You can also install dependencies with pip:
+$ pip install cybox lxml
 
-This script was created using Python 2.7, and so may not be compatible with 3.0.x.
+This script was created using Python 2.7.x, and so may not be compatible with 3.0.x.
 --------------------------------------------------------------------------------
 --Included Files----------------------------------------------------------------
 
