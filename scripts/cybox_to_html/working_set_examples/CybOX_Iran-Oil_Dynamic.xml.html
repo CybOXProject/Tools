@@ -366,6 +366,13 @@
 var currentTarget = null;
 var previousTarget = null;
 
+/*
+  when a user clicks on a idref link, find, scroll to, and highlight the
+  target element.  this is usually an object, event, observable, related
+  object, or associated object.
+  
+  the highlighting is done via css transitions.
+*/
 function highlightTarget(targetId)
 {
     var targetElement = document.getElementById(targetId);
@@ -380,6 +387,10 @@ function highlightTarget(targetId)
     targetElement.setAttribute("class", "relatedTarget");
 }
 
+/*
+  When a user clicks on an idref link, this function will find that referenced
+  element and expand the parent Observable table row (if it's collapsed).
+*/
 function findAndExpandTarget(targetElement)
 {
     var currentAncestor = targetElement.parentNode;
@@ -397,11 +408,19 @@ function findAndExpandTarget(targetElement)
     }
 }
 
+/*
+  When the page is loaded, perform any required initialization.  For right now
+  this only includes validating the "idref" links and marking those that don't
+  resolve as "external".
+*/
 function initialize()
 {
   validate();
 }
 
+/*
+Validate the "idref" links and marking those that don't resolve as "external".
+*/
 function validate()
 {
   console.log("validating BEGIN...");
@@ -443,7 +462,7 @@ function validate()
                   <TD>2</TD>
                   <TD>0</TD>
                   <TD>CybOX_Iran-Oil_Dynamic.xml</TD>
-                  <TD>2013-06-12T10:43:21.927-04:00</TD>
+                  <TD>2013-06-13T16:11:03.606-04:00</TD>
                </TR>
             </table>
          </div>
@@ -503,6 +522,9 @@ function validate()
                                                                <div class="container associatedObjectContainer associatedObject" id="example:Object-51359587-f201-4383-b032-5a64522fcd7d">
                                                                   <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
                                                                   <div class="contents associatedObjectContents associatedObject">
+                                                                     <div class="associationType">
+                                                                        association type: Returned
+                                                                     </div>
                                                                      <div>
                                                                         <fieldset>
                                                                            <legend>cybox properties (type: EmailMessageObj:EmailMessageObjectType)</legend>
@@ -646,6 +668,9 @@ function validate()
                                                                <div class="container associatedObjectContainer associatedObject" id="example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7">
                                                                   <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
                                                                   <div class="contents associatedObjectContents associatedObject">
+                                                                     <div class="associationType">
+                                                                        association type: Affected
+                                                                     </div>
                                                                      <div class="associatedObjectDescription description">
                                                                         description: 
                                                                         The word document contains flash, which downloads a
@@ -747,12 +772,18 @@ function validate()
                                                                         )
                                                                         
                                                                      </div>
+                                                                     <div class="associationType">
+                                                                        association type: Initiating
+                                                                     </div>
                                                                      <div></div>
                                                                   </div>
                                                                </div>
                                                                <div class="container associatedObjectContainer associatedObject" id="example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa">
                                                                   <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
                                                                   <div class="contents associatedObjectContents associatedObject">
+                                                                     <div class="associationType">
+                                                                        association type: Affected
+                                                                     </div>
                                                                      <div class="associatedObjectDescription description">
                                                                         description: 
                                                                         This mp4 file causes memory corruption and code
@@ -807,7 +838,7 @@ function validate()
                                                                                     )
                                                                                     
                                                                                  </div>
-                                                                                 <div>
+                                                                                 <div class="relationship">
                                                                                     via relationship: Downloaded_By
                                                                                  </div>
                                                                                  <div></div>
@@ -822,7 +853,7 @@ function validate()
                                                                                     )
                                                                                     
                                                                                  </div>
-                                                                                 <div>
+                                                                                 <div class="relationship">
                                                                                     via relationship: Downloaded_From
                                                                                  </div>
                                                                                  <div></div>
@@ -835,6 +866,9 @@ function validate()
                                                                <div class="container associatedObjectContainer associatedObject" id="example:Object-61041b8b-0c15-48a0-ac5f-b49488788010">
                                                                   <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
                                                                   <div class="contents associatedObjectContents associatedObject">
+                                                                     <div class="associationType">
+                                                                        association type: Utilized
+                                                                     </div>
                                                                      <div>
                                                                         <fieldset>
                                                                            <legend>cybox properties (type: URIObj:URIObjectType)</legend>
@@ -914,12 +948,18 @@ function validate()
                                                                         )
                                                                         
                                                                      </div>
+                                                                     <div class="associationType">
+                                                                        association type: Initiating
+                                                                     </div>
                                                                      <div></div>
                                                                   </div>
                                                                </div>
                                                                <div class="container associatedObjectContainer associatedObject" id="example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c">
                                                                   <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
                                                                   <div class="contents associatedObjectContents associatedObject">
+                                                                     <div class="associationType">
+                                                                        association type: Affected
+                                                                     </div>
                                                                      <div class="associatedObjectDescription description">
                                                                         description: 
                                                                         The file (us.exe MD5: FD1BE09E499E8E380424B3835FC973A8
@@ -987,7 +1027,7 @@ function validate()
                                                                                     )
                                                                                     
                                                                                  </div>
-                                                                                 <div>
+                                                                                 <div class="relationship">
                                                                                     via relationship: Created_By
                                                                                  </div>
                                                                                  <div></div>
@@ -1002,7 +1042,7 @@ function validate()
                                                                                     )
                                                                                     
                                                                                  </div>
-                                                                                 <div>
+                                                                                 <div class="relationship">
                                                                                     via relationship: Connected_To
                                                                                  </div>
                                                                                  <div></div>
@@ -1017,7 +1057,7 @@ function validate()
                                                                                     )
                                                                                     
                                                                                  </div>
-                                                                                 <div>
+                                                                                 <div class="relationship">
                                                                                     via relationship: Connected_To
                                                                                  </div>
                                                                                  <div></div>
@@ -1032,7 +1072,7 @@ function validate()
                                                                                     )
                                                                                     
                                                                                  </div>
-                                                                                 <div>
+                                                                                 <div class="relationship">
                                                                                     via relationship: Connected_To
                                                                                  </div>
                                                                                  <div></div>
@@ -1047,7 +1087,7 @@ function validate()
                                                                                     )
                                                                                     
                                                                                  </div>
-                                                                                 <div>
+                                                                                 <div class="relationship">
                                                                                     via relationship: Connected_To
                                                                                  </div>
                                                                                  <div></div>
@@ -1062,7 +1102,7 @@ function validate()
                                                                                     )
                                                                                     
                                                                                  </div>
-                                                                                 <div>
+                                                                                 <div class="relationship">
                                                                                     via relationship: Connected_To
                                                                                  </div>
                                                                                  <div></div>
@@ -1077,7 +1117,7 @@ function validate()
                                                                                     )
                                                                                     
                                                                                  </div>
-                                                                                 <div>
+                                                                                 <div class="relationship">
                                                                                     via relationship: Connected_To
                                                                                  </div>
                                                                                  <div></div>
@@ -1145,6 +1185,9 @@ function validate()
                                                                         )
                                                                         
                                                                      </div>
+                                                                     <div class="associationType">
+                                                                        association type: Initiating
+                                                                     </div>
                                                                      <div></div>
                                                                   </div>
                                                                </div>
@@ -1156,6 +1199,9 @@ function validate()
                                                                         <span class="highlightTargetLink" onclick="highlightTarget('example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c')">example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c</span>
                                                                         )
                                                                         
+                                                                     </div>
+                                                                     <div class="associationType">
+                                                                        association type: Affected
                                                                      </div>
                                                                      <div></div>
                                                                   </div>
@@ -1245,7 +1291,7 @@ function validate()
                                                                   )
                                                                   
                                                                </div>
-                                                               <div>
+                                                               <div class="relationship">
                                                                   via relationship: Contained_Within
                                                                </div>
                                                                <div></div>
@@ -1306,6 +1352,9 @@ function validate()
                                                                         )
                                                                         
                                                                      </div>
+                                                                     <div class="associationType">
+                                                                        association type: Initiating
+                                                                     </div>
                                                                      <div></div>
                                                                   </div>
                                                                </div>
@@ -1317,6 +1366,9 @@ function validate()
                                                                         <span class="highlightTargetLink" onclick="highlightTarget('example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e')">example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e</span>
                                                                         )
                                                                         
+                                                                     </div>
+                                                                     <div class="associationType">
+                                                                        association type: Utilized
                                                                      </div>
                                                                      <div></div>
                                                                   </div>
@@ -1330,6 +1382,9 @@ function validate()
                                                                         )
                                                                         
                                                                      </div>
+                                                                     <div class="associationType">
+                                                                        association type: Utilized
+                                                                     </div>
                                                                      <div></div>
                                                                   </div>
                                                                </div>
@@ -1341,6 +1396,9 @@ function validate()
                                                                         <span class="highlightTargetLink" onclick="highlightTarget('example:Object-568db11e-39ee-43d7-83d8-032bdec3801a')">example:Object-568db11e-39ee-43d7-83d8-032bdec3801a</span>
                                                                         )
                                                                         
+                                                                     </div>
+                                                                     <div class="associationType">
+                                                                        association type: Utilized
                                                                      </div>
                                                                      <div></div>
                                                                   </div>
@@ -1354,6 +1412,9 @@ function validate()
                                                                         )
                                                                         
                                                                      </div>
+                                                                     <div class="associationType">
+                                                                        association type: Utilized
+                                                                     </div>
                                                                      <div></div>
                                                                   </div>
                                                                </div>
@@ -1366,6 +1427,9 @@ function validate()
                                                                         )
                                                                         
                                                                      </div>
+                                                                     <div class="associationType">
+                                                                        association type: Utilized
+                                                                     </div>
                                                                      <div></div>
                                                                   </div>
                                                                </div>
@@ -1377,6 +1441,9 @@ function validate()
                                                                         <span class="highlightTargetLink" onclick="highlightTarget('example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a')">example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a</span>
                                                                         )
                                                                         
+                                                                     </div>
+                                                                     <div class="associationType">
+                                                                        association type: Utilized
                                                                      </div>
                                                                      <div></div>
                                                                   </div>
@@ -1452,7 +1519,7 @@ function validate()
                                                                   )
                                                                   
                                                                </div>
-                                                               <div>
+                                                               <div class="relationship">
                                                                   via relationship: Resolved_To
                                                                </div>
                                                                <div></div>
@@ -1577,7 +1644,7 @@ function validate()
                                                                   )
                                                                   
                                                                </div>
-                                                               <div>
+                                                               <div class="relationship">
                                                                   via relationship: Resolved_To
                                                                </div>
                                                                <div></div>
@@ -1702,7 +1769,7 @@ function validate()
                                                                   )
                                                                   
                                                                </div>
-                                                               <div>
+                                                               <div class="relationship">
                                                                   via relationship: Resolved_To
                                                                </div>
                                                                <div></div>
