@@ -1,6 +1,7 @@
 #OpenIOC -> CybOX Translator
 #v0.2 BETA
 #Creates CybOX 2.0 objects from IOC indicator item components 
+import cybox.bindings.cybox_core as core
 import cybox.bindings.cybox_common as common
 
 import cybox.bindings.account_object as accountobj
@@ -107,6 +108,10 @@ def createObj(search_string, content_string, condition):
         defined_object = createVolumeObj(search_string, content_string, condition)
     
     if defined_object != None: 
+        if type(defined_object) is list:
+            print 'a list'
+            return defined_object
+
         if defined_object.hasContent_():
             defined_object.set_object_reference(None)
             return defined_object
@@ -198,207 +203,179 @@ def createDriverObj(search_string, content_string, condition):
     #Assume the IOC indicator value can be mapped to a CybOx type
     valueset = True
 
-    if search_string ==  "DriverItem/CertificateIssuer":
+    if search_string == "DriverItem/CertificateIssuer":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/CertificateSubject":
+    elif search_string == "DriverItem/CertificateSubject":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/DeviceItem/AttachedDeviceName":
+    elif search_string == "DriverItem/DeviceItem/AttachedDeviceName":
         device_list = windriverobj.DeviceObjectListType()
         device_objectstruct = windriverobj.DeviceObjectStructType()
         device_objectstruct.set_Attached_Device_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
         device_list.add_Device_Object_Struct(device_objectstruct)
         driverobj.set_Device_Object_List(device_list)
-    elif search_string ==  "DriverItem/DeviceItem/AttachedDeviceObject":
+    elif search_string == "DriverItem/DeviceItem/AttachedDeviceObject":
         device_list = windriverobj.DeviceObjectListType()
         device_objectstruct = windriverobj.DeviceObjectStructType()
         device_objectstruct.set_Attached_Device_Object(common.UnsignedLongObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
         device_list.add_Device_Object_Struct(device_objectstruct)
         driverobj.set_Device_Object_List(device_list)
-    elif search_string ==  "DriverItem/DeviceItem/AttachedDriverName":
+    elif search_string == "DriverItem/DeviceItem/AttachedDriverName":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/DeviceItem/AttachedDriverObject": 
+    elif search_string == "DriverItem/DeviceItem/AttachedDriverObject": 
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/DeviceItem/AttachedToDeviceName":
+    elif search_string == "DriverItem/DeviceItem/AttachedToDeviceName":
         device_list = windriverobj.DeviceObjectListType()
         device_objectstruct = windriverobj.DeviceObjectStructType()
         device_objectstruct.set_Attached_To_Device_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
         device_list.add_Device_Object_Struct(device_objectstruct)
         driverobj.set_Device_Object_List(device_list)
-    elif search_string ==  "DriverItem/DeviceItem/AttachedToDeviceObject":
+    elif search_string == "DriverItem/DeviceItem/AttachedToDeviceObject":
         device_list = windriverobj.DeviceObjectListType()
         device_objectstruct = windriverobj.DeviceObjectStructType()
         device_objectstruct.set_Attached_To_Device_Object(common.UnsignedLongObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
         device_list.add_Device_Object_Struct(device_objectstruct)
         driverobj.set_Device_Object_List(device_list)
-    elif search_string ==  "DriverItem/DeviceItem/AttachedToDriverName":
+    elif search_string == "DriverItem/DeviceItem/AttachedToDriverName":
         device_list = windriverobj.DeviceObjectListType()
-        device_objectstruct = windriverobj.DeviceObjectStructType() #??? updated; update others
+        device_objectstruct = windriverobj.DeviceObjectStructType()
         device_objectstruct.set_Attached_To_Driver_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
         device_list.add_Device_Object_Struct(device_objectstruct)
         driverobj.set_Device_Object_List(device_list)
-    elif search_string ==  "DriverItem/DeviceItem/AttachedToDriverObject":
+    elif search_string == "DriverItem/DeviceItem/AttachedToDriverObject":
         device_list = windriverobj.DeviceObjectListType()
         device_objectstruct = windriverobj.DeviceObjectStructType()
         device_objectstruct.get_Attached_To_Driver_Object(common.UnsignedLongObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
         device_list.add_Device_Object_Struct(device_objectstruct)
         driverobj.set_Device_Object_List(device_list)
-    elif search_string ==  "DriverItem/DeviceItem/DeviceName":
+    elif search_string == "DriverItem/DeviceItem/DeviceName":
         device_list = windriverobj.DeviceObjectListType()
         device_objectstruct = windriverobj.DeviceObjectStructType()
         device_objectstruct.set_Device_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
         device_list.add_Device_Object_Struct(device_objectstruct)
         driverobj.set_Device_Object_List(device_list)
-    elif search_string ==  "DriverItem/DeviceItem/DeviceObject":
+    elif search_string == "DriverItem/DeviceItem/DeviceObject":
         device_list = windriverobj.DeviceObjectListType()
         device_objectstruct = windriverobj.DeviceObjectStructType()
         device_objectstruct.set_Device_Object(process_numerical_value(common.UnsignedLongObjectPropertyType(datatype=None), content_string, condition))
         device_list.add_Device_Object_Struct(device_objectstruct)
         driverobj.set_Device_Object_List(device_list)
-    elif search_string ==  "DriverItem/DeviceItem/DriverName":
+    elif search_string == "DriverItem/DeviceItem/DriverName":
         device_list = windriverobj.DeviceObjectListType()
         device_objectstruct = windriverobj.DeviceObjectStructType()
         device_objectstruct.set_Driver_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
         device_list.add_Device_Object_Struct(device_objectstruct)
         driverobj.set_Device_Object_List(device_list)
-    elif search_string ==  "DriverItem/DriverInit":
+    elif search_string == "DriverItem/DriverInit":
         valueset = False
         driverobj.set_Driver_Init(process_numerical_value(common.UnsignedLongObjectPropertyType(datatype=None), content_string, condition))
-    elif search_string ==  "DriverItem/DriverName":
+    elif search_string == "DriverItem/DriverName":
         valueset = False
         driverobj.set_Driver_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
-    elif search_string ==  "DriverItem/DriverObjectAddress":
+    elif search_string == "DriverItem/DriverObjectAddress":
         valueset = False
         driverobj.set_Driver_Object_Address(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
-    elif search_string ==  "DriverItem/DriverStartIo":
+    elif search_string == "DriverItem/DriverStartIo":
         valueset = False
         driverobj.set_Driver_Start_IO(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
-    elif search_string ==  "DriverItem/DriverUnload":
+    elif search_string == "DriverItem/DriverUnload":
         valueset = False
         driverobj.set_Driver_Unload(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
-    elif search_string ==  "DriverItem/ImageBase":
+    elif search_string == "DriverItem/ImageBase":
         valueset = False
         driverobj.set_Image_Base(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))  
-    elif search_string ==  "DriverItem/ImageSize":
+    elif search_string == "DriverItem/ImageSize":
         valueset = False
         driverobj.set_Image_Size(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))  
-    elif search_string ==  "DriverItem/Md5sum":
+    elif search_string == "DriverItem/Md5sum":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/BaseAddress":
+    elif search_string == "DriverItem/PEInfo/BaseAddress":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/DetectedAnomalies/string":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/DetectedAnomalies/string":
+    elif search_string == "DriverItem/PEInfo/DetectedEntryPointSignature/Name":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/DetectedEntryPointSignature/Type":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/DigitalSignature/CertificateIssuer":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/DigitalSignature/CertificateSubject":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/DigitalSignature/Description":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/DigitalSignature/SignatureExists":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/DigitalSignature/SignatureVerified":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/EpJumpCodes/Depth":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/EpJumpCodes/Opcodes":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/Exports/ExportedFunctions/string":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/Exports/ExportsTimeStamp":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/Exports/DllName":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/DetectedEntryPointSignature/Name":
+    elif search_string == "DriverItem/PEInfo/Exports/NumberOfFunctions":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/DetectedEntryPointSignature/Type":
+    elif search_string == "DriverItem/PEInfo/Exports/NumberOfNames":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/ExtraneousBytes":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/ImportedModules/Module/ImportedFunctions/string":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/ImportedModules/Module/Name":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/PEChecksum/PEComputedAPI":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/PEChecksum/PEFileAPI":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/PEChecksum/PEFileRaw":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/PETimeStamp":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/Sections/Section/DetectedCharacteristics":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/Sections/Section/DetectedSignatureKeys/string":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/DigitalSignature/CertificateIssuer":
+    elif search_string == "DriverItem/PEInfo/Sections/Section/Entropy/CurveData/float":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/DigitalSignature/CertificateSubject":
+    elif search_string == "DriverItem/PEInfo/Sections/Section/Name":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/Sections/Section/SizeInBytes":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/DigitalSignature/Description":
+    elif search_string == "DriverItem/PEInfo/Sections/Section/Type":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/Subsystem":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/PEInfo/Type":
+        return createWinExecObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/Sha1sum":
+        return createFileObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/Sha256sum":
+        return createFileObj(search_string, content_string, condition)
+    elif search_string == "DriverItem/SignatureDescription":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/DigitalSignature/SignatureExists":
+    elif search_string == "DriverItem/SignatureExists":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/DigitalSignature/SignatureVerified":
+    elif search_string == "DriverItem/SignatureVerified":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/EpJumpCodes/Depth":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/EpJumpCodes/Opcodes":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Exports/ExportedFunctions/string":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Exports/ExportsTimeStamp":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Exports/DllName":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Exports/NumberOfFunctions":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Exports/NumberOfNames":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/ExtraneousBytes":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/ImportedModules/Module/ImportedFunctions/string":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/ImportedModules/Module/Name":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/PEChecksum/PEComputedAPI":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/PEChecksum/PEFileAPI":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/PEChecksum/PEFileRaw":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/PETimeStamp":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Sections/Section/DetectedCharacteristics":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Sections/Section/DetectedSignatureKeys/string":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Sections/Section/Entropy/CurveData/float":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Sections/Section/Name":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Sections/Section/SizeInBytes":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Sections/Section/Type":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Subsystem":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/PEInfo/Type":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/Sha1sum":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/Sha256sum":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/SignatureDescription":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/SignatureExists":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/SignatureVerified":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "DriverItem/StringList/string":
-        valueset = False
-        print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
+    elif search_string == "DriverItem/StringList/string":
+        return createFileObj(search_string, content_string, condition)
 
     if valueset:
         driverobj.set_xsi_type('WinDriverObj:WindowsDriverObjectType')
@@ -413,40 +390,48 @@ def createEmailObj(search_string, content_string, condition):
 
     #Assume the IOC indicator value can be mapped to a CybOx type
     valueset = True
+    
+    #Email attachments are a special case which must be referenced as RelatedObjects
+    #setup list (emailobject + relatedobject) return value in case indicator is email attachment
+    isAttachment = False
+    retVal = []
 
-    #Attachment is a special case which references a RelatedObject
     if search_string == "Email/Attachment/Content":
-        #FileObjectType content field?
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
     elif search_string == "Email/Attachment/MIMEType":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
     elif search_string == "Email/Attachment/Name":
-        #??? related_object?
+        isAttachment = True
         email_attachments = emailmessageobj.AttachmentsType()
         attachment = emailmessageobj.AttachmentReferenceType()
-        fleobj = fileobj.FileObjectType()
-        fleobj.set_xsi_type('FileObj:FileObjectType')
-        fleobj.set_File_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-        refid = fleobj.get_object_reference()
-        attachment.set_object_reference(refid)
+        relobj = core.RelatedObjectType()
+        fileattachobj = fileobj.FileObjectType()
+        fileattachobj.set_xsi_type('FileObj:FileObjectType')
+        fileattachobj.set_File_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        relobj.set_Properties(fileattachobj)
+        relobj.set_Relationship(common.ControlledVocabularyStringType(valueOf_='Received', xsi_type='cyboxVocabs:ObjectRelationshipVocab-1.0')) 
+        attachment.set_object_reference('FileObj')
         email_attachments.add_File(attachment)
-        custom = common.CustomPropertiesType()
-        custom.add_Property(fleobj)
-        emailobj.set_Custom_Properties(custom)
         emailobj.set_Attachments(email_attachments)
+        retVal.append(emailobj)
+        retVal.append(relobj)
     elif search_string == "Email/Attachment/SizeInBytes":
-        #??? related_object?
+        isAttachment = True
         email_attachments = emailmessageobj.AttachmentsType()
         attachment = emailmessageobj.AttachmentReferenceType()
-        fleobj = fileobj.FileObjectType()
-        fleobj.set_xsi_type('FileObj:FileObjectType')
-        fleobj.set_Size_In_Bytes(common.UnsignedLongObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-        refid = fleobj.get_object_reference()
-        attachment.set_object_reference(refid)
+        relobj = core.RelatedObjectType()
+        fileattachobj = fileobj.FileObjectType()
+        fileattachobj.set_xsi_type('FileObj:FileObjectType')
+        fileattachobj.set_Size_In_Bytes(common.UnsignedLongObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        relobj.set_Properties(fileattachobj)
+        relobj.set_Relationship(common.ControlledVocabularyStringType(valueOf_='Received', xsi_type='cyboxVocabs:ObjectRelationshipVocab-1.0')) 
+        attachment.set_object_reference('FileObj')
         email_attachments.add_File(attachment)
         emailobj.set_Attachments(email_attachments)
+        retVal.append(emailobj)
+        retVal.append(relobj)
     elif search_string == "Email/AttachmentCount":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
@@ -549,6 +534,9 @@ def createEmailObj(search_string, content_string, condition):
         emailobj.set_xsi_type('EmailMessageObj:EmailMessageObjectType')
     elif not valueset:
         emailobj = None
+    
+    if isAttachment:
+        return retVal
     
     return emailobj
 
@@ -668,14 +656,14 @@ def createFileObj(search_string, content_string, condition):
         return createWinFileObj(search_string, content_string, condition)
     elif search_string == "FileItem/SecurityType":
         return createWinFileObj(search_string, content_string, condition)
-    elif search_string == "FileItem/Sha1sum":
+    elif search_string == "FileItem/Sha1sum" or search_string == "DriverItem/Sha1sum":
         hashes = common.HashListType()
         sha1hash = common.HashType()
         sha1hash.set_Type(common.ControlledVocabularyStringType(valueOf_='SHA1', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
         sha1hash.set_Simple_Hash_Value(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         hashes.add_Hash(sha1hash)
         fleobj.set_Hashes(hashes)
-    elif search_string == "FileItem/Sha256sum":
+    elif search_string == "FileItem/Sha256sum" or search_string == "DriverItem/Sha1sum":
         hashes = common.HashListType()
         sha256hash = common.HashType()
         sha256hash.set_Type(common.ControlledVocabularyStringType(valueOf_='SHA256', xsi_type='cyboxVocabs:HashNameVocab-1.0'))
@@ -694,7 +682,7 @@ def createFileObj(search_string, content_string, condition):
         return createWinFileObj(search_string, content_string, condition)
     elif search_string == "FileItem/StreamList/Stream/SizeInBytes":
         return createWinFileObj(search_string, content_string, condition)
-    elif search_string == "FileItem/StringList/string":
+    elif search_string == "FileItem/StringList/string" or search_string == "DriverItem/StringList/string":
         extracted_features = common.ExtractedFeaturesType()
         strings = common.ExtractedStringsType()
         string  = common.ExtractedStringType()
@@ -712,8 +700,6 @@ def createFileObj(search_string, content_string, condition):
     
     return fleobj
 
-#signature_exists, etc are boolean; what if content_string is not bool value?
-
 def createHookObj(search_string, content_string, condition):
     #Create the hook object
     hookobject = winkernelhookobj.WindowsKernelHookObjectType()
@@ -721,55 +707,55 @@ def createHookObj(search_string, content_string, condition):
     #Assume the IOC indicator value can be mapped to a CybOx type
     valueset = True
 
-    if search_string ==  "HookItem/DigitalSignatureHooking/CertificateIssuer":
+    if search_string == "HookItem/DigitalSignatureHooking/CertificateIssuer":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.set_Certificate_Subject(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         hookobject.set_Digital_Signature_Hooking(digital_signature)
-    elif search_string ==  "HookItem/DigitalSignatureHooking/CertificateSubject":
+    elif search_string == "HookItem/DigitalSignatureHooking/CertificateSubject":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.set_Certificate_Subject(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         hookobject.set_Digital_Signature_Hooking(digital_signature)
-    elif search_string ==  "HookItem/DigitalSignatureHooking/Description":
+    elif search_string == "HookItem/DigitalSignatureHooking/Description":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.set_Signature_Description(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         hookobject.set_Digital_Signature_Hooking(digital_signature)
-    elif search_string ==  "HookItem/DigitalSignatureHooking/SignatureExists":
+    elif search_string == "HookItem/DigitalSignatureHooking/SignatureExists":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.signature_exists(content_string)
         hookobject.set_Digital_Signature_Hooking(digital_signature)
-    elif search_string ==  "HookItem/DigitalSignatureHooking/SignatureVerified":
+    elif search_string == "HookItem/DigitalSignatureHooking/SignatureVerified":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.signature_verified(content_string)
         hookobject.set_Digital_Signature_Hooking(digital_signature)
-    elif search_string ==  "HookItem/DigitalSignatureHooked/CertificateIssuer":
+    elif search_string == "HookItem/DigitalSignatureHooked/CertificateIssuer":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.set_Certificate_Subject(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         hookobject.set_Digital_Signature_Hooked(digital_signature)
-    elif search_string ==  "HookItem/DigitalSignatureHooked/CertificateSubject":
+    elif search_string == "HookItem/DigitalSignatureHooked/CertificateSubject":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.set_Certificate_Subject(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         hookobject.set_Digital_Signature_Hooked(digital_signature)
-    elif search_string ==  "HookItem/DigitalSignatureHooked/Description":
+    elif search_string == "HookItem/DigitalSignatureHooked/Description":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.set_Signature_Description(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         hookobject.set_Digital_Signature_Hooked(digital_signature)
-    elif search_string ==  "HookItem/DigitalSignatureHooked/SignatureExists":
+    elif search_string == "HookItem/DigitalSignatureHooked/SignatureExists":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.signature_exists(content_string)
         hookobject.set_Digital_Signature_Hooked(digital_signature)
-    elif search_string ==  "HookItem/DigitalSignatureHooked/SignatureVerified":
+    elif search_string == "HookItem/DigitalSignatureHooked/SignatureVerified":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.signature_verified(content_string)
         hookobject.set_Digital_Signature_Hooked(digital_signature)
-    elif search_string ==  "HookItem/HookDescription":
+    elif search_string == "HookItem/HookDescription":
         hookobject.set_Hook_Description(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string ==  "HookItem/HookedFunction":
+    elif search_string == "HookItem/HookedFunction":
         hookobject.set_Hooked_Function(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string ==  "HookItem/HookedModule":
+    elif search_string == "HookItem/HookedModule":
         hookobject.set_Hooked_Module(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string ==  "HookItem/HookingAddress":
+    elif search_string == "HookItem/HookingAddress":
         hookobject.set_Hooking_Address(process_numerical_value(common.UnsignedLongObjectPropertyType(datatype=None), content_string, condition))
-    elif search_string ==  "HookItem/HookingModule":
+    elif search_string == "HookItem/HookingModule":
         hookobject.set_Hooking_Module(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
 
     if valueset:
@@ -971,7 +957,7 @@ def createPortObj(search_string, content_string, condition):
     elif search_string == "PortItem/process":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string ==  "PortItem/protocol":
+    elif search_string == "PortItem/protocol":
         protocol = portobj.Layer4ProtocolType()
         protocol.set_datatype('string')
         protocol.set_valueOf_(process_string_value(content_string))
@@ -1139,17 +1125,17 @@ def createRegObj(search_string, content_string, condition):
     #Assume the IOC indicator value can be mapped to a CybOx type
     valueset = True
 
-    if search_string ==  "RegistryItem/Hive":
+    if search_string == "RegistryItem/Hive":
         regobj.set_Hive(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string ==  "RegistryItem/KeyPath":
+    elif search_string == "RegistryItem/KeyPath":
         regobj.set_Key(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string ==  "RegistryItem/Modified":
+    elif search_string == "RegistryItem/Modified":
         regobj.set_Modified_Time(common.DateTimeObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
-    elif search_string ==  "RegistryItem/NumSubKeys":
+    elif search_string == "RegistryItem/NumSubKeys":
         regobj.set_Number_Subkeys(process_numerical_value(common.UnsignedIntegerObjectPropertyType(datatype=None), content_string, condition))
-    elif search_string ==  "RegistryItem/NumValues":
+    elif search_string == "RegistryItem/NumValues":
         regobj.set_Number_Values(process_numerical_value(common.UnsignedIntegerObjectPropertyType(datatype=None), content_string, condition))
-    elif search_string ==  "RegistryItem/Path":
+    elif search_string == "RegistryItem/Path":
         split_path = content_string.split('\\', 1)
         if any("HKEY_" in s for s in split_path):
             regobj.set_Hive(common.StringObjectPropertyType(datatype=None, condition='Equals', valueOf_=split_path[0]))
@@ -1157,7 +1143,7 @@ def createRegObj(search_string, content_string, condition):
         else:
             regobj.set_Key(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
         
-    elif search_string ==  "RegistryItem/ReportedLengthInBytes":
+    elif search_string == "RegistryItem/ReportedLengthInBytes":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
     elif search_string == "RegistryItem/Text" or search_string == "RegistryItem/Value":
@@ -1166,15 +1152,15 @@ def createRegObj(search_string, content_string, condition):
         value.set_Data(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         values.add_Value(value)
         regobj.set_Values(values)
-    elif search_string ==  "RegistryItem/Type":
+    elif search_string == "RegistryItem/Type":
         values = winregistrykeyobj.RegistryValuesType()
         value = winregistrykeyobj.RegistryValueType()
         value.set_Datatype(common.StringObjectPropertyType(datatype='string', condition=condition, valueOf_=process_string_value(content_string)))
         values.add_Value(value)
         regobj.set_Values(values)
-    elif search_string ==  "RegistryItem/Username":
+    elif search_string == "RegistryItem/Username":
         regobj.set_Creator_Username(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string ==  "RegistryItem/ValueName":
+    elif search_string == "RegistryItem/ValueName":
         values = winregistrykeyobj.RegistryValuesType()
         value = winregistrykeyobj.RegistryValueType()
         value.set_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
@@ -1489,33 +1475,33 @@ def createUserObj(search_string, content_string, condition):
     #Assume the IOC indicator value can be mapped to a CybOx type
     valueset = True
         
-    if search_string ==  "UserItem/SecurityID":
+    if search_string == "UserItem/SecurityID":
         return createWinUserObj(search_string, content_string, condition)
-    elif search_string ==  "UserItem/SecurityType":
+    elif search_string == "UserItem/SecurityType":
         return createWinUserObj(search_string, content_string, condition)
-    elif search_string ==  "UserItem/Username":
+    elif search_string == "UserItem/Username":
         accountobj.set_Username(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string ==  "UserItem/description":
+    elif search_string == "UserItem/description":
         return createAccountObj(search_string, content_string, condition)
-    elif search_string ==  "UserItem/disabled":
+    elif search_string == "UserItem/disabled":
         return createAccountObj(search_string, content_string, condition)
-    elif search_string ==  "UserItem/fullname":
+    elif search_string == "UserItem/fullname":
         accountobj.set_Full_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string ==  "UserItem/grouplist/groupname":
+    elif search_string == "UserItem/grouplist/groupname":
         group_list = useraccountobj.GroupListType()
         group = winuseraccountobj.WindowsGroupType()
         group.set_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         group_list.add_Group(group)
         accountobj.set_Group_List(group_list)
-    elif search_string ==  "UserItem/homedirectory":
+    elif search_string == "UserItem/homedirectory":
         accountobj.set_Home_Directory(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string ==  "UserItem/lockedout":
+    elif search_string == "UserItem/lockedout":
         return createAccountObj(search_string, content_string, condition)
-    elif search_string ==  "UserItem/passwordrequired":
+    elif search_string == "UserItem/passwordrequired":
         accountobj.set_password_required(content_string)
-    elif search_string ==  "UserItem/scriptpath":
+    elif search_string == "UserItem/scriptpath":
         accountobj.set_Script_path(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string ==  "UserItem/userpasswordage":
+    elif search_string == "UserItem/userpasswordage":
         accountobj.set_User_Password_Age(common.DurationObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
 
     if valueset:
@@ -1682,7 +1668,7 @@ def createWinTaskObject(search_string, content_string, condition):
     elif search_string == "TaskItem/ActionList/Action/EmailReplyTo":
         actionlist = wintaskobj.TaskActionListType()
         action = wintaskobj.TaskActionType()
-        #no known base email reply-to indicator, so create the object here
+        #no base email reply-to indicator, , so (somewhat awkwardly) create the object here
         emailobj = emailmessageobj.EmailMessageObjectType()
         email_header = emailmessageobj.EmailHeaderType()
         email_replyto = addressobj.AddressObjectType()
@@ -1695,7 +1681,7 @@ def createWinTaskObject(search_string, content_string, condition):
     elif search_string == "TaskItem/ActionList/Action/EmailServer":
         actionlist = wintaskobj.TaskActionListType()
         action = wintaskobj.TaskActionType()
-        #no known base email server indicator, so create the object here
+        #no base email server indicator, so (somewhat awkwardly) create the object here
         emailobj = emailmessageobj.EmailMessageObjectType()
         emailobj.set_Email_Server(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         action.set_IEmailAction(emailobj)
@@ -1998,7 +1984,7 @@ def createWinExecObj(search_string, content_string, condition):
     #Assume the IOC indicator value can be mapped to a CybOx type
     valueset = True
 
-    if search_string == "FileItem/PEInfo/BaseAddress":
+    if search_string == "FileItem/PEInfo/BaseAddress" or search_string == "DriverItem/PEInfo/BaseAddress":
         pehead = winexecutablefileobj.PEHeadersType()
         opthead = winexecutablefileobj.PEOptionalHeaderType()
         opthead.set_Base_Of_Code(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
@@ -2007,7 +1993,7 @@ def createWinExecObj(search_string, content_string, condition):
     elif search_string == "FileItem/PEInfo/DetectedAnomalies/string":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string == "FileItem/PEInfo/DetectedEntryPointSignature/Name":
+    elif search_string == "FileItem/PEInfo/DetectedEntryPointSignature/Name" or search_string == "DriverItem/PEInfo/DetectedEntryPointSignature/Name":
         packerlist = fileobj.PackerListType()
         packer = fileobj.PackerType()
         epsiglist = fileobj.EntryPointSignatureListType()
@@ -2017,7 +2003,7 @@ def createWinExecObj(search_string, content_string, condition):
         packer.set_Detected_Entrypoint_Signatures(epsiglist)
         packerlist.add_Packer(packer)
         winexecobj.set_Packer_List(packerlist)
-    elif search_string == "FileItem/PEInfo/DetectedEntryPointSignature/Type":
+    elif search_string == "FileItem/PEInfo/DetectedEntryPointSignature/Type" or search_string == "DriverItem/PEInfo/DetectedEntryPointSignature/Type":
         packerlist = fileobj.PackerListType()
         packer = fileobj.PackerType()
         epsiglist = fileobj.EntryPointSignatureListType()
@@ -2027,27 +2013,27 @@ def createWinExecObj(search_string, content_string, condition):
         packer.set_Detected_Entrypoint_Signatures(epsiglist)
         packerlist.add_Packer(packer)
         winexecobj.set_Packer_List(packerlist)
-    elif search_string == "FileItem/PEInfo/DigitalSignature/CertificateIssuer":
+    elif search_string == "FileItem/PEInfo/DigitalSignature/CertificateIssuer" or search_string == "DriverItem/PEInfo/DigitalSignature/CertificateIssuer":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.set_Certificate_Issuer(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         winexecobj.set_Digital_Signature(digital_signature)
-    elif search_string == "FileItem/PEInfo/DigitalSignature/CertificateSubject":
+    elif search_string == "FileItem/PEInfo/DigitalSignature/CertificateSubject" or search_string == "DriverItem/PEInfo/DigitalSignature/CertificateSubject":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.set_Certificate_Subject(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         winexecobj.set_Digital_Signature(digital_signature)
-    elif search_string == "FileItem/PEInfo/DigitalSignature/Description":
+    elif search_string == "FileItem/PEInfo/DigitalSignature/Description" or search_string == "DriverItem/PEInfo/DigitalSignature/Description":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.set_Signature_Description(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         winexecobj.set_Digital_Signature(digital_signature)
-    elif search_string == "FileItem/PEInfo/DigitalSignature/SignatureExists":
+    elif search_string == "FileItem/PEInfo/DigitalSignature/SignatureExists" or search_string == "DriverItem/PEInfo/DigitalSignature/SignatureExists":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.set_signature_exists(content_string)
         winexecobj.set_Digital_Signature(digital_signature)
-    elif search_string == "FileItem/PEInfo/DigitalSignature/SignatureVerified":
+    elif search_string == "FileItem/PEInfo/DigitalSignature/SignatureVerified" or search_string == "DriverItem/PEInfo/DigitalSignature/SignatureVerified":
         digital_signature = common.DigitalSignatureInfoType()
         digital_signature.set_signature_verified(content_string)
         winexecobj.set_Digital_Signature(digital_signature)
-    elif search_string == "FileItem/PEInfo/EpJumpCodes/Depth":
+    elif search_string == "FileItem/PEInfo/EpJumpCodes/Depth" or search_string == "DriverItem/PEInfo/EpJumpCodes/Depth":
         packerlist = fileobj.PackerListType()
         packer = fileobj.PackerType()
         epjumpcode = fileobj.EPJumpCodeType()
@@ -2055,7 +2041,7 @@ def createWinExecObj(search_string, content_string, condition):
         packer.set_EP_Jump_Codes(epjumpcode)
         packerlist.add_Packer(packer)
         winexecobj.set_Packer_List(packerlist)
-    elif search_string == "FileItem/PEInfo/EpJumpCodes/Opcodes":
+    elif search_string == "FileItem/PEInfo/EpJumpCodes/Opcodes" or search_string == "DriverItem/PEInfo/EpJumpCodes/Opcodes":
         packerlist = fileobj.PackerListType()
         packer = fileobj.PackerType()
         epjumpcode = fileobj.EPJumpCodeType()
@@ -2066,7 +2052,7 @@ def createWinExecObj(search_string, content_string, condition):
     elif search_string == "FileItem/PEInfo/Exports/DllName":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string == "FileItem/PEInfo/Exports/ExportedFunctions/string":
+    elif search_string == "FileItem/PEInfo/Exports/ExportedFunctions/string" or search_string == "DriverItem/PEInfo/Exports/ExportedFunctions/string":
         exports = winexecutablefileobj.PEExportsType()
         exportfunlist = winexecutablefileobj.PEExportedFunctionsType()
         exportfun = winexecutablefileobj.PEExportedFunctionType()
@@ -2074,20 +2060,20 @@ def createWinExecObj(search_string, content_string, condition):
         exportfunlist.add_Exported_Function(exportfun)
         exports.set_Exported_Functions(exportfunlist)
         winexecobj.set_Exports(exports)
-    elif search_string == "FileItem/PEInfo/Exports/ExportsTimeStamp":
+    elif search_string == "FileItem/PEInfo/Exports/ExportsTimeStamp" or search_string == "DriverItem/PEInfo/Exports/ExportsTimeStamp":
         exports = winexecutablefileobj.PEExportsType()
         exports.set_Exports_Time_Stamp(common.DateTimeObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
         winexecobj.set_Exports(exports)
     elif search_string == "FileItem/PEInfo/Exports/NumberOfFunctions":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string == "FileItem/PEInfo/Exports/NumberOfNames":
+    elif search_string == "FileItem/PEInfo/Exports/NumberOfNames" or search_string == "DriverItem/PEInfo/Exports/NumberOfNames":
         exports = winexecutablefileobj.PEExportsType()
         exports.set_Number_Of_Names(process_numerical_value(common.IntegerObjectPropertyType(datatype=None), content_string, condition))
         winexecobj.set_Exports(exports)
-    elif search_string == "FileItem/PEInfo/ExtraneousBytes":
+    elif search_string == "FileItem/PEInfo/ExtraneousBytes" or search_string == "DriverItem/PEInfo/ExtraneousBytes":
         winexecobj.set_Extraneous_Bytes(process_numerical_value(common.IntegerObjectPropertyType(datatype=None), content_string, condition))
-    elif search_string == "FileItem/PEInfo/ImportedModules/Module/ImportedFunctions/string":
+    elif search_string == "FileItem/PEInfo/ImportedModules/Module/ImportedFunctions/string" or search_string == "DriverItem/PEInfo/ImportedModules/Module/ImportedFunctions/string":
         imports = winexecutablefileobj.PEImportListType()
         peimport = winexecutablefileobj.PEImportType()
         importfunlist = winexecutablefileobj.PEImportedFunctionsType()
@@ -2097,7 +2083,7 @@ def createWinExecObj(search_string, content_string, condition):
         peimport.set_Imported_Functions(importfunlist)
         imports.add_Import(peimport)
         winexecobj.set_Imports(imports)
-    elif search_string == "FileItem/PEInfo/ImportedModules/Module/Name":
+    elif search_string == "FileItem/PEInfo/ImportedModules/Module/Name" or search_string == "DriverItem/PEInfo/ImportedModules/Module/Name":
         imports = winexecutablefileobj.PEImportListType()
         peimport = winexecutablefileobj.PEImportType()
         peimport.set_File_Name(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
@@ -2106,19 +2092,19 @@ def createWinExecObj(search_string, content_string, condition):
     elif search_string == "FileItem/PEInfo/ImportedModules/Module/NumberOfFunctions":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string == "FileItem/PEInfo/PEChecksum/PEComputedAPI":
+    elif search_string == "FileItem/PEInfo/PEChecksum/PEComputedAPI" or search_string == "DriverItem/PEInfo/PEChecksum/PEComputedAPI":
         checksum = winexecutablefileobj.PEChecksumType()
         checksum.set_PE_Computed_API(process_numerical_value(common.LongObjectPropertyType(datatype=None), content_string, condition))
         winexecobj.set_PE_Checksum(checksum)
-    elif search_string == "FileItem/PEInfo/PEChecksum/PEFileAPI":
+    elif search_string == "FileItem/PEInfo/PEChecksum/PEFileAPI" or search_string == "DriverItem/PEInfo/PEChecksum/PEFileAPI":
         checksum = winexecutablefileobj.PEChecksumType()
         checksum.set_PE_File_API(process_numerical_value(common.LongObjectPropertyType(datatype=None), content_string, condition))
         winexecobj.set_PE_Checksum(checksum)
-    elif search_string == "FileItem/PEInfo/PEChecksum/PEFileRaw":
+    elif search_string == "FileItem/PEInfo/PEChecksum/PEFileRaw" or search_string == "DriverItem/PEInfo/PEChecksum/PEFileRaw":
         checksum = winexecutablefileobj.PEChecksumType()
         checksum.set_PE_File_Raw(process_numerical_value(common.LongObjectPropertyType(datatype=None), content_string, condition))
         winexecobj.set_PE_Checksum(checksum)
-    elif search_string == "FileItem/PEInfo/PETimeStamp":
+    elif search_string == "FileItem/PEInfo/PETimeStamp" or search_string == "DriverItem/PEInfo/PETimeStamp":
         headers = winexecutablefileobj.PEHeadersType()
         fileheader = winexecutablefileobj.PEFileHeaderType()
         fileheader.set_Time_Date_Stamp(common.DateTimeObjectPropertyType(datatype=None, condition=condition, valueOf_=content_string))
@@ -2151,7 +2137,7 @@ def createWinExecObj(search_string, content_string, condition):
     elif search_string == "FileItem/PEInfo/Sections/ActualNumberOfSections":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string == "FileItem/PEInfo/Sections/Section/DetectedCharacteristics":
+    elif search_string == "FileItem/PEInfo/Sections/Section/DetectedCharacteristics" or search_string == "DriverItem/PEInfo/Sections/Section/DetectedCharacteristics":
         seclist = winexecutablefileobj.PESectionListType()
         sec = winexecutablefileobj.PESectionType()
         sechdr = winexecutablefileobj.PESectionHeaderStructType()
@@ -2165,7 +2151,7 @@ def createWinExecObj(search_string, content_string, condition):
     elif search_string == "FileItem/PEInfo/Sections/Section/Entropy/CurveData/float":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string == "FileItem/PEInfo/Sections/Section/Name":
+    elif search_string == "FileItem/PEInfo/Sections/Section/Name" or search_string == "DriverItem/PEInfo/Sections/Section/Name":
         seclist = winexecutablefileobj.PESectionListType()
         sec = winexecutablefileobj.PESectionType()
         sechdr = winexecutablefileobj.PESectionHeaderStructType()
@@ -2176,19 +2162,19 @@ def createWinExecObj(search_string, content_string, condition):
     elif search_string == "FileItem/PEInfo/Sections/Section/SizeInBytes":
         valueset = False
         print 'encountered IOC term {}, which does not currently map to CybOX'.format(search_string)
-    elif search_string == "FileItem/PEInfo/Sections/Section/Type":
+    elif search_string == "FileItem/PEInfo/Sections/Section/Type" or search_string == "DriverItem/PEInfo/Sections/Section/Type":
         seclist = winexecutablefileobj.PESectionListType()
         sec = winexecutablefileobj.PESectionType()
         sec.set_Type(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
         seclist.add_Section(sec)
         winexecobj.set_Sections(seclist)
-    elif search_string == "FileItem/PEInfo/Subsystem":
+    elif search_string == "FileItem/PEInfo/Subsystem" or search_string == "DriverItem/PEInfo/Subsystem":
         pehead = winexecutablefileobj.PEHeadersType()
         opthead = winexecutablefileobj.PEOptionalHeaderType()
         opthead.set_Subsystem(process_numerical_value(common.HexBinaryObjectPropertyType(datatype=None), content_string, condition))
         pehead.set_Optional_Header(opthead)
         winexecobj.set_Headers(pehead)
-    elif search_string == "FileItem/PEInfo/Type":
+    elif search_string == "FileItem/PEInfo/Type" or search_string == "DriverItem/PEInfo/Type":
         petype = winexecutablefileobj.PEType()
         petype.set_valueOf_(process_string_value(content_string))
         petype.set_datatype('string')
@@ -2286,9 +2272,9 @@ def createWinUserObj(search_string, content_string, condition):
     #Assume the IOC indicator value can be mapped to a CybOx type
     valueset = True
     
-    if search_string ==  "UserItem/SecurityID":
+    if search_string == "UserItem/SecurityID":
         accountobj.set_Security_ID(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string ==  "UserItem/SecurityType":
+    elif search_string == "UserItem/SecurityType":
         accountobj.set_Security_Type(common.StringObjectPropertyType(datatype='string', condition=condition, valueOf_=process_string_value(content_string)))
 
     if valueset:
@@ -2305,11 +2291,11 @@ def createAccountObj(search_string, content_string, condition):
     #Assume the IOC indicator value can be mapped to a CybOx type
     valueset = True
 
-    if search_string ==  "UserItem/description":
+    if search_string == "UserItem/description":
         acctobj.set_Description(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
-    elif search_string ==  "UserItem/disabled":
+    elif search_string == "UserItem/disabled":
         acctobj.set_disabled(content_string)
-    elif search_string ==  "UserItem/lockedout":
+    elif search_string == "UserItem/lockedout":
         acctobj.set_locked_out(content_string)
 
     if valueset:
@@ -2326,7 +2312,7 @@ def createWinMemoryPageObj(search_string, content_string, condition):
     #Assume the IOC indicator value can be mapped to a CybOx type
     valueset = True
 
-    if search_string ==  "ProcessItem/SectionList/MemorySection/Protection":
+    if search_string == "ProcessItem/SectionList/MemorySection/Protection":
         wmpobj.set_Protect(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
 
     if valueset:

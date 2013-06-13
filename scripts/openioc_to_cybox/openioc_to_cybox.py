@@ -63,6 +63,13 @@ def process_indicator_item(indicator_item, observables = None, indicatoritem_dic
     condition = indicator_item.get_condition()
 
     properties = ioc_observable.createObj(search_string, content_string, map_condition_keywords(condition))
+    relatedobj = None
+    
+    #check if createObj returned only the expected object, or a list including a RelatedObject
+    if type(properties) is list:
+        relatedobj = properties[1] 
+        properties = properties[0]
+        
     if properties != None:
         if observables != None:
             id_string = ''
@@ -72,8 +79,14 @@ def process_indicator_item(indicator_item, observables = None, indicatoritem_dic
                 id_string = 'openioc:indicator-item-' + generate_observable_id()
                 indicatoritem_dict[get_indicatoritem_string(indicator_item)] = id_string
             observable = cybox_binding.ObservableType(id=id_string)
-            observable.set_Object(cybox_binding.ObjectType(Properties=properties))
+            cyObject = cybox_binding.ObjectType(Properties=properties)
+            observable.set_Object(cyObject)
             observables.add_Observable(observable)
+            if relatedobj != None:
+                roType = cybox_binding.RelatedObjectsType()
+                roType.add_Related_Object(relatedobj)
+                cyObject.set_Related_Objects(roType)
+
         return True
     else:
         if verbose_mode:
