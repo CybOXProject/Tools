@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-CybOX XML to HTML transform v1.1
-Compatible with CybOX v2.0 draft
+  Copyright (c) 2013 – The MITRE Corporation
+  All rights reserved. See LICENSE.txt for complete terms.
+ -->
+<!--
+CybOX XML to HTML transform v2.0beta1
+Compatible with CybOX v2.0
 
-Updated 2013-06-01
+This is an xslt to transform a cybox 2.0 document of observables into html for
+easy viewing.  The series of observables are turned into collapsible elements
+on the screen.  Details about each observable's contents are displayed in a
+format representing the nested structure of the original document.
+
+Below the main observable, Object, Event, and Observable_Composition are
+displayed.  For composite observables, the nested structure of the composition
+and the logical relationships is displayed via nested tables with operators
+("and" and "or) on the left and then a series of component expressions on rows
+on the right.
+
+Any time objects are referred to by reference, a clickable "link" is displayed
+in the output html.  When the user clicks on the link, the target will be
+scrolled to and highlighted on the screen with a red background.
+
+This is a work in progress.  Feedback is most welcome!
+
+requirements:
+ - XSLT 2.0 engine (this has been tested with Saxon 9.5)
+ - a CybOX 2.0 input xml document
+
+Updated 2013-06-13
 mcoarr@mitre.org
 
 Updated 9/11/2012
@@ -46,6 +71,12 @@ ikirillov@mitre.org
 <xsl:output method="html" omit-xml-declaration="yes" indent="yes" media-type="text/html" version="4.0" />
    <xsl:key name="observableID" match="cybox:Observable" use="@id"/>
     
+    <!--
+      This is the main template that sets up the html page that sets up the
+      html structure, includes the base css and javascript, and adds the
+      content for the metadata summary table up top and the heading and
+      surrounding content for the Observables table.
+    --> 
     <xsl:template match="/">
             <html>
                <head>
@@ -419,6 +450,13 @@ ikirillov@mitre.org
 var currentTarget = null;
 var previousTarget = null;
 
+/*
+  when a user clicks on a idref link, find, scroll to, and highlight the
+  target element.  this is usually an object, event, observable, related
+  object, or associated object.
+  
+  the highlighting is done via css transitions.
+*/
 function highlightTarget(targetId)
 {
     var targetElement = document.getElementById(targetId);
@@ -433,6 +471,10 @@ function highlightTarget(targetId)
     targetElement.setAttribute("class", "relatedTarget");
 }
 
+/*
+  When a user clicks on an idref link, this function will find that referenced
+  element and expand the parent Observable table row (if it's collapsed).
+*/
 function findAndExpandTarget(targetElement)
 {
     var currentAncestor = targetElement.parentNode;
@@ -450,11 +492,19 @@ function findAndExpandTarget(targetElement)
     }
 }
 
+/*
+  When the page is loaded, perform any required initialization.  For right now
+  this only includes validating the "idref" links and marking those that don't
+  resolve as "external".
+*/
 function initialize()
 {
   validate();
 }
 
+/*
+Validate the "idref" links and marking those that don't resolve as "external".
+*/
 function validate()
 {
   console.log("validating BEGIN...");
@@ -508,6 +558,14 @@ function validate()
             </html>
     </xsl:template>
     
+    <!--
+      draw the main table on the page that represents the list of Observables.
+      these are the elements that are directly below the root element of the page.
+      
+      each observable will generate two rows in the table.  the first one is the
+      heading that's always visible and is clickable to expand/collapse the
+      second row.
+    -->
     <xsl:template name="processObservables">
       <xsl:for-each select="cybox:Observables">        
           <div id="observablesspandiv" style="font-weight:bold; margin:5px; color:#BD9C8C;">
@@ -538,6 +596,22 @@ function validate()
         </xsl:for-each>
     </xsl:template>
     
+    <!--
+      This is the template that produces the rows in the main table (the
+      observables table) on the page.  These are the observables just below the
+      root element of the document.
+      
+      Each observable produces two rows.  The first row is the heading and is
+      clickable to expand/collapse the second row with all the details.
+      
+      The heading row contains the observable id and the observable type.
+      The type is one of the following categories:
+       - "Compostion"
+       - "Event"
+       - Object (the value of the cybox:Properties/xsi:type will be used)
+       - "Object (no properties set)"
+       - "Other"
+    -->
     <xsl:template name="processObservable">
         <xsl:param name="evenOrOdd" />
         <xsl:variable name="contentVar" select="concat(count(ancestor::node()), '00000000', count(preceding::node()))"/>
@@ -558,7 +632,6 @@ function validate()
                 </xsl:when>
                 <xsl:when test="cybox:Object/cybox:Properties/@xsi:type">
                     <xsl:value-of select="fn:local-name-from-QName(fn:resolve-QName(cybox:Object/cybox:Properties/@xsi:type, cybox:Object/cybox:Properties))" />
-                    <!-- <xsl:value-of select="fn:replace('Matthew E. Coarr', 'Matthew', 'Matt')" /> -->
                 </xsl:when>
                 <xsl:when test="cybox:Object/cybox:Properties/@xsi:type and not(cybox:Object/cybox:Properties/@xsi:type)">
                     Object (no properties set)
@@ -642,6 +715,15 @@ function validate()
         </TR>
     </xsl:template>
     
+    <!--
+      Produce the details for an observable composition.
+      
+      This creates a table with a big cell on the left that includes the binary
+      operator ("and" or "or").  Then on the right is a sequence of rows
+      representing the expressions that are joined by the operator.
+      
+      This is visualized with colored backgrounds via css.
+    -->
     <xsl:template name="processObservableCompositionSimple">
         <table class="compositionTableOperator">
             <colgroup>
@@ -681,6 +763,15 @@ function validate()
         </table> 
     </xsl:template>
     
+    <!--
+      This generates a "link" for an idref.  The link is really just text with
+      an onclick event listener that calls highlightTarget().  
+      
+      When the user clicks the link, the referenced object (any element) will
+      be found, it's parent top-level observable will be expanded, and the
+      referenced object will be highlighted (the background will flash red a
+      few times via css transitions).
+    -->
     <xsl:template name="clickableIdref">
         <xsl:param name="type"/>
         <xsl:param name="idref"/>
@@ -693,6 +784,15 @@ function validate()
         )
     </xsl:template>
 
+    <!--
+      This template formats the output for an observable that is contained
+      within an observable composition.
+      
+      If it's an idref link, it will produce a clickable "link".
+      
+      If it's actual content, it will call the template
+      processObservableCompositionSimple to print it out.
+    -->
     <xsl:template name="processObservableInObservableCompositionSimple">
         <xsl:if test="@idref">
             <div class="foreignObservablePointer">
@@ -712,9 +812,16 @@ function validate()
     
     
     
-    
+    <!--
+      Simple template to print out the xsi:type in parenthesis.  This is used
+      in several places including printing out Actions and cybox:Properties.
+    -->
     <xsl:template match="@xsi:type"> (<xsl:value-of select="."/>)</xsl:template>
     
+    <!--
+      template to print out the list of related objects (prints the heading
+      and call the template to print out actual related object objects).
+    -->
     <xsl:template match="cybox:Related_Objects">
         <div class="container relatedObjects">
             <div class="heading relatedObjects">
@@ -726,6 +833,18 @@ function validate()
         </div>
     </xsl:template>
 
+    <!--
+      This is the consolidated Swiss Army knife template that prints object
+      type data.
+      
+      This prints out objects that are:
+       * Object
+       * Event
+       * Related Object
+       * Associated Object
+       
+       It also prints out either original inline objects (with an id) or object references (with and idref).
+    -->
     <xsl:template match="cybox:Object|cybox:Event|cybox:Related_Object|cybox:Associated_Object">
         <xsl:param name="isObservableDirectChild" select="fn:true()" />
         <xsl:variable name="localName" select="local-name()"/>
@@ -735,7 +854,15 @@ function validate()
         
 
         <div class="container {$identifierName}Container {$identifierName}">
+            <!--
+              The following is important - it makes this object "linkable" with
+              an id. This means the idref links can be resolved to show linked
+              objects.  This is the object that will be highlighted when a link
+              is clicked.
+            -->
             <xsl:if test="@id"><xsl:attribute name="id" select="@id"/></xsl:if>
+            
+            <!-- print out the actual object heading (name and xsi type) -->
             <div class="heading {$identifierName}Heading {$identifierName}">
                 <xsl:value-of select="$headingName"/>
                 <xsl:apply-templates select="@xsi:type"/>
@@ -744,6 +871,11 @@ function validate()
                 <xsl:if test="@type">
                     <div id="object_type_label"><xsl:value-of select="@type"/> Object </div>
                 </xsl:if>
+                
+                <!--
+                  If this "object" is an object reference (an "idref link")
+                  print out the link that will jump to the original object.
+                -->
                 <xsl:if test="@idref">
                     <div>
                         <xsl:call-template name="clickableIdref">
@@ -752,17 +884,31 @@ function validate()
                         </xsl:call-template>
                     </div>
                 </xsl:if>
+                
+                <!-- If this is a related object, we need to print out how this object is related -->
                 <xsl:if test="cybox:Relationship">
-                    <div>
+                    <div class="relationship">
                         via relationship: <xsl:value-of select="cybox:Relationship/text()"/>
                     </div>
                 </xsl:if>
+                
+                <!-- If this is a associated object, we need to print out how this object is related -->
+                <xsl:if test="cybox:Association_Type">
+                    <div class="associationType">
+                        association type: <xsl:value-of select="cybox:Association_Type/text()"/>
+                    </div>
+                </xsl:if>
+                
+                <!-- Print the description if one is available (often they are not) -->
                 <xsl:if test="cybox:Description">
                     <div class="{$identifierName}Description description">
                         description: <xsl:value-of select="cybox:Description"/>
                     </div>
                 </xsl:if>
                 
+                <!--
+                  If this is an Event, we need to print out the list of Actions
+                -->
                 <xsl:if test="cybox:Actions/cybox:Action">
                     <div class="container">
                         <div class="heading actions">Actions</div>
@@ -774,20 +920,31 @@ function validate()
                     </div>
                 </xsl:if>
 
+                <!-- print out defined object type information if it's available -->
                 <xsl:if test="cybox:Defined_Object/@xsi:type">
                     <div id="defined_object_type_label">defined object type: <xsl:value-of select="cybox:Defined_Object/@xsi:type"/></div>
                 </xsl:if>
 
+                <!--
+                  print out the all-important cybox:Properties.  Lots of details in here!!
+                -->
                 <div>
-                    <xsl:for-each select="cybox:Properties">
-                        <xsl:call-template name="processProperties"/>
-                    </xsl:for-each>
+                    <xsl:apply-templates select="cybox:Properties" />
                 </div>
+                
+                <!--
+                  Associated Objects need to have any Related Objects printed out
+                -->
                 <xsl:apply-templates select="cybox:Related_Objects"/>
             </div>
         </div>
     </xsl:template>
     
+    <!--
+      Print the details of an action.
+      
+      TODO: Merge this into the master object template.
+    -->
     <xsl:template name="processAction">
         <div class="container action">
             <div class="heading action">ACTION <xsl:value-of select="cybox:Type/text()" /> (xsi type: <xsl:value-of select="cybox:Type/@xsi:type" />)</div>
@@ -802,10 +959,19 @@ function validate()
         </div>
     </xsl:template>
     
-    <xsl:template name="processProperties">
-        <xsl:apply-templates select="." />
-    </xsl:template>
-
+    <!--
+      Print out the details of cybox:Properties.
+      
+      For each property, print out the name, value, and constrains.
+      
+      Normally, the name is the element local name, the value is the text value
+      of the context property element (all its descendent text nodes
+      concatenated together), and the constrains is a list of all the
+      attributes on the properties element (the element that is a direct
+      child of cybox:Properties).
+      
+      This is customizable by writing custom templates for specific properties.
+    -->
     <xsl:template match="cybox:Properties">
         <fieldset>
             <legend>cybox properties (type: <xsl:value-of select="@xsi:type"/>)</legend>
@@ -828,6 +994,13 @@ function validate()
         </fieldset>
     </xsl:template>
     
+    <!--
+      Template to simplify the output of Raw_Artifact (which is often a very
+      long CDATA encoded value).
+      
+      This will show the first and last 10 characters of the value and the
+      string length.
+    -->
     <xsl:template match="ArtifactObj:Raw_Artifact">
         raw data omitted ["<xsl:value-of select='substring(text(), 1, 10)'/> ... <xsl:value-of select='substring(text(), string-length(text())-10, 10)'/>"; length: <xsl:value-of select="string-length()"/>]
     </xsl:template>
@@ -847,20 +1020,34 @@ function validate()
         </xsl:if>
     </xsl:template>
     
+    <!--
+      Display email headers as a bulleted list.
+    -->
     <xsl:template match="EmailMessageObj:Header">
         <ul>
             <xsl:apply-templates/>
         </ul>
     </xsl:template>
-    
+
+    <!--
+      Individual email headers are showed as bullet items in an unordered list.
+      
+      Each header is prefixed with a "name" which is the element localname.
+    -->
     <xsl:template match="EmailMessageObj:Header/*">
         <li><xsl:value-of select="local-name()" />: <xsl:apply-templates/></li>
     </xsl:template>
     
+    <!--
+      Show email recipient and its category.
+    -->
     <xsl:template match="EmailMessageObj:Recipient">
         <xsl:apply-templates/> (category: <xsl:value-of select="@category"/>)
     </xsl:template>
     
+    <!--
+      Output idref style links for email File and Link cybox properties.
+    -->
     <xsl:template match="EmailMessageObj:File|EmailMessageObj:Link">
         <div class="emailDiv">
           <xsl:apply-templates/>
@@ -875,6 +1062,10 @@ function validate()
         </div>
     </xsl:template>
     
+    <!--
+      Show email raw headers wrapped in a div with a class that is css styled
+      to preserve wrapping in the original content.
+    -->
     <xsl:template match="EmailMessageObj:Raw_Header">
         <div class="verbatim">
             <xsl:value-of select="text()" />
