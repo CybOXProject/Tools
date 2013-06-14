@@ -242,8 +242,10 @@ def main():
             if observables != None:
                 observables.set_cybox_major_version('2')
                 observables.set_cybox_minor_version('0')
-            
-                observables.export(open(outfilename, 'w'), 0, namespacedef_='\n xmlns:openioc="http://openioc.org/"')
+                
+                outfile = open(outfilename, 'w')
+                outfile.write('<?xml version="1.0" encoding="utf-8"?>\n')
+                observables.export(outfile, 0, namespacedef_='\n xmlns:openioc="http://openioc.org/"')
 
                 if verbose_mode:
                     for indicator in skipped_indicators:
