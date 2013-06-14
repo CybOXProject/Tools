@@ -1,3 +1,6 @@
+# Copyright (c) 2013, The MITRE Corporation. All rights reserved.
+# See TERMS.txt for complete terms.
+
 #OpenIOC -> CybOX Translator
 #v0.2 BETA
 #Creates CybOX 2.0 objects from IOC indicator item components 
