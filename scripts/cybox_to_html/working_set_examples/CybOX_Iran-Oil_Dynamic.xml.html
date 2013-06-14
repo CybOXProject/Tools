@@ -341,6 +341,23 @@
                     {
                       empty-cells: show;
                     }
+                    
+                    .externalLinkWarning
+                    {
+                      font-weight: bold;
+                      color: red;
+                    }
+                    
+                    .inlineOrByReferenceLabel
+                    {
+                      font-style: italic!important;
+                      color: lightgray;
+                    }
+                    
+                    .contents
+                    {
+                      padding-left: 1em;
+                    }
                 </style><script type="text/javascript">
                     //Collapse functionality
                     function toggleDiv(divid, spanID)
@@ -415,7 +432,7 @@ function findAndExpandTarget(targetElement)
 */
 function initialize()
 {
-  validate();
+  //validate();
 }
 
 /*
@@ -433,8 +450,12 @@ function validate()
     if (target == null)
     {
       console.log("[" + i + "] id " + currentId + " is NOT found in current document (WARNING)");
-      var warningTextNode = document.createTextNode(" [external]");
-      currentLink.appendChild(warningTextNode);
+      var warningSpan = document.createElement("span");
+      warningSpan.setAttribute("class", "externalLinkWarning");
+      var warningTextNode = document.createTextNode("[external]");
+      warningSpan.appendChild(warningTextNode);
+      
+      currentLink.parentNode.insertBefore(warningSpan, null); 
       
     } else
     {
@@ -462,7 +483,7 @@ function validate()
                   <TD>2</TD>
                   <TD>0</TD>
                   <TD>CybOX_Iran-Oil_Dynamic.xml</TD>
-                  <TD>2013-06-13T16:11:03.606-04:00</TD>
+                  <TD>2013-06-14T14:07:00.572-04:00</TD>
                </TR>
             </table>
          </div>
@@ -508,7 +529,7 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container eventContainer event">
-                                                <div class="heading eventHeading event">EVENT</div>
+                                                <div class="heading eventHeading event"></div>
                                                 <div class="contents eventContents event">
                                                    <div class="eventDescription description">
                                                       description: Receive "Iran-Oil" attack campaign email message.
@@ -519,100 +540,112 @@ function validate()
                                                          <div class="container action">
                                                             <div class="heading action">ACTION Receive (xsi type: cyboxVocabs:ActionTypeVocab-1.0)</div>
                                                             <div class="contents action">
-                                                               <div class="container associatedObjectContainer associatedObject" id="example:Object-51359587-f201-4383-b032-5a64522fcd7d">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div class="associationType">
-                                                                        association type: Returned
-                                                                     </div>
-                                                                     <div>
-                                                                        <fieldset>
-                                                                           <legend>cybox properties (type: EmailMessageObj:EmailMessageObjectType)</legend>
-                                                                           <table>
-                                                                              <thead>
-                                                                                 <th>Name</th>
-                                                                                 <th>Value</th>
-                                                                                 <th>Constraints</th>
-                                                                              </thead>
-                                                                              <tr>
-                                                                                 <td>Header</td>
-                                                                                 <td>
-                                                                                    <ul>
-                                                                                       
-                                                                                       <li>To: 
+                                                               <div class="container associatedObjects">
+                                                                  <div class="heading associatedObjects">Associated Objects
+                                                                     
+                                                                  </div>
+                                                                  <div class="contents associatedObjects">
+                                                                     <div class="container associatedObjectContainer associatedObject" id="example:Object-51359587-f201-4383-b032-5a64522fcd7d">
+                                                                        <div class="heading associatedObjectHeading associatedObject">Returned ♢  EmailMessageObjectType ♢ <span class="inlineObject">
+                                                                              
+                                                                              
+                                                                              "example:Object-51359587-f201-4383-b032-5a64522fcd7d"
+                                                                              
+                                                                              </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Returned
+                                                                           </div>
+                                                                           <div>
+                                                                              <fieldset>
+                                                                                 <legend>cybox properties (type: EmailMessageObj:EmailMessageObjectType)</legend>
+                                                                                 <table>
+                                                                                    <thead>
+                                                                                       <th>Name</th>
+                                                                                       <th>Value</th>
+                                                                                       <th>Constraints</th>
+                                                                                    </thead>
+                                                                                    <tr>
+                                                                                       <td>Header</td>
+                                                                                       <td>
+                                                                                          <ul>
+                                                                                             
+                                                                                             <li>To: 
+                                                                                                
+                                                                                                william.abnett@gmail.com
+                                                                                                 (category: e-mail)
+                                                                                                
+                                                                                                
+                                                                                             </li>
+                                                                                             
+                                                                                             <li>From: 
+                                                                                                wmorrison89@gmail.com
+                                                                                                
+                                                                                             </li>
+                                                                                             
+                                                                                             <li>Subject: Iran's Oil and Nuclear Situation</li>
+                                                                                             
+                                                                                             <li>Date: 2012-03-02T07:42:24Z</li>
+                                                                                             
+                                                                                          </ul>
+                                                                                       </td>
+                                                                                       <td></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                       <td>Raw_Header</td>
+                                                                                       <td>
+                                                                                          <div class="verbatim">
+                                                                                             						Return-Path: &lt;wmorrison89@gmail.com&gt;
+                                                                                             Received-SPF: pass (google.com: domain of wmorrison89@gmail.com designates
+                                                                                             10.236.185.4 as permitted sender) client-ip=10.236.185.4;
+                                                                                             Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+                                                                                             wmorrison89@gmail.com designates 10.236.185.4 as permitted sender)
+                                                                                             smtp.mail=wmorrison89@gmail.com; dkim=pass header.i=wmorrison89@gmail.com
+                                                                                             Received: from mr.google.com ([10.236.185.4]) by 10.236.185.4 with SMTP
+                                                                                             id t4mr5301660yhm.129.1330692273662 (num_hops = 1); Fri, 02 Mar 2012
+                                                                                             04:44:33 -0800 (PST)
+                                                                                             MIME-Version: 1.0
+                                                                                             Received: by 10.236.185.4 with SMTP id t4mr4236541yhm.129.1330692265380;
+                                                                                             Fri,
+                                                                                             02 Mar 2012 04:44:25 -0800 (PST)
+                                                                                             Received: by 10.147.35.14 with HTTP; Fri, 2 Mar 2012 04:44:24 -0800 (PST)
+                                                                                             In-Reply-To:
+                                                                                             &lt;CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com&gt;
+                                                                                             References:
+                                                                                             &lt;CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com&gt;
+                                                                                             Date: Fri, 2 Mar 2012 07:44:24 -0500
+                                                                                             Message-ID:
+                                                                                             &lt;CADY6HTZ6oopY5v6WkYU81YcSQw3X124CK_Fx4jhnhUiU3Y9z6A@mail.gmail.com&gt;
+                                                                                             Subject: Iran's Oil and Nuclear Situation
+                                                                                             From: william abnett &lt;wmorrison89@gmail.com&gt;
+                                                                                             To: william.abnett &lt;william.abnett@gmail.com&gt;
+                                                                                             Content-Type: multipart/mixed; boundary="20cf303f67fac8928804ba41efd5"
+                                                                                             					
+                                                                                          </div>
+                                                                                       </td>
+                                                                                       <td>
+                                                                                          <div class="constraintItem">datatype: string</div>
+                                                                                       </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                       <td>Attachments</td>
+                                                                                       <td>
                                                                                           
-                                                                                          william.abnett@gmail.com
-                                                                                           (category: e-mail)
+                                                                                          <div class="emailDiv">
+                                                                                             [File]
+                                                                                             (object reference:
+                                                                                             <span class="highlightTargetLink" onclick="highlightTarget('cybox:guid-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7')">cybox:guid-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7</span>
+                                                                                             )
+                                                                                             
+                                                                                          </div>
                                                                                           
-                                                                                          
-                                                                                       </li>
-                                                                                       
-                                                                                       <li>From: 
-                                                                                          wmorrison89@gmail.com
-                                                                                          
-                                                                                       </li>
-                                                                                       
-                                                                                       <li>Subject: Iran's Oil and Nuclear Situation</li>
-                                                                                       
-                                                                                       <li>Date: 2012-03-02T07:42:24Z</li>
-                                                                                       
-                                                                                    </ul>
-                                                                                 </td>
-                                                                                 <td></td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                 <td>Raw_Header</td>
-                                                                                 <td>
-                                                                                    <div class="verbatim">
-                                                                                       						Return-Path: &lt;wmorrison89@gmail.com&gt;
-                                                                                       Received-SPF: pass (google.com: domain of wmorrison89@gmail.com designates
-                                                                                       10.236.185.4 as permitted sender) client-ip=10.236.185.4;
-                                                                                       Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-                                                                                       wmorrison89@gmail.com designates 10.236.185.4 as permitted sender)
-                                                                                       smtp.mail=wmorrison89@gmail.com; dkim=pass header.i=wmorrison89@gmail.com
-                                                                                       Received: from mr.google.com ([10.236.185.4]) by 10.236.185.4 with SMTP
-                                                                                       id t4mr5301660yhm.129.1330692273662 (num_hops = 1); Fri, 02 Mar 2012
-                                                                                       04:44:33 -0800 (PST)
-                                                                                       MIME-Version: 1.0
-                                                                                       Received: by 10.236.185.4 with SMTP id t4mr4236541yhm.129.1330692265380;
-                                                                                       Fri,
-                                                                                       02 Mar 2012 04:44:25 -0800 (PST)
-                                                                                       Received: by 10.147.35.14 with HTTP; Fri, 2 Mar 2012 04:44:24 -0800 (PST)
-                                                                                       In-Reply-To:
-                                                                                       &lt;CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com&gt;
-                                                                                       References:
-                                                                                       &lt;CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com&gt;
-                                                                                       Date: Fri, 2 Mar 2012 07:44:24 -0500
-                                                                                       Message-ID:
-                                                                                       &lt;CADY6HTZ6oopY5v6WkYU81YcSQw3X124CK_Fx4jhnhUiU3Y9z6A@mail.gmail.com&gt;
-                                                                                       Subject: Iran's Oil and Nuclear Situation
-                                                                                       From: william abnett &lt;wmorrison89@gmail.com&gt;
-                                                                                       To: william.abnett &lt;william.abnett@gmail.com&gt;
-                                                                                       Content-Type: multipart/mixed; boundary="20cf303f67fac8928804ba41efd5"
-                                                                                       					
-                                                                                    </div>
-                                                                                 </td>
-                                                                                 <td>
-                                                                                    <div class="constraintItem">datatype: string</div>
-                                                                                 </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                 <td>Attachments</td>
-                                                                                 <td>
-                                                                                    
-                                                                                    <div class="emailDiv">
-                                                                                       [File]
-                                                                                       (object reference:
-                                                                                       <span class="highlightTargetLink" onclick="highlightTarget('cybox:guid-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7')">cybox:guid-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7</span>
-                                                                                       )
-                                                                                       
-                                                                                    </div>
-                                                                                    
-                                                                                 </td>
-                                                                                 <td></td>
-                                                                              </tr>
-                                                                           </table>
-                                                                        </fieldset>
+                                                                                       </td>
+                                                                                       <td></td>
+                                                                                    </tr>
+                                                                                 </table>
+                                                                              </fieldset>
+                                                                           </div>
+                                                                        </div>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -654,7 +687,7 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container eventContainer event">
-                                                <div class="heading eventHeading event">EVENT</div>
+                                                <div class="heading eventHeading event"></div>
                                                 <div class="contents eventContents event">
                                                    <div class="eventDescription description">
                                                       description: Open Iran-Oil corrupted .doc file.
@@ -665,52 +698,64 @@ function validate()
                                                          <div class="container action">
                                                             <div class="heading action">ACTION Open (xsi type: cyboxVocabs:ActionTypeVocab-1.0)</div>
                                                             <div class="contents action">
-                                                               <div class="container associatedObjectContainer associatedObject" id="example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div class="associationType">
-                                                                        association type: Affected
-                                                                     </div>
-                                                                     <div class="associatedObjectDescription description">
-                                                                        description: 
-                                                                        The word document contains flash, which downloads a
-                                                                        corrupted mp4 file. The mp4 file itself is not anything special
-                                                                        but an 0C filled (22kb) mp4 file with a valid mp4
-                                                                        header.
-                                                                        
-                                                                     </div>
-                                                                     <div>
-                                                                        <fieldset>
-                                                                           <legend>cybox properties (type: FileObj:FileObjectType)</legend>
-                                                                           <table>
-                                                                              <thead>
-                                                                                 <th>Name</th>
-                                                                                 <th>Value</th>
-                                                                                 <th>Constraints</th>
-                                                                              </thead>
-                                                                              <tr>
-                                                                                 <td>File_Name</td>
-                                                                                 <td>Iran's Oil and Nuclear Situation.doc</td>
-                                                                                 <td></td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                 <td>Size_In_Bytes</td>
-                                                                                 <td>106604</td>
-                                                                                 <td></td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                 <td>Hashes</td>
-                                                                                 <td>
-                                                                                    
-                                                                                    MD5
-                                                                                    E92A4FC283EB2802AD6D0E24C7FCC857
-                                                                                    
-                                                                                    
-                                                                                 </td>
-                                                                                 <td></td>
-                                                                              </tr>
-                                                                           </table>
-                                                                        </fieldset>
+                                                               <div class="container associatedObjects">
+                                                                  <div class="heading associatedObjects">Associated Objects
+                                                                     
+                                                                  </div>
+                                                                  <div class="contents associatedObjects">
+                                                                     <div class="container associatedObjectContainer associatedObject" id="example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7">
+                                                                        <div class="heading associatedObjectHeading associatedObject">Affected ♢  FileObjectType ♢ <span class="inlineObject">
+                                                                              
+                                                                              
+                                                                              "example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7"
+                                                                              
+                                                                              </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Affected
+                                                                           </div>
+                                                                           <div class="associatedObjectDescription description">
+                                                                              description: 
+                                                                              The word document contains flash, which downloads a
+                                                                              corrupted mp4 file. The mp4 file itself is not anything special
+                                                                              but an 0C filled (22kb) mp4 file with a valid mp4
+                                                                              header.
+                                                                              
+                                                                           </div>
+                                                                           <div>
+                                                                              <fieldset>
+                                                                                 <legend>cybox properties (type: FileObj:FileObjectType)</legend>
+                                                                                 <table>
+                                                                                    <thead>
+                                                                                       <th>Name</th>
+                                                                                       <th>Value</th>
+                                                                                       <th>Constraints</th>
+                                                                                    </thead>
+                                                                                    <tr>
+                                                                                       <td>File_Name</td>
+                                                                                       <td>Iran's Oil and Nuclear Situation.doc</td>
+                                                                                       <td></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                       <td>Size_In_Bytes</td>
+                                                                                       <td>106604</td>
+                                                                                       <td></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                       <td>Hashes</td>
+                                                                                       <td>
+                                                                                          
+                                                                                          MD5
+                                                                                          E92A4FC283EB2802AD6D0E24C7FCC857
+                                                                                          
+                                                                                          
+                                                                                       </td>
+                                                                                       <td></td>
+                                                                                    </tr>
+                                                                                 </table>
+                                                                              </fieldset>
+                                                                           </div>
+                                                                        </div>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -752,7 +797,7 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container eventContainer event">
-                                                <div class="heading eventHeading event">EVENT</div>
+                                                <div class="heading eventHeading event"></div>
                                                 <div class="contents eventContents event">
                                                    <div class="eventDescription description">
                                                       description: Download Iran-Oil invalid .mp4 downloader file.
@@ -763,130 +808,143 @@ function validate()
                                                          <div class="container action">
                                                             <div class="heading action">ACTION Download (xsi type: cyboxVocabs:ActionTypeVocab-1.0)</div>
                                                             <div class="contents action">
-                                                               <div class="container associatedObjectContainer associatedObject">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div>
-                                                                        (related object reference:
-                                                                        <span class="highlightTargetLink" onclick="highlightTarget('example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7')">example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7</span>
-                                                                        )
-                                                                        
-                                                                     </div>
-                                                                     <div class="associationType">
-                                                                        association type: Initiating
-                                                                     </div>
-                                                                     <div></div>
+                                                               <div class="container associatedObjects">
+                                                                  <div class="heading associatedObjects">Associated Objects
+                                                                     
                                                                   </div>
-                                                               </div>
-                                                               <div class="container associatedObjectContainer associatedObject" id="example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div class="associationType">
-                                                                        association type: Affected
-                                                                     </div>
-                                                                     <div class="associatedObjectDescription description">
-                                                                        description: 
-                                                                        This mp4 file causes memory corruption and code
-                                                                        execution via heap-spraying code injection.
-                                                                        
-                                                                     </div>
-                                                                     <div>
-                                                                        <fieldset>
-                                                                           <legend>cybox properties (type: FileObj:FileObjectType)</legend>
-                                                                           <table>
-                                                                              <thead>
-                                                                                 <th>Name</th>
-                                                                                 <th>Value</th>
-                                                                                 <th>Constraints</th>
-                                                                              </thead>
-                                                                              <tr>
-                                                                                 <td>File_Name</td>
-                                                                                 <td>test.mp4</td>
-                                                                                 <td></td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                 <td>Size_In_Bytes</td>
-                                                                                 <td>22384</td>
-                                                                                 <td></td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                 <td>Hashes</td>
-                                                                                 <td>
-                                                                                    
-                                                                                    MD5
-                                                                                    8933598C8B1FA5E493497B11C48DA4F2
-                                                                                    
-                                                                                    
-                                                                                 </td>
-                                                                                 <td></td>
-                                                                              </tr>
-                                                                           </table>
-                                                                        </fieldset>
-                                                                     </div>
-                                                                     <div class="container relatedObjects">
-                                                                        <div class="heading relatedObjects">
-                                                                           Related Objects
-                                                                           
+                                                                  <div class="contents associatedObjects">
+                                                                     <div class="container associatedObjectContainer associatedObject">
+                                                                        <div class="heading associatedObjectHeading associatedObject">
+                                                                           <div class="idrefHeading">Initiating ♢  FileObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7')">
+                                                                                 
+                                                                                 
+                                                                                 "example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7"
+                                                                                 
+                                                                                 </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                         </div>
-                                                                        <div class="contents relatedObjects">
-                                                                           <div class="container relatedObjectContainer relatedObject">
-                                                                              <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
-                                                                              <div class="contents relatedObjectContents relatedObject">
-                                                                                 <div>
-                                                                                    (related object reference:
-                                                                                    <span class="highlightTargetLink" onclick="highlightTarget('example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7')">example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7</span>
-                                                                                    )
-                                                                                    
-                                                                                 </div>
-                                                                                 <div class="relationship">
-                                                                                    via relationship: Downloaded_By
-                                                                                 </div>
-                                                                                 <div></div>
-                                                                              </div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Initiating
                                                                            </div>
-                                                                           <div class="container relatedObjectContainer relatedObject">
-                                                                              <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
-                                                                              <div class="contents relatedObjectContents relatedObject">
-                                                                                 <div>
-                                                                                    (related object reference:
-                                                                                    <span class="highlightTargetLink" onclick="highlightTarget('example:Object-61041b8b-0c15-48a0-ac5f-b49488788010')">example:Object-61041b8b-0c15-48a0-ac5f-b49488788010</span>
-                                                                                    )
-                                                                                    
-                                                                                 </div>
-                                                                                 <div class="relationship">
-                                                                                    via relationship: Downloaded_From
-                                                                                 </div>
-                                                                                 <div></div>
-                                                                              </div>
-                                                                           </div>
+                                                                           <div></div>
                                                                         </div>
                                                                      </div>
-                                                                  </div>
-                                                               </div>
-                                                               <div class="container associatedObjectContainer associatedObject" id="example:Object-61041b8b-0c15-48a0-ac5f-b49488788010">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div class="associationType">
-                                                                        association type: Utilized
+                                                                     <div class="container associatedObjectContainer associatedObject" id="example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa">
+                                                                        <div class="heading associatedObjectHeading associatedObject">Affected ♢  FileObjectType ♢ <span class="inlineObject">
+                                                                              
+                                                                              
+                                                                              "example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa"
+                                                                              
+                                                                              </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Affected
+                                                                           </div>
+                                                                           <div class="associatedObjectDescription description">
+                                                                              description: 
+                                                                              This mp4 file causes memory corruption and code
+                                                                              execution via heap-spraying code injection.
+                                                                              
+                                                                           </div>
+                                                                           <div>
+                                                                              <fieldset>
+                                                                                 <legend>cybox properties (type: FileObj:FileObjectType)</legend>
+                                                                                 <table>
+                                                                                    <thead>
+                                                                                       <th>Name</th>
+                                                                                       <th>Value</th>
+                                                                                       <th>Constraints</th>
+                                                                                    </thead>
+                                                                                    <tr>
+                                                                                       <td>File_Name</td>
+                                                                                       <td>test.mp4</td>
+                                                                                       <td></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                       <td>Size_In_Bytes</td>
+                                                                                       <td>22384</td>
+                                                                                       <td></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                       <td>Hashes</td>
+                                                                                       <td>
+                                                                                          
+                                                                                          MD5
+                                                                                          8933598C8B1FA5E493497B11C48DA4F2
+                                                                                          
+                                                                                          
+                                                                                       </td>
+                                                                                       <td></td>
+                                                                                    </tr>
+                                                                                 </table>
+                                                                              </fieldset>
+                                                                           </div>
+                                                                           <div class="container relatedObjects">
+                                                                              <div class="heading relatedObjects">Related Objects
+                                                                                 
+                                                                              </div>
+                                                                              <div class="contents relatedObjects">
+                                                                                 <div class="container relatedObjectContainer relatedObject">
+                                                                                    <div class="heading relatedObjectHeading relatedObject">
+                                                                                       <div class="idrefHeading">Downloaded_By ♢  FileObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7')">
+                                                                                             
+                                                                                             
+                                                                                             "example:Object-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                                    </div>
+                                                                                    <div class="contents relatedObjectContents relatedObject">
+                                                                                       <div></div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                                 <div class="container relatedObjectContainer relatedObject">
+                                                                                    <div class="heading relatedObjectHeading relatedObject">
+                                                                                       <div class="idrefHeading">Downloaded_From ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-61041b8b-0c15-48a0-ac5f-b49488788010')">
+                                                                                             
+                                                                                             
+                                                                                             "example:Object-61041b8b-0c15-48a0-ac5f-b49488788010"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                                    </div>
+                                                                                    <div class="contents relatedObjectContents relatedObject">
+                                                                                       <div></div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                              </div>
+                                                                           </div>
+                                                                        </div>
                                                                      </div>
-                                                                     <div>
-                                                                        <fieldset>
-                                                                           <legend>cybox properties (type: URIObj:URIObjectType)</legend>
-                                                                           <table>
-                                                                              <thead>
-                                                                                 <th>Name</th>
-                                                                                 <th>Value</th>
-                                                                                 <th>Constraints</th>
-                                                                              </thead>
-                                                                              <tr>
-                                                                                 <td>Value</td>
-                                                                                 <td>http://208.115.230.76/test.mp4</td>
-                                                                                 <td>
-                                                                                    <div class="constraintItem">condition: Equals</div>
-                                                                                 </td>
-                                                                              </tr>
-                                                                           </table>
-                                                                        </fieldset>
+                                                                     <div class="container associatedObjectContainer associatedObject" id="example:Object-61041b8b-0c15-48a0-ac5f-b49488788010">
+                                                                        <div class="heading associatedObjectHeading associatedObject">Utilized ♢  URIObjectType ♢ <span class="inlineObject">
+                                                                              
+                                                                              
+                                                                              "example:Object-61041b8b-0c15-48a0-ac5f-b49488788010"
+                                                                              
+                                                                              </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Utilized
+                                                                           </div>
+                                                                           <div>
+                                                                              <fieldset>
+                                                                                 <legend>cybox properties (type: URIObj:URIObjectType)</legend>
+                                                                                 <table>
+                                                                                    <thead>
+                                                                                       <th>Name</th>
+                                                                                       <th>Value</th>
+                                                                                       <th>Constraints</th>
+                                                                                    </thead>
+                                                                                    <tr>
+                                                                                       <td>Value</td>
+                                                                                       <td>http://208.115.230.76/test.mp4</td>
+                                                                                       <td>
+                                                                                          <div class="constraintItem">condition: Equals</div>
+                                                                                       </td>
+                                                                                    </tr>
+                                                                                 </table>
+                                                                              </fieldset>
+                                                                           </div>
+                                                                        </div>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -928,7 +986,7 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container eventContainer event">
-                                                <div class="heading eventHeading event">EVENT</div>
+                                                <div class="heading eventHeading event"></div>
                                                 <div class="contents eventContents event">
                                                    <div class="eventDescription description">
                                                       description: Create Iran-Oil .exe Trojan file.
@@ -939,188 +997,186 @@ function validate()
                                                          <div class="container action">
                                                             <div class="heading action">ACTION Create (xsi type: cyboxVocabs:ActionTypeVocab-1.0)</div>
                                                             <div class="contents action">
-                                                               <div class="container associatedObjectContainer associatedObject">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div>
-                                                                        (related object reference:
-                                                                        <span class="highlightTargetLink" onclick="highlightTarget('example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa')">example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa</span>
-                                                                        )
-                                                                        
-                                                                     </div>
-                                                                     <div class="associationType">
-                                                                        association type: Initiating
-                                                                     </div>
-                                                                     <div></div>
+                                                               <div class="container associatedObjects">
+                                                                  <div class="heading associatedObjects">Associated Objects
+                                                                     
                                                                   </div>
-                                                               </div>
-                                                               <div class="container associatedObjectContainer associatedObject" id="example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div class="associationType">
-                                                                        association type: Affected
-                                                                     </div>
-                                                                     <div class="associatedObjectDescription description">
-                                                                        description: 
-                                                                        The file (us.exe MD5: FD1BE09E499E8E380424B3835FC973A8
-                                                                        4861440 bytes) is created in the logged in user %Temp%
-                                                                        directory. The size of the embedded file is 22.5 KB (23040
-                                                                        bytes) and the size of the created us.exe is 4.63MB. It is an
-                                                                        odd discrepancy until you look at the file and it looks like the
-                                                                        code is repeated over and over - 211 times. The file resource
-                                                                        section indicates the file is meant to look like a java updater,
-                                                                        which is always larger than 22.5KB and that would explain all
-                                                                        this padding, which is done at the time when the file is being
-                                                                        written to the disk.
-                                                                        
-                                                                     </div>
-                                                                     <div>
-                                                                        <fieldset>
-                                                                           <legend>cybox properties (type: FileObj:FileObjectType)</legend>
-                                                                           <table>
-                                                                              <thead>
-                                                                                 <th>Name</th>
-                                                                                 <th>Value</th>
-                                                                                 <th>Constraints</th>
-                                                                              </thead>
-                                                                              <tr>
-                                                                                 <td>File_Name</td>
-                                                                                 <td>us.exe</td>
-                                                                                 <td></td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                 <td>File_Path</td>
-                                                                                 <td>%Temp%</td>
-                                                                                 <td></td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                 <td>Size_In_Bytes</td>
-                                                                                 <td>4861440</td>
-                                                                                 <td></td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                 <td>Hashes</td>
-                                                                                 <td>
-                                                                                    
-                                                                                    MD5
-                                                                                    FD1BE09E499E8E380424B3835FC973A8
-                                                                                    
-                                                                                    
-                                                                                 </td>
-                                                                                 <td></td>
-                                                                              </tr>
-                                                                           </table>
-                                                                        </fieldset>
-                                                                     </div>
-                                                                     <div class="container relatedObjects">
-                                                                        <div class="heading relatedObjects">
-                                                                           Related Objects
-                                                                           
+                                                                  <div class="contents associatedObjects">
+                                                                     <div class="container associatedObjectContainer associatedObject">
+                                                                        <div class="heading associatedObjectHeading associatedObject">
+                                                                           <div class="idrefHeading">Initiating ♢  FileObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa')">
+                                                                                 
+                                                                                 
+                                                                                 "example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa"
+                                                                                 
+                                                                                 </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                         </div>
-                                                                        <div class="contents relatedObjects">
-                                                                           <div class="container relatedObjectContainer relatedObject">
-                                                                              <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
-                                                                              <div class="contents relatedObjectContents relatedObject">
-                                                                                 <div>
-                                                                                    (related object reference:
-                                                                                    <span class="highlightTargetLink" onclick="highlightTarget('example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa')">example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa</span>
-                                                                                    )
-                                                                                    
-                                                                                 </div>
-                                                                                 <div class="relationship">
-                                                                                    via relationship: Created_By
-                                                                                 </div>
-                                                                                 <div></div>
-                                                                              </div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Initiating
                                                                            </div>
-                                                                           <div class="container relatedObjectContainer relatedObject">
-                                                                              <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
-                                                                              <div class="contents relatedObjectContents relatedObject">
-                                                                                 <div>
-                                                                                    (related object reference:
-                                                                                    <span class="highlightTargetLink" onclick="highlightTarget('example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e')">example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e</span>
-                                                                                    )
-                                                                                    
-                                                                                 </div>
-                                                                                 <div class="relationship">
-                                                                                    via relationship: Connected_To
-                                                                                 </div>
-                                                                                 <div></div>
-                                                                              </div>
+                                                                           <div></div>
+                                                                        </div>
+                                                                     </div>
+                                                                     <div class="container associatedObjectContainer associatedObject" id="example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c">
+                                                                        <div class="heading associatedObjectHeading associatedObject">Affected ♢  FileObjectType ♢ <span class="inlineObject">
+                                                                              
+                                                                              
+                                                                              "example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c"
+                                                                              
+                                                                              </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Affected
                                                                            </div>
-                                                                           <div class="container relatedObjectContainer relatedObject">
-                                                                              <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
-                                                                              <div class="contents relatedObjectContents relatedObject">
-                                                                                 <div>
-                                                                                    (related object reference:
-                                                                                    <span class="highlightTargetLink" onclick="highlightTarget('example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9')">example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9</span>
-                                                                                    )
-                                                                                    
-                                                                                 </div>
-                                                                                 <div class="relationship">
-                                                                                    via relationship: Connected_To
-                                                                                 </div>
-                                                                                 <div></div>
-                                                                              </div>
+                                                                           <div class="associatedObjectDescription description">
+                                                                              description: 
+                                                                              The file (us.exe MD5: FD1BE09E499E8E380424B3835FC973A8
+                                                                              4861440 bytes) is created in the logged in user %Temp%
+                                                                              directory. The size of the embedded file is 22.5 KB (23040
+                                                                              bytes) and the size of the created us.exe is 4.63MB. It is an
+                                                                              odd discrepancy until you look at the file and it looks like the
+                                                                              code is repeated over and over - 211 times. The file resource
+                                                                              section indicates the file is meant to look like a java updater,
+                                                                              which is always larger than 22.5KB and that would explain all
+                                                                              this padding, which is done at the time when the file is being
+                                                                              written to the disk.
+                                                                              
                                                                            </div>
-                                                                           <div class="container relatedObjectContainer relatedObject">
-                                                                              <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
-                                                                              <div class="contents relatedObjectContents relatedObject">
-                                                                                 <div>
-                                                                                    (related object reference:
-                                                                                    <span class="highlightTargetLink" onclick="highlightTarget('example:Object-568db11e-39ee-43d7-83d8-032bdec3801a')">example:Object-568db11e-39ee-43d7-83d8-032bdec3801a</span>
-                                                                                    )
-                                                                                    
-                                                                                 </div>
-                                                                                 <div class="relationship">
-                                                                                    via relationship: Connected_To
-                                                                                 </div>
-                                                                                 <div></div>
-                                                                              </div>
+                                                                           <div>
+                                                                              <fieldset>
+                                                                                 <legend>cybox properties (type: FileObj:FileObjectType)</legend>
+                                                                                 <table>
+                                                                                    <thead>
+                                                                                       <th>Name</th>
+                                                                                       <th>Value</th>
+                                                                                       <th>Constraints</th>
+                                                                                    </thead>
+                                                                                    <tr>
+                                                                                       <td>File_Name</td>
+                                                                                       <td>us.exe</td>
+                                                                                       <td></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                       <td>File_Path</td>
+                                                                                       <td>%Temp%</td>
+                                                                                       <td></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                       <td>Size_In_Bytes</td>
+                                                                                       <td>4861440</td>
+                                                                                       <td></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                       <td>Hashes</td>
+                                                                                       <td>
+                                                                                          
+                                                                                          MD5
+                                                                                          FD1BE09E499E8E380424B3835FC973A8
+                                                                                          
+                                                                                          
+                                                                                       </td>
+                                                                                       <td></td>
+                                                                                    </tr>
+                                                                                 </table>
+                                                                              </fieldset>
                                                                            </div>
-                                                                           <div class="container relatedObjectContainer relatedObject">
-                                                                              <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
-                                                                              <div class="contents relatedObjectContents relatedObject">
-                                                                                 <div>
-                                                                                    (related object reference:
-                                                                                    <span class="highlightTargetLink" onclick="highlightTarget('example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1')">example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1</span>
-                                                                                    )
-                                                                                    
-                                                                                 </div>
-                                                                                 <div class="relationship">
-                                                                                    via relationship: Connected_To
-                                                                                 </div>
-                                                                                 <div></div>
+                                                                           <div class="container relatedObjects">
+                                                                              <div class="heading relatedObjects">Related Objects
+                                                                                 
                                                                               </div>
-                                                                           </div>
-                                                                           <div class="container relatedObjectContainer relatedObject">
-                                                                              <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
-                                                                              <div class="contents relatedObjectContents relatedObject">
-                                                                                 <div>
-                                                                                    (related object reference:
-                                                                                    <span class="highlightTargetLink" onclick="highlightTarget('example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f')">example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f</span>
-                                                                                    )
-                                                                                    
+                                                                              <div class="contents relatedObjects">
+                                                                                 <div class="container relatedObjectContainer relatedObject">
+                                                                                    <div class="heading relatedObjectHeading relatedObject">
+                                                                                       <div class="idrefHeading">Created_By ♢  FileObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa')">
+                                                                                             
+                                                                                             
+                                                                                             "example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                                    </div>
+                                                                                    <div class="contents relatedObjectContents relatedObject">
+                                                                                       <div></div>
+                                                                                    </div>
                                                                                  </div>
-                                                                                 <div class="relationship">
-                                                                                    via relationship: Connected_To
+                                                                                 <div class="container relatedObjectContainer relatedObject">
+                                                                                    <div class="heading relatedObjectHeading relatedObject">
+                                                                                       <div class="idrefHeading">Connected_To ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e')">
+                                                                                             
+                                                                                             
+                                                                                             "example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                                    </div>
+                                                                                    <div class="contents relatedObjectContents relatedObject">
+                                                                                       <div></div>
+                                                                                    </div>
                                                                                  </div>
-                                                                                 <div></div>
-                                                                              </div>
-                                                                           </div>
-                                                                           <div class="container relatedObjectContainer relatedObject">
-                                                                              <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
-                                                                              <div class="contents relatedObjectContents relatedObject">
-                                                                                 <div>
-                                                                                    (related object reference:
-                                                                                    <span class="highlightTargetLink" onclick="highlightTarget('example:guid-5ceb9d54-24e2-4627-948d-6b92ac81962a')">example:guid-5ceb9d54-24e2-4627-948d-6b92ac81962a</span>
-                                                                                    )
-                                                                                    
+                                                                                 <div class="container relatedObjectContainer relatedObject">
+                                                                                    <div class="heading relatedObjectHeading relatedObject">
+                                                                                       <div class="idrefHeading">Connected_To ♢  AddressObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9')">
+                                                                                             
+                                                                                             
+                                                                                             "example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                                    </div>
+                                                                                    <div class="contents relatedObjectContents relatedObject">
+                                                                                       <div></div>
+                                                                                    </div>
                                                                                  </div>
-                                                                                 <div class="relationship">
-                                                                                    via relationship: Connected_To
+                                                                                 <div class="container relatedObjectContainer relatedObject">
+                                                                                    <div class="heading relatedObjectHeading relatedObject">
+                                                                                       <div class="idrefHeading">Connected_To ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-568db11e-39ee-43d7-83d8-032bdec3801a')">
+                                                                                             
+                                                                                             
+                                                                                             "example:Object-568db11e-39ee-43d7-83d8-032bdec3801a"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                                    </div>
+                                                                                    <div class="contents relatedObjectContents relatedObject">
+                                                                                       <div></div>
+                                                                                    </div>
                                                                                  </div>
-                                                                                 <div></div>
+                                                                                 <div class="container relatedObjectContainer relatedObject">
+                                                                                    <div class="heading relatedObjectHeading relatedObject">
+                                                                                       <div class="idrefHeading">Connected_To ♢  AddressObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1')">
+                                                                                             
+                                                                                             
+                                                                                             "example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                                    </div>
+                                                                                    <div class="contents relatedObjectContents relatedObject">
+                                                                                       <div></div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                                 <div class="container relatedObjectContainer relatedObject">
+                                                                                    <div class="heading relatedObjectHeading relatedObject">
+                                                                                       <div class="idrefHeading">Connected_To ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f')">
+                                                                                             
+                                                                                             
+                                                                                             "example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                                    </div>
+                                                                                    <div class="contents relatedObjectContents relatedObject">
+                                                                                       <div></div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                                 <div class="container relatedObjectContainer relatedObject">
+                                                                                    <div class="heading relatedObjectHeading relatedObject">
+                                                                                       <div class="idrefHeading">Connected_To ♢ <span class="externalTargetLink">
+                                                                                             
+                                                                                             
+                                                                                             "example:guid-5ceb9d54-24e2-4627-948d-6b92ac81962a"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span> <span class="externalLinkWarning">[external]</span></div>
+                                                                                    </div>
+                                                                                    <div class="contents relatedObjectContents relatedObject">
+                                                                                       <div></div>
+                                                                                    </div>
+                                                                                 </div>
                                                                               </div>
                                                                            </div>
                                                                         </div>
@@ -1165,7 +1221,7 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container eventContainer event">
-                                                <div class="heading eventHeading event">EVENT</div>
+                                                <div class="heading eventHeading event"></div>
                                                 <div class="contents eventContents event">
                                                    <div class="eventDescription description">
                                                       description: Execute Iran-Oil .exe Trojan file.
@@ -1176,34 +1232,43 @@ function validate()
                                                          <div class="container action">
                                                             <div class="heading action">ACTION Execute (xsi type: cyboxVocabs:ActionTypeVocab-1.0)</div>
                                                             <div class="contents action">
-                                                               <div class="container associatedObjectContainer associatedObject">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div>
-                                                                        (related object reference:
-                                                                        <span class="highlightTargetLink" onclick="highlightTarget('example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa')">example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa</span>
-                                                                        )
-                                                                        
-                                                                     </div>
-                                                                     <div class="associationType">
-                                                                        association type: Initiating
-                                                                     </div>
-                                                                     <div></div>
+                                                               <div class="container associatedObjects">
+                                                                  <div class="heading associatedObjects">Associated Objects
+                                                                     
                                                                   </div>
-                                                               </div>
-                                                               <div class="container associatedObjectContainer associatedObject">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div>
-                                                                        (related object reference:
-                                                                        <span class="highlightTargetLink" onclick="highlightTarget('example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c')">example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c</span>
-                                                                        )
-                                                                        
+                                                                  <div class="contents associatedObjects">
+                                                                     <div class="container associatedObjectContainer associatedObject">
+                                                                        <div class="heading associatedObjectHeading associatedObject">
+                                                                           <div class="idrefHeading">Initiating ♢  FileObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa')">
+                                                                                 
+                                                                                 
+                                                                                 "example:Object-8b463e0d-cc16-4036-950e-5eeb09bc51aa"
+                                                                                 
+                                                                                 </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                        </div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Initiating
+                                                                           </div>
+                                                                           <div></div>
+                                                                        </div>
                                                                      </div>
-                                                                     <div class="associationType">
-                                                                        association type: Affected
+                                                                     <div class="container associatedObjectContainer associatedObject">
+                                                                        <div class="heading associatedObjectHeading associatedObject">
+                                                                           <div class="idrefHeading">Affected ♢  FileObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c')">
+                                                                                 
+                                                                                 
+                                                                                 "example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c"
+                                                                                 
+                                                                                 </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                        </div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Affected
+                                                                           </div>
+                                                                           <div></div>
+                                                                        </div>
                                                                      </div>
-                                                                     <div></div>
                                                                   </div>
                                                                </div>
                                                             </div>
@@ -1241,7 +1306,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Object-bed1ff22-08e8-4e04-b7ac-908b5271176f">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> FileObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Object-bed1ff22-08e8-4e04-b7ac-908b5271176f"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1277,23 +1347,20 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contained_Within ♢  FileObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c')">
+                                                                     
+                                                                     
+                                                                     "example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c')">example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contained_Within
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1332,7 +1399,7 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container eventContainer event">
-                                                <div class="heading eventHeading event">EVENT</div>
+                                                <div class="heading eventHeading event"></div>
                                                 <div class="contents eventContents event">
                                                    <div class="eventDescription description">
                                                       description: Trojan .exe file connects out to C2 URLs/IPs.
@@ -1343,109 +1410,123 @@ function validate()
                                                          <div class="container action">
                                                             <div class="heading action">ACTION Connect (xsi type: cyboxVocabs:ActionTypeVocab-1.0)</div>
                                                             <div class="contents action">
-                                                               <div class="container associatedObjectContainer associatedObject">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div>
-                                                                        (related object reference:
-                                                                        <span class="highlightTargetLink" onclick="highlightTarget('example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c')">example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c</span>
-                                                                        )
-                                                                        
-                                                                     </div>
-                                                                     <div class="associationType">
-                                                                        association type: Initiating
-                                                                     </div>
-                                                                     <div></div>
+                                                               <div class="container associatedObjects">
+                                                                  <div class="heading associatedObjects">Associated Objects
+                                                                     
                                                                   </div>
-                                                               </div>
-                                                               <div class="container associatedObjectContainer associatedObject">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div>
-                                                                        (related object reference:
-                                                                        <span class="highlightTargetLink" onclick="highlightTarget('example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e')">example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e</span>
-                                                                        )
-                                                                        
+                                                                  <div class="contents associatedObjects">
+                                                                     <div class="container associatedObjectContainer associatedObject">
+                                                                        <div class="heading associatedObjectHeading associatedObject">
+                                                                           <div class="idrefHeading">Initiating ♢  FileObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c')">
+                                                                                 
+                                                                                 
+                                                                                 "example:Object-b7e0bc39-f519-4878-8fb0-5902554efe1c"
+                                                                                 
+                                                                                 </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                        </div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Initiating
+                                                                           </div>
+                                                                           <div></div>
+                                                                        </div>
                                                                      </div>
-                                                                     <div class="associationType">
-                                                                        association type: Utilized
+                                                                     <div class="container associatedObjectContainer associatedObject">
+                                                                        <div class="heading associatedObjectHeading associatedObject">
+                                                                           <div class="idrefHeading">Utilized ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e')">
+                                                                                 
+                                                                                 
+                                                                                 "example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e"
+                                                                                 
+                                                                                 </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                        </div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Utilized
+                                                                           </div>
+                                                                           <div></div>
+                                                                        </div>
                                                                      </div>
-                                                                     <div></div>
-                                                                  </div>
-                                                               </div>
-                                                               <div class="container associatedObjectContainer associatedObject">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div>
-                                                                        (related object reference:
-                                                                        <span class="highlightTargetLink" onclick="highlightTarget('example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9')">example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9</span>
-                                                                        )
-                                                                        
+                                                                     <div class="container associatedObjectContainer associatedObject">
+                                                                        <div class="heading associatedObjectHeading associatedObject">
+                                                                           <div class="idrefHeading">Utilized ♢  AddressObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9')">
+                                                                                 
+                                                                                 
+                                                                                 "example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9"
+                                                                                 
+                                                                                 </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                        </div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Utilized
+                                                                           </div>
+                                                                           <div></div>
+                                                                        </div>
                                                                      </div>
-                                                                     <div class="associationType">
-                                                                        association type: Utilized
+                                                                     <div class="container associatedObjectContainer associatedObject">
+                                                                        <div class="heading associatedObjectHeading associatedObject">
+                                                                           <div class="idrefHeading">Utilized ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-568db11e-39ee-43d7-83d8-032bdec3801a')">
+                                                                                 
+                                                                                 
+                                                                                 "example:Object-568db11e-39ee-43d7-83d8-032bdec3801a"
+                                                                                 
+                                                                                 </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                        </div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Utilized
+                                                                           </div>
+                                                                           <div></div>
+                                                                        </div>
                                                                      </div>
-                                                                     <div></div>
-                                                                  </div>
-                                                               </div>
-                                                               <div class="container associatedObjectContainer associatedObject">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div>
-                                                                        (related object reference:
-                                                                        <span class="highlightTargetLink" onclick="highlightTarget('example:Object-568db11e-39ee-43d7-83d8-032bdec3801a')">example:Object-568db11e-39ee-43d7-83d8-032bdec3801a</span>
-                                                                        )
-                                                                        
+                                                                     <div class="container associatedObjectContainer associatedObject">
+                                                                        <div class="heading associatedObjectHeading associatedObject">
+                                                                           <div class="idrefHeading">Utilized ♢  AddressObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1')">
+                                                                                 
+                                                                                 
+                                                                                 "example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1"
+                                                                                 
+                                                                                 </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                        </div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Utilized
+                                                                           </div>
+                                                                           <div></div>
+                                                                        </div>
                                                                      </div>
-                                                                     <div class="associationType">
-                                                                        association type: Utilized
+                                                                     <div class="container associatedObjectContainer associatedObject">
+                                                                        <div class="heading associatedObjectHeading associatedObject">
+                                                                           <div class="idrefHeading">Utilized ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f')">
+                                                                                 
+                                                                                 
+                                                                                 "example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f"
+                                                                                 
+                                                                                 </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                        </div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Utilized
+                                                                           </div>
+                                                                           <div></div>
+                                                                        </div>
                                                                      </div>
-                                                                     <div></div>
-                                                                  </div>
-                                                               </div>
-                                                               <div class="container associatedObjectContainer associatedObject">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div>
-                                                                        (related object reference:
-                                                                        <span class="highlightTargetLink" onclick="highlightTarget('example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1')">example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1</span>
-                                                                        )
-                                                                        
+                                                                     <div class="container associatedObjectContainer associatedObject">
+                                                                        <div class="heading associatedObjectHeading associatedObject">
+                                                                           <div class="idrefHeading">Utilized ♢  AddressObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a')">
+                                                                                 
+                                                                                 
+                                                                                 "example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a"
+                                                                                 
+                                                                                 </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                                        </div>
+                                                                        <div class="contents associatedObjectContents associatedObject">
+                                                                           <div class="associationType">
+                                                                              association type: Utilized
+                                                                           </div>
+                                                                           <div></div>
+                                                                        </div>
                                                                      </div>
-                                                                     <div class="associationType">
-                                                                        association type: Utilized
-                                                                     </div>
-                                                                     <div></div>
-                                                                  </div>
-                                                               </div>
-                                                               <div class="container associatedObjectContainer associatedObject">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div>
-                                                                        (related object reference:
-                                                                        <span class="highlightTargetLink" onclick="highlightTarget('example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f')">example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f</span>
-                                                                        )
-                                                                        
-                                                                     </div>
-                                                                     <div class="associationType">
-                                                                        association type: Utilized
-                                                                     </div>
-                                                                     <div></div>
-                                                                  </div>
-                                                               </div>
-                                                               <div class="container associatedObjectContainer associatedObject">
-                                                                  <div class="heading associatedObjectHeading associatedObject">ASSOCIATED OBJECT</div>
-                                                                  <div class="contents associatedObjectContents associatedObject">
-                                                                     <div>
-                                                                        (related object reference:
-                                                                        <span class="highlightTargetLink" onclick="highlightTarget('example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a')">example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a</span>
-                                                                        )
-                                                                        
-                                                                     </div>
-                                                                     <div class="associationType">
-                                                                        association type: Utilized
-                                                                     </div>
-                                                                     <div></div>
                                                                   </div>
                                                                </div>
                                                             </div>
@@ -1483,7 +1564,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> URIObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1505,23 +1591,20 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Resolved_To ♢  AddressObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9')">
+                                                                     
+                                                                     
+                                                                     "example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9')">example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Resolved_To
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1557,7 +1640,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> AddressObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Object-61aa225b-90ef-415c-8bbd-a17282e457c9"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1608,7 +1696,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Object-568db11e-39ee-43d7-83d8-032bdec3801a">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> URIObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Object-568db11e-39ee-43d7-83d8-032bdec3801a"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1630,23 +1723,20 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Resolved_To ♢  AddressObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1')">
+                                                                     
+                                                                     
+                                                                     "example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1')">example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Resolved_To
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1682,7 +1772,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> AddressObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Object-80bea4d1-0e70-4a03-a54f-e40373bf94f1"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1733,7 +1828,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> URIObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Object-af7cb3b6-d70b-4b3b-b24f-7cfad739710f"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1755,23 +1855,20 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Resolved_To ♢  AddressObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a')">
+                                                                     
+                                                                     
+                                                                     "example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a')">example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Resolved_To
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1807,7 +1904,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> AddressObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Object-5ceb9d54-24e2-4627-948d-6b92ac81962a"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1872,62 +1974,62 @@ function validate()
                                                          <table class="compositionTableOperand">
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e')">example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e')">
+                                                                        
+                                                                        
+                                                                        "example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f')">example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="externalTargetLink">
+                                                                        
+                                                                        
+                                                                        "example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span> <span class="externalLinkWarning">[external]</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b')">example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b')">
+                                                                        
+                                                                        
+                                                                        "example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6')">example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6')">
+                                                                        
+                                                                        
+                                                                        "example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161')">example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161')">
+                                                                        
+                                                                        
+                                                                        "example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f')">example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f')">
+                                                                        
+                                                                        
+                                                                        "example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr></tr>
@@ -1978,62 +2080,62 @@ function validate()
                                                          <table class="compositionTableOperand">
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e')">example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e')">
+                                                                        
+                                                                        
+                                                                        "example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f')">example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="externalTargetLink">
+                                                                        
+                                                                        
+                                                                        "example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span> <span class="externalLinkWarning">[external]</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:guid-f005fbc6-7427-43ea-8e1e-9a341836f76b')">example:guid-f005fbc6-7427-43ea-8e1e-9a341836f76b</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="externalTargetLink">
+                                                                        
+                                                                        
+                                                                        "example:guid-f005fbc6-7427-43ea-8e1e-9a341836f76b"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span> <span class="externalLinkWarning">[external]</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6')">example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6')">
+                                                                        
+                                                                        
+                                                                        "example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161')">example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161')">
+                                                                        
+                                                                        
+                                                                        "example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f')">example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f')">
+                                                                        
+                                                                        
+                                                                        "example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr></tr>
@@ -2095,22 +2197,22 @@ function validate()
                                                                               <table class="compositionTableOperand">
                                                                                  <tr>
                                                                                     <td>
-                                                                                       <div class="foreignObservablePointer">
-                                                                                          (object reference:
-                                                                                          <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e')">example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e</span>
-                                                                                          )
-                                                                                          
-                                                                                       </div>
+                                                                                       <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e')">
+                                                                                             
+                                                                                             
+                                                                                             "example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td>
-                                                                                       <div class="foreignObservablePointer">
-                                                                                          (object reference:
-                                                                                          <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f')">example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f</span>
-                                                                                          )
-                                                                                          
-                                                                                       </div>
+                                                                                       <div class="foreignObservablePointer"><span class="externalTargetLink">
+                                                                                             
+                                                                                             
+                                                                                             "example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span> <span class="externalLinkWarning">[external]</span></div>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr></tr>
@@ -2134,32 +2236,32 @@ function validate()
                                                                               <table class="compositionTableOperand">
                                                                                  <tr>
                                                                                     <td>
-                                                                                       <div class="foreignObservablePointer">
-                                                                                          (object reference:
-                                                                                          <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b')">example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b</span>
-                                                                                          )
-                                                                                          
-                                                                                       </div>
+                                                                                       <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b')">
+                                                                                             
+                                                                                             
+                                                                                             "example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td>
-                                                                                       <div class="foreignObservablePointer">
-                                                                                          (object reference:
-                                                                                          <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6')">example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6</span>
-                                                                                          )
-                                                                                          
-                                                                                       </div>
+                                                                                       <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6')">
+                                                                                             
+                                                                                             
+                                                                                             "example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td>
-                                                                                       <div class="foreignObservablePointer">
-                                                                                          (object reference:
-                                                                                          <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161')">example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161</span>
-                                                                                          )
-                                                                                          
-                                                                                       </div>
+                                                                                       <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161')">
+                                                                                             
+                                                                                             
+                                                                                             "example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161"
+                                                                                             
+                                                                                             </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr></tr>
@@ -2172,12 +2274,12 @@ function validate()
                                                             </tr>
                                                             <tr>
                                                                <td>
-                                                                  <div class="foreignObservablePointer">
-                                                                     (object reference:
-                                                                     <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f')">example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f</span>
-                                                                     )
-                                                                     
-                                                                  </div>
+                                                                  <div class="foreignObservablePointer"><span class="highlightTargetLink" onclick="highlightTarget('example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f')">
+                                                                        
+                                                                        
+                                                                        "example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f"
+                                                                        
+                                                                        </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
                                                                </td>
                                                             </tr>
                                                             <tr></tr>

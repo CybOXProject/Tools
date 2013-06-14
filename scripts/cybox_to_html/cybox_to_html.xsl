@@ -427,6 +427,17 @@ ikirillov@mitre.org
                       font-weight: bold;
                       color: red;
                     }
+                    
+                    .inlineOrByReferenceLabel
+                    {
+                      font-style: italic!important;
+                      color: lightgray;
+                    }
+                    
+                    .contents
+                    {
+                      padding-left: 1em;
+                    }
                 </style>
                 
                 <script type="text/javascript">
@@ -505,7 +516,7 @@ function findAndExpandTarget(targetElement)
 */
 function initialize()
 {
-  validate();
+  //validate();
 }
 
 /*
@@ -774,6 +785,41 @@ function validate()
     </xsl:template>
     
     <!--
+      Print out the heading for an inline object instance (it has an id
+      attribute and does not have an idref attribute).
+    -->
+    <xsl:template name="inlineObjectHeading">
+        <xsl:param name="type"/>
+        <xsl:param name="currentObject"/>
+        <xsl:param name="relationshipOrAssociationType" select="''"/>
+        <xsl:param name="id"/>
+        
+        <xsl:variable name="currentObjectType" select="if (local-name($currentObject) = 'Observable') then (local-name(($currentObject/*)[0])) else (if ($currentObject/cybox:Properties/@xsi:type) then (fn:local-name-from-QName(fn:resolve-QName($currentObject/cybox:Properties/@xsi:type, $currentObject/cybox:Properties))) else ('')) "/>
+        
+        <xsl:if test="$relationshipOrAssociationType">
+            <xsl:value-of select="$relationshipOrAssociationType/text()" />
+            <xsl:text> &#x2662; </xsl:text>
+        </xsl:if>
+        
+        <xsl:if test="$currentObjectType">
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="$currentObjectType" />
+            <xsl:text> &#x2662; </xsl:text>
+        </xsl:if>
+        
+        <xsl:element name="span">
+            <xsl:attribute name="class" select="'inlineObject'" />
+            
+            <!-- THIS IS THE MAIN LINK TEXT -->
+            "<xsl:value-of select="$id"/>"
+            
+        </xsl:element>
+        <xsl:text> </xsl:text>
+        <span class="inlineOrByReferenceLabel">(inline object)</span>
+        
+    </xsl:template>
+    
+    <!--
       This generates a "link" for an idref.  The link is really just text with
       an onclick event listener that calls highlightTarget().  
       
@@ -784,14 +830,44 @@ function validate()
     -->
     <xsl:template name="clickableIdref">
         <xsl:param name="type"/>
+        <xsl:param name="targetObject"/>
+        <xsl:param name="relationshipOrAssociationType" select="''"/>
         <xsl:param name="idref"/>
-        (<xsl:value-of select="$type"/> reference:
+        
+        <xsl:variable name="targetObjectType" select="if (local-name($targetObject) = 'Observable') then (local-name(($targetObject/*)[0])) else (if ($targetObject/cybox:Properties/@xsi:type) then (fn:local-name-from-QName(fn:resolve-QName($targetObject/cybox:Properties/@xsi:type, $targetObject/cybox:Properties))) else ('')) "/>
+        
+        <!-- <xsl:value-of select="$type"/> reference: -->
+        
+        <xsl:if test="$relationshipOrAssociationType">
+           <xsl:value-of select="$relationshipOrAssociationType/text()" />
+           <xsl:text> &#x2662; </xsl:text>
+        </xsl:if>
+        
+        <xsl:if test="$targetObjectType">
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="$targetObjectType" />
+            <xsl:text> &#x2662; </xsl:text>
+        </xsl:if>
+        
         <xsl:element name="span">
-            <xsl:attribute name="class">highlightTargetLink</xsl:attribute>
-            <xsl:attribute name="onclick"><xsl:value-of select='concat("highlightTarget(&apos;", $idref, "&apos;)")'/></xsl:attribute>
-            <xsl:value-of select="$idref"/>
+            <xsl:variable name="linkClass" select="if ($targetObject) then ('highlightTargetLink') else ('externalTargetLink')" />
+            <xsl:attribute name="class"><xsl:value-of select="$linkClass" /></xsl:attribute>
+            
+            <!-- this is what makes the "link" -->
+            <xsl:if test="$targetObject">
+                <xsl:attribute name="onclick"><xsl:value-of select='concat("highlightTarget(&apos;", $idref, "&apos;)")'/></xsl:attribute>
+            </xsl:if>
+            
+            <!-- THIS IS THE MAIN LINK TEXT -->
+            "<xsl:value-of select="$idref"/>"
+            
         </xsl:element>
-        )
+        <xsl:text> </xsl:text>
+        <span class="inlineOrByReferenceLabel">(reference by idref)</span>
+        <xsl:if test="not($targetObject)">
+            <xsl:text> </xsl:text><span class="externalLinkWarning">[external]</span>
+        </xsl:if>
+        
     </xsl:template>
 
     <!--
@@ -806,9 +882,15 @@ function validate()
     <xsl:template name="processObservableInObservableCompositionSimple">
         <xsl:if test="@idref">
             <div class="foreignObservablePointer">
+                <xsl:variable name="targetId" select="string(@idref)"/>
+                <xsl:variable name="targetObject" select="//*[@id = $targetId]"/>
+                
+
                 <!-- <span><xsl:value-of select="@idref"/></span> -->
                 <xsl:call-template name="clickableIdref">
                     <xsl:with-param name="type" select="'object'"/>
+                    <xsl:with-param name="targetObject" select="$targetObject" />
+                    <xsl:with-param name="relationshipOrAssociationType" select="''"/>
                     <xsl:with-param name="idref" select="@idref"/>
                 </xsl:call-template>
             </div>
@@ -829,16 +911,19 @@ function validate()
     <xsl:template match="@xsi:type"> (<xsl:value-of select="."/>)</xsl:template>
     
     <!--
-      template to print out the list of related objects (prints the heading
-      and call the template to print out actual related object objects).
+      template to print out the list of related or related objects (prints
+      the heading and call the template to print out actual related/associated
+      objects).
     -->
-    <xsl:template match="cybox:Related_Objects">
-        <div class="container relatedObjects">
-            <div class="heading relatedObjects">
-                Related Objects
+    <xsl:template match="cybox:Related_Objects|cybox:Associated_Objects">
+        <xsl:variable name="relatedOrAssociated" select="if (local-name() = 'Related_Objects') then ('related') else if (local-name() = 'Associated_Objects') then ('associated') else ('other')" />
+        <xsl:variable name="relatedOrAssociatedCapitalized" select="if (local-name() = 'Related_Objects') then ('Related') else if (local-name() = 'Associated_Objects') then ('Associated') else ('Other')" />
+        <div class="container {$relatedOrAssociated}Objects">
+            <div class="heading {$relatedOrAssociated}Objects">
+                <xsl:value-of select="$relatedOrAssociatedCapitalized"/> Objects
             </div>
-            <div class="contents relatedObjects">
-                <xsl:apply-templates select="cybox:Related_Object"/>
+            <div class="contents {$relatedOrAssociated}Objects">
+                <xsl:apply-templates select="cybox:Related_Object|cybox:Associated_Object"/>
             </div>
         </div>
     </xsl:template>
@@ -873,34 +958,56 @@ function validate()
             <xsl:if test="@id"><xsl:attribute name="id" select="@id"/></xsl:if>
             
             <!-- print out the actual object heading (name and xsi type) -->
-            <div class="heading {$identifierName}Heading {$identifierName}">
-                <xsl:value-of select="$headingName"/>
-                <xsl:apply-templates select="@xsi:type"/>
-            </div>
+            
+                <div class="heading {$identifierName}Heading {$identifierName}">
+                    <xsl:if test="@id">
+                       <xsl:call-template name="inlineObjectHeading">
+                           <xsl:with-param name="type" select="'related object'"/>
+                           <xsl:with-param name="currentObject" select="." />
+                           <xsl:with-param name="relationshipOrAssociationType" select="cybox:Relationship|cybox:Association_Type"/>
+                           <xsl:with-param name="id" select="@id"/>
+                       </xsl:call-template>
+                    </xsl:if>
+                    <!--
+                    <xsl:if test="local-name()  != 'Related_Object' and local-name() != 'Associated_Object'">
+                        <xsl:value-of select="$headingName"/>
+                        <xsl:apply-templates select="@xsi:type"/>
+                    </xsl:if>
+                    -->
+                    <!--
+                      If this "object" is an object reference (an "idref link")
+                      print out the link that will jump to the original object.
+                    -->
+                    <xsl:if test="@idref">
+                        <xsl:variable name="targetId" select="string(@idref)"/>
+                        <xsl:variable name="targetObject" select="//*[@id = $targetId]"/>
+                        <div class="idrefHeading">
+                            <xsl:call-template name="clickableIdref">
+                                <xsl:with-param name="type" select="'related object'"/>
+                                <xsl:with-param name="targetObject" select="$targetObject" />
+                                <xsl:with-param name="relationshipOrAssociationType" select="cybox:Relationship|cybox:Association_Type"/>
+                                <xsl:with-param name="idref" select="@idref"/>
+                            </xsl:call-template>
+                        </div>
+                    </xsl:if>
+                    
+                </div>
+            
             <div class="contents {$identifierName}Contents {$identifierName}">
+                <!--
                 <xsl:if test="@type">
                     <div id="object_type_label"><xsl:value-of select="@type"/> Object </div>
                 </xsl:if>
-                
-                <!--
-                  If this "object" is an object reference (an "idref link")
-                  print out the link that will jump to the original object.
                 -->
-                <xsl:if test="@idref">
-                    <div>
-                        <xsl:call-template name="clickableIdref">
-                            <xsl:with-param name="type" select="'related object'"/>
-                            <xsl:with-param name="idref" select="@idref"/>
-                        </xsl:call-template>
-                    </div>
-                </xsl:if>
                 
                 <!-- If this is a related object, we need to print out how this object is related -->
+                <!--
                 <xsl:if test="cybox:Relationship">
                     <div class="relationship">
                         via relationship: <xsl:value-of select="cybox:Relationship/text()"/>
                     </div>
                 </xsl:if>
+                -->
                 
                 <!-- If this is a associated object, we need to print out how this object is related -->
                 <xsl:if test="cybox:Association_Type">
@@ -959,7 +1066,7 @@ function validate()
         <div class="container action">
             <div class="heading action">ACTION <xsl:value-of select="cybox:Type/text()" /> (xsi type: <xsl:value-of select="cybox:Type/@xsi:type" />)</div>
             <div class="contents action">
-                <xsl:apply-templates select="cybox:Associated_Objects/cybox:Associated_Object" />
+                <xsl:apply-templates select="cybox:Associated_Objects" />
                 <!--
                 <xsl:for-each select="cybox:Associated_Objects/cybox:Associated_Object">
                     <xsl:call-template name="processAssociatedObjectSimple" />

@@ -341,6 +341,23 @@
                     {
                       empty-cells: show;
                     }
+                    
+                    .externalLinkWarning
+                    {
+                      font-weight: bold;
+                      color: red;
+                    }
+                    
+                    .inlineOrByReferenceLabel
+                    {
+                      font-style: italic!important;
+                      color: lightgray;
+                    }
+                    
+                    .contents
+                    {
+                      padding-left: 1em;
+                    }
                 </style><script type="text/javascript">
                     //Collapse functionality
                     function toggleDiv(divid, spanID)
@@ -415,7 +432,7 @@ function findAndExpandTarget(targetElement)
 */
 function initialize()
 {
-  validate();
+  //validate();
 }
 
 /*
@@ -433,8 +450,12 @@ function validate()
     if (target == null)
     {
       console.log("[" + i + "] id " + currentId + " is NOT found in current document (WARNING)");
-      var warningTextNode = document.createTextNode(" [external]");
-      currentLink.appendChild(warningTextNode);
+      var warningSpan = document.createElement("span");
+      warningSpan.setAttribute("class", "externalLinkWarning");
+      var warningTextNode = document.createTextNode("[external]");
+      warningSpan.appendChild(warningTextNode);
+      
+      currentLink.parentNode.insertBefore(warningSpan, null); 
       
     } else
     {
@@ -462,7 +483,7 @@ function validate()
                   <TD>1</TD>
                   <TD>0</TD>
                   <TD>STIX-CybOX_Phishing_Email_Structured_Output_Example(with_Attached_File_Artifact_Object_Included_by_Reference).xml</TD>
-                  <TD>2013-06-13T16:11:00.76-04:00</TD>
+                  <TD>2013-06-14T14:07:02.789-04:00</TD>
                </TR>
             </table>
          </div>
@@ -505,7 +526,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> EmailMessageObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -646,68 +672,59 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contains ♢  FileObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f')">cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contains
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contains ♢ <span class="externalTargetLink">
+                                                                     
+                                                                     
+                                                                     "cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span> <span class="externalLinkWarning">[external]</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012')">cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contains
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contains ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contains
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contains ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contains
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -743,7 +760,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> FileObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -784,38 +806,33 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contained_Within ♢  EmailMessageObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contained_Within
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Characterizes ♢ <span class="externalTargetLink">
+                                                                     
+                                                                     
+                                                                     "cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span> <span class="externalLinkWarning">[external]</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012')">cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Characterizes
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -851,7 +868,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> URIObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -871,38 +893,33 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contains ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contains
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contained_Within ♢  EmailMessageObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contained_Within
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -938,7 +955,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> URIObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -958,143 +980,124 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Resolved_To ♢  WhoisObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b')">cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Resolved_To
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Properties_Queried_By ♢  DNSQueryObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Properties_Queried_By
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Characterized_By ♢  DNSRecordObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Characterized_By
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Resolved_To ♢  AddressObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1')">cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Resolved_To
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Properties_Queried_By ♢  DNSQueryObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Properties_Queried_By
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Characterized_By ♢  DNSRecordObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Characterized_By
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Resolved_To ♢  AddressObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7')">cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Resolved_To
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Extracted_From ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Extracted_From
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Sub-domain_Of ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Sub-domain_Of
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1130,7 +1133,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> WhoisObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1160,23 +1168,20 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Resolved_To ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Resolved_To
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1212,7 +1217,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> DNSQueryObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1247,38 +1257,33 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Properties_Queried ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Properties_Queried
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Searched_For ♢  DNSRecordObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Searched_For
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1314,7 +1319,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> DNSRecordObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1375,38 +1385,33 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Characterizes ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Characterizes
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Searched_For_By ♢  DNSQueryObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Searched_For_By
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1442,7 +1447,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> AddressObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1462,53 +1472,46 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Resolved_To ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Resolved_To
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contained_Within ♢  DNSQueryObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contained_Within
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contained_Within ♢  DNSRecordObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contained_Within
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1544,7 +1547,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> DNSQueryObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1579,38 +1587,33 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Properties_Queried ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Properties_Queried
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Searched_For ♢  DNSRecordObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Searched_For
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1646,7 +1649,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> DNSRecordObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1707,23 +1715,20 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Searched_For_By ♢  DNSQueryObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Searched_For_By
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1759,7 +1764,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> AddressObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1779,53 +1789,46 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Resolved_To ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Resolved_To
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contained_Within ♢  DNSQueryObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contained_Within
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contained_Within ♢  DNSRecordObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contained_Within
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1861,7 +1864,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> URIObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1881,38 +1889,33 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contains ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contains
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contained_Within ♢ <span class="externalTargetLink">
+                                                                     
+                                                                     
+                                                                     "cybox:object-6dc7fc5a-30c8-11e2-8011-000c291a73d5"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span> <span class="externalLinkWarning">[external]</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-6dc7fc5a-30c8-11e2-8011-000c291a73d5')">cybox:object-6dc7fc5a-30c8-11e2-8011-000c291a73d5</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Contained_Within
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -1948,7 +1951,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> URIObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1968,68 +1976,59 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Properties_Queried_By ♢  DNSQueryObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c')">cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Properties_Queried_By
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Properties_Queried_By ♢  DNSQueryObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba')">cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Properties_Queried_By
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Extracted_From ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Extracted_From
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">FQDN_Of ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: FQDN_Of
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -2065,7 +2064,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> DNSQueryObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -2092,23 +2096,20 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Properties_Queried ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Properties_Queried
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>
@@ -2144,7 +2145,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> DNSQueryObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -2171,23 +2177,20 @@ function validate()
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
-                                                      <div class="heading relatedObjects">
-                                                         Related Objects
+                                                      <div class="heading relatedObjects">Related Objects
                                                          
                                                       </div>
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">RELATED OBJECT</div>
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Properties_Queried ♢  URIObjectType ♢ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">
+                                                                     
+                                                                     
+                                                                     "cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557"
+                                                                     
+                                                                     </span> <span class="inlineOrByReferenceLabel">(reference by idref)</span></div>
+                                                            </div>
                                                             <div class="contents relatedObjectContents relatedObject">
-                                                               <div>
-                                                                  (related object reference:
-                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557</span>
-                                                                  )
-                                                                  
-                                                               </div>
-                                                               <div class="relationship">
-                                                                  via relationship: Properties_Queried
-                                                               </div>
                                                                <div></div>
                                                             </div>
                                                          </div>

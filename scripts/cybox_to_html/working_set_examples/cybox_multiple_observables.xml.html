@@ -341,6 +341,23 @@
                     {
                       empty-cells: show;
                     }
+                    
+                    .externalLinkWarning
+                    {
+                      font-weight: bold;
+                      color: red;
+                    }
+                    
+                    .inlineOrByReferenceLabel
+                    {
+                      font-style: italic!important;
+                      color: lightgray;
+                    }
+                    
+                    .contents
+                    {
+                      padding-left: 1em;
+                    }
                 </style><script type="text/javascript">
                     //Collapse functionality
                     function toggleDiv(divid, spanID)
@@ -415,7 +432,7 @@ function findAndExpandTarget(targetElement)
 */
 function initialize()
 {
-  validate();
+  //validate();
 }
 
 /*
@@ -433,8 +450,12 @@ function validate()
     if (target == null)
     {
       console.log("[" + i + "] id " + currentId + " is NOT found in current document (WARNING)");
-      var warningTextNode = document.createTextNode(" [external]");
-      currentLink.appendChild(warningTextNode);
+      var warningSpan = document.createElement("span");
+      warningSpan.setAttribute("class", "externalLinkWarning");
+      var warningTextNode = document.createTextNode("[external]");
+      warningSpan.appendChild(warningTextNode);
+      
+      currentLink.parentNode.insertBefore(warningSpan, null); 
       
     } else
     {
@@ -462,7 +483,7 @@ function validate()
                   <TD>2</TD>
                   <TD>0</TD>
                   <TD>cybox_multiple_observables.xml</TD>
-                  <TD>2013-06-13T16:10:57.293-04:00</TD>
+                  <TD>2013-06-14T14:07:05.162-04:00</TD>
                </TR>
             </table>
          </div>
@@ -505,7 +526,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:URI-415cb6c0-b97a-11e2-bc44-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> URIObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:URI-415cb6c0-b97a-11e2-bc44-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -554,7 +580,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:URI-415cddcf-b97a-11e2-ac5e-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> URIObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:URI-415cddcf-b97a-11e2-ac5e-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -603,7 +634,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Address-415cddd1-b97a-11e2-bf9f-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> AddressObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Address-415cddd1-b97a-11e2-bf9f-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -652,7 +688,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:File-415cddd3-b97a-11e2-9959-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> FileObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:File-415cddd3-b97a-11e2-9959-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -701,7 +742,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:File-415cddd5-b97a-11e2-bb22-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> FileObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:File-415cddd5-b97a-11e2-bb22-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -750,7 +796,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:File-415cddd7-b97a-11e2-8698-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> FileObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:File-415cddd7-b97a-11e2-8698-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -799,7 +850,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Process-415cddd9-b97a-11e2-af15-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> ProcessObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Process-415cddd9-b97a-11e2-af15-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -863,7 +919,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Process-415cdddb-b97a-11e2-9ddf-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> ProcessObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Process-415cdddb-b97a-11e2-9ddf-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -927,7 +988,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:WinService-415cdddd-b97a-11e2-ab8c-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> WindowsServiceObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:WinService-415cdddd-b97a-11e2-ab8c-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -996,7 +1062,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:WinService-415cdddf-b97a-11e2-a5e0-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> WindowsServiceObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:WinService-415cdddf-b97a-11e2-a5e0-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1065,7 +1136,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Mutex-415cdde1-b97a-11e2-a0b0-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> MutexObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Mutex-415cdde1-b97a-11e2-a0b0-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1114,7 +1190,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Mutex-415cdde3-b97a-11e2-8b3b-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> MutexObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Mutex-415cdde3-b97a-11e2-8b3b-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
@@ -1163,7 +1244,12 @@ function validate()
                                        <tr>
                                           <td>
                                              <div class="container objectContainer object" id="example:Mutex-415cdde5-b97a-11e2-b2b2-5c260a6db690">
-                                                <div class="heading objectHeading object">OBJECT</div>
+                                                <div class="heading objectHeading object"> MutexObjectType ♢ <span class="inlineObject">
+                                                      
+                                                      
+                                                      "example:Mutex-415cdde5-b97a-11e2-b2b2-5c260a6db690"
+                                                      
+                                                      </span> <span class="inlineOrByReferenceLabel">(inline object)</span></div>
                                                 <div class="contents objectContents object">
                                                    <div>
                                                       <fieldset>
