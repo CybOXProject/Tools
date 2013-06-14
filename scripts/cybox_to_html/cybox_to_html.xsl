@@ -421,6 +421,12 @@ ikirillov@mitre.org
                     {
                       empty-cells: show;
                     }
+                    
+                    .externalLinkWarning
+                    {
+                      font-weight: bold;
+                      color: red;
+                    }
                 </style>
                 
                 <script type="text/javascript">
@@ -517,8 +523,12 @@ function validate()
     if (target == null)
     {
       console.log("[" + i + "] id " + currentId + " is NOT found in current document (WARNING)");
-      var warningTextNode = document.createTextNode(" [external]");
-      currentLink.appendChild(warningTextNode);
+      var warningSpan = document.createElement("span");
+      warningSpan.setAttribute("class", "externalLinkWarning");
+      var warningTextNode = document.createTextNode("[external]");
+      warningSpan.appendChild(warningTextNode);
+      
+      currentLink.parentNode.insertBefore(warningSpan, null); 
       
     } else
     {
