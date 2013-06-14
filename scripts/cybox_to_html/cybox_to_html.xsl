@@ -794,7 +794,19 @@ function validate()
         <xsl:param name="relationshipOrAssociationType" select="''"/>
         <xsl:param name="id"/>
         
-        <xsl:variable name="currentObjectType" select="if (local-name($currentObject) = 'Observable') then (local-name(($currentObject/*)[0])) else (if ($currentObject/cybox:Properties/@xsi:type) then (fn:local-name-from-QName(fn:resolve-QName($currentObject/cybox:Properties/@xsi:type, $currentObject/cybox:Properties))) else ('')) "/>
+        <xsl:variable name="currentObjectType">
+            <xsl:choose>
+                <!-- case 1: cybox objects have a cybox:Properties child with an xsi type,
+                     or an observable has a child that is an object that has cybox:Properties
+                -->
+                <xsl:when test="($currentObject/cybox:Properties|$currentObject/cybox:*/cybox:Properties)/@xsi:type"><xsl:value-of select="fn:local-name-from-QName(fn:resolve-QName(($currentObject/cybox:Properties|$currentObject/cybox:*/cybox:Properties)/@xsi:type, ($currentObject/cybox:Properties|$currentObject/cybox:*/cybox:Properties)))"/></xsl:when>
+                <!-- case 2: the current item is a cybox event or an observable that contains an event  -->
+                <xsl:when test="$currentObject/cybox:Type|$currentObject/cybox:Event/cybox:Type"><xsl:value-of select="($currentObject/cybox:Type|$currentObject/cybox:Event/cybox:Type)/text()"/></xsl:when>
+                <!-- catch all -->
+                <xsl:otherwise></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <!-- <xsl:variable name="currentObjectType" select="if (local-name($currentObject) = 'Observable') then (local-name(($currentObject/*)[0])) else (if ($currentObject/cybox:Properties/@xsi:type) then (fn:local-name-from-QName(fn:resolve-QName($currentObject/cybox:Properties/@xsi:type, $currentObject/cybox:Properties))) else ('')) "/> -->
         
         <xsl:if test="$relationshipOrAssociationType">
             <xsl:value-of select="$relationshipOrAssociationType/text()" />
@@ -829,12 +841,23 @@ function validate()
       few times via css transitions).
     -->
     <xsl:template name="clickableIdref">
-        <xsl:param name="type"/>
         <xsl:param name="targetObject"/>
         <xsl:param name="relationshipOrAssociationType" select="''"/>
         <xsl:param name="idref"/>
         
-        <xsl:variable name="targetObjectType" select="if (local-name($targetObject) = 'Observable') then (local-name(($targetObject/*)[0])) else (if ($targetObject/cybox:Properties/@xsi:type) then (fn:local-name-from-QName(fn:resolve-QName($targetObject/cybox:Properties/@xsi:type, $targetObject/cybox:Properties))) else ('')) "/>
+        <xsl:variable name="targetObjectType">
+            <xsl:choose>
+                <!-- case 1: cybox objects have a cybox:Properties child with an xsi type,
+                     or an observable has a child that is an object that has cybox:Properties
+                -->
+                <xsl:when test="($targetObject/cybox:Properties|$targetObject/cybox:*/cybox:Properties)/@xsi:type"><xsl:value-of select="fn:local-name-from-QName(fn:resolve-QName(($targetObject/cybox:Properties|$targetObject/cybox:*/cybox:Properties)/@xsi:type, ($targetObject/cybox:Properties|$targetObject/cybox:*/cybox:Properties)))"/></xsl:when>
+                <!-- case 2: the current item is a cybox event or an observable that contains an event  -->
+                <xsl:when test="$targetObject/cybox:Type|$targetObject/cybox:Event/cybox:Type"><xsl:value-of select="($targetObject/cybox:Type|$targetObject/cybox:Event/cybox:Type)/text()"/></xsl:when>
+                <!-- catch all -->
+                <xsl:otherwise></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <!-- <xsl:variable name="targetObjectType" select="if (local-name($targetObject) = 'Observable') then (local-name(($targetObject/*)[0])) else (if ($targetObject/cybox:Properties/@xsi:type) then (fn:local-name-from-QName(fn:resolve-QName($targetObject/cybox:Properties/@xsi:type, $targetObject/cybox:Properties))) else ('')) "/> -->
         
         <!-- <xsl:value-of select="$type"/> reference: -->
         
@@ -888,7 +911,6 @@ function validate()
 
                 <!-- <span><xsl:value-of select="@idref"/></span> -->
                 <xsl:call-template name="clickableIdref">
-                    <xsl:with-param name="type" select="'object'"/>
                     <xsl:with-param name="targetObject" select="$targetObject" />
                     <xsl:with-param name="relationshipOrAssociationType" select="''"/>
                     <xsl:with-param name="idref" select="@idref"/>
@@ -962,7 +984,6 @@ function validate()
                 <div class="heading {$identifierName}Heading {$identifierName}">
                     <xsl:if test="@id">
                        <xsl:call-template name="inlineObjectHeading">
-                           <xsl:with-param name="type" select="'related object'"/>
                            <xsl:with-param name="currentObject" select="." />
                            <xsl:with-param name="relationshipOrAssociationType" select="cybox:Relationship|cybox:Association_Type"/>
                            <xsl:with-param name="id" select="@id"/>
@@ -983,7 +1004,6 @@ function validate()
                         <xsl:variable name="targetObject" select="//*[@id = $targetId]"/>
                         <div class="idrefHeading">
                             <xsl:call-template name="clickableIdref">
-                                <xsl:with-param name="type" select="'related object'"/>
                                 <xsl:with-param name="targetObject" select="$targetObject" />
                                 <xsl:with-param name="relationshipOrAssociationType" select="cybox:Relationship|cybox:Association_Type"/>
                                 <xsl:with-param name="idref" select="@idref"/>
