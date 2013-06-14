@@ -1010,11 +1010,13 @@ function validate()
                 -->
                 
                 <!-- If this is a associated object, we need to print out how this object is related -->
+                <!--
                 <xsl:if test="cybox:Association_Type">
                     <div class="associationType">
                         association type: <xsl:value-of select="cybox:Association_Type/text()"/>
                     </div>
                 </xsl:if>
+                -->
                 
                 <!-- Print the description if one is available (often they are not) -->
                 <xsl:if test="cybox:Description">
