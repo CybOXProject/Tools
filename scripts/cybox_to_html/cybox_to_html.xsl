@@ -418,6 +418,7 @@ ikirillov@mitre.org
                     .verbatim
                     {
                       white-space: pre-line;
+                      margin-left: 1em;
                     }
                     table
                     {
@@ -1138,23 +1139,6 @@ function validate()
         <fieldset>
             <legend>cybox properties (type: <xsl:value-of select="@xsi:type"/>)</legend>
             <xsl:apply-templates select="*" mode="cyboxProperties" />
-            <!--
-            <table>
-                <thead><th>Name</th><th>Value</th><th>Constraints</th></thead>
-                <xsl:for-each select="*">
-                    <tr>
-                        <td><xsl:value-of select="local-name()" /></td>
-                        <td><xsl:apply-templates select="." /></td>
-                        <td>
-                            <xsl:for-each select="@*">
-                                <div class="constraintItem"><xsl:value-of select="local-name()"/>: <xsl:value-of select="string(.)"/></div>
-                            </xsl:for-each>
-                            <!- - <xsl:if test="@condition"> (condition: <xsl:value-of select="@condition"/>)</xsl:if> - ->
-                        </td>
-                    </tr>
-                </xsl:for-each>
-            </table>
-            -->
             
         </fieldset>
     </xsl:template>
@@ -1170,70 +1154,13 @@ function validate()
         raw data omitted ["<xsl:value-of select='substring(text(), 1, 10)'/> ... <xsl:value-of select='substring(text(), string-length(text())-10, 10)'/>"; length: <xsl:value-of select="string-length()"/>]
     </xsl:template>
     
-    <xsl:template match="ArtifactObj:Packaging">
-        <!--packaging:--> <xsl:apply-templates />
-    </xsl:template>
-    
-    <xsl:template match="ArtifactObj:Encoding">
-        encoding algorithm is <xsl:value-of select="@algorithm"/>
-    </xsl:template>
-    
-    <xsl:template match="AddressObj:Address_Value">
-        <xsl:apply-templates />
-        <xsl:if test="@pattern_type or @apply_condition">
-            (pattern type: <xsl:value-of select="@pattern_type"/>; apply condition: <xsl:value-of select="@apply_condition"/>)
-        </xsl:if>
-    </xsl:template>
-    
-    <!--
-      Display email headers as a bulleted list.
-    -->
-    <xsl:template match="EmailMessageObj:Header">
-        <ul>
-            <xsl:apply-templates/>
-        </ul>
-    </xsl:template>
-
-    <!--
-      Individual email headers are showed as bullet items in an unordered list.
-      
-      Each header is prefixed with a "name" which is the element localname.
-    -->
-    <xsl:template match="EmailMessageObj:Header/*">
-        <li><xsl:value-of select="local-name()" />: <xsl:apply-templates/></li>
-    </xsl:template>
-    
-    <!--
-      Show email recipient and its category.
-    -->
-    <xsl:template match="EmailMessageObj:Recipient">
-        <xsl:apply-templates/> (category: <xsl:value-of select="@category"/>)
-    </xsl:template>
-    
-    <!--
-      Output idref style links for email File and Link cybox properties.
-    -->
-    <xsl:template match="EmailMessageObj:File|EmailMessageObj:Link">
-        <div class="emailDiv">
-          <xsl:apply-templates/>
-          [<xsl:value-of select="local-name()"/>]
-          (object reference:
-            <xsl:element name="span">
-                <xsl:attribute name="class">highlightTargetLink</xsl:attribute>
-                <xsl:attribute name="onclick"><xsl:value-of select='concat("highlightTarget(&apos;", @object_reference, "&apos;)")'/></xsl:attribute>
-                <xsl:value-of select="@object_reference"/>
-            </xsl:element>
-            )
-        </div>
-    </xsl:template>
-    
     <!--
       Show email raw headers wrapped in a div with a class that is css styled
       to preserve wrapping in the original content.
     -->
-    <xsl:template match="EmailMessageObj:Raw_Header">
+    <xsl:template match="EmailMessageObj:Raw_Header/text()|EmailMessageObj:Raw_Body/text()" mode="cyboxProperties">
         <div class="verbatim">
-            <xsl:value-of select="text()" />
+            <xsl:value-of select="fn:data(.)" />
         </div>
     </xsl:template>
     
@@ -1246,7 +1173,7 @@ function validate()
                 <span class="cyboxPropertiesName"><xsl:value-of select="local-name()"/></span>
                 <span class="cyboxPropertiesConstraints"><xsl:apply-templates select="@*" mode="#current"/></span>
                 <span class="cyboxPropertiesNameValueSeparator">&#x2192;</span>
-                <span class="cyboxPropertiesValue"><xsl:value-of select="text()"/></span>
+                <span class="cyboxPropertiesValue"><xsl:apply-templates select="text()" mode="#current"/></span>
             </div>
             <div class="contents cyboxPropertiesContents cyboxProperties">
                 <xsl:apply-templates select="*" mode="#current"/>
@@ -1269,6 +1196,9 @@ function validate()
     <xsl:template match="@xsi:type" mode="cyboxProperties">
     </xsl:template>
     
+    <!--
+      print out object reference links
+    -->
     <xsl:template match="@object_reference" mode="cyboxProperties">
         <xsl:variable name="targetId" select="fn:data(.)"/>
         <xsl:variable name="targetObject" select="//*[@id = $targetId]"/>
