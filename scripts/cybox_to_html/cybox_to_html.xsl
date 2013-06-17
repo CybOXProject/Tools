@@ -453,6 +453,11 @@ ikirillov@mitre.org
                       color: red;
                       background-color: yellow;
                     }
+                    
+                    .cyboxPropertiesConstraints .objectReference
+                    {
+                      color: black;
+                    }
                 </style>
                 
                 <script type="text/javascript">
@@ -862,6 +867,8 @@ function validate()
         
         <xsl:variable name="targetObjectType">
             <xsl:choose>
+                <!-- case 0: targetObject not present -->
+                <xsl:when test="not($targetObject)"></xsl:when>
                 <!-- case 1: cybox objects have a cybox:Properties child with an xsi type,
                      or an observable has a child that is an object that has cybox:Properties
                 -->
@@ -1261,6 +1268,18 @@ function validate()
        do not show the type on cybox:Properties entries
     -->
     <xsl:template match="@xsi:type" mode="cyboxProperties">
+    </xsl:template>
+    
+    <xsl:template match="@object_reference" mode="cyboxProperties">
+        <xsl:variable name="targetId" select="fn:data(.)"/>
+        <xsl:variable name="targetObject" select="//*[@id = $targetId]"/>
+        <div class="objectReference">
+          <xsl:call-template name="clickableIdref">
+              <xsl:with-param name="targetObject" select="$targetObject" />
+              <xsl:with-param name="relationshipOrAssociationType" select="()"/>
+              <xsl:with-param name="idref" select="$targetId"/>
+          </xsl:call-template>
+        </div>
     </xsl:template>
     
 </xsl:stylesheet>
