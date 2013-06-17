@@ -451,7 +451,6 @@ ikirillov@mitre.org
                       font-weight: normal;
                       font-style: italic!important;
                       color: red;
-                      background-color: yellow;
                     }
                     
                     .cyboxPropertiesConstraints .objectReference
@@ -830,13 +829,13 @@ function validate()
         
         <xsl:if test="$relationshipOrAssociationType">
             <xsl:value-of select="$relationshipOrAssociationType/text()" />
-            <xsl:text> &#x2662; </xsl:text>
+            <xsl:text> &#x25CB; </xsl:text>
         </xsl:if>
         
         <xsl:if test="$currentObjectType">
             <xsl:text> </xsl:text>
             <xsl:value-of select="$currentObjectType" />
-            <xsl:text> &#x2662; </xsl:text>
+            <xsl:text> &#x25CB; </xsl:text>
         </xsl:if>
         
         <xsl:element name="span">
@@ -885,18 +884,18 @@ function validate()
         
         <xsl:if test="$relationshipOrAssociationType">
            <xsl:value-of select="$relationshipOrAssociationType/text()" />
-           <xsl:text> &#x2662; </xsl:text>
+           <xsl:text> &#x25CB; </xsl:text>
         </xsl:if>
         
         <xsl:if test="not($targetObject)">
             <xsl:text> </xsl:text><span class="externalLinkWarning">[external]</span>
-            <!-- <xsl:text> &#x2662; </xsl:text> -->
+            <!-- <xsl:text> &#x25CB; </xsl:text> -->
         </xsl:if>
 
         <xsl:if test="$targetObjectType">
             <xsl:text> </xsl:text>
             <xsl:value-of select="$targetObjectType" />
-            <xsl:text> &#x2662; </xsl:text>
+            <xsl:text> &#x25CB; </xsl:text>
         </xsl:if>
         
         <xsl:element name="span">
@@ -1245,9 +1244,9 @@ function validate()
         <div class="container cyboxPropertiesContainer cyboxProperties">
             <div class="heading cyboxPropertiesHeading cyboxProperties">
                 <span class="cyboxPropertiesName"><xsl:value-of select="local-name()"/></span>
+                <span class="cyboxPropertiesConstraints"><xsl:apply-templates select="@*" mode="#current"/></span>
                 <span class="cyboxPropertiesNameValueSeparator">&#x2192;</span>
                 <span class="cyboxPropertiesValue"><xsl:value-of select="text()"/></span>
-                <span class="cyboxPropertiesConstraints"><xsl:apply-templates select="@*" mode="#current"/></span>
             </div>
             <div class="contents cyboxPropertiesContents cyboxProperties">
                 <xsl:apply-templates select="*" mode="#current"/>
@@ -1273,13 +1272,15 @@ function validate()
     <xsl:template match="@object_reference" mode="cyboxProperties">
         <xsl:variable name="targetId" select="fn:data(.)"/>
         <xsl:variable name="targetObject" select="//*[@id = $targetId]"/>
-        <div class="objectReference">
+        <span class="objectReference">
+          [
           <xsl:call-template name="clickableIdref">
               <xsl:with-param name="targetObject" select="$targetObject" />
               <xsl:with-param name="relationshipOrAssociationType" select="()"/>
               <xsl:with-param name="idref" select="$targetId"/>
           </xsl:call-template>
-        </div>
+          ]
+        </span>
     </xsl:template>
     
 </xsl:stylesheet>
