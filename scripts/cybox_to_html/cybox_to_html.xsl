@@ -1150,8 +1150,9 @@ function validate()
       This will show the first and last 10 characters of the value and the
       string length.
     -->
-    <xsl:template match="ArtifactObj:Raw_Artifact">
-        raw data omitted ["<xsl:value-of select='substring(text(), 1, 10)'/> ... <xsl:value-of select='substring(text(), string-length(text())-10, 10)'/>"; length: <xsl:value-of select="string-length()"/>]
+    <xsl:template match="ArtifactObj:Raw_Artifact/text()[string-length() > 500]" mode="cyboxProperties">
+        <xsl:variable name="data" select="fn:data(.)" />
+        raw data omitted ["<xsl:value-of select='substring($data, 1, 10)'/> ... <xsl:value-of select='substring($data, string-length($data)-10, 10)'/>"; length: <xsl:value-of select="string-length()"/>]
     </xsl:template>
     
     <!--
