@@ -842,7 +842,7 @@ function validate()
             
         </xsl:element>
         <xsl:text> </xsl:text>
-        <span class="inlineOrByReferenceLabel">(inline object)</span>
+        <!-- <span class="inlineOrByReferenceLabel">(inline object)</span> -->
         
     </xsl:template>
     
@@ -881,6 +881,11 @@ function validate()
            <xsl:text> &#x2662; </xsl:text>
         </xsl:if>
         
+        <xsl:if test="not($targetObject)">
+            <xsl:text> </xsl:text><span class="externalLinkWarning">[external]</span>
+            <!-- <xsl:text> &#x2662; </xsl:text> -->
+        </xsl:if>
+
         <xsl:if test="$targetObjectType">
             <xsl:text> </xsl:text>
             <xsl:value-of select="$targetObjectType" />
@@ -901,10 +906,7 @@ function validate()
             
         </xsl:element>
         <xsl:text> </xsl:text>
-        <span class="inlineOrByReferenceLabel">(reference by idref)</span>
-        <xsl:if test="not($targetObject)">
-            <xsl:text> </xsl:text><span class="externalLinkWarning">[external]</span>
-        </xsl:if>
+        <!-- <span class="inlineOrByReferenceLabel">(reference by idref)</span> -->
         
     </xsl:template>
 
@@ -1253,6 +1255,12 @@ function validate()
         <span class="cyboxPropertiesSingleConstraint">
         [<xsl:value-of select="local-name()"/>=<xsl:value-of select="fn:data(.)"/>]
         </span>
+    </xsl:template>
+
+    <!--
+       do not show the type on cybox:Properties entries
+    -->
+    <xsl:template match="@xsi:type" mode="cyboxProperties">
     </xsl:template>
     
 </xsl:stylesheet>
