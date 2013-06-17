@@ -383,7 +383,20 @@
                     {
                       margin-left: 1em;
                     }
+                    
+                    .expandableToggle
+                    {
+                      background-color: black;
+                      color: white;
+                    }
+                    .expandableContents
+                    {
+                      border-style: solid;
+                      border-width: 1px;
+                      border-color: black;
+                    }
                 </style><script type="text/javascript">
+                    
                     //Collapse functionality
                     function toggleDiv(divid, spanID)
                     {
@@ -404,7 +417,9 @@
                         }
                       } // end of else
                     } // end of function toggleDiv()
+                    
                 </script><script type="text/javascript">
+
 var currentTarget = null;
 var previousTarget = null;
 
@@ -450,48 +465,36 @@ function findAndExpandTarget(targetElement)
     }
 }
 
-/*
-  When the page is loaded, perform any required initialization.  For right now
-  this only includes validating the "idref" links and marking those that don't
-  resolve as "external".
-*/
-function initialize()
-{
-  //validate();
-}
 
 /*
-Validate the "idref" links and marking those that don't resolve as "external".
+
+    <div class="expandableContainer">
+        <div class="expandableToggle">toggle</div>
+        <div class="expandableContents">
+            <xsl:apply-templates select="$targetObject"/>
+        </div>
+        
 */
-function validate()
+
+function toggle(currentNode)
 {
-  console.log("validating BEGIN...");
-  var listOfLinks = document.getElementsByClassName("highlightTargetLink");
-  for (var i = 0; i < listOfLinks.length; i++)
+  console.log("starting toggle");
+  var parent = currentNode.parentNode;
+  var content = parent.querySelector(".expandableContents");
+  console.log("content: " + content);
+  console.log("content's style.display: " + content.style.display);
+  if (content.style.display == 'none')
   {
-    var currentLink = listOfLinks.item(i);
-    var currentId = currentLink.textContent;
-    var target = document.getElementById(currentId);
-    if (target == null)
-    {
-      console.log("[" + i + "] id " + currentId + " is NOT found in current document (WARNING)");
-      var warningSpan = document.createElement("span");
-      warningSpan.setAttribute("class", "externalLinkWarning");
-      var warningTextNode = document.createTextNode("[external]");
-      warningSpan.appendChild(warningTextNode);
-      
-      currentLink.parentNode.insertBefore(warningSpan, null); 
-      
-    } else
-    {
-      console.log("[" + i + "] id " + currentId + " IS not found in current document -- " + target);
-    }
+    content.style.display = '';
+  } else
+  {
+    content.style.display = 'none';
   }
-  console.log("validating END...");
+  console.log("finished toggle");
 }
 
 </script></head>
-   <body onload="initialize()">
+   <body>
       <div id="wrapper">
          <div id="header">
             <H1>CybOX Output</H1>
@@ -508,7 +511,7 @@ function validate()
                   <TD>1</TD>
                   <TD>0</TD>
                   <TD>stix_phishing__mcoarr.xml</TD>
-                  <TD>2013-06-17T15:43:20.431-04:00</TD>
+                  <TD>2013-06-17T16:07:16.383-04:00</TD>
                </TR>
             </table>
          </div>
@@ -710,6 +713,104 @@ function validate()
                                                                               
                                                                               </span> 
                                                                         </div>
+                                                                        <div class="expandableContainer">
+                                                                           <div class="expandableToggle" onclick="toggle(this)">toggle</div>
+                                                                           <div class="expandableContents" style="display: none;">
+                                                                              <div class="container objectContainer object" id="cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f">
+                                                                                 <div class="heading objectHeading object"> FileObjectType ○ <span class="inlineObject">
+                                                                                       
+                                                                                       
+                                                                                       "cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f"
+                                                                                       
+                                                                                       </span> 
+                                                                                 </div>
+                                                                                 <div class="contents objectContents object">
+                                                                                    <div>
+                                                                                       <fieldset>
+                                                                                          <legend>cybox properties (type: FileObj:FileObjectType)</legend>
+                                                                                          <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                             <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File_Name</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">Joint_Statement.pdf</span><div class="cyboxPropertiesLink"></div>
+                                                                                             </div>
+                                                                                             <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                          </div>
+                                                                                          <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                             <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File_Extension</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">pdf</span><div class="cyboxPropertiesLink"></div>
+                                                                                             </div>
+                                                                                             <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                          </div>
+                                                                                          <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                             <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Size_In_Bytes</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">87022</span><div class="cyboxPropertiesLink"></div>
+                                                                                             </div>
+                                                                                             <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                          </div>
+                                                                                          <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                             <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Hashes</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                                                   
+                                                                                                   </span><div class="cyboxPropertiesLink"></div>
+                                                                                             </div>
+                                                                                             <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                                <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                                   <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Hash</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                                                         
+                                                                                                         
+                                                                                                         </span><div class="cyboxPropertiesLink"></div>
+                                                                                                   </div>
+                                                                                                   <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                                      <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                                         <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Type</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">MD5</span><div class="cyboxPropertiesLink"></div>
+                                                                                                         </div>
+                                                                                                         <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                                      </div>
+                                                                                                      <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                                         <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Simple_Hash_Value</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">cf2b3ad32a8a4cfb05e9dfc45875bd70</span><div class="cyboxPropertiesLink"></div>
+                                                                                                         </div>
+                                                                                                         <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                                      </div>
+                                                                                                   </div>
+                                                                                                </div>
+                                                                                             </div>
+                                                                                          </div>
+                                                                                       </fieldset>
+                                                                                    </div>
+                                                                                    <div class="container relatedObjects">
+                                                                                       <div class="heading relatedObjects">Related Objects
+                                                                                          
+                                                                                       </div>
+                                                                                       <div class="contents relatedObjects">
+                                                                                          <div class="container relatedObjectContainer relatedObject">
+                                                                                             <div class="heading relatedObjectHeading relatedObject">
+                                                                                                <div class="idrefHeading">Contained_Within ○  EmailMessageObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">
+                                                                                                      
+                                                                                                      
+                                                                                                      "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                                                                      
+                                                                                                      </span> 
+                                                                                                </div>
+                                                                                             </div>
+                                                                                             <div class="contents relatedObjectContents relatedObject">
+                                                                                                <div></div>
+                                                                                             </div>
+                                                                                          </div>
+                                                                                          <div class="container relatedObjectContainer relatedObject">
+                                                                                             <div class="heading relatedObjectHeading relatedObject">
+                                                                                                <div class="idrefHeading">Characterizes ○  <span class="externalLinkWarning">[external]</span>  ○ <span class="externalTargetLink">
+                                                                                                      
+                                                                                                      
+                                                                                                      "cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012"
+                                                                                                      
+                                                                                                      </span> 
+                                                                                                </div>
+                                                                                             </div>
+                                                                                             <div class="contents relatedObjectContents relatedObject">
+                                                                                                <div></div>
+                                                                                             </div>
+                                                                                          </div>
+                                                                                       </div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                              </div>
+                                                                           </div>
+                                                                        </div>
                                                                      </div>
                                                                   </div>
                                                                   <div class="contents cyboxPropertiesContents cyboxProperties"></div>
@@ -732,6 +833,67 @@ function validate()
                                                                               
                                                                               </span> 
                                                                         </div>
+                                                                        <div class="expandableContainer">
+                                                                           <div class="expandableToggle" onclick="toggle(this)">toggle</div>
+                                                                           <div class="expandableContents" style="display: none;">
+                                                                              <div class="container objectContainer object" id="cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018">
+                                                                                 <div class="heading objectHeading object"> URIObjectType ○ <span class="inlineObject">
+                                                                                       
+                                                                                       
+                                                                                       "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"
+                                                                                       
+                                                                                       </span> 
+                                                                                 </div>
+                                                                                 <div class="contents objectContents object">
+                                                                                    <div>
+                                                                                       <fieldset>
+                                                                                          <legend>cybox properties (type: URIObj:URIObjectType)</legend>
+                                                                                          <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                             <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">http://www.state.gov/public/01aff0dc/Joint_Statement.pdf</span><div class="cyboxPropertiesLink"></div>
+                                                                                             </div>
+                                                                                             <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                          </div>
+                                                                                       </fieldset>
+                                                                                    </div>
+                                                                                    <div class="container relatedObjects">
+                                                                                       <div class="heading relatedObjects">Related Objects
+                                                                                          
+                                                                                       </div>
+                                                                                       <div class="contents relatedObjects">
+                                                                                          <div class="container relatedObjectContainer relatedObject">
+                                                                                             <div class="heading relatedObjectHeading relatedObject">
+                                                                                                <div class="idrefHeading">Contains ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                                                                      
+                                                                                                      
+                                                                                                      "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                                                      
+                                                                                                      </span> 
+                                                                                                </div>
+                                                                                             </div>
+                                                                                             <div class="contents relatedObjectContents relatedObject">
+                                                                                                <div></div>
+                                                                                             </div>
+                                                                                          </div>
+                                                                                          <div class="container relatedObjectContainer relatedObject">
+                                                                                             <div class="heading relatedObjectHeading relatedObject">
+                                                                                                <div class="idrefHeading">Contained_Within ○  EmailMessageObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">
+                                                                                                      
+                                                                                                      
+                                                                                                      "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                                                                      
+                                                                                                      </span> 
+                                                                                                </div>
+                                                                                             </div>
+                                                                                             <div class="contents relatedObjectContents relatedObject">
+                                                                                                <div></div>
+                                                                                             </div>
+                                                                                          </div>
+                                                                                       </div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                              </div>
+                                                                           </div>
+                                                                        </div>
                                                                      </div>
                                                                   </div>
                                                                   <div class="contents cyboxPropertiesContents cyboxProperties"></div>
@@ -744,6 +906,10 @@ function validate()
                                                                               "cybox:object-6ec9050e-30c8-11e2-8011-000c291a73d5"
                                                                               
                                                                               </span> 
+                                                                        </div>
+                                                                        <div class="expandableContainer">
+                                                                           <div class="expandableToggle" onclick="toggle(this)">toggle</div>
+                                                                           <div class="expandableContents" style="display: none;"></div>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -1377,6 +1543,10 @@ function validate()
                                                                               
                                                                               </span> 
                                                                         </div>
+                                                                        <div class="expandableContainer">
+                                                                           <div class="expandableToggle" onclick="toggle(this)">toggle</div>
+                                                                           <div class="expandableContents" style="display: none;"></div>
+                                                                        </div>
                                                                      </div>
                                                                   </div>
                                                                   <div class="contents cyboxPropertiesContents cyboxProperties"></div>
@@ -1733,6 +1903,10 @@ function validate()
                                                                               "cybox:object-6ec8ffaa-30c8-11e2-8011-000c291a73d5"
                                                                               
                                                                               </span> 
+                                                                        </div>
+                                                                        <div class="expandableContainer">
+                                                                           <div class="expandableToggle" onclick="toggle(this)">toggle</div>
+                                                                           <div class="expandableContents" style="display: none;"></div>
                                                                         </div>
                                                                      </div>
                                                                   </div>

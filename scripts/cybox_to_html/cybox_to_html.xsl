@@ -463,9 +463,22 @@ ikirillov@mitre.org
                     {
                       margin-left: 1em;
                     }
+                    
+                    .expandableToggle
+                    {
+                      background-color: black;
+                      color: white;
+                    }
+                    .expandableContents
+                    {
+                      border-style: solid;
+                      border-width: 1px;
+                      border-color: black;
+                    }
                 </style>
                 
                 <script type="text/javascript">
+                    <![CDATA[
                     //Collapse functionality
                     function toggleDiv(divid, spanID)
                     {
@@ -486,9 +499,11 @@ ikirillov@mitre.org
                         }
                       } // end of else
                     } // end of function toggleDiv()
+                    ]]>
                 </script>
                    
 <script type="text/javascript">
+<![CDATA[
 var currentTarget = null;
 var previousTarget = null;
 
@@ -521,7 +536,7 @@ function findAndExpandTarget(targetElement)
 {
     var currentAncestor = targetElement.parentNode;
     var isFound = false;
-    while (currentAncestor != null &amp;&amp; !isFound)
+    while (currentAncestor != null && !isFound)
     {
         isFound = currentAncestor.classList.contains("collapsibleContent");
         if (!isFound) { currentAncestor = currentAncestor.parentNode; }
@@ -534,49 +549,37 @@ function findAndExpandTarget(targetElement)
     }
 }
 
-/*
-  When the page is loaded, perform any required initialization.  For right now
-  this only includes validating the "idref" links and marking those that don't
-  resolve as "external".
-*/
-function initialize()
-{
-  //validate();
-}
 
 /*
-Validate the "idref" links and marking those that don't resolve as "external".
+
+    <div class="expandableContainer">
+        <div class="expandableToggle">toggle</div>
+        <div class="expandableContents">
+            <xsl:apply-templates select="$targetObject"/>
+        </div>
+        
 */
-function validate()
+
+function toggle(currentNode)
 {
-  console.log("validating BEGIN...");
-  var listOfLinks = document.getElementsByClassName("highlightTargetLink");
-  for (var i = 0; i &lt; listOfLinks.length; i++)
+  console.log("starting toggle");
+  var parent = currentNode.parentNode;
+  var content = parent.querySelector(".expandableContents");
+  console.log("content: " + content);
+  console.log("content's style.display: " + content.style.display);
+  if (content.style.display == 'none')
   {
-    var currentLink = listOfLinks.item(i);
-    var currentId = currentLink.textContent;
-    var target = document.getElementById(currentId);
-    if (target == null)
-    {
-      console.log("[" + i + "] id " + currentId + " is NOT found in current document (WARNING)");
-      var warningSpan = document.createElement("span");
-      warningSpan.setAttribute("class", "externalLinkWarning");
-      var warningTextNode = document.createTextNode("[external]");
-      warningSpan.appendChild(warningTextNode);
-      
-      currentLink.parentNode.insertBefore(warningSpan, null); 
-      
-    } else
-    {
-      console.log("[" + i + "] id " + currentId + " IS not found in current document -- " + target);
-    }
+    content.style.display = '';
+  } else
+  {
+    content.style.display = 'none';
   }
-  console.log("validating END...");
+  console.log("finished toggle");
 }
-
+]]>
 </script>
                </head>
-                <body onload="initialize()">
+                <body>
                     <div id="wrapper">
                         <div id="header"> 
                             <H1>CybOX Output</H1>
@@ -1222,6 +1225,14 @@ function validate()
               <xsl:with-param name="relationshipOrAssociationType" select="()"/>
               <xsl:with-param name="idref" select="$targetId"/>
           </xsl:call-template>
+        </div>
+        
+        <div class="expandableContainer">
+            <div class="expandableToggle" onclick="toggle(this)">toggle</div>
+            <div class="expandableContents" style="display: none;">
+                <xsl:apply-templates select="$targetObject"/>
+            </div>
+                
         </div>
     </xsl:template>
     
