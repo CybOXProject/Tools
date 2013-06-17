@@ -14,6 +14,7 @@
                     border-width:1px;
                     }
                     
+                    /*
                     table.grid * {
                     font-family: Arial, Helvetica, sans-serif;
                     font-size: 11px;
@@ -21,6 +22,7 @@
                     vertical-align: top;
                     text-align: left;
                     }
+                    */
                     
                     table.grid thead, table.grid .collapsible {
                     background-color: #c7c3bb;
@@ -43,8 +45,8 @@
                     }
 
                     body {
-                    font: 11px Arial, Helvetica, sans-serif;
-                    font-size: 13px;
+                    /*font: 11px Arial, Helvetica, sans-serif;*/
+                    /*font-size: 13px;*/
                     }
                     #wrapper { 
                     margin: 0 auto;
@@ -64,7 +66,7 @@
                     background: #FFFFFF;
                     margin: 0px 0px 5px 0px;
                     padding: 10px;
-                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
                     font-size: 11px;
                     color: #039;
                     }
@@ -97,8 +99,8 @@
                     }
                     .one-column-emphasis
                     {
-                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-                    font-size: 12px;
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+                    /*font-size: 12px;*/
                     margin: 0px;
                     text-align: left;
                     border-collapse: collapse;
@@ -196,7 +198,7 @@
                     padding: 1px;
                     }
                     #associated_object_label {
-                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
                     font-size: 12px;
                     margin-bottom: 2px;
                     }
@@ -358,6 +360,19 @@
                     {
                       padding-left: 1em;
                     }
+                    
+                    .cyboxPropertiesValue
+                    {
+                      font-weight: normal;
+                    }
+                    
+                    .cyboxPropertiesConstraints
+                    {
+                      font-weight: normal;
+                      font-style: italic!important;
+                      color: red;
+                      background-color: yellow;
+                    }
                 </style><script type="text/javascript">
                     //Collapse functionality
                     function toggleDiv(divid, spanID)
@@ -483,7 +498,7 @@ function validate()
                   <TD>2</TD>
                   <TD>0</TD>
                   <TD>cybox_multiple_observables.xml</TD>
-                  <TD>2013-06-14T15:18:40.235-04:00</TD>
+                  <TD>2013-06-17T09:50:47.411-04:00</TD>
                </TR>
             </table>
          </div>
@@ -536,18 +551,10 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: URIObj:URIObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Value</td>
-                                                               <td>http://www.mypremierfutbol.com</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">http://www.mypremierfutbol.com</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -590,18 +597,10 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: URIObj:URIObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Value</td>
-                                                               <td>http://www.todaysfutbol.com</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">http://www.todaysfutbol.com</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -644,18 +643,10 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: AddressObj:AddressObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Address_Value</td>
-                                                               <td>72.167.202.5</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Address_Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">72.167.202.5</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -698,18 +689,10 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: FileObj:FileObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>File_Name</td>
-                                                               <td>\WINDOWS\inf\oem7A.PNF</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File_Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">\WINDOWS\inf\oem7A.PNF</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -752,18 +735,10 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: FileObj:FileObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>File_Name</td>
-                                                               <td>\WINDOWS\inf\mdmeric3.PNF</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File_Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">\WINDOWS\inf\mdmeric3.PNF</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -806,18 +781,10 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: FileObj:FileObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>File_Name</td>
-                                                               <td>\WINDOWS\inf\mdmcpq3.PNF</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File_Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">\WINDOWS\inf\mdmcpq3.PNF</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -860,33 +827,22 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: ProcessObj:ProcessObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>PID</td>
-                                                               <td>1928</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Name</td>
-                                                               <td>lsass.exe</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Creation_Time</td>
-                                                               <td>2011-06-03T04:26:55</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Parent_PID</td>
-                                                               <td>668</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">PID</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">1928</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">lsass.exe</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Creation_Time</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">2011-06-03T04:26:55</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Parent_PID</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">668</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -929,33 +885,22 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: ProcessObj:ProcessObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>PID</td>
-                                                               <td>858</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Name</td>
-                                                               <td>lsass.exe</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Creation_Time</td>
-                                                               <td>2011-06-03T04:26:55</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Parent_PID</td>
-                                                               <td>668</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">PID</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">858</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">lsass.exe</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Creation_Time</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">2011-06-03T04:26:55</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Parent_PID</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">668</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -998,38 +943,26 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: WinServiceObj:WindowsServiceObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Display_Name</td>
-                                                               <td>WebDav Client Redirector</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Service_Name</td>
-                                                               <td>MRxDAV</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Startup_Command_Line</td>
-                                                               <td>\FileSystem\MRxDAV</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Startup_Type</td>
-                                                               <td>SERVICE_FILE_SYSTEM_DRIVER</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Service_Status</td>
-                                                               <td>SERVICE_RUNNING</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Display_Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">WebDav Client Redirector</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Service_Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">MRxDAV</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Startup_Command_Line</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">\FileSystem\MRxDAV</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Startup_Type</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">SERVICE_FILE_SYSTEM_DRIVER</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Service_Status</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">SERVICE_RUNNING</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -1072,38 +1005,26 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: WinServiceObj:WindowsServiceObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Display_Name</td>
-                                                               <td>MRxSmb</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Service_Name</td>
-                                                               <td>MRxSmb</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Startup_Command_Line</td>
-                                                               <td>\FileSystem\MRxSmb</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Startup_Type</td>
-                                                               <td>SERVICE_FILE_SYSTEM_DRIVER</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Service_Status</td>
-                                                               <td>SERVICE_RUNNING</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Display_Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">MRxSmb</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Service_Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">MRxSmb</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Startup_Command_Line</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">\FileSystem\MRxSmb</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Startup_Type</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">SERVICE_FILE_SYSTEM_DRIVER</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Service_Status</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">SERVICE_RUNNING</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -1146,18 +1067,10 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: MutexObj:MutexObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Name</td>
-                                                               <td>{5EC171BB-F130-4a19-B782-B6E655E091B2}</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">{5EC171BB-F130-4a19-B782-B6E655E091B2}</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -1200,18 +1113,10 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: MutexObj:MutexObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Name</td>
-                                                               <td>{E41362C3-F75C-4ec2-AF49-3CB6BCA591CA}</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">{E41362C3-F75C-4ec2-AF49-3CB6BCA591CA}</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -1254,18 +1159,10 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: MutexObj:MutexObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Name</td>
-                                                               <td>PrefetchFileCacheOwner</td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">PrefetchFileCacheOwner</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>

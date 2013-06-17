@@ -94,6 +94,7 @@ ikirillov@mitre.org
                     border-width:1px;
                     }
                     
+                    /*
                     table.grid * {
                     font-family: Arial, Helvetica, sans-serif;
                     font-size: 11px;
@@ -101,6 +102,7 @@ ikirillov@mitre.org
                     vertical-align: top;
                     text-align: left;
                     }
+                    */
                     
                     table.grid thead, table.grid .collapsible {
                     background-color: #c7c3bb;
@@ -123,8 +125,8 @@ ikirillov@mitre.org
                     }
 
                     body {
-                    font: 11px Arial, Helvetica, sans-serif;
-                    font-size: 13px;
+                    /*font: 11px Arial, Helvetica, sans-serif;*/
+                    /*font-size: 13px;*/
                     }
                     #wrapper { 
                     margin: 0 auto;
@@ -144,7 +146,7 @@ ikirillov@mitre.org
                     background: #FFFFFF;
                     margin: 0px 0px 5px 0px;
                     padding: 10px;
-                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
                     font-size: 11px;
                     color: #039;
                     }
@@ -177,8 +179,8 @@ ikirillov@mitre.org
                     }
                     .one-column-emphasis
                     {
-                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-                    font-size: 12px;
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+                    /*font-size: 12px;*/
                     margin: 0px;
                     text-align: left;
                     border-collapse: collapse;
@@ -276,7 +278,7 @@ ikirillov@mitre.org
                     padding: 1px;
                     }
                     #associated_object_label {
-                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
                     font-size: 12px;
                     margin-bottom: 2px;
                     }
@@ -437,6 +439,19 @@ ikirillov@mitre.org
                     .contents
                     {
                       padding-left: 1em;
+                    }
+                    
+                    .cyboxPropertiesValue
+                    {
+                      font-weight: normal;
+                    }
+                    
+                    .cyboxPropertiesConstraints
+                    {
+                      font-weight: normal;
+                      font-style: italic!important;
+                      color: red;
+                      background-color: yellow;
                     }
                 </style>
                 
@@ -1114,6 +1129,8 @@ function validate()
     <xsl:template match="cybox:Properties">
         <fieldset>
             <legend>cybox properties (type: <xsl:value-of select="@xsi:type"/>)</legend>
+            <xsl:apply-templates select="*" mode="cyboxProperties" />
+            <!--
             <table>
                 <thead><th>Name</th><th>Value</th><th>Constraints</th></thead>
                 <xsl:for-each select="*">
@@ -1124,11 +1141,12 @@ function validate()
                             <xsl:for-each select="@*">
                                 <div class="constraintItem"><xsl:value-of select="local-name()"/>: <xsl:value-of select="string(.)"/></div>
                             </xsl:for-each>
-                            <!-- <xsl:if test="@condition"> (condition: <xsl:value-of select="@condition"/>)</xsl:if> -->
+                            <!- - <xsl:if test="@condition"> (condition: <xsl:value-of select="@condition"/>)</xsl:if> - ->
                         </td>
                     </tr>
                 </xsl:for-each>
             </table>
+            -->
             
         </fieldset>
     </xsl:template>
@@ -1209,6 +1227,32 @@ function validate()
         <div class="verbatim">
             <xsl:value-of select="text()" />
         </div>
+    </xsl:template>
+    
+    <!--
+      default template for outputting hierarchical cybox:Properties names/values/constraints
+    -->
+    <xsl:template match="element()" mode="cyboxProperties">
+        <div class="container cyboxPropertiesContainer cyboxProperties">
+            <div class="heading cyboxPropertiesHeading cyboxProperties">
+                <span class="cyboxPropertiesName"><xsl:value-of select="local-name()"/></span>
+                <span class="cyboxPropertiesNameValueSeparator">&#x2192;</span>
+                <span class="cyboxPropertiesValue"><xsl:value-of select="text()"/></span>
+                <span class="cyboxPropertiesConstraints"><xsl:apply-templates select="@*" mode="#current"/></span>
+            </div>
+            <div class="contents cyboxPropertiesContents cyboxProperties">
+                <xsl:apply-templates select="*" mode="#current"/>
+            </div>
+        </div>
+    </xsl:template>
+    
+    <!--
+      default template for printint out constraints associated with cybox:Properties entries
+    -->
+    <xsl:template match="attribute()" mode="cyboxProperties">
+        <span class="cyboxPropertiesSingleConstraint">
+        [<xsl:value-of select="local-name()"/>=<xsl:value-of select="fn:data(.)"/>]
+        </span>
     </xsl:template>
     
 </xsl:stylesheet>

@@ -14,6 +14,7 @@
                     border-width:1px;
                     }
                     
+                    /*
                     table.grid * {
                     font-family: Arial, Helvetica, sans-serif;
                     font-size: 11px;
@@ -21,6 +22,7 @@
                     vertical-align: top;
                     text-align: left;
                     }
+                    */
                     
                     table.grid thead, table.grid .collapsible {
                     background-color: #c7c3bb;
@@ -43,8 +45,8 @@
                     }
 
                     body {
-                    font: 11px Arial, Helvetica, sans-serif;
-                    font-size: 13px;
+                    /*font: 11px Arial, Helvetica, sans-serif;*/
+                    /*font-size: 13px;*/
                     }
                     #wrapper { 
                     margin: 0 auto;
@@ -64,7 +66,7 @@
                     background: #FFFFFF;
                     margin: 0px 0px 5px 0px;
                     padding: 10px;
-                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
                     font-size: 11px;
                     color: #039;
                     }
@@ -97,8 +99,8 @@
                     }
                     .one-column-emphasis
                     {
-                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-                    font-size: 12px;
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+                    /*font-size: 12px;*/
                     margin: 0px;
                     text-align: left;
                     border-collapse: collapse;
@@ -196,7 +198,7 @@
                     padding: 1px;
                     }
                     #associated_object_label {
-                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
                     font-size: 12px;
                     margin-bottom: 2px;
                     }
@@ -358,6 +360,19 @@
                     {
                       padding-left: 1em;
                     }
+                    
+                    .cyboxPropertiesValue
+                    {
+                      font-weight: normal;
+                    }
+                    
+                    .cyboxPropertiesConstraints
+                    {
+                      font-weight: normal;
+                      font-style: italic!important;
+                      color: red;
+                      background-color: yellow;
+                    }
                 </style><script type="text/javascript">
                     //Collapse functionality
                     function toggleDiv(divid, spanID)
@@ -483,7 +498,7 @@ function validate()
                   <TD>2</TD>
                   <TD>0</TD>
                   <TD>CybOX_Iran-Oil_Dynamic.xml</TD>
-                  <TD>2013-06-14T15:17:54.23-04:00</TD>
+                  <TD>2013-06-17T09:50:42.178-04:00</TD>
                </TR>
             </table>
          </div>
@@ -556,90 +571,104 @@ function validate()
                                                                            <div>
                                                                               <fieldset>
                                                                                  <legend>cybox properties (type: EmailMessageObj:EmailMessageObjectType)</legend>
-                                                                                 <table>
-                                                                                    <thead>
-                                                                                       <th>Name</th>
-                                                                                       <th>Value</th>
-                                                                                       <th>Constraints</th>
-                                                                                    </thead>
-                                                                                    <tr>
-                                                                                       <td>Header</td>
-                                                                                       <td>
-                                                                                          <ul>
-                                                                                             
-                                                                                             <li>To: 
-                                                                                                
-                                                                                                william.abnett@gmail.com
-                                                                                                 (category: e-mail)
-                                                                                                
-                                                                                                
-                                                                                             </li>
-                                                                                             
-                                                                                             <li>From: 
-                                                                                                wmorrison89@gmail.com
-                                                                                                
-                                                                                             </li>
-                                                                                             
-                                                                                             <li>Subject: Iran's Oil and Nuclear Situation</li>
-                                                                                             
-                                                                                             <li>Date: 2012-03-02T07:42:24Z</li>
-                                                                                             
-                                                                                          </ul>
-                                                                                       </td>
-                                                                                       <td></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                       <td>Raw_Header</td>
-                                                                                       <td>
-                                                                                          <div class="verbatim">
-                                                                                             						Return-Path: &lt;wmorrison89@gmail.com&gt;
-                                                                                             Received-SPF: pass (google.com: domain of wmorrison89@gmail.com designates
-                                                                                             10.236.185.4 as permitted sender) client-ip=10.236.185.4;
-                                                                                             Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-                                                                                             wmorrison89@gmail.com designates 10.236.185.4 as permitted sender)
-                                                                                             smtp.mail=wmorrison89@gmail.com; dkim=pass header.i=wmorrison89@gmail.com
-                                                                                             Received: from mr.google.com ([10.236.185.4]) by 10.236.185.4 with SMTP
-                                                                                             id t4mr5301660yhm.129.1330692273662 (num_hops = 1); Fri, 02 Mar 2012
-                                                                                             04:44:33 -0800 (PST)
-                                                                                             MIME-Version: 1.0
-                                                                                             Received: by 10.236.185.4 with SMTP id t4mr4236541yhm.129.1330692265380;
-                                                                                             Fri,
-                                                                                             02 Mar 2012 04:44:25 -0800 (PST)
-                                                                                             Received: by 10.147.35.14 with HTTP; Fri, 2 Mar 2012 04:44:24 -0800 (PST)
-                                                                                             In-Reply-To:
-                                                                                             &lt;CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com&gt;
-                                                                                             References:
-                                                                                             &lt;CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com&gt;
-                                                                                             Date: Fri, 2 Mar 2012 07:44:24 -0500
-                                                                                             Message-ID:
-                                                                                             &lt;CADY6HTZ6oopY5v6WkYU81YcSQw3X124CK_Fx4jhnhUiU3Y9z6A@mail.gmail.com&gt;
-                                                                                             Subject: Iran's Oil and Nuclear Situation
-                                                                                             From: william abnett &lt;wmorrison89@gmail.com&gt;
-                                                                                             To: william.abnett &lt;william.abnett@gmail.com&gt;
-                                                                                             Content-Type: multipart/mixed; boundary="20cf303f67fac8928804ba41efd5"
-                                                                                             					
-                                                                                          </div>
-                                                                                       </td>
-                                                                                       <td>
-                                                                                          <div class="constraintItem">datatype: string</div>
-                                                                                       </td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                       <td>Attachments</td>
-                                                                                       <td>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Header</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
                                                                                           
-                                                                                          <div class="emailDiv">
-                                                                                             [File]
-                                                                                             (object reference:
-                                                                                             <span class="highlightTargetLink" onclick="highlightTarget('cybox:guid-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7')">cybox:guid-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7</span>
-                                                                                             )
-                                                                                             
-                                                                                          </div>
                                                                                           
-                                                                                       </td>
-                                                                                       <td></td>
-                                                                                    </tr>
-                                                                                 </table>
+                                                                                          
+                                                                                          
+                                                                                          </span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                       <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                          <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">To</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
+                                                                                                
+                                                                                                </span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                          <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                             <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                                <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Recipient</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
+                                                                                                      
+                                                                                                      </span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                                                         [category=e-mail]
+                                                                                                         </span></span></div>
+                                                                                                <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                                   <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                                      <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Address_Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">william.abnett@gmail.com</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                                      <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                                   </div>
+                                                                                                </div>
+                                                                                             </div>
+                                                                                          </div>
+                                                                                       </div>
+                                                                                       <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                          <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">From</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
+                                                                                                
+                                                                                                </span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                                                   [category=e-mail]
+                                                                                                   </span></span></div>
+                                                                                          <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                             <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                                <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Address_Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">wmorrison89@gmail.com</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                                <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                             </div>
+                                                                                          </div>
+                                                                                       </div>
+                                                                                       <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                          <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Subject</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">Iran's Oil and Nuclear Situation</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                          <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                       </div>
+                                                                                       <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                          <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Date</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">2012-03-02T07:42:24Z</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                                                   [datatype=dateTime]
+                                                                                                   </span></span></div>
+                                                                                          <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                       </div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Raw_Header</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
+                                                                                          						Return-Path: &lt;wmorrison89@gmail.com&gt;
+                                                                                          Received-SPF: pass (google.com: domain of wmorrison89@gmail.com designates
+                                                                                          10.236.185.4 as permitted sender) client-ip=10.236.185.4;
+                                                                                          Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+                                                                                          wmorrison89@gmail.com designates 10.236.185.4 as permitted sender)
+                                                                                          smtp.mail=wmorrison89@gmail.com; dkim=pass header.i=wmorrison89@gmail.com
+                                                                                          Received: from mr.google.com ([10.236.185.4]) by 10.236.185.4 with SMTP
+                                                                                          id t4mr5301660yhm.129.1330692273662 (num_hops = 1); Fri, 02 Mar 2012
+                                                                                          04:44:33 -0800 (PST)
+                                                                                          MIME-Version: 1.0
+                                                                                          Received: by 10.236.185.4 with SMTP id t4mr4236541yhm.129.1330692265380;
+                                                                                          Fri,
+                                                                                          02 Mar 2012 04:44:25 -0800 (PST)
+                                                                                          Received: by 10.147.35.14 with HTTP; Fri, 2 Mar 2012 04:44:24 -0800 (PST)
+                                                                                          In-Reply-To:
+                                                                                          &lt;CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com&gt;
+                                                                                          References:
+                                                                                          &lt;CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com&gt;
+                                                                                          Date: Fri, 2 Mar 2012 07:44:24 -0500
+                                                                                          Message-ID:
+                                                                                          &lt;CADY6HTZ6oopY5v6WkYU81YcSQw3X124CK_Fx4jhnhUiU3Y9z6A@mail.gmail.com&gt;
+                                                                                          Subject: Iran's Oil and Nuclear Situation
+                                                                                          From: william abnett &lt;wmorrison89@gmail.com&gt;
+                                                                                          To: william.abnett &lt;william.abnett@gmail.com&gt;
+                                                                                          Content-Type: multipart/mixed; boundary="20cf303f67fac8928804ba41efd5"
+                                                                                          					</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                                             [datatype=string]
+                                                                                             </span></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                 </div>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Attachments</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
+                                                                                          
+                                                                                          </span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                       <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                          <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue"></span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                                                   [object_reference=cybox:guid-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7]
+                                                                                                   </span></span></div>
+                                                                                          <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                       </div>
+                                                                                    </div>
+                                                                                 </div>
                                                                               </fieldset>
                                                                            </div>
                                                                         </div>
@@ -719,34 +748,39 @@ function validate()
                                                                            <div>
                                                                               <fieldset>
                                                                                  <legend>cybox properties (type: FileObj:FileObjectType)</legend>
-                                                                                 <table>
-                                                                                    <thead>
-                                                                                       <th>Name</th>
-                                                                                       <th>Value</th>
-                                                                                       <th>Constraints</th>
-                                                                                    </thead>
-                                                                                    <tr>
-                                                                                       <td>File_Name</td>
-                                                                                       <td>Iran's Oil and Nuclear Situation.doc</td>
-                                                                                       <td></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                       <td>Size_In_Bytes</td>
-                                                                                       <td>106604</td>
-                                                                                       <td></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                       <td>Hashes</td>
-                                                                                       <td>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File_Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">Iran's Oil and Nuclear Situation.doc</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                 </div>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Size_In_Bytes</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">106604</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                 </div>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Hashes</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
                                                                                           
-                                                                                          MD5
-                                                                                          E92A4FC283EB2802AD6D0E24C7FCC857
-                                                                                          
-                                                                                          
-                                                                                       </td>
-                                                                                       <td></td>
-                                                                                    </tr>
-                                                                                 </table>
+                                                                                          </span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                       <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                          <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Hash</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
+                                                                                                
+                                                                                                
+                                                                                                </span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                          <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                             <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                                <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Type</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">MD5</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                                <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                             </div>
+                                                                                             <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                                <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Simple_Hash_Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">E92A4FC283EB2802AD6D0E24C7FCC857</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                                                         [condition=Equals]
+                                                                                                         </span></span></div>
+                                                                                                <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                             </div>
+                                                                                          </div>
+                                                                                       </div>
+                                                                                    </div>
+                                                                                 </div>
                                                                               </fieldset>
                                                                            </div>
                                                                         </div>
@@ -837,34 +871,39 @@ function validate()
                                                                            <div>
                                                                               <fieldset>
                                                                                  <legend>cybox properties (type: FileObj:FileObjectType)</legend>
-                                                                                 <table>
-                                                                                    <thead>
-                                                                                       <th>Name</th>
-                                                                                       <th>Value</th>
-                                                                                       <th>Constraints</th>
-                                                                                    </thead>
-                                                                                    <tr>
-                                                                                       <td>File_Name</td>
-                                                                                       <td>test.mp4</td>
-                                                                                       <td></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                       <td>Size_In_Bytes</td>
-                                                                                       <td>22384</td>
-                                                                                       <td></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                       <td>Hashes</td>
-                                                                                       <td>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File_Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">test.mp4</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                 </div>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Size_In_Bytes</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">22384</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                 </div>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Hashes</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
                                                                                           
-                                                                                          MD5
-                                                                                          8933598C8B1FA5E493497B11C48DA4F2
-                                                                                          
-                                                                                          
-                                                                                       </td>
-                                                                                       <td></td>
-                                                                                    </tr>
-                                                                                 </table>
+                                                                                          </span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                       <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                          <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Hash</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
+                                                                                                
+                                                                                                
+                                                                                                </span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                          <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                             <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                                <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Type</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">MD5</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                                <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                             </div>
+                                                                                             <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                                <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Simple_Hash_Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">8933598C8B1FA5E493497B11C48DA4F2</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                                                         [condition=Equals]
+                                                                                                         </span></span></div>
+                                                                                                <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                             </div>
+                                                                                          </div>
+                                                                                       </div>
+                                                                                    </div>
+                                                                                 </div>
                                                                               </fieldset>
                                                                            </div>
                                                                            <div class="container relatedObjects">
@@ -913,20 +952,12 @@ function validate()
                                                                            <div>
                                                                               <fieldset>
                                                                                  <legend>cybox properties (type: URIObj:URIObjectType)</legend>
-                                                                                 <table>
-                                                                                    <thead>
-                                                                                       <th>Name</th>
-                                                                                       <th>Value</th>
-                                                                                       <th>Constraints</th>
-                                                                                    </thead>
-                                                                                    <tr>
-                                                                                       <td>Value</td>
-                                                                                       <td>http://208.115.230.76/test.mp4</td>
-                                                                                       <td>
-                                                                                          <div class="constraintItem">condition: Equals</div>
-                                                                                       </td>
-                                                                                    </tr>
-                                                                                 </table>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">http://208.115.230.76/test.mp4</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                                             [condition=Equals]
+                                                                                             </span></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                 </div>
                                                                               </fieldset>
                                                                            </div>
                                                                         </div>
@@ -1025,39 +1056,43 @@ function validate()
                                                                            <div>
                                                                               <fieldset>
                                                                                  <legend>cybox properties (type: FileObj:FileObjectType)</legend>
-                                                                                 <table>
-                                                                                    <thead>
-                                                                                       <th>Name</th>
-                                                                                       <th>Value</th>
-                                                                                       <th>Constraints</th>
-                                                                                    </thead>
-                                                                                    <tr>
-                                                                                       <td>File_Name</td>
-                                                                                       <td>us.exe</td>
-                                                                                       <td></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                       <td>File_Path</td>
-                                                                                       <td>%Temp%</td>
-                                                                                       <td></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                       <td>Size_In_Bytes</td>
-                                                                                       <td>4861440</td>
-                                                                                       <td></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                       <td>Hashes</td>
-                                                                                       <td>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File_Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">us.exe</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                 </div>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File_Path</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">%Temp%</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                 </div>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Size_In_Bytes</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">4861440</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                 </div>
+                                                                                 <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                    <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Hashes</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
                                                                                           
-                                                                                          MD5
-                                                                                          FD1BE09E499E8E380424B3835FC973A8
-                                                                                          
-                                                                                          
-                                                                                       </td>
-                                                                                       <td></td>
-                                                                                    </tr>
-                                                                                 </table>
+                                                                                          </span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                    <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                       <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                          <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Hash</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
+                                                                                                
+                                                                                                
+                                                                                                </span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                          <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                                             <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                                <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Type</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">MD5</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                                                <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                             </div>
+                                                                                             <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                                                <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Simple_Hash_Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">FD1BE09E499E8E380424B3835FC973A8</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                                                         [condition=Equals]
+                                                                                                         </span></span></div>
+                                                                                                <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                                             </div>
+                                                                                          </div>
+                                                                                       </div>
+                                                                                    </div>
+                                                                                 </div>
                                                                               </fieldset>
                                                                            </div>
                                                                            <div class="container relatedObjects">
@@ -1289,34 +1324,39 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: FileObj:FileObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>File_Name</td>
-                                                               <td>us-embedded.exe</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Size_In_Bytes</td>
-                                                               <td>23040</td>
-                                                               <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                               <td>Hashes</td>
-                                                               <td>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File_Name</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">us-embedded.exe</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Size_In_Bytes</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">23040</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Hashes</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
                                                                   
-                                                                  MD5
-                                                                  CB3DCDE34FD9FF0E19381D99B02F9692
-                                                                  
-                                                                  
-                                                               </td>
-                                                               <td></td>
-                                                            </tr>
-                                                         </table>
+                                                                  </span><span class="cyboxPropertiesConstraints"></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Hash</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        
+                                                                        </span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Type</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">MD5</span><span class="cyboxPropertiesConstraints"></span></div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Simple_Hash_Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">CB3DCDE34FD9FF0E19381D99B02F9692</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                                 [condition=Equals]
+                                                                                 </span></span></div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
@@ -1526,20 +1566,12 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: URIObj:URIObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Value</td>
-                                                               <td>www.documents.myPicture.info</td>
-                                                               <td>
-                                                                  <div class="constraintItem">condition: Equals</div>
-                                                               </td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">www.documents.myPicture.info</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                     [condition=Equals]
+                                                                     </span></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
@@ -1602,20 +1634,12 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: AddrObj:AddressObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Address_Value</td>
-                                                               <td>199.192.156.134</td>
-                                                               <td>
-                                                                  <div class="constraintItem">condition: Equals</div>
-                                                               </td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Address_Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">199.192.156.134</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                     [condition=Equals]
+                                                                     </span></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -1658,20 +1682,12 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: URIObj:URIObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Value</td>
-                                                               <td>documents.myPicture.info</td>
-                                                               <td>
-                                                                  <div class="constraintItem">condition: Equals</div>
-                                                               </td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">documents.myPicture.info</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                     [condition=Equals]
+                                                                     </span></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
@@ -1734,20 +1750,12 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: AddrObj:AddressObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Address_Value</td>
-                                                               <td>199.192.156.134</td>
-                                                               <td>
-                                                                  <div class="constraintItem">condition: Equals</div>
-                                                               </td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Address_Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">199.192.156.134</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                     [condition=Equals]
+                                                                     </span></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
@@ -1790,20 +1798,12 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: URIObj:URIObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Value</td>
-                                                               <td>ftp.documents.myPicture.info</td>
-                                                               <td>
-                                                                  <div class="constraintItem">condition: Equals</div>
-                                                               </td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">ftp.documents.myPicture.info</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                     [condition=Equals]
+                                                                     </span></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                    <div class="container relatedObjects">
@@ -1866,20 +1866,12 @@ function validate()
                                                    <div>
                                                       <fieldset>
                                                          <legend>cybox properties (type: AddrObj:AddressObjectType)</legend>
-                                                         <table>
-                                                            <thead>
-                                                               <th>Name</th>
-                                                               <th>Value</th>
-                                                               <th>Constraints</th>
-                                                            </thead>
-                                                            <tr>
-                                                               <td>Address_Value</td>
-                                                               <td>199.192.156.134</td>
-                                                               <td>
-                                                                  <div class="constraintItem">condition: Equals</div>
-                                                               </td>
-                                                            </tr>
-                                                         </table>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Address_Value</span><span class="cyboxPropertiesNameValueSeparator">→</span><span class="cyboxPropertiesValue">199.192.156.134</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint">
+                                                                     [condition=Equals]
+                                                                     </span></span></div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
                                                       </fieldset>
                                                    </div>
                                                 </div>
