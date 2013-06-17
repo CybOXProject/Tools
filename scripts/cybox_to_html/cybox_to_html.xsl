@@ -458,6 +458,11 @@ ikirillov@mitre.org
                     {
                       color: black;
                     }
+                    
+                    .objectReference
+                    {
+                      margin-left: 1em;
+                    }
                 </style>
                 
                 <script type="text/javascript">
@@ -1171,10 +1176,15 @@ function validate()
     <xsl:template match="element()" mode="cyboxProperties">
         <div class="container cyboxPropertiesContainer cyboxProperties">
             <div class="heading cyboxPropertiesHeading cyboxProperties">
-                <span class="cyboxPropertiesName"><xsl:value-of select="local-name()"/></span>
-                <span class="cyboxPropertiesConstraints"><xsl:apply-templates select="@*" mode="#current"/></span>
-                <span class="cyboxPropertiesNameValueSeparator">&#x2192;</span>
-                <span class="cyboxPropertiesValue"><xsl:apply-templates select="text()" mode="#current"/></span>
+                <span class="cyboxPropertiesName"><xsl:value-of select="local-name()"/> </span>
+                <span class="cyboxPropertiesConstraints"><xsl:apply-templates select="@*[fn:node-name(.) != fn:resolve-QName('object_reference', ..)]" mode="#current"/></span>
+                <span class="cyboxPropertiesNameValueSeparator"> &#x2192; </span>
+                <span class="cyboxPropertiesValue">
+                    <xsl:apply-templates select="text()" mode="#current"/>
+                </span>
+                <div class="cyboxPropertiesLink">
+                    <xsl:apply-templates select="@*[fn:node-name(.) = fn:resolve-QName('object_reference', ..)]" mode="#current"/>
+                </div>
             </div>
             <div class="contents cyboxPropertiesContents cyboxProperties">
                 <xsl:apply-templates select="*" mode="#current"/>
@@ -1187,7 +1197,10 @@ function validate()
     -->
     <xsl:template match="attribute()" mode="cyboxProperties">
         <span class="cyboxPropertiesSingleConstraint">
-        [<xsl:value-of select="local-name()"/>=<xsl:value-of select="fn:data(.)"/>]
+          <xsl:if test="position() = 1"> [</xsl:if>
+          <xsl:value-of select="local-name()"/>=<xsl:value-of select="fn:data(.)"/>
+          <xsl:if test="position() != last()">, </xsl:if>
+          <xsl:if test="position() = last()">]</xsl:if>
         </span>
     </xsl:template>
 
@@ -1203,15 +1216,13 @@ function validate()
     <xsl:template match="@object_reference" mode="cyboxProperties">
         <xsl:variable name="targetId" select="fn:data(.)"/>
         <xsl:variable name="targetObject" select="//*[@id = $targetId]"/>
-        <span class="objectReference">
-          [
+        <div class="objectReference">
           <xsl:call-template name="clickableIdref">
               <xsl:with-param name="targetObject" select="$targetObject" />
               <xsl:with-param name="relationshipOrAssociationType" select="()"/>
               <xsl:with-param name="idref" select="$targetId"/>
           </xsl:call-template>
-          ]
-        </span>
+        </div>
     </xsl:template>
     
 </xsl:stylesheet>
