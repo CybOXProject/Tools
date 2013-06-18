@@ -18,7 +18,8 @@ x509_keywords = ['Version', 'Serial Number', 'Signature Algorithm', 'Issuer', 'N
                  'X509v3 Issuer Alternative Name', 'X509v3 Subject Directory Attributes', 'X509v3 CRL Distribution Points',
                  'X509v3 Private Key Usage Period','X509v3 Certificate Policies', 'X509v3 Policy Mappings',
                  'X509v3 Subject Key Identifier', 'X509v3 Authority Key Identifier', 'Netscape Comment',
-                 'Netscape Certificate Type', 'X509v3 Key Usage', 'X509v3 Extended Key Usage', '2.5.29.1', '2.5.29.2']
+                 'Netscape Certificate Type', 'Netscape Cert Type', 'X509v3 Key Usage', 'X509v3 Extended Key Usage', 
+                 '2.5.29.1', '2.5.29.2']
 #Ignored X509 Keywords
 ignored_keywords = ['X509v3 extensions', 'Validity', '-----BEGIN CERTIFICATE-----', '-----END CERTIFICATE-----']
 
@@ -97,7 +98,7 @@ def cert_to_cybox(cert_dict):
             properties_dict['certificate']['standard_extensions']['extended_key_usage'] = value
         elif key == 'Netscape Comment':
             properties_dict['certificate']['non_standard_extensions']['netscape_comment'] = value
-        elif key == 'Netscape Certificate Type':
+        elif key == 'Netscape Cert Type' or key == 'Netscape Certificate Type':
             properties_dict['certificate']['non_standard_extensions']['netscape_certificate_type'] = value
         elif key == '2.5.29.1':
             properties_dict['certificate']['non_standard_extensions']['old_authority_key_identifier'] = value
