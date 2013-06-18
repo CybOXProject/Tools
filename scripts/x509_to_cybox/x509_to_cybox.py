@@ -13,8 +13,8 @@ from cybox.core import Observables, Observable, Object
 #Supported X509 Keywords
 x509_keywords = ['Version', 'Serial Number', 'Signature Algorithm', 'Issuer', 'Not Before', 'Not After ', 'Subject',
                  'Subject Public Key Info', 'Public Key Algorithm', 'RSA Public-Key', 'Public-Key', 'Modulus',
-                 'RSA Public Key', 'Modulus (1024 bit)', 'Modulus (2048 bit)', 'Exponent', 'X509v3 Basic Constraints',
-                 'X509v3 Name Constraints', 'X509v3 Policy Constraints', 'X509v3 Subject Alternative Name',
+                 'RSA Public Key', 'Modulus (512 bit)', 'Modulus (1024 bit)', 'Modulus (2048 bit)', 'Exponent', 
+                 'X509v3 Basic Constraints', 'X509v3 Name Constraints', 'X509v3 Policy Constraints', 'X509v3 Subject Alternative Name',
                  'X509v3 Issuer Alternative Name', 'X509v3 Subject Directory Attributes', 'X509v3 CRL Distribution Points',
                  'X509v3 Private Key Usage Period','X509v3 Certificate Policies', 'X509v3 Policy Mappings',
                  'X509v3 Subject Key Identifier', 'X509v3 Authority Key Identifier', 'Netscape Comment',
@@ -50,7 +50,7 @@ def cert_to_cybox(cert_dict):
             properties_dict['certificate']['signature_algorithm'] = value
         elif key == 'Public Key Algorithm':
             properties_dict['certificate']['subject_public_key']['public_key_algorithm'] = value
-        elif key == 'Modulus' or key == 'Modulus (2048 bit)' or key == 'Modulus (1024 bit)':
+        elif key == 'Modulus' or key == 'Modulus (2048 bit)' or key == 'Modulus (1024 bit)' or key == 'Modulus (512 bit)':
             properties_dict['certificate']['subject_public_key']['rsa_public_key']['modulus'] = value
         elif key == 'Exponent':
             split_exponent = value.split(' ')
