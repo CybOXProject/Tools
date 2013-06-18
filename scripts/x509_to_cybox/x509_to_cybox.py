@@ -150,7 +150,6 @@ def tokenize_input(cert_array):
     '''Breakup the certificate array into its Python dictionary representation'''
     cert_dict = {}
     current_index = 0
-    inside_keyword = False
 
     while(current_index < len(cert_array)):
         current_line = cert_array[current_index]
