@@ -150,6 +150,7 @@ ikirillov@mitre.org
                     font-size: 11px;
                     color: #039;
                     }
+                    /*
                     #hor-minimalist-a
                     {
                     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
@@ -177,22 +178,26 @@ ikirillov@mitre.org
                     {
                     color: #009;
                     }
+                    */
                     .one-column-emphasis
                     {
                     /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
                     /*font-size: 12px;*/
                     margin: 0px;
                     text-align: left;
-                    border-collapse: collapse;
+                    /*border-collapse: collapse;*/
                     width: 100%;
+                    border-spacing: 0;
                     }
-                    .one-column-emphasis td
+                    .one-column-emphasis > tbody > tr > td
                     {
                     padding: 5px 10px;
                     color: #200;
+                    /*
                     border-top: 1px solid #e8edff;
                     border-right: 1px solid #e8edff;
                     border-bottom: 1px solid #e8edff;
+                    */
                     }
                     .oce-first
                     {
@@ -203,7 +208,8 @@ ikirillov@mitre.org
                     .oce-first-obs
                     {
                     background: #EFF8F4;
-                    border-right: 10px solid transparent;
+                    /*border-right: 10px solid transparent;*/
+                    border-right: 10px solid black;
                     }
                     .oce-first-obscomp-or
                     {
