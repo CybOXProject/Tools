@@ -1249,13 +1249,14 @@ function toggle(currentNode)
           </xsl:call-template>
         </div>
         
-        <div class="expandableContainer">
-            <div class="expandableToggle" onclick="toggle(this)">toggle</div>
-            <div class="expandableContents" style="display: none;">
-                <xsl:apply-templates select="$targetObject/*"/>
+        <xsl:if test="$targetObject">
+            <div class="expandableContainer">
+                <div class="expandableToggle" onclick="toggle(this)">toggle</div>
+                <div class="expandableContents" style="display: none;">
+                    <xsl:apply-templates select="$targetObject/*"/>
+                </div>
             </div>
-                
-        </div>
+        </xsl:if>
     </xsl:template>
     
 </xsl:stylesheet>
