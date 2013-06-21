@@ -81,6 +81,7 @@ ikirillov@mitre.org
             <html>
                <head>
                 <title>CybOX Output</title>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
                 <style type="text/css">
                     
                     body
