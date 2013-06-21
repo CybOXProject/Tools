@@ -406,16 +406,21 @@
                       margin-left: 1em;
                     }
                     
+                    .expandableToggle::before
+                    {
+                      content: "+";
+                      color: goldenrod;
+                    }
+                    
                     .expandableToggle
                     {
-                      background-color: black;
-                      color: white;
+                      /* background-color: black; */
+                      /* color: white; */
                     }
                     .expandableContents
                     {
-                      border-style: solid;
-                      border-width: 1px;
-                      border-color: black;
+                      background-color: #A8CBDE;
+                      padding: 1em;
                     }
                 </style><script type="text/javascript">
                     
@@ -533,7 +538,7 @@ function toggle(currentNode)
                   <TD>1</TD>
                   <TD>0</TD>
                   <TD>stix_phishing__mcoarr.xml</TD>
-                  <TD>2013-06-21T12:43:25.389-04:00</TD>
+                  <TD>2013-06-21T13:23:15.319-04:00</TD>
                </TR>
             </table>
          </div>
@@ -728,15 +733,19 @@ function toggle(currentNode)
                                                             <div class="contents cyboxPropertiesContents cyboxProperties">
                                                                <div class="container cyboxPropertiesContainer cyboxProperties">
                                                                   <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue"></span><div class="cyboxPropertiesLink">
-                                                                        <div class="objectReference"> FileObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f')">
+                                                                        <div class="expandableContainer">
+                                                                           <div class="expandableToggle objectReference" onclick="toggle(this)"> FileObjectType ○ 
                                                                               
                                                                               
                                                                               "cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f"
                                                                               
-                                                                              </span> 
-                                                                        </div>
-                                                                        <div class="expandableContainer">
-                                                                           <div class="expandableToggle" onclick="toggle(this)">toggle</div>
+                                                                              <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f')">
+                                                                                 
+                                                                                 
+                                                                                 [ jump to target ]
+                                                                                 
+                                                                                 </span> 
+                                                                           </div>
                                                                            <div class="expandableContents" style="display: none;">
                                                                               <fieldset>
                                                                                  <legend>cybox properties (type: FileObj:FileObjectType)</legend>
@@ -790,10 +799,15 @@ function toggle(currentNode)
                                                                                  <div class="contents relatedObjects">
                                                                                     <div class="container relatedObjectContainer relatedObject">
                                                                                        <div class="heading relatedObjectHeading relatedObject">
-                                                                                          <div class="idrefHeading">Contained_Within ○  EmailMessageObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">
+                                                                                          <div class="idrefHeading">Contained_Within ○  EmailMessageObjectType ○ 
+                                                                                             
+                                                                                             
+                                                                                             "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                                                             
+                                                                                             <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">
                                                                                                 
                                                                                                 
-                                                                                                "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                                                                [ jump to target ]
                                                                                                 
                                                                                                 </span> 
                                                                                           </div>
@@ -804,10 +818,15 @@ function toggle(currentNode)
                                                                                     </div>
                                                                                     <div class="container relatedObjectContainer relatedObject">
                                                                                        <div class="heading relatedObjectHeading relatedObject">
-                                                                                          <div class="idrefHeading">Characterizes ○  <span class="externalLinkWarning">[external]</span>  ○ <span class="externalTargetLink">
+                                                                                          <div class="idrefHeading">Characterizes ○  <span class="externalLinkWarning">[external]</span>  ○ 
+                                                                                             
+                                                                                             
+                                                                                             "cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012"
+                                                                                             
+                                                                                             <span class="externalTargetLink">
                                                                                                 
                                                                                                 
-                                                                                                "cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012"
+                                                                                                [ jump to target ]
                                                                                                 
                                                                                                 </span> 
                                                                                           </div>
@@ -835,15 +854,19 @@ function toggle(currentNode)
                                                             <div class="contents cyboxPropertiesContents cyboxProperties">
                                                                <div class="container cyboxPropertiesContainer cyboxProperties">
                                                                   <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Link</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue"></span><div class="cyboxPropertiesLink">
-                                                                        <div class="objectReference"> URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">
+                                                                        <div class="expandableContainer">
+                                                                           <div class="expandableToggle objectReference" onclick="toggle(this)"> URIObjectType ○ 
                                                                               
                                                                               
                                                                               "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"
                                                                               
-                                                                              </span> 
-                                                                        </div>
-                                                                        <div class="expandableContainer">
-                                                                           <div class="expandableToggle" onclick="toggle(this)">toggle</div>
+                                                                              <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">
+                                                                                 
+                                                                                 
+                                                                                 [ jump to target ]
+                                                                                 
+                                                                                 </span> 
+                                                                           </div>
                                                                            <div class="expandableContents" style="display: none;">
                                                                               <fieldset>
                                                                                  <legend>cybox properties (type: URIObj:URIObjectType)</legend>
@@ -860,10 +883,15 @@ function toggle(currentNode)
                                                                                  <div class="contents relatedObjects">
                                                                                     <div class="container relatedObjectContainer relatedObject">
                                                                                        <div class="heading relatedObjectHeading relatedObject">
-                                                                                          <div class="idrefHeading">Contains ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                                                          <div class="idrefHeading">Contains ○  URIObjectType ○ 
+                                                                                             
+                                                                                             
+                                                                                             "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                                             
+                                                                                             <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
                                                                                                 
                                                                                                 
-                                                                                                "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                                                [ jump to target ]
                                                                                                 
                                                                                                 </span> 
                                                                                           </div>
@@ -874,10 +902,15 @@ function toggle(currentNode)
                                                                                     </div>
                                                                                     <div class="container relatedObjectContainer relatedObject">
                                                                                        <div class="heading relatedObjectHeading relatedObject">
-                                                                                          <div class="idrefHeading">Contained_Within ○  EmailMessageObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">
+                                                                                          <div class="idrefHeading">Contained_Within ○  EmailMessageObjectType ○ 
+                                                                                             
+                                                                                             
+                                                                                             "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                                                             
+                                                                                             <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">
                                                                                                 
                                                                                                 
-                                                                                                "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                                                                [ jump to target ]
                                                                                                 
                                                                                                 </span> 
                                                                                           </div>
@@ -895,15 +928,7 @@ function toggle(currentNode)
                                                                   <div class="contents cyboxPropertiesContents cyboxProperties"></div>
                                                                </div>
                                                                <div class="container cyboxPropertiesContainer cyboxProperties">
-                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Link</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue"></span><div class="cyboxPropertiesLink">
-                                                                        <div class="objectReference"> <span class="externalLinkWarning">[external]</span>  ○ <span class="externalTargetLink">
-                                                                              
-                                                                              
-                                                                              "cybox:object-6ec9050e-30c8-11e2-8011-000c291a73d5"
-                                                                              
-                                                                              </span> 
-                                                                        </div>
-                                                                     </div>
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Link</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue"></span><div class="cyboxPropertiesLink"></div>
                                                                   </div>
                                                                   <div class="contents cyboxPropertiesContents cyboxProperties"></div>
                                                                </div>
@@ -918,24 +943,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contains ○  FileObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f')">
+                                                               <div class="idrefHeading">Contains ○  FileObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f')">
                                                                      
                                                                      
-                                                                     "cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f"
-                                                                     
-                                                                     </span> 
-                                                               </div>
-                                                            </div>
-                                                            <div class="contents relatedObjectContents relatedObject">
-                                                               <div></div>
-                                                            </div>
-                                                         </div>
-                                                         <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contains ○  <span class="externalLinkWarning">[external]</span>  ○ <span class="externalTargetLink">
-                                                                     
-                                                                     
-                                                                     "cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -946,10 +962,15 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contains ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">
+                                                               <div class="idrefHeading">Contains ○  <span class="externalLinkWarning">[external]</span>  ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012"
+                                                                  
+                                                                  <span class="externalTargetLink">
                                                                      
                                                                      
-                                                                     "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -960,10 +981,34 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contains ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">
+                                                               <div class="idrefHeading">Contains ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">
                                                                      
                                                                      
-                                                                     "cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8"
+                                                                     [ jump to target ]
+                                                                     
+                                                                     </span> 
+                                                               </div>
+                                                            </div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contains ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">
+                                                                     
+                                                                     
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1066,10 +1111,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contained_Within ○  EmailMessageObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">
+                                                               <div class="idrefHeading">Contained_Within ○  EmailMessageObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">
                                                                      
                                                                      
-                                                                     "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1080,10 +1130,15 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Characterizes ○  <span class="externalLinkWarning">[external]</span>  ○ <span class="externalTargetLink">
+                                                               <div class="idrefHeading">Characterizes ○  <span class="externalLinkWarning">[external]</span>  ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012"
+                                                                  
+                                                                  <span class="externalTargetLink">
                                                                      
                                                                      
-                                                                     "cybox:object-afb6205d-4db6-44de-98d7-37a32ee4b012"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1149,10 +1204,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contains ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                               <div class="idrefHeading">Contains ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
                                                                      
                                                                      
-                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1163,10 +1223,15 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contained_Within ○  EmailMessageObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">
+                                                               <div class="idrefHeading">Contained_Within ○  EmailMessageObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0')">
                                                                      
                                                                      
-                                                                     "cybox:object-8b319fb4-60a5-49f8-8fbc-68eb0ea12ef0"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1232,24 +1297,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Resolved_To ○  WhoisObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b')">
+                                                               <div class="idrefHeading">Resolved_To ○  WhoisObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b')">
                                                                      
                                                                      
-                                                                     "cybox:object-03d041dd-21f7-4b70-a2be-d4abedf2503b"
-                                                                     
-                                                                     </span> 
-                                                               </div>
-                                                            </div>
-                                                            <div class="contents relatedObjectContents relatedObject">
-                                                               <div></div>
-                                                            </div>
-                                                         </div>
-                                                         <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Properties_Queried_By ○  DNSQueryObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">
-                                                                     
-                                                                     
-                                                                     "cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1260,24 +1316,15 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Characterized_By ○  DNSRecordObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">
+                                                               <div class="idrefHeading">Properties_Queried_By ○  DNSQueryObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">
                                                                      
                                                                      
-                                                                     "cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c"
-                                                                     
-                                                                     </span> 
-                                                               </div>
-                                                            </div>
-                                                            <div class="contents relatedObjectContents relatedObject">
-                                                               <div></div>
-                                                            </div>
-                                                         </div>
-                                                         <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Resolved_To ○  AddressObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1')">
-                                                                     
-                                                                     
-                                                                     "cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1288,24 +1335,15 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Properties_Queried_By ○  DNSQueryObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">
+                                                               <div class="idrefHeading">Characterized_By ○  DNSRecordObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">
                                                                      
                                                                      
-                                                                     "cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4"
-                                                                     
-                                                                     </span> 
-                                                               </div>
-                                                            </div>
-                                                            <div class="contents relatedObjectContents relatedObject">
-                                                               <div></div>
-                                                            </div>
-                                                         </div>
-                                                         <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Characterized_By ○  DNSRecordObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">
-                                                                     
-                                                                     
-                                                                     "cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1316,24 +1354,15 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Resolved_To ○  AddressObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7')">
+                                                               <div class="idrefHeading">Resolved_To ○  AddressObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-f686e94e-d7ff-48b1-a1c3-0f5e8b8d59c1')">
                                                                      
                                                                      
-                                                                     "cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7"
-                                                                     
-                                                                     </span> 
-                                                               </div>
-                                                            </div>
-                                                            <div class="contents relatedObjectContents relatedObject">
-                                                               <div></div>
-                                                            </div>
-                                                         </div>
-                                                         <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Extracted_From ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">
-                                                                     
-                                                                     
-                                                                     "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1344,10 +1373,91 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Sub-domain_Of ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">
+                                                               <div class="idrefHeading">Properties_Queried_By ○  DNSQueryObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">
                                                                      
                                                                      
-                                                                     "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"
+                                                                     [ jump to target ]
+                                                                     
+                                                                     </span> 
+                                                               </div>
+                                                            </div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Characterized_By ○  DNSRecordObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">
+                                                                     
+                                                                     
+                                                                     [ jump to target ]
+                                                                     
+                                                                     </span> 
+                                                               </div>
+                                                            </div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Resolved_To ○  AddressObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-428679c7-89c4-4d3a-9693-dd2beb617fb7')">
+                                                                     
+                                                                     
+                                                                     [ jump to target ]
+                                                                     
+                                                                     </span> 
+                                                               </div>
+                                                            </div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Extracted_From ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">
+                                                                     
+                                                                     
+                                                                     [ jump to target ]
+                                                                     
+                                                                     </span> 
+                                                               </div>
+                                                            </div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Sub-domain_Of ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018')">
+                                                                     
+                                                                     
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1432,10 +1542,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Resolved_To ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                               <div class="idrefHeading">Resolved_To ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
                                                                      
                                                                      
-                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1527,15 +1642,7 @@ function toggle(currentNode)
                                                             </div>
                                                             <div class="contents cyboxPropertiesContents cyboxProperties">
                                                                <div class="container cyboxPropertiesContainer cyboxProperties">
-                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Resource_Record</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue"></span><div class="cyboxPropertiesLink">
-                                                                        <div class="objectReference"> <span class="externalLinkWarning">[external]</span>  ○ <span class="externalTargetLink">
-                                                                              
-                                                                              
-                                                                              "cybox:object-6ec1cb36-30c8-11e2-8011-000c291a73d5"
-                                                                              
-                                                                              </span> 
-                                                                        </div>
-                                                                     </div>
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Resource_Record</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue"></span><div class="cyboxPropertiesLink"></div>
                                                                   </div>
                                                                   <div class="contents cyboxPropertiesContents cyboxProperties"></div>
                                                                </div>
@@ -1550,10 +1657,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Properties_Queried ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                               <div class="idrefHeading">Properties_Queried ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
                                                                      
                                                                      
-                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1564,10 +1676,15 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Searched_For ○  DNSRecordObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">
+                                                               <div class="idrefHeading">Searched_For ○  DNSRecordObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">
                                                                      
                                                                      
-                                                                     "cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1678,10 +1795,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Characterizes ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                               <div class="idrefHeading">Characterizes ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
                                                                      
                                                                      
-                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1692,10 +1814,15 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Searched_For_By ○  DNSQueryObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">
+                                                               <div class="idrefHeading">Searched_For_By ○  DNSQueryObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">
                                                                      
                                                                      
-                                                                     "cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1761,24 +1888,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Resolved_To ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                               <div class="idrefHeading">Resolved_To ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
                                                                      
                                                                      
-                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
-                                                                     
-                                                                     </span> 
-                                                               </div>
-                                                            </div>
-                                                            <div class="contents relatedObjectContents relatedObject">
-                                                               <div></div>
-                                                            </div>
-                                                         </div>
-                                                         <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contained_Within ○  DNSQueryObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">
-                                                                     
-                                                                     
-                                                                     "cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1789,10 +1907,34 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contained_Within ○  DNSRecordObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">
+                                                               <div class="idrefHeading">Contained_Within ○  DNSQueryObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-bea8273c-3b4d-409f-880e-c53c64f8a05c')">
                                                                      
                                                                      
-                                                                     "cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c"
+                                                                     [ jump to target ]
+                                                                     
+                                                                     </span> 
+                                                               </div>
+                                                            </div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contained_Within ○  DNSRecordObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-4c9bad1b-e4ac-4b3e-9e28-fbf03b73613c')">
+                                                                     
+                                                                     
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1884,15 +2026,7 @@ function toggle(currentNode)
                                                             </div>
                                                             <div class="contents cyboxPropertiesContents cyboxProperties">
                                                                <div class="container cyboxPropertiesContainer cyboxProperties">
-                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Resource_Record</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue"></span><div class="cyboxPropertiesLink">
-                                                                        <div class="objectReference"> <span class="externalLinkWarning">[external]</span>  ○ <span class="externalTargetLink">
-                                                                              
-                                                                              
-                                                                              "cybox:object-6ec8ffaa-30c8-11e2-8011-000c291a73d5"
-                                                                              
-                                                                              </span> 
-                                                                        </div>
-                                                                     </div>
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Resource_Record</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue"></span><div class="cyboxPropertiesLink"></div>
                                                                   </div>
                                                                   <div class="contents cyboxPropertiesContents cyboxProperties"></div>
                                                                </div>
@@ -1907,10 +2041,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Properties_Queried ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                               <div class="idrefHeading">Properties_Queried ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
                                                                      
                                                                      
-                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -1921,10 +2060,15 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Searched_For ○  DNSRecordObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">
+                                                               <div class="idrefHeading">Searched_For ○  DNSRecordObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">
                                                                      
                                                                      
-                                                                     "cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -2035,10 +2179,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Searched_For_By ○  DNSQueryObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">
+                                                               <div class="idrefHeading">Searched_For_By ○  DNSQueryObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">
                                                                      
                                                                      
-                                                                     "cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -2104,24 +2253,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Resolved_To ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
+                                                               <div class="idrefHeading">Resolved_To ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3')">
                                                                      
                                                                      
-                                                                     "cybox:object-45ed3e11-5be1-4a7e-8f02-25b8f74196d3"
-                                                                     
-                                                                     </span> 
-                                                               </div>
-                                                            </div>
-                                                            <div class="contents relatedObjectContents relatedObject">
-                                                               <div></div>
-                                                            </div>
-                                                         </div>
-                                                         <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contained_Within ○  DNSQueryObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">
-                                                                     
-                                                                     
-                                                                     "cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -2132,10 +2272,34 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contained_Within ○  DNSRecordObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">
+                                                               <div class="idrefHeading">Contained_Within ○  DNSQueryObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-c1849f06-d433-4ef8-bcfa-a516a008c8d4')">
                                                                      
                                                                      
-                                                                     "cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b"
+                                                                     [ jump to target ]
+                                                                     
+                                                                     </span> 
+                                                               </div>
+                                                            </div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">Contained_Within ○  DNSRecordObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-1f68760e-fa04-4730-936d-d3abcc4b365b')">
+                                                                     
+                                                                     
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -2201,10 +2365,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contains ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">
+                                                               <div class="idrefHeading">Contains ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">
                                                                      
                                                                      
-                                                                     "cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -2215,10 +2384,15 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Contained_Within ○  <span class="externalLinkWarning">[external]</span>  ○ <span class="externalTargetLink">
+                                                               <div class="idrefHeading">Contained_Within ○  <span class="externalLinkWarning">[external]</span>  ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-6dc7fc5a-30c8-11e2-8011-000c291a73d5"
+                                                                  
+                                                                  <span class="externalTargetLink">
                                                                      
                                                                      
-                                                                     "cybox:object-6dc7fc5a-30c8-11e2-8011-000c291a73d5"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -2284,24 +2458,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Properties_Queried_By ○  DNSQueryObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c')">
+                                                               <div class="idrefHeading">Properties_Queried_By ○  DNSQueryObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c')">
                                                                      
                                                                      
-                                                                     "cybox:object-79a3f502-478d-4c0c-a97f-d10d69658b4c"
-                                                                     
-                                                                     </span> 
-                                                               </div>
-                                                            </div>
-                                                            <div class="contents relatedObjectContents relatedObject">
-                                                               <div></div>
-                                                            </div>
-                                                         </div>
-                                                         <div class="container relatedObjectContainer relatedObject">
-                                                            <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Properties_Queried_By ○  DNSQueryObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba')">
-                                                                     
-                                                                     
-                                                                     "cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -2312,10 +2477,15 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Extracted_From ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">
+                                                               <div class="idrefHeading">Properties_Queried_By ○  DNSQueryObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-b7edd88e-5b47-42a6-a5be-ab87d8d8d1ba')">
                                                                      
                                                                      
-                                                                     "cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -2326,10 +2496,34 @@ function toggle(currentNode)
                                                          </div>
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">FQDN_Of ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">
+                                                               <div class="idrefHeading">Extracted_From ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">
                                                                      
                                                                      
-                                                                     "cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8"
+                                                                     [ jump to target ]
+                                                                     
+                                                                     </span> 
+                                                               </div>
+                                                            </div>
+                                                            <div class="contents relatedObjectContents relatedObject">
+                                                               <div></div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container relatedObjectContainer relatedObject">
+                                                            <div class="heading relatedObjectHeading relatedObject">
+                                                               <div class="idrefHeading">FQDN_Of ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-fa7efe7f-e1b4-45de-ba7e-c6a7d625c9d8')">
+                                                                     
+                                                                     
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -2423,10 +2617,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Properties_Queried ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">
+                                                               <div class="idrefHeading">Properties_Queried ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">
                                                                      
                                                                      
-                                                                     "cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>
@@ -2520,10 +2719,15 @@ function toggle(currentNode)
                                                       <div class="contents relatedObjects">
                                                          <div class="container relatedObjectContainer relatedObject">
                                                             <div class="heading relatedObjectHeading relatedObject">
-                                                               <div class="idrefHeading">Properties_Queried ○  URIObjectType ○ <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">
+                                                               <div class="idrefHeading">Properties_Queried ○  URIObjectType ○ 
+                                                                  
+                                                                  
+                                                                  "cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557"
+                                                                  
+                                                                  <span class="highlightTargetLink" onclick="highlightTarget('cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557')">
                                                                      
                                                                      
-                                                                     "cybox:object-486b9846-ced7-49d3-ae92-7845f06b6557"
+                                                                     [ jump to target ]
                                                                      
                                                                      </span> 
                                                                </div>

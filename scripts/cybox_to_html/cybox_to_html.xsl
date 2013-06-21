@@ -486,16 +486,21 @@ ikirillov@mitre.org
                       margin-left: 1em;
                     }
                     
+                    .expandableToggle::before
+                    {
+                      content: "+";
+                      color: goldenrod;
+                    }
+                    
                     .expandableToggle
                     {
-                      background-color: black;
-                      color: white;
+                      /* background-color: black; */
+                      /* color: white; */
                     }
                     .expandableContents
                     {
-                      border-style: solid;
-                      border-width: 1px;
-                      border-color: black;
+                      background-color: #A8CBDE;
+                      padding: 1em;
                     }
                 </style>
                 
@@ -929,6 +934,9 @@ function toggle(currentNode)
             <xsl:text> &#x25CB; </xsl:text>
         </xsl:if>
         
+        <!-- THIS IS THE MAIN LINK TEXT -->
+        "<xsl:value-of select="$idref"/>"
+
         <xsl:element name="span">
             <xsl:variable name="linkClass" select="if ($targetObject) then ('highlightTargetLink') else ('externalTargetLink')" />
             <xsl:attribute name="class"><xsl:value-of select="$linkClass" /></xsl:attribute>
@@ -939,7 +947,7 @@ function toggle(currentNode)
             </xsl:if>
             
             <!-- THIS IS THE MAIN LINK TEXT -->
-            "<xsl:value-of select="$idref"/>"
+            [ jump to target ]
             
         </xsl:element>
         <xsl:text> </xsl:text>
@@ -1241,17 +1249,16 @@ function toggle(currentNode)
     <xsl:template match="@object_reference" mode="cyboxProperties">
         <xsl:variable name="targetId" select="fn:data(.)"/>
         <xsl:variable name="targetObject" select="//*[@id = $targetId]"/>
-        <div class="objectReference">
-          <xsl:call-template name="clickableIdref">
-              <xsl:with-param name="targetObject" select="$targetObject" />
-              <xsl:with-param name="relationshipOrAssociationType" select="()"/>
-              <xsl:with-param name="idref" select="$targetId"/>
-          </xsl:call-template>
-        </div>
         
         <xsl:if test="$targetObject">
             <div class="expandableContainer">
-                <div class="expandableToggle" onclick="toggle(this)">toggle</div>
+                <div class="expandableToggle objectReference" onclick="toggle(this)">
+                    <xsl:call-template name="clickableIdref">
+                        <xsl:with-param name="targetObject" select="$targetObject" />
+                        <xsl:with-param name="relationshipOrAssociationType" select="()"/>
+                        <xsl:with-param name="idref" select="$targetId"/>
+                    </xsl:call-template>
+                </div>
                 <div class="expandableContents" style="display: none;">
                     <xsl:apply-templates select="$targetObject/*"/>
                 </div>
