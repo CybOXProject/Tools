@@ -82,6 +82,11 @@ ikirillov@mitre.org
                <head>
                 <title>CybOX Output</title>
                 <style type="text/css">
+                    
+                    body
+                    {
+                      font-family: Arial,Helvetica,sans-serif;
+                    }
                     /* define table skin */
                     table.grid {
                     margin: 0px;
@@ -149,6 +154,17 @@ ikirillov@mitre.org
                     /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
                     font-size: 11px;
                     color: #039;
+                    }
+                    
+                    #hor-minimalist-a
+                    {
+                      font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                      font-size: 12px;
+                    }
+                    #hor-minimalist-a > thead > tr > th
+                    {
+                      border-bottom: 2px solid #6678b1;
+                      text-align: left;
                     }
                     /*
                     #hor-minimalist-a
