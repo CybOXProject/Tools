@@ -51,6 +51,11 @@ from cybox.objects.uri_object import URI
 from cybox.objects.whois_object import (WhoisContact, WhoisContacts,
         WhoisEntry, WhoisNameservers, WhoisRegistrar, WhoisStatus,
         WhoisStatuses)
+import cybox.utils
+
+NS = cybox.utils.Namespace("http://www.github.com/CybOXProject/Tools/",
+                           "email_to_cybox")
+cybox.utils.set_id_namespace(NS)
 
 
 __all__ = ["EmailParser"]
