@@ -411,6 +411,18 @@
                       content: "+";
                       color: goldenrod;
                     }
+                    .expandableContainer.collapsed > .expandableToggle::before
+                    {
+                      content: "+";
+                    }
+                    .expandableContainer.expanded > .expandableToggle::before
+                    {
+                      content: "-";
+                    }
+                    .expandableContainer > .expandableToggle::before
+                    {
+                      color: goldenrod;
+                    }
                     
                     .expandableToggle
                     {
@@ -421,6 +433,11 @@
                     {
                       background-color: #A8CBDE;
                       padding: 1em;
+                    }
+                    
+                    .expandableContainer.collapsed > .expandableContents
+                    {
+                      display: none;
                     }
                 </style><script type="text/javascript">
                     
@@ -507,16 +524,10 @@ function toggle(currentNode)
 {
   console.log("starting toggle");
   var parent = currentNode.parentNode;
-  var content = parent.querySelector(".expandableContents");
-  console.log("content: " + content);
-  console.log("content's style.display: " + content.style.display);
-  if (content.style.display == 'none')
-  {
-    content.style.display = '';
-  } else
-  {
-    content.style.display = 'none';
-  }
+  
+  parent.classList.toggle("collapsed");
+  parent.classList.toggle("expanded");
+  
   console.log("finished toggle");
 }
 
@@ -538,7 +549,7 @@ function toggle(currentNode)
                   <TD>1</TD>
                   <TD>0</TD>
                   <TD>stix_phishing__mcoarr.xml</TD>
-                  <TD>2013-06-21T13:23:15.319-04:00</TD>
+                  <TD>2013-06-21T13:44:10.202-04:00</TD>
                </TR>
             </table>
          </div>
@@ -733,7 +744,7 @@ function toggle(currentNode)
                                                             <div class="contents cyboxPropertiesContents cyboxProperties">
                                                                <div class="container cyboxPropertiesContainer cyboxProperties">
                                                                   <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue"></span><div class="cyboxPropertiesLink">
-                                                                        <div class="expandableContainer">
+                                                                        <div class="expandableContainer collapsed">
                                                                            <div class="expandableToggle objectReference" onclick="toggle(this)"> FileObjectType ○ 
                                                                               
                                                                               
@@ -746,7 +757,7 @@ function toggle(currentNode)
                                                                                  
                                                                                  </span> 
                                                                            </div>
-                                                                           <div class="expandableContents" style="display: none;">
+                                                                           <div class="expandableContents">
                                                                               <fieldset>
                                                                                  <legend>cybox properties (type: FileObj:FileObjectType)</legend>
                                                                                  <div class="container cyboxPropertiesContainer cyboxProperties">
@@ -854,7 +865,7 @@ function toggle(currentNode)
                                                             <div class="contents cyboxPropertiesContents cyboxProperties">
                                                                <div class="container cyboxPropertiesContainer cyboxProperties">
                                                                   <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Link</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue"></span><div class="cyboxPropertiesLink">
-                                                                        <div class="expandableContainer">
+                                                                        <div class="expandableContainer collapsed">
                                                                            <div class="expandableToggle objectReference" onclick="toggle(this)"> URIObjectType ○ 
                                                                               
                                                                               
@@ -867,7 +878,7 @@ function toggle(currentNode)
                                                                                  
                                                                                  </span> 
                                                                            </div>
-                                                                           <div class="expandableContents" style="display: none;">
+                                                                           <div class="expandableContents">
                                                                               <fieldset>
                                                                                  <legend>cybox properties (type: URIObj:URIObjectType)</legend>
                                                                                  <div class="container cyboxPropertiesContainer cyboxProperties">

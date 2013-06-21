@@ -491,6 +491,18 @@ ikirillov@mitre.org
                       content: "+";
                       color: goldenrod;
                     }
+                    .expandableContainer.collapsed > .expandableToggle::before
+                    {
+                      content: "+";
+                    }
+                    .expandableContainer.expanded > .expandableToggle::before
+                    {
+                      content: "-";
+                    }
+                    .expandableContainer > .expandableToggle::before
+                    {
+                      color: goldenrod;
+                    }
                     
                     .expandableToggle
                     {
@@ -501,6 +513,11 @@ ikirillov@mitre.org
                     {
                       background-color: #A8CBDE;
                       padding: 1em;
+                    }
+                    
+                    .expandableContainer.collapsed > .expandableContents
+                    {
+                      display: none;
                     }
                 </style>
                 
@@ -591,16 +608,10 @@ function toggle(currentNode)
 {
   console.log("starting toggle");
   var parent = currentNode.parentNode;
-  var content = parent.querySelector(".expandableContents");
-  console.log("content: " + content);
-  console.log("content's style.display: " + content.style.display);
-  if (content.style.display == 'none')
-  {
-    content.style.display = '';
-  } else
-  {
-    content.style.display = 'none';
-  }
+  
+  parent.classList.toggle("collapsed");
+  parent.classList.toggle("expanded");
+  
   console.log("finished toggle");
 }
 ]]>
@@ -1251,7 +1262,7 @@ function toggle(currentNode)
         <xsl:variable name="targetObject" select="//*[@id = $targetId]"/>
         
         <xsl:if test="$targetObject">
-            <div class="expandableContainer">
+            <div class="expandableContainer collapsed">
                 <div class="expandableToggle objectReference" onclick="toggle(this)">
                     <xsl:call-template name="clickableIdref">
                         <xsl:with-param name="targetObject" select="$targetObject" />
@@ -1259,7 +1270,7 @@ function toggle(currentNode)
                         <xsl:with-param name="idref" select="$targetId"/>
                     </xsl:call-template>
                 </div>
-                <div class="expandableContents" style="display: none;">
+                <div class="expandableContents">
                     <xsl:apply-templates select="$targetObject/*"/>
                 </div>
             </div>

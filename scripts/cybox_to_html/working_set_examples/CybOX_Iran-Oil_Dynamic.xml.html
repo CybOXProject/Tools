@@ -411,6 +411,18 @@
                       content: "+";
                       color: goldenrod;
                     }
+                    .expandableContainer.collapsed > .expandableToggle::before
+                    {
+                      content: "+";
+                    }
+                    .expandableContainer.expanded > .expandableToggle::before
+                    {
+                      content: "-";
+                    }
+                    .expandableContainer > .expandableToggle::before
+                    {
+                      color: goldenrod;
+                    }
                     
                     .expandableToggle
                     {
@@ -421,6 +433,11 @@
                     {
                       background-color: #A8CBDE;
                       padding: 1em;
+                    }
+                    
+                    .expandableContainer.collapsed > .expandableContents
+                    {
+                      display: none;
                     }
                 </style><script type="text/javascript">
                     
@@ -507,16 +524,10 @@ function toggle(currentNode)
 {
   console.log("starting toggle");
   var parent = currentNode.parentNode;
-  var content = parent.querySelector(".expandableContents");
-  console.log("content: " + content);
-  console.log("content's style.display: " + content.style.display);
-  if (content.style.display == 'none')
-  {
-    content.style.display = '';
-  } else
-  {
-    content.style.display = 'none';
-  }
+  
+  parent.classList.toggle("collapsed");
+  parent.classList.toggle("expanded");
+  
   console.log("finished toggle");
 }
 
@@ -538,7 +549,7 @@ function toggle(currentNode)
                   <TD>2</TD>
                   <TD>0</TD>
                   <TD>CybOX_Iran-Oil_Dynamic.xml</TD>
-                  <TD>2013-06-21T13:23:12.26-04:00</TD>
+                  <TD>2013-06-21T13:44:06.995-04:00</TD>
                </TR>
             </table>
          </div>
