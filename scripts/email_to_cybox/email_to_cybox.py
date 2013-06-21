@@ -451,7 +451,7 @@ class EmailParser:
         if self.__verbose_output:
             sys.stderr.write("** creating uri object for: %s\n" % url)
 
-        return URI(url, URI.TYPE_URL)
+        return URI(url)
 
     def __create_domain_name_object(self, domain):
         """ Creates a CybOX URIObjectType object """
@@ -461,7 +461,7 @@ class EmailParser:
         if self.__verbose_output:
             sys.stderr.write("** creating domain name object for: %s\n" % domain)
 
-        return URI(domain, URI.TYPE_DOMAIN)
+        return URI(domain)
 
     def __create_whois_object(self, domain):
         """ Creates a CybOX WHOISObjectType object """
@@ -830,7 +830,7 @@ class EmailParser:
             message.attachments = Attachments()
             for f in files:
                 message.attachments.append(f.parent.id_)
-                f.add_related(message, "Contained_In", inline=False)
+                f.add_related(message, "Contained_Within", inline=False)
 
         if self.include_raw_headers:
             raw_headers_str = self.__get_raw_headers(msg).strip()
@@ -957,6 +957,8 @@ def main():
 
     try:
         observables = translator.generate_cybox_from_email_file(input_data)
+        print "<?xml version='1.0' encoding='UTF-8'?>"
+        print "<!DOCTYPE doc [<!ENTITY comma '&#44;'>]>"
         print observables.to_xml()
     except Exception, err:
         sys.stderr.write('\n!! error: %s\n' % str(err))
