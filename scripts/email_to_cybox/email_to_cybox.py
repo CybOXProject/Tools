@@ -771,7 +771,7 @@ class EmailParser:
                 new_objs['ipv4'] = dns_record_obj.ip_address
 
             #get ipv6 dns record for domain
-            query6_obj = self.__create_dns_query_object(domain, 'AAAAA')
+            query6_obj = self.__create_dns_query_object(domain, 'AAAA')
             if domain_obj:
                 query6_obj.add_related(domain_obj, 'Searched_For', inline=False)
                 domain_obj.add_related(query6_obj, 'Searched_For_By', inline=False)
