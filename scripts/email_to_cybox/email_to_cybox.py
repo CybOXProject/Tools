@@ -833,14 +833,15 @@ class EmailParser:
                 f.add_related(message, "Contained_In", inline=False)
 
         if self.include_raw_headers:
-            raw_headers_str = self.__get_raw_headers(msg)
-            message.raw_header = String("<![CDATA[ " + raw_headers_str + " ]]>")
+            raw_headers_str = self.__get_raw_headers(msg).strip()
+            if raw_headers_str:
+                message.raw_header = String(raw_headers_str)
 
         # need this for parsing urls AND raw body text
         raw_body = "\n".join(self.__get_raw_body_text(msg)).strip()
 
-        if self.include_raw_body:
-            message.raw_body = String("<![CDATA[ " + raw_body + " ]]>")
+        if self.include_raw_body and raw_body:
+            message.raw_body = String(raw_body)
 
         if self.include_urls:
             (url_list, domain_list) = self.__parse_urls(raw_body)
@@ -848,7 +849,8 @@ class EmailParser:
                 links = Links()
                 for u in url_list:
                     links.append(LinkReference(u.parent.id_))
-                message.links = links
+                if links:
+                    message.links = links
 
         # Return a list of all objects we've built
         return [message] + files + url_list + domain_list
