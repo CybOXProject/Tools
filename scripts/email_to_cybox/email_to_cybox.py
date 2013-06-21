@@ -137,7 +137,7 @@ class EmailParser:
     def __parse_email_string(self, data):
         """ Returns an email.Message object """
         if self.__verbose_output:
-            print "** parsing email input string"
+            sys.stderr.write("** parsing email input string\n")
 
         msg = email.message_from_string(data)
         return msg
@@ -147,7 +147,7 @@ class EmailParser:
 
         @data can be sys.stdin or a file-like object """
         if self.__verbose_output:
-            print "** parsing email input file"
+            sys.stderr.write("** parsing email input file\n")
 
         msg = email.message_from_file(data)
         return msg
@@ -203,13 +203,13 @@ class EmailParser:
         try:
             response = urllib2.urlopen(request)
         except urllib2.HTTPError, e:
-            print 'The WHOIS http service failed to fulfill the request because:'
-            print 'Error code: ', e.code
-            print 'No Whois information for domain: ' + domain + ' will be captured.\n'
+            sys.stderr.write('The WHOIS http service failed to fulfill the request because:\n')
+            sys.stderr.write('Error code: %s\n' % e.code)
+            sys.stderr.write('No Whois information for domain %s will be captured.\n' % domain)
             return None
         except urllib2.URLError, e:
-            print 'Cannot reach the WHOIS http service because:' + str(e.reason)
-            print 'No Whois information for domain: ' + domain + ' will be captured.\n'
+            sys.stderr.write('Cannot reach the WHOIS http service because: %s\n' % e.reason)
+            sys.stderr.write('No Whois information for domain %s will be captured.\n' % domain)
             return None
         else:
             response_text = response.read()
@@ -226,8 +226,8 @@ class EmailParser:
         try:
             record = whois.whois(domain)
         except Exception, e:
-            print 'The whois lookup for the domain: ' + domain + ' failed for the following reason:\n\n'
-            print e
+            sys.stderr.write('The whois lookup for the domain: ' + domain + ' failed for the following reason:\n\n')
+            sys.stderr.write(e + "\n")
             return None
 
         return self.__convert_whois_record(record)
@@ -301,7 +301,7 @@ class EmailParser:
         files = []
 
         if self.__verbose_output:
-            print "** parsing attachments"
+            sys.stderr.write("** parsing attachments\n")
 
         # extract the email attachments into their own FileObjectType objects
         if msg.is_multipart():
@@ -323,7 +323,7 @@ class EmailParser:
                     #created_date = self.__get_attachment_created_date(part)
 
                     if self.__verbose_output:
-                        print "** creating file object for: %s, size: %d bytes" % (f.file_name, f.size)
+                        sys.stderr.write("** creating file object for: %s, size: %d bytes\n" % (f.file_name, f.size))
 
                     md5_hash = hashlib.md5(file_data).hexdigest()
                     f.add_hash(md5_hash)
@@ -396,7 +396,7 @@ class EmailParser:
     def __create_cybox_headers(self, msg):
         """ Returns a CybOX EmailHeaderType object """
         if self.__verbose_output:
-            print "** parsing headers"
+            sys.stderr.write("** parsing headers\n")
 
         headers = EmailHeader()
 
@@ -449,7 +449,7 @@ class EmailParser:
             return None
 
         if self.__verbose_output:
-            print "** creating uri object for: " + url
+            sys.stderr.write("** creating uri object for: %s\n" % url)
 
         return URI(url, URI.TYPE_URL)
 
@@ -459,7 +459,7 @@ class EmailParser:
             return None
 
         if self.__verbose_output:
-            print "** creating domain name object for: " + str(domain)
+            sys.stderr.write("** creating domain name object for: %s\n" % domain)
 
         return URI(domain, URI.TYPE_DOMAIN)
 
@@ -469,7 +469,7 @@ class EmailParser:
             return None
 
         if(self.__verbose_output):
-            print "** creating Whois object for: " + domain
+            sys.stderr.write("** creating Whois object for: %s\n" % domain)
 
         if self.http_whois:
             record = self.__get_whois_record_http(domain)
@@ -559,7 +559,7 @@ class EmailParser:
             return None
 
         if self.__verbose_output:
-            print "** creating email address object for: " + email_addr
+            sys.stderr.write("** creating email address object for: %s\n" % email_addr)
 
         addr_obj = address_object.AddressObjectType(
                    category='e-mail',
@@ -588,7 +588,7 @@ class EmailParser:
             return None
 
         if self.__verbose_output:
-            print "** creating ip address object for: " + str(ip_addr)
+            sys.stderr.write("** creating ip address object for: %s\n" % ip_addr)
 
         if ':' in str(ip_addr):
             category = Address.CAT_IPV6
@@ -675,7 +675,7 @@ class EmailParser:
         unique_domains = set()
 
         if self.__verbose_output:
-            print "** parsing urls from email body"
+            sys.stderr.write("** parsing urls from email body\n")
 
         for match in URL_PATTERN.findall(body):
             url = match[0]
@@ -864,14 +864,6 @@ class EmailParser:
         """ Returns a CybOX Email Message Object """
         msg = self.__parse_email_string(data)
         return Observables(self.__parse_email_message(msg))
-
-    def write_cybox(self, cybox_obj, filename):
-        """Write the CyBOX Email Message Object to file """
-        if self.__verbose_output:
-            print "** writing email message object to file: " + filename
-
-        with open(filename, 'w') as outfile:
-            cybox_obj.to_obj().export(outfile, 0)
 # END CLASS
 
 
@@ -882,18 +874,17 @@ def main():
     description = "Converts raw email to CybOX representation"
     #TODO: make this look cleaner
     epilog = """
-        Example: `cat email.txt | python email_to_cybox.py -o output.xml - ` \n
-        Example: `python email_to_cybox.py -i foobar.txt -o output.xml` \n
-        Example: `python email_to_cybox.pw -i foobar.txt -o output.xml --headers to,from,cc --exclude-urls` \n
+        Example: `cat email.txt | python email_to_cybox.py - > output.exml` \n
+        Example: `python email_to_cybox.py foobar.txt > output.xml` \n
+        Example: `python email_to_cybox.py --headers to,from,cc --exclude-urls foobar.txt > output.xml ` \n
         """
 
     parser = argparse.ArgumentParser(description=description, epilog=epilog)
     parser.add_argument('-v', '--verbose', action='store_true',
             help="verbose output")
 
-    parser.add_argument('-i', '--input', help="input file")
-    parser.add_argument('-o', '--output', help="output file",
-            default="output.xml")
+    parser.add_argument('input',
+            help="message data (can be either a file or '-' for STDIN)")
 
     parser.add_argument('--inline-files', action='store_true',
             help="embed file object details in the attachment section")
@@ -933,11 +924,11 @@ def main():
 
     args = parser.parse_args()
 
-    if args.input:
+    if args.input == "-":
+        input_data = sys.stdin
+    else:
         #TODO: make sure this gets closed
         input_data = open(args.input, 'r')
-    else:
-        input_data = sys.stdin
 
     NAMESERVER = args.use_dns_server
     VERBOSE_OUTPUT = args.verbose
@@ -965,14 +956,14 @@ def main():
     translator.http_whois = args.http_whois
 
     try:
-        cybox_objects = translator.generate_cybox_from_email_file(input_data)
-        translator.write_cybox(cybox_objects, args.output)
+        observables = translator.generate_cybox_from_email_file(input_data)
+        print observables.to_xml()
     except Exception, err:
-        print('\n!! error: %s\n' % str(err))
-        traceback.print_exc()
+        sys.stderr.write('\n!! error: %s\n' % str(err))
+        traceback.print_exc(file=sys.stderr)
 
     if(VERBOSE_OUTPUT):
-        print "** processing completed"
+        sys.stderr.write("** processing completed\n")
 
 
 if __name__ == '__main__':
