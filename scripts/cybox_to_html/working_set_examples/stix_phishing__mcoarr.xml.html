@@ -406,38 +406,49 @@
                       margin-left: 1em;
                     }
                     
-                    .expandableToggle::before
-                    {
-                      content: "+";
-                      color: goldenrod;
-                    }
-                    .expandableContainer.collapsed > .expandableToggle::before
+                    .expandableContainer.collapsed > .expandableToggle::before,
+                    .expandableContainer.collapsed.expandableToggle::before
                     {
                       content: "+";
                     }
-                    .expandableContainer.expanded > .expandableToggle::before
+                    .expandableContainer.expanded > .expandableToggle::before,
+                    .expandableContainer.expanded.expandableToggle::before
                     {
                       content: "-";
                     }
-                    .expandableContainer > .expandableToggle::before
+                    .expandableContainer > .expandableToggle::before,
+                    .expandableContainer.expandableToggle::before
                     {
                       color: goldenrod;
                     }
                     
                     .expandableToggle
                     {
-                      /* background-color: black; */
-                      /* color: white; */
+                      cursor: pointer; 
                     }
-                    .expandableContents
+                    .expandableContainer > .expandableContents
                     {
                       background-color: #A8CBDE;
                       padding: 1em;
                     }
                     
-                    .expandableContainer.collapsed > .expandableContents
+                    .expandableSeparate.expandableContainer.collapsed > .expandableContents
                     {
                       display: none;
+                    }
+
+                    .longText
+                    {
+                       width: 60em;
+                    }
+                    .expandableSame.expandableContainer.collapsed
+                    {
+                      overflow: hidden;
+                      height: 1em;
+                    }
+                    .expandableSame.expandableContainer.expanded
+                    {
+                        word-wrap: break-word;
                     }
                 </style><script type="text/javascript">
                     
@@ -520,13 +531,13 @@ function findAndExpandTarget(targetElement)
         
 */
 
-function toggle(currentNode)
+function toggle(containerNode)
 {
   console.log("starting toggle");
-  var parent = currentNode.parentNode;
+  //var parent = currentNode.parentNode;
   
-  parent.classList.toggle("collapsed");
-  parent.classList.toggle("expanded");
+  containerNode.classList.toggle("collapsed");
+  containerNode.classList.toggle("expanded");
   
   console.log("finished toggle");
 }
@@ -549,7 +560,7 @@ function toggle(currentNode)
                   <TD>1</TD>
                   <TD>0</TD>
                   <TD>stix_phishing__mcoarr.xml</TD>
-                  <TD>2013-06-21T13:44:10.202-04:00</TD>
+                  <TD>2013-06-21T15:12:43.924-04:00</TD>
                </TR>
             </table>
          </div>
@@ -744,8 +755,8 @@ function toggle(currentNode)
                                                             <div class="contents cyboxPropertiesContents cyboxProperties">
                                                                <div class="container cyboxPropertiesContainer cyboxProperties">
                                                                   <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">File</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue"></span><div class="cyboxPropertiesLink">
-                                                                        <div class="expandableContainer collapsed">
-                                                                           <div class="expandableToggle objectReference" onclick="toggle(this)"> FileObjectType ○ 
+                                                                        <div class="expandableContainer expandableSeparate collapsed">
+                                                                           <div class="expandableToggle objectReference" onclick="toggle(this.parentNode)"> FileObjectType ○ 
                                                                               
                                                                               
                                                                               "cybox:object-cb0ec4ad-4a39-4d4b-934b-72ff0563476f"
@@ -865,8 +876,8 @@ function toggle(currentNode)
                                                             <div class="contents cyboxPropertiesContents cyboxProperties">
                                                                <div class="container cyboxPropertiesContainer cyboxProperties">
                                                                   <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Link</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue"></span><div class="cyboxPropertiesLink">
-                                                                        <div class="expandableContainer collapsed">
-                                                                           <div class="expandableToggle objectReference" onclick="toggle(this)"> URIObjectType ○ 
+                                                                        <div class="expandableContainer expandableSeparate collapsed">
+                                                                           <div class="expandableToggle objectReference" onclick="toggle(this.parentNode)"> URIObjectType ○ 
                                                                               
                                                                               
                                                                               "cybox:object-1ba9f939-0c5a-421e-b59d-f8a6517f9018"

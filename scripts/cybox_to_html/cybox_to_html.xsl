@@ -486,38 +486,49 @@ ikirillov@mitre.org
                       margin-left: 1em;
                     }
                     
-                    .expandableToggle::before
-                    {
-                      content: "+";
-                      color: goldenrod;
-                    }
-                    .expandableContainer.collapsed > .expandableToggle::before
+                    .expandableContainer.collapsed > .expandableToggle::before,
+                    .expandableContainer.collapsed.expandableToggle::before
                     {
                       content: "+";
                     }
-                    .expandableContainer.expanded > .expandableToggle::before
+                    .expandableContainer.expanded > .expandableToggle::before,
+                    .expandableContainer.expanded.expandableToggle::before
                     {
                       content: "-";
                     }
-                    .expandableContainer > .expandableToggle::before
+                    .expandableContainer > .expandableToggle::before,
+                    .expandableContainer.expandableToggle::before
                     {
                       color: goldenrod;
                     }
                     
                     .expandableToggle
                     {
-                      /* background-color: black; */
-                      /* color: white; */
+                      cursor: pointer; 
                     }
-                    .expandableContents
+                    .expandableContainer > .expandableContents
                     {
                       background-color: #A8CBDE;
                       padding: 1em;
                     }
                     
-                    .expandableContainer.collapsed > .expandableContents
+                    .expandableSeparate.expandableContainer.collapsed > .expandableContents
                     {
                       display: none;
+                    }
+
+                    .longText
+                    {
+                       width: 60em;
+                    }
+                    .expandableSame.expandableContainer.collapsed
+                    {
+                      overflow: hidden;
+                      height: 1em;
+                    }
+                    .expandableSame.expandableContainer.expanded
+                    {
+                        word-wrap: break-word;
                     }
                 </style>
                 
@@ -604,13 +615,13 @@ function findAndExpandTarget(targetElement)
         
 */
 
-function toggle(currentNode)
+function toggle(containerNode)
 {
   console.log("starting toggle");
-  var parent = currentNode.parentNode;
+  //var parent = currentNode.parentNode;
   
-  parent.classList.toggle("collapsed");
-  parent.classList.toggle("expanded");
+  containerNode.classList.toggle("collapsed");
+  containerNode.classList.toggle("expanded");
   
   console.log("finished toggle");
 }
@@ -1199,10 +1210,12 @@ function toggle(currentNode)
       This will show the first and last 10 characters of the value and the
       string length.
     -->
+    <!--
     <xsl:template match="ArtifactObj:Raw_Artifact/text()[string-length() > 500]" mode="cyboxProperties">
         <xsl:variable name="data" select="fn:data(.)" />
         raw data omitted ["<xsl:value-of select='substring($data, 1, 10)'/> ... <xsl:value-of select='substring($data, string-length($data)-10, 10)'/>"; length: <xsl:value-of select="string-length()"/>]
     </xsl:template>
+    -->
     
     <!--
       Show email raw headers wrapped in a div with a class that is css styled
@@ -1236,6 +1249,17 @@ function toggle(currentNode)
         </div>
     </xsl:template>
     
+    <xsl:template match="text()" mode="cyboxProperties">
+        <xsl:choose>
+            <xsl:when test="string-length() gt 200">
+                <div class="longText expandableContainer expandableToggle expandableContents collapsed expandableSame" onclick="toggle(this)"><xsl:value-of select="fn:data(.)" /></div>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="fn:data(.)" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     <!--
       default template for printint out constraints associated with cybox:Properties entries
     -->
@@ -1262,8 +1286,8 @@ function toggle(currentNode)
         <xsl:variable name="targetObject" select="//*[@id = $targetId]"/>
         
         <xsl:if test="$targetObject">
-            <div class="expandableContainer collapsed">
-                <div class="expandableToggle objectReference" onclick="toggle(this)">
+            <div class="expandableContainer expandableSeparate collapsed">
+                <div class="expandableToggle objectReference" onclick="toggle(this.parentNode)">
                     <xsl:call-template name="clickableIdref">
                         <xsl:with-param name="targetObject" select="$targetObject" />
                         <xsl:with-param name="relationshipOrAssociationType" select="()"/>
