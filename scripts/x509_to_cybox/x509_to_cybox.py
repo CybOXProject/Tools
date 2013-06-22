@@ -9,6 +9,7 @@ import sys
 import os
 import cybox
 from cybox.core import Observables, Observable, Object
+from cybox.utils.nsparser import Namespace
 
 #Supported X509 Keywords
 x509_keywords = ['Version', 'Serial Number', 'Signature Algorithm', 'Issuer', 'Not Before', 'Not After ', 'Subject',
@@ -33,8 +34,9 @@ def cert_to_cybox(cert_dict):
     properties_dict['certificate']['standard_extensions'] = {}
     properties_dict['certificate']['non_standard_extensions'] = {}
     properties_dict['certificate']['subject_public_key']['rsa_public_key'] = {}
-    x509_obj_dict = {'properties' : properties_dict}
-    observable_dict = {'id': cybox.utils.IDGenerator('x509_to_cybox').create_id(prefix="observable"), 'object' : x509_obj_dict}
+    x509_obj_dict = {'properties' : properties_dict} 
+    x509_to_cybox = Namespace("https://github.com/CybOXProject/Tools", "x509_to_cybox")
+    observable_dict = {'id': cybox.utils.IDGenerator(x509_to_cybox).create_id(prefix="observable"), 'object' : x509_obj_dict}
 
     for key, value in cert_dict.items():
         if key == 'Version' :
