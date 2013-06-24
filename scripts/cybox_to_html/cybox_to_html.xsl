@@ -1069,7 +1069,7 @@ function toggle(containerNode)
         <xsl:variable name="friendlyName" select="fn:replace($localName, '_', ' ')" />
         <xsl:variable name="headingName" select="fn:upper-case($friendlyName)" />
         
-        <xsl:variable name="idStack" select="$idStack, (@id)"/>
+        <xsl:variable name="idStack" select="$idStack, (fn:data(@id))"/>
         
         <xsl:message>GENERIC OBJECT TEMPLATE current: id=<xsl:value-of select="@id"/> and idref=<xsl:value-of select="@idref"/> and object_reference=<xsl:value-of select="@object_reference" /> ### stack: <xsl:value-of select="fn:string-join($idStack, ',')" /></xsl:message>
         
@@ -1133,7 +1133,10 @@ function toggle(containerNode)
                                         </xsl:call-template>
                                     </div>
                                     <div class="expandableContents">
-                                        <xsl:apply-templates select="$targetObject/*"/>
+                                        <!-- TODO <xsl:apply-templates select="$targetObject/*"/> -->
+                                        <xsl:apply-templates select="$targetObject/*">
+                                            <xsl:with-param name="idStack" select="$idStack" />
+                                        </xsl:apply-templates>
                                     </div>
                                 </div>
                             </xsl:when>
@@ -1224,6 +1227,7 @@ function toggle(containerNode)
                 </xsl:apply-templates>
             </div>
         </div>
+        <xsl:message>(end template) GENERIC OBJECT TEMPLATE current: id=<xsl:value-of select="@id"/> and idref=<xsl:value-of select="@idref"/> and object_reference=<xsl:value-of select="@object_reference" /></xsl:message>
     </xsl:template>
     
     <!--
@@ -1392,6 +1396,7 @@ function toggle(containerNode)
             </xsl:call-template>
         </xsl:otherwise>
         </xsl:choose>
+        <xsl:message> (end template) @object_reference TEMPLATE current: object_reference=<xsl:value-of select="fn:data(.)"/> </xsl:message>
     </xsl:template>
     
 </xsl:stylesheet>
