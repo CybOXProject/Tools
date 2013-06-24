@@ -28,11 +28,36 @@ requirements:
  - XSLT 2.0 engine (this has been tested with Saxon 9.5)
  - a CybOX 2.0 input xml document
 
-Updated 2013-06-13
+Updated 2013
 mcoarr@mitre.org
 
 Updated 9/11/2012
 ikirillov@mitre.org
+
+DEVELOPER NOTES
+
+1. The inline expandable content is presents some chances for infinite
+   loops/recursions.  This should be detected.  The variable $idStack is
+   a sequence that contains all @id attributes that have been processed in the
+   the current output tree (it is similar to a call stack).  This is
+   accomplished by using "idStack" params in the templates and that param
+   is a sequence of string ids.  Each time a new id is processed, it gets
+   added to the current sequence (and will be visible for all templates
+   called within the current template - - essentially the current output
+   subtree).
+   
+   If you need to debug this, you can look in two places.  First, each
+   time an object, @object_reference, or observable is processed, debug
+   messages are printed out.  This should show up in the console (in
+   Oxygen, they show up in the "messages" window).  This is useful if the
+   stylesheet is failing.  You can see how far it is getting and where it
+   might be failing.
+   
+   Second, if the stylesheet is working and outputs html, each object or
+   @object_reference/@idref, will print out the current idStack.  You can
+   look in the source, or change the css for the class "debug" (it defaults
+   to "display: none").
+   html
 -->
 
 
@@ -617,16 +642,6 @@ function findAndExpandTarget(targetElement)
     }
 }
 
-
-/*
-
-    <div class="expandableContainer">
-        <div class="expandableToggle">toggle</div>
-        <div class="expandableContents">
-            <xsl:apply-templates select="$targetObject"/>
-        </div>
-        
-*/
 
 function toggle(containerNode)
 {
