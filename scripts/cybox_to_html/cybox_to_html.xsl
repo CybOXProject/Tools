@@ -1015,48 +1015,15 @@ function toggle(containerNode)
         <xsl:if test="@idref">
             <div class="foreignObservablePointer">
                 <xsl:variable name="targetId" select="string(@idref)"/>
-                <xsl:variable name="targetObject" select="//*[@id = $targetId]"/>
+                <xsl:variable name="relationshipOrAssociationType" select="''" />
                 
-
-                <!-- <span><xsl:value-of select="@idref"/></span> -->
-                <!--
-                <xsl:call-template name="clickableIdref">
-                    <xsl:with-param name="targetObject" select="$targetObject" />
-                    <xsl:with-param name="relationshipOrAssociationType" select="''"/>
-                    <xsl:with-param name="idref" select="@idref"/>
+                <xsl:call-template name="headerAndExpandableContent">
+                    <xsl:with-param name="targetId" select="$targetId"/>
+                    <xsl:with-param name="relationshipOrAssociationType" select="''" />
                     <xsl:with-param name="idStack" select="$idStack" />
                 </xsl:call-template>
-                -->
                 
-                <xsl:choose>
-                    <xsl:when test="$targetObject and not(fn:exists($idStack[. = $targetId]))">
-                        <div class="expandableContainer expandableSeparate collapsed">
-                            <div class="expandableToggle objectReference" onclick="toggle(this.parentNode)">
-                                <xsl:call-template name="clickableIdref">
-                                    <xsl:with-param name="targetObject" select="$targetObject" />
-                                    <xsl:with-param name="relationshipOrAssociationType" select="''"/>
-                                    <xsl:with-param name="idref" select="$targetId"/>
-                                    <xsl:with-param name="idStack" select="$idStack" />
-                                </xsl:call-template>
-                            </div>
-                            <div class="expandableContents">
-                                <!-- TODO <xsl:apply-templates select="$targetObject/*"/> -->
-                                <xsl:apply-templates select="$targetObject">
-                                    <xsl:with-param name="idStack" select="$idStack" />
-                                    <xsl:with-param name="includeHeading" select="fn:false()" />
-                                </xsl:apply-templates>
-                            </div>
-                        </div>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:call-template name="clickableIdref">
-                            <xsl:with-param name="targetObject" select="$targetObject" />
-                            <xsl:with-param name="relationshipOrAssociationType" select="''"/>
-                            <xsl:with-param name="idref" select="$targetId"/>
-                            <xsl:with-param name="idStack" select="$idStack" />
-                        </xsl:call-template>
-                    </xsl:otherwise>
-                </xsl:choose>
+                
             </div>
         </xsl:if>
         
@@ -1067,6 +1034,44 @@ function toggle(containerNode)
         </xsl:for-each>
         
    </xsl:template>
+    
+    <xsl:template name="headerAndExpandableContent">
+        <xsl:param name="targetId" />
+        <xsl:param name="targetObject" select="//*[@id = $targetId]" />
+        <xsl:param name="relationshipOrAssociationType" />
+        <xsl:param name="idStack" select="()" />
+        
+        <xsl:choose>
+            <xsl:when test="$targetObject and not(fn:exists($idStack[. = $targetId]))">
+                <div class="expandableContainer expandableSeparate collapsed">
+                    <div class="expandableToggle objectReference" onclick="toggle(this.parentNode)">
+                        <xsl:call-template name="clickableIdref">
+                            <xsl:with-param name="targetObject" select="$targetObject" />
+                            <xsl:with-param name="relationshipOrAssociationType" select="$relationshipOrAssociationType"/>
+                            <xsl:with-param name="idref" select="$targetId"/>
+                            <xsl:with-param name="idStack" select="$idStack" />
+                        </xsl:call-template>
+                    </div>
+                    <div class="expandableContents">
+                        <!-- TODO <xsl:apply-templates select="$targetObject/*"/> -->
+                        <xsl:apply-templates select="$targetObject">
+                            <xsl:with-param name="idStack" select="$idStack" />
+                            <xsl:with-param name="includeHeading" select="fn:false()" />
+                        </xsl:apply-templates>
+                    </div>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="clickableIdref">
+                    <xsl:with-param name="targetObject" select="$targetObject" />
+                    <xsl:with-param name="relationshipOrAssociationType" select="''"/>
+                    <xsl:with-param name="idref" select="$targetId"/>
+                    <xsl:with-param name="idStack" select="$idStack" />
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    </xsl:template>
     
     
     
@@ -1160,47 +1165,14 @@ function toggle(containerNode)
                         
                         <xsl:variable name="targetId" select="string(@idref)"/>
                         <xsl:variable name="targetObject" select="//*[@id = $targetId]"/>
-                        <!--
-                        <div class="idrefHeading">
-                            <xsl:call-template name="clickableIdref">
-                                <xsl:with-param name="targetObject" select="$targetObject" />
-                                <xsl:with-param name="relationshipOrAssociationType" select="cybox:Relationship|cybox:Association_Type"/>
-                                <xsl:with-param name="idref" select="@idref"/>
-                                <xsl:with-param name="idStack" select="$idStack"/>
-                            </xsl:call-template>
-                        </div>
-                        -->
                         
+                        <xsl:variable name="relationshipOrAssociationType" select="cybox:Relationship|cybox:Association_Type" />
                         
-                        <xsl:choose>
-                            <xsl:when test="$targetObject and not(fn:exists($idStack[. = $targetId]))">
-                                <div class="expandableContainer expandableSeparate collapsed">
-                                    <div class="expandableToggle objectReference" onclick="toggle(this.parentNode)">
-                                        <xsl:call-template name="clickableIdref">
-                                            <xsl:with-param name="targetObject" select="$targetObject" />
-                                            <xsl:with-param name="relationshipOrAssociationType" select="cybox:Relationship|cybox:Association_Type"/>
-                                            <xsl:with-param name="idref" select="$targetId"/>
-                                            <xsl:with-param name="idStack" select="$idStack" />
-                                        </xsl:call-template>
-                                    </div>
-                                    <div class="expandableContents">
-                                        <!-- TODO <xsl:apply-templates select="$targetObject/*"/> -->
-                                        <xsl:apply-templates select="$targetObject">
-                                            <xsl:with-param name="idStack" select="$idStack" />
-                                            <xsl:with-param name="includeHeading" select="fn:false()" />
-                                        </xsl:apply-templates>
-                                    </div>
-                                </div>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:call-template name="clickableIdref">
-                                    <xsl:with-param name="targetObject" select="$targetObject" />
-                                    <xsl:with-param name="relationshipOrAssociationType" select="cybox:Relationship|cybox:Association_Type"/>
-                                    <xsl:with-param name="idref" select="$targetId"/>
-                                    <xsl:with-param name="idStack" select="$idStack" />
-                                </xsl:call-template>
-                            </xsl:otherwise>
-                        </xsl:choose>
+                        <xsl:call-template name="headerAndExpandableContent">
+                            <xsl:with-param name="targetId" select="$targetId"/>
+                            <xsl:with-param name="relationshipOrAssociationType" select="$relationshipOrAssociationType" />
+                            <xsl:with-param name="idStack" select="$idStack" />
+                        </xsl:call-template>
                         
                     </xsl:if>
                     
@@ -1423,32 +1395,14 @@ function toggle(containerNode)
         
         <xsl:message>@object_reference TEMPLATE current: object_reference=<xsl:value-of select="fn:data(.)"/> ### stack: <xsl:value-of select="fn:string-join($idStack, ',')" /></xsl:message>
         
-        <xsl:choose>
-            <xsl:when test="$targetObject and not(fn:exists($idStack[. = $targetId]))">
-            <div class="expandableContainer expandableSeparate collapsed">
-                <div class="expandableToggle objectReference" onclick="toggle(this.parentNode)">
-                    <xsl:call-template name="clickableIdref">
-                        <xsl:with-param name="targetObject" select="$targetObject" />
-                        <xsl:with-param name="relationshipOrAssociationType" select="()"/>
-                        <xsl:with-param name="idref" select="$targetId"/>
-                    </xsl:call-template>
-                </div>
-                <div class="expandableContents">
-                    <xsl:apply-templates select="$targetObject">
-                        <xsl:with-param name="idStack" select="$idStack" />
-                        <xsl:with-param name="includeHeading" select="fn:false()" />
-                    </xsl:apply-templates>
-                </div>
-            </div>
-        </xsl:when>
-        <xsl:otherwise>
-            <xsl:call-template name="clickableIdref">
-                <xsl:with-param name="targetObject" select="$targetObject" />
-                <xsl:with-param name="relationshipOrAssociationType" select="()"/>
-                <xsl:with-param name="idref" select="$targetId"/>
-            </xsl:call-template>
-        </xsl:otherwise>
-        </xsl:choose>
+        <xsl:variable name="relationshipOrAssociationType" select="()" />
+        <xsl:call-template name="headerAndExpandableContent">
+            <xsl:with-param name="targetId" select="$targetId"/>
+            <xsl:with-param name="relationshipOrAssociationType" select="$relationshipOrAssociationType" />
+            <xsl:with-param name="idStack" select="$idStack" />
+        </xsl:call-template>
+        
+        
         <xsl:message> (end template) @object_reference TEMPLATE current: object_reference=<xsl:value-of select="fn:data(.)"/> </xsl:message>
     </xsl:template>
     
