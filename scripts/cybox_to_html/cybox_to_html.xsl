@@ -814,7 +814,9 @@ function toggle(containerNode)
                                   <td>Observable Composition</td>
                                   <td>
                                       <xsl:for-each select="cybox:Observable_Composition">
-                                          <xsl:call-template name="processObservableCompositionSimple"/>
+                                          <xsl:call-template name="processObservableCompositionSimple">
+                                              <xsl:with-param name="idStack" select="$idStack" />
+                                          </xsl:call-template>
                                       </xsl:for-each>
                                   </td>
                               </tr>
@@ -838,6 +840,7 @@ function toggle(containerNode)
       This is visualized with colored backgrounds via css.
     -->
     <xsl:template name="processObservableCompositionSimple">
+        <xsl:param name="idStack" select="()" />
         <table class="compositionTableOperator">
             <colgroup>
                 <xsl:choose>
@@ -861,7 +864,9 @@ function toggle(containerNode)
                                 <tr>
                                     <td>
                                         <!-- [insert observable here] -->
-                                        <xsl:call-template name="processObservableInObservableCompositionSimple"/>
+                                        <xsl:call-template name="processObservableInObservableCompositionSimple">
+                                            <xsl:with-param name="idStack" select="$idStack" />
+                                        </xsl:call-template>
                                     </td>
                                 </tr>
                                 
@@ -1006,6 +1011,7 @@ function toggle(containerNode)
       processObservableCompositionSimple to print it out.
     -->
     <xsl:template name="processObservableInObservableCompositionSimple">
+        <xsl:param name="idStack" select="()" />
         <xsl:if test="@idref">
             <div class="foreignObservablePointer">
                 <xsl:variable name="targetId" select="string(@idref)"/>
@@ -1013,16 +1019,51 @@ function toggle(containerNode)
                 
 
                 <!-- <span><xsl:value-of select="@idref"/></span> -->
+                <!--
                 <xsl:call-template name="clickableIdref">
                     <xsl:with-param name="targetObject" select="$targetObject" />
                     <xsl:with-param name="relationshipOrAssociationType" select="''"/>
                     <xsl:with-param name="idref" select="@idref"/>
+                    <xsl:with-param name="idStack" select="$idStack" />
                 </xsl:call-template>
+                -->
+                
+                <xsl:choose>
+                    <xsl:when test="$targetObject and not(fn:exists($idStack[. = $targetId]))">
+                        <div class="expandableContainer expandableSeparate collapsed">
+                            <div class="expandableToggle objectReference" onclick="toggle(this.parentNode)">
+                                <xsl:call-template name="clickableIdref">
+                                    <xsl:with-param name="targetObject" select="$targetObject" />
+                                    <xsl:with-param name="relationshipOrAssociationType" select="''"/>
+                                    <xsl:with-param name="idref" select="$targetId"/>
+                                    <xsl:with-param name="idStack" select="$idStack" />
+                                </xsl:call-template>
+                            </div>
+                            <div class="expandableContents">
+                                <!-- TODO <xsl:apply-templates select="$targetObject/*"/> -->
+                                <xsl:apply-templates select="$targetObject">
+                                    <xsl:with-param name="idStack" select="$idStack" />
+                                    <xsl:with-param name="includeHeading" select="fn:false()" />
+                                </xsl:apply-templates>
+                            </div>
+                        </div>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="clickableIdref">
+                            <xsl:with-param name="targetObject" select="$targetObject" />
+                            <xsl:with-param name="relationshipOrAssociationType" select="''"/>
+                            <xsl:with-param name="idref" select="$targetId"/>
+                            <xsl:with-param name="idStack" select="$idStack" />
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
             </div>
         </xsl:if>
         
         <xsl:for-each select="cybox:Observable_Composition">
-            <xsl:call-template name="processObservableCompositionSimple" />
+            <xsl:call-template name="processObservableCompositionSimple">
+                <xsl:with-param name="idStack" select="$idStack" />
+            </xsl:call-template>
         </xsl:for-each>
         
    </xsl:template>
@@ -1072,6 +1113,8 @@ function toggle(containerNode)
     <xsl:template match="cybox:Object|cybox:Event|cybox:Related_Object|cybox:Associated_Object">
         <xsl:param name="idStack" select="()" />
         <xsl:param name="isObservableDirectChild" select="fn:true()" />
+        <xsl:param name="includeHeading" select="fn:true()" />
+        
         <xsl:variable name="localName" select="local-name()"/>
         <xsl:variable name="identifierName" select="if ($localName = 'Object') then 'object' else if ($localName = 'Event') then 'event' else if ($localName = 'Related_Object') then 'relatedObject' else if ($localName = 'Associated_Object') then 'associatedObject' else ''" />
         <xsl:variable name="friendlyName" select="fn:replace($localName, '_', ' ')" />
@@ -1089,12 +1132,12 @@ function toggle(containerNode)
               objects.  This is the object that will be highlighted when a link
               is clicked.
             -->
-            <xsl:if test="@id"><xsl:attribute name="id" select="@id"/></xsl:if>
+            <xsl:if test="@id and $includeHeading"><xsl:attribute name="id" select="@id"/></xsl:if>
             
             <!-- print out the actual object heading (name and xsi type) -->
             
                 <div class="heading {$identifierName}Heading {$identifierName}">
-                    <xsl:if test="@id">
+                    <xsl:if test="@id and $includeHeading">
                        <xsl:call-template name="inlineObjectHeading">
                            <xsl:with-param name="currentObject" select="." />
                            <xsl:with-param name="relationshipOrAssociationType" select="cybox:Relationship|cybox:Association_Type"/>
