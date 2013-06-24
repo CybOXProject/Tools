@@ -980,21 +980,27 @@ function toggle(containerNode)
         <!-- THIS IS THE MAIN LINK TEXT -->
         "<xsl:value-of select="$idref"/>"
 
+        <!--
+        ###
+        ### DISABLING "JUMP TO TARGET" LINKS
+        ###
         <xsl:if test="$targetObject">
         <xsl:element name="span">
             <xsl:variable name="linkClass" select="if ($targetObject) then ('highlightTargetLink') else ('externalTargetLink')" />
             <xsl:attribute name="class"><xsl:value-of select="$linkClass" /></xsl:attribute>
             
-            <!-- this is what makes the "link" -->
+            <!- - this is what makes the "link" - ->
             <xsl:if test="$targetObject">
                 <xsl:attribute name="onclick"><xsl:value-of select='concat("highlightTarget(&apos;", $idref, "&apos;)")'/></xsl:attribute>
             </xsl:if>
             
-            <!-- THIS IS THE MAIN LINK TEXT -->
+            <!- - THIS IS THE MAIN LINK TEXT - ->
             [ jump to target ]
             
         </xsl:element>
         </xsl:if>
+        ### END OF DISABLING "JUMP TO TARGET" LINKS
+        -->
         
         <xsl:text> </xsl:text>
         <!-- <span class="inlineOrByReferenceLabel">(reference by idref)</span> -->
