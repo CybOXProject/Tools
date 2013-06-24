@@ -498,9 +498,16 @@ ikirillov@mitre.org
                       content: "-";
                     }
                     .expandableContainer > .expandableToggle::before,
-                    .expandableContainer.expandableToggle::before
+                    .expandableContainer.expandableToggle::before,
+                    .nonexpandableContainer::before
                     {
                       color: goldenrod;
+                      display: inline-block;
+                      width: 1.5em;
+                    }
+                    .nonexpandableContainer::before
+                    {
+                      content: "";
                     }
                     
                     .expandableToggle
@@ -1068,12 +1075,14 @@ function toggle(containerNode)
                 </div>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="clickableIdref">
-                    <xsl:with-param name="targetObject" select="$targetObject" />
-                    <xsl:with-param name="relationshipOrAssociationType" select="''"/>
-                    <xsl:with-param name="idref" select="$targetId"/>
-                    <xsl:with-param name="idStack" select="$idStack" />
-                </xsl:call-template>
+                <div class="objectReference nonexpandableContainer">
+                  <xsl:call-template name="clickableIdref">
+                      <xsl:with-param name="targetObject" select="$targetObject" />
+                      <xsl:with-param name="relationshipOrAssociationType" select="''"/>
+                      <xsl:with-param name="idref" select="$targetId"/>
+                      <xsl:with-param name="idStack" select="$idStack" />
+                  </xsl:call-template>
+                </div>
             </xsl:otherwise>
         </xsl:choose>
         

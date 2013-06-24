@@ -418,9 +418,16 @@
                       content: "-";
                     }
                     .expandableContainer > .expandableToggle::before,
-                    .expandableContainer.expandableToggle::before
+                    .expandableContainer.expandableToggle::before,
+                    .nonexpandableContainer::before
                     {
                       color: goldenrod;
+                      display: inline-block;
+                      width: 1.5em;
+                    }
+                    .nonexpandableContainer::before
+                    {
+                      content: "";
                     }
                     
                     .expandableToggle
@@ -566,7 +573,7 @@ function toggle(containerNode)
                   <TD>2</TD>
                   <TD>0</TD>
                   <TD>cybox_multiple_observables.xml</TD>
-                  <TD>2013-06-24T15:34:48.711-04:00</TD>
+                  <TD>2013-06-24T15:53:58.4-04:00</TD>
                </TR>
             </table>
          </div>
