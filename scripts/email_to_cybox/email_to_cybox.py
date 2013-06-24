@@ -10,7 +10,7 @@ Requires python-cybox
 """
 
 # Script version
-__version__ = '2.0.0b1'
+__version__ = '2.0.0'
 
 # Standard Library imports
 import argparse
