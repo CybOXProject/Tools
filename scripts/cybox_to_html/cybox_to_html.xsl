@@ -531,6 +531,11 @@ ikirillov@mitre.org
                     {
                         word-wrap: break-word;
                     }
+                    
+                    .debug
+                    {
+                      display: none;
+                    }
                 </style>
                 
                 <script type="text/javascript">
@@ -751,7 +756,7 @@ function toggle(containerNode)
         <TD colspan="2">
           <div id="{$contentVar}"  class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 7px;">
               <div><xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
-                  <div class="idStack">id stack: <xsl:value-of select="fn:string-join($idStack, ',')"/></div>
+                  <div class="debug idStack">id stack: <xsl:value-of select="fn:string-join($idStack, ',')"/></div>
                   <xsl:if test="cybox:Title">
                     <br/>
                     <div id="section">
@@ -970,6 +975,7 @@ function toggle(containerNode)
         <!-- THIS IS THE MAIN LINK TEXT -->
         "<xsl:value-of select="$idref"/>"
 
+        <xsl:if test="$targetObject">
         <xsl:element name="span">
             <xsl:variable name="linkClass" select="if ($targetObject) then ('highlightTargetLink') else ('externalTargetLink')" />
             <xsl:attribute name="class"><xsl:value-of select="$linkClass" /></xsl:attribute>
@@ -983,6 +989,8 @@ function toggle(containerNode)
             [ jump to target ]
             
         </xsl:element>
+        </xsl:if>
+        
         <xsl:text> </xsl:text>
         <!-- <span class="inlineOrByReferenceLabel">(reference by idref)</span> -->
         
@@ -1094,7 +1102,7 @@ function toggle(containerNode)
                        </xsl:call-template>
                     </xsl:if>
                     
-                    <div class="idStack">id stack: <xsl:value-of select="fn:string-join($idStack, ',')"/></div>
+                    <div class="debug idStack">id stack: <xsl:value-of select="fn:string-join($idStack, ',')"/></div>
                     <!--
                     <xsl:if test="local-name()  != 'Related_Object' and local-name() != 'Associated_Object'">
                         <xsl:value-of select="$headingName"/>
@@ -1134,8 +1142,9 @@ function toggle(containerNode)
                                     </div>
                                     <div class="expandableContents">
                                         <!-- TODO <xsl:apply-templates select="$targetObject/*"/> -->
-                                        <xsl:apply-templates select="$targetObject/*">
+                                        <xsl:apply-templates select="$targetObject">
                                             <xsl:with-param name="idStack" select="$idStack" />
+                                            <xsl:with-param name="includeHeading" select="fn:false()" />
                                         </xsl:apply-templates>
                                     </div>
                                 </div>
@@ -1244,7 +1253,7 @@ function toggle(containerNode)
         <div class="container action">
             <div class="heading action">ACTION <xsl:value-of select="cybox:Type/text()" /> (xsi type: <xsl:value-of select="cybox:Type/@xsi:type" />)</div>
             <div class="contents action">
-                <div class="idStack">id stack: <xsl:value-of select="fn:string-join($idStack, ',')"/></div>
+                <div class="debug idStack">id stack: <xsl:value-of select="fn:string-join($idStack, ',')"/></div>
                 <xsl:apply-templates select="cybox:Associated_Objects">
                     <xsl:with-param name="idStack" select="$idStack" />
                 </xsl:apply-templates>
@@ -1384,6 +1393,7 @@ function toggle(containerNode)
                 <div class="expandableContents">
                     <xsl:apply-templates select="$targetObject">
                         <xsl:with-param name="idStack" select="$idStack" />
+                        <xsl:with-param name="includeHeading" select="fn:false()" />
                     </xsl:apply-templates>
                 </div>
             </div>
