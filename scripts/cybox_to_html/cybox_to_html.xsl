@@ -144,6 +144,7 @@ DEVELOPER NOTES
                     padding: 4px 16px 4px 0;
                     padding-left: 10px;
                     font-weight: bold;
+                    text-align: left;
                     } 
                     
                     table.grid td {
