@@ -1327,7 +1327,11 @@ function toggle(containerNode)
     <xsl:template match="cybox:Properties">
         <xsl:param name="idStack" select="()" />
         <fieldset>
-            <legend>cybox properties (type: <xsl:value-of select="@xsi:type"/>)</legend>
+            <legend>
+                cybox properties
+                (type: <xsl:value-of select="local-name-from-QName(fn:resolve-QName(fn:data(@xsi:type), .))"/>)
+                <xsl:apply-templates select="@*[not(fn:QName(namespace-uri(), local-name()) = fn:QName('http://www.w3.org/2001/XMLSchema-instance', 'type'))]" mode="cyboxProperties" />
+            </legend>
             <xsl:apply-templates select="*" mode="cyboxProperties">
                 <xsl:with-param name="idStack" select="$idStack" />
             </xsl:apply-templates>
@@ -1367,13 +1371,13 @@ function toggle(containerNode)
         <div class="container cyboxPropertiesContainer cyboxProperties">
             <div class="heading cyboxPropertiesHeading cyboxProperties">
                 <span class="cyboxPropertiesName"><xsl:value-of select="local-name()"/> </span>
-                <span class="cyboxPropertiesConstraints"><xsl:apply-templates select="@*[fn:node-name(.) != fn:resolve-QName('object_reference', ..)]" mode="#current"/></span>
+                <span class="cyboxPropertiesConstraints"><xsl:apply-templates select="@*[not(node-name(.) = fn:QName('', 'object_reference'))][not(node-name(.) = fn:QName('http://www.w3.org/2001/XMLSchema-instance', 'type'))]" mode="#current"/></span>
                 <span class="cyboxPropertiesNameValueSeparator"> &#x2192; </span>
                 <span class="cyboxPropertiesValue">
                     <xsl:apply-templates select="text()" mode="#current"/>
                 </span>
                 <div class="cyboxPropertiesLink">
-                    <xsl:apply-templates select="@*[fn:node-name(.) = fn:resolve-QName('object_reference', ..)]" mode="#current">
+                    <xsl:apply-templates select="@*[node-name(.) = fn:QName('', 'object_reference')]" mode="#current">
                         <xsl:with-param name="idStack" select="$idStack"/>
                     </xsl:apply-templates>
                 </div>
