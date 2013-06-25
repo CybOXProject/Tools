@@ -875,7 +875,7 @@ function toggle(containerNode)
             <xsl:attribute name="class" select="'inlineObject'" />
             
             <!-- THIS IS THE MAIN LINK TEXT -->
-            "<xsl:value-of select="$id"/>"
+            <xsl:value-of select="$id"/>
             
         </xsl:element>
         <xsl:text> </xsl:text>
