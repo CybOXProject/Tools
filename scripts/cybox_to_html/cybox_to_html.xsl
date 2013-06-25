@@ -125,16 +125,6 @@ DEVELOPER NOTES
                     border-width:1px;
                     }
                     
-                    /*
-                    table.grid * {
-                    font-family: Arial, Helvetica, sans-serif;
-                    font-size: 11px;
-                    font-style: inherit;
-                    vertical-align: top;
-                    text-align: left;
-                    }
-                    */
-                    
                     table.grid thead, table.grid .collapsible {
                     background-color: #c7c3bb;
                     }
@@ -157,8 +147,6 @@ DEVELOPER NOTES
                     }
 
                     body {
-                    /*font: 11px Arial, Helvetica, sans-serif;*/
-                    /*font-size: 13px;*/
                     }
                     #wrapper { 
                     margin: 0 auto;
@@ -167,9 +155,7 @@ DEVELOPER NOTES
                     #header {
                     color: #333;
                     padding: 10px;
-                    /*border: 2px solid #ccc;*/
                     margin: 10px 0px 5px 0px;
-                    /*background: #BD9C8C;*/
                     }
                     #content { 
                     width: 100%;
@@ -178,7 +164,6 @@ DEVELOPER NOTES
                     background: #FFFFFF;
                     margin: 0px 0px 5px 0px;
                     padding: 10px;
-                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
                     font-size: 11px;
                     color: #039;
                     }
@@ -193,42 +178,10 @@ DEVELOPER NOTES
                       border-bottom: 2px solid #6678b1;
                       text-align: left;
                     }
-                    /*
-                    #hor-minimalist-a
-                    {
-                    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-                    font-size: 12px;
-                    background: #fff;
-                    margin: 0px;
-                    border-collapse: collapse;
-                    text-align: left;
-                    width: 90%;
-                    }
-                    #hor-minimalist-a th
-                    {
-                    font-size: 11px;
-                    font-weight: normal;
-                    color: #039;
-                    padding: 10px 8px;
-                    border-bottom: 2px solid #6678b1;
-                    }
-                    #hor-minimalist-a td
-                    {
-                    color: #669;
-                    padding: 9px 8px 0px 8px;
-                    }
-                    #hor-minimalist-a tbody tr:hover td
-                    {
-                    color: #009;
-                    }
-                    */
                     .one-column-emphasis
                     {
-                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
-                    /*font-size: 12px;*/
                     margin: 0px;
                     text-align: left;
-                    /*border-collapse: collapse;*/
                     width: 100%;
                     border-spacing: 0;
                     }
@@ -236,11 +189,6 @@ DEVELOPER NOTES
                     {
                     padding: 5px 10px;
                     color: #200;
-                    /*
-                    border-top: 1px solid #e8edff;
-                    border-right: 1px solid #e8edff;
-                    border-bottom: 1px solid #e8edff;
-                    */
                     }
                     .oce-first
                     {
@@ -251,7 +199,6 @@ DEVELOPER NOTES
                     .oce-first-obs
                     {
                     background: #EFF8F4;
-                    /*border-right: 10px solid transparent;*/
                     border-right: 10px solid black;
                     }
                     .oce-first-obscomp-or
@@ -307,8 +254,6 @@ DEVELOPER NOTES
                     margin: 0px 0px 5px 0px;
                     }
                     #object_label_div div {
-                    /*display: inline;*/
-                    /*width: 30%;*/
                     }
                     #object_type_label {
                     width:200px;
@@ -327,7 +272,6 @@ DEVELOPER NOTES
                     padding: 1px;
                     }
                     #associated_object_label {
-                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
                     font-size: 12px;
                     margin-bottom: 2px;
                     }
@@ -404,8 +348,6 @@ DEVELOPER NOTES
                     table.compositionTableOperator > tbody > tr > td,
                     table.compositionTableOperand > tbody > tr > td
                     {
-                      /* border: solid gray thin; */
-                      /* border-collapse: collapse; */
                       border: none;
                       padding: 0.5em;
                     }
@@ -432,16 +374,6 @@ DEVELOPER NOTES
                     {
                       background-color: lightcyan;
                       padding: 0.7em;
-                    }
-                    
-                    /* make DL look like a table */
-                    dl.table-display
-                    {
-                    float: left;
-                    width: 520px;
-                    margin: 1em 0;
-                    padding: 0;
-                    border-bottom: 1px solid #999;
                     }
                     
                     .table-display dt
@@ -947,7 +879,7 @@ function toggle(containerNode)
             
         </xsl:element>
         <xsl:text> </xsl:text>
-        <!-- <span class="inlineOrByReferenceLabel">(inline object)</span> -->
+        <span class="debug inlineOrByReferenceLabel">(inline object)</span>
         
     </xsl:template>
     
@@ -960,7 +892,7 @@ function toggle(containerNode)
       referenced object will be highlighted (the background will flash red a
       few times via css transitions).
     -->
-    <xsl:template name="clickableIdref">
+    <xsl:template name="objectHeaderOnly">
         <xsl:param name="targetObject"/>
         <xsl:param name="relationshipOrAssociationType" select="''"/>
         <xsl:param name="idStack" />
@@ -980,9 +912,7 @@ function toggle(containerNode)
                 <xsl:otherwise></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <!-- <xsl:variable name="targetObjectType" select="if (local-name($targetObject) = 'Observable') then (local-name(($targetObject/*)[0])) else (if ($targetObject/cybox:Properties/@xsi:type) then (fn:local-name-from-QName(fn:resolve-QName($targetObject/cybox:Properties/@xsi:type, $targetObject/cybox:Properties))) else ('')) "/> -->
         
-        <!-- <xsl:value-of select="$type"/> reference: -->
         
         <xsl:if test="$relationshipOrAssociationType">
            <xsl:value-of select="$relationshipOrAssociationType/text()" />
@@ -1001,7 +931,7 @@ function toggle(containerNode)
         </xsl:if>
         
         <!-- THIS IS THE MAIN LINK TEXT -->
-        "<xsl:value-of select="$idref"/>"
+        <xsl:value-of select="$idref"/>
 
         <!--
         ###
@@ -1026,7 +956,7 @@ function toggle(containerNode)
         -->
         
         <xsl:text> </xsl:text>
-        <!-- <span class="inlineOrByReferenceLabel">(reference by idref)</span> -->
+        <span class="debug inlineOrByReferenceLabel">(reference by idref)</span>
         
     </xsl:template>
 
@@ -1064,6 +994,10 @@ function toggle(containerNode)
         
    </xsl:template>
     
+    <!--
+      shows the object header (relationship/assocation type, object type, and
+      object id) and its associated expandable contents.
+    -->
     <xsl:template name="headerAndExpandableContent">
         <xsl:param name="targetId" />
         <xsl:param name="targetObject" select="//*[@id = $targetId]" />
@@ -1074,7 +1008,7 @@ function toggle(containerNode)
             <xsl:when test="$targetObject and not(fn:exists($idStack[. = $targetId]))">
                 <div class="expandableContainer expandableSeparate collapsed">
                     <div class="expandableToggle objectReference" onclick="toggle(this.parentNode)">
-                        <xsl:call-template name="clickableIdref">
+                        <xsl:call-template name="objectHeaderOnly">
                             <xsl:with-param name="targetObject" select="$targetObject" />
                             <xsl:with-param name="relationshipOrAssociationType" select="$relationshipOrAssociationType"/>
                             <xsl:with-param name="idref" select="$targetId"/>
@@ -1092,7 +1026,7 @@ function toggle(containerNode)
             </xsl:when>
             <xsl:otherwise>
                 <div class="objectReference nonexpandableContainer">
-                  <xsl:call-template name="clickableIdref">
+                  <xsl:call-template name="objectHeaderOnly">
                       <xsl:with-param name="targetObject" select="$targetObject" />
                       <xsl:with-param name="relationshipOrAssociationType" select="''"/>
                       <xsl:with-param name="idref" select="$targetId"/>
@@ -1183,12 +1117,6 @@ function toggle(containerNode)
                     
                     <div class="debug idStack">id stack: <xsl:value-of select="fn:string-join($idStack, ',')"/></div>
                     <!--
-                    <xsl:if test="local-name()  != 'Related_Object' and local-name() != 'Associated_Object'">
-                        <xsl:value-of select="$headingName"/>
-                        <xsl:apply-templates select="@xsi:type"/>
-                    </xsl:if>
-                    -->
-                    <!--
                       If this "object" is an object reference (an "idref link")
                       print out the link that will jump to the original object.
                     -->
@@ -1210,29 +1138,6 @@ function toggle(containerNode)
                 </div>
             
             <div class="contents {$identifierName}Contents {$identifierName}">
-                <!--
-                <xsl:if test="@type">
-                    <div id="object_type_label"><xsl:value-of select="@type"/> Object </div>
-                </xsl:if>
-                -->
-                
-                <!-- If this is a related object, we need to print out how this object is related -->
-                <!--
-                <xsl:if test="cybox:Relationship">
-                    <div class="relationship">
-                        via relationship: <xsl:value-of select="cybox:Relationship/text()"/>
-                    </div>
-                </xsl:if>
-                -->
-                
-                <!-- If this is a associated object, we need to print out how this object is related -->
-                <!--
-                <xsl:if test="cybox:Association_Type">
-                    <div class="associationType">
-                        association type: <xsl:value-of select="cybox:Association_Type/text()"/>
-                    </div>
-                </xsl:if>
-                -->
                 
                 <!-- Print the description if one is available (often they are not) -->
                 <xsl:if test="cybox:Description">
@@ -1251,11 +1156,6 @@ function toggle(containerNode)
                             <xsl:apply-templates select="cybox:Actions/cybox:Action">
                                 <xsl:with-param name="idStack" select="$idStack" />
                             </xsl:apply-templates>
-                            <!--
-                            <xsl:for-each select="cybox:Actions/cybox:Action">
-                                <xsl:call-template name="processAction" />
-                            </xsl:for-each>
-                            -->
                         </div>
                     </div>
                 </xsl:if>
@@ -1303,11 +1203,6 @@ function toggle(containerNode)
                 <xsl:apply-templates select="cybox:Associated_Objects">
                     <xsl:with-param name="idStack" select="$idStack" />
                 </xsl:apply-templates>
-                <!--
-                <xsl:for-each select="cybox:Associated_Objects/cybox:Associated_Object">
-                    <xsl:call-template name="processAssociatedObjectSimple" />
-                </xsl:for-each>
-                -->
             </div>
         </div>
     </xsl:template>
@@ -1339,20 +1234,6 @@ function toggle(containerNode)
             
         </fieldset>
     </xsl:template>
-    
-    <!--
-      Template to simplify the output of Raw_Artifact (which is often a very
-      long CDATA encoded value).
-      
-      This will show the first and last 10 characters of the value and the
-      string length.
-    -->
-    <!--
-    <xsl:template match="ArtifactObj:Raw_Artifact/text()[string-length() > 500]" mode="cyboxProperties">
-        <xsl:variable name="data" select="fn:data(.)" />
-        raw data omitted ["<xsl:value-of select='substring($data, 1, 10)'/> ... <xsl:value-of select='substring($data, string-length($data)-10, 10)'/>"; length: <xsl:value-of select="string-length()"/>]
-    </xsl:template>
-    -->
     
     <!--
       Show email raw headers wrapped in a div with a class that is css styled
@@ -1391,6 +1272,21 @@ function toggle(containerNode)
         </div>
     </xsl:template>
     
+    <!--
+      template to show text within cybox:Properties.  If the text is greater
+      than a certain length, make this expandable, otherwise just show it as
+      inline text.
+      
+      collapsed mode uses:
+       * the css overflow property set to hiddent to only show the beginning
+         of the text
+       * "height: 1em" to show first line
+       
+       expanded mode uses:
+       * clearing the display and height properties
+       * "word-wrap: break-word" to force wrapping (particularly needed for
+         binary base64 data)
+    -->
     <xsl:template match="text()" mode="cyboxProperties">
         <xsl:choose>
             <xsl:when test="string-length() gt 200">
