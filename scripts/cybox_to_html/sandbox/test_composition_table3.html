@@ -1,0 +1,303 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>cybox composition table test</title>
+    <style type="text/css">
+    table, td, tr
+    {
+      padding: 0;
+      margin: 0;
+    }
+    table
+    {
+      /*border: solid red thin;*/
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td
+    {
+      /*border: solid blue thin;*/
+    }
+    th
+    {
+      /*border: solid green thin;*/
+      background-color: lightgreen;
+      border-left: solid green thin;
+    }
+    .emptyCell
+    {
+      background-color: purple;
+      display: none;
+    }
+    .orTable
+    {
+      /*border: solid red 3px;*/
+    }
+    .andTable
+    {
+      /*border: solid blue 3px;*/
+    }
+    td
+    {
+      border: solid lightgray thin;
+    }
+
+    
+    </style>
+  </head>
+  <body>
+    <h1>before</h1>
+    <table>
+      <tr>
+        <td>Observable Composition</td>
+        <td>
+          <table class="one-column-emphasis">
+            <colgroup>
+              <col class="oce-first-obscomp-or"/>
+            </colgroup>
+            <tbody>
+              <tr>
+                <th rowspan="3">
+                  <span>OR</span>
+                </th>
+                <td>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <table class="one-column-emphasis">
+                            <colgroup>
+                              <col class="oce-first-obscomp-and"/>
+                            </colgroup>
+                            <tbody>
+                              <tr>
+                                <th rowspan="2">
+                                  <span>AND</span>
+                                </th>
+                                <td>
+                                  <table>
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                          <div class="foreignObservablePointer">
+                                                
+                                                (object reference:
+                                                <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e')">example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e</span>
+                                                )
+                                                
+                                                
+                                             </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="foreignObservablePointer">
+                                                
+                                                (object reference:
+                                                <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f')">example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f</span>
+                                                )
+                                                
+                                                
+                                             </div>
+                                        </td>
+                                      </tr>
+                                      <tr/>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <table class="one-column-emphasis">
+                            <colgroup>
+                              <col class="oce-first-obscomp-and"/>
+                            </colgroup>
+                            <tbody>
+                              <tr>
+                                <th rowspan="3">
+                                  <span>AND</span>
+                                </th>
+                                <td>
+                                  <table>
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                          <div class="foreignObservablePointer">
+                                                
+                                                (object reference:
+                                                <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b')">example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b</span>
+                                                )
+                                                
+                                                
+                                             </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="foreignObservablePointer">
+                                                
+                                                (object reference:
+                                                <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6')">example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6</span>
+                                                )
+                                                
+                                                
+                                             </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="foreignObservablePointer">
+                                                
+                                                (object reference:
+                                                <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161')">example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161</span>
+                                                )
+                                                
+                                                
+                                             </div>
+                                        </td>
+                                      </tr>
+                                      <tr/>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="foreignObservablePointer">
+                           
+                           (object reference:
+                           <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f')">example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f</span>
+                           )
+                           
+                           
+                        </div>
+                        </td>
+                      </tr>
+                      <tr/>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+
+
+    <h1>after</h1>
+    <table>
+      <tr>
+        <td>Observable Composition</td>
+        <td>
+          <table class="one-column-emphasis orTable">
+            <colgroup>
+              <col class="oce-first-obscomp-or"/>
+            </colgroup>
+            <tbody>
+              <tr>
+                <th rowspan="4">
+                  <span>OR</span>
+                </th>
+                <td class="emptyCell">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                          <table class="one-column-emphasis andTable">
+                            <colgroup>
+                              <col class="oce-first-obscomp-and"/>
+                            </colgroup>
+                            <tbody>
+                              <tr>
+                                <th rowspan="3">
+                                  <span>AND</span>
+                                </th>
+                                <td class="emptyCell">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                                (object reference:
+                                                <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e')">example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e</span>
+                                                )
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                                (object reference:
+                                                <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f')">example:Observable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f</span>
+                                                )
+                                </td>
+                              </tr>
+                            </tbody>
+
+
+                          </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                          <table class="one-column-emphasis andTable">
+                            <colgroup>
+                              <col class="oce-first-obscomp-and"/>
+                            </colgroup>
+                            <tbody>
+                              <tr>
+                                <th rowspan="4">
+                                  <span>AND</span>
+                                </th>
+                                <td class="emptyCell">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                                (object reference:
+                                                <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6')">example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6</span>
+                                                )
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                                (object reference:
+                                                <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161')">example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161</span>
+                                                )
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                                (object reference:
+                                                <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161')">example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161</span>
+                                                )
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                           (object reference:
+                           <span class="highlightTargetLink" onclick="highlightTarget('example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f')">example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f</span>
+                           )
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>
