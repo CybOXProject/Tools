@@ -248,6 +248,7 @@ def main():
                 
                 outfile = open(outfilename, 'w')
                 outfile.write('<?xml version="1.0" encoding="utf-8"?>\n')
+                outfile.write("<!DOCTYPE doc [<!ENTITY comma '&#44;'>]>\n")
                 observables.export(outfile, 0, namespacedef_='\n xmlns:openioc="http://openioc.org/"')
 
                 if verbose_mode:
