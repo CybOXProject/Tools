@@ -24,8 +24,8 @@ For more information, please refer to the terms.txt file.
 --------------------------------------------------------------------------------
 --Installation Notes------------------------------------------------------------
 
-Extract included files into your directory of choice. This script is dependent on
-the python-cybox library, v2.0.0b4 and its sub-dependencies: https://github.com/CybOXProject/python-cybox/tree/v2.0.0b4
+Extract included files into your directory of choice. This script is dependent on the following libraries:
+* python-cybox, v2.0.0b4: https://github.com/CybOXProject/python-cybox/tree/v2.0.0b4
 This script was created using Python 2.7.x, and so may not be compatible with 3.0.x.
 --------------------------------------------------------------------------------
 --Included Files----------------------------------------------------------------
