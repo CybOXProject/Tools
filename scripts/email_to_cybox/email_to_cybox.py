@@ -959,7 +959,7 @@ def main():
         observables = translator.generate_cybox_from_email_file(input_data)
         print "<?xml version='1.0' encoding='UTF-8'?>"
         print "<!DOCTYPE doc [<!ENTITY comma '&#44;'>]>"
-        print observables.to_xml()
+        print observables.to_xml(namespace_dict={'https://github.com/CybOXProject/Tools':'email_to_cybox'})
     except Exception, err:
         sys.stderr.write('\n!! error: %s\n' % str(err))
         traceback.print_exc(file=sys.stderr)
