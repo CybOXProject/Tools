@@ -7,6 +7,7 @@
 import openioc
 import cybox.bindings.cybox_core as cybox_binding
 import cybox.bindings.cybox_common as cybox_common_binding
+from cybox.utils import NamespaceParser
 import ioc_observable
 import sys
 import os
@@ -249,7 +250,10 @@ def main():
                 outfile = open(outfilename, 'w')
                 outfile.write('<?xml version="1.0" encoding="utf-8"?>\n')
                 outfile.write("<!DOCTYPE doc [<!ENTITY comma '&#44;'>]>\n")
-                observables.export(outfile, 0, namespacedef_='\n xmlns:openioc="http://openioc.org/"')
+                #outfile.write(Observables.from_obj(observables).to_xml(True))
+                nsparser = NamespaceParser(observables.get_Observable())
+                ns_string = '\n xmlns:openioc="http://openioc.org/"' + nsparser.build_namespaces_schemalocations_str()
+                observables.export(outfile, 0, namespacedef_=ns_string)
 
                 if verbose_mode:
                     for indicator in skipped_indicators:
