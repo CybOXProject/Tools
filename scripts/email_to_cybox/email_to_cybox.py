@@ -636,15 +636,20 @@ class EmailParser:
         is appended to a list of body parts."""
         raw_body = []
 
-        #TODO: clean this up with message.walk
-        if not msg.is_multipart():
-            # text document attachments have a content type of text, so we have to filter them out
-            if ('content-disposition' not in msg) and (msg.get_content_maintype() == 'text'):
-                raw_body_str = msg.get_payload(decode=True)
-                raw_body.append(raw_body_str)
-        else:
-            for part in msg.get_payload():
-                raw_body.extend(self.__get_raw_body_text(part))
+        for part in msg.walk():
+            # Ignore attachments, focus only on inline parts
+            if part.get('content-disposition'):
+                continue
+            # Ignore multipart wrappers (but not their contents)
+            if part.is_multipart():
+                continue
+            if part.get_content_maintype() == 'text':
+                payload = part.get_payload(decode=True)
+                charset = part.get_content_charset()
+                if charset:
+                    raw_body.append(payload.decode(charset))
+                else:
+                    raw_body.append(payload)
 
         return raw_body
 
