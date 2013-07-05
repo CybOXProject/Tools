@@ -236,20 +236,35 @@ class EmailParser:
         """take a whois response and convert it into a dict with better formatted info"""
         record = {}
 
+        #TODO: look at different subclasses of WhoisEntry and better handle
+        # missing attributes
         #TODO: process entire lists if they exist
         if response.registrar:
             record['registrar'] = response.registrar[0]
-        if response.whois_server:
-            record['whois_server'] = response.whois_server[0]
+        try:
+            if response.whois_server:
+                record['whois_server'] = response.whois_server[0]
+        except KeyError:
+            # Some registrants (for example, .uk) don't return whois_server
+            pass
         if response.domain_name:
             record['domain_name'] = response.domain_name[0]
-        if response.referral_url:
-            record['referral_url'] = response.referral_url[0]
+        try:
+            if response.referral_url:
+                record['referral_url'] = response.referral_url[0]
+        except KeyError:
+            # Some registrants (for example, .uk) don't return referral_url
+            pass
+
         #These list comprehensions get rid of empty strings that the parser sometimes adds to the lists
         if response.status:
             record['status'] = [x.replace(' ', '_') for x in response.status if len(x.strip())]
-        if response.emails:
-            record['registrar_contacts'] = [x for x in response.emails if len(x.strip())]
+        try:
+            if response.emails:
+                record['registrar_contacts'] = [x for x in response.emails if len(x.strip())]
+        except KeyError:
+            # Some registrants (for example, .uk) don't return emails
+            pass
         if response.name_servers:
             record['name_servers'] = [x for x in response.name_servers if len(x.strip())]
 
