@@ -2037,7 +2037,7 @@ def createWinExecObj(search_string, content_string, condition):
     elif search_string == "FileItem/PEInfo/ResourceInfoList/ResourceInfoItem/Type":
         reslist = winexecutablefileobj.PEResourceListType()
         res = winexecutablefileobj.PEResourceType()
-        res.set_Type(common.StringObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        res.set_Type(process_string_value(content_string))
         reslist.add_Resource(res)
         winexecobj.set_Resources(reslist)
     elif search_string == "FileItem/PEInfo/Sections/NumberOfSections":
