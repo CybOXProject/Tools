@@ -404,7 +404,7 @@ def createEmailObj(search_string, content_string, condition):
         relobj = core.RelatedObjectType()
         fileattachobj = fileobj.FileObjectType()
         fileattachobj.set_xsi_type('FileObj:FileObjectType')
-        fileattachobj.set_Size_In_Bytes(common.UnsignedLongObjectPropertyType(datatype=None, condition=condition, valueOf_=process_string_value(content_string)))
+        fileattachobj.set_Size_In_Bytes(process_numerical_value(common.UnsignedLongObjectPropertyType(datatype=None), content_string, condition))
         relobj.set_Properties(fileattachobj)
         relobj.set_Relationship(common.ControlledVocabularyStringType(valueOf_='Received', xsi_type='cyboxVocabs:ObjectRelationshipVocab-1.0')) 
         attachment.set_object_reference('FileObj')
@@ -2358,15 +2358,15 @@ def createWinProcessObj(search_string, content_string, condition):
 #Set the correct attributes for any range values
 
 def process_numerical_value(object_attribute, content_string, condition):
-    if content_string.count('[') > 0 and content_string.count('TO') > 0:
+    if content_string.count('[') > 0 or content_string.count(' TO ') > 0:
         normalized_string = content_string.strip('[]')
-        split_string = normalized_string.split('TO')
-        object_attribute.set_start_range(split_string[0].strip())
-        object_attribute.set_end_range(split_string[1].strip())
-        if condition == 'Contains' or condition == 'Equals':
-            object_attribute.set_condition('IsInRange')
+        split_string = normalized_string.split(' TO ')
+        object_attribute.set_condition('InclusiveBetween')
+        object_attribute.set_valueOf_(split_string[0] + ',' + split_string[1])
+        if condition == 'Contains' or condition == 'Equals':           
+            object_attribute.set_apply_condition('ANY')
         elif condition == 'DoesNotContain' or condition == 'DoesNotEqual':
-            object_attribute.set_condition('IsNotInRange')
+            object_attribute.set_apply_condition('NONE')
     else:
         object_attribute.set_condition(condition)
         object_attribute.set_valueOf_(content_string)
