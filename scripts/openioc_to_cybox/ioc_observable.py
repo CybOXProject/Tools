@@ -2384,4 +2384,4 @@ def process_string_value(content_string):
     ):
         return ('<![CDATA[' + content_string + ']]>')
     else:
-        return content_string
+        return content_string.replace(',','&#44;')
