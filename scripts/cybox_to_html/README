@@ -1,38 +1,35 @@
 ****************************************************
 
-      CybOX XML -> HTML Transform
+      CybOX XML -> HTML Transform v2
 
- Copyright (c) 2012 - The MITRE Corporation
+ Copyright (c) 2013 - The MITRE Corporation
 
 ****************************************************
 
-BY USING THE CYBOX XML to HTML TRANSFORM, YOU SIGNIFY YOUR ACCEPTANCE OF THE TERMS AND 
-CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE CYBOX XML to HTML TRANSFORM.
+BY USING THE CYBOX XML to HTML TRANSFORM, YOU SIGNIFY YOUR ACCEPTANCE OF THE 
+TERMS AND CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE 
+THE CYBOX XML to HTML TRANSFORM.
 
 For more information, please refer to the terms.txt file.
 
-#################################################################
-#CybOX XML --> HTML Transform v0.1 BETA                         #
-#Generates an HTML representation of a CyboX XML file. Displays #
-#observables, including embedded observable compositions.       #
-#                                                               #
-#Supports Address, Email Message, File, Library, Memory, Mutex, # 
-#Pipe, Process, Port, Socket, URI, WinDriver, WinExecutableFile,#
-#WinFile, WinHandle, WinMutex, WinPipe, WinProcess,             #
-#WinRegistryKey, and WinService objects                         #
-#                                                               #
-#Compatible with content produced using CybOX v1.0 Draft        #
-#                                                               #
-#v0.1                                                           #
-#09/11/2012                                                     #
-#                                                               #
-#CybOX - http://cybox.mitre.org                                 #
-#################################################################
+##################################################################
+# CybOX XML --> HTML Transform v2.0 BETA                         #
+# Generates an HTML representation of a CyboX XML file. Displays #
+# observables, including embedded observable compositions.       #
+#                                                                #
+# Compatible with content produced using CybOX v2.0              #
+#                                                                #
+# v2.0                                                           #
+# 07/11/2013                                                     #
+#                                                                #
+# CybOX - http://cybox.mitre.org                                 #
+##################################################################
 --------------------------------------------------------------------------------
 --Included Files----------------------------------------------------------------
 
 README: this file.
-cybox_to_html.xsl: the CybOX XML to HTML XSL Transform.
+cybox_to_html.xsl: the top-level CybOX XML to HTML XSL Transform.
+cybox_common.xsl: common CybOX transformations used by cybox_to_html.xsl.
 --------------------------------------------------------------------------------
 --Usage Notes-------------------------------------------------------------------
 Use with your favorite XML Editor or XSLT interpreter (e.g. Saxon). 
