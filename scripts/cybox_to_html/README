@@ -3,6 +3,7 @@
       CybOX XML -> HTML Transform v2
 
  Copyright (c) 2013 - The MITRE Corporation
+ All rights reserved. See LICENSE.txt for complete terms.
 
 ****************************************************
 
@@ -12,26 +13,79 @@ THE CYBOX XML to HTML TRANSFORM.
 
 For more information, please refer to the terms.txt file.
 
-##################################################################
-# CybOX XML --> HTML Transform v2.0 BETA                         #
-# Generates an HTML representation of a CyboX XML file. Displays #
-# observables, including embedded observable compositions.       #
-#                                                                #
-# Compatible with content produced using CybOX v2.0              #
-#                                                                #
-# v2.0                                                           #
-# 07/11/2013                                                     #
-#                                                                #
-# CybOX - http://cybox.mitre.org                                 #
-##################################################################
+#################################################################
+CybOX XML to HTML transform v2.0beta1
+Compatible with CybOX v2.0
+
+This is an xslt to transform a cybox 2.0 document of observables into html for
+easy viewing.  The series of observables are turned into collapsible elements
+on the screen.  Details about each observable's contents are displayed in a
+format representing the nested structure of the original document.
+
+Below the main observable, Object, Event, and Observable_Composition are
+displayed.  For composite observables, the nested structure of the composition
+and the logical relationships is displayed via nested tables with operators
+("and" and "or) on the left and then a series of component expressions on rows
+on the right.
+
+Any time objects are referred to by reference, they can be expanded in-line.
+
+Supports:
+- Observable, Observable_Composition
+- Object
+- Related_Object
+- Associated_Object
+- Event
+- cybox:Properties:
+  * direct children of cybox:Properties will be printed with the localname of
+    the element as the property "name", the text value of the element as the
+    "value", and the attributes as "constraints".
+  * specific templates can be created for Properties that need more detailed
+    formatting
+  * the following elements have specialized formatting:
+    - EmailMessageObj:Header, FileObj:*
+
+Warning about cybox properties:
+  The general template that is applied will use the localname of the element
+  that is a direct child of cybox:Properties, the value is the text value of
+  this element (meaning all the text nodes of descendants are concatenated),
+  and the constraints column shows all attributes on this same element.
+  
+  Any element that contains richer structured content will probably need a
+  custom template created.
+
+This is a work in progress.  Feedback is most welcome!
+
+requirements:
+ - XSLT 2.0 engine (this has been tested with Saxon 9.5)
+ - a CybOX 2.0 input xml document
+
+v2.0beta1
+07/11/2013
+
+CybOX - http://cybox.mitre.org
+#################################################################
 --------------------------------------------------------------------------------
 --Included Files----------------------------------------------------------------
 
 README: this file.
 cybox_to_html.xsl: the top-level CybOX XML to HTML XSL Transform.
 cybox_common.xsl: common CybOX transformations used by cybox_to_html.xsl.
+
 --------------------------------------------------------------------------------
 --Usage Notes-------------------------------------------------------------------
-Use with your favorite XML Editor or XSLT interpreter (e.g. Saxon). 
+Use with your favorite XML Editor or XSLT 2.0 interpreter (e.g. Saxon).
+
+Here are commands to run a single document or multiple documents through the
+stylesheet with Saxon. 
+
+Single file:
+
+  java -jar /opt/saxon/saxon9he.jar -xsl:xslt/cybox_to_html.xsl -s:input.xml -o:output.html
+
+Directory of files ("inputdir" and "outputdir" are directories):
+
+  java -jar /opt/saxon/saxon9he.jar -xsl:cybox_to_html.xsl -s:inputdir -o:outputdir
+  
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
