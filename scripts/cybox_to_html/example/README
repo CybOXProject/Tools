@@ -1,4 +1,4 @@
-Included are several examples of CybOX XML to HTML transform: 
+Included are several examples of the CybOX XML to HTML transform: 
 
 *CybOX_Iran-Oil_Dynamic.xml/html: A set of Observables related to the Iran-Oil email attack campaign. Contains Objects, Events, Actions, and Observable Compositions.
 *openioc_to_cybox_example.xml/html: An example CybOX document generated from an OpenIOC file using the OpenIOC to CybOX utility. Contains Objects and an Observable Composition.
