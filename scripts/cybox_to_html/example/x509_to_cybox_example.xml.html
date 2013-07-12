@@ -1,0 +1,915 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>CybOX Output</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"><style type="text/css">
+                    
+                    body
+                    {
+                      font-family: Arial,Helvetica,sans-serif;
+                    }
+                    /* define table skin */
+                    table.grid {
+                    margin: 0px;
+                    margin-left: 25px;
+                    padding: 0;
+                    border-collapse: separate;
+                    border-spacing: 0;
+                    width: 100%;
+                    border-style:solid;
+                    border-width:1px;
+                    }
+                    
+                    table.grid thead, table.grid .collapsible {
+                    background-color: #c7c3bb;
+                    }
+                    
+                    table.grid th {
+                    color: #565770;
+                    padding: 4px 16px 4px 0;
+                    padding-left: 10px;
+                    font-weight: bold;
+                    text-align: left;
+                    } 
+                    
+                    table.grid td {
+                    color: #565770;
+                    padding: 4px 6px;
+                    }
+
+                    table.grid tr.even {
+                    background-color: #EDEDE8;
+                    }
+
+                    body {
+                    /*font: 11px Arial, Helvetica, sans-serif;*/
+                    /*font-size: 13px;*/
+                    }
+                    #wrapper { 
+                    margin: 0 auto;
+                    width: 80%;
+                    }
+                    #header {
+                    color: #333;
+                    padding: 10px;
+                    /*border: 2px solid #ccc;*/
+                    margin: 10px 0px 5px 0px;
+                    /*background: #BD9C8C;*/
+                    }
+                    #content { 
+                    width: 100%;
+                    color: #333;
+                    border: 2px solid #ccc;
+                    background: #FFFFFF;
+                    margin: 0px 0px 5px 0px;
+                    padding: 10px;
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+                    font-size: 11px;
+                    color: #039;
+                    }
+                    
+                    #hor-minimalist-a
+                    {
+                      font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                      font-size: 12px;
+                    }
+                    #hor-minimalist-a > thead > tr > th
+                    {
+                      border-bottom: 2px solid #6678b1;
+                      text-align: left;
+                    }
+                    .one-column-emphasis
+                    {
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+                    /*font-size: 12px;*/
+                    margin: 0px;
+                    text-align: left;
+                    /*border-collapse: collapse;*/
+                    width: 100%;
+                    border-spacing: 0;
+                    }
+                    .one-column-emphasis > tbody > tr > td
+                    {
+                    padding: 5px 10px;
+                    color: #200;
+                    }
+                    .oce-first
+                    {
+                    background: #d0dafd;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-obs
+                    {
+                    background: #EFF8F4;
+                    /*border-right: 10px solid transparent;*/
+                    border-right: 10px solid black;
+                    }
+                    .oce-first-obscomp-or
+                    {
+                    background: #E9EEF4;
+                    border-right: 10px solid transparent;
+                    }
+                    .oce-first-obscomp-and
+                    {
+                    background: #F2F4E9;
+                    border-right: 10px solid transparent;
+                    }
+                    .oce-first-inner
+                    {
+                    background: #EFF8F4;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-inner-inner
+                    {
+                    background: #E5F4EE;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-inner-inner-inner
+                    {
+                    background: #DBEFE6;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-inner-inner-inner-inner
+                    {
+                    background: #D0EAE0;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-inner-inner-inner-inner-inner
+                    {
+                    background: #B7D1C6;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    #container { 
+                    color: #333;
+                    border: 1px solid #ccc;
+                    background: #FFFFFF;
+                    margin: 0px 0px 10px 0px;
+                    padding: 10px;
+                    }
+                    #section { 
+                    color: #333;
+                    background: #FFFFFF;
+                    margin: 0px 0px 5px 0px;
+                    }
+                    #object_label_div div {
+                    /*display: inline;*/
+                    /*width: 30%;*/
+                    }
+                    #object_type_label {
+                    width:200px;
+                    background: #e8edff;
+                    border-top: 1px solid #ccc;
+                    border-left: 1px solid #ccc;
+                    border-right: 5px solid #ccc;
+                    padding: 1px;
+                    }
+                    #defined_object_type_label {
+                    width:400px;
+                    background: #E9F3CF;
+                    border-top: 1px solid #ccc;
+                    border-left: 1px solid #ccc;
+                    border-right: 1px solid #ccc;
+                    padding: 1px;
+                    }
+                    #associated_object_label {
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+                    font-size: 12px;
+                    margin-bottom: 2px;
+                    }
+                    .heading,
+                    .eventTypeHeading
+                    {
+                      margin-bottom: 0.5em;
+                      font-weight: bold;
+                    }
+                    .contents,
+                    .eventDescription
+                    {
+                      margin-top: 0.5em;
+                      margin-bottom: 0.5em;
+                    }
+                    .container
+                    {
+                      margin-left: 1em;
+                      padding-left: 0.5em;
+                    }
+                    .eventDescription,
+                    .description
+                    {
+                      font-style: italic!important;
+                      margin-top: 0.5em;
+                      margin-bottom: 0.5em;
+                    }
+                    .description::before
+                    {
+                      font-weight: bold;
+                      content: "Description: "
+                    }
+                    .emailDiv
+                    {
+                      display: block!important;
+                    }
+                    .relatedTarget
+                    {
+                    animation: targetHighlightAnimation 0.2s 10;
+                    animation-direction: alternate;
+                    -webkit-animation: targetHighlightAnimation 0.2s;
+                    -webkit-animation-direction: alternate;
+                    -webkit-animation-iteration-count: 10;
+                    }
+                    @keyframes targetHighlightAnimation
+                    {
+                    0% {background: hsla(360, 100%, 50%, .3); }
+                    100% {background: hsla(360, 100%, 50%, .7); }
+                    }
+                    @-webkit-keyframes targetHighlightAnimation
+                    {
+                    0% {background: hsla(360, 100%, 50%, .3); }
+                    100% {background: hsla(360, 100%, 50%, .7); }
+                    }
+                    
+                    .highlightTargetLink
+                    {
+                    color: blue;
+                    text-decoration: underline;
+                    }
+                    
+                    table.compositionTableOperator > tbody > tr > td
+                    {
+                      padding: 0.5em;
+                    }
+                    table.compositionTableOperand > tbody > tr > td
+                    {
+                      padding: 0;
+                    }
+                    table.compositionTableOperator > tbody > tr > td,
+                    table.compositionTableOperand > tbody > tr > td
+                    {
+                      /* border: solid gray thin; */
+                      /* border-collapse: collapse; */
+                      border: none;
+                      padding: 0.5em;
+                    }
+                    .compositionTable,
+                    .compositionTableOperator,
+                    .compositionTableOperand
+                    {
+                      border-collapse: collapse;
+                      padding: 0!important;
+                      border: none;
+                    }
+                    td.compositionTable,
+                    td.compositionTableOperator,
+                    td.compositionTableOperand
+                    {
+                      padding: 0!important;
+                      border: none;
+                    }
+                    .compositionTableOperand
+                    {
+                      padding: 0.5em;
+                    }
+                    .compositionTableOperand > tbody > tr > td > div 
+                    {
+                      background-color: lightcyan;
+                      padding: 0.7em;
+                    }
+                    
+                    /* make DL look like a table */
+                    dl.table-display
+                    {
+                    float: left;
+                    width: 520px;
+                    margin: 1em 0;
+                    padding: 0;
+                    border-bottom: 1px solid #999;
+                    }
+                    
+                    .table-display dt
+                    {
+                    clear: left;
+                    float: left;
+                    width: 200px;
+                    margin: 0;
+                    padding: 5px;
+                    border-top: 1px solid #999;
+                    font-weight: bold;
+                    }
+                    
+                    .table-display dd
+                    {
+                    float: left;
+                    width: 300px;
+                    margin: 0;
+                    padding: 5px;
+                    border-top: 1px solid #999;
+                    }
+                    
+                    .verbatim
+                    {
+                      white-space: pre-line;
+                      margin-left: 1em;
+                    }
+                    table
+                    {
+                      empty-cells: show;
+                    }
+                    
+                    .externalLinkWarning
+                    {
+                      font-weight: bold;
+                      color: red;
+                    }
+                    
+                    .inlineOrByReferenceLabel
+                    {
+                      font-style: italic!important;
+                      color: lightgray;
+                    }
+                    
+                    .contents
+                    {
+                      padding-left: 1em;
+                    }
+                    
+                    .cyboxPropertiesValue
+                    {
+                      font-weight: normal;
+                    }
+                    
+                    .cyboxPropertiesConstraints
+                    {
+                      font-weight: normal;
+                      font-style: italic!important;
+                      color: red;
+                    }
+                    
+                    .cyboxPropertiesConstraints .objectReference
+                    {
+                      color: black;
+                    }
+                    
+                    .objectReference
+                    {
+                      margin-left: 1em;
+                    }
+                    
+                    .expandableContainer.collapsed > .expandableToggle::before,
+                    .expandableContainer.collapsed.expandableToggle::before
+                    {
+                      content: "+";
+                    }
+                    .expandableContainer.expanded > .expandableToggle::before,
+                    .expandableContainer.expanded.expandableToggle::before
+                    {
+                      content: "-";
+                    }
+                    .expandableContainer > .expandableToggle::before,
+                    .expandableContainer.expandableToggle::before,
+                    .nonexpandableContainer::before
+                    {
+                      color: goldenrod;
+                      display: inline-block;
+                      width: 1em;
+                    }
+                    .nonexpandableContainer::before
+                    {
+                      content: "";
+                    }
+
+                    .expandableToggle
+                    {
+                      cursor: pointer; 
+                    }
+                    .expandableContainer > .expandableContents
+                    {
+                      background-color: #A8CBDE;
+                      padding-top: 0.25em;
+                      padding-right: 1em;
+                      padding-left: 0.5em;
+                      padding-bottom: 0.5em;
+                    }
+                    
+                    .expandableSeparate.expandableContainer.collapsed > .expandableContents
+                    {
+                      display: none;
+                    }
+
+                    .longText
+                    {
+                       width: 60em;
+                    }
+                    .expandableSame.expandableContainer.collapsed
+                    {
+                      overflow: hidden;
+                      height: 1em;
+                    }
+                    .expandableSame.expandableContainer.expanded
+                    {
+                        word-wrap: break-word;
+                    }
+
+                    .associatedObjectContents
+                    {
+                        font-weight: normal;
+                    }
+                    .baseobj
+                    {
+                    }
+                    .copyobj
+                    {
+                    }
+                    .baseobserv
+                    {
+                    }
+                    .copyobserv
+                    {
+                    }
+                    
+                    .debug
+                    {
+                      display: none;
+                    }
+                </style><script type="text/javascript">
+                    
+                    <!-- toggle top-level Observables -->
+                    function toggleDiv(divid, spanID) {
+                        if (document.getElementById(divid).style.display == 'none') {
+                            document.getElementById(divid).style.display = 'block';
+                            if (spanID) {
+                                document.getElementById(spanID).innerText = "-";
+                            }
+                        }
+                        else {
+                            document.getElementById(divid).style.display = 'none';
+                            if (spanID) {
+                                document.getElementById(spanID).innerText = "+";
+                            }
+                        }
+                    }
+
+                    <!-- onload, make a clean copy of all top level Observables for compositions before they are manipulated at runtime -->
+                    function embedCompositions() {
+                        var divCompBaseList = getElementsByClass('baseobserv');
+                        var divCompCopyList = getElementsByClass('copyobserv');
+
+                        for (i = 0; i < divCompCopyList.length; i++) {
+                            for (j = 0; j < divCompBaseList.length; j++) {
+                                if (divCompCopyList[i].id == 'copy-' + divCompBaseList[j].id) {
+                                    divCompCopyList[i].innerHTML = divCompBaseList[j].innerHTML;
+                                }
+                            }
+                        }
+
+                        return false;
+                    }
+
+                    <!-- copy object from clean src copy to dst destination and then toggle visibility -->
+                    function embedObject(container, src, dst) {
+                        <!-- deep copy the source div's html into the destination div --> 
+                        <!-- (typically a RelatedObjects's content expanded into a parent Object's RO container) -->
+                        var objDiv = document.getElementById(src).cloneNode(true);
+
+                        for (i = 0; i < container.children.length; i++) {
+                            if ((typeof (container.children[i].id) != "undefined") && (container.children[i].id == dst)) {
+                                container.children[i].innerHTML = objDiv.innerHTML;
+                            }
+                        }
+
+                        <!-- finally, toggle the visibility state of the div  -->
+                        toggle(container);
+
+                        return false;
+                    }
+
+                    <!-- onload, make a clean copy of all id'd objects/actions for runtime copying -->
+                    function runtimeCopyObjects() {
+                        embedCompositions()
+
+                        var divSrcList = getElementsByClass('baseobj');
+                        var divDstList = getElementsByClass('copyobj');
+
+                        for (i = 0; i < divSrcList.length; i++) {
+                            divDeepCopy = divSrcList[i].cloneNode(true);
+
+                            <!-- remove heading from copied content since expandable reference will contain header info -->
+                            for (j = 0; j < divDeepCopy.children.length; j++) {
+                                if ((typeof (divDeepCopy.children[j].className) != "undefined") && (divDeepCopy.children[j].className.indexOf("heading") > -1)) {
+                                    divDeepCopy.removeChild(divDeepCopy.children[j]);
+                                    break;
+                                }
+                            }
+
+                            for (k = 0; k < divDstList.length; k++) {
+                                if ('copy-' + divDeepCopy.id == divDstList[k].id)
+                                    divDstList[k].innerHTML = divDeepCopy.innerHTML;
+                            }
+                        }
+
+                        return false;
+                    }
+
+                    <!-- identify all elements in the document which have the parameterized class applied -->
+                    function getElementsByClass(inClass) {
+                        var children = document.body.getElementsByTagName('*');
+                        var elements = [],
+                            child;
+                        for (var i = 0, length = children.length; i < length; i++) {
+                            child = children[i];
+                            if ((typeof (child.className) != "undefined") && (child.className.indexOf(inClass) > -1)) {
+                                elements.push(child);
+                            }
+                        }
+                        return elements;
+                    }
+
+                    <!-- toggle visibility of a container element -->
+                    function toggle(containerElement) {
+                        // explicitly setting .className is a cross-browser compatible way to do this
+                        if (containerElement.className.indexOf("collapsed") > -1) {
+                            containerElement.className = "expandableContainer expandableSeparate expanded";
+                        }
+                        else {
+                            containerElement.className = "expandableContainer expandableSeparate collapsed";
+                        }
+                    }
+                 
+                </script></head>
+   <body onload="runtimeCopyObjects();">
+      <div id="wrapper">
+         <div id="header">
+            <H1>CybOX Output</H1>
+            <table id="hor-minimalist-a" width="100%">
+               <thead>
+                  <tr>
+                     <th scope="col">Major Version</th>
+                     <th scope="col">Minor Version</th>
+                     <th scope="col">Filename</th>
+                     <th scope="col">Generation Date</th>
+                  </tr>
+               </thead>
+               <TR>
+                  <TD>2</TD>
+                  <TD>0</TD>
+                  <TD>x509_to_cybox_example.xml</TD>
+                  <TD>2013-07-12T09:01:28.778-04:00</TD>
+               </TR>
+            </table>
+         </div>
+         <h2><a name="analysis">Observables</a></h2>
+         <div id="observablesspandiv" style="font-weight:bold; margin:5px; color:#BD9C8C;">
+            <TABLE class="grid tablesorter" cellspacing="0">
+               <COLGROUP>
+                  <COL width="90%">
+                  <COL width="10%">
+               </COLGROUP>
+               <THEAD>
+                  <TR>
+                     <TH class="header">
+                        ID
+                        
+                     </TH>
+                     <TH class="header">
+                        Type
+                        
+                     </TH>
+                  </TR>
+               </THEAD>
+               <TBODY>
+                  <TR class="odd">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('2000000002','d2e4')"><span id="d2e4" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>x509_to_cybox:observable-8ae773e1-d84a-11e2-9bb0-005056c00008
+                        </div>
+                     </TD>
+                     <TD>X509CertificateObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="2000000002" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="x509_to_cybox:observable-8ae773e1-d84a-11e2-9bb0-005056c00008" class="baseobserv">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object">
+                                                <div class="heading objectHeading object"></div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>
+                                                            cybox properties
+                                                            (type: X509CertificateObjectType)
+                                                            
+                                                         </legend>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Certificate</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Version</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">1</span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Serial_Number</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">7829 (0x1e95)</span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Signature_Algorithm</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">md5WithRSAEncryption</span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Issuer</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">C=ZA, ST=Western Cape, L=Cape Town, O=Thawte Consulting cc, OU=Certification Services
+                                                                        Division,CN=Thawte Server CA/emailAddress=server-certs@thawte.com</span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Validity</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Not_Before</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">1998-07-09T16:04:02+00:00</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Not_After</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">1999-07-09T16:04:02+00:00</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Subject</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">C=US, ST=Maryland, L=Pasadena, O=Brent Baccala, OU=FreeSoft, CN=www.freesoft.org/emailAddress=baccala@freesoft.org</span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Subject_Public_Key</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Public_Key_Algorithm</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">rsaEncryption</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">RSA_Public_Key</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                              
+                                                                              
+                                                                              </span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                           <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                              <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Modulus</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                                    <div class="longText expandableContainer expandableToggle expandableContents collapsed expandableSame" onclick="toggle(this)">00:b4:31:98:0a:c4:bc:62:c1:88:aa:dc:b0:c8:bb:33:35:19:d5:0c:64:b9:3d:41:b2:96:fc:f3:31:e1:66:36:d0:8e:56:12:44:ba:75:eb:e8:1c:9c:5b:66:70:33:52:14:c9:ec:4f:91:51:70:39:de:53:85:17:16:94:6e:ee:f4:d5:6f:d5:ca:b3:47:5e:1b:0c:7b:c5:cc:2b:6b:c1:90:c3:16:31:0d:bf:7a:c7:47:77:8f:a0:21:c7:4c:d0:16:65:00:c1:0f:d7:b8:80:e3:d2:75:6b:c1:ea:9e:5c:5c:ea:7d:c1:a1:10:bc:b8:e8:35:1c:9e:27:52:7e:41:8f</div></span><div class="cyboxPropertiesLink"></div>
+                                                                              </div>
+                                                                              <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                           </div>
+                                                                           <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                              <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Exponent</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">65537</span><div class="cyboxPropertiesLink"></div>
+                                                                              </div>
+                                                                              <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                           </div>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Certificate_Signature</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Signature_Algorithm</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">md5WithRSAEncryption</span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Signature</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        <div class="longText expandableContainer expandableToggle expandableContents collapsed expandableSame" onclick="toggle(this)">93:5f:8f:5f:c5:af:bf:0a:ab:a5:6d:fb:24:5f:b6:59:5d:9d:92:2e:4a:1b:8b:ac:7d:99:17:5d:cd:19:f6:ad:ef:63:2f:92:ab:2f:4b:cf:0a:13:90:ee:2c:0e:43:03:be:f6:ea:8e:9c:67:d0:a2:40:03:f7:ef:6a:15:09:79:a9:46:ed:b7:16:1b:41:72:0d:19:aa:ad:dd:9a:df:ab:97:50:65:f5:5e:85:a6:ef:19:d1:5a:de:9d:ea:63:cd:cb:cc:6d:5d:01:85:b5:6d:c8:f3:d9:f7:8f:0e:fc:ba:1f:34:e9:96:6e:6c:cf:f2:ef:9b:bf:de:b5:22:68:9f</div></span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </fieldset>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('20000000062','d2e65')"><span id="d2e65" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>x509_to_cybox:observable-8ae8fa80-d84a-11e2-a9e2-005056c00008
+                        </div>
+                     </TD>
+                     <TD>X509CertificateObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="20000000062" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="x509_to_cybox:observable-8ae8fa80-d84a-11e2-a9e2-005056c00008" class="baseobserv">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object">
+                                                <div class="heading objectHeading object"></div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>
+                                                            cybox properties
+                                                            (type: X509CertificateObjectType)
+                                                            
+                                                         </legend>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Certificate</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Version</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">3</span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Serial_Number</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">1 (0x1)</span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Signature_Algorithm</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">md5WithRSAEncryption</span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Issuer</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">C=ZA, ST=Western Cape, L=Cape Town, O=Thawte Consulting cc, OU=Certification Services
+                                                                        Division,CN=Thawte Server CA/emailAddress=server-certs@thawte.com</span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Validity</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Not_Before</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">1996-08-01T00:00:00+00:00</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Not_After</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">2020-12-31T23:59:59+00:00</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Subject</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">C=ZA, ST=Western Cape, L=Cape Town, O=Thawte Consulting cc, OU=Certification Services
+                                                                        Division,CN=Thawte Server CA/emailAddress=server-certs@thawte.com</span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Subject_Public_Key</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Public_Key_Algorithm</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">rsaEncryption</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">RSA_Public_Key</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                              
+                                                                              
+                                                                              </span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                           <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                              <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Modulus</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                                    <div class="longText expandableContainer expandableToggle expandableContents collapsed expandableSame" onclick="toggle(this)">00:d3:a4:50:6e:c8:ff:56:6b:e6:cf:5d:b6:ea:0c:68:75:47:a2:aa:c2:da:84:25:fc:a8:f4:47:51:da:85:b5:20:74:94:86:1e:0f:75:c9:e9:08:61:f5:06:6d:30:6e:15:19:02:e9:52:c0:62:db:4d:99:9e:e2:6a:0c:44:38:cd:fe:be:e3:64:09:70:c5:fe:b1:6b:29:b6:2f:49:c8:3b:d4:27:04:25:10:97:2f:e7:90:6d:c0:28:42:99:d7:4c:43:de:c3:f5:21:6d:54:9f:5d:c3:58:e1:c0:e4:d9:5b:b0:b8:dc:b4:7b:df:36:3a:c2:b5:66:22:12:d6:87:0d</div></span><div class="cyboxPropertiesLink"></div>
+                                                                              </div>
+                                                                              <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                           </div>
+                                                                           <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                              <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Exponent</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">65537</span><div class="cyboxPropertiesLink"></div>
+                                                                              </div>
+                                                                              <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                           </div>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Standard_Extensions</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Basic_Constraints</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">critical CA:TRUE</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Certificate_Signature</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Signature_Algorithm</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">md5WithRSAEncryption</span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Signature</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        <div class="longText expandableContainer expandableToggle expandableContents collapsed expandableSame" onclick="toggle(this)">07:fa:4c:69:5c:fb:95:cc:46:ee:85:83:4d:21:30:8e:ca:d9:a8:6f:49:1a:e6:da:51:e3:60:70:6c:84:61:11:a1:1a:c8:48:3e:59:43:7d:4f:95:3d:a1:8b:b7:0b:62:98:7a:75:8a:dd:88:4e:4e:9e:40:db:a8:cc:32:74:b9:6f:0d:c6:e3:b3:44:0b:d9:8a:6f:9a:29:9b:99:18:28:3b:d1:e3:40:28:9a:5a:3c:d5:b5:e7:20:1b:8b:ca:a4:ab:8d:e9:51:d9:e2:4c:2c:59:a9:da:b9:b2:75:1b:f6:42:f2:ef:c7:f2:18:f9:89:bc:a3:ff:8a:23:2e:70:47</div></span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </fieldset>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+               </TBODY>
+            </TABLE>
+         </div>
+      </div>
+   </body>
+</html>

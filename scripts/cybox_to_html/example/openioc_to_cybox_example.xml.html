@@ -1,0 +1,1484 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>CybOX Output</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"><style type="text/css">
+                    
+                    body
+                    {
+                      font-family: Arial,Helvetica,sans-serif;
+                    }
+                    /* define table skin */
+                    table.grid {
+                    margin: 0px;
+                    margin-left: 25px;
+                    padding: 0;
+                    border-collapse: separate;
+                    border-spacing: 0;
+                    width: 100%;
+                    border-style:solid;
+                    border-width:1px;
+                    }
+                    
+                    table.grid thead, table.grid .collapsible {
+                    background-color: #c7c3bb;
+                    }
+                    
+                    table.grid th {
+                    color: #565770;
+                    padding: 4px 16px 4px 0;
+                    padding-left: 10px;
+                    font-weight: bold;
+                    text-align: left;
+                    } 
+                    
+                    table.grid td {
+                    color: #565770;
+                    padding: 4px 6px;
+                    }
+
+                    table.grid tr.even {
+                    background-color: #EDEDE8;
+                    }
+
+                    body {
+                    /*font: 11px Arial, Helvetica, sans-serif;*/
+                    /*font-size: 13px;*/
+                    }
+                    #wrapper { 
+                    margin: 0 auto;
+                    width: 80%;
+                    }
+                    #header {
+                    color: #333;
+                    padding: 10px;
+                    /*border: 2px solid #ccc;*/
+                    margin: 10px 0px 5px 0px;
+                    /*background: #BD9C8C;*/
+                    }
+                    #content { 
+                    width: 100%;
+                    color: #333;
+                    border: 2px solid #ccc;
+                    background: #FFFFFF;
+                    margin: 0px 0px 5px 0px;
+                    padding: 10px;
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+                    font-size: 11px;
+                    color: #039;
+                    }
+                    
+                    #hor-minimalist-a
+                    {
+                      font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                      font-size: 12px;
+                    }
+                    #hor-minimalist-a > thead > tr > th
+                    {
+                      border-bottom: 2px solid #6678b1;
+                      text-align: left;
+                    }
+                    .one-column-emphasis
+                    {
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+                    /*font-size: 12px;*/
+                    margin: 0px;
+                    text-align: left;
+                    /*border-collapse: collapse;*/
+                    width: 100%;
+                    border-spacing: 0;
+                    }
+                    .one-column-emphasis > tbody > tr > td
+                    {
+                    padding: 5px 10px;
+                    color: #200;
+                    }
+                    .oce-first
+                    {
+                    background: #d0dafd;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-obs
+                    {
+                    background: #EFF8F4;
+                    /*border-right: 10px solid transparent;*/
+                    border-right: 10px solid black;
+                    }
+                    .oce-first-obscomp-or
+                    {
+                    background: #E9EEF4;
+                    border-right: 10px solid transparent;
+                    }
+                    .oce-first-obscomp-and
+                    {
+                    background: #F2F4E9;
+                    border-right: 10px solid transparent;
+                    }
+                    .oce-first-inner
+                    {
+                    background: #EFF8F4;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-inner-inner
+                    {
+                    background: #E5F4EE;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-inner-inner-inner
+                    {
+                    background: #DBEFE6;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-inner-inner-inner-inner
+                    {
+                    background: #D0EAE0;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    .oce-first-inner-inner-inner-inner-inner
+                    {
+                    background: #B7D1C6;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid transparent;
+                    }
+                    #container { 
+                    color: #333;
+                    border: 1px solid #ccc;
+                    background: #FFFFFF;
+                    margin: 0px 0px 10px 0px;
+                    padding: 10px;
+                    }
+                    #section { 
+                    color: #333;
+                    background: #FFFFFF;
+                    margin: 0px 0px 5px 0px;
+                    }
+                    #object_label_div div {
+                    /*display: inline;*/
+                    /*width: 30%;*/
+                    }
+                    #object_type_label {
+                    width:200px;
+                    background: #e8edff;
+                    border-top: 1px solid #ccc;
+                    border-left: 1px solid #ccc;
+                    border-right: 5px solid #ccc;
+                    padding: 1px;
+                    }
+                    #defined_object_type_label {
+                    width:400px;
+                    background: #E9F3CF;
+                    border-top: 1px solid #ccc;
+                    border-left: 1px solid #ccc;
+                    border-right: 1px solid #ccc;
+                    padding: 1px;
+                    }
+                    #associated_object_label {
+                    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+                    font-size: 12px;
+                    margin-bottom: 2px;
+                    }
+                    .heading,
+                    .eventTypeHeading
+                    {
+                      margin-bottom: 0.5em;
+                      font-weight: bold;
+                    }
+                    .contents,
+                    .eventDescription
+                    {
+                      margin-top: 0.5em;
+                      margin-bottom: 0.5em;
+                    }
+                    .container
+                    {
+                      margin-left: 1em;
+                      padding-left: 0.5em;
+                    }
+                    .eventDescription,
+                    .description
+                    {
+                      font-style: italic!important;
+                      margin-top: 0.5em;
+                      margin-bottom: 0.5em;
+                    }
+                    .description::before
+                    {
+                      font-weight: bold;
+                      content: "Description: "
+                    }
+                    .emailDiv
+                    {
+                      display: block!important;
+                    }
+                    .relatedTarget
+                    {
+                    animation: targetHighlightAnimation 0.2s 10;
+                    animation-direction: alternate;
+                    -webkit-animation: targetHighlightAnimation 0.2s;
+                    -webkit-animation-direction: alternate;
+                    -webkit-animation-iteration-count: 10;
+                    }
+                    @keyframes targetHighlightAnimation
+                    {
+                    0% {background: hsla(360, 100%, 50%, .3); }
+                    100% {background: hsla(360, 100%, 50%, .7); }
+                    }
+                    @-webkit-keyframes targetHighlightAnimation
+                    {
+                    0% {background: hsla(360, 100%, 50%, .3); }
+                    100% {background: hsla(360, 100%, 50%, .7); }
+                    }
+                    
+                    .highlightTargetLink
+                    {
+                    color: blue;
+                    text-decoration: underline;
+                    }
+                    
+                    table.compositionTableOperator > tbody > tr > td
+                    {
+                      padding: 0.5em;
+                    }
+                    table.compositionTableOperand > tbody > tr > td
+                    {
+                      padding: 0;
+                    }
+                    table.compositionTableOperator > tbody > tr > td,
+                    table.compositionTableOperand > tbody > tr > td
+                    {
+                      /* border: solid gray thin; */
+                      /* border-collapse: collapse; */
+                      border: none;
+                      padding: 0.5em;
+                    }
+                    .compositionTable,
+                    .compositionTableOperator,
+                    .compositionTableOperand
+                    {
+                      border-collapse: collapse;
+                      padding: 0!important;
+                      border: none;
+                    }
+                    td.compositionTable,
+                    td.compositionTableOperator,
+                    td.compositionTableOperand
+                    {
+                      padding: 0!important;
+                      border: none;
+                    }
+                    .compositionTableOperand
+                    {
+                      padding: 0.5em;
+                    }
+                    .compositionTableOperand > tbody > tr > td > div 
+                    {
+                      background-color: lightcyan;
+                      padding: 0.7em;
+                    }
+                    
+                    /* make DL look like a table */
+                    dl.table-display
+                    {
+                    float: left;
+                    width: 520px;
+                    margin: 1em 0;
+                    padding: 0;
+                    border-bottom: 1px solid #999;
+                    }
+                    
+                    .table-display dt
+                    {
+                    clear: left;
+                    float: left;
+                    width: 200px;
+                    margin: 0;
+                    padding: 5px;
+                    border-top: 1px solid #999;
+                    font-weight: bold;
+                    }
+                    
+                    .table-display dd
+                    {
+                    float: left;
+                    width: 300px;
+                    margin: 0;
+                    padding: 5px;
+                    border-top: 1px solid #999;
+                    }
+                    
+                    .verbatim
+                    {
+                      white-space: pre-line;
+                      margin-left: 1em;
+                    }
+                    table
+                    {
+                      empty-cells: show;
+                    }
+                    
+                    .externalLinkWarning
+                    {
+                      font-weight: bold;
+                      color: red;
+                    }
+                    
+                    .inlineOrByReferenceLabel
+                    {
+                      font-style: italic!important;
+                      color: lightgray;
+                    }
+                    
+                    .contents
+                    {
+                      padding-left: 1em;
+                    }
+                    
+                    .cyboxPropertiesValue
+                    {
+                      font-weight: normal;
+                    }
+                    
+                    .cyboxPropertiesConstraints
+                    {
+                      font-weight: normal;
+                      font-style: italic!important;
+                      color: red;
+                    }
+                    
+                    .cyboxPropertiesConstraints .objectReference
+                    {
+                      color: black;
+                    }
+                    
+                    .objectReference
+                    {
+                      margin-left: 1em;
+                    }
+                    
+                    .expandableContainer.collapsed > .expandableToggle::before,
+                    .expandableContainer.collapsed.expandableToggle::before
+                    {
+                      content: "+";
+                    }
+                    .expandableContainer.expanded > .expandableToggle::before,
+                    .expandableContainer.expanded.expandableToggle::before
+                    {
+                      content: "-";
+                    }
+                    .expandableContainer > .expandableToggle::before,
+                    .expandableContainer.expandableToggle::before,
+                    .nonexpandableContainer::before
+                    {
+                      color: goldenrod;
+                      display: inline-block;
+                      width: 1em;
+                    }
+                    .nonexpandableContainer::before
+                    {
+                      content: "";
+                    }
+
+                    .expandableToggle
+                    {
+                      cursor: pointer; 
+                    }
+                    .expandableContainer > .expandableContents
+                    {
+                      background-color: #A8CBDE;
+                      padding-top: 0.25em;
+                      padding-right: 1em;
+                      padding-left: 0.5em;
+                      padding-bottom: 0.5em;
+                    }
+                    
+                    .expandableSeparate.expandableContainer.collapsed > .expandableContents
+                    {
+                      display: none;
+                    }
+
+                    .longText
+                    {
+                       width: 60em;
+                    }
+                    .expandableSame.expandableContainer.collapsed
+                    {
+                      overflow: hidden;
+                      height: 1em;
+                    }
+                    .expandableSame.expandableContainer.expanded
+                    {
+                        word-wrap: break-word;
+                    }
+
+                    .associatedObjectContents
+                    {
+                        font-weight: normal;
+                    }
+                    .baseobj
+                    {
+                    }
+                    .copyobj
+                    {
+                    }
+                    .baseobserv
+                    {
+                    }
+                    .copyobserv
+                    {
+                    }
+                    
+                    .debug
+                    {
+                      display: none;
+                    }
+                </style><script type="text/javascript">
+                    
+                    <!-- toggle top-level Observables -->
+                    function toggleDiv(divid, spanID) {
+                        if (document.getElementById(divid).style.display == 'none') {
+                            document.getElementById(divid).style.display = 'block';
+                            if (spanID) {
+                                document.getElementById(spanID).innerText = "-";
+                            }
+                        }
+                        else {
+                            document.getElementById(divid).style.display = 'none';
+                            if (spanID) {
+                                document.getElementById(spanID).innerText = "+";
+                            }
+                        }
+                    }
+
+                    <!-- onload, make a clean copy of all top level Observables for compositions before they are manipulated at runtime -->
+                    function embedCompositions() {
+                        var divCompBaseList = getElementsByClass('baseobserv');
+                        var divCompCopyList = getElementsByClass('copyobserv');
+
+                        for (i = 0; i < divCompCopyList.length; i++) {
+                            for (j = 0; j < divCompBaseList.length; j++) {
+                                if (divCompCopyList[i].id == 'copy-' + divCompBaseList[j].id) {
+                                    divCompCopyList[i].innerHTML = divCompBaseList[j].innerHTML;
+                                }
+                            }
+                        }
+
+                        return false;
+                    }
+
+                    <!-- copy object from clean src copy to dst destination and then toggle visibility -->
+                    function embedObject(container, src, dst) {
+                        <!-- deep copy the source div's html into the destination div --> 
+                        <!-- (typically a RelatedObjects's content expanded into a parent Object's RO container) -->
+                        var objDiv = document.getElementById(src).cloneNode(true);
+
+                        for (i = 0; i < container.children.length; i++) {
+                            if ((typeof (container.children[i].id) != "undefined") && (container.children[i].id == dst)) {
+                                container.children[i].innerHTML = objDiv.innerHTML;
+                            }
+                        }
+
+                        <!-- finally, toggle the visibility state of the div  -->
+                        toggle(container);
+
+                        return false;
+                    }
+
+                    <!-- onload, make a clean copy of all id'd objects/actions for runtime copying -->
+                    function runtimeCopyObjects() {
+                        embedCompositions()
+
+                        var divSrcList = getElementsByClass('baseobj');
+                        var divDstList = getElementsByClass('copyobj');
+
+                        for (i = 0; i < divSrcList.length; i++) {
+                            divDeepCopy = divSrcList[i].cloneNode(true);
+
+                            <!-- remove heading from copied content since expandable reference will contain header info -->
+                            for (j = 0; j < divDeepCopy.children.length; j++) {
+                                if ((typeof (divDeepCopy.children[j].className) != "undefined") && (divDeepCopy.children[j].className.indexOf("heading") > -1)) {
+                                    divDeepCopy.removeChild(divDeepCopy.children[j]);
+                                    break;
+                                }
+                            }
+
+                            for (k = 0; k < divDstList.length; k++) {
+                                if ('copy-' + divDeepCopy.id == divDstList[k].id)
+                                    divDstList[k].innerHTML = divDeepCopy.innerHTML;
+                            }
+                        }
+
+                        return false;
+                    }
+
+                    <!-- identify all elements in the document which have the parameterized class applied -->
+                    function getElementsByClass(inClass) {
+                        var children = document.body.getElementsByTagName('*');
+                        var elements = [],
+                            child;
+                        for (var i = 0, length = children.length; i < length; i++) {
+                            child = children[i];
+                            if ((typeof (child.className) != "undefined") && (child.className.indexOf(inClass) > -1)) {
+                                elements.push(child);
+                            }
+                        }
+                        return elements;
+                    }
+
+                    <!-- toggle visibility of a container element -->
+                    function toggle(containerElement) {
+                        // explicitly setting .className is a cross-browser compatible way to do this
+                        if (containerElement.className.indexOf("collapsed") > -1) {
+                            containerElement.className = "expandableContainer expandableSeparate expanded";
+                        }
+                        else {
+                            containerElement.className = "expandableContainer expandableSeparate collapsed";
+                        }
+                    }
+                 
+                </script></head>
+   <body onload="runtimeCopyObjects();">
+      <div id="wrapper">
+         <div id="header">
+            <H1>CybOX Output</H1>
+            <table id="hor-minimalist-a" width="100%">
+               <thead>
+                  <tr>
+                     <th scope="col">Major Version</th>
+                     <th scope="col">Minor Version</th>
+                     <th scope="col">Filename</th>
+                     <th scope="col">Generation Date</th>
+                  </tr>
+               </thead>
+               <TR>
+                  <TD>2</TD>
+                  <TD>0</TD>
+                  <TD>openioc_to_cybox_example.xml</TD>
+                  <TD>2013-07-12T08:58:37.797-04:00</TD>
+               </TR>
+            </table>
+         </div>
+         <h2><a name="analysis">Observables</a></h2>
+         <div id="observablesspandiv" style="font-weight:bold; margin:5px; color:#BD9C8C;">
+            <TABLE class="grid tablesorter" cellspacing="0">
+               <COLGROUP>
+                  <COL width="90%">
+                  <COL width="10%">
+               </COLGROUP>
+               <THEAD>
+                  <TR>
+                     <TH class="header">
+                        ID
+                        
+                     </TH>
+                     <TH class="header">
+                        Type
+                        
+                     </TH>
+                  </TR>
+               </THEAD>
+               <TBODY>
+                  <TR class="odd">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('2000000001','d2e3')"><span id="d2e3" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>openioc:indicator-item-b6404e87-48f1-4bf2-80b4-5e80f6e356f8
+                        </div>
+                     </TD>
+                     <TD>WindowsRegistryKeyObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="2000000001" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="openioc:indicator-item-b6404e87-48f1-4bf2-80b4-5e80f6e356f8" class="baseobserv">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object">
+                                                <div class="heading objectHeading object"></div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>
+                                                            cybox properties
+                                                            (type: WindowsRegistryKeyObjectType)
+                                                            
+                                                         </legend>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Key</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint"> [condition=Contains]</span></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON</span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                         </div>
+                                                      </fieldset>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('20000000013','d2e15')"><span id="d2e15" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>openioc:indicator-item-64311c6e-7b99-4eac-8286-afc2973c5ecf
+                        </div>
+                     </TD>
+                     <TD>WindowsRegistryKeyObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="20000000013" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="openioc:indicator-item-64311c6e-7b99-4eac-8286-afc2973c5ecf" class="baseobserv">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object">
+                                                <div class="heading objectHeading object"></div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>
+                                                            cybox properties
+                                                            (type: WindowsRegistryKeyObjectType)
+                                                            
+                                                         </legend>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Values</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Name</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint"> [condition=Equals]</span></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">SHELL</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </fieldset>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('20000000031','d2e33')"><span id="d2e33" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>openioc:indicator-item-180a59f4-1a8c-4a71-914c-9784920a344a
+                        </div>
+                     </TD>
+                     <TD>WindowsRegistryKeyObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="20000000031" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="openioc:indicator-item-180a59f4-1a8c-4a71-914c-9784920a344a" class="baseobserv">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object">
+                                                <div class="heading objectHeading object"></div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>
+                                                            cybox properties
+                                                            (type: WindowsRegistryKeyObjectType)
+                                                            
+                                                         </legend>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Values</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Data</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint"> [condition=Contains]</span></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">%AppData%</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </fieldset>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('20000000049','d2e51')"><span id="d2e51" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>openioc:indicator-item-3ccc2bc5-bd85-47a6-bed7-2cb4914e195f
+                        </div>
+                     </TD>
+                     <TD>WindowsRegistryKeyObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="20000000049" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="openioc:indicator-item-3ccc2bc5-bd85-47a6-bed7-2cb4914e195f" class="baseobserv">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object">
+                                                <div class="heading objectHeading object"></div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>
+                                                            cybox properties
+                                                            (type: WindowsRegistryKeyObjectType)
+                                                            
+                                                         </legend>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Values</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Data</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint"> [condition=Contains]</span></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">%Application Data%</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </fieldset>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('20000000067','d2e69')"><span id="d2e69" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>openioc:indicator-item-16eed1c6-8bb4-4aea-905f-afecad14db8a
+                        </div>
+                     </TD>
+                     <TD>WindowsRegistryKeyObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="20000000067" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="openioc:indicator-item-16eed1c6-8bb4-4aea-905f-afecad14db8a" class="baseobserv">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object">
+                                                <div class="heading objectHeading object"></div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>
+                                                            cybox properties
+                                                            (type: WindowsRegistryKeyObjectType)
+                                                            
+                                                         </legend>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Values</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Data</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint"> [condition=Contains]</span></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">%User Profile%</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </fieldset>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('20000000085','d2e88')"><span id="d2e88" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>openioc:indicator-item-6d7b3df9-d960-491e-b431-997384eef654
+                        </div>
+                     </TD>
+                     <TD>WindowsRegistryKeyObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="20000000085" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="openioc:indicator-item-6d7b3df9-d960-491e-b431-997384eef654" class="baseobserv">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object">
+                                                <div class="heading objectHeading object"></div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>
+                                                            cybox properties
+                                                            (type: WindowsRegistryKeyObjectType)
+                                                            
+                                                         </legend>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Values</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Data</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint"> [condition=Contains]</span></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">\Users</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </fieldset>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000103','d2e106')"><span id="d2e106" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>openioc:indicator-item-82af7237-2517-4bb7-8d60-eca6cbd041de
+                        </div>
+                     </TD>
+                     <TD>WindowsRegistryKeyObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="200000000103" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="openioc:indicator-item-82af7237-2517-4bb7-8d60-eca6cbd041de" class="baseobserv">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object">
+                                                <div class="heading objectHeading object"></div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>
+                                                            cybox properties
+                                                            (type: WindowsRegistryKeyObjectType)
+                                                            
+                                                         </legend>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Values</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Data</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint"> [condition=Contains]</span></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">\Documents</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </fieldset>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000121','d2e124')"><span id="d2e124" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>openioc:indicator-item-f0a5abaa-41f4-488e-9acf-8c7654a71122
+                        </div>
+                     </TD>
+                     <TD>WindowsRegistryKeyObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="200000000121" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="openioc:indicator-item-f0a5abaa-41f4-488e-9acf-8c7654a71122" class="baseobserv">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object">
+                                                <div class="heading objectHeading object"></div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>
+                                                            cybox properties
+                                                            (type: WindowsRegistryKeyObjectType)
+                                                            
+                                                         </legend>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Values</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Data</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint"> [condition=Contains]</span></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">%Temp%</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </fieldset>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000139','d2e142')"><span id="d2e142" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>openioc:indicator-item-20a2b9f6-1e55-47e4-b955-4fc49e69d6ce
+                        </div>
+                     </TD>
+                     <TD>WindowsRegistryKeyObjectType</TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="200000000139" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="openioc:indicator-item-20a2b9f6-1e55-47e4-b955-4fc49e69d6ce" class="baseobserv">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object">
+                                                <div class="heading objectHeading object"></div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>
+                                                            cybox properties
+                                                            (type: WindowsRegistryKeyObjectType)
+                                                            
+                                                         </legend>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Values</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Data</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint"> [condition=Contains]</span></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">\Recycled</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </fieldset>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="even">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000157','d2e160')"><span id="d2e160" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>openioc:indicator-item-58933a09-8f48-45a5-b930-475f7d069916
+                        </div>
+                     </TD>
+                     <TD>WindowsRegistryKeyObjectType</TD>
+                  </TR>
+                  <TR class="even">
+                     <TD colspan="2">
+                        <div id="200000000157" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="openioc:indicator-item-58933a09-8f48-45a5-b930-475f7d069916" class="baseobserv">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>
+                                             <div class="container objectContainer object">
+                                                <div class="heading objectHeading object"></div>
+                                                <div class="contents objectContents object">
+                                                   <div>
+                                                      <fieldset>
+                                                         <legend>
+                                                            cybox properties
+                                                            (type: WindowsRegistryKeyObjectType)
+                                                            
+                                                         </legend>
+                                                         <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                            <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Values</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                  
+                                                                  </span><div class="cyboxPropertiesLink"></div>
+                                                            </div>
+                                                            <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                               <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                  <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Value</span><span class="cyboxPropertiesConstraints"></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">
+                                                                        
+                                                                        </span><div class="cyboxPropertiesLink"></div>
+                                                                  </div>
+                                                                  <div class="contents cyboxPropertiesContents cyboxProperties">
+                                                                     <div class="container cyboxPropertiesContainer cyboxProperties">
+                                                                        <div class="heading cyboxPropertiesHeading cyboxProperties"><span class="cyboxPropertiesName">Data</span><span class="cyboxPropertiesConstraints"><span class="cyboxPropertiesSingleConstraint"> [condition=Contains]</span></span><span class="cyboxPropertiesNameValueSeparator"> → </span><span class="cyboxPropertiesValue">\Temp</span><div class="cyboxPropertiesLink"></div>
+                                                                        </div>
+                                                                        <div class="contents cyboxPropertiesContents cyboxProperties"></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </fieldset>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD>
+                        <div class="collapsibleLabel" style="cursor: pointer;" onclick="toggleDiv('200000000175','d2e178')"><span id="d2e178" style="font-weight:bold; margin:5px; color:#BD9C8C;">+</span>openioc:indicator-1
+                        </div>
+                     </TD>
+                     <TD>
+                        Composition
+                        
+                     </TD>
+                  </TR>
+                  <TR class="odd">
+                     <TD colspan="2">
+                        <div id="200000000175" class="collapsibleContent" style="overflow:hidden; display:none; padding:0px 0px;">
+                           <div id="openioc:indicator-1">
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>Title</td>
+                                          <td>This IOC detects malware that abuses the WinLogon Shell as persistence mechanism to
+                                             startup. Normally this value should just be "explorer.exe".
+                                             
+                                             http://home.mcafee.com/virusinfo/virusprofile.aspx?key=1567958#none
+                                             The following registry elements have been changed:
+                                             - HKEY_CURRENT_USER\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON\SHELL =
+                                             %APPDATA%\07F4HkiN.exe
+                                             - HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON\SHELL =
+                                             %APPDATA%\07F4HkiN.exe
+                                             
+                                             http://home.mcafee.com/VirusInfo/VirusProfile.aspx?key=1585881#none
+                                             The following registry elements have been changed:
+                                             - HKEY_CURRENT_USER\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON\SHELL =
+                                             %APPDATA%\5w4yher54uyhw4.exe
+                                             - HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON\SHELL =
+                                             %APPDATA%\5w4yher54uyhw4.exe
+                                             
+                                             http://www.threatexpert.com/report.aspx?md5=0e961bed52b8063945c9d528ad0669ed
+                                             The newly created Registry Value is:
+                                             [HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon]
+                                             Shell = "Explorer.exe "C:\recycled\SVCHOST.exe""
+                                             
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                              <div id="section">
+                                 <table class="one-column-emphasis">
+                                    <colgroup>
+                                       <col class="oce-first-obs">
+                                    </colgroup>
+                                    <tbody>
+                                       <tr>
+                                          <td>Observable Composition</td>
+                                          <td>
+                                             <table class="compositionTableOperator">
+                                                <colgroup>
+                                                   <col class="oce-first-obscomp-or">
+                                                </colgroup>
+                                                <tbody>
+                                                   <tr>
+                                                      <th rowspan="1"><span>OR</span></th>
+                                                      <td>
+                                                         <table class="compositionTableOperand">
+                                                            <tr>
+                                                               <td>
+                                                                  <table class="compositionTableOperator">
+                                                                     <colgroup>
+                                                                        <col class="oce-first-obscomp-and">
+                                                                     </colgroup>
+                                                                     <tbody>
+                                                                        <tr>
+                                                                           <th rowspan="3"><span>AND</span></th>
+                                                                           <td>
+                                                                              <table class="compositionTableOperand">
+                                                                                 <tr>
+                                                                                    <td>
+                                                                                       <div class="foreignObservablePointer">
+                                                                                          <div class="expandableContainer expandableSeparate collapsed">
+                                                                                             <div class="expandableToggle objectReference" onclick="toggle(this.parentElement)"> WindowsRegistryKeyObjectType ○ 
+                                                                                                
+                                                                                                
+                                                                                                "openioc:indicator-item-b6404e87-48f1-4bf2-80b4-5e80f6e356f8"
+                                                                                                
+                                                                                                 
+                                                                                             </div>
+                                                                                             <div class="copyobserv expandableContents" id="copy-openioc:indicator-item-b6404e87-48f1-4bf2-80b4-5e80f6e356f8"></div>
+                                                                                          </div>
+                                                                                       </div>
+                                                                                    </td>
+                                                                                 </tr>
+                                                                                 <tr>
+                                                                                    <td>
+                                                                                       <div class="foreignObservablePointer">
+                                                                                          <div class="expandableContainer expandableSeparate collapsed">
+                                                                                             <div class="expandableToggle objectReference" onclick="toggle(this.parentElement)"> WindowsRegistryKeyObjectType ○ 
+                                                                                                
+                                                                                                
+                                                                                                "openioc:indicator-item-64311c6e-7b99-4eac-8286-afc2973c5ecf"
+                                                                                                
+                                                                                                 
+                                                                                             </div>
+                                                                                             <div class="copyobserv expandableContents" id="copy-openioc:indicator-item-64311c6e-7b99-4eac-8286-afc2973c5ecf"></div>
+                                                                                          </div>
+                                                                                       </div>
+                                                                                    </td>
+                                                                                 </tr>
+                                                                                 <tr>
+                                                                                    <td>
+                                                                                       <table class="compositionTableOperator">
+                                                                                          <colgroup>
+                                                                                             <col class="oce-first-obscomp-or">
+                                                                                          </colgroup>
+                                                                                          <tbody>
+                                                                                             <tr>
+                                                                                                <th rowspan="8"><span>OR</span></th>
+                                                                                                <td>
+                                                                                                   <table class="compositionTableOperand">
+                                                                                                      <tr>
+                                                                                                         <td>
+                                                                                                            <div class="foreignObservablePointer">
+                                                                                                               <div class="expandableContainer expandableSeparate collapsed">
+                                                                                                                  <div class="expandableToggle objectReference" onclick="toggle(this.parentElement)"> WindowsRegistryKeyObjectType ○ 
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     "openioc:indicator-item-180a59f4-1a8c-4a71-914c-9784920a344a"
+                                                                                                                     
+                                                                                                                      
+                                                                                                                  </div>
+                                                                                                                  <div class="copyobserv expandableContents" id="copy-openioc:indicator-item-180a59f4-1a8c-4a71-914c-9784920a344a"></div>
+                                                                                                               </div>
+                                                                                                            </div>
+                                                                                                         </td>
+                                                                                                      </tr>
+                                                                                                      <tr>
+                                                                                                         <td>
+                                                                                                            <div class="foreignObservablePointer">
+                                                                                                               <div class="expandableContainer expandableSeparate collapsed">
+                                                                                                                  <div class="expandableToggle objectReference" onclick="toggle(this.parentElement)"> WindowsRegistryKeyObjectType ○ 
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     "openioc:indicator-item-3ccc2bc5-bd85-47a6-bed7-2cb4914e195f"
+                                                                                                                     
+                                                                                                                      
+                                                                                                                  </div>
+                                                                                                                  <div class="copyobserv expandableContents" id="copy-openioc:indicator-item-3ccc2bc5-bd85-47a6-bed7-2cb4914e195f"></div>
+                                                                                                               </div>
+                                                                                                            </div>
+                                                                                                         </td>
+                                                                                                      </tr>
+                                                                                                      <tr>
+                                                                                                         <td>
+                                                                                                            <div class="foreignObservablePointer">
+                                                                                                               <div class="expandableContainer expandableSeparate collapsed">
+                                                                                                                  <div class="expandableToggle objectReference" onclick="toggle(this.parentElement)"> WindowsRegistryKeyObjectType ○ 
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     "openioc:indicator-item-16eed1c6-8bb4-4aea-905f-afecad14db8a"
+                                                                                                                     
+                                                                                                                      
+                                                                                                                  </div>
+                                                                                                                  <div class="copyobserv expandableContents" id="copy-openioc:indicator-item-16eed1c6-8bb4-4aea-905f-afecad14db8a"></div>
+                                                                                                               </div>
+                                                                                                            </div>
+                                                                                                         </td>
+                                                                                                      </tr>
+                                                                                                      <tr>
+                                                                                                         <td>
+                                                                                                            <div class="foreignObservablePointer">
+                                                                                                               <div class="expandableContainer expandableSeparate collapsed">
+                                                                                                                  <div class="expandableToggle objectReference" onclick="toggle(this.parentElement)"> WindowsRegistryKeyObjectType ○ 
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     "openioc:indicator-item-6d7b3df9-d960-491e-b431-997384eef654"
+                                                                                                                     
+                                                                                                                      
+                                                                                                                  </div>
+                                                                                                                  <div class="copyobserv expandableContents" id="copy-openioc:indicator-item-6d7b3df9-d960-491e-b431-997384eef654"></div>
+                                                                                                               </div>
+                                                                                                            </div>
+                                                                                                         </td>
+                                                                                                      </tr>
+                                                                                                      <tr>
+                                                                                                         <td>
+                                                                                                            <div class="foreignObservablePointer">
+                                                                                                               <div class="expandableContainer expandableSeparate collapsed">
+                                                                                                                  <div class="expandableToggle objectReference" onclick="toggle(this.parentElement)"> WindowsRegistryKeyObjectType ○ 
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     "openioc:indicator-item-82af7237-2517-4bb7-8d60-eca6cbd041de"
+                                                                                                                     
+                                                                                                                      
+                                                                                                                  </div>
+                                                                                                                  <div class="copyobserv expandableContents" id="copy-openioc:indicator-item-82af7237-2517-4bb7-8d60-eca6cbd041de"></div>
+                                                                                                               </div>
+                                                                                                            </div>
+                                                                                                         </td>
+                                                                                                      </tr>
+                                                                                                      <tr>
+                                                                                                         <td>
+                                                                                                            <div class="foreignObservablePointer">
+                                                                                                               <div class="expandableContainer expandableSeparate collapsed">
+                                                                                                                  <div class="expandableToggle objectReference" onclick="toggle(this.parentElement)"> WindowsRegistryKeyObjectType ○ 
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     "openioc:indicator-item-f0a5abaa-41f4-488e-9acf-8c7654a71122"
+                                                                                                                     
+                                                                                                                      
+                                                                                                                  </div>
+                                                                                                                  <div class="copyobserv expandableContents" id="copy-openioc:indicator-item-f0a5abaa-41f4-488e-9acf-8c7654a71122"></div>
+                                                                                                               </div>
+                                                                                                            </div>
+                                                                                                         </td>
+                                                                                                      </tr>
+                                                                                                      <tr>
+                                                                                                         <td>
+                                                                                                            <div class="foreignObservablePointer">
+                                                                                                               <div class="expandableContainer expandableSeparate collapsed">
+                                                                                                                  <div class="expandableToggle objectReference" onclick="toggle(this.parentElement)"> WindowsRegistryKeyObjectType ○ 
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     "openioc:indicator-item-20a2b9f6-1e55-47e4-b955-4fc49e69d6ce"
+                                                                                                                     
+                                                                                                                      
+                                                                                                                  </div>
+                                                                                                                  <div class="copyobserv expandableContents" id="copy-openioc:indicator-item-20a2b9f6-1e55-47e4-b955-4fc49e69d6ce"></div>
+                                                                                                               </div>
+                                                                                                            </div>
+                                                                                                         </td>
+                                                                                                      </tr>
+                                                                                                      <tr>
+                                                                                                         <td>
+                                                                                                            <div class="foreignObservablePointer">
+                                                                                                               <div class="expandableContainer expandableSeparate collapsed">
+                                                                                                                  <div class="expandableToggle objectReference" onclick="toggle(this.parentElement)"> WindowsRegistryKeyObjectType ○ 
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     "openioc:indicator-item-58933a09-8f48-45a5-b930-475f7d069916"
+                                                                                                                     
+                                                                                                                      
+                                                                                                                  </div>
+                                                                                                                  <div class="copyobserv expandableContents" id="copy-openioc:indicator-item-58933a09-8f48-45a5-b930-475f7d069916"></div>
+                                                                                                               </div>
+                                                                                                            </div>
+                                                                                                         </td>
+                                                                                                      </tr>
+                                                                                                      <tr></tr>
+                                                                                                   </table>
+                                                                                                </td>
+                                                                                             </tr>
+                                                                                          </tbody>
+                                                                                       </table>
+                                                                                    </td>
+                                                                                 </tr>
+                                                                                 <tr></tr>
+                                                                              </table>
+                                                                           </td>
+                                                                        </tr>
+                                                                     </tbody>
+                                                                  </table>
+                                                               </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                         </table>
+                                                      </td>
+                                                   </tr>
+                                                </tbody>
+                                             </table>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </TD>
+                  </TR>
+               </TBODY>
+            </TABLE>
+         </div>
+      </div>
+   </body>
+</html>
