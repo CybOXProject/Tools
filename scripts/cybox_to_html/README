@@ -57,7 +57,8 @@ Warning about cybox properties:
 This is a work in progress.  Feedback is most welcome!
 
 requirements:
- - XSLT 2.0 engine; we strongly encourage the use of Saxon 9.x: http://saxon.sourceforge.net/, which we have been using for testing.
+ - XSLT 2.0 engine; we strongly encourage the use of Saxon 9.x: http://saxon.sourceforge.net/, 
+   which we have been using for testing.
  - a CybOX 2.0 input xml document
 
 v2.0beta1
