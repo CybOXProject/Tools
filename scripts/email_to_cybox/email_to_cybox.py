@@ -14,16 +14,11 @@ __version__ = '2.0.0'
 
 # Standard Library imports
 import argparse
-import base64
-import datetime
 import email
 import hashlib
 import os
-import quopri
 import re
-import socket
 import sys
-import time
 import traceback
 import urllib2
 import uuid
@@ -37,10 +32,8 @@ import whois
 import whois.parser
 
 # CybOX imports
-from cybox import ObjectReference
-from cybox.common import (DateTime, Hash, HexBinary, MeasureSource,
-        PositiveInteger, String, StructuredText, ToolInformation,
-        ToolInformationList)
+from cybox.common import (DateTime, HexBinary, MeasureSource, String,
+        StructuredText, ToolInformation, ToolInformationList)
 from cybox.core import Observables
 from cybox.objects.address_object import Address, EmailAddress
 from cybox.objects.dns_query_object import (DNSQuery, DNSQuestion,
