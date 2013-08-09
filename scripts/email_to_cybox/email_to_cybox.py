@@ -47,7 +47,8 @@ from cybox.objects.dns_query_object import (DNSQuery, DNSQuestion,
         DNSResourceRecords)
 from cybox.objects.dns_record_object import DNSRecord
 from cybox.objects.email_message_object import (Attachments, EmailHeader,
-        EmailMessage, EmailRecipients, LinkReference, Links)
+        EmailMessage, EmailRecipients, LinkReference, Links, ReceivedLine,
+        ReceivedLineList)
 from cybox.objects.file_object import File
 from cybox.objects.uri_object import URI
 from cybox.objects.whois_object import (WhoisContact, WhoisContacts,
@@ -65,8 +66,7 @@ __all__ = ["EmailParser"]
 # Global Variables
 VERBOSE_OUTPUT = False
 
-#TODO: Add Received Header support
-ALLOWED_HEADER_FIELDS = ('to', 'cc', 'bcc', 'from', 'subject',
+ALLOWED_HEADER_FIELDS = ('received', 'to', 'cc', 'bcc', 'from', 'subject',
                          'in-reply-to', 'date', 'message-id', 'sender',
                          'reply-to', 'errors-to', 'boundary', 'content-type',
                          'mime-version', 'precedence', 'user-agent',
@@ -408,6 +408,31 @@ class EmailParser:
             return EmailAddress(match.group(1))
         return None
 
+    @staticmethod
+    def _parse_received_headers(msg):
+        """ Returns a list of Received headers from a message.
+
+        :param msg: The email message
+        :type msg: an email.message.Message object
+        :return: a cybox.objects.email_message_object.ReceivedLineList
+        """
+        rlinelist = ReceivedLineList()
+
+        for line in msg.get_all("received"):
+            rline = ReceivedLine()
+
+            (line, rline.timestamp) = _try_rsplit(line, ';')
+            (line, rline.for_) = _try_rsplit(line, 'for ')
+            (line, rline.id_) = _try_rsplit(line, 'id ')
+            (line, rline.with_) = _try_rsplit(line, 'with ')
+            #TODO: Add in "via" when it is added to the CybOX Standard
+            (line, rline.by) = _try_rsplit(line, 'by ')
+            (line, rline.from_) = _try_rsplit(line, 'from ')
+
+            rlinelist.append(rline)
+
+        return rlinelist
+
     def __create_cybox_headers(self, msg):
         """ Returns a CybOX EmailHeaderType object """
         if self.__verbose_output:
@@ -415,7 +440,8 @@ class EmailParser:
 
         headers = EmailHeader()
 
-        #TODO: Add Received lines
+        if 'received' in self.headers:
+            headers.received_lines = self._parse_received_headers(msg)
         if 'to' in self.headers:
             headers.to = self._get_email_recipients(msg['to'])
         if 'cc' in self.headers:
@@ -903,6 +929,19 @@ class EmailParser:
 
         return o
 # END CLASS
+
+
+def _try_rsplit(text, delim):
+    """Helper method for splitting Email Received headers.
+
+    Attempts to rsplit ``text`` with ``delim`` with at most one split.
+    returns a tuple of (remaining_text, last_component) if the split was
+    successful; otherwise, returns (text, None)
+    """
+    if delim in text:
+        return [x.strip() for x in text.rsplit(delim, 1)]
+    else:
+        return (text, None)
 
 
 def main():
