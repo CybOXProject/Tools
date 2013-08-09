@@ -92,8 +92,6 @@ class EmailParser:
         self.__verbose_output = verbose
         self.__email_obj_container = self._newObjContainer(self.__create_cybox_id("object"), None)
 
-        self.inline_files = False
-
         self.include_urls = True
         self.include_attachments = True
         self.include_raw_body = True
@@ -906,9 +904,6 @@ def main():
     parser.add_argument('input',
             help="message data (can be either a file or '-' for STDIN)")
 
-    parser.add_argument('--inline-files', action='store_true',
-            help="embed file object details in the attachment section")
-
     # TODO: convert these from negative to positive
     parser.add_argument('--exclude-attachments', action="store_true",
             help='exclude attachments from cybox email message object')
@@ -961,8 +956,6 @@ def main():
             if header and (header not in ALLOWED_HEADER_FIELDS):
                 parser.error("Unrecognized header field: %s" % header)
         translator.headers = header_list
-
-    translator.inline_files = args.inline_files
 
     translator.include_raw_body = not args.exclude_raw_body
     translator.include_raw_headers = not args.exclude_raw_headers

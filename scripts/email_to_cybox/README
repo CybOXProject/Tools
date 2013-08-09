@@ -4,7 +4,7 @@ Converts raw email to CybOX representation
 2013 - Bryan Worrell & Greg Back - The MITRE Corporation
 Version 2.0.0
 
-usage: email_to_cybox.py [-h] [-v] [--inline-files] [--exclude-attachments]
+usage: email_to_cybox.py [-h] [-v] [--exclude-attachments]
                          [--exclude-raw-body] [--exclude-raw-headers]
                          [--exclude-urls] [--exclude-domain-objs]
                          [--exclude-url-objs] [--whois] [--http-whois] [--dns]
@@ -17,7 +17,6 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -v, --verbose         verbose output
-  --inline-files        embed file object details in the attachment section
   --exclude-attachments
                         exclude attachments from cybox email message object
   --exclude-raw-body    exclude raw body from email message object
