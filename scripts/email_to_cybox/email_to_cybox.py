@@ -386,28 +386,6 @@ class EmailParser:
         day = datetime_tup[2]
         return "%02d-%02d-%02d" % (year, month, day)
 
-    #TODO: make static method
-    def _get_email_recipients(self, header):
-        """Parse a string into an EmailRecipients list"""
-        if not header:
-            return None
-
-        recips = EmailRecipients()
-        for match in EMAIL_PATTERN.findall(header):
-            recips.append(match[0])
-        return recips
-
-    #TODO: make static method
-    def _get_single_email_address(self, header):
-        """Extract a single email address from a header"""
-        if not header:
-            return None
-
-        match = EMAIL_PATTERN.search(header)
-        if match:
-            return EmailAddress(match.group(1))
-        return None
-
     @staticmethod
     def _parse_received_headers(msg):
         """ Returns a list of Received headers from a message.
@@ -443,17 +421,17 @@ class EmailParser:
         if 'received' in self.headers:
             headers.received_lines = self._parse_received_headers(msg)
         if 'to' in self.headers:
-            headers.to = self._get_email_recipients(msg['to'])
+            headers.to = _get_email_recipients(msg['to'])
         if 'cc' in self.headers:
-            headers.cc = self._get_email_recipients(msg['cc'])
+            headers.cc = _get_email_recipients(msg['cc'])
         if 'bcc' in self.headers:
-            headers.bcc = self._get_email_recipients(msg['bcc'])
+            headers.bcc = _get_email_recipients(msg['bcc'])
         if 'from' in self.headers:
-            headers.from_ = self._get_single_email_address(msg['from'])
+            headers.from_ = _get_single_email_address(msg['from'])
         if 'sender' in self.headers:
-            headers.sender = self._get_single_email_address(msg['sender'])
+            headers.sender = _get_single_email_address(msg['sender'])
         if 'reply-to' in self.headers:
-            headers.reply_to = self._get_single_email_address(msg['reply-to'])
+            headers.reply_to = _get_single_email_address(msg['reply-to'])
         if 'subject' in self.headers:
             headers.subject = String(msg['subject'])
         if 'in-reply-to' in self.headers:
@@ -929,6 +907,26 @@ class EmailParser:
 
         return o
 # END CLASS
+
+def _get_email_recipients(header):
+    """Parse a string into an EmailRecipients list"""
+    if not header:
+        return None
+
+    recips = EmailRecipients()
+    for match in EMAIL_PATTERN.findall(header):
+        recips.append(match[0])
+    return recips
+
+def _get_single_email_address(header):
+    """Extract a single email address from a header"""
+    if not header:
+        return None
+
+    match = EMAIL_PATTERN.search(header)
+    if match:
+        return EmailAddress(match.group(1))
+    return None
 
 
 def _try_rsplit(text, delim):
