@@ -21,7 +21,6 @@ import re
 import sys
 import traceback
 import urllib2
-import uuid
 
 #Third Party imports
 
