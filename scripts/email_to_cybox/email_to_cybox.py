@@ -81,11 +81,9 @@ class EmailParser:
     """Translates raw email into a CybOX Email Message Object"""
 
     __verbose_output = False
-    __email_obj_container = None
 
     def __init__(self, verbose=False):
         self.__verbose_output = verbose
-        self.__email_obj_container = self._newObjContainer(self.__create_cybox_id("object"), None)
 
         self.include_urls = True
         self.include_attachments = True
@@ -100,32 +98,6 @@ class EmailParser:
 
         # By default, include all headers. This can be modified by the caller.
         self.headers = ALLOWED_HEADER_FIELDS
-
-    class _newObjContainer:
-        """Private class for storing new objects and their relationships"""
-        def __init__(self, idref, obj):
-            self.idref = idref
-            self.obj = obj
-            self.relationships = []
-
-        def add_relationship(self, idref, type_, relationship):
-            self.relationships.append({'idref': idref, 'type': type_, 'relationship': relationship})
-
-        def get_relationship_objects(self):
-            related_objects = cybox.RelatedObjectsType()
-            for r in self.relationships:
-                related_object = cybox.RelatedObjectType(idref=r['idref'], type_=r['type'], relationship=r['relationship'])
-                related_objects.add_Related_Object(related_object)
-            return related_objects
-
-    def __get_email_obj_id(self):
-        return self.__email_obj_container.idref
-
-    def __get_email_obj_container(self):
-        return self.__email_obj_container
-
-    def __add_email_obj_relationship(self, idref, type_, relationship):
-        self.__email_obj_container.add_relationship(idref, type_, relationship)
 
     def __parse_email_string(self, data):
         """ Returns an email.Message object """
@@ -144,18 +116,6 @@ class EmailParser:
 
         msg = email.message_from_file(data)
         return msg
-
-    def __create_cybox_id(self, item_type="guid"):
-        """ Returns a unique cybox id """
-        return "cybox:" + item_type + "-" + str(uuid.uuid1())
-
-    def __get_email_id(self, item_type="guid"):
-        """ Returns a unique cybox id for the Email message Object"""
-        if self._EMAIL_OBJECT_ID:
-            return EMAIL_OBJECT_ID
-        else:
-            EMAIL_OBJECT_ID = self.__create_cybox_id()
-            return EMAIL_OBJECT_ID
 
     def __get_attachment_created_date(self, msg):
         """ Returns the creation date of the attachment if provided
