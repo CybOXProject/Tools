@@ -38,7 +38,9 @@ import whois.parser
 
 # CybOX imports
 from cybox import ObjectReference
-from cybox.common import DateTime, Hash, HexBinary, PositiveInteger, String
+from cybox.common import (DateTime, Hash, HexBinary, MeasureSource,
+        PositiveInteger, String, StructuredText, ToolInformation,
+        ToolInformationList)
 from cybox.core import Observables
 from cybox.objects.address_object import Address, EmailAddress
 from cybox.objects.dns_query_object import (DNSQuery, DNSQuestion,
@@ -876,12 +878,30 @@ class EmailParser:
     def generate_cybox_from_email_file(self, data):
         """ Returns a CybOX Email Message Object """
         msg = self.__parse_email_file(data)
-        return Observables(self.__parse_email_message(msg))
+        return self._create_observables(msg)
 
     def generate_cybox_from_email_str(self, data):
         """ Returns a CybOX Email Message Object """
         msg = self.__parse_email_string(data)
-        return Observables(self.__parse_email_message(msg))
+        return self._create_observables(msg)
+
+    def _create_observables(self, msg):
+        o = Observables(self.__parse_email_message(msg))
+
+        t = ToolInformation()
+        t.name = os.path.basename(__file__)
+        t.description = StructuredText("Email to CybOX conversion script")
+        t.vendor = "The MITRE Corporation"
+        t.version = __version__
+
+        t_list = ToolInformationList()
+        t_list.append(t)
+
+        m = MeasureSource()
+        m.tools = t_list
+        o.observable_package_source = m
+
+        return o
 # END CLASS
 
 
