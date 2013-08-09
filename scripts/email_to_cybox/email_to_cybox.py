@@ -565,35 +565,6 @@ class EmailParser:
 
         return dns_record
 
-    def __create_email_address_object(self, email_addr):
-        """ Returns a CybOX AddressType Object for use with Email addresses """
-        if not email_addr:
-            return None
-
-        if self.__verbose_output:
-            sys.stderr.write("** creating email address object for: %s\n" % email_addr)
-
-        addr_obj = address_object.AddressObjectType(
-                   category='e-mail',
-                   Address_Value=self.__create_string_object_attr_type(email_addr))
-
-        return addr_obj
-
-    def __create_hash_object(self, md5_hash):
-        """ Returns a CybOX HashType object for the given md5 hash """
-        hash_name_type = common.HashNameType(valueOf_="MD5")
-        hash_value_type = common.SimpleHashValueType(valueOf_=md5_hash)
-        hash_type = common.HashType(Type=hash_name_type, Simple_Hash_Value=hash_value_type)
-
-        return hash_type
-
-    def __create_hash_list_object(self, list_hash_type_objects):
-        """ Returns a CybOX HashListType object for the given list of HashType objects """
-        hash_list_object = common.HashListType()
-        for hash_type_object in list_hash_type_objects:
-            hash_list_object.add_Hash(hash_type_object)
-        return hash_list_object
-
     def __create_ip_address_object(self, ip_addr):
         """ Returns a CybOX AddressType Object for use with IPv4 or IPv6 addresses """
         if not ip_addr:
@@ -608,35 +579,6 @@ class EmailParser:
             category = Address.CAT_IPV4
 
         return Address(ip_addr, category)
-
-    #TODO: delete
-    def __create_string_object_attr_type(self, value):
-        """ Returns a CybOX StringObjectAttributeType object with a value
-        of @value """
-        if not value:
-            return None
-
-        str_obj = common.StringObjectAttributeType(valueOf_=value)
-        return str_obj
-
-    def __create_date_time_object_attr_type(self, value):
-        """ Returns a CybOX DateTimeObjectAttributeType object with a value
-        of @value """
-        if not value:
-            return None
-        datetime_obj = common.DateTimeObjectAttributeType(valueOf_=value)
-
-        return datetime_obj
-
-    def __create_hex_binary_object_attr_type(self, value):
-        """ Returns a CybOX HexBinaryObjectAttributeType object with a value
-        of @value """
-        if not value:
-            return None
-
-        hex_obj = common.HexBinaryObjectAttributeType(valueOf_=value)
-
-        return hex_obj
 
     def __get_raw_body_text(self, msg):
         """ Extracts the body of the email message from the Message object.
