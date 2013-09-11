@@ -1,6 +1,10 @@
 #CybOX -> OVAL Translator
 #v0.1 BETA
 #Processor Class
+
+# Copyright (c) 2013, The MITRE Corporation. All rights reserved.
+# See LICENSE.txt for complete terms.
+
 import cybox.cybox_1_0 as cybox #bindings
 import cybox.common_types_1_0 as common #bindings
 import oval57 as oval #bindings

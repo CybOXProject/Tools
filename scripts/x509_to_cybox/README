@@ -3,13 +3,12 @@
  X509 Certificate -> CybOX XML Converter Script
 
  Copyright (c) 2013 - The MITRE Corporation
+ All rights reserved. See LICENSE.txt for complete terms.
 
 ****************************************************
 
 BY USING THE X509 TO CYBOX SCRIPT, YOU SIGNIFY YOUR ACCEPTANCE OF THE TERMS AND 
 CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THIS SCRIPT.
-
-For more information, please refer to the terms.txt file.
 
 #################################################################
 #Generates CybOX Output from an X509 Certificate txt file       #

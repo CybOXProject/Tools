@@ -4,6 +4,9 @@
 # Generated Fri Jul 23 10:17:34 2010 by generateDS.py version 2.0b.
 #
 
+# Copyright (c) 2013, The MITRE Corporation. All rights reserved.
+# See LICENSE.txt for complete terms.
+
 import sys
 import getopt
 from string import lower as str_lower

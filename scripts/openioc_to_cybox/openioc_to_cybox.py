@@ -1,5 +1,5 @@
 # Copyright (c) 2013, The MITRE Corporation. All rights reserved.
-# See TERMS.txt for complete terms.
+# See LICENSE.txt for complete terms.
 
 #OpenIOC to CybOX Translator
 #v0.2 BETA
