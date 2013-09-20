@@ -4,10 +4,10 @@
   All rights reserved. See LICENSE.txt for complete terms.
  -->
 <!--
-CybOX XML to HTML transform v2.0
-Compatible with CybOX v2.0
+CybOX XML to HTML transform v2.0.1
+Compatible with CybOX v2.0.1
 
-This is an xslt to transform a cybox 2.0 document of observables into html for
+This is an xslt to transform a cybox 2.0.1 document of observables into html for
 easy viewing.  The series of observables are turned into collapsible elements
 on the screen.  Details about each observable's contents are displayed in a
 format representing the nested structure of the original document.

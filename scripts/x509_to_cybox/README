@@ -12,7 +12,7 @@ CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THIS SCRIPT.
 
 #################################################################
 #Generates CybOX Output from an X509 Certificate txt file       #
-#Compatible with CybOX v2.0                                     #
+#Compatible with CybOX v2.0.1                                   #
 #                                                               #
 #v0.2 - BETA                                                    #
 #06/18/2013                                                     #
@@ -24,7 +24,12 @@ CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THIS SCRIPT.
 --Installation Notes------------------------------------------------------------
 
 Extract included files into your directory of choice. This script is dependent on the following libraries:
-* python-cybox, v2.0.0b4: https://github.com/CybOXProject/python-cybox/tree/v2.0.0b4
+
++ python-cybox v2.0.1.x
+
+Install python-cybox with the following command:
+$ pip install cybox
+
 This script was created using Python 2.7.x, and so may not be compatible with 3.0.x.
 --------------------------------------------------------------------------------
 --Included Files----------------------------------------------------------------

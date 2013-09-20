@@ -46,6 +46,7 @@ def main():
         elif args[i] == '-v':
             verbose_mode = True
 
+
     processor = cybox2oval.cybox_to_oval_processor(infilename, outfilename, verbose_mode)
     #Parse the input CybOX and generate the output OVAL
     processor.generate_oval()
