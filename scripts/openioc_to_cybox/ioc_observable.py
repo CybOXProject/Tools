@@ -3,7 +3,7 @@
 
 #OpenIOC -> CybOX Translator
 #v0.2 BETA
-#Creates CybOX 2.0 objects from IOC indicator item components 
+#Creates CybOX 2.0.1 objects from IOC indicator item components 
 import uuid
 import cybox.bindings.cybox_core as core
 import cybox.bindings.cybox_common as common

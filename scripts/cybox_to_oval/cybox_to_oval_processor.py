@@ -5,8 +5,8 @@
 # Copyright (c) 2013, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-import cybox.cybox_1_0 as cybox #bindings
-import cybox.common_types_1_0 as common #bindings
+import cybox.bindings.cybox_core as cybox #bindings
+import cybox.bindings.cybox_common as common #bindings
 import oval57 as oval #bindings
 import cybox_oval_mappings
 import sys
@@ -39,8 +39,8 @@ class cybox_to_oval_processor(object):
     
     #Process a single observable
     def process_observable(self, observable, oval_criteria, normal_observables = None):
-        if observable.Stateful_Measure is not None:
-            oval_entities = self.mappings.create_oval(observable.Stateful_Measure.Object.Defined_Object)
+        if observable.Object:
+            oval_entities = self.mappings.create_oval(observable.Object.Properties)
             if oval_entities is not None:
                 #Add the tests, objects, and states to the oval document
                 self.oval_tests.add_test(oval_entities.get('test'))
@@ -83,6 +83,7 @@ class cybox_to_oval_processor(object):
                 oval_def.set_criteria(oval_criteria)
                 self.oval_defs.add_definition(oval_def)
         for observable in normal_observables:
+            print observable.id
             if observable.id not in self.converted_ids:
                 oval_def = oval.DefinitionType(version = 1.0, id = self.mappings.generate_def_id(), classxx = 'miscellaneous', metadata = metadata)
                 oval_criteria = oval.CriteriaType()
@@ -99,7 +100,7 @@ class cybox_to_oval_processor(object):
             observables = cybox.parse(self.infilename)
             try:
                 sys.stdout.write('Generating ' + self.outfilename + ' from ' + self.infilename + '...')
-
+                print
                 normal_observables = []
                 obscomp_observables = []
 
@@ -107,9 +108,9 @@ class cybox_to_oval_processor(object):
                 #Two bins: one for observables with observable compositions, and one for those without
                 #This is to ensure that we account for referenced observables correctly
                 for observable in observables.Observable:
-                    if type(observable) is cybox.ObservableType and not observable.Observable_Composition:
+                    if not observable.Observable_Composition:
                         normal_observables.append(observable)
-                    elif type(observable) is cybox.ObservableType and observable.Observable_Composition:
+                    elif observable.Observable_Composition:
                         obscomp_observables.append(observable)
 
                 self.process_observables(obscomp_observables, normal_observables)
@@ -145,7 +146,7 @@ class cybox_to_oval_processor(object):
         #Add the generator to the defs
         oval_gen = oval.GeneratorType()
         oval_gen.set_product_name('CybOX XML to OVAL Script')
-        oval_gen.set_product_version('0.1')
+        oval_gen.set_product_version("0.2")
         oval_gen.set_schema_version('5.7')
         #Generate the datetime
         oval_gen.set_timestamp(self.__generate_datetime())

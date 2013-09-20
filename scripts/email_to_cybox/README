@@ -1,11 +1,11 @@
 # Copyright (c) 2013, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-Email to CybOX v2.0 Translator
+Email to CybOX v2.0.1 Translator
 Converts raw email to CybOX representation
 
 2013 - Bryan Worrell & Greg Back - The MITRE Corporation
-Version 2.0.0
+Version 2.0.1
 
 usage: email_to_cybox.py [-h] [-v] [--exclude-attachments]
                          [--exclude-raw-body] [--exclude-raw-headers]

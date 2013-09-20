@@ -1,9 +1,9 @@
 <oval_definitions xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:win-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows http://oval.mitre.org/language/version5.7/ovaldefinition/complete/windows-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5 http://oval.mitre.org/language/version5.7/ovaldefinition/complete/oval-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-common-5 http://oval.mitre.org/language/version5.7/ovaldefinition/complete/oval-common-schema.xsd">
     <generator>
         <oval:product_name>CybOX XML to OVAL Script</oval:product_name>
-        <oval:product_version>0.1</oval:product_version>
+        <oval:product_version>0.2</oval:product_version>
         <oval:schema_version>5.7</oval:schema_version>
-        <oval:timestamp>2012-08-23T09:29:45.784000</oval:timestamp>
+        <oval:timestamp>2013-09-20T16:20:10.464117</oval:timestamp>
     </generator>
     <definitions>
         <definition deprecated="false" version="1" id="oval:cybox_to_oval:def:1" class="miscellaneous">
@@ -26,39 +26,38 @@
         </definition>
     </definitions>
     <tests>
-        <win-def:registry_test comment="OVAL Test created from CybOX WinRegistryKeyObj:WindowsRegistryKeyObjectType" state_operator="AND" check="at least one" version="1" id="oval:cybox_to_oval:tst:1" check_existence="at_least_one_exists">
+        <win-def:file_test comment="OVAL Test created from CybOX FileObj:FileObjectType" state_operator="AND" check="at least one" version="1" id="oval:cybox_to_oval:tst:1" check_existence="at_least_one_exists">
             <win-def:object object_ref="oval:cybox_to_oval:obj:1"/>
-            <win-def:state state_ref="oval:cybox_to_oval:ste:1"/>
             <win-def:state state_ref="oval:cybox_to_oval:ste:2"/>
-        </win-def:registry_test>
-        <win-def:file_test comment="OVAL Test created from CybOX FileObj:FileObjectType" state_operator="AND" check="at least one" version="1" id="oval:cybox_to_oval:tst:2" check_existence="at_least_one_exists">
-            <win-def:object object_ref="oval:cybox_to_oval:obj:2"/>
-            <win-def:state state_ref="oval:cybox_to_oval:ste:4"/>
         </win-def:file_test>
+        <win-def:registry_test comment="OVAL Test created from CybOX WinRegistryKeyObj:WindowsRegistryKeyObjectType" state_operator="AND" check="at least one" version="1" id="oval:cybox_to_oval:tst:2" check_existence="at_least_one_exists">
+            <win-def:object object_ref="oval:cybox_to_oval:obj:2"/>
+            <win-def:state state_ref="oval:cybox_to_oval:ste:3"/>
+            <win-def:state state_ref="oval:cybox_to_oval:ste:4"/>
+        </win-def:registry_test>
     </tests>
     <objects>
-        <win-def:registry_object version="1" id="oval:cybox_to_oval:obj:1">
-            <win-def:hive datatype="string" operation="equals" mask="false">HKEY_LOCAL_MACHINE</win-def:hive>
-            <win-def:key datatype="string" operation="equals" mask="false">SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings</win-def:key>
+        <win-def:file_object version="1" id="oval:cybox_to_oval:obj:1">
+            <win-def:path datatype="string" mask="false">AppData\Mozilla</win-def:path>
+            <win-def:filename datatype="string" mask="false">bad_file24.exe</win-def:filename>
+        </win-def:file_object>
+        <win-def:registry_object version="1" id="oval:cybox_to_oval:obj:2">
+            <win-def:hive datatype="string" mask="false">HKEY_LOCAL_MACHINE</win-def:hive>
+            <win-def:key datatype="string" mask="false">SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings</win-def:key>
             <win-def:name datatype="string" operation="pattern match" mask="false">.*</win-def:name>
         </win-def:registry_object>
-        <win-def:file_object version="1" id="oval:cybox_to_oval:obj:2">
-            <win-def:path datatype="string" mask="false">C:\windows\system32</win-def:path>
-            <win-def:filename datatype="string" mask="false">abcdfdfsdf.dll</win-def:filename>
-        </win-def:file_object>
     </objects>
     <states>
-        <win-def:registry_state operator="AND" version="1" id="oval:cybox_to_oval:ste:1">
-            <win-def:name datatype="string" operation="equals" mask="false">6</win-def:name>
-            <win-def:value datatype="string" operation="equals" mask="false">asdfgh</win-def:value>
-        </win-def:registry_state>
-        <win-def:registry_state operator="AND" version="1" id="oval:cybox_to_oval:ste:2">
-            <win-def:name datatype="string" operation="equals" mask="false">7</win-def:name>
-            <win-def:value datatype="string" operation="equals" mask="false">1231241asd</win-def:value>
-        </win-def:registry_state>
-        <win-def:file_state operator="AND" version="1" id="oval:cybox_to_oval:ste:4">
-            <win-def:size datatype="int" mask="false">1024</win-def:size>
-            <win-def:m_time datatype="int" operation="not equal" mask="false">24523542352</win-def:m_time>
+        <win-def:file_state operator="AND" version="1" id="oval:cybox_to_oval:ste:2">
+            <win-def:size datatype="int" mask="false">3282</win-def:size>
         </win-def:file_state>
+        <win-def:registry_state operator="AND" version="1" id="oval:cybox_to_oval:ste:3">
+            <win-def:name datatype="string" mask="false">6</win-def:name>
+            <win-def:value datatype="string" mask="false">asdfgh</win-def:value>
+        </win-def:registry_state>
+        <win-def:registry_state operator="AND" version="1" id="oval:cybox_to_oval:ste:4">
+            <win-def:name datatype="string" mask="false">7</win-def:name>
+            <win-def:value datatype="string" mask="false">1231241asd</win-def:value>
+        </win-def:registry_state>
     </states>
 </oval_definitions>

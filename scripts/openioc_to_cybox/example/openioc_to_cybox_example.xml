@@ -1,14 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <cybox:Observables 
  xmlns:openioc="http://openioc.org/"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
  xmlns:cybox="http://cybox.mitre.org/cybox-2" 
  xmlns:cyboxCommon="http://cybox.mitre.org/common-2" 
  xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2" 
+ xmlns:example="http://example.com" 
  xmlns:WinRegistryKeyObj="http://cybox.mitre.org/objects#WinRegistryKeyObject-2" 
  xmlns:WinHandleObj="http://cybox.mitre.org/objects#WinHandleObject-2" 
- xsi:schemaLocation="http://cybox.mitre.org/cybox-2 http://cybox.mitre.org/XMLSchema/core/2.0/cybox_core.xsd
- http://cybox.mitre.org/default_vocabularies-2 http://cybox.mitre.org/XMLSchema/default_vocabularies/2.0.0/cybox_default_vocabularies.xsd
- http://cybox.mitre.org/objects#WinRegistryKeyObject-2 http://cybox.mitre.org/XMLSchema/objects/Win_Registry_Key/2.0/Win_Registry_Key_Object.xsd" cybox_major_version="2" cybox_minor_version="0">
+ xsi:schemaLocation="http://cybox.mitre.org/cybox-2 http://cybox.mitre.org/XMLSchema/core/2.0.1/cybox_core.xsd
+ http://cybox.mitre.org/default_vocabularies-2 http://cybox.mitre.org/XMLSchema/default_vocabularies/2.0.1/cybox_default_vocabularies.xsd
+ http://cybox.mitre.org/objects#WinRegistryKeyObject-2 http://cybox.mitre.org/XMLSchema/objects/Win_Registry_Key/2.0.1/Win_Registry_Key_Object.xsd" cybox_major_version="2" cybox_minor_version="0" cybox_update_version="1">
     <cybox:Observable id="openioc:indicator-item-08e029be-0648-438e-b9af-7916961efa2e">
         <cybox:Object>
             <cybox:Properties xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">

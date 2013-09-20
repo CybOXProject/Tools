@@ -1,9 +1,25 @@
-<cybox:Observables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cybox="http://cybox.mitre.org/cybox-2" xmlns:cyboxCommon="http://cybox.mitre.org/common-2" xmlns:AddrObj="http://cybox.mitre.org/objects#AddressObject-2" xmlns:URIObj="http://cybox.mitre.org/objects#URIObject-2" xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2" xmlns:EmailMessageObj="http://cybox.mitre.org/objects#EmailMessageObject-2" xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2" xmlns:example="http://example.com/" xsi:schemaLocation="http://cybox.mitre.org/cybox-2 http://cybox.mitre.org/XMLSchema/core/2.0/cybox_core.xsd     http://cybox.mitre.org/objects#URIObject-2 http://cybox.mitre.org/XMLSchema/objects/URI/2.0/URI_Object.xsd     http://cybox.mitre.org/objects#FileObject-2 http://cybox.mitre.org/XMLSchema/objects/File/2.0/File_Object.xsd     http://cybox.mitre.org/objects#EmailMessageObject-2 http://cybox.mitre.org/XMLSchema/objects/Email_Message/2.0/Email_Message_Object.xsd     http://cybox.mitre.org/default_vocabularies-2 http://cybox.mitre.org/XMLSchema/default_vocabularies/2.0.0/cybox_default_vocabularies.xsd     " cybox_major_version="2" cybox_minor_version="0">
+<?xml version="1.0" encoding="UTF-8"?>
+<cybox:Observables 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:cybox="http://cybox.mitre.org/cybox-2" 
+    xmlns:cyboxCommon="http://cybox.mitre.org/common-2" 
+    xmlns:AddrObj="http://cybox.mitre.org/objects#AddressObject-2" 
+    xmlns:URIObj="http://cybox.mitre.org/objects#URIObject-2" 
+    xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2" 
+    xmlns:EmailMessageObj="http://cybox.mitre.org/objects#EmailMessageObject-2" 
+    xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2" 
+    xmlns:example="http://example.com/" 
+    xsi:schemaLocation="
+    http://cybox.mitre.org/cybox-2 ../cybox_core.xsd
+    http://cybox.mitre.org/objects#URIObject-2 ../objects/URI_Object.xsd
+    http://cybox.mitre.org/objects#FileObject-2 ../objects/File_Object.xsd
+    http://cybox.mitre.org/objects#EmailMessageObject-2 ../objects/Email_Message_Object.xsd
+    http://cybox.mitre.org/default_vocabularies-2 ../cybox_default_vocabularies.xsd" cybox_major_version="2" cybox_minor_version="0" cybox_update_version="1">
     <!-- This collection of observables were observed as part of the widespread "Iran-Oil" (among many other names used) attack campaign in March 2012 -->
     <cybox:Observable id="example:Observable-1a937ec2-90ab-4e0e-a37c-db9b2e66a58e">
         <!-- Receive "Iran-Oil" attack campaign email message -->
         <cybox:Event>
-            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0">Email Ops</cybox:Type>
+            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0.1">Email Ops</cybox:Type>
             <cybox:Description>Receive "Iran-Oil" attack campaign email message.</cybox:Description>
             <cybox:Actions>
                 <cybox:Action>
@@ -23,8 +39,8 @@
                                     <EmailMessageObj:Subject>Iran's Oil and Nuclear Situation</EmailMessageObj:Subject>
                                     <EmailMessageObj:Date datatype="dateTime">2012-03-02T07:42:24Z</EmailMessageObj:Date>
                                 </EmailMessageObj:Header>
-                                <EmailMessageObj:Raw_Header datatype="string">
-						Return-Path: &lt;wmorrison89@gmail.com&gt;
+                                <EmailMessageObj:Raw_Header datatype="string"><![CDATA[
+						Return-Path: <wmorrison89@gmail.com>
 Received-SPF: pass (google.com: domain of wmorrison89@gmail.com designates
 10.236.185.4 as permitted sender) client-ip=10.236.185.4;
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
@@ -39,17 +55,17 @@ Fri,
 02 Mar 2012 04:44:25 -0800 (PST)
 Received: by 10.147.35.14 with HTTP; Fri, 2 Mar 2012 04:44:24 -0800 (PST)
 In-Reply-To:
-&lt;CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com&gt;
+<CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com>
 References:
-&lt;CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com&gt;
+<CADY6HTa-jmaqmtVyyT-nLz6reztNjcs-617wL4bt9YBOGu+h4w@mail.gmail.com>
 Date: Fri, 2 Mar 2012 07:44:24 -0500
 Message-ID:
-&lt;CADY6HTZ6oopY5v6WkYU81YcSQw3X124CK_Fx4jhnhUiU3Y9z6A@mail.gmail.com&gt;
+<CADY6HTZ6oopY5v6WkYU81YcSQw3X124CK_Fx4jhnhUiU3Y9z6A@mail.gmail.com>
 Subject: Iran's Oil and Nuclear Situation
-From: william abnett &lt;wmorrison89@gmail.com&gt;
-To: william.abnett &lt;william.abnett@gmail.com&gt;
+From: william abnett <wmorrison89@gmail.com>
+To: william.abnett <william.abnett@gmail.com>
 Content-Type: multipart/mixed; boundary="20cf303f67fac8928804ba41efd5"
-					</EmailMessageObj:Raw_Header>
+					]]></EmailMessageObj:Raw_Header>
                                 <EmailMessageObj:Attachments>
                                     <EmailMessageObj:File object_reference="cybox:guid-49d31c13-8d7b-4528-b8d6-ce8ed0d43ad7"/>
                                 </EmailMessageObj:Attachments>
@@ -64,7 +80,7 @@ Content-Type: multipart/mixed; boundary="20cf303f67fac8928804ba41efd5"
     <cybox:Observable id="example:Obervable-35f04c28-5fd2-4d72-8aae-2ad04ee1811f">
         <!-- Open Iran-Oil corrupted .doc file-->
         <cybox:Event>
-            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0">File Ops (CRUD)</cybox:Type>
+            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0.1">File Ops (CRUD)</cybox:Type>
             <cybox:Description>Open Iran-Oil corrupted .doc file.</cybox:Description>
             <cybox:Actions>
                 <cybox:Action>
@@ -97,7 +113,7 @@ Content-Type: multipart/mixed; boundary="20cf303f67fac8928804ba41efd5"
     <cybox:Observable id="example:Observable-f005fbc6-7427-43ea-8e1e-9a341836f76b">
         <!-- Download Iran-Oil invalid .mp4 downloader file-->
         <cybox:Event>
-            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0">File Ops (CRUD)</cybox:Type>
+            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0.1">File Ops (CRUD)</cybox:Type>
             <cybox:Description>Download Iran-Oil invalid .mp4 downloader file.</cybox:Description>
             <cybox:Actions>
                 <cybox:Action>
@@ -147,7 +163,7 @@ Content-Type: multipart/mixed; boundary="20cf303f67fac8928804ba41efd5"
     <cybox:Observable id="example:Observable-210f18f3-3874-4f9a-861d-71b328be90c6">
         <!-- Create Iran-Oil .exe Trojan file-->
         <cybox:Event>
-            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0">File Ops (CRUD)</cybox:Type>
+            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0.1">File Ops (CRUD)</cybox:Type>
             <cybox:Description>Create Iran-Oil .exe Trojan file.</cybox:Description>
             <cybox:Actions>
                 <cybox:Action>
@@ -215,7 +231,7 @@ Content-Type: multipart/mixed; boundary="20cf303f67fac8928804ba41efd5"
     <cybox:Observable id="example:Observable-b650c988-aac7-45ff-967d-9f1e5fc66161">
         <!-- Execute Iran-Oil .exe Trojan file-->
         <cybox:Event>
-            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0">File Ops (CRUD)</cybox:Type>
+            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0.1">File Ops (CRUD)</cybox:Type>
             <cybox:Description>Execute Iran-Oil .exe Trojan file.</cybox:Description>
             <cybox:Actions>
                 <cybox:Action>
@@ -255,7 +271,7 @@ Content-Type: multipart/mixed; boundary="20cf303f67fac8928804ba41efd5"
     <cybox:Observable id="example:Observable-a24ff8bc-b534-4616-838b-8bbe260a8e8f">
         <!-- Trojan .exe file connects out to C&C URLs/IPs-->
         <cybox:Event>
-            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0">App Layer Traffic</cybox:Type>
+            <cybox:Type xsi:type="cyboxVocabs:EventTypeVocab-1.0.1">App Layer Traffic</cybox:Type>
             <cybox:Description>Trojan .exe file connects out to C2 URLs/IPs.</cybox:Description>
             <cybox:Actions>
                 <cybox:Action>
@@ -291,7 +307,7 @@ Content-Type: multipart/mixed; boundary="20cf303f67fac8928804ba41efd5"
     <cybox:Observable id="example:Observable-066cef51-c886-432e-9a22-a17f57f3f3f2">
         <!-- One of three Command and Control URLs-->
         <cybox:Object id="example:Object-41b220d8-4c45-48de-9d08-30d661b2dc8e">
-            <cybox:Properties xsi:type="URIObj:URIObjectType">
+            <cybox:Properties xsi:type="URIObj:URIObjectType" type="URL">
                 <URIObj:Value condition="Equals">www.documents.myPicture.info</URIObj:Value>
             </cybox:Properties>
             <cybox:Related_Objects>

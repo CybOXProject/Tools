@@ -1,8 +1,8 @@
 ****************************************************
 
-      CybOX XML -> OVAL XML Converter Script
+      CybOX v2.0.1 XML -> OVAL 5.7 XML Converter Script
 
- Copyright (c) 2012 - The MITRE Corporation
+ Copyright (c) 2013 - The MITRE Corporation
  All rights reserved. See LICENSE.txt for more details.
 
 ****************************************************
@@ -13,22 +13,28 @@ SCRIPT.
 
 For more information, please refer to the terms.txt file.
 
-#################################################################
-#CybOX XML --> OVAL XML Generation Script                       #
-#Generates OVAL 5.7 definitions/tests/objects from CyBOX XML    #
-#                                                               #
-#Compatible with content produced using CybOX v1.0 draft        #
-#v0.1 BETA - extracts files and registry keys                   #
-#08/23/2012                                                     #
-#                                                               #
-#################################################################
-# CybOX - http://cybox.mitre.org  #                             #
-# OVAL - http://oval.mitre.org  #                               #
-#################################################################
+########################################################################
+#CybOX v2.0.1 XML --> OVAL XML Generation Script                       #
+#Generates OVAL 5.7 definitions/tests/objects from CyBOX v2.0.1 XML    #
+#                                                               	   #
+#Compatible with content produced using CybOX v1.0 draft               #
+#v0.2 BETA - extracts files and registry keys                          #
+#08/23/2012                                                            #
+#                                                                      #
+########################################################################
+# CybOX - http://cybox.mitre.org                                       #
+# OVAL - http://oval.mitre.org                                         #
+########################################################################
 --------------------------------------------------------------------------------
 --Installation Notes------------------------------------------------------------
 
-Simply extract all files from the archive into your directory of choice. No external modules should be required. This script was created using Python 2.7.x, and so may not be compatible with 3.0.x.
+This script depends on the following:
+python-cybox v2.0.1.x
+
+To install dependencies, run the following command(s):
+$ pip install cybox
+
+This script was created using Python 2.7.x, and so may not be compatible with 3.0.x.
 --------------------------------------------------------------------------------
 --Included Files----------------------------------------------------------------
 
@@ -36,7 +42,6 @@ README: this file.
 cybox_to_oval.py: the CybOX XML to OVAL XML Python driver.
 cybox_to_oval_processor.py: the main CybOX XML to OVAL XML converter class.
 cybox_oval_mappings.py: the CybOX to OVAL mappings class.
-/cybox: the CybOX Python bindings used by the script.
 oval57.py: the OVAL 5.7 Python bindings used by the script.
 terms.txt: the terms of usage for this script.
 --------------------------------------------------------------------------------

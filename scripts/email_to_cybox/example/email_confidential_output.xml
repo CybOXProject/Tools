@@ -1,57 +1,78 @@
-<cybox:Observables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"        xmlns:cybox="http://cybox.mitre.org/cybox_v1"        xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject"        xmlns:Common="http://cybox.mitre.org/Common_v1"        xmlns:FileObj="http://cybox.mitre.org/objects#FileObject"        xmlns:URIObj="http://cybox.mitre.org/objects#URIObject"        xmlns:EmailMessageObj="http://cybox.mitre.org/objects#EmailMessageObject"        xsi:schemaLocation="http://cybox.mitre.org/Common_v1 http://cybox.mitre.org/XMLSchema/cybox_common_types_v1.0(draft).xsd        http://cybox.mitre.org/objects#AddressObject http://cybox.mitre.org/XMLSchema/objects/Address/Address_Object_1.1.xsd        http://cybox.mitre.org/objects#FileObject http://cybox.mitre.org/XMLSchema/objects/File/File_Object_1.2.xsd        http://cybox.mitre.org/objects#URIObject http://cybox.mitre.org/XMLSchema/objects/URI/URI_Object_1.1.xsd        http://cybox.mitre.org/objects#EmailMessageObject http://cybox.mitre.org/XMLSchema/objects/Email_Message/Email_Message_Object_1.1.xsd        http://cybox.mitre.org/cybox_v1 http://cybox.mitre.org/XMLSchema/cybox_core_v1.0(draft).xsd" cybox_major_version="1" cybox_minor_version="0">
-    <cybox:Observable id="cybox:guid-38bec7c0-cf81-11e1-a574-2fa5cd7681ca">
-        <cybox:Stateful_Measure>
-            <cybox:Object id="cybox:guid-38bec7bd-cf81-11e1-9e16-2fa5cd7681ca">
-                <cybox:Defined_Object xsi:type="URIObj:URIObjectType" type="URL">
-                    <URIObj:Value datatype="AnyURI">http://www.consultingservize.net/archives/Analysis.pdf</URIObj:Value>
-                </cybox:Defined_Object>
-                <cybox:Related_Objects>
-                    <cybox:Related_Object idref="cybox:guid-38bec7be-cf81-11e1-b873-2fa5cd7681ca" type="Email Message" relationship="Contained_Within">
-                    </cybox:Related_Object>
-                </cybox:Related_Objects>
-            </cybox:Object>
-        </cybox:Stateful_Measure>
-    </cybox:Observable>
-    <cybox:Observable id="cybox:guid-38bec7c1-cf81-11e1-a449-2fa5cd7681ca">
-        <cybox:Stateful_Measure>
-            <cybox:Object id="cybox:guid-38bb6c5c-cf81-11e1-ac2f-2fa5cd7681ca">
-                <cybox:Defined_Object xsi:type="FileObj:FileObjectType">
-                    <FileObj:File_Name datatype="String">Analysis.exe.pdf</FileObj:File_Name>
-                    <FileObj:File_Extension datatype="String">pdf</FileObj:File_Extension>
-                    <FileObj:Size_In_Bytes datatype="UnsignedLong">17189</FileObj:Size_In_Bytes>
-                </cybox:Defined_Object>
-                <cybox:Related_Objects>
-                    <cybox:Related_Object idref="cybox:guid-38bec7be-cf81-11e1-b873-2fa5cd7681ca" type="Email Message" relationship="Contained_Within">
-                    </cybox:Related_Object>
-                </cybox:Related_Objects>
-            </cybox:Object>
-        </cybox:Stateful_Measure>
-    </cybox:Observable>
-    <cybox:Observable id="cybox:observable-38bec7bf-cf81-11e1-ad1d-2fa5cd7681ca">
-        <cybox:Stateful_Measure>
-            <cybox:Object id="cybox:guid-38bec7be-cf81-11e1-b873-2fa5cd7681ca">
-                <cybox:Defined_Object xsi:type="EmailMessageObj:EmailMessageObjectType">
-                    <EmailMessageObj:Attachments>
-                        <EmailMessageObj:File xsi:type="FileObj:FileObjectType" object_reference="cybox:guid-38bb6c5c-cf81-11e1-ac2f-2fa5cd7681ca"/>
-                    </EmailMessageObj:Attachments>
-                    <EmailMessageObj:Header>
-                        <EmailMessageObj:To>
-                            <EmailMessageObj:Recipient category="e-mail">
-                                <AddressObj:Address_Value datatype="String">rsmith@megacorp.com</AddressObj:Address_Value>
-                            </EmailMessageObj:Recipient>
-                        </EmailMessageObj:To>
-                        <EmailMessageObj:From category="e-mail">
-                            <AddressObj:Address_Value datatype="String">jdoe@yahoo.com</AddressObj:Address_Value>
-                        </EmailMessageObj:From>
-                        <EmailMessageObj:Subject datatype="String">Complete Analysis</EmailMessageObj:Subject>
-                        <EmailMessageObj:Date datatype="DateTime">2012-07-16T15:48:34-04:00</EmailMessageObj:Date>
-                        <EmailMessageObj:Message_ID datatype="String">CAF=+=fBGC1ivgFkbi7jvxRBxH_h_OQnERPNiJQjTWO6HDjNbqg@foo.yahoo.com</EmailMessageObj:Message_ID>
-                    </EmailMessageObj:Header>
-                    <EmailMessageObj:Optional_Header>
-                        <EmailMessageObj:Content-Type datatype="String">multipart/mixed; boundary=14dae934080712a51504c4f7b772</EmailMessageObj:Content-Type>
-                        <EmailMessageObj:MIME-Version datatype="String">1.0</EmailMessageObj:MIME-Version>
-                    </EmailMessageObj:Optional_Header>
-                    <EmailMessageObj:Raw_Body datatype="String"><![CDATA[ Attached is the summary for the analysis that you requested. This is
+<?xml version='1.0' encoding='UTF-8'?>
+<cybox:Observables 
+	xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
+	xmlns:cyboxCommon="http://cybox.mitre.org/common-2"
+	xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2"
+	xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject-2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cybox="http://cybox.mitre.org/cybox-2"
+	xmlns:email_to_cybox="http://www.github.com/CybOXProject/Tools/"
+	xmlns:URIObj="http://cybox.mitre.org/objects#URIObject-2"
+	xmlns:EmailMessageObj="http://cybox.mitre.org/objects#EmailMessageObject-2"
+	xsi:schemaLocation="http://cybox.mitre.org/objects#FileObject-2 http://cybox.mitre.org/XMLSchema/objects/File/2.0.1/File_Object.xsd http://cybox.mitre.org/common-2 http://cybox.mitre.org/XMLSchema/common/2.0.1/cybox_common.xsd http://cybox.mitre.org/default_vocabularies-2 http://cybox.mitre.org/XMLSchema/default_vocabularies/2.0.1/cybox_default_vocabularies.xsd http://cybox.mitre.org/objects#AddressObject-2 http://cybox.mitre.org/XMLSchema/objects/Address/2.0.1/Address_Object.xsd http://cybox.mitre.org/cybox-2 http://cybox.mitre.org/XMLSchema/core/2.0.1/cybox_core.xsd http://cybox.mitre.org/objects#URIObject-2 http://cybox.mitre.org/XMLSchema/objects/URI/2.0.1/URI_Object.xsd http://cybox.mitre.org/objects#EmailMessageObject-2 http://cybox.mitre.org/XMLSchema/objects/Email_Message/2.0.1/Email_Message_Object.xsd" cybox_major_version="2" cybox_minor_version="0" cybox_update_version="1">
+    <cybox:Observable_Package_Source>
+        <cyboxCommon:Tools>
+            <cyboxCommon:Tool>
+                <cyboxCommon:Name>email_to_cybox.py</cyboxCommon:Name>
+                <cyboxCommon:Description>Email to CybOX conversion script</cyboxCommon:Description>
+                <cyboxCommon:Vendor>The MITRE Corporation</cyboxCommon:Vendor>
+                <cyboxCommon:Version>2.0.1</cyboxCommon:Version>
+            </cyboxCommon:Tool>
+        </cyboxCommon:Tools>
+    </cybox:Observable_Package_Source>
+    <cybox:Observable id="email_to_cybox:Observable-0bc59ef7-d92f-47b9-8cea-a94a0835ef81">
+        <cybox:Object id="email_to_cybox:EmailMessage-9ef16cea-2b75-47c2-bd8c-7036148fad35">
+            <cybox:Properties xsi:type="EmailMessageObj:EmailMessageObjectType">
+                <EmailMessageObj:Header>
+                    <EmailMessageObj:Received_Lines>
+                        <EmailMessageObj:Received>
+                            <EmailMessageObj:By>10.64.32.72</EmailMessageObj:By>
+                            <EmailMessageObj:With>SMTP</EmailMessageObj:With>
+                            <EmailMessageObj:ID>g8csp132763iei</EmailMessageObj:ID>
+                            <EmailMessageObj:Timestamp>2012-07-16T12:48:37-07:00</EmailMessageObj:Timestamp>
+                        </EmailMessageObj:Received>
+                        <EmailMessageObj:Received>
+                            <EmailMessageObj:From>foo.yahoo.com ([10.20.30.40])</EmailMessageObj:From>
+                            <EmailMessageObj:By>10.20.30.40</EmailMessageObj:By>
+                            <EmailMessageObj:With>SMTP</EmailMessageObj:With>
+                            <EmailMessageObj:ID>e6mr6123235ign.55.1342468114267 (num_hops = 1)</EmailMessageObj:ID>
+                            <EmailMessageObj:Timestamp>2012-07-16T12:48:34-07:00</EmailMessageObj:Timestamp>
+                        </EmailMessageObj:Received>
+                        <EmailMessageObj:Received>
+                            <EmailMessageObj:By>10.20.30.40</EmailMessageObj:By>
+                            <EmailMessageObj:With>SMTP</EmailMessageObj:With>
+                            <EmailMessageObj:ID>e6mr6123235ign.55.1342468114261</EmailMessageObj:ID>
+                            <EmailMessageObj:Timestamp>2012-07-16T12:48:34-07:00</EmailMessageObj:Timestamp>
+                        </EmailMessageObj:Received>
+                        <EmailMessageObj:Received>
+                            <EmailMessageObj:By>10.43.79.137</EmailMessageObj:By>
+                            <EmailMessageObj:With>HTTP</EmailMessageObj:With>
+                            <EmailMessageObj:Timestamp>2012-07-16T12:48:34-07:00</EmailMessageObj:Timestamp>
+                        </EmailMessageObj:Received>
+                    </EmailMessageObj:Received_Lines>
+                    <EmailMessageObj:To>
+                        <EmailMessageObj:Recipient xsi:type="AddressObj:AddressObjectType" category="e-mail">
+                            <AddressObj:Address_Value>rsmith@megacorp.com</AddressObj:Address_Value>
+                        </EmailMessageObj:Recipient>
+                    </EmailMessageObj:To>
+                    <EmailMessageObj:From xsi:type="AddressObj:AddressObjectType" category="e-mail">
+                        <AddressObj:Address_Value>jdoe@yahoo.com</AddressObj:Address_Value>
+                    </EmailMessageObj:From>
+                    <EmailMessageObj:Subject>Complete Analysis</EmailMessageObj:Subject>
+                    <EmailMessageObj:In_Reply_To>None</EmailMessageObj:In_Reply_To>
+                    <EmailMessageObj:Date>2012-07-16T15:48:34-04:00</EmailMessageObj:Date>
+                    <EmailMessageObj:Message_ID>&lt;CAF=+=fBGC1ivgFkbi7jvxRBxH_h_OQnERPNiJQjTWO6HDjNbqg@foo.yahoo.com&gt;</EmailMessageObj:Message_ID>
+                    <EmailMessageObj:Errors_To>None</EmailMessageObj:Errors_To>
+                    <EmailMessageObj:Boundary>None</EmailMessageObj:Boundary>
+                    <EmailMessageObj:Content_Type>multipart/mixed; boundary=14dae934080712a51504c4f7b772</EmailMessageObj:Content_Type>
+                    <EmailMessageObj:MIME_Version>1.0</EmailMessageObj:MIME_Version>
+                    <EmailMessageObj:Precedence>None</EmailMessageObj:Precedence>
+                    <EmailMessageObj:User_Agent>None</EmailMessageObj:User_Agent>
+                    <EmailMessageObj:X_Mailer>None</EmailMessageObj:X_Mailer>
+                    <EmailMessageObj:X_Originating_IP xsi:type="AddressObj:AddressObjectType" category="ipv4-addr">
+                    </EmailMessageObj:X_Originating_IP>
+                </EmailMessageObj:Header>
+                <EmailMessageObj:Raw_Body><![CDATA[Attached is the summary for the analysis that you requested. This is
 CONFIDENTIAL so do not share with anyone outside the group. The full
 summary can be found here:
 http://www.consultingservize.net/archives/Analysis.pdf.
@@ -61,14 +82,9 @@ Jonathan Doe
 Senior Analyst
 Consulting Services, LLC
 
-Attached is the summary for the analysis that you requested. This is CONFID=
-ENTIAL so do not share with anyone outside the group. The full summary can =
-be found here:<div><a href=3D"http://www.consultingservize.net/archives/Ana=
-lysis.pdf">http://www.consultingservize.net/archives/Analysis.pdf</a>.</div=
->
-<div><br></div><div>Regards,</div><div>Jonathan Doe</div><div>Senior Analys=
-t</div><div>Consulting Services, LLC</div> ]]></EmailMessageObj:Raw_Body>
-                    <EmailMessageObj:Raw_Header datatype="String"><![CDATA[ Delivered-To: rsmith@megacorp.com
+Attached is the summary for the analysis that you requested. This is CONFIDENTIAL so do not share with anyone outside the group. The full summary can be found here:&lt;div&gt;&lt;a href="http://www.consultingservize.net/archives/Analysis.pdf"&gt;http://www.consultingservize.net/archives/Analysis.pdf&lt;/a&gt;.&lt;/div&gt;
+&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Regards,&lt;/div&gt;&lt;div&gt;Jonathan Doe&lt;/div&gt;&lt;div&gt;Senior Analyst&lt;/div&gt;&lt;div&gt;Consulting Services, LLC&lt;/div&gt;]]></EmailMessageObj:Raw_Body>
+                <EmailMessageObj:Raw_Header><![CDATA[Delivered-To: rsmith@megacorp.com
 Received: by 10.64.32.72 with SMTP id g8csp132763iei;
         Mon, 16 Jul 2012 12:48:37 -0700 (PDT)
 Return-Path: jdoe@yahoo.com
@@ -92,14 +108,66 @@ Received: by 10.20.30.40 with SMTP id e6mr6123235ign.55.1342468114261; Mon,
  16 Jul 2012 12:48:34 -0700 (PDT)
 Received: by 10.43.79.137 with HTTP; Mon, 16 Jul 2012 12:48:34 -0700 (PDT)
 Date: Mon, 16 Jul 2012 15:48:34 -0400
-Message-ID: <CAF=+=fBGC1ivgFkbi7jvxRBxH_h_OQnERPNiJQjTWO6HDjNbqg@foo.yahoo.com>
+Message-ID: &lt;CAF=+=fBGC1ivgFkbi7jvxRBxH_h_OQnERPNiJQjTWO6HDjNbqg@foo.yahoo.com&gt;
 Subject: Complete Analysis
-From: Jon Doe <jdoe@yahoo.com>
-To: Robert Smith <rsmith@megacorp.com>
-Content-Type: multipart/mixed; boundary=14dae934080712a51504c4f7b772
- ]]></EmailMessageObj:Raw_Header>
-                </cybox:Defined_Object>
-            </cybox:Object>
-        </cybox:Stateful_Measure>
+From: Jon Doe &lt;jdoe@yahoo.com&gt;
+To: Robert Smith &lt;rsmith@megacorp.com&gt;
+Content-Type: multipart/mixed; boundary=14dae934080712a51504c4f7b772]]></EmailMessageObj:Raw_Header>
+                <EmailMessageObj:Attachments>
+                    <EmailMessageObj:File object_reference="email_to_cybox:File-c7f0c907-8b70-4525-8174-cf11c1763edd"/>
+                </EmailMessageObj:Attachments>
+                <EmailMessageObj:Links>
+                    <EmailMessageObj:Link object_reference="email_to_cybox:URI-b08085eb-32e1-4c69-9fef-e301e16aed76"/>
+                </EmailMessageObj:Links>
+            </cybox:Properties>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="email_to_cybox:Observable-4319bb08-6fb5-4317-a5c2-b44c7d9aaf8e">
+        <cybox:Object id="email_to_cybox:File-c7f0c907-8b70-4525-8174-cf11c1763edd">
+            <cybox:Properties xsi:type="FileObj:FileObjectType">
+                <FileObj:File_Name>Analysis.exe.pdf</FileObj:File_Name>
+                <FileObj:File_Extension>.pdf</FileObj:File_Extension>
+                <FileObj:Size_In_Bytes>17432</FileObj:Size_In_Bytes>
+                <FileObj:Hashes>
+                    <cyboxCommon:Hash>
+                        <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                        <cyboxCommon:Simple_Hash_Value>51444701d484acc8768860e5c0eeb981</cyboxCommon:Simple_Hash_Value>
+                    </cyboxCommon:Hash>
+                </FileObj:Hashes>
+            </cybox:Properties>
+            <cybox:Related_Objects>
+                <cybox:Related_Object idref="email_to_cybox:EmailMessage-9ef16cea-2b75-47c2-bd8c-7036148fad35">
+                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Contained_Within</cybox:Relationship>
+                </cybox:Related_Object>
+            </cybox:Related_Objects>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="email_to_cybox:Observable-c39dc98f-0b08-455d-9562-29b5ec29bc35">
+        <cybox:Object id="email_to_cybox:URI-b08085eb-32e1-4c69-9fef-e301e16aed76">
+            <cybox:Properties xsi:type="URIObj:URIObjectType">
+                <URIObj:Value>http://www.consultingservize.net/archives/Analysis.pdf</URIObj:Value>
+            </cybox:Properties>
+            <cybox:Related_Objects>
+                <cybox:Related_Object idref="email_to_cybox:URI-e08f2ddf-89b5-4ed5-b7a8-a5dc10620e37">
+                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Contains</cybox:Relationship>
+                </cybox:Related_Object>
+            </cybox:Related_Objects>
+        </cybox:Object>
+    </cybox:Observable>
+    <cybox:Observable id="email_to_cybox:Observable-cd61afef-e246-4b79-b857-404111d74ac3">
+        <cybox:Object id="email_to_cybox:URI-e08f2ddf-89b5-4ed5-b7a8-a5dc10620e37">
+            <cybox:Properties xsi:type="URIObj:URIObjectType">
+                <URIObj:Value>consultingservize.net</URIObj:Value>
+            </cybox:Properties>
+            <cybox:Related_Objects>
+                <cybox:Related_Object idref="email_to_cybox:URI-b08085eb-32e1-4c69-9fef-e301e16aed76">
+                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">Extracted_From</cybox:Relationship>
+                </cybox:Related_Object>
+                <cybox:Related_Object idref="email_to_cybox:URI-b08085eb-32e1-4c69-9fef-e301e16aed76">
+                    <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.0">FQDN_Of</cybox:Relationship>
+                </cybox:Related_Object>
+            </cybox:Related_Objects>
+        </cybox:Object>
     </cybox:Observable>
 </cybox:Observables>
+

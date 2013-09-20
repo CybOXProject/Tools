@@ -6,14 +6,14 @@
 """
 Converts raw email to CybOX representation
 
-Email to CybOX v2.0 Translator
+Email to CybOX v2.0.1 Translator
 2013 - Bryan Worrell & Greg Back - The MITRE Corporation
 
 Requires python-cybox
 """
 
 # Script version
-__version__ = '2.0.0'
+__version__ = '2.0.1'
 
 # Standard Library imports
 import argparse
@@ -412,7 +412,7 @@ class EmailParser:
         if 'x-originating-ip' in self.headers:
             headers.x_originating_ip = Address(msg['x-originating-ip'],
                                                Address.CAT_IPV4)
-        if 'x-priority' in self.headers:
+        if 'x-priority' in self.headers and 'x-priority' in msg:
             headers.x_priority = String(msg['x-priority'])
 
         return headers
@@ -925,8 +925,8 @@ def main():
     try:
         observables = translator.generate_cybox_from_email_file(input_data)
         print "<?xml version='1.0' encoding='UTF-8'?>"
-        print "<!DOCTYPE doc [<!ENTITY comma '&#44;'>]>"
-        print observables.to_xml(namespace_dict={'https://github.com/CybOXProject/Tools':'email_to_cybox'})
+        #print "<!DOCTYPE doc [<!ENTITY comma '&#44;'>]>"
+        print observables.to_xml()
     except Exception, err:
         sys.stderr.write('\n!! error: %s\n' % str(err))
         traceback.print_exc(file=sys.stderr)

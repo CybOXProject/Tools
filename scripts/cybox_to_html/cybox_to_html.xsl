@@ -4,10 +4,10 @@
   All rights reserved. See LICENSE.txt for complete terms.
  -->
 <!--
-CybOX XML to HTML transform v2.0
-Compatible with CybOX v2.0
+CybOX XML to HTML transform v2.0.1
+Compatible with CybOX v2.0.1
 
-This is an xslt to transform a cybox 2.0 document of observables into html for
+This is an xslt to transform a cybox 2.0.1 document of observables into html for
 easy viewing.  The series of observables are turned into collapsible elements
 on the screen.  Details about each observable's contents are displayed in a
 format representing the nested structure of the original document.
@@ -25,7 +25,8 @@ This is a work in progress.  Feedback is most welcome!
 
 requirements:
  - XSLT 2.0 engine (this has been tested with Saxon 9.5)
- - a CybOX 2.0 input xml document
+ - a CybOX 2.0.1 input xml document
+
 
 Updated 2013
 mcoarr@mitre.org & mdunn@mitre.org
@@ -615,6 +616,9 @@ ikirillov@mitre.org
                                     <tr>
                                         <th scope="col">Major Version</th>
                                         <th scope="col">Minor Version</th>
+                                        <xsl:if test="exists(//cybox:Observables/@cybox_update_version)">
+                                          <th scope="col">Update Version</th>
+                                        </xsl:if>
                                         <th scope="col">Filename</th>
                                         <th scope="col">Generation Date</th>
                                     </tr>
@@ -622,6 +626,9 @@ ikirillov@mitre.org
                                 <TR>
                                     <TD><xsl:value-of select="//cybox:Observables/@cybox_major_version"/></TD>
                                     <TD><xsl:value-of select="//cybox:Observables/@cybox_minor_version"/></TD>
+                                    <xsl:if test="exists(//cybox:Observables/@cybox_update_version)">
+                                      <TD><xsl:value-of select="//cybox:Observables/@cybox_update_version"/></TD>
+                                    </xsl:if>
                                     <TD><xsl:value-of select="tokenize(document-uri(.), '/')[last()]"/></TD>
                                     <TD><xsl:value-of select="current-dateTime()"/></TD>
                                 </TR>   
