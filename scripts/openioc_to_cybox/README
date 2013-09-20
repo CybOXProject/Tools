@@ -12,7 +12,7 @@ CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE SCRIPT.
 
 #################################################################
 #Generates CybOX Output from an OpenIOC XML File                #
-#Compatible with CybOX v2.0 and corresponding objects           #
+#Compatible with CybOX v2.0.1 and corresponding objects         #
 #                                                               #
 #v0.2 - BETA                                                    #
 #06/13/2013                                                     #
@@ -26,8 +26,10 @@ CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE SCRIPT.
 --Installation Notes------------------------------------------------------------
 
 Extract included files into your directory of choice. This script is dependent on the following libraries:
-* lxml >= 3.1.x
-* python-cybox, v2.0.0b4: https://github.com/CybOXProject/python-cybox/tree/v2.0.0b4
+* python-cybox v2.0.1.x
+
+Install dependencies with pip: 
+$ pip install cybox
 
 This script was created using Python 2.7, and so may not be compatible with 3.0.x.
 --------------------------------------------------------------------------------
