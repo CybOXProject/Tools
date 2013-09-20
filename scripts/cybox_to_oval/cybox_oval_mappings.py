@@ -37,7 +37,7 @@ class cybox_oval_mappings(object):
     def create_oval(self, cybox_defined_object):
         oval_entities = {}
         oval_states = []
-        object_type = cybox_defined_object.anyAttributes_.get('{http://www.w3.org/2001/XMLSchema-instance}type')
+        object_type = cybox_defined_object.xsi_type
 
         if object_type in self.object_mappings.keys():
             oval_object = self.create_oval_object(object_type, cybox_defined_object)
@@ -45,8 +45,8 @@ class cybox_oval_mappings(object):
                 if object_type == 'WinRegistryKeyObj:WindowsRegistryKeyObjectType':
                     self.process_registry_values(cybox_defined_object, oval_object, oval_states)
                 else:
-                   state = self.create_oval_state(object_type, cybox_defined_object)
-                   if state is not None:
+                    state = self.create_oval_state(object_type, cybox_defined_object)
+                    if state is not None:
                         oval_states.append(self.create_oval_state(object_type, cybox_defined_object))
                 oval_test = self.create_oval_test(object_type, oval_object, oval_entities, oval_states)
                 oval_entities['test'] = oval_test
