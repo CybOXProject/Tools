@@ -257,8 +257,6 @@ def main():
                 
                 outfile = open(outfilename, 'w')
                 outfile.write('<?xml version="1.0" encoding="utf-8"?>\n')
-                #outfile.write("<!DOCTYPE doc [<!ENTITY comma '&#44;'>]>\n")
-                #outfile.write(Observables.from_obj(observables).to_xml(True))
                 nsparser = NamespaceParser(observables.get_Observable())
                 ns_string = '\n xmlns:openioc="http://openioc.org/"' + nsparser.build_namespaces_schemalocations_str()
                 observables.export(outfile, 0, namespacedef_=ns_string)
