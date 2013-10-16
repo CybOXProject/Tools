@@ -2,7 +2,7 @@
 # See LICENSE.txt for complete terms.
 
 #OpenIOC -> CybOX Translator
-#v0.2 BETA
+#v0.21 BETA
 #Creates CybOX 2.0.1 objects from IOC indicator item components 
 import uuid
 import cybox.bindings.cybox_core as core

@@ -3,7 +3,7 @@
 
 #OpenIOC to CybOX Translator
 #v0.21 BETA
-#Generates valid CybOX v2.0 XML output from OpenIOCs
+#Generates valid CybOX v2.0.1 XML output from OpenIOCs
 import openioc
 import cybox.bindings.cybox_core as cybox_binding
 import cybox.bindings.cybox_common as cybox_common_binding
