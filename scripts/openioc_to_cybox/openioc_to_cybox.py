@@ -211,7 +211,9 @@ v0.21 BETA // Compatible with CybOX v2.0.1
 Usage: python openioc_to_cybox.py <flags> -i <openioc xml file> -o <cybox xml file>
 
 Available Flags:
-    -e: Create embedded Observable. Creates a single root Observable with nested Observable Composition and Observables.
+    -e: Embedded Observable Output Mode. Creates a single root Observable with nested Observable Composition and Observables.
+        If this mode is not specified, the script will create a single Observable at the root level for each Indicator Item
+        and then add a separate Observable with the Boolean logic that composes the indicator, via Observable_Compositions.
     -v: Verbose output mode. Lists any skipped indicator items and also prints traceback for errors.
 """
 obsv_id_base = 0    
