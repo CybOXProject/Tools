@@ -2,7 +2,7 @@
 # See LICENSE.txt for complete terms.
 
 #OpenIOC to CybOX Translator
-#v0.2 BETA
+#v0.21 BETA
 #Generates valid CybOX v2.0 XML output from OpenIOCs
 import openioc
 import cybox.bindings.cybox_core as cybox_binding
@@ -85,12 +85,11 @@ def process_indicator_item(indicator_item, observables = None, indicatoritem_dic
             observable = cybox_binding.ObservableType(id=id_string)
             cyObject = cybox_binding.ObjectType(Properties=properties)
             observable.set_Object(cyObject)
-            observables.add_Observable(observable)
             if relatedobj != None:
                 roType = cybox_binding.RelatedObjectsType()
                 roType.add_Related_Object(relatedobj)
                 cyObject.set_Related_Objects(roType)
-
+            return observable
         return True
     else:
         if verbose_mode:
@@ -112,38 +111,43 @@ def test_compatible_indicator(indicator):
     return False
 
 #Process a single indicator and create the associated observable structure
-def process_indicator(indicator, observables, observable_composition, top_level=True):
+def process_indicator(indicator, observables, observable_composition, top_level=True, embed_observables=False):
     if test_compatible_indicator(indicator):
         #Dictionary for keeping track of indicatoritems without IDs
         indicatoritem_dict = {}
         current_composition = None
-        if top_level == False:
+        if not top_level:
             observable = cybox_binding.ObservableType(id='openioc:indicator-' + normalize_id(indicator.get_id()))
             nested_observable_composition = cybox_binding.ObservableCompositionType(operator=indicator.get_operator())
             observable.set_Observable_Composition(nested_observable_composition)
             observable_composition.add_Observable(observable)
             current_composition = nested_observable_composition
-        elif top_level == True:
+        elif top_level:
             current_composition = observable_composition
         
         for indicator_item in indicator.get_IndicatorItem():
-            if process_indicator_item(indicator_item, observables, indicatoritem_dict):
-                if indicator_item.get_id() is not None:
-                    observable = cybox_binding.ObservableType(idref='openioc:indicator-item-' + normalize_id(indicator_item.get_id()))
+            observable_obj = process_indicator_item(indicator_item, observables, indicatoritem_dict)
+            if observable_obj:
+                if embed_observables:
+                    current_composition.add_Observable(observable_obj)
                 else:
-                    observable = cybox_binding.ObservableType(idref=indicatoritem_dict.get(get_indicatoritem_string(indicator_item)))
-                current_composition.add_Observable(observable)
+                    if indicator_item.get_id() is not None:
+                        observable = cybox_binding.ObservableType(idref='openioc:indicator-item-' + normalize_id(indicator_item.get_id()))
+                    else:
+                        observable = cybox_binding.ObservableType(idref=indicatoritem_dict.get(get_indicatoritem_string(indicator_item)))
+                    observables.add_Observable(observable_obj)
+                    current_composition.add_Observable(observable)
                 
         #Recurse as needed to handle embedded indicators
         for embedded_indicator in indicator.get_Indicator():
-            process_indicator(embedded_indicator, observables, current_composition, False)
+            process_indicator(embedded_indicator, observables, current_composition, False, embed_observables)
     else:
         return False
     
     return True
 
 #Generate CybOX output from the OpenIOC indicators
-def generate_cybox(indicators, infilename):
+def generate_cybox(indicators, infilename, embed_observables):
     #Create the core CybOX structure
     observables = cybox_binding.ObservablesType()
 
@@ -175,13 +179,13 @@ def generate_cybox(indicators, infilename):
 
         composition = cybox_binding.ObservableCompositionType(operator=indicator.get_operator())
         #Process the indicator, including any embedded indicators
-        if process_indicator(indicator, observables, composition, True):
+        if process_indicator(indicator, observables, composition, True, embed_observables):
             indicator_observable.set_Observable_Composition(composition)
             observables.add_Observable(indicator_observable)
         else:
             #IOC had no indicator items compatible with CybOX
             return None
-    
+
     return observables 
 
 #Helper methods
@@ -202,11 +206,12 @@ def usage():
     
 USAGE_TEXT = """
 OpenIOC --> CybOX XML Converter Utility
-v0.2 BETA // Compatible with CybOX v2.0
+v0.21 BETA // Compatible with CybOX v2.0.1
 
 Usage: python openioc_to_cybox.py <flags> -i <openioc xml file> -o <cybox xml file>
 
 Available Flags:
+    -e: Create embedded Observable. Creates a single root Observable with nested Observable Composition and Observables.
     -v: Verbose output mode. Lists any skipped indicator items and also prints traceback for errors.
 """
 obsv_id_base = 0    
@@ -217,6 +222,7 @@ def main():
     outfilename = ''
     global verbose_mode
     global skipped_indicators
+    embed_observables = False
     verbose_mode = False
     skipped_indicators = []
     
@@ -234,6 +240,8 @@ def main():
             outfilename = args[i+1]
         elif args[i] == '-v':
             verbose_mode = True
+        elif args[i] == '-e':
+            embed_observables = True
             
     #Basic input file checking
     if os.path.isfile(infilename):    
@@ -241,7 +249,7 @@ def main():
         indicators = openioc.parse(infilename)
         try:
             print 'Generating ' + outfilename + ' from ' + infilename + '...'
-            observables = generate_cybox(indicators, infilename)
+            observables = generate_cybox(indicators, infilename, embed_observables)
             
             if observables != None:
                 observables.set_cybox_major_version('2')
