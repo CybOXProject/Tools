@@ -14,7 +14,7 @@ CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE SCRIPT.
 #Generates CybOX Output from an OpenIOC XML File                #
 #Compatible with CybOX v2.0.1 and corresponding objects         #
 #                                                               #
-#v0.2 - BETA                                                    #
+#v0.21 - BETA                                                    #
 #06/13/2013                                                     #
 #                                                               #
 #                                                               #
@@ -48,8 +48,11 @@ There are two main command line parameters for this script:
 -i: the path to the input OpenIOC XML file
 -o: the path to the output CybOX XML file
 
-There is one optional parameter that may be specified before the main parameters:
--v: print verbose error output (tracebacks)
+There are two optional output parameters that may be specified before the main parameters:
+-e: Embedded Observable Output Mode. Creates a single root Observable with nested Observable Composition and Observables.
+    If this mode is not specified, the script will create a single Observable at the root level for each Indicator Item
+    and then add a separate Observable with the Boolean logic that composes the indicator, via Observable_Compositions.
+-v: Verbose output mode. Lists any skipped indicator items and also prints traceback for errors.
 
 To use the script, run the following command:
 python openioc_to_cybox.py -i <OpenIOC xml> -o <cybox xml>
